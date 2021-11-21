@@ -6,7 +6,7 @@
         <h1>Lorem Ipsum is simply dummy texts V2</h1>
 
         <div class="hero-cta">
-          <a href="#" class="primary-cta">Sign up now!</a>
+          <router-link class="primary-cta" to="/signup">Sign up now!</router-link>
           <a href="#" class="see-demo-cta">
             <img src="@/assets/video.svg" alt="">See demo
           </a>
