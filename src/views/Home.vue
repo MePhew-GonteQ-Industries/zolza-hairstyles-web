@@ -1,6 +1,6 @@
 <template>
   <div id="homepage">
-    <hero></hero>
+    <hero id='hero'></hero>
   </div>
 </template>
 
@@ -16,4 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  //#hero {
+    //background-color: red;
+  //}
 </style>

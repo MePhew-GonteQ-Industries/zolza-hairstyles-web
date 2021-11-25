@@ -4,10 +4,9 @@
       <div class="left-col">
         <p class="subhead">Lorem Ipsum is simply dummy texts</p>
         <h1>Lorem Ipsum is simply dummy texts V2</h1>
-
         <div class="hero-cta">
           <router-link class="primary-cta" to="/signup">Sign up now!</router-link>
-          <a href="#" class="see-demo-cta">
+          <a href="https://www.youtube.com/watch?v=0YTSqREl80s" target="blank" class="see-demo-cta">
             <img src="@/assets/video.svg" alt="">See demo
           </a>
         </div>

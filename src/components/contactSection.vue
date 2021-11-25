@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer-basic">
+    <div class="footer-basic">
       <hr>
       <ul class="list-inline">
         <li class="list-inline-item"><router-link to="/terms">Terms</router-link></li>
@@ -8,7 +8,7 @@
         </router-link></li>
       </ul>
       <p class="copyright">Zołza Hairstyles © 2021</p>
-    </footer>
+    </div>
 </template>
 
 <script>
@@ -18,15 +18,8 @@ export default {
 </script>
 
 <style scoped>
-  .footer-basic {
-    width: 100vw;
-    padding: 20px 0;
-    background-color: inherit;
-    color:#4b4c4d;
-  }
 
   .footer-basic ul {
-    padding:0;
     list-style:none;
     text-align:center;
     font-size:18px;

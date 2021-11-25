@@ -1,6 +1,9 @@
 <template>
   <div class="navbar">
-    <img id="mobile-cta" class="hamburger-icon" src="@/assets/menu.svg" alt="">
+    <div id="mobile-cta">
+      <img id="hamburger-icon" src="@/assets/menu.svg" alt="" @click="toggleMobileNavigation">
+      <mobile-navigation id="mobile-navigation"  class="hidden"/>
+    </div>
     <section class="navbar-logo">
       <router-link to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt=""></router-link>
     </section>
@@ -10,11 +13,19 @@
 
 <script>
 import navigation from '@/components/navigation.vue';
+import mobileNavigation from '@/components/mobileNavigation.vue';
 
 export default {
   name: 'navbar',
   components: {
     navigation,
+    mobileNavigation,
+  },
+  methods: {
+    toggleMobileNavigation() {
+      document.getElementById('mobile-navigation').classList.toggle('hidden');
+      document.getElementById('mobile-navigation').classList.toggle('displayed');
+    },
   },
 };
 </script>
@@ -29,13 +40,17 @@ export default {
     padding: 5px;
   }
 
-  @media only screen and (max-width: 600px) {
+  .navbar-logo{
+    padding: 10px 32px;
+  }
+
+  @media only screen and (max-width: 520px) {
     .navigation {
       display: none;
     }
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 680px) {
     #mobile-cta {
       display: none;
     }

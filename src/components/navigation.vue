@@ -7,7 +7,7 @@
       </ul>
 
       <ul class="secondary-nav">
-        <li><router-link to="/signup">Sign up</router-link></li>
+        <li><router-link to="/signup">Log In</router-link></li>
         <li><router-link to="/login">Sign up</router-link></li>
       </ul>
     </nav>
@@ -32,10 +32,21 @@ export default {
 
   .navigation {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
+  @media only screen and (max-width: 680px) {
+     .primary-nav {
+       display: none;
+     }
+     .navigation{
+       justify-content: flex-end;
+     }
+   }
+
   .secondary-nav {
-    position: absolute;
+    /* position: absolute; */
     right: 0;
   }
 </style>
