@@ -47,7 +47,7 @@ export default {
 }
 
 .displayed {
-  display: initial;
+  display: inline-block;
 }
 
 * {

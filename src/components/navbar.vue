@@ -2,7 +2,7 @@
   <div class="navbar">
     <div id="mobile-cta">
       <img id="hamburger-icon" src="@/assets/menu.svg" alt="" @click="toggleMobileNavigation">
-      <mobile-navigation id="mobile-navigation"  class="hidden"/>
+      <mobile-navigation id="mobile-navigation"  class="mobileNavigagtionHidden"/>
     </div>
     <section class="navbar-logo">
       <router-link to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt=""></router-link>
@@ -23,14 +23,24 @@ export default {
   },
   methods: {
     toggleMobileNavigation() {
-      document.getElementById('mobile-navigation').classList.toggle('hidden');
-      document.getElementById('mobile-navigation').classList.toggle('displayed');
+      document.getElementById('mobile-navigation').classList.toggle('mobileNavigagtionHidden');
+      document.getElementById('mobile-navigation').classList.toggle('mobileNavigagtionVisible');
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+  .mobileNavigagtionHidden {
+    height: 0;
+    width: 0;
+  }
+
+  .mobileNavigagtionVisible {
+    height: 100vh;
+    width: 100vw;
+  }
+
   .navbar {
     background-color: inherit;
     display: flex;
@@ -40,20 +50,26 @@ export default {
     padding: 5px;
   }
 
-  .navbar-logo{
-    padding: 10px 32px;
+  .navbar-logo {
+    padding: 0;
   }
 
-  @media only screen and (max-width: 520px) {
-    .navigation {
-      display: none;
-    }
+  .wordmark{
+    transform: scale(75%);
+    padding: 0;
   }
 
   @media only screen and (min-width: 680px) {
     #mobile-cta {
       display: none;
     }
-  }
 
+    .wordmark {
+      transform: scale(100%);
+    }
+
+    .navbar-logo {
+      padding: 10px 32px;
+    }
+  }
 </style>

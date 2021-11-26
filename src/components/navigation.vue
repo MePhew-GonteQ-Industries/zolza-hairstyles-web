@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
   a {
     text-decoration: none;
     padding-right: 5px;
@@ -34,19 +34,24 @@ export default {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
 
-  @media only screen and (max-width: 680px) {
+      @media only screen and (max-width: 680px) {
      .primary-nav {
        display: none;
      }
-     .navigation{
+   }
+  }
+
+  @media only screen and (max-width: 680px) {
+    .navigation{
        justify-content: flex-end;
      }
    }
 
-  .secondary-nav {
-    /* position: absolute; */
-    right: 0;
+  @media only screen and (max-width: 410px) {
+    .navigation {
+      display: none;
+    }
   }
+
 </style>
