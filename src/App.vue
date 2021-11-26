@@ -5,10 +5,10 @@
       <div id="nav">
           <navbar />
       </div>
-          <router-view/>
-          <footer>
-            <contactSection />
-          </footer>
+        <router-view class="router-view"/>
+        <footer>
+          <contactSection />
+        </footer>
     </div>
   </body>
 </template>
@@ -62,6 +62,7 @@ export default {
 a {
   color: #444;
   text-decoration: none;
+  font-size: 20px
 }
 
 ul {
@@ -84,20 +85,20 @@ body {
   position: sticky;
   top: 0;
   height: 10%;
+  z-index: 10;
 }
 
 footer {
-  padding: 0% 10%;
+  padding: 0 10%;
   position: absolute;
   width: 100vw;
   bottom: 0;
   margin: 2% 0;
-  z-index: -10;
 }
 
 @media only screen and (max-width: 400px) {
      footer {
-       padding: 0% 5%;
+       padding: 0 5%;
      }
    }
 </style>

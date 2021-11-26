@@ -5,8 +5,8 @@
       <mobile-navigation id="mobile-navigation"  class="mobileNavigagtionHidden"/>
     </div>
     <section class="navbar-logo">
-      <router-link to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt=""></router-link>
-    </section>
+      <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
+      </router-link></section>
     <navigation />
   </div>
 </template>
@@ -30,26 +30,19 @@ export default {
 };
 </script>
 
+<!--suppress CssUnusedSymbol, CssUnusedSymbol, CssUnusedSymbol -->
 <style lang="scss" scoped>
-  #mobile-cta {
-    z-index: 20;
-  }
-
-  a {
-    display: block;
-  }
-
   #hamburger-icon {
-    z-index: 20;
+    z-index: 30;
+    position: relative;
   }
 
   .mobileNavigagtionHidden {
-    height: 0;
+    height: 100vh;
     width: 0;
   }
 
   .mobileNavigagtionVisible {
-    height: 100vh;
     width: 100vw;
   }
 
@@ -58,17 +51,26 @@ export default {
     display: flex;
     align-items: center;
     place-content: flex-start;
-    height: 100%;
-    padding: 5px;
+    height: 80px;
+    padding: 10px 10px 5px 10px;
+  }
+
+  #logo-link {
+    height: 60px;
+    display: block;
   }
 
   .navbar-logo {
-    z-index: 0;
+    margin: 0 40px 0 30px;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .wordmark{
-    transform: scale(75%);
+    //transform: scale(75%);
+    height: 60px;
     padding: 0;
   }
 
@@ -78,11 +80,7 @@ export default {
       }
 
     .wordmark {
-      transform: scale(100%);
-      }
-
-    .navbar-logo {
-      padding: 10px 32px;
+      //transform: scale(100%);
       }
     }
 </style>
