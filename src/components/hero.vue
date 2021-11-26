@@ -44,8 +44,8 @@ export default {
    }
 
    h1 {
-     line-height: 1.3em;
-     margin-top: .2em;
+      line-height: 1.3em;
+      margin-top: .2em;
    }
 
    .primary-cta {

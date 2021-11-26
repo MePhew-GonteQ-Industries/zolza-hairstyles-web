@@ -92,6 +92,7 @@ footer {
   width: 100vw;
   bottom: 0;
   margin: 2% 0;
+  z-index: -10;
 }
 
 @media only screen and (max-width: 400px) {

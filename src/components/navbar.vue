@@ -31,6 +31,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  #mobile-cta {
+    z-index: 20;
+  }
+
+  a {
+    display: block;
+  }
+
+  #hamburger-icon {
+    z-index: 20;
+  }
+
   .mobileNavigagtionHidden {
     height: 0;
     width: 0;
@@ -51,6 +63,7 @@ export default {
   }
 
   .navbar-logo {
+    z-index: 0;
     padding: 0;
   }
 
@@ -62,14 +75,14 @@ export default {
   @media only screen and (min-width: 680px) {
     #mobile-cta {
       display: none;
-    }
+      }
 
     .wordmark {
       transform: scale(100%);
-    }
+      }
 
     .navbar-logo {
       padding: 10px 32px;
+      }
     }
-  }
 </style>

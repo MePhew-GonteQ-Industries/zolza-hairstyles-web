@@ -33,14 +33,15 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
-  background-color: rgba(255, 255, 255, .5);
+  // background-color: rgba(255, 255, 255, .5);
+  background-color: green;
   transition: width 500ms, height 1s;
 }
 
 .mobile-navigation {
-  height: 400px;
+  height: 100%;
   top: 75px;
+  bottom: 0;
   position: relative;
   background-color: red;
   z-index: 20;
