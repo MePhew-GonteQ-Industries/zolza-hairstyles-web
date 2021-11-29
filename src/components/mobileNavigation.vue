@@ -81,7 +81,7 @@ export default {
        display: none;
       }
     }
-  @media only screen and (max-width: 560px) {
+  @media only screen and (max-width: 570px) {
       .secondary-nav {
         display: initial;
       }
