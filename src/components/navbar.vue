@@ -3,6 +3,7 @@
     <div id="mobile-cta">
       <img id="hamburger-icon" src="@/assets/menu.svg" alt="" @click="toggleMobileNavigation">
       <mobile-navigation id="mobile-navigation"  class="mobileNavigagtionHidden"/>
+      <div id="modal-overlay" class="hide-modal-overlay" @click="toggleMobileNavigation"></div>
     </div>
     <section class="navbar-logo">
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
@@ -25,6 +26,8 @@ export default {
     toggleMobileNavigation() {
       document.getElementById('mobile-navigation').classList.toggle('mobileNavigagtionHidden');
       document.getElementById('mobile-navigation').classList.toggle('mobileNavigagtionVisible');
+      document.getElementById('modal-overlay').classList.toggle('hide-modal-overlay');
+      document.getElementById('modal-overlay').classList.toggle('show-modal-overlay');
     },
   },
 };
@@ -32,9 +35,31 @@ export default {
 
 <!--suppress CssUnusedSymbol, CssUnusedSymbol, CssUnusedSymbol -->
 <style lang="scss" scoped>
+  #modal-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 100ms ease-in;
+  }
+
+  .hide-modal-overlay {
+    //display: none;
+    background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
+  }
+
+  .show-modal-overlay {
+    //display: block;
+    visibility: visible;
+    background-color: rgba(0, 0, 0, .75);
+  }
+
   #hamburger-icon {
     z-index: 30;
     position: relative;
+    cursor: pointer;
   }
 
   .mobileNavigagtionHidden {
@@ -43,7 +68,7 @@ export default {
   }
 
   .mobileNavigagtionVisible {
-    width: 100vw;
+    width: 50vw;
   }
 
   .navbar {

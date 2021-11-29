@@ -1,9 +1,8 @@
 <template>
-  <div class="modal" @click="toggleMobileNavigation">
       <div class="mobile-navigation-container">
         <nav class="mobile-navigation">
-          <ul class="primary-nav">
-            <li><router-link to="/">Home</router-link></li>
+          <ul class="primary-nav primary-nav-hidden">
+            <li><router-link to="/" @click="toggleMobileNavigation">Home</router-link></li>
             <li><router-link to="/services">Services</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
@@ -14,7 +13,6 @@
           </ul>
         </nav>
       </div>
-  </div>
 </template>
 
 <script>
@@ -30,22 +28,15 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.modal {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .75);
-  transition: width 500ms;
-}
-
 .mobile-navigation-container {
   height: 100vh;
+  left: 0;
   top: 0;
-  position: relative;
+  position: absolute;
   background-color: white;
   z-index: 20;
   margin-right: 50%;
+  transition: width 500ms;
 
   .mobile-navigation {
     position: relative;
@@ -54,8 +45,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden; // TODO: Improve
 
     a {
+      margin-left: 10px;
       font-size: 25px;
       padding: 0 25px 0 25px;
     }
