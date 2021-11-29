@@ -86,7 +86,6 @@ export default {
         display: initial;
       }
     }
-
 }
 
 </style>

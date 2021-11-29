@@ -32,7 +32,6 @@ export default {
    }
 
     a {
-      font-size: 22px;
       text-decoration: none;
       padding-right: 5px;
       margin-right: 10px;
