@@ -22,6 +22,7 @@ export default {
 <style lang='scss' scoped>
   .navigation {
     display: flex;
+    padding-top: 1vh;
     justify-content: space-between;
     width: 100%;
 
