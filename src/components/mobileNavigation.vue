@@ -46,7 +46,7 @@ export default {
 }
 
 .mobile-menu-shown {
-    width: 50%;
+    width: 30%;
 }
 
 .mobile-navigation-container {

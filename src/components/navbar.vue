@@ -47,6 +47,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.navbar {
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  place-content: flex-start;
+  padding: 10px 10px 5px 10px;
+
   .mobile-menu-modal {
     display: block;
     position: absolute;
@@ -62,24 +69,22 @@ export default {
   }
 
   #hamburger-icon {
-    height: 18px;
+    padding: 4px;
+    height: 22px;
     z-index: 30;
     position: relative;
     cursor: pointer;
   }
 
-  .navbar {
-    background-color: inherit;
-    display: flex;
-    align-items: center;
-    place-content: flex-start;
-    height: 80px;
-    padding: 10px 10px 5px 10px;
-  }
-
   #logo-link {
     height: 60px;
+    padding: 0;
     display: block;
+  }
+
+  .wordmark{
+    height: 60px;
+    padding: 0;
   }
 
   .navbar-logo {
@@ -89,20 +94,6 @@ export default {
     align-items: center;
     justify-content: center;
   }
+}
 
-  .wordmark{
-    height: 60px;
-    padding: 0;
-  }
-
-  @media only screen and (min-width: 990px) {
-    #mobile-navigation-container {
-      display: none;
-      }
-    }
-  @media only screen and (max-width: 570px){
-    .navbar-logo{
-      width: 100%;
-    }
-  }
 </style>

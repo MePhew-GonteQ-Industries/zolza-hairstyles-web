@@ -27,7 +27,8 @@ export default {
 
 <style lang="scss">
   #app {
-      height: 100vh;
+    height: 100vh;
+    overflow: hidden;
   }
 
   #nav {
