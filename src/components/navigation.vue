@@ -35,20 +35,20 @@ export default {
     justify-content: space-between;
     width: 100%;
 
-      @media only screen and (max-width: 680px) {
+      @media only screen and (max-width: 850px) {
      .primary-nav {
        display: none;
      }
    }
   }
 
-  @media only screen and (max-width: 680px) {
+  @media only screen and (max-width: 850px) {
     .navigation{
        justify-content: flex-end;
      }
    }
 
-  @media only screen and (max-width: 410px) {
+  @media only screen and (max-width: 570px) {
     .navigation {
       display: none;
     }
