@@ -99,4 +99,9 @@ export default {
       display: none;
       }
     }
+  @media only screen and (max-width: 570px){
+    .navbar-logo{
+      width: 100%;
+    }
+  }
 </style>
