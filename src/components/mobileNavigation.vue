@@ -14,8 +14,10 @@
           </ul>
 
           <ul class="secondary-nav">
-            <li><router-link to="/signup">Log In</router-link></li>
-            <li><router-link to="/login">Sign up</router-link></li>
+            <li><router-link to="/signup"
+               @click="toggleMobileMenu">Log In</router-link></li>
+            <li><router-link to="/login"
+               @click="toggleMobileMenu">Sign up</router-link></li>
           </ul>
         </nav>
       </div>
