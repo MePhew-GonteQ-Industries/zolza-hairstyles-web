@@ -3,7 +3,10 @@
     <div id="mobile-navigation-container">
       <img id="hamburger-icon" src="@/assets/menu.svg" alt=""
       @click=toggleMobileMenu>
-      <mobile-navigation :mobileMenuActive={mobileMenuActive} />
+      <mobile-navigation :mobile-menu-active="state.mobileMenuActive" />
+      <div class="mobile-menu-modal"
+        :class="{ 'mobile-menu-modal-hidden' : !state.mobileMenuActive }">
+      </div>
     </div>
     <section class="navbar-logo">
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
@@ -41,6 +44,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .mobile-menu-modal {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $modal-background;
+  }
+
+  .mobile-menu-modal-hidden {
+    display: none;
+  }
+
   #hamburger-icon {
     height: 18px;
     z-index: 30;

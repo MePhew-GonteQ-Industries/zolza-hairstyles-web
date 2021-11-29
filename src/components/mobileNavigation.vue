@@ -1,8 +1,7 @@
 <template>
       <div class="mobile-navigation-container"
-      :class="{ 'mobile-menu-hidden' : !props.mobileMenuActive,
-      'mobile-menu-shown' : props.mobileMenuActive}">
-      <p>{{mobileMenuActive}}</p>
+      :class="{ 'mobile-menu-hidden' : !mobileMenuActive,
+      'mobile-menu-shown' : mobileMenuActive}">
         <nav class="mobile-navigation">
           <ul class="primary-nav">
             <li><router-link to="/">Home</router-link></li>
