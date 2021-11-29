@@ -1,6 +1,8 @@
 <template>
   <div class="login">
-    <h1>This is a login page</h1>
+    <section class="main-box">
+
+    </section>
   </div>
 </template>
 
@@ -11,5 +13,16 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.main-box{
+  height: 100%;
+  width: 85%;
+  background-color: black;
+}
 </style>
