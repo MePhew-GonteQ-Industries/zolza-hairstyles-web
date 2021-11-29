@@ -3,7 +3,9 @@
     <div id="mobile-navigation-container">
       <img id="hamburger-icon" src="@/assets/menu.svg" alt=""
       @click=toggleMobileMenu>
-      <mobile-navigation :mobile-menu-active="state.mobileMenuActive" />
+      <mobile-navigation
+        :mobile-menu-active="state.mobileMenuActive"
+        @mobile-menu-closed="toggleMobileMenu"/>
       <div class="mobile-menu-modal"
         :class="{ 'mobile-menu-modal-hidden' : !state.mobileMenuActive }"
         @click="toggleMobileMenu">

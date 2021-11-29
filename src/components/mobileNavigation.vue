@@ -3,10 +3,14 @@
       :class="{ 'mobile-menu-hidden' : !mobileMenuActive,
       'mobile-menu-shown' : mobileMenuActive}">
         <nav class="mobile-navigation">
+
           <ul class="primary-nav">
-            <li><router-link to="/">Home</router-link></li>
-            <li><router-link to="/services">Services</router-link></li>
-            <li><router-link to="/contact">Contact</router-link></li>
+            <li><router-link to="/"
+               @click="toggleMobileMenu">Home</router-link></li>
+            <li><router-link to="/services"
+               @click="toggleMobileMenu">Services</router-link></li>
+            <li><router-link to="/contact"
+               @click="toggleMobileMenu">Contact</router-link></li>
           </ul>
 
           <ul class="secondary-nav">
@@ -24,8 +28,12 @@ export default {
   props: {
     mobileMenuActive: { default: false },
   },
-  setup(props) {
-    console.log(props);
+  setup(props, ctx) {
+    function toggleMobileMenu() {
+      ctx.emit('mobile-menu-closed');
+    }
+
+    return { toggleMobileMenu };
   },
 };
 </script>
@@ -40,20 +48,21 @@ export default {
 }
 
 .mobile-navigation-container {
+  z-index: 20;
   height: 100vh;
   left: 0;
   top: 0;
   position: absolute;
   background-color: $darker-white;
-  z-index: 20;
-  margin-right: 50%;
   transition: width 500ms;
   overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 
   .mobile-navigation {
-    position: relative;
-    height: 100%;
-    top: 80px;
+    margin: 80px 50% 50% 50%;
+    height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -64,16 +73,17 @@ export default {
       padding: 0 25px 0 25px;
     }
   }
-}
 
-@media only screen and (max-width: 680px) {
+  @media only screen and (max-width: 680px) {
     .secondary-nav {
       display: none;
     }
   }
-@media only screen and (max-width: 560px) {
+  @media only screen and (max-width: 560px) {
     .secondary-nav {
       display: initial;
     }
   }
+}
+
 </style>
