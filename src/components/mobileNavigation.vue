@@ -63,20 +63,18 @@ export default {
   justify-content: center;
 
   .mobile-navigation {
-    margin: 80px 50% 50% 50%;
-    height: 50%;
+    margin: 80px 50% 2vh 5%;
+    height: calc(100vh - 80px - 2vh);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     a {
       margin-left: 10px;
       font-size: 25px;
       padding: 0 25px 0 25px;
     }
-
   }
-    @media only screen and (max-width: 990px) {
+  @media only screen and (max-width: 990px) {
       .secondary-nav {
        display: none;
       }
