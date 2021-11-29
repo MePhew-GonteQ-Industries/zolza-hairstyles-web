@@ -74,18 +74,19 @@ export default {
       font-size: 25px;
       padding: 0 25px 0 25px;
     }
-  }
 
-  @media only screen and (max-width: 680px) {
-    .secondary-nav {
-      display: none;
-    }
   }
+    @media only screen and (max-width: 840px) {
+      .secondary-nav {
+       display: none;
+      }
+    }
   @media only screen and (max-width: 560px) {
-    .secondary-nav {
-      display: initial;
+      .secondary-nav {
+        display: initial;
+      }
     }
-  }
+
 }
 
 </style>
