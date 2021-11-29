@@ -76,7 +76,7 @@ export default {
     }
 
   }
-    @media only screen and (max-width: 840px) {
+    @media only screen and (max-width: 990px) {
       .secondary-nav {
        display: none;
       }

@@ -35,14 +35,14 @@ export default {
     justify-content: space-between;
     width: 100%;
 
-      @media only screen and (max-width: 850px) {
+      @media only screen and (max-width: 990px) {
      .primary-nav {
        display: none;
      }
    }
   }
 
-  @media only screen and (max-width: 850px) {
+  @media only screen and (max-width: 990px) {
     .navigation{
        justify-content: flex-end;
      }
@@ -54,4 +54,9 @@ export default {
     }
   }
 
+  @media only screen and (min-width: 640px){
+    a{
+      font-size: 28px;
+    }
+  }
 </style>

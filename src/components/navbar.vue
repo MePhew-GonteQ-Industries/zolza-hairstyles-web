@@ -94,7 +94,7 @@ export default {
     padding: 0;
   }
 
-  @media only screen and (min-width: 680px) {
+  @media only screen and (min-width: 990px) {
     #mobile-navigation-container {
       display: none;
       }
