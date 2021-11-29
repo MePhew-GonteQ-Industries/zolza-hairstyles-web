@@ -1,7 +1,6 @@
 <template>
   <body>
-    <splashscreen id='splashscreen'/>
-    <div id="content" class="hidden">
+    <div id="content">
       <div id="nav">
           <navbar />
       </div>

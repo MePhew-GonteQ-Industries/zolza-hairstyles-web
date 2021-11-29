@@ -1,8 +1,11 @@
 <template>
-      <div class="mobile-navigation-container">
+      <div class="mobile-navigation-container"
+      :class="{ 'mobile-menu-hidden' : !props.mobileMenuActive,
+      'mobile-menu-shown' : props.mobileMenuActive}">
+      <p>{{mobileMenuActive}}</p>
         <nav class="mobile-navigation">
-          <ul class="primary-nav primary-nav-hidden">
-            <li><router-link to="/" @click="toggleMobileNavigation">Home</router-link></li>
+          <ul class="primary-nav">
+            <li><router-link to="/">Home</router-link></li>
             <li><router-link to="/services">Services</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
           </ul>
@@ -16,27 +19,37 @@
 </template>
 
 <script>
+
 export default {
   name: 'mobileNavigation',
-  methods: {
-    toggleMobileNavigation() {
-      document.getElementById('mobile-navigation').classList.toggle('mobileNavigagtionHidden');
-      document.getElementById('mobile-navigation').classList.toggle('mobileNavigagtionVisible');
-    },
+  props: {
+    mobileMenuActive: { default: false },
+  },
+  setup(props) {
+    console.log(props);
   },
 };
 </script>
 
 <style lang='scss' scoped>
+.mobile-menu-hidden {
+  width: 0;
+}
+
+.mobile-menu-shown {
+    width: 50%;
+}
+
 .mobile-navigation-container {
   height: 100vh;
   left: 0;
   top: 0;
   position: absolute;
-  background-color: white;
+  background-color: $darker-white;
   z-index: 20;
   margin-right: 50%;
   transition: width 500ms;
+  overflow: hidden;
 
   .mobile-navigation {
     position: relative;
@@ -45,7 +58,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden; // TODO: Improve
 
     a {
       margin-left: 10px;
