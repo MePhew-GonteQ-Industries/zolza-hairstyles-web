@@ -33,7 +33,6 @@ export default {
 };
 </script>
 
-<!--suppress CssUnusedSymbol, CssUnusedSymbol, CssUnusedSymbol -->
 <style lang="scss" scoped>
   #modal-overlay {
     position: absolute;
@@ -94,7 +93,7 @@ export default {
   }
 
   .wordmark{
-    //transform: scale(75%);
+    transform: scale(.75);
     height: 60px;
     padding: 0;
   }
@@ -105,7 +104,7 @@ export default {
       }
 
     .wordmark {
-      //transform: scale(100%);
+      transform: scale(1);
       }
     }
 </style>

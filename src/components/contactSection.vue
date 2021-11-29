@@ -17,7 +17,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 
   .footer-basic ul {
     list-style:none;

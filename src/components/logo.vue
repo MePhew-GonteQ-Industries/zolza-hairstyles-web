@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
   #logo {
     background-color: white;
     width: 70%;

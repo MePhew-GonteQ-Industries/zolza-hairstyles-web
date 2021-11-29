@@ -49,8 +49,7 @@ export default {
    }
 
    .primary-cta {
-     //background: var(--light-complementary-color);
-     background: #007AF3;
+     background-color: $light-complementary-color;
      color: white;
      text-decoration: none;
      padding: .6em 1.2em;

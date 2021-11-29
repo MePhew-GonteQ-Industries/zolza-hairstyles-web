@@ -60,7 +60,7 @@ export default {
       display: none;
     }
   }
-@media only screen and (max-width: 520px) {
+@media only screen and (max-width: 560px) {
     .secondary-nav {
       display: initial;
     }
