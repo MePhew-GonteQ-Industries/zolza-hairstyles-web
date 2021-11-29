@@ -94,6 +94,16 @@ export default {
     align-items: center;
     justify-content: center;
   }
+  @media only screen and (min-width: 990px){
+    #mobile-navigation-container{
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 570px){
+    .navbar-logo{
+      width: 100%;
+    }
+  }
 }
 
 </style>
