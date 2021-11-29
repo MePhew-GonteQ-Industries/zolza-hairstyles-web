@@ -20,16 +20,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  a {
-    text-decoration: none;
-    padding-right: 5px;
-    margin-right: 10px;
-  }
-
-  li {
-    display: inline-block;
-  }
-
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -40,6 +30,17 @@ export default {
        display: none;
      }
    }
+
+    a {
+      font-size: 22px;
+      text-decoration: none;
+      padding-right: 5px;
+      margin-right: 10px;
+    }
+
+    li {
+      display: inline-block;
+    }
   }
 
   @media only screen and (max-width: 990px) {
