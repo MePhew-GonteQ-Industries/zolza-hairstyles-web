@@ -7,8 +7,8 @@
       </ul>
 
       <ul class="secondary-nav">
-        <li><router-link to="/signup">Log In</router-link></li>
-        <li><router-link to="/login">Sign up</router-link></li>
+        <li><router-link to="/login" id="login">Log In</router-link></li>
+        <li><router-link to="/signup" id="signup">Sign up</router-link></li>
       </ul>
     </nav>
 </template>
@@ -20,11 +20,51 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+  #login {
+    padding: 0 10px 0 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  #signup {
+    padding: 0 10px 0 10px;
+    border: 1px solid transparent;
+    background-color: $light-complementary-color;
+    color: white;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: white;
+      border: 1px solid black;
+      color: black;
+    }
+  }
+
   .navigation {
     display: flex;
-    padding-top: 1vh;
     justify-content: space-between;
     width: 100%;
+
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .secondary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .primary-nav a {
+      font-size: 24px;
+    }
 
       @media only screen and (max-width: 990px) {
      .primary-nav {
@@ -34,7 +74,6 @@ export default {
 
     a {
       text-decoration: none;
-      padding-right: 5px;
       margin-right: 10px;
     }
 
@@ -57,7 +96,7 @@ export default {
 
   @media only screen and (min-width: 640px){
     a{
-      font-size: 28px;
+      font-size: 26px;
     }
   }
 </style>

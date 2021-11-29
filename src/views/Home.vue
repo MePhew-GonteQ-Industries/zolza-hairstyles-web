@@ -16,7 +16,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  //#hero {
-    //background-color: red;
-  //}
+  #homepage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: chocolate;
+  }
 </style>

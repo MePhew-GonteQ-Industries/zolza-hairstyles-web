@@ -3,7 +3,6 @@
       :class="{ 'mobile-menu-hidden' : !mobileMenuActive,
       'mobile-menu-shown' : mobileMenuActive}">
         <nav class="mobile-navigation">
-
           <ul class="primary-nav">
             <li><router-link to="/"
                @click="toggleMobileMenu">Home</router-link></li>
@@ -14,9 +13,9 @@
           </ul>
 
           <ul class="secondary-nav">
-            <li><router-link to="/signup"
-               @click="toggleMobileMenu">Log In</router-link></li>
             <li><router-link to="/login"
+               @click="toggleMobileMenu">Log In</router-link></li>
+            <li><router-link to="/signup"
                @click="toggleMobileMenu">Sign up</router-link></li>
           </ul>
         </nav>
@@ -28,7 +27,7 @@
 export default {
   name: 'mobileNavigation',
   props: {
-    mobileMenuActive: { default: false },
+    mobileMenuActive: { default: false }, // TODO: Add transition : line 5
   },
   setup(props, ctx) {
     function toggleMobileMenu() {
@@ -63,15 +62,17 @@ export default {
   justify-content: center;
 
   .mobile-navigation {
-    margin: 80px 50% 2vh 5%;
+    margin-top: 80px;
     height: calc(100vh - 80px - 2vh);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     a {
       margin-left: 10px;
       font-size: 25px;
       padding: 0 25px 0 25px;
+      transition: visibility 5000ms;
     }
   }
   @media only screen and (max-width: 990px) {

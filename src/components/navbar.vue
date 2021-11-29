@@ -11,7 +11,7 @@
         @click="toggleMobileMenu">
       </div>
     </div>
-    <section class="navbar-logo">
+    <section class="navbar-logo-section">
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
       </router-link></section>
     <navigation />
@@ -48,11 +48,12 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
+  height: 100%;
+  padding: 5px 10px 5px 10px;
   background-color: inherit;
   display: flex;
   align-items: center;
   place-content: flex-start;
-  padding: 10px 10px 5px 10px;
 
   .mobile-menu-modal {
     display: block;
@@ -76,23 +77,23 @@ export default {
     cursor: pointer;
   }
 
-  #logo-link {
-    height: 60px;
-    padding: 0;
-    display: block;
-  }
-
-  .wordmark{
-    height: 60px;
-    padding: 0;
-  }
-
-  .navbar-logo {
-    margin: 0 40px 0 30px;
+  .navbar-logo-section {
+    margin: 0 30px 0 30px;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    #logo-link {
+      height: 50px;
+      display: block;
+      padding: 0;
+    }
+
+    .wordmark{
+      height: 50px;
+      padding: 0;
+    }
   }
   @media only screen and (min-width: 990px){
     #mobile-navigation-container{

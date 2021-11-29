@@ -1,52 +1,56 @@
 <template>
-  <body>
-    <div id="content">
-      <div id="nav">
-          <navbar />
-      </div>
-      <div id="middle">
-        <login />
-      </div>
-        <!--<router-view id="router-view"/>-->
-        <footer>
-          <contactSection />
-        </footer>
-    </div>
-  </body>
+  <div id="nav">
+      <navbar />
+      <hr>
+  </div>
+    <router-view class="router-view"/>
+    <footer>
+      <contactSection />
+    </footer>
 </template>
 
 <script>
 import navbar from '@/components/navbar.vue';
 import contactSection from '@/components/contactSection.vue';
-import login from '@/views/Login.vue';
 
 export default {
   components: {
     navbar,
     contactSection,
-    login,
   },
 };
 
 </script>
 
 <style lang="scss">
-  #app {
-    height: 100vh;
-    overflow: hidden;
-  }
-  #content{
+  body {
+    background-color: #F2F2F2;
     height: 100%;
-    width: 100%;
-  }
-  #middle{
-    height: calc(100vh - 95.5px - 70px - 75px);
-    width: 100%;
-  }
-  #nav {
-      position: sticky;
-      top: 0;
-      height: 80px;
-      z-index: 10;
+
+    #app {
+
+      #nav {
+        height: 8vh;
+        z-index: 10; // TODO: FIX
+        padding-bottom: 5px;
+      }
+
+      .router-view {
+        height: 83vh;
+        padding: 30px;
+      }
+
+      footer {
+        height: 9vh;
+        width: 100vw;
+        padding: 5px 10% 0 10%;
+
+        @media only screen and (max-width: 400px) {
+          & {
+            padding: 5px 5% 0 5%;
+          }
+        }
+      }
+    }
   }
 </style>
