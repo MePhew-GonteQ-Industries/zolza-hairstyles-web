@@ -5,7 +5,8 @@
       @click=toggleMobileMenu>
       <mobile-navigation :mobile-menu-active="state.mobileMenuActive" />
       <div class="mobile-menu-modal"
-        :class="{ 'mobile-menu-modal-hidden' : !state.mobileMenuActive }">
+        :class="{ 'mobile-menu-modal-hidden' : !state.mobileMenuActive }"
+        @click="toggleMobileMenu">
       </div>
     </div>
     <section class="navbar-logo">
