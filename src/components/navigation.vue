@@ -20,8 +20,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  #login {
+  #login, #signup {
     padding: 0 10px 0 10px;
+    transition: all .5s;
+  }
+
+  #login {
     border: 1px solid black;
     border-radius: 20px;
 
@@ -32,7 +36,6 @@ export default {
   }
 
   #signup {
-    padding: 0 10px 0 10px;
     border: 1px solid transparent;
     background-color: $light-complementary-color;
     color: white;

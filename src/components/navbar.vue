@@ -56,8 +56,8 @@ export default {
   place-content: flex-start;
 
   .mobile-menu-modal {
-    display: block;
     position: absolute;
+    display: block;
     top: 0;
     left: 0;
     width: 100vw;

@@ -30,9 +30,12 @@ export default {
     #app {
 
       #nav {
+        position: sticky;
+        top: 0;
         height: 8vh;
-        z-index: 10; // TODO: FIX
+        z-index: 10;
         padding-bottom: 5px;
+        background-color: $light-background;
       }
 
       .router-view {

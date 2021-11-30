@@ -21,8 +21,9 @@ export default {
   width: 100%;
 }
 .main-box{
-  height: 100%;
-  width: 85%;
-  background-color: black;
+  height: 80%;
+  width: 75%;
+  border: 1px solid black;
+  box-shadow: 5px 5px rgba(0, 0, 0, .1);
 }
 </style>

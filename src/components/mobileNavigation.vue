@@ -49,11 +49,11 @@ export default {
 }
 
 .mobile-navigation-container {
+  position: absolute;
   z-index: 20;
   height: 100vh;
   left: 0;
   top: 0;
-  position: absolute;
   background-color: $darker-white;
   transition: width 500ms;
   overflow: hidden;
@@ -62,16 +62,17 @@ export default {
   justify-content: center;
 
   .mobile-navigation {
-    margin-top: 80px;
-    height: calc(100vh - 80px - 2vh);
+    padding: 80px 0 20px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: right;
 
     a {
       margin-left: 10px;
       font-size: 25px;
-      padding: 0 25px 0 25px;
       transition: visibility 5000ms;
     }
   }
