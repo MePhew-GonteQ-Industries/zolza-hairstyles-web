@@ -53,7 +53,6 @@ export default {
   background-color: inherit;
   display: flex;
   align-items: center;
-  place-content: flex-start;
 
   .mobile-menu-modal {
     position: absolute;

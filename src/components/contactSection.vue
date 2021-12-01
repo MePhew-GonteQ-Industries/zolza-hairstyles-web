@@ -2,7 +2,7 @@
     <div class="footer-basic">
       <hr>
       <ul class="list-inline">
-        <li class="list-inline-item"><router-link to="/terms">Terms</router-link></li>
+        <li class="list-inline-item"><router-link to="/terms">Terms of use</router-link></li>
         <li class="list-inline-item"><router-link to="/privacyPolicy">
           Privacy policy
         </router-link></li>

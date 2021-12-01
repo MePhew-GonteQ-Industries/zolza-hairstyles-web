@@ -1,7 +1,7 @@
 <template>
-  <div class="privacy-policy">
+  <section class="app-page" id="privacy-policy-page">
     <h1>This is a privacy policy page</h1>
-  </div>
+  </section>
 </template>
 
 <script>

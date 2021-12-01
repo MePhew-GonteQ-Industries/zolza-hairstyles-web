@@ -1,7 +1,7 @@
 <template>
-  <div class="services">
+  <section class="app-page" id="services-page">
     <h1>This is a services page</h1>
-  </div>
+  </section>
 </template>
 
 <script>

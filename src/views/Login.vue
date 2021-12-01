@@ -1,9 +1,8 @@
 <template>
-  <div class="login">
-    <section class="main-box">
-
-    </section>
-  </div>
+  <section class="app-page" id="login-page">
+    <div class="login-section-wrapper">
+    </div>
+  </section>
 </template>
 
 <script>
@@ -13,14 +12,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.login{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
-.main-box{
+.login-section-wrapper{
   height: 80%;
   width: 75%;
   border: 1px solid black;

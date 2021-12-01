@@ -1,7 +1,7 @@
 <template>
-  <div id="homepage">
+  <section class="app-page" id="homepage">
     <hero id='hero'></hero>
-  </div>
+  </section>
 </template>
 
 <script>
