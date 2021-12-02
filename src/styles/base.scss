@@ -21,8 +21,9 @@ ul {
 
 .app-page {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    flex-flow: column;
     height: 100%;
     width: 100%;
 }

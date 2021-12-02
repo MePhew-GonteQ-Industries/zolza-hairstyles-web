@@ -40,7 +40,6 @@ export default {
 
       .router-view {
         height: 83vh;
-        padding: 30px;
       }
 
       footer {

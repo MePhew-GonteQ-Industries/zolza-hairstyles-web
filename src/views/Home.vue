@@ -16,9 +16,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #homepage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 </style>
