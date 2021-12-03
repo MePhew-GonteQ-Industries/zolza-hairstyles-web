@@ -6,11 +6,11 @@
           <h1>Witaj</h1>
           <!-- <div id="login-data"> -->
             <div class="textbox" id="emailbox">
-              <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png"/>
+              <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" alt=""/>
               <input type="text" name="email" id="email" placeholder="E-mail">
             </div>
             <div class="textbox" id="passwordbox">
-              <img src="https://img.icons8.com/ios-glyphs/30/000000/lock.png"/>
+              <img src="https://img.icons8.com/ios-glyphs/30/000000/lock.png" alt=""/>
               <input type="password" name="password" id="password" placeholder="Hasło">
             </div>
           <!-- </div> -->
