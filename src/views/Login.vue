@@ -2,20 +2,25 @@
   <section class="app-page" id="login-page">
     <div class="login-section-wrapper">
       <div id="login-left">
-        <div id="login-section">
+        <!-- <div id="login-section"> -->
           <h1>Witaj</h1>
-          <div id="login-data">
-            <label for="email">Adres E-mail:</label>
-            <input type="text" name="email" id="email" placeholder="E-mail"><br>
-            <label for="password">Hasło:</label><br>
-            <input type="password" name="password" id="password" placeholder="Hasło">
-          </div>
-          <br>
-          <div id="login-action">
-            <a href="#">Nie pamiętasz hasła</a>
+          <!-- <div id="login-data"> -->
+            <div class="textbox" id="emailbox">
+              <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png"/>
+              <input type="text" name="email" id="email" placeholder="E-mail">
+            </div>
+            <div class="textbox" id="passwordbox">
+              <img src="https://img.icons8.com/ios-glyphs/30/000000/lock.png"/>
+              <input type="password" name="password" id="password" placeholder="Hasło">
+            </div>
+          <!-- </div> -->
+          <!-- <div id="login-action"> -->
+            <div id="forgotpassword">
+              <a href="#">Nie pamiętasz hasła</a>
+            </div>
             <button id="login-btn" onclick="">Zaloguj się</button>
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
       </div>
       <div id="login-right">
         <div id="no-account-section">
@@ -45,47 +50,96 @@ export default {
   width: 75%;
   border: 1px solid black;
   box-shadow: 5px 5px rgba(0, 0, 0, .1);
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
 }
 #login-left{
   text-align: center;
-  height: 100%;
-  width: 50%;
-}
-#login-section{
+  display: grid;
+  grid-template-columns: 100%/3;
+  grid-template-rows: 40% 10% 10% 40%;
   height: 100%;
   width: 100%;
-  padding: 25% 10%;
-  text-align: center;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
 }
+// #login-section{
+//   height: 100%;
+//   width: 100%;
+//   padding: 25% 10%;
+//   text-align: center;
+//   display: flex;
+//   flex-flow: column;
+//   // justify-content: space-between;
+// }
 h1{
-  font-size: 3em;
+  font-size: 4em;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  align-self: end;
 }
-#login-data{
-  font-size: 1.5em;
-  display: flex;
-  flex-flow: column;
-  text-align: left;
+#emailbox{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  align-self: end;
 }
-#login-action{
-  display: flex;
-  justify-content: space-between;
+#passwordbox{
+  grid-column-start: 1;
+  grid-column-end: 4;
+  align-self: start;
+}
+.textbox{
+  width: 80%;
+  overflow: hidden;
+  padding: 8px 0;
+  margin: 8px 10%;
+  border-bottom: 1px solid $light-complementary-color;
+  img{
+    float: left;
+    text-align: center;
+  }
+  input{
+    border: none;
+    outline: none;
+    background: none;
+    width: 80%;
+    float: left;
+    margin: 0 10px;
+  }
+}
+// #login-data{
+//   font-size: 1.5em;
+//   display: flex;
+//   flex-flow: column;
+//   text-align: left;
+// }
+// #login-action{
+//   grid-column-start: 1;
+//   grid-column-end: 4;
+// }
+#forgotpassword{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  align-self: start;
+  text-align: center;
 }
 a{
   font-size: 12px;
 }
 #login-btn{
-  padding: 10px 25px;
+  //grid-row: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  align-self: start;
+  padding: 10px 10px;
   background-color: $light-complementary-color;
   border-radius: 50px;
   border: none;
   color: $light-background;
-  transition: all .5s;
+  transition: all .7s;
+  margin: 0 20% 0 0;
   &:hover{
-    border: 1px solid $light-complementary-color;
+    // border: 1px solid $light-complementary-color;
+    box-shadow: 0px 0px 0px 1px $light-complementary-color inset;
     background-color: $light-background;
     color: $light-complementary-color;
   }
@@ -106,28 +160,33 @@ a{
   display: flex;
   width: 100%;
   justify-content: space-between;
-  &ul{
+  align-items: center;
+  ul{
     display: flex;
+    justify-content: left;
+    width: 100%;
     align-items: center;
-    justify-content: center;
   }
   li{
     display: inline-block;
-    }
+    display: flex;
+    align-items: center;
   }
+}
 #signup {
     border: 1px solid transparent;
     background-color: $light-complementary-color;
     color: white;
-    border-radius: 10px;
+    border-radius: 50px;
     padding: 10px 25px;
     display: flex;
     flex-flow: row;
-    transition: all .5s;
+    transition: all .7s;
     &:hover {
-      background-color: white;
-      border: 1px solid black;
-      color: black;
+      background-color: $light-background;
+      // border: 1px solid $light-complementary-color;
+      box-shadow: 0px 0px 0px 1px $light-complementary-color inset;
+      color: $light-complementary-color;
     }
   }
 </style>
