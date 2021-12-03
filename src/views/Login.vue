@@ -23,16 +23,22 @@
         <!-- </div> -->
       </div>
       <div id="login-right">
-        <div id="no-account-section">
+        <!-- <div id="no-account-section"> -->
           <h2>Nie masz jeszcze konta?</h2>
-          <nav id="register-navigation">
-            <ul>
-              <li><router-link to="/signup" id="signup">Zarejestruj się</router-link></li>
-              <li><img src="../assets/facebook.svg" alt="FB"></li>
-              <li><img src="../assets/google.svg" alt="Google"></li>
-            </ul>
-          </nav>
-        </div>
+          <!-- <nav id="register-navigation"> -->
+            <!-- <ul> -->
+              <!-- <li> -->
+                <router-link to="/signup" id="signup">Zarejestruj się</router-link>
+                <!-- </li> -->
+              <!-- <li> -->
+                <img src="../assets/facebook.svg" alt="FB" id="facebook">
+                <!-- </li> -->
+              <!-- <li> -->
+                <img src="../assets/google.svg" alt="Google" id="google">
+                <!-- </li> -->
+            <!-- </ul> -->
+          <!-- </nav> -->
+        <!-- </div> -->
       </div>
     </div>
   </section>
@@ -145,48 +151,73 @@ a{
   }
 }
 #login-right{
-  height: 100%;
-  width: 50%;
-  text-align: left;
-}
-#no-account-section{
+  text-align: center;
+  display: grid;
+  grid-template-columns: 50% 10% 40%;
+  grid-template-rows: 40% 10% 10% 40%;
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-flow: column;
-  padding: 25% 10%;
 }
-#register-navigation{
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  ul{
-    display: flex;
-    justify-content: left;
-    width: 100%;
-    align-items: center;
-  }
-  li{
-    display: inline-block;
-    display: flex;
-    align-items: center;
-  }
+h2{
+  grid-column-start: 1;
+  font-size: 2em;
+  grid-column-end: 4;
+  align-self: end;
+  justify-self: center;
 }
+// #no-account-section{
+//   height: 100%;
+//   width: 100%;
+//   display: flex;
+//   flex-flow: column;
+//   padding: 25% 10%;
+// }
+// #register-navigation{
+//   width: 100%;
+//   justify-content: space-between;
+//   align-items: center;
+//   ul{
+//     display: flex;
+//     justify-content: left;
+//     width: 100%;
+//     align-items: center;
+//   }
+//   li{
+//     display: inline-block;
+//     display: flex;
+//     align-items: center;
+//   }
+// }
 #signup {
-    border: 1px solid transparent;
-    background-color: $light-complementary-color;
-    color: white;
-    border-radius: 50px;
-    padding: 10px 25px;
-    display: flex;
-    flex-flow: row;
-    transition: all .7s;
-    &:hover {
-      background-color: $light-background;
-      // border: 1px solid $light-complementary-color;
-      box-shadow: 0px 0px 0px 1px $light-complementary-color inset;
-      color: $light-complementary-color;
-    }
+  justify-self: right;
+  align-self: center;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  border: 1px solid transparent;
+  background-color: $light-complementary-color;
+  color: white;
+  border-radius: 50px;
+  padding: 10px 25px;
+  display: flex;
+  flex-flow: row;
+  transition: all .7s;
+  &:hover {
+    background-color: $light-background;
+    // border: 1px solid $light-complementary-color;
+    box-shadow: 0px 0px 0px 1px $light-complementary-color inset;
+    color: $light-complementary-color;
   }
+}
+#facebook{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  justify-self: center;
+  align-self: center;
+}
+#google{
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-self: left;
+  align-self: center;
+}
 </style>
