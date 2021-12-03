@@ -20,13 +20,13 @@
       <div id="login-right">
         <div id="no-account-section">
           <h2>Nie masz jeszcze konta?</h2>
-          <div id="register-navigation">
+          <nav id="register-navigation">
             <ul>
               <li><router-link to="/signup" id="signup">Zarejestruj się</router-link></li>
-              <li><a href="#">Zaloguj się z GOOGLE</a></li>
-              <li><a href="#">Zaloguj się z FACEBOOK</a></li>
+              <li><img src="../assets/facebook.svg" alt="FB"></li>
+              <li><img src="../assets/google.svg" alt="Google"></li>
             </ul>
-          </div>
+          </nav>
         </div>
       </div>
     </div>
@@ -98,21 +98,31 @@ a{
 #no-account-section{
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-flow: column;
   padding: 25% 10%;
 }
 #register-navigation{
   display: flex;
+  width: 100%;
   justify-content: space-between;
   &ul{
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
-}
+  li{
+    display: inline-block;
+    }
+  }
 #signup {
     border: 1px solid transparent;
     background-color: $light-complementary-color;
     color: white;
     border-radius: 10px;
     padding: 10px 25px;
+    display: flex;
+    flex-flow: row;
     transition: all .5s;
     &:hover {
       background-color: white;
