@@ -1,7 +1,6 @@
 <template>
   <div id="nav">
       <navbar />
-      <hr>
   </div>
     <router-view class="router-view"/>
     <footer>

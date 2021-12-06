@@ -2,7 +2,10 @@
   <div class="navbar">
     <div id="mobile-navigation-container">
       <img id="hamburger-icon" src="@/assets/menu.svg" alt=""
-      @click=toggleMobileMenu>
+      @click=toggleMobileMenu
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
       <mobile-navigation
         :mobile-menu-active="state.mobileMenuActive"
         @mobile-menu-closed="toggleMobileMenu"/>
@@ -50,7 +53,7 @@ export default {
 .navbar {
   height: 100%;
   padding: 10px 10px 5px 10px;
-  background-color: inherit;
+  background-color: white;
   display: flex;
   align-items: center;
 
@@ -99,6 +102,7 @@ export default {
       display: none;
     }
   }
+  // TODO: Make wordmark scalable
   // @media only screen and (max-width: 570px){
   //   .navbar-logo-section{
   //     width: 100%;

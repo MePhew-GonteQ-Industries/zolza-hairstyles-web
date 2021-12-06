@@ -1,6 +1,5 @@
 <template>
     <div class="footer-basic">
-      <hr>
       <ul class="list-inline">
         <li class="list-inline-item"><router-link to="/terms">Terms of use</router-link></li>
         <li class="list-inline-item"><router-link to="/privacyPolicy">
@@ -20,10 +19,7 @@ export default {
 <style lang='scss' scoped>
 
   .footer-basic ul {
-    list-style:none;
     text-align:center;
-    font-size:18px;
-    line-height:1.6;
     margin-bottom:0;
   }
 
@@ -33,6 +29,7 @@ export default {
   }
 
   .footer-basic ul a {
+    font-size: 18px;
     color:inherit;
     text-decoration:none;
     opacity:0.8;
