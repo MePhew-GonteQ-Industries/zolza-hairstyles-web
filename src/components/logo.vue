@@ -12,10 +12,9 @@ export default {
 
 <style lang='scss' scoped>
   #logo {
-    background-color: white;
-    width: 70%;
-    max-width: 230px;
-    height: 230px;
+    background-color: $primary-color;
+    width: 250px;
+    height: 250px;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -23,6 +22,7 @@ export default {
   }
 
   #logo img {
-    filter: invert(100%);
+    height: 50%;
+    filter: brightness(0) saturate(0) invert(100%);
   }
 </style>
