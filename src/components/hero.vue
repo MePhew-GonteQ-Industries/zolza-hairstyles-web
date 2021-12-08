@@ -39,7 +39,7 @@ export default {
    .subhead {
      text-transform: uppercase;
      font-weight: bold;
-     color: gray;
+     color: $complementary-color;
      letter-spacing: .07em;
    }
 
@@ -49,8 +49,8 @@ export default {
    }
 
    .primary-cta {
-     background-color: $light-complementary-color;
-     color: white;
+     background-color: $background-color;
+     color: $primary-color;
      text-decoration: none;
      padding: .6em 1.2em;
      font-size: 1.2em;
