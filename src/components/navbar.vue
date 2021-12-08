@@ -1,11 +1,11 @@
 <template>
   <div class="navbar">
     <div id="mobile-navigation-container">
-      <img id="hamburger-icon" src="@/assets/menu.svg" alt=""
-      @click=toggleMobileMenu
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+      <img id="hamburger-icon" src="@/assets/hamburger_icon.svg" alt=""
+           @click=toggleMobileMenu
+           :aria-expanded="state.mobileMenuActive"
+           aria-controls="navbarSupportedContent"
+           aria-label="Toggle navigation">
       <mobile-navigation
         :mobile-menu-active="state.mobileMenuActive"
         @mobile-menu-closed="toggleMobileMenu"/>
@@ -16,8 +16,9 @@
     </div>
     <section class="navbar-logo-section">
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
-      </router-link></section>
-    <navigation />
+      </router-link>
+    </section>
+    <navigation @theme-toggled="toggleTheme"/>
   </div>
 </template>
 
@@ -32,7 +33,7 @@ export default {
     navigation,
     mobileNavigation,
   },
-  setup() {
+  setup(props, ctx) {
     const state = reactive({
       mobileMenuActive: false,
     });
@@ -41,9 +42,14 @@ export default {
       state.mobileMenuActive = !state.mobileMenuActive;
     }
 
+    function toggleTheme() {
+      ctx.emit('theme-toggled');
+    }
+
     return {
       state,
       toggleMobileMenu,
+      toggleTheme,
     };
   },
 };
@@ -53,12 +59,13 @@ export default {
 .navbar {
   height: 100%;
   padding: 10px 10px 5px 10px;
-  background-color: white;
+  background-color: $background-accent-color;
   display: flex;
   align-items: center;
 
   .mobile-menu-modal {
     position: absolute;
+    z-index: 5;
     display: block;
     top: 0;
     left: 0;
@@ -77,6 +84,7 @@ export default {
     z-index: 30;
     position: relative;
     cursor: pointer;
+    filter: $logo-filter;
   }
 
   .navbar-logo-section {
@@ -84,7 +92,14 @@ export default {
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+
+    @media only screen and (max-width: 900px) {
+      & {
+        width: 100%;
+        justify-content: center;
+      }
+    }
 
     #logo-link {
       height: 50px;
@@ -94,20 +109,14 @@ export default {
 
     .wordmark{
       height: 50px;
-      padding: 0;
+      filter: $logo-filter;
     }
   }
-  @media only screen and (min-width: 990px){
+  @media only screen and (min-width: 900px){
     #mobile-navigation-container{
       display: none;
     }
   }
-  // TODO: Make wordmark scalable
-  // @media only screen and (max-width: 570px){
-  //   .navbar-logo-section{
-  //     width: 100%;
-  //   }
-  // }
 }
 
 </style>
