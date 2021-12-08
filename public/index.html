@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="pl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--suppress HtmlUnknownTarget -->
-      <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="style.css">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        <div class="no-script-warning">
+            <h1>It appears your browser has JavaScript disabled</h1>
+            <div class="wrapper">
+                <span>!</span>
+                <p>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+                    <br>Please enable it to continue.</p>
+            </div>
+        </div>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
