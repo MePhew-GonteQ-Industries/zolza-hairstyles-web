@@ -5,8 +5,7 @@
         <nav class="mobile-navigation">
           <img src="@/assets/wordmark.svg" alt="" class="wordmark">
 
-          <ul class="primary-nav" :class="{'hidden' : !mobileMenuActive,
-                                          'shown' : mobileMenuActive}">
+          <ul class="primary-nav">
             <li><router-link to="/"
                @click="toggleMobileMenu">Home</router-link></li>
             <li><router-link to="/services"
@@ -15,8 +14,7 @@
                @click="toggleMobileMenu">Contact</router-link></li>
           </ul>
 
-          <ul class="secondary-nav" :class="{'hidden' : !mobileMenuActive,
-                                          'shown' : mobileMenuActive}">
+          <ul class="secondary-nav">
             <li><router-link to="/login"
                @click="toggleMobileMenu">Log In</router-link></li>
             <li><router-link to="/signup"
@@ -44,17 +42,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .hidden {
-    visibility: hidden;
-  }
-
-  .shown {
-    visibility: visible;
-  }
-
-  ul {
-    transition: visibility 200ms;
-  }
 
   .wordmark {
     position: absolute;
@@ -90,7 +77,7 @@ export default {
   }
 
   .mobile-menu-shown {
-      width: 60%; // TODO: Fix secondary nav overlapping
+    width: 60%;
   }
 
   .mobile-navigation-container {
@@ -102,14 +89,13 @@ export default {
     transition: width 500ms;
     overflow: hidden;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    justify-content: right;
     background-color: $background-accent-color;
 
     .mobile-navigation {
       margin-top: 8vh;
       padding: 30px 0 90px;
-      width: 100%;
+      width: 60vw;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -118,19 +104,26 @@ export default {
 
       a {
         color: $primary-color;
-        margin-left: 20px;
+        padding-left: 20px;
         font-size: 25px;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .secondary-nav {
+
+        @media only screen and (max-width: 990px) {
+          & {
+            display: none;
+          }
+        }
+        @media only screen and (max-width: 570px) {
+          & {
+            display: block;
+          }
+        }
+
       }
     }
-    @media only screen and (max-width: 990px) {
-        .secondary-nav {
-         display: none;
-        }
-      }
-    @media only screen and (max-width: 570px) {
-        .secondary-nav {
-          display: initial;
-        }
-      }
   }
 </style>

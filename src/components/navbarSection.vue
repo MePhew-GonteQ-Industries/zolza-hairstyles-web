@@ -10,11 +10,13 @@
         :mobile-menu-active="state.mobileMenuActive"
         @mobile-menu-closed="toggleMobileMenu"/>
       <div class="mobile-menu-modal"
-        :class="{ 'mobile-menu-modal-hidden' : !state.mobileMenuActive }"
+        :class="{ 'hide' : !state.mobileMenuActive }"
         @click="toggleMobileMenu">
       </div>
     </div>
-    <section class="navbar-logo-section">
+    <section class="navbar-logo-section"
+        :class="{'hide' : state.mobileMenuActive,
+                 'show' : !state.mobileMenuActive}">
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
       </router-link>
     </section>
@@ -74,8 +76,12 @@ export default {
     background-color: $modal-background;
   }
 
-  .mobile-menu-modal-hidden {
+  .hide {
     display: none;
+  }
+
+  .show {
+    display: flex;
   }
 
   #hamburger-icon {
@@ -90,7 +96,6 @@ export default {
   .navbar-logo-section {
     margin: 0 30px 0 30px;
     padding: 0;
-    display: flex;
     align-items: center;
     justify-content: left;
 

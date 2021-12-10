@@ -38,44 +38,27 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    margin-right: 10px;
+
+    @media only screen and (min-width: 660px){
+      &{
+        font-size: 26px;
+      }
+    }
+  }
+
+  li {
+    display: inline-block;
+  }
+
   .controls-wrapper {
     flex-grow: 2;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
-    @media only screen and (max-width: 570px) {
-      & {
-        flex-grow: 0;
-        width: 40px;
-      }
-    }
-  }
-
-  #login, #signup {
-    padding: 0 10px 0 10px;
-    transition: all .5s;
-  }
-
-  #login {
-    border-radius: 20px;
-
-    &:hover {
-      //color: $accent-color;
-    }
-  }
-
-  #signup {
-    border: 1px solid $primary-color;
-    background-color: $background-color;
-    color: $complementary-color;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: white;
-      border: 1px solid black;
-      color: black;
-    }
   }
 
   .navigation {
@@ -84,9 +67,9 @@ export default {
     justify-content: space-between;
     width: 100%;
 
-    @media only screen and (max-width: 570px) {
-      & {
-        width: 40px;
+    @media only screen and (max-width: 990px) {
+      &{
+        justify-content: flex-end;
       }
     }
 
@@ -94,50 +77,54 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+
+      @media only screen and (max-width: 900px) {
+        & {
+          display: none;
+        }
+      }
+
+      a {
+        font-size: 24px;
+      }
     }
 
     .secondary-nav {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
 
-    .primary-nav a {
-      font-size: 24px;
-    }
+      @media only screen and (max-width: 580px) {
+        & {
+          display: none;
+        }
+      }
 
-      @media only screen and (max-width: 900px) {
-     .primary-nav {
-       display: none;
-     }
-   }
+      #login, #signup {
+        padding: 0 10px 0 10px;
+        transition: background-color, color .5s;
+      }
 
-    a {
-      text-decoration: none;
-      margin-right: 10px;
-    }
+      #login {
+        border-radius: 20px;
 
-    li {
-      display: inline-block;
-    }
-  }
+        &:hover {
+          //color: $accent-color;
+        }
+      }
 
-  @media only screen and (max-width: 990px) {
-    .navigation{
-       justify-content: flex-end;
-     }
-   }
+      #signup {
+        border: 1px solid $primary-color;
+        background-color: $background-color;
+        color: $complementary-color;
+        border-radius: 10px;
 
-  @media only screen and (max-width: 570px) {
-    #secondary-nav {
-      display: none;
-    }
-  }
-
-  @media only screen and (min-width: 640px){
-    a{
-      color: $primary-color;
-      font-size: 26px;
+        &:hover {
+          background-color: white;
+          border: 1px solid black;
+          color: black;
+        }
+      }
     }
   }
 
