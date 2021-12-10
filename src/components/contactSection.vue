@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'contact-section',
+  name: 'contactSection',
 };
 </script>
 

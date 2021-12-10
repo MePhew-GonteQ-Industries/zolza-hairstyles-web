@@ -1,16 +1,16 @@
 <template>
   <section class="app-page" id="homepage">
-    <hero id='hero'></hero>
+    <heroSection id='hero'></heroSection>
   </section>
 </template>
 
 <script>
-import hero from '@/components/hero.vue';
+import heroSection from '@/components/heroSection.vue';
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
   components: {
-    hero,
+    heroSection,
   },
 };
 </script>

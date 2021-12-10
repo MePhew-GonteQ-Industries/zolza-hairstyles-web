@@ -11,18 +11,18 @@
           </a>
         </div>
       </div>
-      <logo />
+      <logoItem />
     </div>
   </section>
 </template>
 
 <script>
-import logo from '@/components/logo.vue';
+import logoItem from '@/components/logoItem.vue';
 
 export default {
-  name: 'hero',
+  name: 'heroSection',
   components: {
-    logo,
+    logoItem,
   },
 };
 </script>

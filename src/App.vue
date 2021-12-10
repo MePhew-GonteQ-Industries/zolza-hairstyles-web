@@ -1,7 +1,7 @@
 <template>
   <div id="app-wrapper" :data-theme="state.theme">
     <div id="nav">
-      <navbar @theme-toggled="toggleTheme"/>
+      <navbarSection @theme-toggled="toggleTheme"/>
     </div>
     <router-view class="router-view"/>
     <footer>
@@ -12,12 +12,12 @@
 
 <script>
 import { reactive } from 'vue';
-import navbar from '@/components/navbar.vue';
+import navbarSection from '@/components/navbarSection.vue';
 import contactSection from '@/components/contactSection.vue';
 
 export default {
   components: {
-    navbar,
+    navbarSection,
     contactSection,
   },
   setup() {
@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss">
   #app {
+    transition: all 2s;
 
     #app-wrapper {
 

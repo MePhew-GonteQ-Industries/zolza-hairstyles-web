@@ -18,19 +18,19 @@
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
       </router-link>
     </section>
-    <navigation @theme-toggled="toggleTheme"/>
+    <desktopNavigation @theme-toggled="toggleTheme"/>
   </div>
 </template>
 
 <script>
 import { reactive } from 'vue';
-import navigation from '@/components/navigation.vue';
+import desktopNavigation from '@/components/desktopNavigation.vue';
 import mobileNavigation from '@/components/mobileNavigation.vue';
 
 export default {
-  name: 'navbar',
+  name: 'navbarSection',
   components: {
-    navigation,
+    desktopNavigation,
     mobileNavigation,
   },
   setup(props, ctx) {

@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'navigation',
+  name: 'desktopNavigation',
   setup(props, ctx) {
     function toggleTheme() {
       ctx.emit('theme-toggled');

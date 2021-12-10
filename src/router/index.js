@@ -1,7 +1,7 @@
 // noinspection JSCheckFunctionSignatures
 
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import Home from '../views/HomePage.vue';
 
 const routes = [{
   path: '/',
@@ -14,32 +14,32 @@ const routes = [{
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
-  component: () => import(/* webpackChunkName: "contact" */ '../views/Contact.vue'),
+  component: () => import(/* webpackChunkName: "contact" */ '../views/ContactPage.vue'),
 },
 {
   path: '/signup',
   name: 'SignUp',
-  component: () => import(/* webpackChunkName: "signup" */ '../views/SignUp.vue'),
+  component: () => import(/* webpackChunkName: "signup" */ '../views/SignUpPage.vue'),
 },
 {
   path: '/login',
   name: 'Login',
-  component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+  component: () => import(/* webpackChunkName: "login" */ '../views/LoginPage.vue'),
 },
 {
   path: '/services',
   name: 'Services',
-  component: () => import(/* webpackChunkName: "services" */ '../views/Services.vue'),
+  component: () => import(/* webpackChunkName: "services" */ '../views/ServicesPage.vue'),
 },
 {
   path: '/terms',
-  name: 'Terms',
-  component: () => import(/* webpackChunkName: "terms" */ '../views/Terms.vue'),
+  name: 'TermsOfUse',
+  component: () => import(/* webpackChunkName: "terms" */ '../views/TermsOfUsePage.vue'),
 },
 {
   path: '/privacypolicy',
   name: 'PrivacyPolicy',
-  component: () => import(/* webpackChunkName: "privacypolicy" */ '../views/PrivacyPolicy.vue'),
+  component: () => import(/* webpackChunkName: "privacypolicy" */ '../views/PrivacyPolicyPage.vue'),
 },
 ];
 
