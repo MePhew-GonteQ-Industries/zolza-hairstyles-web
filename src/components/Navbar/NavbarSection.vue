@@ -26,8 +26,8 @@
 
 <script>
 import { reactive } from 'vue';
-import desktopNavigation from '@/components/Navbar/desktopNavigation.vue';
-import mobileNavigation from '@/components/Navbar/mobileNavigation.vue';
+import desktopNavigation from '@/components/Navbar/DesktopNavigation/DesktopNavigation.vue';
+import mobileNavigation from '@/components/Navbar/MobileNavigation.vue';
 
 export default {
   name: 'navbarSection',
@@ -58,71 +58,76 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navbar {
-  height: 100%;
-  padding: 10px 10px 5px 10px;
-  background-color: $background-accent-color;
-  display: flex;
-  align-items: center;
-
-  .mobile-menu-modal {
-    position: absolute;
-    z-index: 5;
-    display: block;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: $modal-background;
-  }
-
-  .hide {
-    display: none;
-  }
-
-  .show {
+  .navbar {
+    height: 100%;
+    padding: 10px 10px 5px 10px;
+    background-color: $accent-bg-color;
     display: flex;
-  }
-
-  #hamburger-icon {
-    padding: 4px;
-    height: 22px;
-    z-index: 30;
-    position: relative;
-    cursor: pointer;
-    filter: $logo-filter;
-  }
-
-  .navbar-logo-section {
-    margin: 0 30px 0 30px;
-    padding: 0;
     align-items: center;
-    justify-content: left;
 
-    @media only screen and (max-width: 900px) {
-      & {
-        width: 100%;
-        justify-content: center;
+    .mobile-menu-modal {
+      position: absolute;
+      z-index: 5;
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: $modal-bg-color;
+    }
+
+    .hide {
+      display: none;
+
+      @media only screen and (min-width: 900px) {
+        display: flex;
       }
     }
 
-    #logo-link {
-      height: 50px;
-      display: block;
-      padding: 0;
+    .show {
+      display: flex;
     }
 
-    .wordmark{
-      height: 50px;
-      transition: all 5s;
+    #hamburger-icon {
+      user-select: none;
+      padding: 4px;
+      height: 22px;
+      z-index: 30;
+      position: relative;
+      cursor: pointer;
       filter: $logo-filter;
     }
-  }
-  @media only screen and (min-width: 900px){
-    #mobile-navigation-container{
-      display: none;
+
+    .navbar-logo-section {
+      user-select: none;
+      margin: 0 30px 0 30px;
+      padding: 0;
+      align-items: center;
+      justify-content: left;
+
+      @media only screen and (max-width: 900px) {
+        & {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      #logo-link {
+        height: 50px;
+        display: block;
+        padding: 0;
+      }
+
+      .wordmark{
+        height: 50px;
+        transition: all 5s;
+        filter: $logo-filter;
+      }
+    }
+    @media only screen and (min-width: 900px){
+      #mobile-navigation-container{
+        display: none;
+      }
     }
   }
-}
-
 </style>

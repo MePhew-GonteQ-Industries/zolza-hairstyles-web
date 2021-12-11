@@ -1,4 +1,11 @@
 {
-  "message": "Siema i18n !!",
-  "label": "Język: "
+  "nav": {
+    "primary-nav": ["Strona główna", "Usługi", "Kontakt"],
+    "secondary-nav": ["Zaloguj się", "Zarejestruj się"]
+  },
+  "footer": ["Warunki korzystania", "Polityka prywatności"],
+  "home": "DOM",
+  "settings": {
+    "language-selector": ["Polski", "Angielski"]
+  }
 }

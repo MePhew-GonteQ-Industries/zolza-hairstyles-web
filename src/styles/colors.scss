@@ -1,14 +1,27 @@
 @import '_colors';
 
-$primary-color: var(--primary-color);
-$complementary-color: var(--complementary-color);
-$background-color: var(--background-color);
-$background-accent-color: var(--background-accent-color);
-$footer-fg-color: var(--footer-fg-color);
+// general
+$primary-fg-color: var(--primary-fg-color);
+$primary-bg-color: var(--primary-bg-color);
+$accent-bg-color: var(--accent-bg-color);
+$page-fg-color: var(--page-fg-color);
+$link-active-color: var(--link-active-color);
+
+// reactive
 $hover-color: var(--hover-color);
 
+// mobile menu
+$mobile-menu-icon-filter: var(--mobile-menu-icon-filter);
+$mobile-menu-icon-link-active-filter: var(--mobile-menu-icon-link-active-filter);
+
+// footer
+$footer-fg-color: var(--footer-fg-color);
+$footer-icon-filter: var(--footer-icon-filter);
+$footer-icon-hover-filter: var(--footer-icon-hover-filter);
+
+// logo
 $logo-filter: var(--logo-filter);
 
-// constant values
-$modal-background: rgba(0, 0, 0, .75);
+// constants
+$modal-bg-color: rgba(0, 0, 0, .75);
 $copyright-note-color: #aaa;

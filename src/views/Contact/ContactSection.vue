@@ -3,9 +3,10 @@
       <div class="info-section">
         <span>© 2021 Zołza Hairstyles</span>
         <ul>
-          <li class="list-inline-item"><router-link to="/terms">Terms of use</router-link>
+          <li class="list-inline-item"><router-link to="/terms">{{$t('footer[0]')}}</router-link>
           </li>
-          <li class="list-inline-item"><router-link to="/privacyPolicy">Privacy policy</router-link>
+          <li class="list-inline-item"><router-link to="/privacyPolicy">{{$t('footer[1]')}}
+          </router-link>
           </li>
         </ul>
       </div>
@@ -14,23 +15,28 @@
         <ul>
           <li>
             <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank">
-              <img src="@/assets/facebook_mono.svg"
-                   class="d-block" loading="lazy" decoding="async" alt="Facebook icon" width="18"
-                   height="18">
+              <img
+                  src="@/assets/facebook_mono.svg"
+                  class="social-media-icon"
+                  loading="lazy" decoding="async" alt="Facebook icon" width="18"
+                  height="18">
             </a>
             <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank">
               <img src="@/assets/instagram_mono.svg"
-                   class="d-block" loading="lazy" decoding="async" alt="Instagram icon" width="18"
+                   class="social-media-icon"
+                   loading="lazy" decoding="async" alt="Instagram icon" width="18"
                    height="18">
             </a>
             <a href="tel:+48 730 601 830" target="_blank">
               <img src="@/assets/phone.svg"
-                   class="d-block" loading="lazy" decoding="async" alt="Phone icon" width="18"
+                   class="social-media-icon"
+                   loading="lazy" decoding="async" alt="Phone icon" width="18"
                    height="18">
             </a>
             <a href="mailto: zolza.hairstyles@gmail.com" target="_blank">
               <img id="email" src="@/assets/email.svg"
-                   class="d-block" loading="lazy" decoding="async" alt="Email icon"
+                   class="social-media-icon"
+                   loading="lazy" decoding="async" alt="Email icon"
                    height="18">
             </a>
           </li>
@@ -105,12 +111,27 @@ export default {
         display: inline-block;
 
         a {
+          user-select: none;
           color: $footer-fg-color;
           font-size: 14px;
+
+          &.router-link-active {
+            color: $link-active-color;
+          }
 
           &:hover {
             color: $hover-color;
             text-decoration: underline;
+          }
+
+          img {
+            &.social-media-icon {
+              filter: $footer-icon-filter;
+
+              &:hover {
+                filter: $footer-icon-hover-filter;
+              }
+            }
           }
 
           @media only screen and (max-width: 370px) {

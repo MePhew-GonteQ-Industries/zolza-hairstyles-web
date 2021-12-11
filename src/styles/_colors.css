@@ -1,21 +1,76 @@
-:root, #app-wrapper[data-theme='light'] {
-    --primary-color: #231F20;
-    --complementary-color: #326771;
-    --hover-color: #2C8C99;
-    --background-color: #fdfdfe;
-    --background-accent-color: #F6F8FA;
-    --footer-fg-color: #6e7781;
+#app-wrapper[data-theme='light'] {
+    /* general */
+    --primary-fg-color: #231F20;
+    --primary-bg-color: #F2F2F2;
+    --accent-bg-color: #e5e6e8;
+    --page-fg-color: #506AD4;
+    --link-active-color: #BD4BBF;
 
+    /*reactive*/
+    --hover-color: #fb69ff;
+
+    /* mobile menu */
+    --mobile-menu-icon-filter: brightness(0);
+    --mobile-menu-icon-link-active-filter: brightness(0)
+        invert(30%)
+        sepia(88%)
+        saturate(627%)
+        hue-rotate(255deg)
+        brightness(112%)
+        contrast(95%);
+
+    /* footer */
+    --footer-fg-color: #5D626C;
+    --footer-icon-filter: brightness(0)
+        invert(40%)
+        sepia(4%)
+        saturate(1175%)
+        hue-rotate(182deg)
+        brightness(91%)
+        contrast(90%);
+    --footer-icon-hover-filter: invert(32%)
+        sepia(24%)
+        saturate(1776%)
+        hue-rotate(252deg)
+        brightness(94%)
+        contrast(93%);
+
+    /* logo */
     --logo-filter: invert(0);
 }
 
 #app-wrapper[data-theme='dark'] {
-    --primary-color: #F5F5F5;
-    --complementary-color: #326771;
-    --hover-color: #2C8C99;
-    --background-color: #1F2041;
-    --background-accent-color: #4b4b4b;
-    --footer-fg-color: #a4afb7;
+    /* general */
+    --primary-fg-color: #F5F5F5;
+    --primary-bg-color: #3D3D3D;
+    --accent-bg-color: #121212;
+    --page-fg-color: #fff28c;
+    --link-active-color: #3EB595;
 
+    /*reactive*/
+    --hover-color: #2C8C99;
+
+    /* mobile menu */
+    --mobile-menu-icon-filter: brightness(0) invert(1);
+    --mobile-menu-icon-link-active-filter: brightness(0)
+        invert(65%)
+        sepia(21%)
+        saturate(1055%)
+        hue-rotate(113deg)
+        brightness(90%)
+        contrast(91%);
+
+    /* footer */
+    --footer-fg-color: #a4afb7;
+    --footer-icon-filter: none;
+    --footer-icon-hover-filter: brightness(0)
+        invert(46%)
+        sepia(13%)
+        saturate(1971%)
+        hue-rotate(139deg)
+        brightness(99%)
+        contrast(90%);
+
+    /* logo */
     --logo-filter: brightness(0) saturate(0) invert(100%);
 }

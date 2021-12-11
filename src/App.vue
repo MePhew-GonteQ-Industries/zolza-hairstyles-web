@@ -1,5 +1,8 @@
 <template>
-  <div id="app-wrapper" :data-theme="state.theme">
+  <div
+      :lang="this.$i18n.locale"
+      id="app-wrapper"
+      :data-theme="state.theme">
     <div id="nav">
       <navbarSection @theme-toggled="toggleTheme"/>
     </div>
@@ -12,7 +15,7 @@
 
 <script>
 import { reactive } from 'vue';
-import navbarSection from '@/components/Navbar/navbarSection.vue';
+import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
 
 export default {
@@ -22,7 +25,7 @@ export default {
   },
   setup() {
     const state = reactive({
-      theme: 'light',
+      theme: 'dark',
     });
 
     function toggleTheme() {
@@ -67,7 +70,7 @@ export default {
         height: 7vh;
         width: 100vw;
         padding: 5px 10% 0 10%;
-        background-color: $background-accent-color;
+        background-color: $accent-bg-color;
 
         @media only screen and (max-width: 645px) {
           & {

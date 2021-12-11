@@ -1,7 +1,7 @@
 // noinspection JSCheckFunctionSignatures
 
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Hero/HomePage.vue';
+import Home from '../views/Home/HomePage.vue';
 
 const routes = [{
   path: '/',

@@ -1,141 +1,28 @@
 <template>
-    <nav class="navigation">
-      <ul class="primary-nav">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/services">Services</router-link></li>
-        <li><router-link to="/contact">Contact</router-link></li>
-      </ul>
-
-      <div class="controls-wrapper">
-        <div class="toggle-theme-wrapper">
-          <input type="checkbox"
-                 name="toggle-theme"
-                 id="toggle-theme-checkbox"
-                 @change="toggleTheme"/>
-          <label for="toggle-theme-checkbox" class="toggle-theme-label-left"></label>
-          <label for="toggle-theme-checkbox" class="toggle-theme-label"></label>
-        </div>
-      </div>
-
-      <ul class="secondary-nav" id="secondary-nav">
-        <li><router-link to="/login" id="login">Log in</router-link></li>
-        <li><router-link to="/signup" id="signup">Sign up</router-link></li>
-      </ul>
-    </nav>
+  <div class="toggle-theme-wrapper">
+    <input type="checkbox"
+           name="toggle-theme"
+           id="toggle-theme-checkbox"
+           checked/>
+    <label for="toggle-theme-checkbox" class="toggle-theme-label-left"></label>
+    <label for="toggle-theme-checkbox" class="toggle-theme-label"></label>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'desktopNavigation',
-  setup(props, ctx) {
-    function toggleTheme() {
-      ctx.emit('theme-toggled');
-    }
-
-    return { toggleTheme };
-  },
+  name: 'ToggleSwitch',
 };
 </script>
 
-<style lang='scss' scoped>
-  a {
-    color: $primary-color;
-    text-decoration: none;
-    margin-right: 10px;
-
-    @media only screen and (min-width: 660px){
-      &{
-        font-size: 26px;
-      }
-    }
-  }
-
-  li {
-    display: inline-block;
-  }
-
-  .controls-wrapper {
-    flex-grow: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-
-    @media only screen and (max-width: 990px) {
-      &{
-        justify-content: flex-end;
-      }
-    }
-
-    .primary-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @media only screen and (max-width: 900px) {
-        & {
-          display: none;
-        }
-      }
-
-      a {
-        font-size: 24px;
-      }
-    }
-
-    .secondary-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @media only screen and (max-width: 580px) {
-        & {
-          display: none;
-        }
-      }
-
-      #login, #signup {
-        padding: 0 10px 0 10px;
-        transition: background-color, color .5s;
-      }
-
-      #login {
-        border-radius: 20px;
-
-        &:hover {
-          //color: $accent-color;
-        }
-      }
-
-      #signup {
-        border: 1px solid $primary-color;
-        background-color: $background-color;
-        color: $complementary-color;
-        border-radius: 10px;
-
-        &:hover {
-          background-color: white;
-          border: 1px solid black;
-          color: black;
-        }
-      }
-    }
-  }
-
-  // custom toggle switch
+<style lang="scss" scoped>
   $shine: 0 0 10px white;
   $on-bg: rgba(0, 0, 0, 0.15);
   $on-dot-color: #FFB200;
-  $on-border: 2px solid $primary-color;
+  $on-border: 2px solid $primary-fg-color;
   $off-bg: rgba(255, 255, 255, 0.15);
   $off-dot-color: #eee;
-  $off-border: 2px solid $primary-color;
+  $off-border: 2px solid $primary-fg-color;
   $togglebutton-size: 16px;
   $togglebutton-padding: 4px;
   $togglebutton-margin: 10px;

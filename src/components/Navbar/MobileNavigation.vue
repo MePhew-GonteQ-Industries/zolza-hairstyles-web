@@ -7,18 +7,22 @@
 
           <ul class="primary-nav">
             <li><router-link to="/"
-               @click="toggleMobileMenu">Home</router-link></li>
-            <li><router-link to="/services"
-               @click="toggleMobileMenu">Services</router-link></li>
+               @click="toggleMobileMenu"><img src="@/assets/home.svg" alt="">
+              {{$t('nav.primary-nav[0]')}}</router-link></li><li><router-link to="/services"
+               @click="toggleMobileMenu"><img src="@/assets/logo.svg" alt="">
+            {{$t('nav.primary-nav[1]')}}</router-link></li>
             <li><router-link to="/contact"
-               @click="toggleMobileMenu">Contact</router-link></li>
+               @click="toggleMobileMenu"><img src="@/assets/contact.svg" alt="">
+              {{$t('nav.primary-nav[2]')}}</router-link></li>
           </ul>
 
           <ul class="secondary-nav">
             <li><router-link to="/login"
-               @click="toggleMobileMenu">Log in</router-link></li>
+               @click="toggleMobileMenu"><img src="@/assets/login.svg" alt="">
+              {{$t('nav.secondary-nav[0]')}}</router-link></li>
             <li><router-link to="/signup"
-               @click="toggleMobileMenu">Sign up</router-link></li>
+               @click="toggleMobileMenu"><img src="@/assets/user.svg" alt="">
+              {{$t('nav.secondary-nav[1]')}}</router-link></li>
           </ul>
         </nav>
       </div>
@@ -42,7 +46,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
   .wordmark {
     position: absolute;
     left: 150px;
@@ -90,7 +93,7 @@ export default {
     overflow: hidden;
     display: flex;
     justify-content: right;
-    background-color: $background-accent-color;
+    background-color: $accent-bg-color;
 
     .mobile-navigation {
       margin-top: 8vh;
@@ -100,17 +103,35 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background-color: $background-color;
+      background-color: $primary-bg-color;
 
       a {
-        color: $primary-color;
-        padding-left: 20px;
+        color: $primary-fg-color;
+        padding-left: 10px;
         font-size: 25px;
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: left;
         width: 100%;
+
+        img {
+          height: 30px;
+          width: 30px;
+          margin-right: 10px;
+          filter: $mobile-menu-icon-filter;
+        }
+
+        &.router-link-active {
+          color: $link-active-color;
+
+          img {
+            filter: $mobile-menu-icon-link-active-filter;
+          }
+        }
       }
 
       .secondary-nav {
+        margin-bottom: 50px;
 
         @media only screen and (max-width: 990px) {
           & {

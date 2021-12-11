@@ -12,7 +12,7 @@ export default {
 
 <style lang='scss' scoped>
   #logo {
-    background-color: $primary-color;
+    background-color: $primary-fg-color;
     width: 250px;
     height: 250px;
     border-radius: 20px;

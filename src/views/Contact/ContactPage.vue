@@ -10,7 +10,7 @@
   #business-card {
     height: 300px;
     width: 600px;
-    background-color: $background-color;
+    background-color: $primary-bg-color;
     // background-image: url(''); // TODO: Create business card
     border-radius: 20px;
     display: flex;

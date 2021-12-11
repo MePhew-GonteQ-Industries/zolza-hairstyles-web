@@ -1,4 +1,11 @@
 {
-  "message": "Hello i18n !!",
-  "label": "Language: "
+  "nav": {
+    "primary-nav": ["Home", "Services", "Contact"],
+    "secondary-nav": ["Log in", "Sign up"]
+  },
+  "footer": ["Terms of use", "Privacy policy"],
+  "home": "HOME",
+  "settings": {
+    "language-selector": ["English", "Polish"]
+  }
 }
