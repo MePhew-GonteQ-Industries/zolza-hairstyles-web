@@ -7,21 +7,21 @@
 
           <ul class="primary-nav">
             <li><router-link to="/"
-               @click="toggleMobileMenu"><img src="@/assets/home.svg" alt="">
+               @click="toggleMobileMenu"><img src="@/assets/nav/home.svg" alt="">
               {{$t('nav.primary-nav[0]')}}</router-link></li><li><router-link to="/services"
                @click="toggleMobileMenu"><img src="@/assets/logo.svg" alt="">
             {{$t('nav.primary-nav[1]')}}</router-link></li>
             <li><router-link to="/contact"
-               @click="toggleMobileMenu"><img src="@/assets/contact.svg" alt="">
+               @click="toggleMobileMenu"><img src="@/assets/nav/contact.svg" alt="">
               {{$t('nav.primary-nav[2]')}}</router-link></li>
           </ul>
 
           <ul class="secondary-nav">
             <li><router-link to="/login"
-               @click="toggleMobileMenu"><img src="@/assets/login.svg" alt="">
+               @click="toggleMobileMenu"><img src="@/assets/nav/login.svg" alt="">
               {{$t('nav.secondary-nav[0]')}}</router-link></li>
             <li><router-link to="/signup"
-               @click="toggleMobileMenu"><img src="@/assets/user.svg" alt="">
+               @click="toggleMobileMenu"><img src="@/assets/nav/user.svg" alt="">
               {{$t('nav.secondary-nav[1]')}}</router-link></li>
           </ul>
         </nav>

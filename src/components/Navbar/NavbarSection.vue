@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div id="mobile-navigation-container">
-      <img id="hamburger-icon" src="@/assets/hamburger_icon.svg" alt=""
+      <img id="hamburger-icon" src="@/assets/nav/hamburger_icon.svg" alt=""
            @click=toggleMobileMenu
            :aria-expanded="state.mobileMenuActive"
            aria-controls="navbarSupportedContent"

@@ -16,25 +16,25 @@
           <li>
             <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank">
               <img
-                  src="@/assets/facebook_mono.svg"
+                  src="@/assets/footer/facebook_mono.svg"
                   class="social-media-icon"
                   loading="lazy" decoding="async" alt="Facebook icon" width="18"
                   height="18">
             </a>
             <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank">
-              <img src="@/assets/instagram_mono.svg"
+              <img src="@/assets/footer/instagram_mono.svg"
                    class="social-media-icon"
                    loading="lazy" decoding="async" alt="Instagram icon" width="18"
                    height="18">
             </a>
             <a href="tel:+48 730 601 830" target="_blank">
-              <img src="@/assets/phone.svg"
+              <img src="@/assets/footer/phone.svg"
                    class="social-media-icon"
                    loading="lazy" decoding="async" alt="Phone icon" width="18"
                    height="18">
             </a>
             <a href="mailto: zolza.hairstyles@gmail.com" target="_blank">
-              <img id="email" src="@/assets/email.svg"
+              <img id="email" src="@/assets/footer/email.svg"
                    class="social-media-icon"
                    loading="lazy" decoding="async" alt="Email icon"
                    height="18">
