@@ -18,7 +18,7 @@
       </div>
 
       <ul class="secondary-nav" id="secondary-nav">
-        <li><router-link to="/login" id="login">Log In</router-link></li>
+        <li><router-link to="/login" id="login">Log in</router-link></li>
         <li><router-link to="/signup" id="signup">Sign up</router-link></li>
       </ul>
     </nav>

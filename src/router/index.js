@@ -1,7 +1,7 @@
 // noinspection JSCheckFunctionSignatures
 
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/HomePage.vue';
+import Home from '../views/Hero/HomePage.vue';
 
 const routes = [{
   path: '/',
@@ -14,7 +14,7 @@ const routes = [{
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
-  component: () => import(/* webpackChunkName: "contact" */ '../views/ContactPage.vue'),
+  component: () => import(/* webpackChunkName: "contact" */ '../views/Contact/ContactPage.vue'),
 },
 {
   path: '/signup',

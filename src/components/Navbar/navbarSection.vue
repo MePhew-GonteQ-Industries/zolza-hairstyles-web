@@ -26,8 +26,8 @@
 
 <script>
 import { reactive } from 'vue';
-import desktopNavigation from '@/components/desktopNavigation.vue';
-import mobileNavigation from '@/components/mobileNavigation.vue';
+import desktopNavigation from '@/components/Navbar/desktopNavigation.vue';
+import mobileNavigation from '@/components/Navbar/mobileNavigation.vue';
 
 export default {
   name: 'navbarSection',
@@ -114,6 +114,7 @@ export default {
 
     .wordmark{
       height: 50px;
+      transition: all 5s;
       filter: $logo-filter;
     }
   }

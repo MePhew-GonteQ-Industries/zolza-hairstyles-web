@@ -23,6 +23,6 @@ export default {
 
   #logo img {
     height: 50%;
-    filter: brightness(0) saturate(0) invert(100%);
+    //filter: brightness(0) saturate(0) invert(100%);
   }
 </style>

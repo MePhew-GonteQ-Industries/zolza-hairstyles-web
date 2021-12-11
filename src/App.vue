@@ -12,8 +12,8 @@
 
 <script>
 import { reactive } from 'vue';
-import navbarSection from '@/components/navbarSection.vue';
-import contactSection from '@/components/contactSection.vue';
+import navbarSection from '@/components/Navbar/navbarSection.vue';
+import contactSection from '@/views/Contact/ContactSection.vue';
 
 export default {
   components: {
@@ -49,7 +49,6 @@ export default {
 
 <style lang="scss">
   #app {
-    transition: all 2s;
 
     #app-wrapper {
 
