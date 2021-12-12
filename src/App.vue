@@ -69,20 +69,7 @@ export default {
       footer {
         height: 7vh;
         width: 100vw;
-        padding: 5px 10% 0 10%;
         background-color: $accent-bg-color;
-
-        @media only screen and (max-width: 645px) {
-          & {
-            padding: 5px 5% 0 5%;
-          }
-        }
-
-        @media only screen and (max-width: 570px) {
-          & {
-            padding: 2px 1% 0 1%;
-          }
-        }
       }
     }
   }

@@ -64,14 +64,29 @@ export default {
       align-items: center;
       justify-content: center;
 
-      @media only screen and (max-width: 900px) {
-        & {
-          display: none;
+      &:lang(en) {
+        @media only screen and (max-width: 940px) {
+          & {
+            display: none;
+          }
+        }
+      }
+
+      &:lang(pl) {
+        @media only screen and (max-width: 1160px) {
+          & {
+            display: none;
+          }
         }
       }
 
       li {
         cursor: pointer;
+
+        &:hover a{
+          margin-bottom: 10px;
+          border-bottom: 1px solid $primary-fg-color;
+        }
 
         a {
           user-select: none;
@@ -79,21 +94,21 @@ export default {
           color: $primary-fg-color;
           text-decoration: none;
           margin-right: 10px;
+          transition: margin-bottom 200ms;
 
           &.router-link-active {
             color: $link-active-color;
           }
 
-          @media only screen and (min-width: 660px){
+          @media only screen and (min-width: 690px){
             &{
               font-size: 26px;
             }
           }
-        }
 
-        &:hover a{
-          margin-bottom: 10px;
-          border-bottom: 1px solid $primary-fg-color;
+          @media only screen and (max-height: 720px) {
+            font-size: 22px;
+          }
         }
       }
     }
@@ -103,7 +118,15 @@ export default {
       align-items: center;
       justify-content: center;
 
-      @media only screen and (max-width: 580px) {
+      @media only screen and (max-height: 720px) {
+        @media only screen and (max-width: 640px) {
+          & {
+            display: none;
+          }
+        }
+      }
+
+      @media only screen and (max-width: 610px) {
         & {
           display: none;
         }
@@ -119,14 +142,18 @@ export default {
           text-decoration: none;
           margin-right: 10px;
 
-          @media only screen and (min-width: 660px){
+          @media only screen and (min-width: 690px){
             &{
               font-size: 26px;
             }
           }
 
+          @media only screen and (max-height: 720px) {
+            font-size: 22px;
+          }
+
           &.login-btn, &.signup-btn {
-            padding: 0 10px 0 10px;
+            margin: 0 10px 0 10px;
           }
 
           &.login-btn {

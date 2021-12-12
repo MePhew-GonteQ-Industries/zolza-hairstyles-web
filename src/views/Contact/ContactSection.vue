@@ -1,8 +1,8 @@
 <template>
     <div class="footer-basic">
       <div class="info-section">
-        <span>© 2021 Zołza Hairstyles</span>
         <ul>
+          <li class="list-inline-item"><span>© 2021 Zołza Hairstyles</span></li>
           <li class="list-inline-item"><router-link to="/terms">{{$t('footer[0]')}}</router-link>
           </li>
           <li class="list-inline-item"><router-link to="/privacyPolicy">{{$t('footer[1]')}}
@@ -14,30 +14,36 @@
       <div class="contact">
         <ul>
           <li>
-            <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank">
-              <img
-                  src="@/assets/footer/facebook_mono.svg"
-                  class="social-media-icon"
-                  loading="lazy" decoding="async" alt="Facebook icon" width="18"
-                  height="18">
-            </a>
+              <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank">
+                <img
+                    src="@/assets/footer/facebook_mono.svg"
+                    class="social-media-icon"
+                    loading="lazy" decoding="async" alt="Facebook icon" width="21"
+                    height="21">
+              </a>
+          </li>
+          <li>
             <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank">
               <img src="@/assets/footer/instagram_mono.svg"
                    class="social-media-icon"
-                   loading="lazy" decoding="async" alt="Instagram icon" width="18"
-                   height="18">
+                   loading="lazy" decoding="async" alt="Instagram icon" width="21"
+                   height="21">
             </a>
+          </li>
+          <li>
             <a href="tel:+48 730 601 830" target="_blank">
               <img src="@/assets/footer/phone.svg"
                    class="social-media-icon"
-                   loading="lazy" decoding="async" alt="Phone icon" width="18"
-                   height="18">
+                   loading="lazy" decoding="async" alt="Phone icon" width="21"
+                   height="21">
             </a>
+          </li>
+          <li>
             <a href="mailto: zolza.hairstyles@gmail.com" target="_blank">
-              <img id="email" src="@/assets/footer/email.svg"
+              <img src="@/assets/footer/email.svg"
                    class="social-media-icon"
                    loading="lazy" decoding="async" alt="Email icon"
-                   height="18">
+                   width="21" height="21">
             </a>
           </li>
         </ul>
@@ -61,16 +67,28 @@ export default {
     justify-content: space-between;
     color: $footer-fg-color;
     font-size: 14px;
+    padding: 0 10%;
 
-    @media only screen and (max-width: 510px) {
-      & {
-        flex-flow: column;
+    &:lang(en) {
+      @media only screen and (max-width: 800px) {
+        padding: 0 5%;
       }
-    }
 
-    @media only screen and (max-width: 370px) {
-      & {
-        font-size: 12px;
+      @media only screen and (max-width: 540px) {
+        padding: 0 3%;
+      }
+
+      @media only screen and (max-width: 510px) {
+        & {
+          flex-flow: column;
+          padding: 0 2% 5px 2%;
+        }
+      }
+
+      @media only screen and (max-width: 380px) {
+        & {
+          font-size: 12px;
+        }
       }
     }
 
@@ -78,42 +96,42 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 100%;
     }
 
     .contact {
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 100%;
     }
 
     ul {
-      margin-left: 20px;
-
-      @media only screen and (max-width: 645px) {
-        & {
-          margin-left: 10px;
-        }
-      }
-
-      @media only screen and (max-width: 510px) {
-        & {
-          margin-left: 2px;
-        }
-      }
-
-      @media only screen and (max-width: 320px) {
-        & {
-          margin-left: 0;
-        }
-      }
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
 
       li {
         display: inline-block;
+        padding: 0 5px;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
 
         a {
           user-select: none;
           color: $footer-fg-color;
           font-size: 14px;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           &.router-link-active {
             color: $link-active-color;
@@ -124,6 +142,12 @@ export default {
             text-decoration: underline;
           }
 
+          @media only screen and (max-width: 380px) {
+            & {
+              font-size: 12px;
+            }
+          }
+
           img {
             &.social-media-icon {
               filter: $footer-icon-filter;
@@ -131,24 +155,11 @@ export default {
               &:hover {
                 filter: $footer-icon-hover-filter;
               }
-            }
-          }
 
-          @media only screen and (max-width: 370px) {
-            & {
-              font-size: 12px;
-            }
-          }
-
-          @media only screen and (max-width: 320px) {
-            & {
-              padding: 4px;
-            }
-          }
-
-          @media only screen and (max-width: 315px) {
-            & {
-              padding: 3px;
+              @media only screen and (max-width: 1000px) {
+                height: 18px;
+                width: 18px;
+              }
             }
           }
         }

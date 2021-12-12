@@ -133,12 +133,21 @@ export default {
       .secondary-nav {
         margin-bottom: 50px;
 
-        @media only screen and (max-width: 990px) {
+        @media only screen and (min-width: 610px) {
           & {
             display: none;
           }
         }
-        @media only screen and (max-width: 570px) {
+
+        @media only screen and (max-height: 720px) {
+          @media only screen and (max-width: 640px) {
+            & {
+              display: block;
+            }
+          }
+        }
+
+        @media only screen and (max-width: 610px) {
           & {
             display: block;
           }

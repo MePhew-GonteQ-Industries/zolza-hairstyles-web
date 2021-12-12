@@ -60,7 +60,7 @@ export default {
 <style lang="scss" scoped>
   .navbar {
     height: 100%;
-    padding: 10px 10px 5px 10px;
+    padding: 10px;
     background-color: $accent-bg-color;
     display: flex;
     align-items: center;
@@ -79,7 +79,7 @@ export default {
     .hide {
       display: none;
 
-      @media only screen and (min-width: 900px) {
+      @media only screen and (min-width: 941px) {
         display: flex;
       }
     }
@@ -105,7 +105,7 @@ export default {
       align-items: center;
       justify-content: left;
 
-      @media only screen and (max-width: 900px) {
+      @media only screen and (max-width: 940px) {
         & {
           width: 100%;
           justify-content: center;
@@ -114,17 +114,22 @@ export default {
 
       #logo-link {
         height: 50px;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0;
       }
 
       .wordmark{
         height: 50px;
-        transition: all 5s;
         filter: $logo-filter;
+
+        @media only screen and (max-height: 720px) {
+          height: 35px;
+        }
       }
     }
-    @media only screen and (min-width: 900px){
+    @media only screen and (min-width: 941px){
       #mobile-navigation-container{
         display: none;
       }

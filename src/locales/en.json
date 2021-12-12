@@ -6,6 +6,6 @@
   "footer": ["Terms of use", "Privacy policy"],
   "home": "HOME",
   "settings": {
-    "language-selector": ["English", "Polish"]
+    "language-selector": ["Polish", "English"]
   }
 }
