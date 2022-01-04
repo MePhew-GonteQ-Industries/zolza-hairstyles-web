@@ -34,6 +34,6 @@ jobs:
           username: ${{secrets.DEPLOYMENT_USERNAME}}
           password: ${{secrets.DEPLOYMENT_PASSWORD}}
           script: |
-            cd app/src
             git pull
-            sudo systemctl restart api
+            npm run build
+            echo ${{secrets.DEPLOYMENT_PASSWORD}} | sudo -S cp dist /var/www/zolza_hairstyles/html/
