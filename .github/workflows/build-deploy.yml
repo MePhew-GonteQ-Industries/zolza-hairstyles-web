@@ -19,11 +19,9 @@ jobs:
         run: npm install
       - name: Building application
         run: npm run build
-
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
-
     steps:
       - name: Deploying to the server
         uses: appleboy/ssh-action@master
