@@ -1,12 +1,17 @@
 <template>
   <section class="app-page" id="sign-up-page">
-    <h1>This is a sign up page</h1>
+    <signUp />
   </section>
 </template>
 
 <script>
+import signUp from '@/views/SignUp/SignUp.vue';
+
 export default {
-  name: 'SignUp',
+  name: 'SignUpPage',
+  components: {
+    signUp,
+  },
 };
 </script>
 
