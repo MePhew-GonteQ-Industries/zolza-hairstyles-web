@@ -25,6 +25,6 @@ export default {
   }
 
   h1::selection {
-    background-color: $primary-fg-color; // TODO: Set proper selection colors?
+    background-color: $primary-fg-color;
   }
 </style>
