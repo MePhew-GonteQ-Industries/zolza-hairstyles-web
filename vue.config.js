@@ -9,13 +9,24 @@ module.exports = {
 
   pluginOptions: {
     i18n: {
-      locale: 'en',
-      fallbackLocale: 'en',
+      globalInjection: true,
+      legacy: false,
+      locale: process.env.VUE_APP_I18N_LOCALE || 'pl',
+      fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'pl',
       localeDir: 'locales',
-      enableLegacy: false,
       runtimeOnly: false,
       compositionOnly: false,
       fullInstall: true,
     },
+  },
+
+  /* eslint no-param-reassign: "error" */
+  chainWebpack: (config) => {
+    config
+      .plugin('html')
+      .tap((args) => {
+        args[0].title = 'Zołza Hairstyles';
+        return args;
+      });
   },
 };
