@@ -63,6 +63,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
 
       &:lang(en) {
         @media only screen and (max-width: 940px) {
@@ -86,6 +87,8 @@ export default {
         &:hover a{
           margin-bottom: 10px;
           border-bottom: 1px solid $primary-fg-color;
+
+          //TODO: Fix not clickable space
         }
 
         a {
@@ -95,6 +98,7 @@ export default {
           text-decoration: none;
           margin-right: 10px;
           transition: margin-bottom 200ms;
+          height: 100%;
 
           &.router-link-active {
             color: $link-active-color;

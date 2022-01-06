@@ -59,6 +59,8 @@ export default {
         position: sticky;
         top: 0;
         height: 8vh;
+        min-height: 50px;
+        max-height: 75px;
         z-index: 10;
       }
 

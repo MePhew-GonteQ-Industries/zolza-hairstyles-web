@@ -6,7 +6,7 @@ import router from './router';
 import store from './store';
 import i18n from './i18n';
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL || 'https://mephew.ddns.net/api';
 
 createApp(App).use(i18n)
   .use(VueAxios, axios)

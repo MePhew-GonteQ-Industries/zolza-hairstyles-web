@@ -23,4 +23,8 @@ export default {
   h1 {
     font-size: 25vw;
   }
+
+  h1::selection {
+    background-color: $primary-fg-color; // TODO: Set proper selection colors?
+  }
 </style>

@@ -3,7 +3,9 @@
       :class="{ 'mobile-menu-collapsed' : !mobileMenuActive,
       'mobile-menu-shown' : mobileMenuActive}">
         <nav class="mobile-navigation">
-          <img src="@/assets/wordmark.svg" alt="" class="wordmark">
+          <div class="top-bar">
+            <img src="@/assets/wordmark.svg" alt="" class="wordmark">
+          </div>
 
           <ul class="primary-nav">
             <li><router-link to="/"
@@ -46,43 +48,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .wordmark {
-    position: absolute;
-    left: 150px;
-    top: 10px;
-    height: 50px;
-    filter: $logo-filter;
-
-    @media only screen and (max-width: 620px) {
-      & {
-        top: 12px;
-        left: 70px;
-        height: 40px;
-      }
-    }
-
-    @media only screen and (max-width: 410px) {
-      & {
-        top: 16px;
-        height: 35px;
-      }
-    }
-
-    @media only screen and (max-width: 375px) {
-      & {
-        display: none;
-      }
-    }
-  }
-
-  .mobile-menu-collapsed {
-    width: 0;
-  }
-
-  .mobile-menu-shown {
-    width: 60%;
-  }
-
   .mobile-navigation-container {
     position: absolute;
     z-index: 20;
@@ -92,13 +57,18 @@ export default {
     transition: width 500ms;
     overflow: hidden;
     display: flex;
-    justify-content: right;
+    flex-flow: column;
     background-color: $accent-bg-color;
 
+    &.mobile-menu-collapsed {
+      width: 0;
+    }
+
+    &.mobile-menu-shown {
+      width: 60%;
+    }
+
     .mobile-navigation {
-      margin-top: 8vh;
-      padding: 30px 0 90px;
-      width: 60vw;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -108,11 +78,15 @@ export default {
       a {
         color: $primary-fg-color;
         padding-left: 10px;
-        font-size: 25px;
         display: flex;
         align-items: center;
         justify-content: left;
         width: 100%;
+        font-size: 25px;
+
+        &:lang(pl) {
+          font-size: 20px;
+        }
 
         img {
           height: 30px;
@@ -130,8 +104,54 @@ export default {
         }
       }
 
+      .top-bar {
+        position: absolute;
+        top: 0;
+        height: 8vh;
+        min-height: 50px;
+        max-height: 75px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: $accent-bg-color;
+
+        .wordmark {
+          margin-left: 60px;
+          height: 50px;
+          filter: $logo-filter;
+
+          @media only screen and (max-width: 470px) {
+            margin-left: 45px;
+            height: 40px;
+          }
+
+          @media only screen and (max-width: 370px) {
+            margin-left: 50px;
+            height: 35px;
+          }
+
+          @media only screen and (max-width: 340px) {
+            margin-left: 55px;
+            height: 30px;
+          }
+
+          @media only screen and (max-width: 340px) {
+            margin-left: 50px;
+            height: 30px;
+          }
+
+          @media only screen and (max-height: 750px) {
+            height: 40px;
+          }
+        }
+      }
+
+      .primary-nav {
+        margin-top: 80px;
+      }
+
       .secondary-nav {
-        margin-bottom: 50px;
+        margin-bottom: 10vh;
 
         @media only screen and (min-width: 610px) {
           & {
@@ -152,7 +172,6 @@ export default {
             display: block;
           }
         }
-
       }
     }
   }
