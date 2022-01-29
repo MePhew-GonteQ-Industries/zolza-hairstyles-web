@@ -10,21 +10,21 @@
           <ul class="primary-nav">
             <li><router-link to="/"
                @click="toggleMobileMenu"><img src="@/assets/nav/home.svg" alt="">
-              {{$t('nav.primary-nav[0]')}}</router-link></li><li><router-link to="/services"
+              {{$t('nav.primaryNav[0]')}}</router-link></li><li><router-link to="/services"
                @click="toggleMobileMenu"><img src="@/assets/logo.svg" alt="">
-            {{$t('nav.primary-nav[1]')}}</router-link></li>
+            {{$t('nav.primaryNav[1]')}}</router-link></li>
             <li><router-link to="/contact"
                @click="toggleMobileMenu"><img src="@/assets/nav/contact.svg" alt="">
-              {{$t('nav.primary-nav[2]')}}</router-link></li>
+              {{$t('nav.primaryNav[2]')}}</router-link></li>
           </ul>
 
-          <ul class="secondary-nav">
+          <ul class="secondaryNav">
             <li><router-link to="/login"
                @click="toggleMobileMenu"><img src="@/assets/nav/login.svg" alt="">
-              {{$t('nav.secondary-nav[0]')}}</router-link></li>
-            <li><router-link to="/signup"
+              {{$t('nav.secondaryNav[0]')}}</router-link></li>
+            <li><router-link to="/sign-up"
                @click="toggleMobileMenu"><img src="@/assets/nav/user.svg" alt="">
-              {{$t('nav.secondary-nav[1]')}}</router-link></li>
+              {{$t('nav.secondaryNav[1]')}}</router-link></li>
           </ul>
         </nav>
       </div>

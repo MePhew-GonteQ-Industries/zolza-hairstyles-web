@@ -1,9 +1,9 @@
 <template>
     <nav class="navigation">
       <ul class="primary-nav">
-        <li><router-link to="/">{{$t('nav.primary-nav[0]')}}</router-link></li>
-        <li><router-link to="/services">{{$t('nav.primary-nav[1]')}}</router-link></li>
-        <li><router-link to="/contact">{{$t('nav.primary-nav[2]')}}</router-link></li>
+        <li><router-link to="/">{{$t('nav.primaryNav[0]')}}</router-link></li>
+        <li><router-link to="/services">{{$t('nav.primaryNav[1]')}}</router-link></li>
+        <li><router-link to="/contact">{{$t('nav.primaryNav[2]')}}</router-link></li>
       </ul>
 
       <div class="controls-wrapper">
@@ -11,9 +11,9 @@
       </div>
 
       <ul class="secondary-nav">
-        <li><router-link to="/login" class="login-btn">{{$t('nav.secondary-nav[0]')}}
+        <li><router-link to="/login" class="login-btn">{{$t('nav.secondaryNav[0]')}}
         </router-link></li>
-        <li><router-link to="/signup" class="signup-btn">{{$t('nav.secondary-nav[1]')}}
+        <li><router-link to="/sign-up" class="signup-btn">{{$t('nav.secondaryNav[1]')}}
         </router-link></li>
       </ul>
     </nav>

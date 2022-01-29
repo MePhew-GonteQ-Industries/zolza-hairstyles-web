@@ -1,11 +1,18 @@
 {
   "nav": {
-    "primary-nav": ["Strona główna", "Usługi", "Kontakt"],
-    "secondary-nav": ["Zaloguj się", "Zarejestruj się"]
+    "primaryNav": ["Strona główna", "Usługi", "Kontakt"],
+    "secondaryNav": ["Zaloguj się", "Zarejestruj się"]
   },
   "footer": ["Warunki korzystania", "Polityka prywatności"],
   "home": "DOM",
   "settings": {
-    "language-selector": ["Polski", "Angielski"]
+    "languageSelector": ["Polski", "Angielski"]
+  },
+  "signUp": {
+    "heading": "Zapraszamy",
+    "eMailFieldLabel": "Adres e-mail",
+    "passwordFieldLabel": "Hasło",
+    "forgotPasswordBtn": "Nie pamiętasz hasła?",
+    "logInBtn": "Zaloguj się"
   }
 }

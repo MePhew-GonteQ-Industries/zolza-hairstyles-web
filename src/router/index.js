@@ -1,12 +1,19 @@
 // noinspection JSCheckFunctionSignatures
 
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home/HomePage.vue';
+import Home from '@/views/Home/HomePage.vue';
+import EmailVerification from '@/views/EmailVerification/EmailVerificationPage.vue';
+import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
 
 const routes = [{
   path: '/',
   name: 'Home',
   component: Home,
+},
+{
+  path: '/email-verification',
+  name: 'EmailVerification',
+  component: EmailVerification,
 },
 {
   path: '/contact',
@@ -17,14 +24,14 @@ const routes = [{
   component: () => import(/* webpackChunkName: "contact" */ '../views/Contact/ContactPage.vue'),
 },
 {
-  path: '/signup',
+  path: '/sign-up',
   name: 'SignUp',
   component: () => import(/* webpackChunkName: "signup" */ '../views/SignUp/SignUpPage.vue'),
 },
 {
   path: '/login',
   name: 'Login',
-  component: () => import(/* webpackChunkName: "login" */ '../views/LoginPage.vue'),
+  component: () => import(/* webpackChunkName: "login" */ '../views/LogIn/LoginPage.vue'),
 },
 {
   path: '/services',
@@ -37,9 +44,14 @@ const routes = [{
   component: () => import(/* webpackChunkName: "terms" */ '../views/TermsOfUsePage.vue'),
 },
 {
-  path: '/privacypolicy',
+  path: '/privacy-policy',
   name: 'PrivacyPolicy',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '../views/PrivacyPolicyPage.vue'),
+},
+{
+  path: '/:catchAll(.*)',
+  name: 'NotFound',
+  component: PageNotFound,
 },
 ];
 

@@ -1,7 +1,6 @@
 <template>
-  <section class="app-page" id="login-page">
-    <div class="login-section-wrapper">
-    </div>
+  <section class="app-page" id="sign-up-page">
+    <h1>DASDSADAD</h1>
   </section>
 </template>
 
