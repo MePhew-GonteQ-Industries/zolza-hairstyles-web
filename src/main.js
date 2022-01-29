@@ -6,7 +6,17 @@ import router from './router';
 import store from './store';
 import i18n from './i18n';
 
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL || 'https://mephew.ddns.net/api';
+const { VUE_APP_ENV } = process.env;
+const { VUE_APP_DEV_URL } = process.env;
+const { VUE_APP_PROD_URL } = process.env;
+
+if (VUE_APP_ENV === 'DEV') {
+  axios.defaults.baseURL = VUE_APP_DEV_URL;
+} else if (VUE_APP_ENV === 'PROD') {
+  axios.defaults.baseURL = VUE_APP_PROD_URL;
+}
+
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
 
 createApp(App).use(i18n)
   .use(VueAxios, axios)
