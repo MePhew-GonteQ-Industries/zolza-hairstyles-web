@@ -2,7 +2,7 @@
     <div class="footer-basic">
       <div class="info-section">
         <ul>
-          <li class="list-inline-item"><span>© 2021 Zołza Hairstyles</span></li>
+          <li class="list-inline-item"><span>© 2022 Zołza Hairstyles</span></li>
           <li class="list-inline-item"><router-link to="/terms">{{$t('footer[0]')}}</router-link>
           </li>
           <li class="list-inline-item"><router-link to="/privacy-policy">{{$t('footer[1]')}}
