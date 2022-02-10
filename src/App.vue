@@ -54,23 +54,23 @@ export default {
   #app {
 
     #app-wrapper {
+      height: 100vh;
 
       #nav {
         position: sticky;
         top: 0;
-        height: 8vh;
+        height: 8%;
         min-height: 50px;
         max-height: 75px;
         z-index: 10;
       }
 
       .router-view {
-        min-height: 85vh;
+        min-height: 85%;
       }
 
       footer {
-        height: 7vh;
-        width: 100vw;
+        height: 7%;
         background-color: $accent-bg-color;
       }
     }
