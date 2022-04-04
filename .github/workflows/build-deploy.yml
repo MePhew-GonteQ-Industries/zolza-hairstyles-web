@@ -28,10 +28,11 @@ jobs:
         with:
           host: ${{secrets.DEPLOYMENT_HOST}}
           username: ${{secrets.DEPLOYMENT_USERNAME}}
-          password: ${{secrets.DEPLOYMENT_PASSWORD}}
+          key: ${{secrets.DEPLOYMENT_SSH_KEY}}
+          passphrase: ${{secrets.DEPLOYMENT_SSH_KEY_PASSPHRASE}}
           script: |
-            cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza_hairstyles
+            cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
             git pull
             npm install
             npm run build
-            echo ${{secrets.DEPLOYMENT_PASSWORD}} | sudo -S cp -r dist /var/www/zolza_hairstyles/html/
+            echo ${{secrets.DEPLOYMENT_PASSWORD}} | sudo -S cp -r dist /var/www/zolza-hairstyles.pl
