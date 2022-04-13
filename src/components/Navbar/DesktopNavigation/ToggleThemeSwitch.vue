@@ -3,7 +3,7 @@
     <input type="checkbox"
            name="toggle-theme"
            id="toggle-theme-checkbox"
-           checked/>
+           :checked="dataTheme === 'dark'"/>
     <label for="toggle-theme-checkbox" class="toggle-theme-label-left"></label>
     <label for="toggle-theme-checkbox" class="toggle-theme-label"></label>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'ToggleSwitch',
+  props: ['dataTheme'],
 };
 </script>
 
