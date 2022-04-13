@@ -18,7 +18,7 @@
                 <img
                     src="@/assets/footer/facebook_mono.svg"
                     class="social-media-icon"
-                    loading="lazy" decoding="async" alt="Facebook icon" width="21"
+                    loading="lazy" decoding="async" alt="Facebook" width="21"
                     height="21">
               </a>
           </li>
@@ -26,7 +26,7 @@
             <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank">
               <img src="@/assets/footer/instagram_mono.svg"
                    class="social-media-icon"
-                   loading="lazy" decoding="async" alt="Instagram icon" width="21"
+                   loading="lazy" decoding="async" alt="Instagram" width="21"
                    height="21">
             </a>
           </li>
@@ -34,7 +34,7 @@
             <a href="tel:+48 730 601 830" target="_blank">
               <img src="@/assets/footer/phone.svg"
                    class="social-media-icon"
-                   loading="lazy" decoding="async" alt="Phone icon" width="21"
+                   loading="lazy" decoding="async" alt="Phone" width="21"
                    height="21">
             </a>
           </li>
@@ -42,7 +42,7 @@
             <a href="mailto: zolza.hairstyles@gmail.com" target="_blank">
               <img src="@/assets/footer/email.svg"
                    class="social-media-icon"
-                   loading="lazy" decoding="async" alt="Email icon"
+                   loading="lazy" decoding="async" alt="Email"
                    width="21" height="21">
             </a>
           </li>
