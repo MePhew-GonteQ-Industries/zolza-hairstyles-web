@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div id="mobile-navigation-container">
-      <img id="hamburger-icon" src="@/assets/nav/hamburger_icon.svg" alt=""
+      <img id="hamburger-icon" src="@/assets/nav/hamburger_icon.svg" alt="Menu"
            @click=toggleMobileMenu
            :aria-expanded="state.mobileMenuActive"
            aria-controls="navbarSupportedContent"
@@ -20,7 +20,7 @@
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
       </router-link>
     </section>
-    <desktopNavigation @theme-toggled="toggleTheme"/>
+    <desktopNavigation :data-theme="dataTheme"  @theme-toggled="toggleTheme"/>
   </div>
 </template>
 
@@ -35,7 +35,8 @@ export default {
     desktopNavigation,
     mobileNavigation,
   },
-  setup(props, ctx) {
+  props: ['dataTheme'],
+  setup(_props, ctx) {
     const state = reactive({
       mobileMenuActive: false,
     });
