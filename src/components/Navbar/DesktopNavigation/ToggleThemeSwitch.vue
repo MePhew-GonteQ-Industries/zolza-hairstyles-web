@@ -55,7 +55,7 @@ export default {
 
   .toggle-theme-wrapper input[type=checkbox], .toggle-theme-wrapper input[type=checkbox]:active{
     position:absolute;
-    top:-5000px;
+    // top:-5000px; Absolutely no idea why this was here but caused some weird issues
     height:0;
     width:0;
     opacity:0;
