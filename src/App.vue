@@ -4,7 +4,7 @@
       id="app-wrapper"
       :data-theme="state.theme">
     <div id="nav">
-      <navbarSection @theme-toggled="toggleTheme"/>
+      <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
     </div>
     <router-view class="router-view"/>
     <footer>
