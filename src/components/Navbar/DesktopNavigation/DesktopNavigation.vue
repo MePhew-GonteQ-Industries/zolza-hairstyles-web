@@ -7,7 +7,7 @@
       </ul>
 
       <div class="controls-wrapper">
-        <ToggleThemeSwitch @change="toggleTheme"/>
+        <ToggleThemeSwitch :data-theme="dataTheme" @change="toggleTheme"/>
       </div>
 
       <ul class="secondary-nav">
@@ -27,7 +27,8 @@ export default {
   components: {
     ToggleThemeSwitch,
   },
-  setup(props, ctx) {
+  props: ['dataTheme'],
+  setup(_props, ctx) {
     function toggleTheme() {
       ctx.emit('theme-toggled');
     }
