@@ -24,8 +24,18 @@ export default {
     contactSection,
   },
   setup() {
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    let theme;
+
+    if (prefersDarkMode) {
+      theme = 'dark';
+    } else {
+      theme = 'light';
+    }
+
     const state = reactive({
-      theme: 'dark',
+      theme,
     });
 
     function toggleTheme() {
