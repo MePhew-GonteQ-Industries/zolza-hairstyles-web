@@ -1,6 +1,5 @@
 <template>
   <div
-      :lang="this.$i18n.locale"
       id="app-wrapper"
       :data-theme="state.theme">
     <div id="nav">
