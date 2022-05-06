@@ -1,9 +1,7 @@
 <template>
   <section class="app-page" id="verification-page">
     <div class="verification-wrapper">
-      <h1>Kliknij przycisk poniżej, aby zweryfikować swój adres e-mail</h1>
-      <button @click="verifyEmail">Zweryfikuj</button>
-      <h6>{{info}}</h6>
+
     </div>
   </section>
 </template>
@@ -11,20 +9,26 @@
 <script>
 export default {
   name: 'EmailVerification',
-  data() {
-    return {
-      info: null,
-    };
-  },
-  methods: {
-    verifyEmail() {
-      this.axios.post('/users/email-verification', { verification_token: this.$route.query.token })
-        .then((res) => this.updateUi(res))
-        .catch((err) => console.error(err));
-    },
-    updateUi(res) {
-      this.info = res;
-    },
+  mounted() {
+    const { query } = this.$route;
+    if (query) {
+      const { token } = query;
+      if (token) {
+        this.axios.put('users/verify-email', {
+          verification_token: token,
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              // this.$router.push('/login');
+              const { email } = response.data;
+              this.$router.replace({ name: 'Login', params: { email } });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
   },
 };
 </script>
