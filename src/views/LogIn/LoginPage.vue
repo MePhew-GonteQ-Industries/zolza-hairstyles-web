@@ -1,6 +1,10 @@
 <template>
   <section class="app-page" id="login-page">
     <h1>Login</h1>
+    <div class="email-confirmation-message" :class="{ hide: !emailConfirmationMessageShown }">
+        <h4>Email address has been confirmed successfully</h4>
+        <h4>You can now login to your account</h4>
+    </div>
     <form class="login-form" @submit.prevent="loginUser">
       <div class="input-wrapper">
         <input class="email-input" type="text" name="email"
@@ -82,16 +86,28 @@ export default {
           }
         });
     }
+
+    const emailConfirmationMessageShown = ref(false);
+
+    function showEmailConfirmationMessage() {
+      emailConfirmationMessageShown.value = !emailConfirmationMessageShown.value;
+    }
+
     return {
       userData,
       loginUser,
       message,
       showPassword,
       passwordHidden,
+      showEmailConfirmationMessage,
+      emailConfirmationMessageShown,
     };
   },
   mounted() {
-    this.userData.email = this.email ? this.email : '';
+    if (this.email) {
+      this.userData.email = this.email;
+      this.showEmailConfirmationMessage();
+    }
   },
   components: { CustomButton },
 };
@@ -108,6 +124,20 @@ export default {
     }
   }
 
+  .email-confirmation-message {
+    margin-top: 70px;
+    margin-bottom: 5px;
+    background-color: rgba(24, 25, 27, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #4F8A10;
+    background-color: #DFF2BF;
+  }
+
   .hide {
     display: none;
   }
@@ -120,7 +150,7 @@ export default {
     gap: 20px;
     transition: all .3s;
     background-color: rgba(39, 42, 54, .6);
-    padding: 140px 0 100px 0;
+    padding: 100px 0 100px 0;
     border-radius: 20px;
 
     label {
