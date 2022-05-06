@@ -14,9 +14,7 @@
         @click="toggleMobileMenu">
       </div>
     </div>
-    <section class="navbar-logo-section"
-        :class="{'hide' : state.mobileMenuActive,
-                 'show' : !state.mobileMenuActive}">
+    <section class="navbar-logo-section">
       <router-link id="logo-link" to="/"><img class="wordmark" src="@/assets/wordmark.svg" alt="">
       </router-link>
     </section>
@@ -70,7 +68,7 @@ export default {
       position: absolute;
       z-index: 5;
       display: block;
-      top: 0;
+      top: 8vh;
       left: 0;
       width: 100vw;
       height: 100vh;

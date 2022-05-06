@@ -1,8 +1,11 @@
 <template>
     <nav class="navigation">
       <ul class="primary-nav">
-        <li><router-link to="/">{{$t('nav.primaryNav[0]')}}</router-link></li>
-        <li><router-link to="/services">{{$t('nav.primaryNav[1]')}}</router-link></li>
+        <li><router-link :to="{ name: 'Home',
+        params: { lang: this.$i18n.locale }}">{{$t('nav.primaryNav[0]')}}</router-link></li>
+        <li><router-link :to="{ name: 'Services',
+        params: { lang: this.$i18n.locale }}">{{$t('nav.primaryNav[1]')}}
+          </router-link></li>
         <li><router-link to="/contact">{{$t('nav.primaryNav[2]')}}</router-link></li>
       </ul>
 

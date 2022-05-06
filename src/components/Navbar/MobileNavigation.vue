@@ -3,10 +3,6 @@
       :class="{ 'mobile-menu-collapsed' : !mobileMenuActive,
       'mobile-menu-shown' : mobileMenuActive}">
         <nav class="mobile-navigation">
-          <div class="top-bar">
-            <img src="@/assets/wordmark.svg" alt="" class="wordmark">
-          </div>
-
           <ul class="primary-nav">
             <li><router-link to="/"
                @click="toggleMobileMenu"><img src="@/assets/nav/home.svg" alt="">
@@ -51,9 +47,9 @@ export default {
   .mobile-navigation-container {
     position: absolute;
     z-index: 20;
-    height: 100vh;
+    height: 92vh;
+    top: 8vh;
     left: 0;
-    top: 0;
     transition: width 500ms;
     overflow: hidden;
     display: flex;
