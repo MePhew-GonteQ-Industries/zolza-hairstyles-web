@@ -42,13 +42,13 @@
 #app-wrapper[data-theme='dark'] {
     /* general */
     --primary-fg-color: #F5F5F5;
-    --primary-bg-color: #3D3D3D;
-    --accent-bg-color: #121212;
-    --page-fg-color: #fff28c;
-    --link-active-color: #3EB595;
+    --primary-bg-color: #272A36; /* #3D3D3D */
+    --accent-bg-color: #232327; /* #121212 */
+    --page-fg-color: orange; /* #fff28c */
+    --link-active-color: pink; /* #3EB595 */
 
     /*reactive*/
-    --hover-color: #2C8C99;
+    --hover-color: pink; /* #2C8C99 */
 
     /* mobile menu */
     --mobile-menu-icon-filter: brightness(0) invert(1);
