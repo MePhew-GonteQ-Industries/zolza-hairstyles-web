@@ -16,8 +16,6 @@ if (VUE_APP_ENV === 'DEV') {
   axios.defaults.baseURL = VUE_APP_PROD_URL;
 }
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
-
 createApp(App).use(i18n)
   .use(VueAxios, axios)
   .use(store)
