@@ -79,7 +79,15 @@ export default {
       passwordHiddenRepeat.value = !passwordHiddenRepeat.value;
     }
 
-    function signUpUser() {
+    function validateData() {
+      if (userData.value.password !== passwordRepeat.value) {
+        return false;
+      }
+
+      return true;
+    }
+
+    function sendSignUpRequest() {
       axios.post('/auth/register', {
         name: userData.value.name,
         surname: userData.value.surname,
@@ -119,6 +127,14 @@ export default {
             console.log('Error', error.message);
           }
         });
+    }
+
+    function signUpUser() {
+      if (validateData()) {
+        sendSignUpRequest();
+      } else {
+        console.error('Panie z czym do ludzi');
+      }
     }
 
     return {
