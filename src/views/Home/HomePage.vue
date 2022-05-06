@@ -1,5 +1,5 @@
 <template>
-  <section class="app-page" id="homepage">
+  <section class="app-page" id="home-page">
     <heroSection id='hero'></heroSection>
     <h1>{{$t('home')}}</h1>
     <language-selector />
@@ -20,6 +20,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  #home-page {
+    // background-image: url('~@/assets/blob-background2.svg');
+    background-size: cover;
+  }
+
+  a {
+    color: white;
+    font-size: 4rem;
+  }
+
   h1 {
     font-size: 25vw;
   }
