@@ -1,6 +1,6 @@
 <template>
   <section class="app-page" id="sign-up-page">
-    <h1>Sign up</h1>
+    <h1>Create an account</h1>
     <form class="sing-up-form" @submit.prevent="signUpUser">
       <div class="input-wrapper">
         <input class="name-input" type="text" name="name"
@@ -14,10 +14,11 @@
         <label class="surname-label" for="email">Surname</label>
         <img class="contact-icon" src="@/assets/contact.svg" alt="">
       </div>
-      <div class="gender-select">
-        <span>Gender</span>
-        <img class="genders-icon" src="@/assets/genders-icon.svg" alt="">
-      </div>
+      <CustomSelect class="selector"
+      header="Gender"
+      :iconSrc="selectGenderIcon"
+      placeholder='Select your gender'
+      :options="genderOptions"/>
       <div class="input-wrapper">
         <input class="email-input" type="text" name="email"
         placeholder="Email" v-model="userData.email">
@@ -29,9 +30,9 @@
          placeholder="Password" v-model="userData.password">
         <label class="password-label" for="password">Password</label>
         <div class="show-password" @click="showPassword">
-            <img class="eye-icon" :class="{ hide: !passwordHidden }"
+            <img class="eye-icon" v-if="passwordHidden"
             src="@/assets/eye-crossed-out.svg" alt="show-password-icon">
-            <img class="eye-icon" :class="{ hide: passwordHidden }"
+            <img class="eye-icon" v-if="!passwordHidden"
             src="@/assets/eye.svg" alt="hide-password-icon">
         </div>
       </div>
@@ -41,9 +42,9 @@
          placeholder="Password" v-model="passwordRepeat">
         <label class="password-repeat-label" for="password-repeat">Repeat Password</label>
         <div class="show-password-repeat" @click="showPasswordRepeat">
-            <img class="eye-icon" :class="{ hide: !passwordHiddenRepeat }"
+            <img class="eye-icon" v-if="passwordHiddenRepeat"
             src="@/assets/eye-crossed-out.svg" alt="show-password-icon">
-            <img class="eye-icon" :class="{ hide: passwordHiddenRepeat }"
+            <img class="eye-icon" v-if="!passwordHiddenRepeat"
             src="@/assets/eye.svg" alt="hide-password-icon">
         </div>
       </div>
@@ -55,10 +56,19 @@
 <script>
 import { ref } from 'vue';
 import axios from 'axios';
-import CustomButton from '../../components/CustomButton.vue';
+import CustomButton from '@/components/CustomButton.vue';
+import CustomSelect from '@/components/CustomSelect.vue';
+import maleIcon from '@/assets/male.svg';
+import femaleIcon from '@/assets/female.svg';
+import otherGenderIcon from '@/assets/other-gender.svg';
+import selectGenderIcon from '@/assets/genders-icon.svg';
 
 export default {
   name: 'SignUpPage',
+  components: {
+    CustomButton,
+    CustomSelect,
+  },
   setup() {
     const userData = ref({
       name: '',
@@ -88,19 +98,14 @@ export default {
     }
 
     function sendSignUpRequest() {
-      axios.post('/auth/register', {
-        name: userData.value.name,
-        surname: userData.value.surname,
-        gender: userData.value.gender,
-        email: userData.value.email,
-        password: userData.value.password,
-      },
-      {
-        headers: {
-          'content-language': navigator.language,
-          'preferred-theme': 'dark',
-        },
-      }).then((response) => {
+      axios.post('/auth/register',
+        userData.value,
+        {
+          headers: {
+            'content-language': navigator.language,
+            'preferred-theme': 'dark',
+          },
+        }).then((response) => {
         console.log(response);
       })
         .catch((error) => {
@@ -137,6 +142,24 @@ export default {
       }
     }
 
+    const genderOptions = [
+      {
+        title: 'Male',
+        value: 'male',
+        iconSrc: maleIcon,
+      },
+      {
+        title: 'Female',
+        value: 'female',
+        iconSrc: femaleIcon,
+      },
+      {
+        title: 'Other',
+        value: 'other',
+        iconSrc: otherGenderIcon,
+      },
+    ];
+
     return {
       userData,
       signUpUser,
@@ -145,47 +168,19 @@ export default {
       passwordHiddenRepeat,
       showPassword,
       showPasswordRepeat,
+      genderOptions,
+      selectGenderIcon,
     };
-  },
-  components: {
-    CustomButton,
   },
 };
 </script>
 
 <style lang='scss' scoped>
-
-.gender-select {
-  padding-top: 20px;
-  padding-left: 30px;
-  padding-right: 55px;
-  outline: none;
-  border: none;
-  border: 2px solid transparent;
-  background-color: #323644;
-  color: #84868f;
-  height: 65px;
-  width: 420px;
-  border-radius: 15px;
-  box-shadow: none;
-  transition: all 0.3s;
-  cursor: default;
-
-  .genders-icon {
-    position: absolute;
-    transform: translateX(17.6em);
-  }
-}
-
 #sign-up-page {
   background-image: url("~@/assets/blob-background2.svg");
   background-size: cover;
   justify-content: flex-start;
   gap: 5px;
-
-  .hide {
-    display: none;
-  }
 
   h1 {
     font-size: 5rem;
@@ -268,7 +263,8 @@ export default {
           transform: none;
           width: 30px;
           height: 30px;
-        }
+          user-select: none;
+          }
       }
 
       .password-input,
