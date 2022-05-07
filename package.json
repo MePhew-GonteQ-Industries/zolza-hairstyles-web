@@ -9,6 +9,8 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
+    "@vueuse/components": "^8.4.2",
+    "@vueuse/core": "^8.4.2",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "firebase": "^9.7.0",
