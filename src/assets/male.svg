@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="30.000013"
+   height="29.9946"
+   viewBox="0 0 30.000013 29.9946"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="male.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="9.1039998"
+     inkscape:cx="39.213533"
+     inkscape:cy="22.242971"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1272"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <title
+     id="title2">ionicons-v5-j</title>
+  <path
+     d="m 28.413136,0 h -6.491711 a 1.5868627,1.5868627 0 0 0 0,3.173725 h 2.66088 L 20.226367,7.529663 C 15.307814,3.716865 8.1806366,4.067418 3.6696186,8.580599 v 0 c -4.893308,4.894029 -4.893308,12.855752 0.0029,17.746896 a 12.565789,12.565789 0 0 0 17.7440104,0 c 4.513182,-4.513903 4.863734,-11.638196 1.050936,-16.556749 l 4.358824,-4.353052 v 2.66088 a 1.5868627,1.5868627 0 0 0 3.173725,0 V 1.586863 A 1.5868627,1.5868627 0 0 0 28.413136,0 Z M 19.17471,24.085691 a 9.3862928,9.3862928 0 0 1 -13.2604024,0 c -3.656276,-3.655555 -3.656276,-9.604848 0,-13.260402 3.656276,-3.655555 9.6048474,-3.656276 13.2604024,0 3.655555,3.656276 3.656276,9.604847 0,13.260402 z"
+     id="path4"
+     style="fill:#959da5;fill-opacity:1;stroke-width:0.0721301" />
+  <metadata
+     id="metadata827">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>ionicons-v5-j</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
