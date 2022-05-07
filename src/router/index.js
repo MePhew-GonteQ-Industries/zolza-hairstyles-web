@@ -9,7 +9,7 @@ import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
 const routes = [{
   path: '/',
   name: 'Home',
-  component: () => import(/* webpackChunkName: "signup" */ '../views/Home/HomePage.vue'),
+  component: () => import(/* webpackChunkName: "home" */ '@/views/Home/HomePage.vue'),
 },
 {
   path: '/email-verification',
@@ -22,33 +22,38 @@ const routes = [{
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
-  component: () => import(/* webpackChunkName: "contact" */ '../views/Contact/ContactPage.vue'),
+  component: () => import(/* webpackChunkName: "contact" */ '@/views/Contact/ContactPage.vue'),
 },
 {
   path: '/sign-up',
   name: 'SignUp',
-  component: () => import(/* webpackChunkName: "signup" */ '../views/SignUp/SignUpPage.vue'),
+  component: () => import(/* webpackChunkName: "signup" */ '@/views/SignUp/SignUpPage.vue'),
 },
 {
   path: '/login',
   name: 'Login',
-  component: () => import(/* webpackChunkName: "login" */ '../views/LogIn/LoginPage.vue'),
+  component: () => import(/* webpackChunkName: "login" */ '@/views/LogIn/LoginPage.vue'),
   props: true,
 },
 {
   path: '/services',
   name: 'Services',
-  component: () => import(/* webpackChunkName: "services" */ '../views/ServicesPage.vue'),
+  component: () => import(/* webpackChunkName: "services" */ '@/views/ServicesPage.vue'),
 },
 {
   path: '/terms',
   name: 'TermsOfUse',
-  component: () => import(/* webpackChunkName: "terms" */ '../views/TermsOfUsePage.vue'),
+  component: () => import(/* webpackChunkName: "terms" */ '@/views/TermsOfUsePage.vue'),
 },
 {
   path: '/privacy-policy',
   name: 'PrivacyPolicy',
-  component: () => import(/* webpackChunkName: "privacypolicy" */ '../views/PrivacyPolicyPage.vue'),
+  component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/PrivacyPolicyPage.vue'),
+},
+{
+  path: '/recover-password',
+  name: 'RecoverPassword',
+  component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/RecoverPassword.vue'),
 },
 {
   path: '/:catchAll(.*)',

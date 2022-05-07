@@ -23,6 +23,8 @@
             src="@/assets/eye.svg" alt="hide-password-icon">
         </div>
       </div>
+      <router-link class="forgot-password-link" to="/recover-password">
+        Forgot password?</router-link>
       <CustomButton content="Login"/>
     </form>
     <p>{{message}}</p>
@@ -121,6 +123,17 @@ export default {
 
     h1 {
       font-size: 5rem;
+    }
+  }
+
+  .forgot-password-link {
+    color: #00A2E8;
+    font-size: 1em;
+    position: relative;
+    left: -130px;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 
