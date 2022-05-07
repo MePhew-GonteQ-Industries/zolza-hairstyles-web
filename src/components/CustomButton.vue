@@ -24,9 +24,13 @@ export default {
     font-weight: 500;
     cursor: pointer;
 
-    &:hover {
+    &:hover, &:active  {
       border-color: white;
       box-shadow: 0 0 4px 3px rgb(156, 156, 156);
+    }
+
+    &:active {
+      transform: scale(.9);
     }
   }
 </style>
