@@ -32,6 +32,7 @@ jobs:
           passphrase: ${{secrets.DEPLOYMENT_SSH_KEY_PASSPHRASE}}
           script: |
             cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
+            git reset --hard
             git pull
             npm install
             npm run build
