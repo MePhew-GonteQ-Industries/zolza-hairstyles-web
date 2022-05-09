@@ -40,7 +40,7 @@
           </li>
           <li>
             <a href="mailto: zolza.hairstyles@gmail.com" target="_blank">
-              <img src="@/assets/footer/email.svg"
+              <img src="@/assets/email.svg"
                    class="social-media-icon"
                    loading="lazy" decoding="async" alt="Email"
                    width="21" height="21">
