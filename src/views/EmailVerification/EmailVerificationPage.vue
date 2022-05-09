@@ -1,7 +1,6 @@
 <template>
   <section class="app-page" id="verification-page">
     <div class="verification-wrapper">
-
     </div>
   </section>
 </template>
