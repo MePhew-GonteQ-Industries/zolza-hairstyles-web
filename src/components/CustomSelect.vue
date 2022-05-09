@@ -1,19 +1,38 @@
 <template>
   <div class="select-wrapper">
-    <div class="select" :class="{ active: active }" @click="toggleDropdown" ref="target">
-      <span class="header">{{ header }}</span>
-      <span :class="{ placeholder: !value, title: value }">{{ title }}</span>
+    <div class="select" tabindex="0"
+      :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled}"
+      @mousedown.self="toggleDropdown"
+      @focus.self="expandDropdown"
+      @keydown.down="selectNextOption"
+      @keydown.up="selectPreviousOption"
+      @keydown.tab="collapseDropdown"
+      ref="select">
+      <span class="header"
+      :class="{ expanded: expanded, 'value-selected': selectedItem !== null}">
+      {{ header }}</span>
+      <span class="selected-value">
+      {{ title }}</span>
       <img src="@/assets/arrow-down.svg" alt="dropdown-arrow"
         class="dropdown-arrow"
-        :class="{ flipped: !active }">
-      <img class="select-icon" :src="currentIconSrc" alt="">
+        :class="{ flipped: !expanded }">
+      <img class="select-icon" :src="currentIconSrc" alt="select icon"
+      @focus.stop
+      @mousedown.stop
+      @click.stop
+      @blur.stop
+      @mouseenter="toggleSelectHover"
+      @mouseleave="toggleSelectHover">
     </div>
-    <div class="dropdown" :class="{ show: active }">
+    <div class="dropdown" :class="{ show: expanded }">
       <ol>
-        <li v-for="option in options" :key="option.value"
-        @click="changeValue(option)">
-          <span class="title">{{ option.title }}</span>
-          <img v-if="option.iconSrc" :src="option.iconSrc" alt="">
+        <li v-for="(option, index) in options" :key="option.value"
+        @click="changeValue(index); collapseDropdown()"
+        @keydown.down="selectNextOption"
+        @keydown.up="selectPreviousOption">
+          <span :class="{ selected: index === selectedItem }">
+          {{ option.title }}</span>
+          <img :src="option.iconSrc" :alt="option.iconAlt">
         </li>
       </ol>
     </div>
@@ -21,7 +40,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
 export default {
@@ -43,46 +62,102 @@ export default {
       type: Array,
       required: true,
     },
+    initialItem: {
+      type: Number,
+    },
   },
   setup(props, ctx) {
-    const value = ref(null);
-    const active = ref(false);
-    const title = ref(props.placeholder);
+    const selectedValue = ref(null);
+    const selectedItem = ref(null);
+    const expanded = ref(false);
+    const title = ref('');
     const currentIconSrc = ref(props.iconSrc);
 
+    const select = ref(null);
+
+    function changeCurrentItem() {
+      selectedValue.value = props.options[selectedItem.value].value;
+      ctx.emit('update:selected-value', selectedValue.value);
+      currentIconSrc.value = props.options[selectedItem.value].iconSrc;
+      title.value = props.options[selectedItem.value].title;
+    }
+
+    onMounted(() => {
+      if (props.initialItem) {
+        selectedValue.value = props.options[props.initialItem].value;
+        changeCurrentItem();
+      }
+    });
+
     function toggleDropdown() {
-      active.value = !active.value;
-      ctx.emit('active-changed');
+      expanded.value = !expanded.value;
     }
 
     function collapseDropdown() {
-      if (active.value) {
-        active.value = false;
-        ctx.emit('active-changed');
+      if (expanded.value) {
+        expanded.value = false;
       }
     }
 
-    const target = ref(null);
+    function expandDropdown() {
+      console.log('Dropdown focused');
+      if (!expanded.value) {
+        expanded.value = true;
+      }
+    }
 
-    onClickOutside(target, () => {
+    function changeValue(index) {
+      selectedItem.value = index;
+      changeCurrentItem();
+    }
+
+    function selectNextOption() {
+      if (selectedItem.value !== null) {
+        if (props.options.length > selectedItem.value + 1) {
+          selectedItem.value += 1;
+          changeCurrentItem();
+        }
+      } else {
+        selectedItem.value = 0;
+      }
+    }
+
+    function selectPreviousOption() {
+      if (selectedItem.value !== null) {
+        if (selectedItem.value - 1 >= 0) {
+          selectedItem.value -= 1;
+          changeCurrentItem();
+        }
+      } else {
+        selectedItem.value = 0;
+      }
+    }
+
+    const selectHoverEnabled = ref(true);
+
+    function toggleSelectHover() {
+      selectHoverEnabled.value = !selectHoverEnabled.value;
+    }
+
+    onClickOutside(select, () => {
       collapseDropdown();
     });
 
-    function changeValue(option) {
-      this.value = option.value;
-      this.title = option.title;
-      this.currentIconSrc = option.iconSrc;
-    }
-
     return {
-      value,
-      active,
+      selectedValue,
+      expanded,
       toggleDropdown,
       collapseDropdown,
-      target,
       changeValue,
       title,
       currentIconSrc,
+      expandDropdown,
+      selectNextOption,
+      selectedItem,
+      selectPreviousOption,
+      toggleSelectHover,
+      selectHoverEnabled,
+      select,
     };
   },
 };
@@ -93,78 +168,117 @@ export default {
   color: #84868f;
 
   .select {
-  outline: none;
-  border: none;
-  border: 2px solid transparent;
-  background-color: #323644;
-  height: 65px;
-  width: 420px;
-  border-radius: 15px;
-  box-shadow: none;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    position: relative;
+    outline: none;
+    border: 2px solid transparent;
+    background-color: #323644;
+    height: 65px;
+    width: 420px;
+    border-radius: 15px;
+    box-shadow: none;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 
-  &.active {
+    &.hover-enabled:hover {
+      border-color: #3e83ba;
+      background-color: #3d4049;
+      box-shadow: 0 0 0 3px #274b6d;
+    }
+
+    &.expanded {
+      border-color: #3e83ba;
+      background-color: #3d4049;
+      box-shadow: 0 0 0 3px #274b6d;
+    }
+
+  &.expanded {
     border-radius: 15px 15px 0 0;
-    border-color: #3e83ba;
-    background-color: #3d4049;
-    box-shadow: 0 0 0 3px #274b6d;
   }
 
   .header {
     position: absolute;
-    transform: translateX(-9.4em);
+    left: 30px;
+    transform-origin: 0 0;
+    transition: transform .6s;
+    user-select: none;
+
+    &.expanded, &.value-selected {
+      color: #00a2e8;
+    }
+
+    &.value-selected {
+      transform: translateY(-0.6em) scale(0.8);
+    }
   }
 
   .select-icon {
     position: absolute;
-    transform: translateX(11em);
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    cursor: default;
   }
 
-  .title {
+  .selected-value {
+    padding-top: 20px;
+    color: #84868f;
+    position: absolute;
+    left: 30px;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+    transform-origin: 0 0;
     color: white;
-  }
+    font-size: .8em;
 
-  .placeholder {
-    color: #84868f
+    &.placeholder {
+    }
   }
 
     .dropdown-arrow {
       position: absolute;
-      transform: translateX(6em);
       transition: all .5s;
       user-select: none;
 
       &.flipped {
-      transform: translateX(6em) rotateZ(180deg);
+      transform: rotateZ(180deg);
       }
     }
 }
 
     .dropdown {
       position: absolute;
-      transition: all .5s;
+      margin-top: 10px;
       width: 420px;
-      padding: 20px 0;
       z-index: 1;
       border-radius: 0 0 15px 15px;
-      border-width: 0 2px 2px 2px;
+      border-width: 0;
       border-style: solid;
       border-color: transparent;
       background-color: #323644;
       box-shadow: none;
-      visibility: hidden;
-      max-height: 200px;
-      overflow-y: auto;
+      max-height: 0;
+      overflow: hidden;
+
+      @keyframes expand {
+        from {
+          max-height: 0;
+        }
+
+        to {
+          max-height: 200px;
+          // overflow-y: auto;
+        }
+      }
 
       &.show {
-        visibility: visible;
+        animation: expand .6s forwards;
         border-color: #3e83ba;
         background-color: #3d4049;
         box-shadow: 0 0 0 3px #274b6d;
+        border-width: 0 2px 2px 2px;
       }
 
       ol {
@@ -175,21 +289,29 @@ export default {
           display: flex;
           align-items: center;
           justify-content: flex-start;
-          padding-left: 20px;
           cursor: pointer;
 
           span {
+            position: absolute;
+            left: 30px;
 
+            &.selected {
+              color: white;
+            }
           }
 
           img {
             width: 30px;
             height: 30px;
             position: absolute;
-            right: 15px;
+            right: 30px;
           }
 
-          &:hover {
+          &:focus {
+            outline: none;
+          }
+
+          &:hover, &:focus {
             background-color: #323644;
           }
         }
