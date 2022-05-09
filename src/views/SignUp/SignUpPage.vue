@@ -41,6 +41,7 @@ import otherGenderIcon from '@/assets/other-gender.svg';
 import selectGenderIcon from '@/assets/genders-icon.svg';
 import emailIcon from '@/assets/email.svg';
 import contactIcon from '@/assets/contact.svg';
+import helicopterIcon from '@/assets/helicopter.svg';
 
 export default {
   name: 'SignUpPage',
@@ -140,33 +141,9 @@ export default {
       {
         title: 'Apache Attack Helicopter',
         value: 'other',
-        iconSrc: otherGenderIcon,
-        iconAlt: 'other gender icon',
-      },
-      {
-        title: 'Apache Attack Helicopter',
-        value: 'other',
-        iconSrc: otherGenderIcon,
-        iconAlt: 'other gender icon',
-      },
-      {
-        title: 'Apache Attack Helicopter',
-        value: 'other',
-        iconSrc: otherGenderIcon,
-        iconAlt: 'other gender icon',
-      },
-      {
-        title: 'Apache Attack Helicopter',
-        value: 'other',
-        iconSrc: otherGenderIcon,
-        iconAlt: 'other gender icon',
-      },
-      {
-        title: 'Apache Attack Helicopter',
-        value: 'other',
-        iconSrc: otherGenderIcon,
-        iconAlt: 'other gender icon',
-      },
+        iconSrc: helicopterIcon,
+        iconAlt: 'apache attack helicopter icon',
+      }, // todo: autoscroll
     ];
 
     return {
