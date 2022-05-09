@@ -20,6 +20,7 @@
     "vue-next-select": "^2.10.4",
     "vue-router": "^4.0.0-0",
     "vue-select": "^4.0.0-beta.3",
+    "vue-simple-password-meter": "^1.1.0",
     "vue-splash": "^1.2.1",
     "vuex": "^4.0.0-0",
     "webpack": "^4.46.0"
