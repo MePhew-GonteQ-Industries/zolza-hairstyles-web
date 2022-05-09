@@ -2,7 +2,7 @@
   <div class="select-wrapper">
     <div class="select" tabindex="0"
       :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled}"
-      @mousedown.self="toggleDropdown"
+      @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down="selectNextOption"
       @keydown.up="selectPreviousOption"
@@ -19,10 +19,8 @@
       <img class="select-icon" :src="currentIconSrc" alt="select icon"
       @focus.stop
       @mousedown.stop
-      @click.stop
-      @blur.stop
       @mouseenter="toggleSelectHover"
-      @mouseleave="toggleSelectHover">
+      @mouseleave="toggleSelectHover" tabindex="-1">
     </div>
     <div class="dropdown" :class="{ show: expanded }">
       <ol>
@@ -100,7 +98,6 @@ export default {
     }
 
     function expandDropdown() {
-      console.log('Dropdown focused');
       if (!expanded.value) {
         expanded.value = true;
       }
