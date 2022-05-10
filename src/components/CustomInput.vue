@@ -1,15 +1,19 @@
 <template>
   <div class="input-wrapper">
-    <input type="text" name="input" :autocomplete="autocomplete"
+    <input type="text" :id="inputId" name="input" :autocomplete="autocomplete"
     :placeholder="label" v-model="value"
-    @input="event => $emit('update:value', event.target.value)">
-    <label for="input">{{ label }}</label>
+    @input="event => $emit('update:value', event.target.value)"
+    :class="{ invalid: invalid }">
+    <label :for="inputId">{{ label }}</label>
     <img :src="iconSrc" alt="">
+    <img v-show="invalid" class="invalid-icon"
+    src="@/assets/exclamation-mark.svg" alt="">
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'CustomInput',
@@ -26,12 +30,23 @@ export default {
       type: String,
       required: true,
     },
+    invalid: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup() {
     const value = ref('');
 
+    const inputId = ref(null);
+
+    onMounted(() => {
+      inputId.value = uuidv4();
+    });
+
     return {
       value,
+      inputId,
     };
   },
 };
@@ -43,6 +58,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .invalid-icon {
+    position: absolute;
+    right: -50px;
+    width: 30px;
+    height: 30px;
+  }
 
   label {
     color: #84868f;
@@ -71,6 +93,11 @@ export default {
     border-radius: 15px;
     box-shadow: none;
     transition: all .3s;
+
+    &.invalid {
+      border-color: #853635;
+      box-shadow: 0 0 0px 3px #382328;
+    }
 
    &:-webkit-autofill{
       -webkit-text-fill-color: white;

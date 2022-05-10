@@ -3,20 +3,24 @@
     <input :autocomplete="autocomplete"
     class="password-input"
     :type="passwordHidden ? 'password' : 'text'"
-    name="password" placeholder="Password" v-model="password"
-    @input="event => $emit('update:password', event.target.value)">
-    <label for="password">{{ label }}</label>
+    name="password" :id="inputId" placeholder="Password" v-model="password"
+    @input="event => $emit('update:password', event.target.value)"
+    :class="{ invalid: invalid }">
+    <label :for="inputId">{{ label }}</label>
     <div class="show-password" @click="showPassword">
       <img class="eye-icon" v-if="passwordHidden"
       src="@/assets/eye-crossed-out.svg" alt="show-password-icon">
       <img class="eye-icon" v-if="!passwordHidden"
       src="@/assets/eye.svg" alt="hide-password-icon">
     </div>
+    <img v-show="invalid" class="invalid-icon"
+    src="@/assets/exclamation-mark.svg" alt="">
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'CustomPasswordInput',
@@ -29,6 +33,10 @@ export default {
       type: String,
       default: 'Password',
     },
+    invalid: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup() {
     const password = ref('');
@@ -38,10 +46,17 @@ export default {
       passwordHidden.value = !passwordHidden.value;
     }
 
+    const inputId = ref(null);
+
+    onMounted(() => {
+      inputId.value = uuidv4();
+    });
+
     return {
       password,
       passwordHidden,
       showPassword,
+      inputId,
     };
   },
 };
@@ -62,6 +77,13 @@ export default {
     pointer-events: none;
     backface-visibility: hidden;
     transform-origin: 0 0;
+  }
+
+  .invalid-icon {
+    position: absolute;
+    right: -50px;
+    width: 30px;
+    height: 30px;
   }
 
   .show-password {
@@ -110,6 +132,11 @@ export default {
     border-radius: 15px;
     box-shadow: none;
     transition: all .3s, letter-spacing .6s;
+
+    &.invalid {
+      border-color: #853635;
+      box-shadow: 0 0 0px 3px #382328;
+    }
 
     &:-webkit-autofill{
       -webkit-text-fill-color: white;

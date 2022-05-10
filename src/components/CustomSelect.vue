@@ -1,7 +1,8 @@
 <template>
   <div class="select-wrapper">
     <div class="select" tabindex="0"
-      :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled}"
+      :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled,
+      invalid: invalid}"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down="selectNextOption"
@@ -21,6 +22,8 @@
       @mousedown.stop
       @mouseenter="toggleSelectHover"
       @mouseleave="toggleSelectHover" tabindex="-1">
+      <img v-show="invalid" class="invalid-icon"
+      src="@/assets/exclamation-mark.svg" alt="">
     </div>
     <div class="dropdown" :class="{ show: expanded }">
       <ol>
@@ -62,6 +65,10 @@ export default {
     },
     initialItem: {
       type: Number,
+    },
+    invalid: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, ctx) {
@@ -178,6 +185,18 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    .invalid-icon {
+      position: absolute;
+      right: -50px;
+      width: 30px;
+      height: 30px;
+    }
+
+    &.invalid {
+      border-color: #853635;
+      box-shadow: 0 0 0px 3px #382328;
+    }
 
     &.hover-enabled:hover {
       border-color: #3e83ba;

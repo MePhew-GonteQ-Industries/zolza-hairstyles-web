@@ -1,27 +1,31 @@
 <template>
   <section class="app-page" id="sign-up-page">
     <h1>Create an account</h1>
-    <form class="sing-up-form" @submit.prevent="signUpUser">
+    <form class="sing-up-form" @submit.prevent="handleSubmit">
+      <input class="hidden-input" type="text" autocomplete="username">
       <CustomInput label='Name' :iconSrc='contactIcon' autocomplete="given-name"
-      v-model:value="userData.name"/>
+      v-model:value="userData.name" :invalid="showValidationFeedback && !userData.name"/>
       <CustomInput label='Surname' :iconSrc='contactIcon' autocomplete="family-name"
-      v-model:value="userData.surname"/>
+      v-model:value="userData.surname" :invalid="showValidationFeedback && !userData.surname"/>
       <CustomInput label='Email' :iconSrc='emailIcon' autocomplete="email"
-      v-model:value="userData.email"/>
+      v-model:value="userData.email" :invalid="showValidationFeedback && !userData.email"/>
       <CustomSelect class="selector"
       header="Gender"
       :iconSrc="selectGenderIcon"
       placeholder='Select your gender'
       :options="genderOptions"
-      v-model:selected-value="userData.gender"/>
+      v-model:selected-value="userData.gender"
+      :invalid="showValidationFeedback && !userData.gender" />
       <CustomPasswordInput autocomplete="new-password"
-      v-model:password="userData.password"/>
+      v-model:password="userData.password"
+      :invalid="showValidationFeedback && !userData.password"/>
       <div class="password-strength-feedback" v-if="userData.password">
         <span>Secure</span>
         <password-meter :password="userData.password"/>
       </div>
       <CustomPasswordInput autocomplete="new-password" label="Repeat password"
-      v-model:password="passwordRepeat"/>
+      v-model:password="passwordRepeat"
+      :invalid="showValidationFeedback && !passwordRepeat"/>
       <CustomButton content="Sign up"/>
     </form>
   </section>
@@ -62,19 +66,39 @@ export default {
     });
     const passwordRepeat = ref('');
 
+    const showValidationFeedback = ref(false);
+
     function validateData() {
-      console.log(userData.value);
-      console.log(passwordRepeat.value);
-      return false;
+      showValidationFeedback.value = true;
 
-      // if (userData.value.password !== passwordRepeat.value) {
-      //   return false;
-      // }
+      if (!userData.value.name) {
+        return false;
+      }
 
-      // return true;
+      if (!userData.value.surname) {
+        return false;
+      }
+
+      if (!userData.value.email) {
+        return false;
+      }
+
+      if (!userData.value.gender) {
+        return false;
+      }
+
+      if (!userData.value.password) {
+        return false;
+      }
+
+      if (userData.value.password !== passwordRepeat.value) {
+        return false;
+      }
+
+      return true;
     }
 
-    function sendSignUpRequest() {
+    function signUpUser() {
       axios.post('/auth/register',
         userData.value,
         {
@@ -111,9 +135,9 @@ export default {
         });
     }
 
-    function signUpUser() {
+    function handleSubmit() {
       if (validateData()) {
-        sendSignUpRequest();
+        signUpUser();
       } else {
         console.error('Panie z czym do ludzi');
       }
@@ -154,6 +178,8 @@ export default {
       selectGenderIcon,
       emailIcon,
       contactIcon,
+      showValidationFeedback,
+      handleSubmit,
     };
   },
 };
@@ -220,6 +246,10 @@ export default {
     background-color: rgba(39, 42, 54, 0.6);
     padding: 20px 0;
     border-radius: 20px;
+
+    .hidden-input {
+      display: none;
+    }
   }
 }
 </style>

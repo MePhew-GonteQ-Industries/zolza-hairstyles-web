@@ -5,9 +5,11 @@
         <h4>Email address has been confirmed successfully</h4>
         <h4>You can now login to your account</h4>
     </div>
-    <form class="login-form" @submit.prevent="loginUser">
-      <CustomInput label='Email' :iconSrc='emailIcon' autocomplete="email"/>
-      <CustomPasswordInput autocomplete="current-password"/>
+    <form class="login-form" @submit.prevent="handleSubmit">
+      <CustomInput label='Email' :iconSrc='emailIcon'
+      autocomplete="email" :invalid="showValidationFeedback && !userData.email"/>
+      <CustomPasswordInput autocomplete="current-password"
+      :invalid="showValidationFeedback && !userData.password" />
       <router-link class="forgot-password-link" to="/recover-password">
       Forgot password?</router-link>
       <CustomButton content="Login"/>
@@ -34,11 +36,30 @@ export default {
       email: '',
       password: '',
     });
+
     const message = ref('');
     const passwordHidden = ref(true);
+
     function showPassword() {
       passwordHidden.value = !passwordHidden.value;
     }
+
+    const showValidationFeedback = ref(false);
+
+    function validateData() {
+      showValidationFeedback.value = true;
+
+      if (!userData.value.email) {
+        return false;
+      }
+
+      if (!userData.value.password) {
+        return false;
+      }
+
+      return true;
+    }
+
     function loginUser() {
       axios.post('/auth/login', new URLSearchParams({
         grant_type: 'password',
@@ -77,6 +98,12 @@ export default {
         });
     }
 
+    function handleSubmit() {
+      if (validateData()) {
+        loginUser();
+      }
+    }
+
     const emailConfirmationMessageShown = ref(false);
 
     function showEmailConfirmationMessage() {
@@ -92,6 +119,9 @@ export default {
       showEmailConfirmationMessage,
       emailConfirmationMessageShown,
       emailIcon,
+      showValidationFeedback,
+      validateData,
+      handleSubmit,
     };
   },
   mounted() {
