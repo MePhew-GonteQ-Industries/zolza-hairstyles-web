@@ -6,28 +6,36 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import axios from 'axios';
+
 export default {
   name: 'EmailVerification',
-  mounted() {
-    const { query } = this.$route;
-    if (query) {
-      const { token } = query;
-      if (token) {
-        this.axios.put('users/verify-email', {
-          verification_token: token,
-        })
-          .then((response) => {
-            if (response.status === 200) {
-              // this.$router.push('/login');
-              const { email } = response.data;
-              this.$router.replace({ name: 'Login', params: { email } });
-            }
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+
+    onMounted(() => {
+      const { query } = route;
+      if (query) {
+        const { token } = query;
+        if (token) {
+          axios.put('users/verify-email', {
+            verification_token: token,
           })
-          .catch((error) => {
-            console.log(error);
-          });
+            .then((response) => {
+              if (response.status === 200) {
+                const { email } = response.data;
+                router.push({ name: 'Login', params: { email } });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }
-    }
+    });
   },
 };
 </script>
