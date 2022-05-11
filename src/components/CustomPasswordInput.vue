@@ -3,7 +3,7 @@
     <input :autocomplete="autocomplete"
     class="password-input"
     :type="passwordHidden ? 'password' : 'text'"
-    name="password" :id="inputId" placeholder="Password" v-model="password"
+    name="password" :id="inputId" placeholder="Password" :value="password"
     @input="event => $emit('update:password', event.target.value)"
     :class="{ invalid: invalid }">
     <label :for="inputId">{{ label }}</label>
@@ -25,6 +25,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default {
   name: 'CustomPasswordInput',
   props: {
+    password: String,
     autocomplete: {
       type: String,
       required: true,
@@ -39,7 +40,6 @@ export default {
     },
   },
   setup() {
-    const password = ref('');
     const passwordHidden = ref('false');
 
     function showPassword() {
@@ -53,7 +53,6 @@ export default {
     });
 
     return {
-      password,
       passwordHidden,
       showPassword,
       inputId,
@@ -132,6 +131,9 @@ export default {
     border-radius: 15px;
     box-shadow: none;
     transition: all .3s, letter-spacing .6s;
+    width: 50vw;
+    min-width: 250px;
+    max-width: 420px;
 
     &.invalid {
       border-color: #853635;
