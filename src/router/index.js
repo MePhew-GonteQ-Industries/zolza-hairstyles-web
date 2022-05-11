@@ -6,6 +6,17 @@ import Home from '@/views/Home/HomePage.vue';
 import EmailVerification from '@/views/EmailVerification/EmailVerificationPage.vue';
 import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
 
+function loginProps(route) {
+  if (route.params) {
+    return {
+      emailConfirmed: Boolean(route.params.emailConfirmed),
+      accountCreated: Boolean(route.params.accountCreated),
+      email: route.params.email,
+    };
+  }
+  return null;
+}
+
 const routes = [{
   path: '/',
   name: 'Home',
@@ -33,7 +44,7 @@ const routes = [{
   path: '/login',
   name: 'Login',
   component: () => import(/* webpackChunkName: "login" */ '@/views/LogIn/LoginPage.vue'),
-  props: true,
+  props: loginProps,
 },
 {
   path: '/services',
