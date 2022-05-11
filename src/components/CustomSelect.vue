@@ -5,8 +5,8 @@
       invalid: invalid}"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
-      @keydown.down="selectNextOption"
-      @keydown.up="selectPreviousOption"
+      @keydown.down.prevent="selectNextOption"
+      @keydown.up.prevent="selectPreviousOption"
       @keydown.tab="collapseDropdown"
       ref="select">
       <span class="header"
@@ -119,22 +119,22 @@ export default {
       if (selectedItem.value !== null) {
         if (props.options.length > selectedItem.value + 1) {
           selectedItem.value += 1;
-          changeCurrentItem();
         }
       } else {
         selectedItem.value = 0;
       }
+      changeCurrentItem();
     }
 
     function selectPreviousOption() {
       if (selectedItem.value !== null) {
         if (selectedItem.value - 1 >= 0) {
           selectedItem.value -= 1;
-          changeCurrentItem();
         }
       } else {
         selectedItem.value = 0;
       }
+      changeCurrentItem();
     }
 
     const selectHoverEnabled = ref(true);
@@ -177,7 +177,9 @@ export default {
     border: 2px solid transparent;
     background-color: #323644;
     height: 65px;
-    width: 420px;
+    width: 50vw;
+    min-width: 250px;
+    max-width: 420px;
     border-radius: 15px;
     box-shadow: none;
     transition: all 0.1s;
@@ -208,11 +210,9 @@ export default {
       border-color: #3e83ba;
       background-color: #3d4049;
       box-shadow: 0 0 0 3px #274b6d;
+      border-radius: 15px 15px 0 0;
+      border-width: 2px;
     }
-
-  &.expanded {
-    border-radius: 15px 15px 0 0;
-  }
 
   .header {
     position: absolute;
@@ -248,9 +248,6 @@ export default {
     transform-origin: 0 0;
     color: white;
     font-size: .8em;
-
-    &.placeholder {
-    }
   }
 
     .dropdown-arrow {
@@ -267,7 +264,9 @@ export default {
     .dropdown {
       position: absolute;
       margin-top: 10px;
-      width: 420px;
+      width: 50vw;
+      min-width: 250px;
+      max-width: 420px;
       z-index: 1;
       border-radius: 0 0 15px 15px;
       border-width: 0;
@@ -294,7 +293,7 @@ export default {
         border-color: #3e83ba;
         background-color: #3d4049;
         box-shadow: 0 0 0 3px #274b6d;
-        border-width: 0 2px 2px 2px;
+        border-width: 2px;
       }
 
       ol {
