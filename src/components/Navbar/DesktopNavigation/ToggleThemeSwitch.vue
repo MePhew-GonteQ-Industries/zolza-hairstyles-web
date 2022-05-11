@@ -34,28 +34,22 @@ export default {
 
   .toggle-theme-wrapper {
     width: 40px;
-    height: 30px;
-  }
-
-  .toggle-theme-label-left:empty{
-    margin-left: -$togglebutton-margin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .toggle-theme-label-left:before, .toggle-theme-label-left:after{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    /*transition*/
-    -webkit-transition:.25s ease-in-out;
-    -moz-transition:.25s ease-in-out;
-    -o-transition:.25s ease-in-out;
     transition:.25s ease-in-out;
     outline:none;
   }
 
   .toggle-theme-wrapper input[type=checkbox], .toggle-theme-wrapper input[type=checkbox]:active{
     position:absolute;
-    // top:-5000px; Absolutely no idea why this was here but caused some weird issues
     height:0;
     width:0;
     opacity:0;
@@ -66,7 +60,6 @@ export default {
     display:inline-block;
     position:relative;
     padding:$togglebutton-label-padding;
-    margin-bottom:20px;
     font-size:14px;
     line-height:16px;
     cursor:pointer;
@@ -82,9 +75,6 @@ export default {
     height:$togglebutton-size;
     width:$togglebutton-size;
     margin: $togglebutton-padding;
-    /*border-radius*/
-    -webkit-border-radius:100%;
-    -moz-border-radius:100%;
     border-radius:100%;
     right: (($togglebutton-size) ) + $togglebutton-label-padding + $togglebutton-margin;
     bottom: $togglebutton-label-padding;
@@ -97,9 +87,6 @@ export default {
     display: inline-block;
     width: ($togglebutton-size * 2) + ($togglebutton-padding * 2);
     height:$togglebutton-size + ($togglebutton-padding * 2);
-    /*border-radius*/
-    -webkit-border-radius: $togglebutton-size;
-    -moz-border-radius: $togglebutton-size;
     border-radius: $togglebutton-size;
     background: $off-bg;
     vertical-align: middle;

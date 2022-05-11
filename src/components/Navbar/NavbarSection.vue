@@ -2,10 +2,10 @@
   <div class="navbar">
     <div id="mobile-navigation-container">
       <img id="hamburger-icon" src="@/assets/nav/hamburger_icon.svg" alt="Menu"
-           @click=toggleMobileMenu
-           :aria-expanded="state.mobileMenuActive"
-           aria-controls="navbarSupportedContent"
-           aria-label="Toggle navigation">
+        @click=toggleMobileMenu
+        :aria-expanded="state.mobileMenuActive"
+        aria-controls="navbarSupportedContent"
+        aria-label="Toggle navigation">
       <mobile-navigation
         :mobile-menu-active="state.mobileMenuActive"
         @mobile-menu-closed="toggleMobileMenu"/>
