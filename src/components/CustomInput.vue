@@ -1,9 +1,9 @@
 <template>
   <div class="input-wrapper">
-    <input type="text" :id="inputId" name="input" :autocomplete="autocomplete"
-    :placeholder="label" v-model="value"
+    <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete"
+    :placeholder="label" :value="value"
     @input="event => $emit('update:value', event.target.value)"
-    :class="{ invalid: invalid }">
+    :class="{ invalid: invalid }" />
     <label :for="inputId">{{ label }}</label>
     <img :src="iconSrc" alt="">
     <img v-show="invalid" class="invalid-icon"
@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default {
   name: 'CustomInput',
   props: {
+    value: String,
     autocomplete: {
       type: String,
       required: true,
@@ -30,14 +31,19 @@ export default {
       type: String,
       required: true,
     },
+    inputType: {
+      type: String,
+      default: 'text',
+    },
     invalid: {
       type: Boolean,
       default: false,
     },
   },
+  emits: [
+    'update:value',
+  ],
   setup() {
-    const value = ref('');
-
     const inputId = ref(null);
 
     onMounted(() => {
@@ -45,7 +51,6 @@ export default {
     });
 
     return {
-      value,
       inputId,
     };
   },
@@ -89,7 +94,9 @@ export default {
     background-color: #323644;
     color: white;
     height: 65px;
-    width: 420px;
+    width: 50vw;
+    min-width: 250px;
+    max-width: 420px;
     border-radius: 15px;
     box-shadow: none;
     transition: all .3s;
