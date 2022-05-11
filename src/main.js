@@ -6,8 +6,8 @@ import router from './router';
 import store from './store';
 import i18n from './i18n';
 
-const { VUE_API_URL } = process.env;
-axios.defaults.baseURL = VUE_API_URL;
+const { VUE_APP_API_URL } = process.env;
+axios.defaults.baseURL = VUE_APP_API_URL;
 
 createApp(App).use(i18n)
   .use(VueAxios, axios)
