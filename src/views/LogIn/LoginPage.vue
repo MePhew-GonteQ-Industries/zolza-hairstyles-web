@@ -1,25 +1,32 @@
 <template>
   <section class="app-page" id="login-page">
     <h1>Log In to Zołza Hairstyles</h1>
-    <div class="email-confirmation-message" v-if="emailConfirmationMessageShown">
+    <div class="state-message" v-if="emailConfirmed">
         <h4>Email address has been confirmed successfully</h4>
         <h4>You can now login to your account</h4>
     </div>
-    <form class="login-form" @submit.prevent="handleSubmit">
-      <CustomInput label='Email' :iconSrc='emailIcon'
-      autocomplete="email" :invalid="showValidationFeedback && !userData.email"/>
+    <div class="state-message" v-if="accountCreated">
+        <h4>Account created successfully</h4>
+        <h4>You can now login</h4>
+    </div>
+    <form class="login-form" @submit.prevent="handleSubmit" novalidate>
+      <CustomInput label='Email' :iconSrc='emailIcon' inputType='email'
+      autocomplete="email" v-model:value="userData.email"
+      :invalid="showValidationFeedback && !userData.email"/>
       <CustomPasswordInput autocomplete="current-password"
+      v-model:password="userData.password"
       :invalid="showValidationFeedback && !userData.password" />
-      <router-link class="forgot-password-link" to="/recover-password">
+      <router-link class="forgot-password-link" to="/recover-password"
+      tabindex="-1">
       Forgot password?</router-link>
-      <CustomButton content="Login"/>
+      <CustomButton class="login-btn" content="Log In"/>
     </form>
     <p>{{message}}</p>
   </section>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import CustomButton from '../../components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
@@ -29,9 +36,20 @@ import emailIcon from '@/assets/email.svg';
 export default {
   name: 'LoginPage',
   props: {
-    email: String,
+    emailConfirmed: {
+      type: Boolean,
+      default: false,
+    },
+    accountCreated: {
+      type: Boolean,
+      default: false,
+    },
+    email: {
+      type: String,
+      default: '',
+    },
   },
-  setup() {
+  setup(props) {
     const userData = ref({
       email: '',
       password: '',
@@ -104,11 +122,11 @@ export default {
       }
     }
 
-    const emailConfirmationMessageShown = ref(false);
-
-    function showEmailConfirmationMessage() {
-      emailConfirmationMessageShown.value = !emailConfirmationMessageShown.value;
-    }
+    onMounted(() => {
+      if (props.email) {
+        userData.value.email = props.email;
+      }
+    });
 
     return {
       userData,
@@ -116,19 +134,11 @@ export default {
       message,
       showPassword,
       passwordHidden,
-      showEmailConfirmationMessage,
-      emailConfirmationMessageShown,
       emailIcon,
       showValidationFeedback,
       validateData,
       handleSubmit,
     };
-  },
-  mounted() {
-    if (this.email) {
-      this.userData.email = this.email;
-      this.showEmailConfirmationMessage();
-    }
   },
   components: {
     CustomButton,
@@ -150,18 +160,7 @@ export default {
     }
   }
 
-  .forgot-password-link {
-    color: #00A2E8;
-    font-size: 1em;
-    position: relative;
-    left: -130px;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .email-confirmation-message {
+  .state-message {
     margin-top: 70px;
     margin-bottom: 5px;
     background-color: rgba(24, 25, 27, 0.6);
@@ -183,7 +182,24 @@ export default {
     gap: 20px;
     transition: all .3s;
     background-color: rgba(39, 42, 54, .6);
-    padding: 100px 0 100px 0;
+    padding: 100px 20px;
     border-radius: 20px;
+    position: relative;
+
+    .forgot-password-link {
+      color: #00A2E8;
+      font-size: 1em;
+      position: absolute;
+      top: 260px;
+      left: 20px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .login-btn {
+      margin-top: 50px;
+    }
   }
 </style>

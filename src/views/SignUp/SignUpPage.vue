@@ -1,14 +1,15 @@
 <template>
   <section class="app-page" id="sign-up-page">
     <h1>Create an account</h1>
-    <form class="sing-up-form" @submit.prevent="handleSubmit">
+    <form class="sing-up-form" @submit.prevent="handleSubmit" novalidate>
       <input class="hidden-input" type="text" autocomplete="username">
       <CustomInput label='Name' :iconSrc='contactIcon' autocomplete="given-name"
       v-model:value="userData.name" :invalid="showValidationFeedback && !userData.name"/>
       <CustomInput label='Surname' :iconSrc='contactIcon' autocomplete="family-name"
       v-model:value="userData.surname" :invalid="showValidationFeedback && !userData.surname"/>
-      <CustomInput label='Email' :iconSrc='emailIcon' autocomplete="email"
-      v-model:value="userData.email" :invalid="showValidationFeedback && !userData.email"/>
+      <CustomInput label='Email' :iconSrc='emailIcon' autocomplete="email" inputType='email'
+      v-model:value="userData.email"
+      :invalid="showValidationFeedback && !validateEmail(userData.email)"/>
       <CustomSelect class="selector"
       header="Gender"
       :iconSrc="selectGenderIcon"
@@ -18,14 +19,16 @@
       :invalid="showValidationFeedback && !userData.gender" />
       <CustomPasswordInput autocomplete="new-password"
       v-model:password="userData.password"
-      :invalid="showValidationFeedback && !userData.password"/>
+      :invalid="showValidationFeedback && (!passwordRepeat || passwordRepeat !== userData.password)"
+      />
       <div class="password-strength-feedback" v-if="userData.password">
-        <span>Secure</span>
-        <password-meter :password="userData.password"/>
+        <span>{{ passwordStrength }}  {{ passwordScore }}</span>
+        <password-meter :password="userData.password" @score="onScore"/>
       </div>
       <CustomPasswordInput autocomplete="new-password" label="Repeat password"
       v-model:password="passwordRepeat"
-      :invalid="showValidationFeedback && !passwordRepeat"/>
+      :invalid="showValidationFeedback && (!passwordRepeat || passwordRepeat !== userData.password)"
+      />
       <CustomButton content="Sign up"/>
     </form>
   </section>
@@ -33,6 +36,7 @@
 
 <script>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
 import CustomButton from '@/components/CustomButton.vue';
@@ -45,7 +49,6 @@ import otherGenderIcon from '@/assets/other-gender.svg';
 import selectGenderIcon from '@/assets/genders-icon.svg';
 import emailIcon from '@/assets/email.svg';
 import contactIcon from '@/assets/contact.svg';
-import helicopterIcon from '@/assets/helicopter.svg';
 
 export default {
   name: 'SignUpPage',
@@ -57,6 +60,8 @@ export default {
     PasswordMeter,
   },
   setup() {
+    const router = useRouter();
+
     const userData = ref({
       name: '',
       surname: '',
@@ -66,12 +71,33 @@ export default {
     });
     const passwordRepeat = ref('');
 
+    const passwordScore = ref(null);
+    const passwordStrength = ref(null);
+
+    function onScore(payload) {
+      passwordScore.value = payload.score;
+      passwordStrength.value = payload.strength;
+    }
+
     const showValidationFeedback = ref(false);
+
+    function validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
 
     function validateData() {
       showValidationFeedback.value = true;
 
       if (!userData.value.name) {
+        return false;
+      }
+
+      if (userData.value.name.length > 50) {
+        return false;
+      }
+
+      if (userData.value.surname.length > 50) {
         return false;
       }
 
@@ -83,11 +109,19 @@ export default {
         return false;
       }
 
+      if (!validateEmail(userData.value.email)) {
+        return false;
+      }
+
       if (!userData.value.gender) {
         return false;
       }
 
       if (!userData.value.password) {
+        return false;
+      }
+
+      if (passwordScore.value < 3) {
         return false;
       }
 
@@ -99,7 +133,7 @@ export default {
     }
 
     function signUpUser() {
-      axios.post('/auth/register',
+      axios.post('/users/register',
         userData.value,
         {
           headers: {
@@ -107,7 +141,8 @@ export default {
             'preferred-theme': 'dark',
           },
         }).then((response) => {
-        console.log(response);
+        const { email } = response.data;
+        router.push({ name: 'Login', params: { email, accountCreated: true } });
       })
         .catch((error) => {
           if (error.response) {
@@ -138,8 +173,6 @@ export default {
     function handleSubmit() {
       if (validateData()) {
         signUpUser();
-      } else {
-        console.error('Panie z czym do ludzi');
       }
     }
 
@@ -162,13 +195,9 @@ export default {
         iconSrc: otherGenderIcon,
         iconAlt: 'other gender icon',
       },
-      {
-        title: 'Apache Attack Helicopter',
-        value: 'other',
-        iconSrc: helicopterIcon,
-        iconAlt: 'apache attack helicopter icon',
-      }, // todo: autoscroll
     ];
+
+    // todo: autoscroll
 
     return {
       userData,
@@ -180,6 +209,10 @@ export default {
       contactIcon,
       showValidationFeedback,
       handleSubmit,
+      validateEmail,
+      onScore,
+      passwordScore,
+      passwordStrength,
     };
   },
 };
@@ -244,7 +277,7 @@ export default {
     gap: 20px;
     transition: all 0.3s;
     background-color: rgba(39, 42, 54, 0.6);
-    padding: 20px 0;
+    padding: 50px 20px;
     border-radius: 20px;
 
     .hidden-input {
