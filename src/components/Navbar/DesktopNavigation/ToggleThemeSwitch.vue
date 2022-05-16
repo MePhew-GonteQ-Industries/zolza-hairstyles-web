@@ -56,6 +56,7 @@ export default {
     border:none;
     outline:none;
   }
+
   .toggle-theme-wrapper label{
     display:inline-block;
     position:relative;
@@ -66,6 +67,7 @@ export default {
     color: $togglebutton-label-color;
     font-weight: $togglebutton-label-weight;
   }
+
   .toggle-theme-label-left:before{
     content:'';
     display:block;
@@ -82,6 +84,7 @@ export default {
     transform: rotate(-45deg);
     box-shadow: $shine;
   }
+
   .toggle-theme-label-left:after{
     content: "";
     display: inline-block;
@@ -93,23 +96,28 @@ export default {
     margin: 0 $togglebutton-margin;
     border: $on-border;
   }
+
   .toggle-theme-wrapper input[type=checkbox]:checked + .toggle-theme-label-left:before{
     right: 17px;
     box-shadow: 5px 5px 0 0 $off-dot-color;
     background: transparent;
   }
+
   .toggle-theme-wrapper input[type=checkbox]:checked + .toggle-theme-label-left:after{
     background: $on-bg;
     border: $off-border;
   }
+
   .toggle-theme-wrapper input[type=checkbox] + .toggle-theme-label-left{
     color: $togglebutton-label-active-color;
     font-weight: $togglebutton-label-active-weight;
   }
+
   .toggle-theme-wrapper input[type=checkbox]:checked + .toggle-theme-label-left{
     color: $togglebutton-label-color;
     font-weight: $togglebutton-label-weight;
   }
+
   .toggle-theme-wrapper input[type=checkbox]:checked + .toggle-theme-label-left +,
   .toggle-theme-label{
     color: $togglebutton-label-active-color;
