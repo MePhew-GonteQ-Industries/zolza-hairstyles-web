@@ -36,6 +36,11 @@ const routes = [{
   component: () => import(/* webpackChunkName: "contact" */ '@/views/Contact/ContactPage.vue'),
 },
 {
+  path: '/select-sign-up-method',
+  name: 'SelectSignUpMethod',
+  component: () => import('@/views/SignUp/ChooseSignUpMethod.vue'),
+},
+{
   path: '/sign-up',
   name: 'SignUp',
   component: () => import(/* webpackChunkName: "signup" */ '@/views/SignUp/SignUpPage.vue'),
@@ -62,9 +67,9 @@ const routes = [{
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/PrivacyPolicyPage.vue'),
 },
 {
-  path: '/recover-password',
-  name: 'RecoverPassword',
-  component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/RecoverPassword.vue'),
+  path: '/reset-password',
+  name: 'ResetPassword',
+  component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword.vue'),
 },
 {
   path: '/:catchAll(.*)',
