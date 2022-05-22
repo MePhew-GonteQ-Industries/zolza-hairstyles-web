@@ -10,19 +10,27 @@
       </ul>
 
       <div class="controls-wrapper">
-        <ToggleThemeSwitch :data-theme="dataTheme" @change="toggleTheme"/>
+        <ToggleThemeSwitch v-if="!userLoggedIn" :data-theme="dataTheme" @change="toggleTheme"/>
       </div>
 
-      <ul class="secondary-nav">
-        <li><router-link to="/login" class="login-btn">{{$t('nav.secondaryNav[0]')}}
-        </router-link></li>
-        <li><router-link to="/sign-up" class="signup-btn">{{$t('nav.secondaryNav[1]')}}
-        </router-link></li>
+      <ul class="secondary-nav" v-if="!userLoggedIn">
+          <li><router-link to="/login" class="login-btn">{{$t('nav.secondaryNav[0]')}}
+          </router-link></li>
+          <li><router-link to="/select-sign-up-method" class="signup-btn">
+          {{$t('nav.secondaryNav[1]')}}
+          </router-link></li>
       </ul>
+
+      <div class="user-prof" v-else>
+        <img class="prof-icon" src="@/assets/bell-fill.svg" alt="">
+        <img class="prof-icon" src="@/assets/avatar-fill.svg" alt="">
+      </div>
     </nav>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 import ToggleThemeSwitch from '@/components/Navbar/DesktopNavigation/ToggleThemeSwitch.vue';
 
 export default {
@@ -30,13 +38,25 @@ export default {
   components: {
     ToggleThemeSwitch,
   },
-  props: ['dataTheme'],
+  props: {
+    dataTheme: {
+      type: String,
+      required: true,
+    },
+  },
   setup(_props, ctx) {
+    const store = useStore();
+
+    const userLoggedIn = computed(() => store.state.user.loggedIn);
+
     function toggleTheme() {
       ctx.emit('theme-toggled');
     }
 
-    return { toggleTheme };
+    return {
+      toggleTheme,
+      userLoggedIn,
+    };
   },
 };
 </script>
@@ -56,6 +76,20 @@ export default {
     justify-content: space-between;
     height: 100%;
     width: 100%;
+
+    .user-prof {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      gap: 20px;
+
+      .prof-icon {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+      }
+    }
 
     @media only screen and (max-width: 990px) {
       &{
