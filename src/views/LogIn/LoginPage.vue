@@ -12,26 +12,29 @@
     <form class="login-form" @submit.prevent="handleSubmit" novalidate>
       <CustomInput label='Email' :iconSrc='emailIcon' inputType='email'
       autocomplete="email" v-model:value="userData.email"
-      :invalid="showValidationFeedback && !userData.email"/>
+      :invalid="showValidationFeedback && emailInvalid"/>
       <CustomPasswordInput autocomplete="current-password"
       v-model:password="userData.password"
       :invalid="showValidationFeedback && !userData.password" />
-      <router-link class="forgot-password-link" to="/recover-password"
+      <router-link class="forgot-password-link" to="/reset-password"
       tabindex="-1">
       Forgot password?</router-link>
-      <CustomButton class="login-btn" content="Log In"/>
+      <CustomButton class="login-btn" content="Log In" v-if='!loading'/>
+      <CustomLoader class='loader' v-else />
     </form>
     <p>{{message}}</p>
   </section>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import CustomButton from '../../components/CustomButton.vue';
+import { ref, onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
+import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
 import emailIcon from '@/assets/email.svg';
+import validateEmail from '@/utils';
+import CustomLoader from '@/components/CustomLoader.vue';
 
 export default {
   name: 'LoginPage',
@@ -54,20 +57,20 @@ export default {
       email: '',
       password: '',
     });
+    const store = useStore();
+
+    const loading = ref(false);
 
     const message = ref('');
-    const passwordHidden = ref(true);
-
-    function showPassword() {
-      passwordHidden.value = !passwordHidden.value;
-    }
 
     const showValidationFeedback = ref(false);
+
+    const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
     function validateData() {
       showValidationFeedback.value = true;
 
-      if (!userData.value.email) {
+      if (!validateEmail(userData.value.email)) {
         return false;
       }
 
@@ -79,41 +82,13 @@ export default {
     }
 
     function loginUser() {
-      axios.post('/auth/login', new URLSearchParams({
-        grant_type: 'password',
-        username: userData.value.email,
-        password: userData.value.password,
-      }), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }).then((response) => {
-        console.log(response);
-      })
-        .catch((error) => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            switch (error.response.status) {
-              case 404: {
-                message.value = 'Incorrect user data';
-                break;
-              }
-              default: {
-                console.error(error.response.status);
-                break;
-              }
-            }
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-          }
-        });
+      loading.value = true;
+      store.dispatch('login', userData.value).then(() => {
+        loading.value = false;
+        // router.push();
+      }).catch((err) => {
+        message.value = err;
+      });
     }
 
     function handleSubmit() {
@@ -132,18 +107,19 @@ export default {
       userData,
       loginUser,
       message,
-      showPassword,
-      passwordHidden,
       emailIcon,
       showValidationFeedback,
       validateData,
       handleSubmit,
+      emailInvalid,
+      loading,
     };
   },
   components: {
     CustomButton,
     CustomInput,
     CustomPasswordInput,
+    CustomLoader,
   },
 };
 </script>
@@ -198,7 +174,7 @@ export default {
       }
     }
 
-    .login-btn {
+    .login-btn, .loader {
       margin-top: 50px;
     }
   }
