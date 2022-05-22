@@ -118,6 +118,14 @@ export default {
     }
 
     &:focus, &:hover {
+      outline: none;
+    }
+
+    &:hover {
+      border-color: #2167a0;
+    }
+
+    &:focus {
       border-color: #3e83ba;
       background-color: #3d4049;
       box-shadow: 0 0 0px 3px #274b6d;
