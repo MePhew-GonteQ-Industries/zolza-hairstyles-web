@@ -9,7 +9,7 @@
       v-model:value="userData.surname" :invalid="showValidationFeedback && !userData.surname"/>
       <CustomInput label='Email' :iconSrc='emailIcon' autocomplete="email" inputType='email'
       v-model:value="userData.email"
-      :invalid="showValidationFeedback && !validateEmail(userData.email)"/>
+      :invalid="showValidationFeedback && emailInvalid"/>
       <CustomSelect class="selector"
       header="Gender"
       :iconSrc="selectGenderIcon"
@@ -21,8 +21,10 @@
       v-model:password="userData.password"
       :invalid="showValidationFeedback && (!passwordRepeat || passwordRepeat !== userData.password)"
       />
+      <p>Hasło musi składać się z co najmniej 8 znaków i zawierać cyfrę lub znak specjalny.</p>
       <div class="password-strength-feedback" v-if="userData.password">
         <span>{{ passwordStrength }}  {{ passwordScore }}</span>
+        <!-- TODO: HBO MAX -->
         <password-meter :password="userData.password" @score="onScore"/>
       </div>
       <CustomPasswordInput autocomplete="new-password" label="Repeat password"
@@ -35,7 +37,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
@@ -49,6 +51,7 @@ import otherGenderIcon from '@/assets/other-gender.svg';
 import selectGenderIcon from '@/assets/genders-icon.svg';
 import emailIcon from '@/assets/email.svg';
 import contactIcon from '@/assets/contact.svg';
+import validateEmail from '@/utils';
 
 export default {
   name: 'SignUpPage',
@@ -74,17 +77,14 @@ export default {
     const passwordScore = ref(null);
     const passwordStrength = ref(null);
 
+    const emailInvalid = computed(() => !validateEmail(userData.value.email));
+
     function onScore(payload) {
       passwordScore.value = payload.score;
       passwordStrength.value = payload.strength;
     }
 
     const showValidationFeedback = ref(false);
-
-    function validateEmail(email) {
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    }
 
     function validateData() {
       showValidationFeedback.value = true;
@@ -133,7 +133,7 @@ export default {
     }
 
     function signUpUser() {
-      axios.post('/users/register',
+      axios.post('users/register',
         userData.value,
         {
           headers: {
@@ -213,6 +213,7 @@ export default {
       onScore,
       passwordScore,
       passwordStrength,
+      emailInvalid,
     };
   },
 };
