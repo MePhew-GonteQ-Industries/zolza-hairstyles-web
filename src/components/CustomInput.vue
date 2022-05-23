@@ -121,8 +121,9 @@ export default {
       outline: none;
     }
 
-    &:hover {
+    &:hover:not(:focus) {
       border-color: #2167a0;
+      box-shadow: none;
     }
 
     &:focus {

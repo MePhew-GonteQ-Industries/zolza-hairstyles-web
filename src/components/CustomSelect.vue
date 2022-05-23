@@ -200,19 +200,18 @@ export default {
       box-shadow: 0 0 0px 3px #382328;
     }
 
-    &.hover-enabled:hover {
-      border-color: #3e83ba;
-      background-color: #3d4049;
-      box-shadow: 0 0 0 3px #274b6d;
-    }
+  &.hover-enabled:hover:not(.expanded) {
+    border-color: #2167a0;
+    box-shadow: none;
+  }
 
-    &.expanded {
-      border-color: #3e83ba;
-      background-color: #3d4049;
-      box-shadow: 0 0 0 3px #274b6d;
-      border-radius: 15px 15px 0 0;
-      border-width: 2px;
-    }
+  &.expanded {
+    border-color: #3e83ba;
+    background-color: #3d4049;
+    box-shadow: 0 0 0 3px #274b6d;
+    border-radius: 15px 15px 0 0;
+    border-width: 2px;
+  }
 
   .header {
     position: absolute;
@@ -305,6 +304,7 @@ export default {
           align-items: center;
           justify-content: flex-start;
           cursor: pointer;
+          transition: color 400ms, background-color 400ms;
 
           span {
             position: absolute;
@@ -328,6 +328,7 @@ export default {
 
           &:hover, &:focus {
             background-color: #323644;
+            color: rgb(196, 196, 196);
           }
         }
       }

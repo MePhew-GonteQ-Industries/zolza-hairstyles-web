@@ -154,6 +154,15 @@ export default {
     }
 
     &:focus, &:hover {
+      outline: none;
+    }
+
+    &:hover:not(:focus) {
+      border-color: #2167a0;
+      box-shadow: none;
+    }
+
+    &:focus {
       border-color: #3e83ba;
       background-color: #3d4049;
       box-shadow: 0 0 0px 3px #274b6d;
@@ -162,13 +171,6 @@ export default {
 
     &[type="password"] {
       letter-spacing: 4px;
-    }
-
-    &:focus, &:hover {
-      border-color: #3e83ba;
-      background-color: #3d4049;
-      box-shadow: 0 0 0px 3px #274b6d;
-      outline: none;
     }
 
     &:focus + label,
