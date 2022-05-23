@@ -1,7 +1,7 @@
 // noinspection JSCheckFunctionSignatures
 
 import { createRouter, createWebHistory } from 'vue-router';
-import { loadLanguageAsync, getClientLocale } from '../i18n';
+import store from '@/store/index';
 import Home from '@/views/Home/HomePage.vue';
 import EmailVerification from '@/views/EmailVerification/EmailVerificationPage.vue';
 import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
@@ -82,16 +82,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   default: Home,
-  paramas: {
-    lang: 'pl',
-  },
 });
 
-const initialLocale = getClientLocale() || process.env.VUE_APP_I18N_LOCALE || 'pl';
-
-router.beforeEach((to, _from, next) => {
-  const lang = to.params.lang || initialLocale;
-  loadLanguageAsync(lang).then(() => next());
+router.beforeEach((to) => {
+  if (to.name === 'Login') {
+    if (!store.state.user.loggedIn) {
+      return true;
+    }
+    return { name: 'Home' };
+  }
+  return true;
 });
 
 export default router;
