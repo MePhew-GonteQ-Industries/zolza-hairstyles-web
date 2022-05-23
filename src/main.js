@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import axios from 'axios';
-import VueAxios from 'vue-axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -10,7 +9,6 @@ const { VUE_APP_API_URL } = process.env;
 axios.defaults.baseURL = VUE_APP_API_URL;
 
 createApp(App).use(i18n)
-  .use(VueAxios, axios)
   .use(store)
   .use(router)
   .mount('#app');
