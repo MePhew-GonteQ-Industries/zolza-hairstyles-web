@@ -1,12 +1,10 @@
 <template>
     <nav class="navigation">
       <ul class="primary-nav">
-        <li><router-link :to="{ name: 'Home',
-        params: { lang: this.$i18n.locale }}">{{$t('nav.primaryNav[0]')}}</router-link></li>
-        <li><router-link :to="{ name: 'Services',
-        params: { lang: this.$i18n.locale }}">{{$t('nav.primaryNav[1]')}}
+        <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
+        <li><router-link to='/services'>{{ t('nav.primaryNav[1]') }}
           </router-link></li>
-        <li><router-link to="/contact">{{$t('nav.primaryNav[2]')}}</router-link></li>
+        <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
       </ul>
 
       <div class="controls-wrapper">
@@ -14,21 +12,22 @@
       </div>
 
       <ul class="secondary-nav" v-if="!userLoggedIn">
-          <li><router-link to="/login" class="login-btn">{{$t('nav.secondaryNav[0]')}}
+          <li><router-link to="/login" class="login-btn">{{ t('nav.secondaryNav[0]') }}
           </router-link></li>
           <li><router-link to="/select-sign-up-method" class="signup-btn">
-          {{$t('nav.secondaryNav[1]')}}
+          {{ t('nav.secondaryNav[1]') }}
           </router-link></li>
       </ul>
 
       <div class="user-prof" v-else>
         <img class="prof-icon" src="@/assets/bell-fill.svg" alt="">
-        <img class="prof-icon" src="@/assets/avatar-fill.svg" alt="">
+        <img @click="logout" class="prof-icon" src="@/assets/avatar-fill.svg" alt="">
       </div>
     </nav>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 import ToggleThemeSwitch from '@/components/Navbar/DesktopNavigation/ToggleThemeSwitch.vue';
@@ -45,9 +44,15 @@ export default {
     },
   },
   setup(_props, ctx) {
+    const { t } = useI18n({ useScope: 'global' });
+
     const store = useStore();
 
     const userLoggedIn = computed(() => store.state.user.loggedIn);
+
+    function logout() {
+      store.dispatch('logout');
+    }
 
     function toggleTheme() {
       ctx.emit('theme-toggled');
@@ -56,6 +61,8 @@ export default {
     return {
       toggleTheme,
       userLoggedIn,
+      logout,
+      t,
     };
   },
 };

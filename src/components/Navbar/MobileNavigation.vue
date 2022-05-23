@@ -6,27 +6,28 @@
           <ul class="primary-nav">
             <li><router-link to="/"
                @click="toggleMobileMenu"><img src="@/assets/nav/home.svg" alt="">
-              {{$t('nav.primaryNav[0]')}}</router-link></li><li><router-link to="/services"
+              {{ t('nav.primaryNav[0]') }}</router-link></li><li><router-link to="/services"
                @click="toggleMobileMenu"><img src="@/assets/logo.svg" alt="">
-            {{$t('nav.primaryNav[1]')}}</router-link></li>
+            {{ t('nav.primaryNav[1]') }}</router-link></li>
             <li><router-link to="/contact"
                @click="toggleMobileMenu"><img src="@/assets/nav/contact.svg" alt="">
-              {{$t('nav.primaryNav[2]')}}</router-link></li>
+              {{ t('nav.primaryNav[2]') }}</router-link></li>
           </ul>
 
           <ul class="secondaryNav">
             <li><router-link to="/login"
                @click="toggleMobileMenu"><img src="@/assets/nav/login.svg" alt="">
-              {{$t('nav.secondaryNav[0]')}}</router-link></li>
+              {{ t('nav.secondaryNav[0]') }}</router-link></li>
             <li><router-link to="/sign-up"
                @click="toggleMobileMenu"><img src="@/assets/nav/user.svg" alt="">
-              {{$t('nav.secondaryNav[1]')}}</router-link></li>
+              {{ t('nav.secondaryNav[1]') }}</router-link></li>
           </ul>
         </nav>
       </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'mobileNavigation',
@@ -34,11 +35,13 @@ export default {
     mobileMenuActive: { default: false },
   },
   setup(props, ctx) {
+    const { t } = useI18n({ useScope: 'global' });
+
     function toggleMobileMenu() {
       ctx.emit('mobile-menu-closed');
     }
 
-    return { toggleMobileMenu };
+    return { toggleMobileMenu, t };
   },
 };
 </script>

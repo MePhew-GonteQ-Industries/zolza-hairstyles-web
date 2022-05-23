@@ -53,11 +53,12 @@ export default {
     },
   },
   setup(props) {
-    const userData = ref({
-      email: '',
-      password: '',
-    });
     const store = useStore();
+
+    const userData = ref({
+      email: 'matib0029@gmaila.com',
+      password: 'Kwakwa5!',
+    });
 
     const loading = ref(false);
 
@@ -88,6 +89,7 @@ export default {
         // router.push();
       }).catch((err) => {
         message.value = err;
+        loading.value = false;
       });
     }
 

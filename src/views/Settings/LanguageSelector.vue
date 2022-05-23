@@ -1,7 +1,7 @@
 <template>
   <select name="lang" id="lang-selector" v-model="locale">
-    <option value="pl">{{$t('settings.languageSelector[0]')}}</option>
-    <option value="en">{{$t('settings.languageSelector[1]')}}</option>
+    <option value="pl">{{ t('settings.languageSelector[0]') }}</option>
+    <option value="en">{{ t('settings.languageSelector[1]') }}</option>
   </select>
 </template>
 

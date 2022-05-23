@@ -1,12 +1,13 @@
 <template>
   <section class="app-page" id="home-page">
     <heroSection id='hero'></heroSection>
-    <h1>{{$t('home')}}</h1>
+    <h1>{{ t('home') }}</h1>
     <language-selector />
   </section>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import heroSection from '@/views/Home/HeroSection.vue';
 import languageSelector from '@/views/Settings/LanguageSelector.vue';
 
@@ -15,6 +16,11 @@ export default {
   components: {
     heroSection,
     languageSelector,
+  },
+  setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
+    return { t };
   },
 };
 </script>
