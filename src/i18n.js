@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createI18n } from 'vue-i18n';
+import { usePreferredLanguages } from '@vueuse/core';
 /**
  * Load locale messages
  *
@@ -21,10 +21,8 @@ function loadLocaleMessages() {
 }
 
 function getClientLocale() {
-  return (navigator.language.slice(0, 2));
+  return usePreferredLanguages()[0];
 }
-
-export { getClientLocale };
 
 const initialLocale = getClientLocale() || process.env.VUE_APP_I18N_LOCALE || 'pl';
 
@@ -39,38 +37,5 @@ const i18n = createI18n({
   compositionOnly: false,
   fullInstall: true,
 });
-
-const loadedLanguages = [initialLocale];
-
-function setI18nLanguage(lang) {
-  i18n.locale = lang;
-  axios.defaults.headers.common['Accept-Language'] = lang;
-  document.querySelector('html').setAttribute('lang', lang);
-  return lang;
-}
-
-export async function loadLanguageAsync(lang) {
-  // If the same language
-  if (i18n.locale === lang) {
-    return Promise.resolve(setI18nLanguage(lang));
-  }
-
-  // If the language was already loaded
-  if (loadedLanguages.includes(lang)) {
-    return Promise.resolve(setI18nLanguage(lang));
-  }
-
-  axios.defaults.timeout = 1000;
-  // If the language hasn't been loaded yet
-  console.log('sending request');
-  console.log(axios.get(`https://zolza-hairstyles.pl/api/lang/${lang}`));
-  return Promise.resolve(axios.get(`https://zolza-hairstyles.pl/api/lang/${lang}`).then((res) => {
-    console.log(res);
-    const msgs = res.data;
-    loadedLanguages.push(lang);
-    i18n.setLocaleMessage(lang, msgs.default);
-    setI18nLanguage(lang);
-  }));
-}
 
 export default i18n;
