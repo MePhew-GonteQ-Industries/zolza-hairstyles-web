@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { useStore } from 'vuex';
+import { reactive, onMounted } from 'vue';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
 
@@ -23,6 +24,8 @@ export default {
     contactSection,
   },
   setup() {
+    const store = useStore();
+
     const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     let theme;
@@ -49,6 +52,10 @@ export default {
           console.error('Theme was in an incorrect state');
       }
     }
+
+    onMounted(() => {
+      store.dispatch('loadUser');
+    });
 
     return {
       state,
