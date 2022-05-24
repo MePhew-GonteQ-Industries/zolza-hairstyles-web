@@ -20,7 +20,7 @@
       </ul>
 
       <div class="user-prof" v-else>
-        <img class="prof-icon" src="@/assets/bell-fill.svg" alt="">
+        <NotificationsPanel />
         <img @click="logout" class="prof-icon" src="@/assets/avatar-fill.svg" alt="">
       </div>
     </nav>
@@ -30,12 +30,14 @@
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
+import NotificationsPanel from '@/components/Navbar/NotificationsPanel.vue';
 import ToggleThemeSwitch from '@/components/Navbar/DesktopNavigation/ToggleThemeSwitch.vue';
 
 export default {
   name: 'desktopNavigation',
   components: {
     ToggleThemeSwitch,
+    NotificationsPanel,
   },
   props: {
     dataTheme: {
