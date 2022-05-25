@@ -89,7 +89,7 @@ export default {
   }
 
   input {
-    padding: 20px 55px 0 30px;
+    padding: 20px 90px 0 30px;
     border: 2px solid transparent;
     background-color: #323644;
     color: white;
