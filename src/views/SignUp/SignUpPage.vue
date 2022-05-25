@@ -22,7 +22,7 @@
       :invalid="showValidationFeedback && (!passwordRepeat || passwordRepeat !== userData.password)"
       />
       <p>Hasło musi składać się z co najmniej 8 znaków i zawierać cyfrę lub znak specjalny.</p>
-      <div class="password-strength-feedback" v-if="userData.password">
+      <div class="password-strength-feedback">
         <span>{{ passwordStrength }}  {{ passwordScore }}</span>
         <!-- TODO: HBO MAX -->
         <password-meter :password="userData.password" @score="onScore"/>
@@ -222,32 +222,37 @@ export default {
 <style>
 .po-password-strength-bar {
     border-radius: 5px;
-    transition: all 0.2s linear;
+    transition: all 600ms linear;
 }
 
 .po-password-strength-bar.risky {
     background-color: #f95e68;
     width: 10%;
+    transition: all 600ms linear;
 }
 
 .po-password-strength-bar.guessable {
     background-color: #fb964d;
     width: 32.5%;
+    transition: all 600ms linear;
 }
 
 .po-password-strength-bar.weak {
     background-color: #fdd244;
     width: 55%;
+    transition: all 600ms linear;
 }
 
 .po-password-strength-bar.safe {
     background-color: #b0dc53;
     width: 77.5%;
+    transition: all 600ms linear;
 }
 
 .po-password-strength-bar.secure {
     background-color: #35cc62;
     width: 100%;
+    transition: all 600ms linear;
 }
 </style>
 
