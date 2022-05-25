@@ -21,7 +21,7 @@
 
       <div class="user-prof" v-else>
         <NotificationsPanel />
-        <img @click="logout" class="prof-icon" src="@/assets/avatar-fill.svg" alt="">
+        <img @click="logout" class="prof-icon" src="@/assets/avatar-outline.svg" alt="">
       </div>
     </nav>
 </template>

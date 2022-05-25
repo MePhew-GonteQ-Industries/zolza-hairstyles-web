@@ -1,11 +1,15 @@
 <template>
   <div class="notifications-wrapper" ref="notificationsPanel">
-        <img class="prof-icon" src="@/assets/bell-fill.svg"
+        <img class="prof-icon"
+        :src="notificationsPanelExpanded ? bellFill: bellOutline"
         alt="bell-notification-icon" @click='toggleNotificationsPanel'>
+        <span class="unread-notifications-count">2</span>
         <div class="notifications-panel" v-show="notificationsPanelExpanded">
           <div class="panel-header">
             <h3>Notifications</h3>
-            <img class="notification-settings" src="@/assets/settings.svg" alt="settings-icon">
+            <router-link to="/notification-settings" @click="collapseNotificationsPanel">
+              <img class="notification-settings" src="@/assets/settings.svg" alt="settings-icon">
+            </router-link>
           </div>
           <div class="tab-selector">
             <button class="tab" :class='{ active: currentTabIndex === 0 }'
@@ -44,6 +48,8 @@
 import { ref } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import ComposedNotification from '@/components/Navbar/ComposedNotification.vue';
+import bellFill from '@/assets/bell-fill.svg';
+import bellOutline from '@/assets/bell-outline.svg';
 
 export default {
   name: 'NotificationsPanel',
@@ -105,6 +111,8 @@ export default {
       collapseNotificationsPanel,
       clearNotifications,
       notifications,
+      bellFill,
+      bellOutline,
     };
   },
 };
@@ -122,6 +130,24 @@ export default {
     width: 25px;
     height: 25px;
     cursor: pointer;
+  }
+
+  .unread-notifications-count {
+    background-color: #CD0700;
+    color: white;
+    padding: 4px;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    right: -10px;
+    top: -5px;
+    font-size: .6rem;
+    border: 2px solid $accent-bg-color;
+    font-weight: 600;
   }
 
   .notifications-panel {
