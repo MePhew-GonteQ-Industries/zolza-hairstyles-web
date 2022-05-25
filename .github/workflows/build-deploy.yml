@@ -9,9 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Pulling git repo
-        uses: actions/checkout@v2
-      - name: Installing Node v.14
+      - name: Running build command
         uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.DEPLOYMENT_HOST}}
