@@ -6,8 +6,11 @@
     :class="{ invalid: invalid }" />
     <label :for="inputId">{{ label }}</label>
     <img :src="iconSrc" alt="">
-    <img v-show="invalid" class="invalid-icon"
-    src="@/assets/exclamation-mark.svg" alt="">
+    <div class="invalid-wrapper">
+      <img v-show="invalid" class="invalid-icon"
+      src="@/assets/exclamation-mark.svg" alt="">
+      <p>Enter e-mail address</p>
+    </div>
   </div>
 </template>
 
@@ -89,7 +92,7 @@ export default {
   }
 
   input {
-    padding: 20px 55px 0 30px;
+    padding: 20px 90px 0 30px;
     border: 2px solid transparent;
     background-color: #323644;
     color: white;

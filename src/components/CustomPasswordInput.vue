@@ -120,9 +120,7 @@ export default {
   }
 
   input {
-    padding-top: 20px;
-    padding-left: 30px;
-    padding-right: 55px;
+    padding: 20px 90px 0 30px;
     border: 2px solid transparent;
     background-color: #323644;
     color: white;
