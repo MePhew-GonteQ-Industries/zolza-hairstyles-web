@@ -4,7 +4,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/store/index';
 import Home from '@/views/Home/HomePage.vue';
 import EmailVerification from '@/views/EmailVerification/EmailVerificationPage.vue';
-import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
 
 function loginProps(route) {
   if (route.params) {
@@ -72,9 +71,14 @@ const routes = [{
   component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword.vue'),
 },
 {
+  path: '/dashboard',
+  name: 'Dashboard',
+  component: () => import('@/views/Dashboard/DashboardPage.vue'),
+},
+{
   path: '/:catchAll(.*)',
   name: 'NotFound',
-  component: PageNotFound,
+  component: () => import('@/views/PageNotFound/PageNotFound.vue'),
 },
 ];
 
