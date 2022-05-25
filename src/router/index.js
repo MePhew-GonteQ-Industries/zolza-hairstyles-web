@@ -72,6 +72,11 @@ const routes = [{
   component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword.vue'),
 },
 {
+  path: '/notification-settings',
+  name: 'NotificationSettings',
+  component: () => import('@/views/NotificationSettings.vue'),
+},
+{
   path: '/:catchAll(.*)',
   name: 'NotFound',
   component: PageNotFound,
