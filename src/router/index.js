@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/store/index';
 import Home from '@/views/Home/HomePage.vue';
 import EmailVerification from '@/views/EmailVerification/EmailVerificationPage.vue';
+import RequestPasswordReset from '@/views/ResetPassword/RequestPasswordReset.vue';
+import ChangePassword from '@/views/ResetPassword/ChangePassword.vue';
 
 function loginProps(route) {
   if (route.params) {
@@ -35,11 +37,6 @@ const routes = [{
   component: () => import(/* webpackChunkName: "contact" */ '@/views/Contact/ContactPage.vue'),
 },
 {
-  path: '/select-sign-up-method',
-  name: 'SelectSignUpMethod',
-  component: () => import('@/views/SignUp/ChooseSignUpMethod.vue'),
-},
-{
   path: '/sign-up',
   name: 'SignUp',
   component: () => import(/* webpackChunkName: "signup" */ '@/views/SignUp/SignUpPage.vue'),
@@ -66,9 +63,19 @@ const routes = [{
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/PrivacyPolicyPage.vue'),
 },
 {
-  path: '/reset-password',
+  path: '/password-reset',
   name: 'ResetPassword',
-  component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword.vue'),
+  component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword/ResetPassword.vue'),
+  children: [
+    {
+      path: '',
+      component: RequestPasswordReset,
+    },
+    {
+      path: 'change',
+      component: ChangePassword,
+    },
+  ],
 },
 {
   path: '/notification-settings',
