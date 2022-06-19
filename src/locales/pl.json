@@ -84,7 +84,7 @@
     }
   },
   "pageNotFound": {
-    "notFound": "Nie znaleziono strony",
+    "heading": "Nie znaleziono strony",
     "homeRedirection": "Powrót"
   }
 }
