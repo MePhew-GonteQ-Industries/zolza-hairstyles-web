@@ -1,22 +1,14 @@
 <template>
   <section class="app-page" id="home-page">
-    <heroSection id='hero'></heroSection>
-    <h1>{{ t('home') }}</h1>
-    <language-selector />
+    Witamy w Zołza Hairstyles - umów się na wizytę już niebawem! (mam nadzieję)
   </section>
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n';
-import heroSection from '@/views/Home/HeroSection.vue';
-import languageSelector from '@/views/Settings/LanguageSelector.vue';
 
 export default {
   name: 'HomePage',
-  components: {
-    heroSection,
-    languageSelector,
-  },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
 
@@ -26,11 +18,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #home-page {
-    // background-image: url('~@/assets/blob-background2.svg');
-    background-size: cover;
-  }
-
   a {
     color: white;
     font-size: 4rem;
