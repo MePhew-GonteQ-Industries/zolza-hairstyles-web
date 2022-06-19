@@ -14,5 +14,8 @@
     "passwordFieldLabel": "Hasło",
     "forgotPasswordBtn": "Nie pamiętasz hasła?",
     "logInBtn": "Zaloguj się"
+  },
+  "pageNotFound": {
+    "notFound": "Nie znaleziono strony"
   }
 }

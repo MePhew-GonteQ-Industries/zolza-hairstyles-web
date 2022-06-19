@@ -14,5 +14,8 @@
     "passwordFieldLabel": "Password",
     "forgotPasswordBtn": "Forgot password?",
     "logInBtn": "Log in"
+  },
+  "pageNotFound": {
+    "notFound": "Page not found"
   }
 }

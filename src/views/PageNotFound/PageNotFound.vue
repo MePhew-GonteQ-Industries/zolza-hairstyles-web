@@ -1,13 +1,22 @@
 <template>
   <section class="app-page" id="page-not-found">
     <h1>404</h1>
-    <h3>Nie znaleziono strony</h3>
+    <h3>{{ t('pageNotFound.notFound') }}</h3>
   </section>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
+
 export default {
   name: 'NotFoundPage',
+  setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
+    return {
+      t,
+    };
+  },
 };
 </script>
 
