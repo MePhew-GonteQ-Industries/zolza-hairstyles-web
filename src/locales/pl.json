@@ -9,10 +9,78 @@
     "languageSelector": ["Polski", "Angielski"]
   },
   "signUp": {
-    "heading": "Zapraszamy",
-    "eMailFieldLabel": "Adres e-mail",
-    "passwordFieldLabel": "Hasło",
+    "heading": "Utwórz swoje konto",
+    "nameField": {
+      "label": "Imię",
+      "messageEmpty": "Podaj swoje imię",
+      "messageInvalid": ""
+    },
+    "surnameField": {
+      "label": "Nazwisko",
+      "messageEmpty": "Podaj swoje nazwisko",
+      "messageInvalid": ""
+    },
+    "emailField": {
+      "label": "Email",
+      "messageEmpty": "Podaj swój adres email",
+      "messageInvalid": "Podany adres email jest niepoprawny"
+    },
+    "genderField": {
+      "header": "Płeć",
+      "messageEmpty": "Wybierz swoją płeć",
+      "messageInvalid": ""
+    },
+    "passwordField": {
+      "label": "Hasło",
+      "messageEmpty": "Podaj swoje hasło",
+      "messageInvalid": "Podane hasło jest za słabe"
+    },
+    "repeatPasswordField": {
+      "label": "Powtórz hasło",
+      "messageEmpty": "Powtórz podane hasło",
+      "messageInvalid": "Hasła nie są takie same"
+    },
+    "logInBtn": "Utwórz konto"
+  },
+  "logIn": {
+    "heading": "Zaloguj się na swoje konto",
+    "emailField": {
+      "label": "Email",
+      "messageEmpty": "Podaj swój adres email",
+      "messageInvalid": "Podany adres email jest niepoprawny"
+    },
+    "currentPasswordField": {
+      "label": "Hasło",
+      "messageEmpty": "Podaj swoje hasło",
+      "messageInvalid": "Podane hasło jest za słabe"
+    },
     "forgotPasswordBtn": "Nie pamiętasz hasła?",
     "logInBtn": "Zaloguj się"
+  },
+  "resetPassword": {
+    "requestPasswordReset": {
+      "heading": "Resetowanie hasła",
+      "description": "Wpisz adres email powiązany z twoim kontem. Wyślemy do Ciebie wiadomość zawierającą link umożliwiający zresetowanie hasła.",
+      "emailField": {
+        "label": "Email",
+        "messageEmpty": "Podaj swój adres email",
+        "messageInvalid": "Podany adres email jest niepoprawny"
+      },
+      "resetPasswordBtn": "Zresetuj hasło"
+    },
+    "changePassword": {
+      "heading": "Ustaw nowe hasło",
+      "newPasswordField": {
+        "label": "Nowe hasło",
+        "messageEmpty": "Podaj swoje nowe hasło",
+        "messageInvalid": "Podane hasło jest za słabe"
+      },
+      "repeatNewPasswordField": {
+        "label": "Powtórz nowe hasło",
+        "messageEmpty": "Powtórz podane hasło",
+        "messageInvalid": "Hasła nie są takie same"
+      },
+      "changePasswordBtn": "Zmień hasło"
+    }
   }
 }

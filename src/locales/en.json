@@ -9,9 +9,40 @@
     "languageSelector": ["Polish", "English"]
   },
   "signUp": {
-    "heading": "Welcome",
-    "eMailFieldLabel": "E-mail address",
-    "passwordFieldLabel": "Password",
+    "heading": "Welcome to Zołza Hairstyles",
+    "nameField": {
+      "label": "Name",
+      "messageEmpty": "",
+      "messageInvalid": ""
+    },
+    "surnameField": {
+      "label": "Surname",
+      "messageEmpty": "",
+      "messageInvalid": ""
+    },
+    "emailField": {
+      "label": "Email",
+      "messageEmpty": "",
+      "messageInvalid": ""
+    },
+    "genderField": {
+      "label": "Gender",
+      "messageEmpty": "",
+      "messageInvalid": ""
+    },
+    "passwordField": {
+      "label": "Password",
+      "messageEmpty": "",
+      "messageInvalid": ""
+    },
+    "repeatPasswordField": {
+      "label": "Repeat Password",
+      "messageEmpty": "",
+      "messageInvalid": ""
+    },
+    "logInBtn": "Sign up"
+  },
+  "logIn": {
     "forgotPasswordBtn": "Forgot password?",
     "logInBtn": "Log in"
   }
