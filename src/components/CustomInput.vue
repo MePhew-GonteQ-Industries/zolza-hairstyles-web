@@ -6,16 +6,19 @@
     :class="{ invalid: invalid }" />
     <label :for="inputId">{{ label }}</label>
     <img :src="iconSrc" alt="">
-    <div class="invalid-wrapper">
-      <img v-show="invalid" class="invalid-icon"
+    <div v-show="invalid" class="invalid-wrapper">
+      <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
-      <p>Enter e-mail address</p>
+      <p class="messageInvalid messageValueEmpty"
+      v-if="invalid && (required && empty)">{{ messageEmpty }}</p>
+      <p class="messageInvalid messageValueInvalid"
+      v-if="invalid && !(required && empty)">{{ messageInvalid }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
@@ -34,6 +37,18 @@ export default {
       type: String,
       required: true,
     },
+    messageInvalid: {
+      type: String,
+      required: true,
+    },
+    messageEmpty: {
+      type: String,
+      required: false,
+    },
+    required: {
+      type: Boolean,
+      required: true,
+    },
     inputType: {
       type: String,
       default: 'text',
@@ -46,15 +61,18 @@ export default {
   emits: [
     'update:value',
   ],
-  setup() {
+  setup(props) {
     const inputId = ref(null);
 
     onMounted(() => {
       inputId.value = uuidv4();
     });
 
+    const empty = computed(() => props.value.length === 0);
+
     return {
       inputId,
+      empty,
     };
   },
 };
@@ -66,12 +84,26 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 25px;
 
-  .invalid-icon {
+  .invalid-wrapper {
     position: absolute;
-    right: -50px;
-    width: 30px;
-    height: 30px;
+    margin-top: 8px;
+    top: 100%;
+    left: 8px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    .invalid-icon {
+      position: static;
+      width: 25px;
+      height: 25px;
+      }
+
+    .messageInvalid {
+      color: #F95249;
+    }
   }
 
   label {

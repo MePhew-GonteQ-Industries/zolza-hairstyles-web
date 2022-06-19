@@ -3,7 +3,7 @@
     <input :autocomplete="autocomplete"
     class="password-input"
     :type="passwordHidden ? 'password' : 'text'"
-    name="password" :id="inputId" placeholder="Password" :value="password"
+    name="password" :id="inputId" :placeholder="label" :value="password"
     @input="event => $emit('update:password', event.target.value)"
     :class="{ invalid: invalid }">
     <label :for="inputId">{{ label }}</label>
@@ -13,13 +13,19 @@
       <img class="eye-icon" v-if="!passwordHidden"
       src="@/assets/eye.svg" alt="hide-password-icon">
     </div>
-    <img v-show="invalid" class="invalid-icon"
-    src="@/assets/exclamation-mark.svg" alt="">
+    <div v-show="invalid" class="invalid-wrapper">
+      <img class="invalid-icon"
+      src="@/assets/exclamation-mark.svg" alt="">
+      <p class="messageInvalid messageValueEmpty"
+      v-if="invalid && (required && empty)">{{ messageEmpty }}</p>
+      <p class="messageInvalid messageValueInvalid"
+      v-if="invalid && !(required && empty)">{{ messageInvalid }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
@@ -32,14 +38,26 @@ export default {
     },
     label: {
       type: String,
-      default: 'Password',
+      required: true,
     },
     invalid: {
       type: Boolean,
       default: false,
     },
+    messageInvalid: {
+      type: String,
+      required: true,
+    },
+    messageEmpty: {
+      type: String,
+      required: false,
+    },
+    required: {
+      type: Boolean,
+      required: true,
+    },
   },
-  setup() {
+  setup(props) {
     const passwordHidden = ref('false');
 
     function showPassword() {
@@ -52,7 +70,10 @@ export default {
       inputId.value = uuidv4();
     });
 
+    const empty = computed(() => props.password.length === 0);
+
     return {
+      empty,
       passwordHidden,
       showPassword,
       inputId,
@@ -67,6 +88,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 25px;
 
   label {
     color: #84868f;
@@ -78,11 +100,24 @@ export default {
     transform-origin: 0 0;
   }
 
-  .invalid-icon {
+  .invalid-wrapper {
     position: absolute;
-    right: -50px;
-    width: 30px;
-    height: 30px;
+    margin-top: 8px;
+    top: 100%;
+    left: 8px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    .invalid-icon {
+      position: static;
+      width: 25px;
+      height: 25px;
+      }
+
+    .messageInvalid {
+      color: #F95249;
+    }
   }
 
   .show-password {

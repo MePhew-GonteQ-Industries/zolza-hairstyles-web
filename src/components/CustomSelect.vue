@@ -22,13 +22,19 @@
       @mousedown.stop
       @mouseenter="toggleSelectHover"
       @mouseleave="toggleSelectHover" tabindex="-1">
-      <img v-show="invalid" class="invalid-icon"
+    </div>
+    <div v-show="invalid" class="invalid-wrapper">
+      <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
+      <p class="messageInvalid messageValueEmpty"
+      v-if="invalid && (required && !selectedItem)">{{ messageEmpty }}</p>
+      <p class="messageInvalid messageValueInvalid"
+      v-if="invalid && !(required && !selectedItem)">{{ messageInvalid }}</p>
     </div>
     <div class="dropdown" :class="{ show: expanded }">
       <ol>
         <li v-for="(option, index) in options" :key="option.value"
-        @click="changeValue(index); collapseDropdown()"
+        @click="changeValue(index); collapseDropdown();"
         @keydown.down="selectNextOption"
         @keydown.up="selectPreviousOption">
           <span :class="{ selected: index === selectedItem }">
@@ -55,10 +61,6 @@ export default {
       type: String,
       required: true,
     },
-    placeholder: {
-      type: String,
-      required: true,
-    },
     options: {
       type: Array,
       required: true,
@@ -69,6 +71,18 @@ export default {
     invalid: {
       type: Boolean,
       default: false,
+    },
+    messageInvalid: {
+      type: String,
+      required: true,
+    },
+    messageEmpty: {
+      type: String,
+      required: false,
+    },
+    required: {
+      type: Boolean,
+      required: true,
     },
   },
   setup(props, ctx) {
@@ -170,6 +184,28 @@ export default {
 <style lang='scss' scoped>
 .select-wrapper {
   color: #84868f;
+  position: relative;
+  margin-bottom: 25px;
+
+  .invalid-wrapper {
+    position: absolute;
+    margin-top: 8px;
+    top: 100%;
+    left: 8px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    .invalid-icon {
+      position: static;
+      width: 25px;
+      height: 25px;
+      }
+
+    .messageInvalid {
+      color: #F95249;
+    }
+  }
 
   .select {
     position: relative;
@@ -187,18 +223,6 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
-    .invalid-icon {
-      position: absolute;
-      right: -50px;
-      width: 30px;
-      height: 30px;
-    }
-
-    &.invalid {
-      border-color: #853635;
-      box-shadow: 0 0 0px 3px #382328;
-    }
 
   &.hover-enabled:hover:not(.expanded) {
     border-color: #2167a0;
