@@ -14,7 +14,7 @@
       <ul class="secondary-nav" v-if="!userLoggedIn">
           <li><router-link to="/login" class="login-btn">{{ t('nav.secondaryNav[0]') }}
           </router-link></li>
-          <li><router-link to="/select-sign-up-method" class="signup-btn">
+          <li><router-link to="/sign-up" class="signup-btn">
           {{ t('nav.secondaryNav[1]') }}
           </router-link></li>
       </ul>
@@ -45,7 +45,7 @@ export default {
       required: true,
     },
   },
-  setup(_props, ctx) {
+  setup(_props, { emit }) {
     const { t } = useI18n({ useScope: 'global' });
 
     const store = useStore();
@@ -57,7 +57,7 @@ export default {
     }
 
     function toggleTheme() {
-      ctx.emit('theme-toggled');
+      emit('theme-toggled');
     }
 
     return {
