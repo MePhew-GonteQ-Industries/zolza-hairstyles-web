@@ -82,5 +82,9 @@
       },
       "changePasswordBtn": "Zmień hasło"
     }
+  },
+  "pageNotFound": {
+    "notFound": "Nie znaleziono strony",
+    "homeRedirection": "Powrót"
   }
 }
