@@ -16,6 +16,7 @@
     "logInBtn": "Log in"
   },
   "pageNotFound": {
-    "notFound": "Page not found"
+    "notFound": "Page not found",
+    "homeRedirection": "Go Home"
   }
 }

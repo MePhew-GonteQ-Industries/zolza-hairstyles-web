@@ -2,11 +2,13 @@
   <section class="app-page" id="page-not-found">
     <h1>404</h1>
     <h3>{{ t('pageNotFound.notFound') }}</h3>
+    <CustomButton content="t('pageNotFound.homeRedirection')"/>
   </section>
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n';
+import CustomButton from '@/components/CustomButton.vue';
 
 export default {
   name: 'NotFoundPage',
@@ -16,6 +18,9 @@ export default {
     return {
       t,
     };
+  },
+  components: {
+    CustomButton,
   },
 };
 </script>

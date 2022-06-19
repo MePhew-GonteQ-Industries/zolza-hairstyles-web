@@ -16,6 +16,7 @@
     "logInBtn": "Zaloguj się"
   },
   "pageNotFound": {
-    "notFound": "Nie znaleziono strony"
+    "notFound": "Nie znaleziono strony",
+    "homeRedirection": "Powrót"
   }
 }
