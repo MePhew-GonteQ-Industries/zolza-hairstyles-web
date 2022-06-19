@@ -1,34 +1,48 @@
 <template>
   <section class="app-page" id="login-page">
-    <h1>Log In to Zołza Hairstyles</h1>
+    <h1>{{ t('logIn.heading') }}</h1>
+
     <div class="state-message" v-if="emailConfirmed">
         <h4>Email address has been confirmed successfully</h4>
         <h4>You can now login to your account</h4>
     </div>
+
     <div class="state-message" v-if="accountCreated">
         <h4>Account created successfully</h4>
         <h4>You can now login</h4>
     </div>
+
     <form class="login-form" @submit.prevent="handleSubmit" novalidate>
-      <CustomInput label='Email' :iconSrc='emailIcon' inputType='email'
+      <CustomInput :label="t('logIn.emailField.label')" :iconSrc='emailIcon' inputType='email'
       autocomplete="email" v-model:value="userData.email"
-      :invalid="showValidationFeedback && emailInvalid"/>
-      <CustomPasswordInput autocomplete="current-password"
+      :invalid="showValidationFeedback && emailInvalid"
+      :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
+      :messageInvalid="t('logIn.emailField.messageInvalid')"/>
+
+      <CustomPasswordInput class='current-password' autocomplete="current-password"
       v-model:password="userData.password"
-      :invalid="showValidationFeedback && !userData.password" />
-      <router-link class="forgot-password-link" to="/reset-password"
-      tabindex="-1">
-      Forgot password?</router-link>
+      :invalid="showValidationFeedback && !userData.password"
+      :label="t('logIn.currentPasswordField.label')"
+      :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
+      :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
+
+      <router-link class="forgot-password-link" to="/password-reset"
+      tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+
       <CustomButton class="login-btn" content="Log In" v-if='!loading'/>
+
       <CustomLoader class='loader' v-else />
     </form>
+
     <p>{{message}}</p>
+
   </section>
 </template>
 
 <script>
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
@@ -53,6 +67,7 @@ export default {
     },
   },
   setup(props) {
+    const { t } = useI18n();
     const store = useStore();
 
     const userData = ref({
@@ -106,6 +121,7 @@ export default {
     });
 
     return {
+      t,
       userData,
       loginUser,
       message,
@@ -128,14 +144,7 @@ export default {
 
 <style lang='scss' scoped>
   #login-page {
-    background-image: url('~@/assets/blob-background.svg');
-    background-size: cover;
     justify-content: flex-start;
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 300;
-    }
   }
 
   .state-message {
@@ -159,16 +168,14 @@ export default {
     justify-content: center;
     gap: 20px;
     transition: all .3s;
-    background-color: rgba(39, 42, 54, .6);
     padding: 100px 20px;
-    border-radius: 20px;
     position: relative;
 
     .forgot-password-link {
       color: #00A2E8;
       font-size: 1em;
       position: absolute;
-      top: 260px;
+      top: 320px;
       left: 20px;
 
       &:hover {

@@ -1,36 +1,58 @@
 <template>
   <section class="app-page" id="sign-up-page">
-    <h1>Create an account</h1>
+
+    <h1>{{t('signUp.heading')}}</h1>
+
     <form class="sing-up-form" @submit.prevent="handleSubmit" novalidate>
       <input class="hidden-input" type="text" autocomplete="username">
-      <CustomInput label='Name' :iconSrc='contactIcon' autocomplete="given-name"
+
+      <CustomInput :label="t('signUp.nameField.label')"
+      :iconSrc='contactIcon' autocomplete="given-name"
+      :required='true' :messageEmpty="t('signUp.nameField.messageEmpty')"
+      :messageInvalid="t('signUp.nameField.messageInvalid')"
       v-model:value="userData.name" :invalid="showValidationFeedback && !userData.name"/>
-      <CustomInput label='Surname' :iconSrc='contactIcon' autocomplete="family-name"
-      v-model:value="userData.surname" :invalid="showValidationFeedback && !userData.surname"/>
-      <CustomInput label='Email' :iconSrc='emailIcon' autocomplete="email" inputType='email'
-      v-model:value="userData.email"
-      :invalid="showValidationFeedback && emailInvalid"/>
+
+      <CustomInput :label="t('signUp.surnameField.label')" :iconSrc='contactIcon'
+      autocomplete="family-name"
+      v-model:value="userData.surname" :invalid="showValidationFeedback && !userData.surname"
+      :required='true' :messageEmpty="t('signUp.surnameField.messageEmpty')"
+      :messageInvalid="t('signUp.surnameField.messageInvalid')"/>
+
+      <CustomInput :label="t('signUp.emailField.label')" :iconSrc='emailIcon'
+      autocomplete="email" inputType='email'
+      v-model:value="userData.email" :invalid="showValidationFeedback && emailInvalid"
+      :required='true' :messageEmpty="t('signUp.emailField.messageEmpty')"
+      :messageInvalid="t('signUp.emailField.messageInvalid')"/>
+
       <CustomSelect class="selector"
-      header="Gender"
+      :header="t('signUp.genderField.header')"
       :iconSrc="selectGenderIcon"
-      placeholder='Select your gender'
       :options="genderOptions"
       v-model:selected-value="userData.gender"
-      :invalid="showValidationFeedback && !userData.gender" />
+      :invalid="showValidationFeedback && !userData.gender"
+      :required='true' :messageEmpty="t('signUp.genderField.messageEmpty')"
+      :messageInvalid="t('signUp.genderField.messageInvalid')"/>
+
       <CustomPasswordInput autocomplete="new-password"
+      :label="t('signUp.passwordField.label')"
       v-model:password="userData.password"
       :invalid="showValidationFeedback && (!passwordRepeat || passwordRepeat !== userData.password)"
-      />
-      <p>Hasło musi składać się z co najmniej 8 znaków i zawierać cyfrę lub znak specjalny.</p>
+      :required='true' :messageEmpty="t('signUp.passwordField.messageEmpty')"
+      :messageInvalid="t('signUp.passwordField.messageInvalid')"/>
+
       <div class="password-strength-feedback">
-        <span>{{ passwordStrength }}  {{ passwordScore }}</span>
-        <!-- TODO: HBO MAX -->
         <password-meter :password="userData.password" @score="onScore"/>
+        <p>Hasło musi składać się z co najmniej 8 znaków i
+        zawierać przynajmniej jedną cyfrę lub znak specjalny</p>
       </div>
-      <CustomPasswordInput autocomplete="new-password" label="Repeat password"
+
+      <CustomPasswordInput autocomplete="new-password"
+      :label="t('signUp.repeatPasswordField.label')"
       v-model:password="passwordRepeat"
       :invalid="showValidationFeedback && (!passwordRepeat || passwordRepeat !== userData.password)"
-      />
+      :required='true' :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
+      :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"/>
+
       <CustomButton content="Sign up"/>
     </form>
   </section>
@@ -41,6 +63,7 @@ import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import PasswordMeter from 'vue-simple-password-meter';
+import { useI18n } from 'vue-i18n';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
@@ -63,6 +86,7 @@ export default {
     PasswordMeter,
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
     const router = useRouter();
 
     const userData = ref({
@@ -200,6 +224,7 @@ export default {
     // todo: autoscroll
 
     return {
+      t,
       userData,
       signUpUser,
       passwordRepeat,
@@ -221,45 +246,59 @@ export default {
 
 <style>
 .po-password-strength-bar {
-    border-radius: 5px;
-    transition: all 600ms linear;
+  position: relative;
+  border-radius: 5px;
+  transition: all 600ms linear !important;
+  height: 10px;
+  width: 100%;
+  background-color: #f95e68;
 }
 
 .po-password-strength-bar.risky {
     background-color: #f95e68;
-    width: 10%;
-    transition: all 600ms linear;
+    /* width: 10%; */
+    width: 100%;
 }
 
 .po-password-strength-bar.guessable {
     background-color: #fb964d;
-    width: 32.5%;
-    transition: all 600ms linear;
+    /* width: 32.5%; */
+    width: 77.5%;
 }
 
 .po-password-strength-bar.weak {
     background-color: #fdd244;
+    /* width: 55%; */
     width: 55%;
-    transition: all 600ms linear;
 }
 
 .po-password-strength-bar.safe {
     background-color: #b0dc53;
-    width: 77.5%;
-    transition: all 600ms linear;
+    /* width: 77.5%; */
+    width: 25%;
 }
 
 .po-password-strength-bar.secure {
-    background-color: #35cc62;
-    width: 100%;
-    transition: all 600ms linear;
+    /* background-color: #35cc62; */
+    background-color: transparent;
+    width: 0;
+}
+.po-password-strength-bar::before {
+  transition: all 600ms linear;
+}
+.po-password-strength-bar.secure::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: "\2713";
+    color: #35cc62;
+    font-size: 40px;
 }
 </style>
 
 <style lang='scss' scoped>
 #sign-up-page {
-  background-image: url("~@/assets/blob-background2.svg");
-  background-size: cover;
   justify-content: flex-start;
   gap: 5px;
 
@@ -269,10 +308,13 @@ export default {
 
   .password-strength-feedback {
     display: flex;
+    gap: 10px;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
     width: 100%;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    color: #F95249;
   }
 
   .sing-up-form {
@@ -282,9 +324,8 @@ export default {
     justify-content: center;
     gap: 20px;
     transition: all 0.3s;
-    background-color: rgba(39, 42, 54, 0.6);
     padding: 50px 20px;
-    border-radius: 20px;
+    max-width: 420px;
 
     .hidden-input {
       display: none;
