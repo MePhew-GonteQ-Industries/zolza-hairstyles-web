@@ -144,47 +144,54 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  h1 {
-    font-size: 3rem;
-  }
-
-  .state-message {
-    margin-top: 70px;
-    margin-bottom: 5px;
-    background-color: rgba(24, 25, 27, 0.6);
-    padding: 20px;
-    border-radius: 15px;
+  .login-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    color: #4F8A10;
-    background-color: #DFF2BF;
-  }
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all .3s;
-    padding: 100px 20px;
-    position: relative;
-
-    .forgot-password-link {
-      color: #00A2E8;
-      font-size: 1em;
-      position: absolute;
-      top: 320px;
-      left: 20px;
-
-      &:hover {
-        text-decoration: underline;
-      }
+    h1 {
+      font-size: 3rem;
     }
 
-    .login-btn, .loader {
-      margin-top: 50px;
+    .state-message {
+      margin-top: 70px;
+      margin-bottom: 5px;
+      background-color: rgba(24, 25, 27, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #4F8A10;
+      background-color: #DFF2BF;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s;
+      padding: 100px 20px;
+      position: relative;
+      max-width: 420px;
+
+      .forgot-password-link {
+        color: #00A2E8;
+        font-size: 1em;
+        position: absolute;
+        top: 60%;
+        left: 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .login-btn, .loader {
+        margin-top: 50px;
+      }
     }
   }
 </style>
