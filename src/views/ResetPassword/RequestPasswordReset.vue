@@ -1,7 +1,10 @@
 <template>
   <div class="recovery-wrapper">
     <h1>{{t('resetPassword.requestPasswordReset.heading')}}</h1>
-    <h2>{{t('resetPassword.requestPasswordReset.description')}}</h2>
+    <div class="description">
+      <h2>{{t('resetPassword.requestPasswordReset.description[0]')}}</h2>
+      <h2>{{t('resetPassword.requestPasswordReset.description[1]')}}</h2>
+    </div>
 
     <form @submit.prevent='handleResetPasswordRequest' novalidate>
 
@@ -104,25 +107,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h2 {
-  font-size: 1em;
-  font-weight: normal;
-}
-
-form {
+.recovery-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  transition: all .3s;
-  background-color: rgba(39, 42, 54, .6);
-  padding: 100px 20px;
-  border-radius: 20px;
-  position: relative;
+  gap: 40px;
+  max-width: 600px;
 
-  .hidden-input {
-      display: none;
+      h2 {
+      font-size: 1em;
+      font-weight: normal;
+    }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      font-size: 1em;
+      font-weight: normal;
+    }
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: all .3s;
+    padding: 100px 20px;
+    max-width: 420px;
+    position: relative;
+    box-sizing: content-box;
   }
 }
 </style>

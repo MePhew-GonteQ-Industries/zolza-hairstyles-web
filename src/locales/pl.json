@@ -60,7 +60,10 @@
   "resetPassword": {
     "requestPasswordReset": {
       "heading": "Resetowanie hasła",
-      "description": "Wpisz adres email powiązany z twoim kontem. Wyślemy do Ciebie wiadomość zawierającą link umożliwiający zresetowanie hasła.",
+      "description": [
+        "Wpisz adres email powiązany z twoim kontem.",
+        "Wyślemy do Ciebie wiadomość zawierającą link umożliwiający zmianę hasła."
+      ],
       "emailField": {
         "label": "Email",
         "messageEmpty": "Podaj swój adres email",
