@@ -5,21 +5,28 @@
     :type="passwordHidden ? 'password' : 'text'"
     name="password" :id="inputId" :placeholder="label" :value="password"
     @input="event => $emit('update:password', event.target.value)"
-    :class="{ invalid: invalid }"
+    :class="{ invalid: invalid && validate }"
     @focus="$emit('focus')"
-    @blur="$emit('blur')">
+    @blur="() => {$emit('blur'); validate = true;}">
+
     <label :for="inputId">{{ label }}</label>
+
     <div class="show-password" @click="showPassword">
       <img class="eye-icon" v-if="passwordHidden"
       src="@/assets/eye-crossed-out.svg" alt="show-password-icon">
+
       <img class="eye-icon" v-if="!passwordHidden"
       src="@/assets/eye.svg" alt="hide-password-icon">
+
     </div>
-    <div v-show="invalid" class="invalid-wrapper">
+
+    <div v-show="validate && invalid" class="invalid-wrapper">
       <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
+
       <p class="messageInvalid messageValueEmpty"
-      v-if="invalid && (required && empty)">{{ messageEmpty }}</p>
+      v-if="invalid">{{ messageEmpty }}</p>
+
       <p class="messageInvalid messageValueInvalid"
       v-if="invalid && !(required && empty)">{{ messageInvalid }}</p>
     </div>
@@ -74,11 +81,14 @@ export default {
 
     const empty = computed(() => props.password.length === 0);
 
+    const validate = ref(false);
+
     return {
       empty,
       passwordHidden,
       showPassword,
       inputId,
+      validate,
     };
   },
 };

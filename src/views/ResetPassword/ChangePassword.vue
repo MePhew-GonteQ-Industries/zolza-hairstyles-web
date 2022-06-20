@@ -6,8 +6,7 @@
 
       <CustomPasswordInput autocomplete="new-password"
       v-model:password="newPassword"
-      :invalid="showValidationFeedback && (
-      !newPasswordRepeat || newPasswordRepeat !== newPassword)"
+      :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
       :label="t('resetPassword.changePassword.newPasswordField.label')"
       :required='true'
       :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
@@ -21,8 +20,7 @@
       <CustomPasswordInput autocomplete="new-password"
       :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
       v-model:password="newPasswordRepeat"
-      :invalid="showValidationFeedback && (
-      !newPasswordRepeat || newPasswordRepeat !== newPassword)"
+      :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
       :required='true  '
       :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
       :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
@@ -62,8 +60,6 @@ export default {
 
     const resetToken = ref(null);
 
-    const showValidationFeedback = ref(false);
-
     const passwordInputFocused = false;
 
     onMounted(() => {
@@ -77,7 +73,6 @@ export default {
     });
 
     function resetPassword() {
-      showValidationFeedback.value = false;
       axios.put('auth/reset-password', {
         reset_token: resetToken.value,
         new_password: newPassword.value,
@@ -95,8 +90,6 @@ export default {
     }
 
     function validatePasswordData() {
-      showValidationFeedback.value = true;
-
       if (!newPassword.value) {
         return false;
       }
@@ -137,7 +130,6 @@ export default {
       newPasswordScore,
       newPasswordStrength,
       onScore,
-      showValidationFeedback,
       passwordInputFocused,
     };
   },

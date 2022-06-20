@@ -3,16 +3,23 @@
     <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete"
     :placeholder="label" :value="value"
     @input="event => $emit('update:value', event.target.value)"
-    :class="{ invalid: invalid }" />
+    :class="{ invalid: invalid && validate }"
+    @blur="validate = true"/>
+
     <label :for="inputId">{{ label }}</label>
+
     <img :src="iconSrc" alt="">
-    <div v-show="invalid" class="invalid-wrapper">
+
+    <div v-show="validate && invalid" class="invalid-wrapper">
       <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
+
       <p class="messageInvalid messageValueEmpty"
-      v-if="invalid && (required && empty)">{{ messageEmpty }}</p>
+      v-if="invalid">{{ messageEmpty }}</p>
+
       <p class="messageInvalid messageValueInvalid"
       v-if="invalid && !(required && empty)">{{ messageInvalid }}</p>
+
     </div>
   </div>
 </template>
@@ -70,9 +77,12 @@ export default {
 
     const empty = computed(() => props.value.length === 0);
 
+    const validate = ref(false);
+
     return {
       inputId,
       empty,
+      validate,
     };
   },
 };

@@ -16,13 +16,13 @@
       <form class="login-form" @submit.prevent="handleSubmit" novalidate>
         <CustomInput :label="t('logIn.emailField.label')" :iconSrc='emailIcon' inputType='email'
         autocomplete="email" v-model:value="userData.email"
-        :invalid="showValidationFeedback && emailInvalid"
+        :invalid="emailInvalid"
         :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
         :messageInvalid="t('logIn.emailField.messageInvalid')"/>
 
         <CustomPasswordInput class='current-password' autocomplete="current-password"
         v-model:password="userData.password"
-        :invalid="showValidationFeedback && !userData.password"
+        :invalid="!userData.password"
         :label="t('logIn.currentPasswordField.label')"
         :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
         :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
@@ -80,13 +80,9 @@ export default {
 
     const message = ref('');
 
-    const showValidationFeedback = ref(false);
-
     const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
     function validateData() {
-      showValidationFeedback.value = true;
-
       if (!validateEmail(userData.value.email)) {
         return false;
       }
@@ -127,7 +123,6 @@ export default {
       loginUser,
       message,
       emailIcon,
-      showValidationFeedback,
       validateData,
       handleSubmit,
       emailInvalid,

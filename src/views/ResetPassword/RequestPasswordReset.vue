@@ -11,7 +11,7 @@
     <CustomInput :label="t('resetPassword.requestPasswordReset.emailField.label')"
     :iconSrc='emailIcon' inputType='email'
     autocomplete="email" v-model:value="userEmail"
-    :invalid="showValidationFeedback && emailInvalid"
+    :invalid="emailInvalid"
     :required='true'
     :messageEmpty="t('resetPassword.requestPasswordReset.emailField.messageEmpty')"
     :messageInvalid="t('resetPassword.requestPasswordReset.emailField.messageInvalid')"/>
@@ -41,14 +41,11 @@ export default {
   setup() {
     const { t } = useI18n();
 
-    const showValidationFeedback = ref(false);
     const userEmail = ref('');
 
     const emailInvalid = computed(() => !validateEmail(userEmail.value));
 
     function validateEmailData() {
-      showValidationFeedback.value = true;
-
       if (!userEmail.value) {
         return false;
       }
@@ -96,7 +93,6 @@ export default {
 
     return {
       t,
-      showValidationFeedback,
       userEmail,
       emailIcon,
       handleResetPasswordRequest,

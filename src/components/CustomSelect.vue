@@ -2,34 +2,43 @@
   <div class="select-wrapper">
     <div class="select" tabindex="0"
       :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled,
-      invalid: invalid}"
+      invalid: invalid && validate}"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down.prevent="selectNextOption"
       @keydown.up.prevent="selectPreviousOption"
       @keydown.tab="collapseDropdown"
-      ref="select">
+      ref="select"
+      @blur="validate = true">
+
       <span class="header"
       :class="{ expanded: expanded, 'value-selected': selectedItem !== null}">
       {{ header }}</span>
+
       <span class="selected-value">
       {{ title }}</span>
+
       <img src="@/assets/arrow-down.svg" alt="dropdown-arrow"
         class="dropdown-arrow"
-        :class="{ flipped: !expanded }">
+        :class="{ flipped: !expanded }"/>
+
       <img class="select-icon" :src="currentIconSrc" alt="select icon"
       @focus.stop
       @mousedown.stop
       @mouseenter="toggleSelectHover"
       @mouseleave="toggleSelectHover" tabindex="-1">
+
     </div>
-    <div v-show="invalid" class="invalid-wrapper">
+    <div v-show="invalid && validate" class="invalid-wrapper">
       <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
+
       <p class="messageInvalid messageValueEmpty"
-      v-if="invalid && (required && !selectedItem)">{{ messageEmpty }}</p>
+      v-if="invalid">{{ messageEmpty }}</p>
+
       <p class="messageInvalid messageValueInvalid"
       v-if="invalid && !(required && !selectedItem)">{{ messageInvalid }}</p>
+
     </div>
     <div class="dropdown" :class="{ show: expanded }">
       <ol>
@@ -37,8 +46,10 @@
         @click="changeValue(index); collapseDropdown();"
         @keydown.down="selectNextOption"
         @keydown.up="selectPreviousOption">
+
           <span :class="{ selected: index === selectedItem }">
           {{ option.title }}</span>
+
           <img :src="option.iconSrc" :alt="option.iconAlt">
         </li>
       </ol>
@@ -93,6 +104,8 @@ export default {
     const currentIconSrc = ref(props.iconSrc);
 
     const select = ref(null);
+
+    const validate = ref(false);
 
     function changeCurrentItem() {
       selectedValue.value = props.options[selectedItem.value].value;
@@ -176,6 +189,7 @@ export default {
       toggleSelectHover,
       selectHoverEnabled,
       select,
+      validate,
     };
   },
 };

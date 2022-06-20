@@ -10,17 +10,17 @@
         :iconSrc='contactIcon' autocomplete="given-name"
         :required='true' :messageEmpty="t('signUp.nameField.messageEmpty')"
         :messageInvalid="t('signUp.nameField.messageInvalid')"
-        v-model:value="userData.name" :invalid="showValidationFeedback && !userData.name"/>
+        v-model:value="userData.name" :invalid="!userData.name"/>
 
         <CustomInput :label="t('signUp.surnameField.label')" :iconSrc='contactIcon'
         autocomplete="family-name"
-        v-model:value="userData.surname" :invalid="showValidationFeedback && !userData.surname"
+        v-model:value="userData.surname" :invalid="!userData.surname"
         :required='true' :messageEmpty="t('signUp.surnameField.messageEmpty')"
         :messageInvalid="t('signUp.surnameField.messageInvalid')"/>
 
         <CustomInput :label="t('signUp.emailField.label')" :iconSrc='emailIcon'
         autocomplete="email" inputType='email'
-        v-model:value="userData.email" :invalid="showValidationFeedback && emailInvalid"
+        v-model:value="userData.email" :invalid="emailInvalid"
         :required='true' :messageEmpty="t('signUp.emailField.messageEmpty')"
         :messageInvalid="t('signUp.emailField.messageInvalid')"/>
 
@@ -29,15 +29,14 @@
         :iconSrc="selectGenderIcon"
         :options="genderOptions"
         v-model:selected-value="userData.gender"
-        :invalid="showValidationFeedback && !userData.gender"
+        :invalid="!userData.gender"
         :required='true' :messageEmpty="t('signUp.genderField.messageEmpty')"
         :messageInvalid="t('signUp.genderField.messageInvalid')"/>
 
         <CustomPasswordInput autocomplete="new-password"
         :label="t('signUp.passwordField.label')"
         v-model:password="userData.password"
-        :invalid="showValidationFeedback &&
-        (!passwordRepeat || passwordRepeat !== userData.password)"
+        :invalid="!passwordRepeat || passwordRepeat !== userData.password"
         :required='true' :messageEmpty="t('signUp.passwordField.messageEmpty')"
         :messageInvalid="t('signUp.passwordField.messageInvalid')"
         @focus='passwordInputFocused = true'
@@ -49,8 +48,7 @@
         <CustomPasswordInput autocomplete="new-password"
         :label="t('signUp.repeatPasswordField.label')"
         v-model:password="passwordRepeat"
-        :invalid="showValidationFeedback && (!passwordRepeat
-        || passwordRepeat !== userData.password)"
+        :invalid="!passwordRepeat || passwordRepeat !== userData.password"
         :required='true' :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
         :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"/>
 
@@ -108,13 +106,9 @@ export default {
       passwordScore.value = payload.score;
     }
 
-    const showValidationFeedback = ref(false);
-
     const passwordInputFocused = ref(false);
 
     function validateData() {
-      showValidationFeedback.value = true;
-
       if (!userData.value.name) {
         return false;
       }
@@ -234,7 +228,6 @@ export default {
       selectGenderIcon,
       emailIcon,
       contactIcon,
-      showValidationFeedback,
       handleSubmit,
       validateEmail,
       onScore,
