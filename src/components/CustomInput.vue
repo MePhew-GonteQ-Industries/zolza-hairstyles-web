@@ -84,7 +84,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 45px;
 
   .invalid-wrapper {
     position: absolute;

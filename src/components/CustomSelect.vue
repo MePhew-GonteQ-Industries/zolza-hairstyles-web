@@ -185,7 +185,7 @@ export default {
 .select-wrapper {
   color: #84868f;
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 45px;
 
   .invalid-wrapper {
     position: absolute;
@@ -223,6 +223,11 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+  &.invalid {
+    border-color: #853635;
+    box-shadow: 0 0 0px 3px #382328;
+  }
 
   &.hover-enabled:hover:not(.expanded) {
     border-color: #2167a0;
