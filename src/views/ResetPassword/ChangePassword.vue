@@ -1,50 +1,52 @@
 <template v-if='resetToken'>
-  <h1>{{t('resetPassword.changePassword.heading')}}</h1>
-  <form @submit.prevent='handlePasswordReset' novalidate>
-    <input class="hidden-input" type="text" autocomplete="username">
+  <div class="wrapper">
+    <h1>{{t('resetPassword.changePassword.heading')}}</h1>
+    <form @submit.prevent='handlePasswordReset' novalidate>
+      <input class="hidden-input" type="text" autocomplete="username">
 
-    <CustomPasswordInput autocomplete="new-password"
-    v-model:password="newPassword"
-    :invalid="showValidationFeedback && (
-    !newPasswordRepeat || newPasswordRepeat !== newPassword)"
-    :label="t('resetPassword.changePassword.newPasswordField.label')"
-    :required='true'
-    :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
-    :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"/>
+      <CustomPasswordInput autocomplete="new-password"
+      v-model:password="newPassword"
+      :invalid="showValidationFeedback && (
+      !newPasswordRepeat || newPasswordRepeat !== newPassword)"
+      :label="t('resetPassword.changePassword.newPasswordField.label')"
+      :required='true'
+      :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
+      :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"
+      @focus='passwordInputFocused = true'
+      @blur='passwordInputFocused = false'/>
 
-    <div class="password-strength-feedback" v-if="newPassword">
-      <span>{{ newPasswordStrength }}  {{ newPasswordScore }}</span>
-      <password-meter :password="newPassword" @score="onScore"/>
-    </div>
+      <PasswordStrengthFeedback :password="newPassword" :show="passwordInputFocused"
+      @score="onScore"/>
 
-    <CustomPasswordInput autocomplete="new-password"
-    :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
-    v-model:password="newPasswordRepeat"
-    :invalid="showValidationFeedback && (
-    !newPasswordRepeat || newPasswordRepeat !== newPassword)"
-    :required='true  '
-    :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
-    :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
+      <CustomPasswordInput autocomplete="new-password"
+      :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
+      v-model:password="newPasswordRepeat"
+      :invalid="showValidationFeedback && (
+      !newPasswordRepeat || newPasswordRepeat !== newPassword)"
+      :required='true  '
+      :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
+      :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
 
-    <CustomButton class="reset-password-btn"
-    :content="t('resetPassword.changePassword.changePasswordBtn')"/>
-  </form>
+      <CustomButton class="reset-password-btn"
+      :content="t('resetPassword.changePassword.changePasswordBtn')"/>
+    </form>
+  </div>
 </template>
 
 <script>
-import PasswordMeter from 'vue-simple-password-meter';
 import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
+import PasswordStrengthFeedback from '@/components/PasswordStrengthFeedback.vue';
 
 export default {
   name: 'ChangePassword',
   components: {
     CustomButton,
-    PasswordMeter,
+    PasswordStrengthFeedback,
     CustomPasswordInput,
   },
   setup() {
@@ -61,6 +63,8 @@ export default {
     const resetToken = ref(null);
 
     const showValidationFeedback = ref(false);
+
+    const passwordInputFocused = false;
 
     onMounted(() => {
       const { query } = route;
@@ -134,26 +138,38 @@ export default {
       newPasswordStrength,
       onScore,
       showValidationFeedback,
+      passwordInputFocused,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-form {
+.wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  transition: all .3s;
-  background-color: rgba(39, 42, 54, .6);
-  padding: 100px 20px;
-  border-radius: 20px;
-  position: relative;
+  gap: 40px;
 
-  .hidden-input {
-      display: none;
+  h1 {
+    font-size: 3rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: all .3s;
+    padding: 100px 20px;
+    position: relative;
+    max-width: 420px;
+    box-sizing: content-box;
+
+    .hidden-input {
+        display: none;
+    }
   }
 }
 </style>
