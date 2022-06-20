@@ -5,7 +5,9 @@
     :type="passwordHidden ? 'password' : 'text'"
     name="password" :id="inputId" :placeholder="label" :value="password"
     @input="event => $emit('update:password', event.target.value)"
-    :class="{ invalid: invalid }">
+    :class="{ invalid: invalid }"
+    @focus="$emit('focus')"
+    @blur="$emit('blur')">
     <label :for="inputId">{{ label }}</label>
     <div class="show-password" @click="showPassword">
       <img class="eye-icon" v-if="passwordHidden"
@@ -88,7 +90,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 45px;
 
   label {
     color: #84868f;
