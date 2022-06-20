@@ -1,41 +1,42 @@
 <template>
   <section class="app-page" id="login-page">
-    <h1>{{ t('logIn.heading') }}</h1>
+    <div class="login-wrapper">
+      <h1>{{ t('logIn.heading') }}</h1>
 
-    <div class="state-message" v-if="emailConfirmed">
-        <h4>Email address has been confirmed successfully</h4>
-        <h4>You can now login to your account</h4>
+      <div class="state-message" v-if="emailConfirmed">
+          <h4>Email address has been confirmed successfully</h4>
+          <h4>You can now login to your account</h4>
+      </div>
+
+      <div class="state-message" v-if="accountCreated">
+          <h4>Account created successfully</h4>
+          <h4>You can now login</h4>
+      </div>
+
+      <form class="login-form" @submit.prevent="handleSubmit" novalidate>
+        <CustomInput :label="t('logIn.emailField.label')" :iconSrc='emailIcon' inputType='email'
+        autocomplete="email" v-model:value="userData.email"
+        :invalid="showValidationFeedback && emailInvalid"
+        :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
+        :messageInvalid="t('logIn.emailField.messageInvalid')"/>
+
+        <CustomPasswordInput class='current-password' autocomplete="current-password"
+        v-model:password="userData.password"
+        :invalid="showValidationFeedback && !userData.password"
+        :label="t('logIn.currentPasswordField.label')"
+        :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
+        :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
+
+        <router-link class="forgot-password-link" to="/password-reset"
+        tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+
+        <CustomButton class="login-btn" content="Log In" v-if='!loading'/>
+
+        <CustomLoader class='loader' v-else />
+      </form>
+
+      <p>{{message}}</p>
     </div>
-
-    <div class="state-message" v-if="accountCreated">
-        <h4>Account created successfully</h4>
-        <h4>You can now login</h4>
-    </div>
-
-    <form class="login-form" @submit.prevent="handleSubmit" novalidate>
-      <CustomInput :label="t('logIn.emailField.label')" :iconSrc='emailIcon' inputType='email'
-      autocomplete="email" v-model:value="userData.email"
-      :invalid="showValidationFeedback && emailInvalid"
-      :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
-      :messageInvalid="t('logIn.emailField.messageInvalid')"/>
-
-      <CustomPasswordInput class='current-password' autocomplete="current-password"
-      v-model:password="userData.password"
-      :invalid="showValidationFeedback && !userData.password"
-      :label="t('logIn.currentPasswordField.label')"
-      :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
-      :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
-
-      <router-link class="forgot-password-link" to="/password-reset"
-      tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
-
-      <CustomButton class="login-btn" content="Log In" v-if='!loading'/>
-
-      <CustomLoader class='loader' v-else />
-    </form>
-
-    <p>{{message}}</p>
-
   </section>
 </template>
 
@@ -143,8 +144,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  #login-page {
-    justify-content: flex-start;
+  h1 {
+    font-size: 3rem;
   }
 
   .state-message {
@@ -166,7 +167,6 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
     transition: all .3s;
     padding: 100px 20px;
     position: relative;
