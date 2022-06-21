@@ -7,7 +7,7 @@
       <h3>
         Umawiaj się na wizyty za pomocą dedykowanej aplikacji na twoim telefonie
       </h3>
-      <video src="@/assets/appDemo.mp4" autoplay mute loop></video>
+      <video src="@/assets/appDemo.mp4" autoplay mute loop webkit-playsinline playsinline></video>
       <div class="stores-container">
         <img src="@/assets/appstore-pl-light.svg" alt="pobierz w appstore">
         <img src="@/assets/appstore-pl-light.svg" alt="pobierz w appstore">
