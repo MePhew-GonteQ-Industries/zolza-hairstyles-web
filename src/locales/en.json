@@ -48,6 +48,6 @@
   },
   "pageNotFound": {
     "notFound": "Page not found",
-    "homeRedirection": "Go Home"
+    "button": "Go Home"
   }
 }
