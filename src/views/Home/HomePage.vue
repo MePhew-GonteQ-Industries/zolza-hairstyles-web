@@ -1,7 +1,14 @@
 <template>
   <section class="app-page" id="home-page">
     <div class="home-page-content">
-      Witamy w Zołza Hairstyles - umów się na wizytę już niebawem! (mam nadzieję)
+      <h1>Witamy w Zołza Hairstyles - umów się na wizytę już niebawem! (mam nadzieję)</h1>
+      <h3>Tutaj kilka moich prac</h3>
+      <div class="images">
+        <img src="@/assets/homePagePhotos/firstPhoto.jpg" alt="moje prace">
+        <img src="@/assets/homePagePhotos/secondPhoto.jpg" alt="moje prace">
+        <img src="@/assets/homePagePhotos/thirdPhoto.jpg" alt="moje prace">
+        <img src="@/assets/homePagePhotos/fourthPhoto.jpg" alt="moje prace">
+      </div>
     </div>
     <div class="app-container">
       <h3>
@@ -35,13 +42,37 @@ export default {
     flex-flow: column;
     justify-content: space-between;
 
-    a {
-      color: $primary-text-color;
-      font-size: 4rem;
-    }
+    .home-page-content{
+      a {
+        color: $primary-text-color;
+        font-size: 4rem;
+      }
 
-    .home-page-content {
+      margin-top: 5vh;
+      display: flex;
+      text-align: center;
+      flex-flow: column;
       padding: 0 5vw;
+
+      h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 40px;
+      }
+
+      h3 {
+        margin-top: 5vh;
+        font-family: 'Poppins', sans-serif;
+        font-size: 28px;
+      }
+
+      .images {
+        img {
+        margin: 0 .5vw;
+        height: 675px;
+        width: 540px;
+        border: 2px solid black;
+        }
+      }
     }
 
     .app-container {
@@ -57,7 +88,7 @@ export default {
       }
 
       video {
-      height: 50vh;
+        height: 50vh;
       }
 
       .stores-container {
