@@ -179,6 +179,7 @@ export default {
     width: 50vw;
     min-width: 250px;
     max-width: 420px;
+    font-weight: 600;
 
     &.invalid {
       border-color: $border-color-invalid;

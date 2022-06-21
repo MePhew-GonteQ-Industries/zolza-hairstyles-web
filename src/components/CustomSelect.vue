@@ -282,7 +282,6 @@ export default {
 
   .selected-value {
     padding-top: 20px;
-    color: $accent-text-color;
     position: absolute;
     left: 30px;
     transition: all 0.5s;
@@ -290,6 +289,7 @@ export default {
     transform-origin: 0 0;
     color: $primary-text-color;
     font-size: .8em;
+    font-weight: 600;
   }
 
     .dropdown-arrow {

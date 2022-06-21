@@ -145,6 +145,7 @@ export default {
     border-radius: 15px;
     box-shadow: none;
     transition: all .3s;
+    font-weight: 600;
 
     &.invalid {
       border-color: $border-color-invalid;
