@@ -14,7 +14,12 @@ import CarouselItem from './CarouselItem.vue';
 
 export default {
   name: 'CarouselComponent',
-  props: ['photos'],
+  props: {
+    photos: {
+      type: Array,
+      required: true,
+    },
+  },
   components: { CarouselItem },
 };
 </script>
