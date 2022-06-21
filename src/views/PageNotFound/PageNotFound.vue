@@ -49,4 +49,15 @@ export default {
       cursor: pointer;
     }
   }
-</style>>
+
+  @media only screen and(max-width: 1024px){
+    #page-not-found{
+      img{
+        height: 15vh;
+      }
+      h3{
+        font-size: 2em;
+      }
+    }
+  }
+</style>
