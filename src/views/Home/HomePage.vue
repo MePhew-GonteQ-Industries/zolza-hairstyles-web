@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss" scoped>
   a {
-    color: white;
+    color: $primary-text-color;
     font-size: 4rem;
   }
 

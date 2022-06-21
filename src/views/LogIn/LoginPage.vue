@@ -173,7 +173,7 @@ export default {
       max-width: 420px;
 
       .forgot-password-link {
-        color: #00A2E8;
+        color: $text-color-element-active;
         font-size: 1em;
         position: absolute;
         top: 60%;
