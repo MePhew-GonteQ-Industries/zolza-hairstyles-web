@@ -252,7 +252,7 @@ export default {
   &.expanded {
     border-color: $border-color-active-primary;
     background-color: $element-bg-color-active;
-    box-shadow: 0 0 0 3px #274b6d;
+    box-shadow: 0 0 0 3px $element-box-shadow-active;
     border-radius: 15px 15px 0 0;
     border-width: 2px;
   }
@@ -335,7 +335,7 @@ export default {
         animation: expand .6s forwards;
         border-color: $border-color-active-primary;
         background-color: $element-bg-color-active;
-        box-shadow: 0 0 0 3px #274b6d;
+        box-shadow: 0 0 0 3px $element-box-shadow-active;
         border-width: 2px;
       }
 

@@ -215,7 +215,7 @@ export default {
     &:focus {
       border-color: $border-color-active-primary;
       background-color: $element-bg-color-active;
-      box-shadow: 0 0 0px 3px #274b6d;
+      box-shadow: 0 0 0px 3px $element-box-shadow-active;
       outline: none;
     }
 
