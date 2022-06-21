@@ -25,10 +25,10 @@
       src="@/assets/exclamation-mark.svg" alt="">
 
       <p class="messageInvalid messageValueEmpty"
-      v-if="invalid">{{ messageEmpty }}</p>
+      v-if="required && empty">{{ messageEmpty }}</p>
 
       <p class="messageInvalid messageValueInvalid"
-      v-if="invalid && !(required && empty)">{{ messageInvalid }}</p>
+      v-if="!(required && empty)">{{ messageInvalid }}</p>
     </div>
   </div>
 </template>
