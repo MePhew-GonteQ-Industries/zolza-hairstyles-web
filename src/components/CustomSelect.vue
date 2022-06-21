@@ -2,7 +2,7 @@
   <div class="select-wrapper">
     <div class="select" tabindex="0"
       :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled,
-      invalid: invalid && validate}"
+      invalid: invalid && (validate || forceValidate) }"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down.prevent="selectNextOption"
@@ -29,15 +29,12 @@
       @mouseleave="toggleSelectHover" tabindex="-1">
 
     </div>
-    <div v-show="invalid && validate" class="invalid-wrapper">
+    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
       <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
 
       <p class="messageInvalid messageValueEmpty"
-      v-if="required && empty">{{ messageEmpty }}</p>
-
-      <p class="messageInvalid messageValueInvalid"
-      v-if="!(required && empty)">{{ messageInvalid }}</p>
+      v-if="required && selectedItem === null">{{ messageEmpty }}</p>
 
     </div>
     <div class="dropdown" :class="{ show: expanded }">
@@ -94,6 +91,10 @@ export default {
     required: {
       type: Boolean,
       required: true,
+    },
+    forceValidate: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, ctx) {

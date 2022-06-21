@@ -10,33 +10,37 @@
         :iconSrc='contactIcon' autocomplete="given-name"
         :required='true' :messageEmpty="t('signUp.nameField.messageEmpty')"
         :messageInvalid="t('signUp.nameField.messageInvalid')"
-        v-model:value="userData.name" :invalid="!userData.name"/>
+        v-model:value="userData.name"
+        :forceValidate="forceValidate" :invalid="!userData.name"/>
 
         <CustomInput :label="t('signUp.surnameField.label')" :iconSrc='contactIcon'
         autocomplete="family-name"
-        v-model:value="userData.surname" :invalid="!userData.surname"
+        v-model:value="userData.surname"
         :required='true' :messageEmpty="t('signUp.surnameField.messageEmpty')"
-        :messageInvalid="t('signUp.surnameField.messageInvalid')"/>
+        :messageInvalid="t('signUp.surnameField.messageInvalid')"
+        :invalid="!userData.surname" :forceValidate="forceValidate"/>
 
         <CustomInput :label="t('signUp.emailField.label')" :iconSrc='emailIcon'
         autocomplete="email" inputType='email'
-        v-model:value="userData.email" :invalid="emailInvalid"
+        v-model:value="userData.email"
         :required='true' :messageEmpty="t('signUp.emailField.messageEmpty')"
-        :messageInvalid="t('signUp.emailField.messageInvalid')"/>
+        :messageInvalid="t('signUp.emailField.messageInvalid')"
+        :invalid="emailInvalid" :forceValidate="forceValidate"/>
 
         <CustomSelect class="selector"
         :header="t('signUp.genderField.header')"
         :iconSrc="selectGenderIcon"
         :options="genderOptions"
         v-model:selected-value="userData.gender"
-        :invalid="!userData.gender"
         :required='true' :messageEmpty="t('signUp.genderField.messageEmpty')"
-        :messageInvalid="t('signUp.genderField.messageInvalid')"/>
+        :messageInvalid="t('signUp.genderField.messageInvalid')"
+        :invalid="!userData.gender" :forceValidate="forceValidate"/>
 
         <CustomPasswordInput autocomplete="new-password"
         :label="t('signUp.passwordField.label')"
         v-model:password="userData.password"
         :invalid="!passwordRepeat || passwordRepeat !== userData.password"
+        :forceValidate="forceValidate"
         :required='true' :messageEmpty="t('signUp.passwordField.messageEmpty')"
         :messageInvalid="t('signUp.passwordField.messageInvalid')"
         @focus='passwordInputFocused = true'
@@ -49,6 +53,7 @@
         :label="t('signUp.repeatPasswordField.label')"
         v-model:password="passwordRepeat"
         :invalid="!passwordRepeat || passwordRepeat !== userData.password"
+        :forceValidate="forceValidate"
         :required='true' :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
         :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"/>
 
@@ -108,7 +113,11 @@ export default {
 
     const passwordInputFocused = ref(false);
 
+    const forceValidate = ref(false);
+
     function validateData() {
+      forceValidate.value = true;
+
       if (!userData.value.name) {
         return false;
       }
@@ -234,6 +243,7 @@ export default {
       passwordScore,
       emailInvalid,
       passwordInputFocused,
+      forceValidate,
     };
   },
 };

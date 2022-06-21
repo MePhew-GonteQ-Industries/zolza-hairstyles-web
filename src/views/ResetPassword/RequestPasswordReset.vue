@@ -11,8 +11,7 @@
     <CustomInput :label="t('resetPassword.requestPasswordReset.emailField.label')"
     :iconSrc='emailIcon' inputType='email'
     autocomplete="email" v-model:value="userEmail"
-    :invalid="emailInvalid"
-    :required='true'
+    :invalid="emailInvalid" :forceValidate="forceValidate" :required='true'
     :messageEmpty="t('resetPassword.requestPasswordReset.emailField.messageEmpty')"
     :messageInvalid="t('resetPassword.requestPasswordReset.emailField.messageInvalid')"/>
 
@@ -45,7 +44,11 @@ export default {
 
     const emailInvalid = computed(() => !validateEmail(userEmail.value));
 
+    const forceValidate = ref(false);
+
     function validateEmailData() {
+      forceValidate.value = true;
+
       if (!userEmail.value) {
         return false;
       }
@@ -97,6 +100,7 @@ export default {
       emailIcon,
       handleResetPasswordRequest,
       emailInvalid,
+      forceValidate,
     };
   },
 };

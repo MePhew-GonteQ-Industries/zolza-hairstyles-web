@@ -5,7 +5,7 @@
     :type="passwordHidden ? 'password' : 'text'"
     name="password" :id="inputId" :placeholder="label" :value="password"
     @input="event => $emit('update:password', event.target.value)"
-    :class="{ invalid: invalid && validate }"
+    :class="{ invalid: invalid && (validate || forceValidate) }"
     @focus="$emit('focus')"
     @blur="() => {$emit('blur'); validate = true;}">
 
@@ -20,7 +20,7 @@
 
     </div>
 
-    <div v-show="validate && invalid" class="invalid-wrapper">
+    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
       <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
 
@@ -64,6 +64,10 @@ export default {
     required: {
       type: Boolean,
       required: true,
+    },
+    forceValidate: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {

@@ -16,12 +16,14 @@
       <form class="login-form" @submit.prevent="handleSubmit" novalidate>
         <CustomInput :label="t('logIn.emailField.label')" :iconSrc='emailIcon' inputType='email'
         autocomplete="email" v-model:value="userData.email"
+        :forceValidate="forceValidate"
         :invalid="emailInvalid"
         :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
         :messageInvalid="t('logIn.emailField.messageInvalid')"/>
 
         <CustomPasswordInput class='current-password' autocomplete="current-password"
         v-model:password="userData.password"
+        :forceValidate="forceValidate"
         :invalid="!userData.password"
         :label="t('logIn.currentPasswordField.label')"
         :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
@@ -50,9 +52,16 @@ import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
 import emailIcon from '@/assets/email.svg';
 import validateEmail from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'LoginPage',
+  components: {
+    CustomButton,
+    CustomInput,
+    CustomPasswordInput,
+    CustomLoader,
+  },
   props: {
     emailConfirmed: {
       type: Boolean,
@@ -68,6 +77,8 @@ export default {
     },
   },
   setup(props) {
+    const router = useRouter();
+
     const { t } = useI18n();
     const store = useStore();
 
@@ -82,7 +93,11 @@ export default {
 
     const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
+    const forceValidate = ref(false);
+
     function validateData() {
+      forceValidate.value = true;
+
       if (!validateEmail(userData.value.email)) {
         return false;
       }
@@ -98,7 +113,7 @@ export default {
       loading.value = true;
       store.dispatch('login', userData.value).then(() => {
         loading.value = false;
-        // router.push();
+        router.push('/');
       }).catch((err) => {
         message.value = err;
         loading.value = false;
@@ -127,13 +142,8 @@ export default {
       handleSubmit,
       emailInvalid,
       loading,
+      forceValidate,
     };
-  },
-  components: {
-    CustomButton,
-    CustomInput,
-    CustomPasswordInput,
-    CustomLoader,
   },
 };
 </script>

@@ -7,6 +7,7 @@
       <CustomPasswordInput autocomplete="new-password"
       v-model:password="newPassword"
       :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
+      :forceValidate="forceValidate"
       :label="t('resetPassword.changePassword.newPasswordField.label')"
       :required='true'
       :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
@@ -21,7 +22,7 @@
       :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
       v-model:password="newPasswordRepeat"
       :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-      :required='true  '
+      :forceValidate="forceValidate" :required='true'
       :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
       :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
 
@@ -89,7 +90,11 @@ export default {
         });
     }
 
+    const forceValidate = ref(false);
+
     function validatePasswordData() {
+      forceValidate.value = true;
+
       if (!newPassword.value) {
         return false;
       }
@@ -131,6 +136,7 @@ export default {
       newPasswordStrength,
       onScore,
       passwordInputFocused,
+      forceValidate,
     };
   },
 };

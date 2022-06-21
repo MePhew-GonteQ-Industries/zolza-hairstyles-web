@@ -3,14 +3,14 @@
     <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete"
     :placeholder="label" :value="value"
     @input="event => $emit('update:value', event.target.value)"
-    :class="{ invalid: invalid && validate }"
+    :class="{ invalid: invalid && (validate || forceValidate)}"
     @blur="validate = true"/>
 
     <label :for="inputId">{{ label }}</label>
 
     <img :src="iconSrc" alt="">
 
-    <div v-show="validate && invalid" class="invalid-wrapper">
+    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
       <img class="invalid-icon"
       src="@/assets/exclamation-mark.svg" alt="">
 
@@ -61,6 +61,10 @@ export default {
       default: 'text',
     },
     invalid: {
+      type: Boolean,
+      default: false,
+    },
+    forceValidate: {
       type: Boolean,
       default: false,
     },
