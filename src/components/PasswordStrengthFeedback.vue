@@ -98,7 +98,7 @@ export default {
   align-items: center;
   width: 100%;
   border-radius: 5px;
-  color: #F95249;
+  color: $color-danger;
   height: 0;
   overflow: hidden;
   transition: all 500ms;
