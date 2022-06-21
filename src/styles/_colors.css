@@ -1,10 +1,33 @@
 #app-wrapper[data-theme='light'] {
     /* general */
     --primary-fg-color: #231F20;
-    --primary-bg-color: #F2F2F2;
+    --primary-bg-color: #FFF;
     --accent-bg-color: #e5e6e8;
     --page-fg-color: #506AD4;
     --link-active-color: #BD4BBF;
+
+    --primary-text-color: black;
+    --accent-text-color: #84868f;
+    --text-color-element-active: #00a2e8;
+
+    --element-bg-color: #F2F6FC;
+    --element-secondary-accent-bg-color: #1A92F0;
+    --element-secondary-accent-text-color: white;
+    --element-bg-color-active: white;
+    --element-bg-color-hover-secondary: #d1cccc;
+    --element-bg-color-active-secondary: #b4b4b4;
+
+    --element-box-shadow-active: #ECF5FD;
+    --element-box-shadow-active-secondary: #9c9c9c;
+
+    --border-color-invalid: #f3716f;
+    --box-shadow-color-invalid: #eebdc9;
+
+    --border-color-hover-primary: #5BB3FC;
+    --border-color-active-primary: #39a3fa;
+    --border-color-active-secondary: white;
+    --color-danger: #F95249;
+    --color-invalid: #853635;
 
     /*reactive*/
     --hover-color: #fb69ff;
@@ -46,6 +69,29 @@
     --accent-bg-color: #232327; /* #121212 */
     --page-fg-color: orange; /* #fff28c */
     --link-active-color: pink; /* #3EB595 */
+
+    --primary-text-color: white;
+    --accent-text-color: #84868f;
+    --text-color-element-active: #00a2e8;
+
+    --element-bg-color: #323644;
+    --element-secondary-accent-bg-color: #1A92F0;
+    --element-secondary-accent-text-color: white;
+    --element-bg-color-active: #3d4049;
+    --element-bg-color-hover-secondary: #2b2d33;
+    --element-bg-color-active-secondary: #55575e;
+
+    --element-box-shadow-active: #274b6d;
+    --element-box-shadow-active-secondary: #9c9c9c;
+
+    --border-color-invalid: #853635;
+    --box-shadow-color-invalid: #382328;
+
+    --border-color-hover-primary: #2167a0;
+    --border-color-active-primary: #3e83ba;
+    --border-color-active-secondary: white;
+    --color-danger: #F95249;
+    --color-invalid: #853635;
 
     /*reactive*/
     --hover-color: pink; /* #2C8C99 */

@@ -7,6 +7,30 @@ $accent-bg-color: var(--accent-bg-color);
 $page-fg-color: var(--page-fg-color);
 $link-active-color: var(--link-active-color);
 
+$primary-text-color: var(--primary-text-color);
+$accent-text-color: var(--accent-text-color);
+$text-color-element-active: var(--text-color-element-active);
+
+$element-bg-color: var(--element-bg-color);
+$element-secondary-accent-bg-color: var(--element-secondary-accent-bg-color);
+$element-secondary-accent-text-color: var(--element-secondary-accent-text-color);
+$element-bg-color-active: var(--element-bg-color-active);
+$element-bg-color-hover-secondary: var(--element-bg-color-hover-secondary);
+$element-bg-color-active-secondary: var(--element-bg-color-active-secondary);
+
+$element-box-shadow-active: var(--element-box-shadow-active);
+$element-box-shadow-active-secondary: var(--element-box-shadow-active-secondary);
+
+$border-color-invalid: var(--border-color-invalid); 
+$box-shadow-color-invalid: var(--box-shadow-color-invalid); 
+
+$border-color-hover-primary: var(--border-color-hover-primary);
+$border-color-active-primary: var(--border-color-active-primary);
+
+$border-color-active-secondary: var(--border-color-active-secondary);
+
+$color-danger: var(--color-danger);
+
 // reactive
 $hover-color: var(--hover-color);
 
