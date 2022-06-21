@@ -103,7 +103,7 @@ export default {
   margin-bottom: 45px;
 
   label {
-    color: #84868f;
+    color: $accent-text-color;
     position: absolute;
     left: 30px;
     transition: all 0.5s;
@@ -128,7 +128,7 @@ export default {
       }
 
     .messageInvalid {
-      color: #F95249;
+      color: $color-danger;
     }
   }
 
@@ -152,11 +152,11 @@ export default {
     }
 
     &:hover {
-      background-color: #2b2d33;
+      background-color: $element-bg-color-hover-secondary;
     }
 
     &:active {
-      background-color: #55575e;
+      background-color: $element-bg-color-active-secondary;
     }
 
     .eye-icon {
@@ -169,8 +169,8 @@ export default {
   input {
     padding: 20px 90px 0 30px;
     border: 2px solid transparent;
-    background-color: #323644;
-    color: white;
+    background-color: $element-bg-color;
+    color: $primary-text-color;
     height: 65px;
     width: 420px;
     border-radius: 15px;
@@ -181,13 +181,13 @@ export default {
     max-width: 420px;
 
     &.invalid {
-      border-color: #853635;
-      box-shadow: 0 0 0px 3px #382328;
+      border-color: $border-color-invalid;
+      box-shadow: 0 0 0px 3px $box-shadow-color-invalid;
     }
 
     &:-webkit-autofill{
-      -webkit-text-fill-color: white;
-      color: white;
+      -webkit-text-fill-color: $primary-text-color;
+      color: $primary-text-color;
       font-family: 'Open Sans', sans-serif;
     }
 
@@ -203,13 +203,13 @@ export default {
     }
 
     &:hover:not(:focus) {
-      border-color: #2167a0;
+      border-color: $border-color-hover-primary;
       box-shadow: none;
     }
 
     &:focus {
-      border-color: #3e83ba;
-      background-color: #3d4049;
+      border-color: $border-color-active-primary;
+      background-color: $element-bg-color-active;
       box-shadow: 0 0 0px 3px #274b6d;
       outline: none;
     }
@@ -221,7 +221,7 @@ export default {
     &:focus + label,
     &:not(:placeholder-shown) + label,
     &:-webkit-autofill:active + label  {
-      color: #00a2e8;
+      color: $text-color-element-active;
       transform: translateY(-0.6em) scale(0.8);
     }
 

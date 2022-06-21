@@ -197,7 +197,7 @@ export default {
 
 <style lang='scss' scoped>
 .select-wrapper {
-  color: #84868f;
+  color: $accent-text-color;
   position: relative;
   margin-bottom: 45px;
 
@@ -217,7 +217,7 @@ export default {
       }
 
     .messageInvalid {
-      color: #F95249;
+      color: $color-danger;
     }
   }
 
@@ -225,7 +225,7 @@ export default {
     position: relative;
     outline: none;
     border: 2px solid transparent;
-    background-color: #323644;
+    background-color: $element-bg-color;
     height: 65px;
     width: 50vw;
     min-width: 250px;
@@ -239,18 +239,18 @@ export default {
     cursor: pointer;
 
   &.invalid {
-    border-color: #853635;
-    box-shadow: 0 0 0px 3px #382328;
+    border-color: $border-color-invalid;
+    box-shadow: 0 0 0px 3px $box-shadow-color-invalid;
   }
 
   &.hover-enabled:hover:not(.expanded) {
-    border-color: #2167a0;
+    border-color: $border-color-hover-primary;
     box-shadow: none;
   }
 
   &.expanded {
-    border-color: #3e83ba;
-    background-color: #3d4049;
+    border-color: $border-color-active-primary;
+    background-color: $element-bg-color-active;
     box-shadow: 0 0 0 3px #274b6d;
     border-radius: 15px 15px 0 0;
     border-width: 2px;
@@ -264,7 +264,7 @@ export default {
     user-select: none;
 
     &.expanded, &.value-selected {
-      color: #00a2e8;
+      color: $text-color-element-active;
     }
 
     &.value-selected {
@@ -282,13 +282,13 @@ export default {
 
   .selected-value {
     padding-top: 20px;
-    color: #84868f;
+    color: $accent-text-color;
     position: absolute;
     left: 30px;
     transition: all 0.5s;
     backface-visibility: hidden;
     transform-origin: 0 0;
-    color: white;
+    color: $primary-text-color;
     font-size: .8em;
   }
 
@@ -314,7 +314,7 @@ export default {
       border-width: 0;
       border-style: solid;
       border-color: transparent;
-      background-color: #323644;
+      background-color: $element-bg-color;
       box-shadow: none;
       max-height: 0;
       overflow: hidden;
@@ -332,8 +332,8 @@ export default {
 
       &.show {
         animation: expand .6s forwards;
-        border-color: #3e83ba;
-        background-color: #3d4049;
+        border-color: $border-color-active-primary;
+        background-color: $element-bg-color-active;
         box-shadow: 0 0 0 3px #274b6d;
         border-width: 2px;
       }
@@ -354,7 +354,7 @@ export default {
             left: 30px;
 
             &.selected {
-              color: white;
+              color: $primary-text-color;
             }
           }
 
@@ -370,7 +370,7 @@ export default {
           }
 
           &:hover, &:focus {
-            background-color: #323644;
+            background-color: $element-bg-color;
             color: rgb(196, 196, 196);
           }
         }

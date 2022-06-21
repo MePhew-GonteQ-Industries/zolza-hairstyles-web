@@ -112,12 +112,12 @@ export default {
       }
 
     .messageInvalid {
-      color: #F95249;
+      color: $color-danger;
     }
   }
 
   label {
-    color: #84868f;
+    color: $accent-text-color;
     position: absolute;
     left: 30px;
     transition: all 0.5s;
@@ -136,8 +136,8 @@ export default {
   input {
     padding: 20px 90px 0 30px;
     border: 2px solid transparent;
-    background-color: #323644;
-    color: white;
+    background-color: $element-bg-color;
+    color: $primary-text-color;
     height: 65px;
     width: 50vw;
     min-width: 250px;
@@ -147,13 +147,13 @@ export default {
     transition: all .3s;
 
     &.invalid {
-      border-color: #853635;
-      box-shadow: 0 0 0px 3px #382328;
+      border-color: $border-color-invalid;
+      box-shadow: 0 0 0px 3px $box-shadow-color-invalid;
     }
 
    &:-webkit-autofill{
-      -webkit-text-fill-color: white;
-      color: white;
+      -webkit-text-fill-color: $primary-text-color;
+      color: $primary-text-color;
     }
 
     &:-webkit-autofill,
@@ -167,21 +167,21 @@ export default {
     }
 
     &:hover:not(:focus) {
-      border-color: #2167a0;
+      border-color: $border-color-hover-primary;
       box-shadow: none;
     }
 
     &:focus {
-      border-color: #3e83ba;
-      background-color: #3d4049;
-      box-shadow: 0 0 0px 3px #274b6d;
+      border-color: $border-color-active-primary;
+      background-color: $element-bg-color-active;
+      box-shadow: 0 0 0px 3px $element-box-shadow-active;
       outline: none;
     }
 
     &:focus + label,
     &:not(:placeholder-shown) + label,
     &:-webkit-autofill:active + label  {
-      color: #00a2e8;
+      color: $text-color-element-active;
       transform: translateY(-0.6em) scale(0.8);
     }
 
