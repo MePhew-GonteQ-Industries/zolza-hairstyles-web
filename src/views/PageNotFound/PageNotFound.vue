@@ -27,10 +27,11 @@ export default {
     justify-content: space-around;
     img{
       height: 40vh;
+      color: $primary-fg-color;
     }
     h3{
       font-size: 8em;
-      color: white;
+      color: $primary-fg-color;
       font-family: 'Poppins', sans-serif;
     }
     a{
@@ -40,7 +41,7 @@ export default {
       border-radius: 30px;
       border: 2px solid transparent;
       background-color: #1A92F0;
-      color: white;
+      color: $primary-fg-color;
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
