@@ -46,13 +46,13 @@
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
 import emailIcon from '@/assets/email.svg';
 import validateEmail from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
-import { useRouter } from 'vue-router';
 
 export default {
   name: 'LoginPage',
