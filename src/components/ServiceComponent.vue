@@ -82,7 +82,7 @@ export default {
   .right {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .5rem;
   }
 }
 </style>
