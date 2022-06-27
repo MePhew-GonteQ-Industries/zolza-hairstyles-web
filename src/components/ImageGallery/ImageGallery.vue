@@ -1,24 +1,62 @@
 <template>
     <div class="slider">
-      <div class="photos">
-        <template v-for="photo in photos" :key="photo">
-          <img :src="photo" alt="image gallery photo" class="photo" />
-        </template>
-      </div>
+      <swiper
+        :slidesPerView="3"
+        :slidesPerGroup="3"
+        :loop="true"
+        :loopFillGroupWithBlank="true"
+        :pagination="{
+          clickable: true,
+        }"
+        :navigation="true"
+        :modules="modules"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: true,
+        }"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="photo in photos" :key="photo">
+          <img :src="photo" alt="">
+        </swiper-slide>
+      </swiper>
     </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Pagination, Navigation } from 'swiper';
+
+/* eslint-disable */
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
 export default {
   name: 'ImageGallery',
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   props: {
     photos: {
       type: Array,
       required: true,
     },
   },
+  setup() {
+    return {
+      modules: [Autoplay, Pagination, Navigation],
+    };
+  },
 };
 </script>
+
+<style lang="scss">
+:root {
+  --swiper-theme-color:#e5ca50;
+}
+</style>
 
 <style lang="scss" scoped>
 .slider {
@@ -27,18 +65,37 @@ export default {
   width: 100%;
   margin-top: 1.5rem;
 
-  .photos {
+  .swiper {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    align-items: center;
-    justify-items: center;
-    overflow: hidden;
+    height: 100%;
+    padding: 3rem 4rem;
+  }
 
-    .photo {
-      width: 300px;
-      margin: 0 10px;
-    }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    max-height: 60vh;
+    max-width: 25vw;
+    display: block;
+    object-fit: cover;
+    user-select: none;
   }
 }
 </style>
