@@ -119,6 +119,12 @@ import Photo12 from '@/assets/work-photos/12.jpg';
 import Photo13 from '@/assets/work-photos/13.jpg';
 import Photo14 from '@/assets/work-photos/14.jpg';
 import Photo15 from '@/assets/work-photos/15.jpg';
+import Photo16 from '@/assets/work-photos/16.jpg';
+import Photo17 from '@/assets/work-photos/17.jpg';
+import Photo18 from '@/assets/work-photos/18.jpg';
+import Photo19 from '@/assets/work-photos/19.jpg';
+import Photo20 from '@/assets/work-photos/20.jpg';
+import Photo21 from '@/assets/work-photos/21.jpg';
 
 export default {
   name: 'HomePage',
@@ -146,6 +152,12 @@ export default {
       Photo13,
       Photo14,
       Photo15,
+      Photo16,
+      Photo17,
+      Photo18,
+      Photo19,
+      Photo20,
+      Photo21,
     ];
 
     return {
