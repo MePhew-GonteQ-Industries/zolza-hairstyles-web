@@ -100,6 +100,7 @@ export default {
         height: 77vh;
         background-image: url('@/assets/hero-img.jpg');
         background-size: cover;
+        background-position: 0 40%;
 
         .wrapper {
           height: 100%;
