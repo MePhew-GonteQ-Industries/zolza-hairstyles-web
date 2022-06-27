@@ -1,5 +1,8 @@
 <template>
     <nav class="navigation">
+      <router-link id="logo-link" to="/">
+        <img class="wordmark" src="@/assets/wordmark.svg" alt="">
+      </router-link>
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
         <li><router-link to='/services'>{{ t('nav.primaryNav[1]') }}
@@ -7,16 +10,18 @@
         <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
       </ul>
 
-      <div class="controls-wrapper">
-        <ToggleThemeSwitch v-if="!userLoggedIn" :data-theme="dataTheme" @change="toggleTheme"/>
-      </div>
-
       <ul class="secondary-nav" v-if="!userLoggedIn">
-          <li><router-link to="/login" class="login-btn">{{ t('nav.secondaryNav[0]') }}
-          </router-link></li>
-          <li><router-link to="/sign-up" class="signup-btn">
-          {{ t('nav.secondaryNav[1]') }}
-          </router-link></li>
+          <li>
+            <router-link to="/login" class="login-btn">
+              <i class="ph-user-light"></i>{{ t('nav.secondaryNav[0]') }}
+            </router-link>
+          </li>
+
+          <li>
+            <router-link to="/sign-up" class="signup-btn">
+              <i class="ph-user-plus-light"></i>{{ t('nav.secondaryNav[1]') }}
+            </router-link>
+          </li>
       </ul>
 
       <div class="user-prof" v-else>
@@ -31,12 +36,10 @@ import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 import NotificationsPanel from '@/components/Navbar/NotificationsPanel.vue';
-import ToggleThemeSwitch from '@/components/Navbar/DesktopNavigation/ToggleThemeSwitch.vue';
 
 export default {
   name: 'desktopNavigation',
   components: {
-    ToggleThemeSwitch,
     NotificationsPanel,
   },
   props: {
@@ -71,163 +74,44 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .controls-wrapper {
-    flex-grow: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-right: 15px;
+.navigation, .primary-nav, .secondary-nav {
+   display: flex;
+}
+
+.navigation {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .wordmark {
+    filter: invert(1);
   }
 
-  .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
+  a {
+    color: white;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
 
-    .user-prof {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: right;
-      gap: 20px;
-
-      .prof-icon {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-      }
+    &.router-link-active {
+      color: #e5ca50;
+      font-weight: 500;
     }
+  }
 
-    @media only screen and (max-width: 990px) {
-      &{
-        justify-content: flex-end;
-      }
-    }
-
-    .primary-nav {
+  .secondary-nav {
+    a {
+      margin: 0 .5rem;
       display: flex;
+      flex-direction: row;
       align-items: center;
-      justify-content: center;
-      padding: 0;
+      gap: 5px;
 
-      &:lang(en) {
-        @media only screen and (max-width: 940px) {
-          & {
-            display: none;
-          }
-        }
-      }
-
-      &:lang(pl) {
-        @media only screen and (max-width: 1160px) {
-          & {
-            display: none;
-          }
-        }
-      }
-
-      li {
-        cursor: pointer;
-
-        &:hover a{
-          margin-bottom: 10px;
-          border-bottom: 1px solid $primary-fg-color;
-
-          //TODO: Fix not clickable space
-        }
-
-        a {
-          user-select: none;
-          display: inline-block;
-          color: $primary-fg-color;
-          text-decoration: none;
-          margin-right: 10px;
-          transition: margin-bottom 200ms;
-          height: 100%;
-
-          &.router-link-active {
-            color: $link-active-color;
-          }
-
-          @media only screen and (min-width: 690px){
-            &{
-              font-size: 26px;
-            }
-          }
-
-          @media only screen and (max-height: 720px) {
-            font-size: 22px;
-          }
-        }
-      }
-    }
-
-    .secondary-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      @media only screen and (max-height: 720px) {
-        @media only screen and (max-width: 640px) {
-          & {
-            display: none;
-          }
-        }
-      }
-
-      @media only screen and (max-width: 610px) {
-        & {
-          display: none;
-        }
-      }
-
-      li {
-        cursor: pointer;
-
-        a {
-          user-select: none;
-          display: inline-block;
-          color: $primary-fg-color;
-          text-decoration: none;
-          margin-right: 10px;
-
-          @media only screen and (min-width: 690px){
-            &{
-              font-size: 26px;
-            }
-          }
-
-          @media only screen and (max-height: 720px) {
-            font-size: 22px;
-          }
-
-          &.login-btn, &.signup-btn {
-            margin: 0 10px 0 10px;
-          }
-
-          &.login-btn {
-
-            &:hover {
-              color: $hover-color;
-            }
-          }
-
-          &.signup-btn {
-            border: 1px solid transparent;
-            border-radius: 10px;
-            background-color: $page-fg-color;
-            color: $primary-bg-color;
-
-            &:hover {
-              background-color: $primary-bg-color;
-              color: $page-fg-color;
-              border-color: $page-fg-color;
-            }
-          }
-        }
+      i {
+        font-size: 1.6rem;
       }
     }
   }
+}
 </style>

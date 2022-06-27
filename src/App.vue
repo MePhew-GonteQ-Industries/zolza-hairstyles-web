@@ -1,14 +1,33 @@
 <template>
-  <div
-      id="app-wrapper"
-      :data-theme="state.theme">
-    <div id="nav">
-      <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
-    </div>
+  <div id="app-wrapper" :data-theme="state.theme">
+
+    <main>
+      <div class="wrapper">
+        <div id="nav">
+          <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
+        </div>
+
+        <section class="hero">
+          <img class="wordmark" src="@/assets/wordmark.svg" alt="">
+          <h1 class="description">Profesjonalny salon fryzjerski. Golenie brzytwą,
+            stryżenie włosów, fryzury ślubne, oraz okolicznosciowe.
+            Zapraszamy do zapoznania się z naszą ofertą, oraz
+            prezentacją wykonanych przez nas fryzur.</h1>
+        </section>
+        <i class="ph-caret-down-light"></i>
+
+        <div class="divider">
+          <img src="@/assets/custom-divider.svg" alt="">
+        </div>
+      </div>
+    </main>
+
     <router-view class="router-view"/>
+
     <footer>
       <contactSection />
     </footer>
+
   </div>
 </template>
 
@@ -72,22 +91,84 @@ export default {
     #app-wrapper {
       height: 100vh;
 
-      #nav {
-        position: sticky;
-        top: 0;
-        height: 8%;
-        min-height: 50px;
-        max-height: 75px;
-        z-index: 10;
-      }
-
       .router-view {
         min-height: 85%;
       }
 
-      footer {
-        height: 7%;
-        background-color: $accent-bg-color;
+      main {
+        position: relative;
+        height: 77vh;
+        background-image: url('@/assets/hero-img.jpg');
+        background-size: cover;
+
+        .wrapper {
+          height: 100%;
+          background-color: rgba(33, 33, 33, .6);
+          display: flex;
+          flex-direction: column;
+        }
+
+        #nav {
+          top: 0;
+          height: 8%;
+          min-height: 50px;
+          max-height: 75px;
+          width: 100%;
+          z-index: 10;
+        }
+
+        .ph-caret-down-light {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 4%;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+        .hero {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0 10%;
+          justify-content: center;
+
+          .description {
+            color: white;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            margin-top: .75rem;
+            max-width: 45vw;
+            font-weight: 400;
+          }
+
+          .wordmark {
+            height: 5rem;
+            filter: invert(1);
+          }
+        }
+
+        footer {
+          height: 7%;
+        }
+      }
+
+      .divider {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        transform: rotate(180deg);
+
+        img {
+          position: relative;
+          display: block;
+          width: calc(100% + 1.3px);
+          height: 61px;
+        }
       }
     }
   }
