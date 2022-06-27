@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'SliderComponent',
+  name: 'ImageGallery',
   props: {
     photos: {
       type: Array,

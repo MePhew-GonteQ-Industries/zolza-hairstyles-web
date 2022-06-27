@@ -73,7 +73,7 @@
       <AvailableDateComponent day="Kiedyś" time="21:37"/>
     </div>
 
-    <SliderComponent :photos="photos"/>
+    <ImageGallery :photos="photos"/>
 
     <div class="mobile-app-banner">
 
@@ -101,7 +101,7 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
-import SliderComponent from '@/components/Carousel/SliderComponent.vue';
+import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
 import ServiceComponent from '@/components/ServiceComponent.vue';
 import AvailableDateComponent from '@/components/AvailableDateComponent.vue';
 import Photo1 from '@/assets/work-photos/1.jpg';
@@ -123,7 +123,7 @@ import Photo15 from '@/assets/work-photos/15.jpg';
 export default {
   name: 'HomePage',
   components: {
-    SliderComponent,
+    ImageGallery,
     ServiceComponent,
     AvailableDateComponent,
   },
