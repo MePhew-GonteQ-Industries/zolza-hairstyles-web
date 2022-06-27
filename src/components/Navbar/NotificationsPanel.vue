@@ -1,8 +1,9 @@
 <template>
   <div class="notifications-wrapper" ref="notificationsPanel">
-        <img class="prof-icon"
+        <img class="bell-icon"
+        :class="{ clicked: buttonClicked }"
         :src="notificationsPanelExpanded ? bellFill: bellOutline"
-        alt="bell-notification-icon" @click='toggleNotificationsPanel'>
+        alt="bell-notification-icon" @click='toggleNotificationsPanel(); toggleButton();'>
         <span class="unread-notifications-count">2</span>
         <div class="notifications-panel" v-show="notificationsPanelExpanded">
           <div class="panel-header">
@@ -102,6 +103,16 @@ export default {
       notifications.value[currentTabIndex.value] = [];
     }
 
+    const buttonClicked = ref(false);
+
+    function toggleButton() {
+      buttonClicked.value = true;
+
+      setTimeout(() => {
+        buttonClicked.value = false;
+      }, 500);
+    }
+
     return {
       notificationsPanelExpanded,
       toggleNotificationsPanel,
@@ -113,6 +124,8 @@ export default {
       notifications,
       bellFill,
       bellOutline,
+      toggleButton,
+      buttonClicked,
     };
   },
 };
@@ -126,15 +139,44 @@ export default {
   justify-content: center;
   position: relative;
 
-  .prof-icon {
+  @keyframes ripple {
+    0% {
+      background-color: #55575e;
+      border-color: transparent;
+    }
+
+    50% {
+      border-color: $border-color-active-secondary;
+      background-color: #55575e;
+    }
+
+    100% {
+      border-color: transparent;
+      background-color: transparent;
+    }
+  }
+
+  .bell-icon {
     width: 25px;
     height: 25px;
     cursor: pointer;
+    box-sizing: content-box;
+    padding: 4px;
+    border-radius: 50%;
+    border: .1px solid transparent;
+
+    &:active {
+      background-color: #55575e;
+    }
+
+    &.clicked {
+      animation: ripple .4s;
+    }
   }
 
   .unread-notifications-count {
     background-color: #CD0700;
-    color: white;
+    color: $primary-text-color;
     padding: 4px;
     display: flex;
     width: 20px;
@@ -165,7 +207,7 @@ export default {
     top: 30px;
     right: 0;
     border-radius: 0 0 5px 5px;
-    color: white;
+    color: $primary-text-color;
 
     h3 {
       font-weight: 600;
@@ -252,7 +294,7 @@ export default {
         transition: border-color 600ms;
 
         &:hover {
-          border-color: white;
+          border-color: $border-color-active-secondary;
         }
       }
     }
