@@ -14,7 +14,7 @@
             Zapraszamy do zapoznania się z naszą ofertą, oraz
             prezentacją wykonanych przez nas fryzur.</h1>
         </section>
-        <i class="ph-caret-down-light"></i>
+        <i class="ph-caret-down-light" @click="scrollToServices"></i>
 
         <div class="divider">
           <img src="@/assets/custom-divider.svg" alt="">
@@ -22,7 +22,8 @@
       </div>
     </main>
 
-    <router-view class="router-view"/>
+    <router-view :scrolledToServices="scrolledToServices"
+      @scrollingFinished="scrollingFinished" class="router-view"/>
 
     <footer>
       <contactSection />
@@ -33,7 +34,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
 
@@ -76,9 +77,22 @@ export default {
       store.dispatch('loadUser');
     });
 
+    const scrolledToServices = ref(false);
+
+    const scrollToServices = () => {
+      scrolledToServices.value = true;
+    };
+
+    const scrollingFinished = () => {
+      scrolledToServices.value = false;
+    };
+
     return {
       state,
       toggleTheme,
+      scrollToServices,
+      scrolledToServices,
+      scrollingFinished,
     };
   },
 };

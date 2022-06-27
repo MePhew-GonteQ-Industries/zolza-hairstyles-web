@@ -1,6 +1,6 @@
 <template>
   <section class="app-page" id="home-page">
-    <div class="services">
+    <div class="services" ref="services">
 
       <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
 import ServiceTile from '@/components/ServiceTile.vue';
@@ -133,7 +134,14 @@ export default {
     ServiceTile,
     AvailableDateTile,
   },
-  setup() {
+  props: {
+    scrolledToServices: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  emits: ['scrollingFinished'],
+  setup(props, { emit }) {
     const { t } = useI18n({ useScope: 'global' });
 
     const photos = [
@@ -160,9 +168,22 @@ export default {
       Photo21,
     ];
 
+    const services = ref(null);
+
+    const scrollToServices = () => {
+      services.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    watch(props, () => {
+      scrollToServices();
+      emit('scrollingFinished');
+    });
+
     return {
       t,
       photos,
+      services,
+      scrollToServices,
     };
   },
 };
@@ -178,12 +199,11 @@ export default {
 
     .services {
       grid-template-columns: repeat(2, 1fr);
+      padding: 2.5rem 10%;
     }
 
     .services, .available-dates {
       min-height: 20vh;
-      margin-top: 2.5rem;
-      padding: 0 10%;
       color: black;
       width: 100%;
       display: grid;
