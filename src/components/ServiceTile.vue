@@ -19,7 +19,7 @@
 import CustomProgressBar from '@/components/CustomProgressBar.vue';
 
 export default {
-  name: 'ServiceComponent',
+  name: 'ServiceTile',
   components: {
     CustomProgressBar,
   },

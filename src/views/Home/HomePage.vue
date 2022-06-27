@@ -2,51 +2,51 @@
   <section class="app-page" id="home-page">
     <div class="services">
 
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
         :availability="40"
         :priceMin="25"
         :priceMax="50"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
         :availability="40"
         :priceMin="25"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
         :availability="80"
         :priceMin="25"
         :priceMax="90"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
         :availability="40"
         :priceMin="25"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="90"
         :availability="40"
         :priceMin="120"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
         :availability="40"
         :priceMin="25"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
         :availability="80"
         :priceMin="25"/>
-      <ServiceComponent name="Strzyżenie męskie"
+      <ServiceTile name="Strzyżenie męskie"
         description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
         :time="20"
@@ -56,21 +56,21 @@
     </div>
 
     <div class="available-dates">
-      <AvailableDateComponent day="Dzisiaj" time="15:30"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
-      <AvailableDateComponent day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Dzisiaj" time="15:30"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
+      <AvailableDateTile day="Kiedyś" time="21:37"/>
     </div>
 
     <ImageGallery :photos="photos"/>
@@ -102,8 +102,8 @@
 <script>
 import { useI18n } from 'vue-i18n';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
-import ServiceComponent from '@/components/ServiceComponent.vue';
-import AvailableDateComponent from '@/components/AvailableDateComponent.vue';
+import ServiceTile from '@/components/ServiceTile.vue';
+import AvailableDateTile from '@/components/AvailableDateTile.vue';
 import Photo1 from '@/assets/work-photos/1.jpg';
 import Photo2 from '@/assets/work-photos/2.jpg';
 import Photo3 from '@/assets/work-photos/3.jpg';
@@ -124,8 +124,8 @@ export default {
   name: 'HomePage',
   components: {
     ImageGallery,
-    ServiceComponent,
-    AvailableDateComponent,
+    ServiceTile,
+    AvailableDateTile,
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });

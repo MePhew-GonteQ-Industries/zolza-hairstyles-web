@@ -25,7 +25,7 @@
 import { ref, onMounted } from 'vue';
 
 export default {
-  name: 'AvailableDateComponent',
+  name: 'AvailableDateTile',
   props: {
     day: {
       type: String,
