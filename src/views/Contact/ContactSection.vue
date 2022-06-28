@@ -85,6 +85,7 @@ export default {
   .contact ul {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 }
 </style>
