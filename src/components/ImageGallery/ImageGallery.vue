@@ -16,8 +16,8 @@
         }"
         class="mySwiper"
       >
-        <swiper-slide v-for="photo in photos" :key="photo">
-          <img :src="photo" alt="">
+        <swiper-slide v-for="photo in photos" :key="photo.id">
+          <img :src="photo.path" alt="">
         </swiper-slide>
       </swiper>
     </div>
