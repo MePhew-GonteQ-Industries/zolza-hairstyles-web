@@ -1,9 +1,11 @@
 <template>
   <div id="app-wrapper" :data-theme="state.theme">
 
-    <main>
+    <main ref='main'>
       <div class="wrapper">
-        <div id="nav">
+        <div id="nav" ref="navbar"
+          :class="{ fixed: navbarFixed,
+          'static-outside-viewport': !navbarFixed && !navbarVisible }">
           <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
         </div>
 
@@ -34,7 +36,10 @@
 
 <script>
 import { useStore } from 'vuex';
-import { reactive, onMounted, ref } from 'vue';
+import {
+  reactive, onMounted, ref, watch, computed,
+} from 'vue';
+import { useElementVisibility, useWindowScroll } from '@vueuse/core';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
 
@@ -87,12 +92,29 @@ export default {
       scrolledToServices.value = false;
     };
 
+    const { y } = useWindowScroll();
+
+    const navbarVisible = computed(() => y.value <= 80);
+
+    const main = ref(null);
+
+    const mainSectionVisible = useElementVisibility(main);
+
+    const navbarFixed = ref(false);
+
+    watch(mainSectionVisible, (newValue) => {
+      navbarFixed.value = !newValue;
+    });
+
     return {
       state,
       toggleTheme,
       scrollToServices,
       scrolledToServices,
       scrollingFinished,
+      navbarFixed,
+      main,
+      navbarVisible,
     };
   },
 };
@@ -124,12 +146,26 @@ export default {
         }
 
         #nav {
+          position: fixed;
           top: 0;
-          height: 8%;
           min-height: 50px;
           max-height: 75px;
           width: 100%;
           z-index: 10;
+          transform: translateY(0);
+          transition: all .6s;
+
+          &.static-outside-viewport {
+            position: fixed;
+            top: -150px;
+          }
+
+          &.fixed {
+            position: fixed;
+            top: -150px;
+            background-color: rgba(33, 33, 33, .6);
+            transform: translateY(150px);
+          }
         }
 
         .ph-caret-down-light {
