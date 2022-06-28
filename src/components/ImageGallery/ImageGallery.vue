@@ -56,6 +56,14 @@ export default {
 :root {
   --swiper-theme-color:#e5ca50;
 }
+
+.swiper-button-next {
+  right: 2.25rem;
+}
+
+.swiper-button-prev {
+  left: 2.25rem;
+}
 </style>
 
 <style lang="scss" scoped>

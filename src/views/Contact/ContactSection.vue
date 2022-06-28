@@ -61,7 +61,6 @@ export default {
   padding: 0 10%;
   background-color: white;
   height: 5rem;
-  padding-top: 1.5rem;
   box-sizing: content-box;
 
   i {
@@ -72,6 +71,9 @@ export default {
     color: #28262c;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     &.link {
       &:hover {

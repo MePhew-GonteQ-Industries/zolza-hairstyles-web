@@ -87,7 +87,7 @@ export default {
     .button {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: .375rem;
       cursor: pointer;
 
       i {

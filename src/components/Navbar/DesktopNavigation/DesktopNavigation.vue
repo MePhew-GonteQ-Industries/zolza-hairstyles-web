@@ -100,6 +100,10 @@ export default {
     }
   }
 
+  .primary-nav {
+    gap: 1.125rem;
+  }
+
   .secondary-nav {
     a {
       margin: 0 .5rem;
@@ -109,7 +113,7 @@ export default {
       gap: 5px;
 
       i {
-        font-size: 1.6rem;
+        font-size: 1.675rem;
       }
     }
   }

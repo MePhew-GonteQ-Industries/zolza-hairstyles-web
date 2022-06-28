@@ -5,10 +5,14 @@
     <p class="description">{{ description }}</p>
   </div>
   <div class="right">
-    <p class="time">Czas: <span>~{{ time }}min</span></p>
-    <CustomProgressBar color="#9ae66e" :value="time"/>
-    <p class="available-dates">Dostępne terminy</p>
-    <CustomProgressBar color="lightskyblue" :value="availability"/>
+    <div class="time-wrapper">
+      <p class="time">Czas: <span>~{{ time }}min</span></p>
+      <CustomProgressBar color="#9ae66e" :value="time"/>
+    </div>
+    <div class="available-dates-wrapper">
+      <p class="available-dates">Dostępne terminy</p>
+      <CustomProgressBar color="lightskyblue" :value="availability"/>
+    </div>
     <p class="price">Cena: <span>{{ priceMin }}
       <span v-if="priceMax">- {{ priceMax }}</span> zł</span></p>
   </div>
@@ -62,7 +66,6 @@ export default {
   align-items: center;
 
   // p {
-
   //   span {
   //     font-weight: 600;
   //   }
@@ -82,7 +85,7 @@ export default {
   .right {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: .875rem;
   }
 }
 </style>

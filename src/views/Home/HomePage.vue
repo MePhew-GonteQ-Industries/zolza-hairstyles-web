@@ -80,13 +80,18 @@
       <div class="cta">
         <p class="primary">Jedna aplikacja wiele możliwości</p>
         <p class="description">W aplikacji mobilnej na telefon możesz przeglądać wolne terminy,
-          umawiać się na wizytę, oraz kontrolować swoje wszystkie wizyty w naszym salonie.</p>
+          umawiać się na wizytę oraz kontrolować wszystkie swoje wizyty w naszym salonie.</p>
         <p class="secondary">
-          Aplikacja dostępna jest na urządzeniach z systemem Android, oraz IOS.
+          Aplikacja dostępna jest na urządzeniach z systemem Android oraz IOS.
         </p>
         <div class="download-links">
-          <a href=""><img src="@/assets/app-store-badge.svg" alt="Pobierz z App Store"></a>
-          <a href=""><img src='@/assets/google-play-badge.png' alt='Pobierz z Google Play'/></a>
+          <a href="">
+            <img class="app-store-badge"
+             src="@/assets/app-store-badge.svg" alt="Pobierz z App Store">
+          </a>
+          <a href="">
+            <img class="gp-badge" src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg" alt="Pobierz w Google Play">
+          </a>
         </div>
       </div>
 
@@ -252,18 +257,29 @@ export default {
           }
         }
 
+        .description {
+          margin-top: 1rem;
+        }
+
         .secondary {
           padding-top: 1.5rem;
         }
 
         .download-links {
           display: flex;
-          gap: 2rem;
+          align-items: center;
+          padding-top: .75rem;
 
-          img {
-            height: 70px;
-            padding-top: .75rem;
-            box-sizing: content-box;
+          a {
+            padding: 0;
+          }
+
+          .app-store-badge {
+            height: 65px;
+          }
+
+          .gp-badge {
+            height: 95px;
           }
         }
       }
