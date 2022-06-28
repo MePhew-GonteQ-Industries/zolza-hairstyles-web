@@ -3,7 +3,7 @@
     <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete"
     :placeholder="label" :value="value"
     @input="event => $emit('update:value', event.target.value)"
-    :class="{ invalid: invalid && (validate || forceValidate)}"
+    :class="{ invalid: invalid && (validate || forceValidate) }"
     @blur="validate = true"/>
 
     <label :for="inputId">{{ label }}</label>
