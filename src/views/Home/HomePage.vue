@@ -110,27 +110,6 @@ import { useI18n } from 'vue-i18n';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
 import ServiceTile from '@/components/ServiceTile.vue';
 import AvailableDateTile from '@/components/AvailableDateTile.vue';
-import Photo1 from '@/assets/work-photos/1.jpg';
-import Photo2 from '@/assets/work-photos/2.jpg';
-import Photo3 from '@/assets/work-photos/3.jpg';
-import Photo4 from '@/assets/work-photos/4.jpg';
-import Photo5 from '@/assets/work-photos/5.jpg';
-import Photo6 from '@/assets/work-photos/6.jpg';
-import Photo7 from '@/assets/work-photos/7.jpg';
-import Photo8 from '@/assets/work-photos/8.jpg';
-import Photo9 from '@/assets/work-photos/9.jpg';
-import Photo10 from '@/assets/work-photos/10.jpg';
-import Photo11 from '@/assets/work-photos/11.jpg';
-import Photo12 from '@/assets/work-photos/12.jpg';
-import Photo13 from '@/assets/work-photos/13.jpg';
-import Photo14 from '@/assets/work-photos/14.jpg';
-import Photo15 from '@/assets/work-photos/15.jpg';
-import Photo16 from '@/assets/work-photos/16.jpg';
-import Photo17 from '@/assets/work-photos/17.jpg';
-import Photo18 from '@/assets/work-photos/18.jpg';
-import Photo19 from '@/assets/work-photos/19.jpg';
-import Photo20 from '@/assets/work-photos/20.jpg';
-import Photo21 from '@/assets/work-photos/21.jpg';
 
 export default {
   name: 'HomePage',
@@ -149,29 +128,15 @@ export default {
   setup(props, { emit }) {
     const { t } = useI18n({ useScope: 'global' });
 
-    const photos = [
-      Photo1,
-      Photo2,
-      Photo3,
-      Photo4,
-      Photo5,
-      Photo6,
-      Photo7,
-      Photo8,
-      Photo9,
-      Photo10,
-      Photo11,
-      Photo12,
-      Photo13,
-      Photo14,
-      Photo15,
-      Photo16,
-      Photo17,
-      Photo18,
-      Photo19,
-      Photo20,
-      Photo21,
-    ];
+    const photos = [];
+
+    for (let i = 1; i <= 21; i += 1) {
+      const photo = require(`@/assets/work-photos/${i}.jpg`); // eslint-disable-line
+      photos.push({
+        id: i,
+        path: photo,
+      });
+    }
 
     const services = ref(null);
 
