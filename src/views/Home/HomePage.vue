@@ -1,59 +1,6 @@
 <template>
   <section class="app-page" id="home-page">
-    <div class="services" ref="services">
-
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="40"
-        :priceMin="25"
-        :priceMax="50"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="40"
-        :priceMin="25"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="80"
-        :priceMin="25"
-        :priceMax="90"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="40"
-        :priceMin="25"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="90"
-        :availability="40"
-        :priceMin="120"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="40"
-        :priceMin="25"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="80"
-        :priceMin="25"/>
-      <ServiceTile name="Strzyżenie męskie"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="20"
-        :availability="40"
-        :priceMin="25"/>
-
-    </div>
+    <ServicesList :scrolledToServices="scrolledToServices" />
 
     <div class="available-dates">
       <AvailableDateTile day="Dzisiaj" time="15:30"/>
@@ -105,17 +52,16 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
-import ServiceTile from '@/components/ServiceTile.vue';
+import ServicesList from '@/components/Home/ServicesList.vue';
 import AvailableDateTile from '@/components/AvailableDateTile.vue';
 
 export default {
   name: 'HomePage',
   components: {
     ImageGallery,
-    ServiceTile,
+    ServicesList,
     AvailableDateTile,
   },
   props: {
@@ -125,7 +71,7 @@ export default {
     },
   },
   emits: ['scrollingFinished'],
-  setup(props, { emit }) {
+  setup() {
     const { t } = useI18n({ useScope: 'global' });
 
     const photos = [];
@@ -138,22 +84,9 @@ export default {
       });
     }
 
-    const services = ref(null);
-
-    const scrollToServices = () => {
-      services.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-
-    watch(props, () => {
-      scrollToServices();
-      emit('scrollingFinished');
-    });
-
     return {
       t,
       photos,
-      services,
-      scrollToServices,
     };
   },
 };
@@ -167,12 +100,7 @@ export default {
     background-color: white;
     color: white;
 
-    .services {
-      grid-template-columns: repeat(2, 1fr);
-      padding: 2.5rem 10%;
-    }
-
-    .services, .available-dates {
+    .available-dates {
       min-height: 20vh;
       color: black;
       width: 100%;
