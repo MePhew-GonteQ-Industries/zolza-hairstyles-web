@@ -24,8 +24,7 @@
       </div>
     </main>
 
-    <router-view :scrolledToServices="scrolledToServices"
-      @scrollingFinished="scrollingFinished" class="router-view"/>
+    <router-view :scrolledToServices="scrolledToServices" class="router-view"/>
 
     <footer>
       <contactSection />
@@ -85,11 +84,7 @@ export default {
     const scrolledToServices = ref(false);
 
     const scrollToServices = () => {
-      scrolledToServices.value = true;
-    };
-
-    const scrollingFinished = () => {
-      scrolledToServices.value = false;
+      scrolledToServices.value = !scrolledToServices.value;
     };
 
     const { y } = useWindowScroll();
@@ -111,7 +106,6 @@ export default {
       toggleTheme,
       scrollToServices,
       scrolledToServices,
-      scrollingFinished,
       navbarFixed,
       main,
       navbarVisible,
