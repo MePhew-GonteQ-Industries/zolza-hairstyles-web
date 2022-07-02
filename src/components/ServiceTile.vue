@@ -14,7 +14,7 @@
       <CustomProgressBar color="lightskyblue" :value="availability"/>
     </div>
     <p class="price">Cena: <span>{{ priceMin }}
-      <span v-if="priceMax">- {{ priceMax }}</span> zł</span></p>
+      <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span></p>
   </div>
 </div>
 </template>
