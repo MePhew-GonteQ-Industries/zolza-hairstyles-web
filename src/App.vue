@@ -1,14 +1,13 @@
 <template>
   <div id="app-wrapper" :data-theme="state.theme">
 
-    <main ref='main'>
-      <div class="wrapper">
-        <div id="nav" ref="navbar"
-          :class="{ fixed: navbarFixed,
-          'static-outside-viewport': !navbarFixed && !navbarVisible }">
-          <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
-        </div>
-
+    <main ref='main' :class="{collapsed: !onHomePage}">
+      <div id="nav" ref="navbar"
+        :class="{ fixed: navbarFixed && onHomePage,
+        'static-outside-viewport': !navbarFixed && !navbarVisible }">
+        <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
+      </div>
+      <div class="wrapper" v-if="onHomePage">
         <section class="hero">
           <img class="wordmark" src="@/assets/wordmark.svg" alt="">
           <h1 class="description">Profesjonalny salon fryzjerski. Golenie brzytwą,
@@ -41,6 +40,7 @@ import {
 import { useElementVisibility, useWindowScroll } from '@vueuse/core';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -48,17 +48,22 @@ export default {
     contactSection,
   },
   setup() {
+    const router = useRouter();
+
+    const onHomePage = computed(() => router.currentRoute.value.name === 'Home');
+
     const store = useStore();
 
-    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // const prefersDarkMode =
+    // window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    let theme;
+    const theme = 'light';
 
-    if (prefersDarkMode) {
-      theme = 'dark';
-    } else {
-      theme = 'light';
-    }
+    // if (prefersDarkMode) {
+    //   theme = 'dark';
+    // } else {
+    //   theme = 'light';
+    // }
 
     const state = reactive({
       theme,
@@ -89,7 +94,15 @@ export default {
 
     const { y } = useWindowScroll();
 
-    const navbarVisible = computed(() => y.value <= 80);
+    const navbar = ref(null);
+
+    const navbarHeight = ref(null);
+
+    const navbarVisible = computed(() => y.value <= navbarHeight.value);
+
+    onMounted(() => {
+      navbarHeight.value = navbar.value.offsetHeight;
+    });
 
     const main = ref(null);
 
@@ -109,6 +122,8 @@ export default {
       navbarFixed,
       main,
       navbarVisible,
+      onHomePage,
+      navbar,
     };
   },
 };
@@ -131,6 +146,25 @@ export default {
         background-image: url('@/assets/hero-img.jpg');
         background-size: cover;
         background-position: 0 40%;
+        color: white;
+
+        &.collapsed {
+          height: 80px;
+          background-image: none;
+          color: black;
+
+          #nav {
+            background-color: white;
+          }
+
+          .wordmark {
+            filter: none;
+          }
+        }
+
+        *:not(.router-link-active) {
+          color: inherit;
+        }
 
         .wrapper {
           height: 100%;
@@ -142,8 +176,9 @@ export default {
         #nav {
           position: fixed;
           top: 0;
-          min-height: 50px;
-          max-height: 75px;
+          height: 5rem;
+          min-height: 40px;
+          max-height: 80px;
           width: 100%;
           z-index: 10;
           transform: translateY(0);

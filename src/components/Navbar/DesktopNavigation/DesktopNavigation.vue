@@ -3,10 +3,13 @@
       <router-link id="logo-link" to="/">
         <img class="wordmark" src="@/assets/wordmark.svg" alt="">
       </router-link>
+
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
-        <li><router-link to='/services'>{{ t('nav.primaryNav[1]') }}
-          </router-link></li>
+        <li>
+          <router-link to='/services'>{{ t('nav.primaryNav[1]') }}
+          </router-link>
+        </li>
         <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
       </ul>
 
@@ -95,7 +98,7 @@ export default {
     font-family: 'Poppins', sans-serif;
 
     &.router-link-active {
-      color: #e5ca50;
+      color: $text-color-element-active;
       font-weight: 500;
     }
   }

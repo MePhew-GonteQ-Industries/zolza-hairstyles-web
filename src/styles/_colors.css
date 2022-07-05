@@ -1,3 +1,7 @@
+:root {
+    --text-color-element-active: #00a2e8;
+}
+
 #app-wrapper[data-theme='light'] {
     /* general */
     --primary-fg-color: #231F20;

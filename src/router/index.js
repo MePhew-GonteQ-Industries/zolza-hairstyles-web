@@ -53,7 +53,7 @@ const routes = [{
   component: () => import(/* webpackChunkName: "services" */ '@/views/ServicesPage.vue'),
 },
 {
-  path: '/terms',
+  path: '/terms-of-use',
   name: 'TermsOfUse',
   component: () => import(/* webpackChunkName: "terms" */ '@/views/TermsOfUsePage.vue'),
 },
@@ -61,6 +61,16 @@ const routes = [{
   path: '/privacy-policy',
   name: 'PrivacyPolicy',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/PrivacyPolicyPage.vue'),
+},
+{
+  path: '/cookies-policy',
+  name: 'CookiesPolicy',
+  component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/CookiesPolicyPage.vue'),
+},
+{
+  path: '/rodo',
+  name: 'RodoNotice',
+  component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/RodoNoticePage.vue'),
 },
 {
   path: '/password-reset',

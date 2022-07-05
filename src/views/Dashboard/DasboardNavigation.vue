@@ -1,10 +1,10 @@
 <template>
   <div class="navigation-wrapper">
     <div class="tab-selector">
-      <button class="tab">Zarządzanie</button>
-      <button class="tab">asdasd</button>
-      <button class="tab">asdda</button>
-      <button class="tab">ssasda</button>
+      <button class="tab">Wizyty</button>
+      <button class="tab">Usługi</button>
+      <button class="tab">Użytkownicy</button>
+      <button class="tab">Godziny pracy</button>
     </div>
   </div>
 </template>

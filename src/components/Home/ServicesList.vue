@@ -1,40 +1,72 @@
 <template>
-<div class="services" ref="services">
+<div class="services-wrapper" ref="services">
+  <CustomLoader :class="{ hidden: !loading }" v-if="!loaderAnimationFinished"/>
 
-  <template v-for="service in servicesData" :key="service.id">
-    <ServiceTile :name="service.name"
-      description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-        Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-      :time="service.average_time_minutes"
-      :availability="40"
-      :priceMin="service.min_price"
-      :priceMax="service.max_price"/>
-  </template>
+  <div class="services" :class="{ hidden: loading }"
+  v-if="loaderAnimationFinished && !loadingFailed">
+    <template v-for="service in servicesData" :key="service.id">
+      <ServiceTile
+        :id="service.id"
+        :name="service.name"
+        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
+          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
+        :time="service.average_time_minutes"
+        :availability="40"
+        :priceMin="service.min_price"
+        :priceMax="service.max_price"
+        @updateSelectedService="(newValue) => { $emit('update:selectedServiceId', newValue) }"/>
+    </template>
+  </div>
+
+  <div class="error-message" :class="{ hidden: loading }"
+   v-if="loadingFailed && loaderAnimationFinished">
+    <i class="ph-warning-circle-light"></i>
+    <p>Wystąpił błąd przy pobieraniu usług</p>
+  </div>
+
 </div>
 </template>
 
 <script>
-import ServiceTile from '@/components/ServiceTile.vue';
+import ServiceTile from '@/components/Home/ServiceTile.vue';
 import axios from 'axios';
 import { ref, onMounted, watch } from 'vue';
+import CustomLoader from '@/components/CustomLoader.vue';
 
 export default {
   name: 'ServicesList',
   components: {
     ServiceTile,
+    CustomLoader,
   },
   props: {
     scrolledToServices: {
       type: Boolean,
       required: true,
     },
+    selectedServiceId: {
+      type: String,
+    },
   },
   setup(props) {
+    const loading = ref(true);
+    const loadingFailed = ref(false);
+    const loaderAnimationFinished = ref(false);
+
     const servicesData = ref(null);
 
     onMounted(async () => {
-      const response = await axios.get('services');
-      servicesData.value = response.data;
+      try {
+        const response = await axios.get('services');
+        servicesData.value = response.data;
+      } catch (err) {
+        loadingFailed.value = true;
+        console.error(err);
+      }
+      loading.value = false;
+      setTimeout(() => {
+        loaderAnimationFinished.value = true;
+      }, 1000);
     });
 
     const services = ref(null);
@@ -50,19 +82,52 @@ export default {
     return {
       servicesData,
       services,
+      loadingFailed,
+      loading,
+      loaderAnimationFinished,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.services {
-  grid-template-columns: repeat(2, 1fr);
-  padding: 2.5rem 10%;
+.services-wrapper {
   min-height: 20vh;
-  color: black;
   width: 100%;
-  display: grid;
-  row-gap: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .hidden {
+      display: none;
+      opacity: 0;
+    }
+
+  .loader {
+    transition: all 1s;
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2.5rem 10%;
+    color: black;
+    display: grid;
+    row-gap: 2rem;
+    transition: all 1s;
+  }
+
+  .error-message {
+    min-height: inherit;
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.250rem;
+    gap: 1rem;
+
+    i {
+      font-size: 2.250rem;
+    }
+  }
 }
 </style>>

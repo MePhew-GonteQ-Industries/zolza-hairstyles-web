@@ -1,5 +1,5 @@
 <template>
-<div class="available-date" ref="availableDate">
+<div class="available-slot" ref="availableSlot">
 
   <div class="date">
     <p class="day">{{ day }}</p>
@@ -25,8 +25,12 @@
 import { ref, onMounted } from 'vue';
 
 export default {
-  name: 'AvailableDateTile',
+  name: 'AvailableSlotTile',
   props: {
+    color: {
+      type: String,
+      required: true,
+    },
     day: {
       type: String,
       required: true,
@@ -36,30 +40,28 @@ export default {
       required: true,
     },
   },
-  setup() {
-    const availableDate = ref(null);
-    const color = Math.floor(Math.random() * 16777215).toString(16);
+  setup(props) {
+    const availableSlot = ref(null);
 
     onMounted(() => {
-      availableDate.value.style.setProperty('--color', `#${color}`);
+      availableSlot.value.style.setProperty('--color', props.color);
     });
 
     return {
-      availableDate,
+      availableSlot,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.available-date {
+.available-slot {
   --color: none;
   $color: var(--color);
 
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 100px;
   gap: 1rem;
 
   .date {
@@ -69,8 +71,8 @@ export default {
       font-size: 1.125rem;
       letter-spacing: .5px;
       font-weight: 500;
-      height: 60px;
-      width: 100px;
+      height: 100px;
+      width: 140px;
       display: flex;
       flex-direction: column;
       align-items: center;

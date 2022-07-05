@@ -1,24 +1,9 @@
 <template>
   <section class="app-page" id="home-page">
-    <ServicesList :scrolledToServices="scrolledToServices" />
+    <ServicesList :scrolledToServices="scrolledToServices"
+      v-model:selectedServiceId="selectedServiceId" />
 
-    <div class="available-dates">
-      <AvailableDateTile day="Dzisiaj" time="15:30"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-      <AvailableDateTile day="Kiedyś" time="21:37"/>
-    </div>
+    <AvailableSlotsList :selectedServiceId="selectedServiceId"/>
 
     <ImageGallery :photos="photos"/>
 
@@ -52,17 +37,18 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
 import ServicesList from '@/components/Home/ServicesList.vue';
-import AvailableDateTile from '@/components/AvailableDateTile.vue';
+import AvailableSlotsList from '@/components/Home/AvailableSlotsList.vue';
 
 export default {
   name: 'HomePage',
   components: {
     ImageGallery,
     ServicesList,
-    AvailableDateTile,
+    AvailableSlotsList,
   },
   props: {
     scrolledToServices: {
@@ -70,7 +56,6 @@ export default {
       required: true,
     },
   },
-  emits: ['scrollingFinished'],
   setup() {
     const { t } = useI18n({ useScope: 'global' });
 
@@ -84,9 +69,12 @@ export default {
       });
     }
 
+    const selectedServiceId = ref(null);
+
     return {
       t,
       photos,
+      selectedServiceId,
     };
   },
 };
@@ -99,21 +87,6 @@ export default {
     justify-content: space-between;
     background-color: white;
     color: white;
-
-    .available-dates {
-      min-height: 20vh;
-      color: black;
-      width: 100%;
-      display: grid;
-      row-gap: 2rem;
-    }
-
-    .available-dates {
-      background-color: #f2f2f2;
-      grid-template-columns: repeat(3, 1fr);
-      justify-items: center;
-      padding: 3.5rem 10% 2.5rem 10%;
-    }
 
     .mobile-app-banner {
       margin-top: 1.5rem;

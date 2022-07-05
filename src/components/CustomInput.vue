@@ -9,6 +9,7 @@
     <label :for="inputId">{{ label }}</label>
 
     <img :src="iconSrc" alt="">
+    <i class="ph-envelope-simple-light"></i>
 
     <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
       <img class="invalid-icon"

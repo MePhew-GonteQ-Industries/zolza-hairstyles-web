@@ -54,7 +54,7 @@ export default {
 
 <style lang="scss">
 :root {
-  --swiper-theme-color:#e5ca50;
+  --swiper-theme-color: #{$text-color-element-active};
 }
 
 .swiper-button-next {

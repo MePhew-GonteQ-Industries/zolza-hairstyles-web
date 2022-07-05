@@ -16,6 +16,7 @@
     <p class="price">Cena: <span>{{ priceMin }}
       <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span></p>
   </div>
+  <input type="radio" name="select-service" @change="$emit('updateSelectedService', id)" id="">
 </div>
 </template>
 
@@ -28,6 +29,10 @@ export default {
     CustomProgressBar,
   },
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -78,7 +83,7 @@ export default {
     }
 
     .description {
-      margin-top: .9rem;
+      margin-top: .125rem;
     }
   }
 
