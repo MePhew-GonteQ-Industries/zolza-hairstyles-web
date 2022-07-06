@@ -210,7 +210,7 @@
            gdy Użytkownik ograniczy w jakikolwiek
            sposób możliwość zapisywania i odczytu plików Cookie.</li>
       </ul>
-    <h2>§8 Zmiany w Polityce Cookie</h2>
+    <h2>§8 Zmiany w Polityce Cookies</h2>
       <ul>
         <li>Administrator zastrzega sobie prawo do dowolnej
           zmiany niniejszej Polityki Cookie bez konieczności informowania o tym użytkowników.</li>
