@@ -140,7 +140,7 @@ export default {
     row-gap: 2rem;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
-    padding: 3.5rem 10% 2.5rem 10%;
+    padding: 3.5rem 10% 3.5rem 10%;
   }
 }
 </style>>
