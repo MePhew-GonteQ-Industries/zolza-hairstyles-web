@@ -203,18 +203,19 @@ export default {
             margin-bottom: 4%;
             cursor: pointer;
             animation-name: bounceArrow;
-            animation-duration: 1s;
+            animation-duration: 4s;
             animation-iteration-count: infinite;
+            padding: 40px 20px;
 
             @keyframes bounceArrow{
               0%{
-                margin-bottom: 4%;
+                transform: translateY(2vh);
               }
               50%{
-                margin-bottom: 2%;
+                transform: translateY(-2vh);
               }
               100%{
-                margin-bottom: 4%;
+                transform: translateY(2vh);
               }
             }
           }
@@ -262,17 +263,6 @@ export default {
           height: 61px;
         }
       }
-    }
-  }
-  @keyframes bounceArrow{
-    0%{
-      transform: translateY(2vh);
-    }
-    50%{
-      transform: translateY(-2vh);
-    }
-    100%{
-      transform: translateY(2vh);
     }
   }
 </style>
