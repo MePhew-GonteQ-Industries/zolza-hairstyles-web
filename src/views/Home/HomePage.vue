@@ -28,9 +28,14 @@
       </div>
 
       <div class="banner">
-        <video class="app-showcase"
-          src="@/assets/appDemo.mp4" mute loop webkit-playsinline playsinline autoplay>
-          </video>
+        <div class="app-showcase-container">
+          <div class="wrapper">
+            <img class="iphone" src="@/assets/iphone-13-pro-max.png" alt="">
+            <video class="app-showcase"
+              src="@/assets/appDemo.mp4" mute loop webkit-playsinline playsinline autoplay>
+            </video>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -151,9 +156,24 @@ export default {
       }
 
       .banner {
-        .app-showcase {
-          height: 75vh;
+        .app-showcase-container {
           padding: 5vh 0;
+        }
+
+        .wrapper {
+          position: relative;
+
+          .iphone {
+            height: 746px;
+            width: 372px;
+          }
+
+          .app-showcase {
+            position: absolute;
+            top: 18px;
+            width: 89%;
+            border-radius: 20px;
+          }
         }
       }
     }
