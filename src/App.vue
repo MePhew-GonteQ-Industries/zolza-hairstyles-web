@@ -264,4 +264,15 @@ export default {
       }
     }
   }
+  @keyframes bounceArrow{
+    0%{
+      transform: translateY(2vh);
+    }
+    50%{
+      transform: translateY(-2vh);
+    }
+    100%{
+      transform: translateY(2vh);
+    }
+  }
 </style>
