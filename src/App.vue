@@ -201,10 +201,7 @@ export default {
             color: white;
             font-size: 2rem;
             margin-bottom: 4%;
-
-            &:hover {
-              cursor: pointer;
-            }
+            cursor: pointer;
           }
 
         .hero {
