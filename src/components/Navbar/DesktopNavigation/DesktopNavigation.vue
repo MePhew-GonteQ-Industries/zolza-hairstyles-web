@@ -6,10 +6,6 @@
 
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
-        <li>
-          <router-link to='/services'>{{ t('nav.primaryNav[1]') }}
-          </router-link>
-        </li>
         <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
       </ul>
 
@@ -28,8 +24,10 @@
       </ul>
 
       <div class="user-prof" v-else>
-        <NotificationsPanel />
-        <img @click="logout" class="prof-icon" src="@/assets/avatar-outline.svg" alt="">
+        <ul>
+          <li><NotificationsPanel /></li>
+          <li><i @click="logout" class="ph-user-light prof-icon"></i></li>
+        </ul>
       </div>
     </nav>
 </template>
@@ -117,6 +115,21 @@ export default {
 
       i {
         font-size: 1.675rem;
+      }
+    }
+  }
+
+  .user-prof {
+    ul {
+      display: flex;
+      gap: 25px;
+      margin: 0 .5rem;
+      font-size: 25px;
+      align-items: center;
+      justify-content: space-around;
+
+      .prof-icon {
+        padding: 1rem;
       }
     }
   }

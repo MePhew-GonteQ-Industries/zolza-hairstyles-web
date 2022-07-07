@@ -1,47 +1,47 @@
 <template>
   <div class="notifications-wrapper" ref="notificationsPanel">
-        <img class="bell-icon"
-        :class="{ clicked: buttonClicked }"
-        :src="notificationsPanelExpanded ? bellFill: bellOutline"
-        alt="bell-notification-icon" @click='toggleNotificationsPanel(); toggleButton();'>
-        <span class="unread-notifications-count">2</span>
-        <div class="notifications-panel" v-show="notificationsPanelExpanded">
-          <div class="panel-header">
-            <h3>Notifications</h3>
-            <router-link to="/notification-settings" @click="collapseNotificationsPanel">
-              <img class="notification-settings" src="@/assets/settings.svg" alt="settings-icon">
-            </router-link>
-          </div>
-          <div class="tab-selector">
-            <button class="tab" :class='{ active: currentTabIndex === 0 }'
-             @click="switchTab(0)">Events</button>
-            <button class="tab" :class='{ active: currentTabIndex === 1 }'
-             @click="switchTab(1)">My account</button>
-            <button class="tab" :class='{ active: currentTabIndex === 2 }'
-             @click="switchTab(2)">What's new</button>
-          </div>
-          <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
-            <p>There aren't any notifications yet</p>
-          </div>
-          <div class="notifications" v-if="currentTabIndex === 0">
-            <ComposedNotification v-for="(notification, index) in notifications[0]"
-            :key="index" :title="notification.title"/>
-          </div>
-          <div class="notifications" v-else-if="currentTabIndex === 1">
-            <ComposedNotification v-for="(notification, index) in notifications[1]"
-            :key="index" :title="notification.title"/>
-
-          </div>
-          <div class="notifications" v-else-if="currentTabIndex === 2">
-            <ComposedNotification v-for="(notification, index) in notifications[2]"
-            :key="index" :title="notification.title"/>
-          </div>
-          <div class="panel-footer">
-            <p class="notifications-count">3 notifications</p>
-            <button class="clear-notifications" @click="clearNotifications">
-              Clear all</button>
-          </div>
+    <i class="bell-icon"
+    :class="notificationsPanelExpanded ? 'ph-bell-fill': 'ph-bell-light'"
+    @click='toggleNotificationsPanel(); toggleButton();'></i>
+    <span class="unread-notifications-count"
+    @click='toggleNotificationsPanel(); toggleButton();'>2</span>
+    <div class="notifications-panel" v-show="notificationsPanelExpanded">
+      <div class="panel-header">
+        <h3>Notifications</h3>
+        <router-link to="/notification-settings" @click="collapseNotificationsPanel">
+          <img class="notification-settings" src="@/assets/settings.svg" alt="settings-icon">
+        </router-link>
       </div>
+      <div class="tab-selector">
+        <button class="tab" :class='{ active: currentTabIndex === 0 }'
+          @click="switchTab(0)">Events</button>
+        <button class="tab" :class='{ active: currentTabIndex === 1 }'
+          @click="switchTab(1)">My account</button>
+        <button class="tab" :class='{ active: currentTabIndex === 2 }'
+          @click="switchTab(2)">What's new</button>
+      </div>
+      <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
+        <p>There aren't any notifications yet</p>
+      </div>
+      <div class="notifications" v-if="currentTabIndex === 0">
+        <ComposedNotification v-for="(notification, index) in notifications[0]"
+        :key="index" :title="notification.title"/>
+      </div>
+      <div class="notifications" v-else-if="currentTabIndex === 1">
+        <ComposedNotification v-for="(notification, index) in notifications[1]"
+        :key="index" :title="notification.title"/>
+
+      </div>
+      <div class="notifications" v-else-if="currentTabIndex === 2">
+        <ComposedNotification v-for="(notification, index) in notifications[2]"
+        :key="index" :title="notification.title"/>
+      </div>
+      <div class="panel-footer">
+        <p class="notifications-count">3 notifications</p>
+        <button class="clear-notifications" @click="clearNotifications">
+          Clear all</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -157,11 +157,10 @@ export default {
   }
 
   .bell-icon {
-    width: 25px;
-    height: 25px;
+    font-size: 25px;
     cursor: pointer;
     box-sizing: content-box;
-    padding: 4px;
+    padding: 1rem;
     border-radius: 50%;
     border: .1px solid transparent;
 
@@ -175,9 +174,8 @@ export default {
   }
 
   .unread-notifications-count {
-    background-color: #CD0700;
-    color: $primary-text-color;
-    padding: 4px;
+    background-color: $text-color-element-active;
+    color: white;
     display: flex;
     width: 20px;
     height: 20px;
@@ -185,11 +183,11 @@ export default {
     justify-content: center;
     border-radius: 50%;
     position: absolute;
-    right: -10px;
-    top: -5px;
-    font-size: .6rem;
-    border: 2px solid $accent-bg-color;
+    top: 10px;
+    right: 10px;
+    font-size: .688rem;
     font-weight: 600;
+    cursor: pointer;
   }
 
   .notifications-panel {
@@ -204,7 +202,7 @@ export default {
     max-width: 500px;
     background-color: #202427;
     position: absolute;
-    top: 30px;
+    top: 100%;
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
