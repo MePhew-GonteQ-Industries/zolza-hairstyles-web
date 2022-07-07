@@ -202,6 +202,9 @@ export default {
             font-size: 2rem;
             margin-bottom: 4%;
             cursor: pointer;
+            animation-name: bounceArrow;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
           }
 
         .hero {
@@ -247,6 +250,17 @@ export default {
           height: 61px;
         }
       }
+    }
+  }
+  @keyframes bounceArrow{
+    0%{
+      margin-bottom: 4%;
+    }
+    50%{
+      margin-bottom: 2%;
+    }
+    100%{
+      margin-bottom: 4%;
     }
   }
 </style>
