@@ -28,6 +28,7 @@
 </template>
 
 <script>
+// todo: fix animations
 import ServiceTile from '@/components/Home/ServiceTile.vue';
 import axios from 'axios';
 import { ref, onMounted, watch } from 'vue';
