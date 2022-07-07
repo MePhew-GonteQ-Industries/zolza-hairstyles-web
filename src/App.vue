@@ -162,7 +162,7 @@ export default {
           }
         }
 
-        *:not(.router-link-active) {
+        a:not(.router-link-active) {
           color: inherit;
         }
 
