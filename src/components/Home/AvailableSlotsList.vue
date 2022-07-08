@@ -44,10 +44,14 @@ export default {
 
       const slots = [];
 
+      const now = new Date();
+
       availableSlotsData.value.forEach((service) => {
-        const date = new Date(Date.parse(service.start_time));
-        const now = new Date();
-        const day = date === now ? 'Dzisiaj' : date.toLocaleDateString(locale, { weekday: 'long' });
+        const date = new Date(`${service.start_time}Z`);
+
+        const day = date === now ? 'Dzisiaj' : date.toLocaleDateString(locale, {
+          weekday: 'long',
+        });
 
         slots.push({
           day: `${day[0].toUpperCase()}${day.slice(1)}`,
