@@ -27,7 +27,7 @@ export default {
     justify-content: space-around;
     img{
       height: 40vh;
-      color: $primary-fg-color;
+      filter: $mobile-menu-icon-filter;
     }
     h3{
       font-size: 8em;
