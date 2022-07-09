@@ -25,23 +25,26 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
   #page-not-found{
     justify-content: space-around;
+
     img{
       height: 40vh;
-      color: $primary-fg-color;
+      color: $primary-color;
     }
-    h3{
+
+    h3 {
       font-size: 8em;
-      color: $primary-fg-color;
+      color: $primary-color;
       font-family: 'Poppins', sans-serif;
     }
-    a{
+
+    a {
       display: flex;
       height: 60px;
       width: 200px;
       border-radius: 30px;
       border: 2px solid transparent;
       background-color: #1A92F0;
-      color: $primary-fg-color;
+      color: $primary-color;
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
