@@ -7,11 +7,12 @@
     box-sizing: border-box;
     // font-family: 'Open Sans', sans-serif;
     font-family: 'Poppins', sans-serif;
-    transition: color, background-color $color-transition-duration;
+    transition: transform $transition-duration, 
+        background-color $transition-duration,
+        box-shadow $transition-duration;
 }
 
 a {
-    color: #444;
     text-decoration: none;
     font-size: 20px;
     padding: 0 5px 0 5px;
@@ -26,6 +27,98 @@ ul {
     justify-content: space-around;
     align-items: center;
     flex-flow: column;
-    background-color: white;
-    color: black;
+    background-color: $primary-color;
+    color: $primary-text-color;
+}
+
+.dashboard-page {
+    margin-block: 1rem;
+    padding: 2rem 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    background-color: $primary-color;
+    border-radius: 2.5rem 0 0 2.5rem;
+
+    h2 {
+        color: $primary-text-color;
+    }
+}
+
+.document-page {
+    padding: 2rem 20vw;
+    justify-content: space-evenly;
+
+    article {
+        max-width: 900px;
+        color: $primary-text-color;
+
+        .last-change {
+        font-weight: 500;
+        }
+
+        h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 28px;
+        font-weight: 700;
+        line-height: 1.25;
+        color: $accent-color;
+        }
+
+        h2 {
+        font-size: 1.625rem;
+        margin: 2.2rem 0 2rem 0;
+        color: $accent-color;
+        }
+
+        span.strong {
+        font-weight: 600;
+        }
+
+        span.small {
+        font-size: 85%;
+        }
+
+        span.new-line {
+        display: block;
+        }
+
+        span.bottom-spacing {
+        margin-bottom: 2rem;
+        }
+
+        p {
+        margin: 0 0 1rem;
+        font-size: 1rem;
+        }
+
+        a {
+        color: $accent-color;
+        text-decoration: underline;
+        font-size: 1rem;
+        }
+
+        ul > li {
+        list-style-type: disc;
+        }
+
+        ul, li ul {
+        padding-left: 3rem;
+        }
+
+        li ul > li {
+        list-style-type: circle;
+        }
+
+        li ul li ul > li {
+        list-style-type: square;
+        }
+
+        li:last-of-type {
+        margin-bottom: 1rem;
+        }
+    }
 }
