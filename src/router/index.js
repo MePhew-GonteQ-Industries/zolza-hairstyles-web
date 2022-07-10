@@ -96,6 +96,43 @@ const routes = [{
   path: '/dashboard',
   name: 'Dashboard',
   component: () => import('@/views/Dashboard/DashboardPage.vue'),
+  children: [
+    {
+      path: '/dashboard',
+      component: () => import('@/views/Dashboard/SummaryView.vue'),
+      name: 'summaryView',
+    },
+    {
+      path: 'appointments',
+      component: () => import('@/views/Dashboard/AppointmentsManagement.vue'),
+      name: 'appointmentsManagement',
+    },
+    {
+      path: 'services',
+      component: () => import('@/views/Dashboard/ServicesManagement.vue'),
+      name: 'servicesManagement',
+    },
+    {
+      path: 'users',
+      component: () => import('@/views/Dashboard/UsersManagement.vue'),
+      name: 'usersManagement',
+    },
+    {
+      path: 'work-hours',
+      component: () => import('@/views/Dashboard/WorkHoursManagement.vue'),
+      name: 'workHoursManagement',
+    },
+    {
+      path: 'stats',
+      component: () => import('@/views/Dashboard/StatsView.vue'),
+      name: 'statsView',
+    },
+    {
+      path: 'settings',
+      component: () => import('@/views/Dashboard/ServiceSettings.vue'),
+      name: 'serviceSettings',
+    },
+  ],
 },
 {
   path: '/:catchAll(.*)',
@@ -111,13 +148,23 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  if (to.name === 'Login') {
-    if (!store.state.user.loggedIn) {
+  switch (to.name) {
+    case 'Login': {
+      if (!store.state.user.loggedIn) {
+        return true;
+      }
+      return { name: 'Home' };
+    }
+    case 'Dashboard': {
+      if (!store.state.user.loggedIn || !store.state.user.userData.permission_level.includes('admin')) {
+        return { name: 'Login' };
+      }
       return true;
     }
-    return { name: 'Home' };
+    default: {
+      return true;
+    }
   }
-  return true;
 });
 
 export default router;
