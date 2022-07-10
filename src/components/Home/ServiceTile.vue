@@ -7,16 +7,17 @@
   <div class="right">
     <div class="time-wrapper">
       <p class="time">Czas: <span>~{{ time }}min</span></p>
-      <CustomProgressBar color="#9ae66e" :value="time"/>
+      <CustomProgressBar :value="time"/>
     </div>
     <div class="available-dates-wrapper">
       <p class="available-dates">Dostępne terminy</p>
-      <CustomProgressBar color="lightskyblue" :value="availability"/>
+      <CustomProgressBar :value="availability"/>
     </div>
     <p class="price">Cena: <span>{{ priceMin }}
       <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span></p>
   </div>
-  <input type="radio" name="select-service" @change="$emit('updateSelectedService', id)" id="">
+  <input class='select-service'
+  type="radio" name="select-service" @change="$emit('updateSelectedService', id)" id="">
 </div>
 </template>
 
@@ -69,12 +70,11 @@ export default {
   column-gap: 2rem;
   justify-items: center;
   align-items: center;
+  color: $secondary-text-color;
 
-  // p {
-  //   span {
-  //     font-weight: 600;
-  //   }
-  // }
+  .select-service:focus {
+    outline: orange;
+  }
 
   .left {
     .name {

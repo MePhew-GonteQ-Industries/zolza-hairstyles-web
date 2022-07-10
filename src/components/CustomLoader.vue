@@ -24,7 +24,7 @@ export default {
     position: absolute;
     width: 40px;
     height: 40px;
-    border: 5px solid $text-color-element-active;
+    border: 5px solid $accent-color;
     border-top-color: transparent;
     border-radius: 50%;
   }

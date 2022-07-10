@@ -65,7 +65,8 @@ export default {
   gap: 1rem;
 
   .date {
-      background-color: $color;
+      background-color: $primary-color;
+      color: $secondary-text-color;
       border-radius: 1rem;
       padding: 10px;
       font-size: 1.125rem;
@@ -85,6 +86,7 @@ export default {
     flex-direction: column;
     height: 100%;
     justify-content: space-evenly;
+    color: $accent-color;
 
     .button {
       display: flex;

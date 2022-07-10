@@ -18,20 +18,18 @@
       <span class="selected-value">
       {{ title }}</span>
 
-      <img src="@/assets/arrow-down.svg" alt="dropdown-arrow"
-        class="dropdown-arrow"
-        :class="{ flipped: !expanded }"/>
+      <i class="ph-caret-down-light dropdown-arrow"
+      :class="{ flipped: !expanded }"></i>
 
-      <img class="select-icon" :src="currentIconSrc" alt="select icon"
+      <i class="select-icon" :class="currentIconClass"
       @focus.stop
       @mousedown.stop
       @mouseenter="toggleSelectHover"
-      @mouseleave="toggleSelectHover" tabindex="-1">
+      @mouseleave="toggleSelectHover" tabindex="-1"></i>
 
     </div>
     <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
-      <img class="invalid-icon"
-      src="@/assets/exclamation-mark.svg" alt="">
+      <i class="ph-warning-circle-light invalid-icon"></i>
 
       <p class="messageInvalid messageValueEmpty"
       v-if="required && selectedItem === null">{{ messageEmpty }}</p>
@@ -47,7 +45,7 @@
           <span :class="{ selected: index === selectedItem }">
           {{ option.title }}</span>
 
-          <img :src="option.iconSrc" :alt="option.iconAlt">
+          <i :class="option.iconClass"></i>
         </li>
       </ol>
     </div>
@@ -65,7 +63,7 @@ export default {
       type: String,
       required: true,
     },
-    iconSrc: {
+    iconClass: {
       type: String,
       required: true,
     },
@@ -102,7 +100,7 @@ export default {
     const selectedItem = ref(null);
     const expanded = ref(false);
     const title = ref('');
-    const currentIconSrc = ref(props.iconSrc);
+    const currentIconClass = ref(props.iconClass);
 
     const select = ref(null);
 
@@ -111,7 +109,7 @@ export default {
     function changeCurrentItem() {
       selectedValue.value = props.options[selectedItem.value].value;
       ctx.emit('update:selected-value', selectedValue.value);
-      currentIconSrc.value = props.options[selectedItem.value].iconSrc;
+      currentIconClass.value = props.options[selectedItem.value].iconClass;
       title.value = props.options[selectedItem.value].title;
     }
 
@@ -182,7 +180,7 @@ export default {
       collapseDropdown,
       changeValue,
       title,
-      currentIconSrc,
+      currentIconClass,
       expandDropdown,
       selectNextOption,
       selectedItem,
@@ -198,24 +196,25 @@ export default {
 
 <style lang='scss' scoped>
 .select-wrapper {
-  color: $accent-text-color;
   position: relative;
   margin-bottom: 45px;
 
   .invalid-wrapper {
     position: absolute;
-    margin-top: 8px;
     top: 100%;
-    left: 8px;
+    left: 0;
+    margin: .5rem 1rem;
     display: flex;
     flex-direction: row;
     gap: 15px;
+    align-items: center;
+    transform: translate3d(0, 0, 0);
 
     .invalid-icon {
       position: static;
-      width: 25px;
-      height: 25px;
-      }
+      font-size: 2rem;
+      color: $color-danger;
+    }
 
     .messageInvalid {
       color: $color-danger;
@@ -226,33 +225,33 @@ export default {
     position: relative;
     outline: none;
     border: 2px solid transparent;
-    background-color: $element-bg-color;
+    background-color: $secondary-color;
     height: 65px;
     width: 50vw;
     min-width: 250px;
     max-width: 420px;
     border-radius: 15px;
     box-shadow: none;
-    transition: all 0.1s;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all $transition-duration;
 
   &.invalid {
-    border-color: $border-color-invalid;
-    box-shadow: 0 0 0px 3px $box-shadow-color-invalid;
+    border-color: $color-invalid;
+    box-shadow: 0 0 10px 1px $color-invalid;
   }
 
   &.hover-enabled:hover:not(.expanded) {
-    border-color: $border-color-hover-primary;
+    border-color: $accent-color;
     box-shadow: none;
   }
 
   &.expanded {
-    border-color: $border-color-active-primary;
-    background-color: $element-bg-color-active;
-    box-shadow: 0 0 0 3px $element-box-shadow-active;
+    border-color: $accent-color;
+    background-color: $secondary-color;
+    box-shadow: 0 0 10px 1px $accent-color;
     border-radius: 15px 15px 0 0;
     border-width: 2px;
   }
@@ -261,11 +260,11 @@ export default {
     position: absolute;
     left: 30px;
     transform-origin: 0 0;
-    transition: transform .6s;
     user-select: none;
+    color: $primary-text-color;
 
     &.expanded, &.value-selected {
-      color: $text-color-element-active;
+      color: $accent-color;
     }
 
     &.value-selected {
@@ -273,11 +272,13 @@ export default {
     }
   }
 
+  i {
+    font-size: 2rem;
+  }
+
   .select-icon {
     position: absolute;
     right: 30px;
-    width: 30px;
-    height: 30px;
     cursor: default;
   }
 
@@ -285,17 +286,15 @@ export default {
     padding-top: 20px;
     position: absolute;
     left: 30px;
-    transition: all 0.5s;
     backface-visibility: hidden;
     transform-origin: 0 0;
-    color: $primary-text-color;
+    color: $secondary-text-color;
     font-size: .8em;
     font-weight: 600;
   }
 
     .dropdown-arrow {
       position: absolute;
-      transition: all .5s;
       user-select: none;
 
       &.flipped {
@@ -315,7 +314,7 @@ export default {
       border-width: 0;
       border-style: solid;
       border-color: transparent;
-      background-color: $element-bg-color;
+      background-color: $secondary-color;
       box-shadow: none;
       max-height: 0;
       overflow: hidden;
@@ -333,9 +332,8 @@ export default {
 
       &.show {
         animation: expand .6s forwards;
-        border-color: $border-color-active-primary;
-        background-color: $element-bg-color-active;
-        box-shadow: 0 0 0 3px $element-box-shadow-active;
+        border-color: $accent-color;
+        box-shadow: 0 0 10px 1px $accent-color;
         border-width: 2px;
       }
 
@@ -348,31 +346,29 @@ export default {
           align-items: center;
           justify-content: flex-start;
           cursor: pointer;
-          transition: color 400ms, background-color 400ms;
-
-          span {
-            position: absolute;
-            left: 30px;
-
-            &.selected {
-              color: $primary-text-color;
-            }
-          }
-
-          img {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            right: 30px;
-          }
 
           &:focus {
             outline: none;
           }
 
           &:hover, &:focus {
-            background-color: $element-bg-color;
-            color: rgb(196, 196, 196);
+            background-color: $primary-color;
+            color: $secondary-text-color;
+          }
+
+          span {
+            position: absolute;
+            left: 30px;
+
+            &.selected {
+              color: $secondary-text-color;
+            }
+          }
+
+          i {
+            position: absolute;
+            right: 30px;
+            font-size: 2rem;
           }
         }
       }

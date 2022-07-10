@@ -104,10 +104,6 @@ export default {
       opacity: 0;
     }
 
-  .loader {
-    transition: all 1s;
-  }
-
   .services {
     grid-template-columns: repeat(2, 1fr);
     padding: 2.5rem 10%;

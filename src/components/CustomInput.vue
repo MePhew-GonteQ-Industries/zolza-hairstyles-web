@@ -8,17 +8,15 @@
 
     <label :for="inputId">{{ label }}</label>
 
-    <img :src="iconSrc" alt="">
-    <i class="ph-envelope-simple-light"></i>
+    <i :class="iconClass"></i>
 
     <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
-      <img class="invalid-icon"
-      src="@/assets/exclamation-mark.svg" alt="">
+      <i class="ph-warning-circle-light invalid-icon"></i>
 
-      <p class="messageInvalid messageValueEmpty"
+      <p class="message-invalid message-value-empty"
       v-if="required && empty">{{ messageEmpty }}</p>
 
-      <p class="messageInvalid messageValueInvalid"
+      <p class="message-invalid message-value-invalid"
       v-if="!(required && empty)">{{ messageInvalid }}</p>
 
     </div>
@@ -41,7 +39,7 @@ export default {
       type: String,
       required: true,
     },
-    iconSrc: {
+    iconClass: {
       type: String,
       required: true,
     },
@@ -103,37 +101,36 @@ export default {
 
   .invalid-wrapper {
     position: absolute;
-    margin-top: 8px;
     top: 100%;
-    left: 8px;
+    left: 0;
+    margin: .5rem 1rem;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     gap: 15px;
+    transform: translate3d(0, 0, 0);
 
     .invalid-icon {
       position: static;
-      width: 25px;
-      height: 25px;
+      font-size: 2rem;
+      color: $color-danger;
       }
 
-    .messageInvalid {
+    .message-invalid {
       color: $color-danger;
     }
   }
 
   label {
-    color: $accent-text-color;
+    color: $primary-text-color;
     position: absolute;
     left: 30px;
-    transition: all 0.5s;
     pointer-events: none;
     backface-visibility: hidden;
     transform-origin: 0 0;
   }
 
-  img {
-    width: 30px;
-    height: 30px;
+  i {
+    font-size: 2rem;
     position: absolute;
     right: 30px
   }
@@ -141,31 +138,39 @@ export default {
   input {
     padding: 20px 90px 0 30px;
     border: 2px solid transparent;
-    background-color: $element-bg-color;
-    color: $primary-text-color;
+    background-color: $secondary-color;
+    color: $secondary-text-color;
     height: 65px;
     width: 50vw;
     min-width: 250px;
     max-width: 420px;
     border-radius: 15px;
     box-shadow: none;
-    transition: all .3s;
     font-weight: 600;
+    transition: all calc($transition-duration * 2);
+    filter: none;
 
     &.invalid {
-      border-color: $border-color-invalid;
-      box-shadow: 0 0 0px 3px $box-shadow-color-invalid;
+      border-color: $color-invalid;
+      box-shadow: 0 0 10px 1px $color-invalid;
     }
 
-   &:-webkit-autofill{
-      -webkit-text-fill-color: $primary-text-color;
-      color: $primary-text-color;
+   &:-webkit-autofill,
+   &:autofill {
+      -webkit-text-fill-color: $secondary-text-color;
+      background: $secondary-color;
+      color: $secondary-text-color;
     }
 
     &:-webkit-autofill,
+    &:autofill,
     &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus {
-      transition: background-color 5000s ease-in-out 0s, border-color .3s, box-shadow .3s;
+    &:autofill:hover,
+    &:-webkit-autofill:focus,
+    &:autofill:focus {
+      transition: background-color 5000s ease-in-out 0s,
+      border-color $transition-duration,
+      box-shadow $transition-duration;
     }
 
     &:focus, &:hover {
@@ -173,21 +178,20 @@ export default {
     }
 
     &:hover:not(:focus) {
-      border-color: $border-color-hover-primary;
+      border-color: $accent-color;
       box-shadow: none;
     }
 
     &:focus {
-      border-color: $border-color-active-primary;
-      background-color: $element-bg-color-active;
-      box-shadow: 0 0 0px 3px $element-box-shadow-active;
+      border-color: $accent-color;
+      box-shadow: 0 0 10px 1px $accent-color;
       outline: none;
     }
 
     &:focus + label,
     &:not(:placeholder-shown) + label,
     &:-webkit-autofill:active + label  {
-      color: $text-color-element-active;
+      color: $accent-color;
       transform: translateY(-0.6em) scale(0.8);
     }
 

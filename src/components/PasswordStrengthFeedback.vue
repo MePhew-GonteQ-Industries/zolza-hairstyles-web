@@ -41,7 +41,7 @@ export default {
 .po-password-strength-bar {
   position: relative;
   border-radius: 5px;
-  transition: all 600ms linear !important;
+  transition: all var(--transition-duration) linear !important;
   height: 10px;
   width: 100%;
   background-color: #f95e68;
@@ -77,7 +77,7 @@ export default {
     width: 0;
 }
 .po-password-strength-bar::before {
-  transition: all 600ms linear;
+  transition: all var(--transition-duration) linear !important;
 }
 .po-password-strength-bar.secure::before {
     position: absolute;
@@ -101,7 +101,6 @@ export default {
   color: $color-danger;
   height: 0;
   overflow: hidden;
-  transition: all 500ms;
 
   &.shown {
     height: 100px;

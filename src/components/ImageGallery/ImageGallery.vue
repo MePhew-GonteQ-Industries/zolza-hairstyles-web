@@ -29,8 +29,10 @@ import { Autoplay, Pagination, Navigation } from 'swiper';
 
 /* eslint-disable */
 import 'swiper/scss';
+import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
+import 'swiper/scss/thumbs';
 
 export default {
   name: 'ImageGallery',
@@ -53,8 +55,8 @@ export default {
 </script>
 
 <style lang="scss">
-:root {
-  --swiper-theme-color: #{$text-color-element-active};
+.swiper {
+  --swiper-theme-color: #{$accent-color};
 }
 
 .swiper-button-next {

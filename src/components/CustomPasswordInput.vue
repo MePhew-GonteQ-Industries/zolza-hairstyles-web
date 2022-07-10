@@ -12,17 +12,15 @@
     <label :for="inputId">{{ label }}</label>
 
     <div class="show-password" @click="showPassword">
-      <img class="eye-icon" v-if="passwordHidden"
-      src="@/assets/eye-crossed-out.svg" alt="show-password-icon">
 
-      <img class="eye-icon" v-if="!passwordHidden"
-      src="@/assets/eye.svg" alt="hide-password-icon">
+      <i class="ph-eye-slash-light eye-icon" v-if="passwordHidden"></i>
+
+      <i class="ph-eye-light eye-icon" v-if="!passwordHidden"></i>
 
     </div>
 
     <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
-      <img class="invalid-icon"
-      src="@/assets/exclamation-mark.svg" alt="">
+      <i class="ph-warning-circle-light invalid-icon"></i>
 
       <p class="messageInvalid messageValueEmpty"
       v-if="required && empty">{{ messageEmpty }}</p>
@@ -107,10 +105,9 @@ export default {
   margin-bottom: 45px;
 
   label {
-    color: $accent-text-color;
+    color: $primary-text-color;
     position: absolute;
     left: 30px;
-    transition: all 0.5s;
     pointer-events: none;
     backface-visibility: hidden;
     transform-origin: 0 0;
@@ -118,17 +115,19 @@ export default {
 
   .invalid-wrapper {
     position: absolute;
-    margin-top: 8px;
     top: 100%;
-    left: 8px;
+    left: 0;
+    margin: .5rem 1rem;
     display: flex;
     flex-direction: row;
     gap: 15px;
+    align-items: center;
+    transform: translate3d(0, 0, 0);
 
     .invalid-icon {
       position: static;
-      width: 25px;
-      height: 25px;
+      font-size: 2rem;
+      color: $color-danger;
       }
 
     .messageInvalid {
@@ -150,22 +149,12 @@ export default {
     background-color: transparent;
     cursor: pointer;
 
-    img {
-      width: 30px;
-      height: 30px;
-    }
-
     &:hover {
-      background-color: $element-bg-color-hover-secondary;
-    }
-
-    &:active {
-      background-color: $element-bg-color-active-secondary;
+      background-color: $primary-color;
     }
 
     .eye-icon {
-      width: 30px;
-      height: 30px;
+      font-size: 2rem;
       user-select: none;
     }
   }
@@ -173,34 +162,38 @@ export default {
   input {
     padding: 20px 90px 0 30px;
     border: 2px solid transparent;
-    background-color: $element-bg-color;
-    color: $primary-text-color;
+    background-color: $secondary-color;
+    color: $secondary-text-color;
     height: 65px;
     width: 420px;
     border-radius: 15px;
     box-shadow: none;
-    transition: all .3s, letter-spacing .6s;
     width: 50vw;
     min-width: 250px;
     max-width: 420px;
     font-weight: 600;
 
     &.invalid {
-      border-color: $border-color-invalid;
-      box-shadow: 0 0 0px 3px $box-shadow-color-invalid;
+      border-color: $color-invalid;
+      box-shadow: 0 0 10px 1px $color-invalid;
     }
 
-    &:-webkit-autofill{
-      -webkit-text-fill-color: $primary-text-color;
-      color: $primary-text-color;
-      font-family: 'Open Sans', sans-serif;
+   &:-webkit-autofill,
+   &:autofill {
+      -webkit-text-fill-color: $secondary-text-color;
+      background: $secondary-color;
+      color: $secondary-text-color;
     }
 
     &:-webkit-autofill,
+    &:autofill,
     &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus {
+    &:autofill:hover,
+    &:-webkit-autofill:focus,
+    &:autofill:focus {
       transition: background-color 5000s ease-in-out 0s,
-      border-color .3s, box-shadow .3s, letter-spacing .6s;
+      border-color $transition-duration,
+      box-shadow $transition-duration;
     }
 
     &:focus, &:hover {
@@ -208,14 +201,13 @@ export default {
     }
 
     &:hover:not(:focus) {
-      border-color: $border-color-hover-primary;
+      border-color: $accent-color;
       box-shadow: none;
     }
 
     &:focus {
-      border-color: $border-color-active-primary;
-      background-color: $element-bg-color-active;
-      box-shadow: 0 0 0px 3px $element-box-shadow-active;
+      border-color: $accent-color;
+      box-shadow: 0 0 10px 1px $accent-color;
       outline: none;
     }
 
@@ -226,7 +218,7 @@ export default {
     &:focus + label,
     &:not(:placeholder-shown) + label,
     &:-webkit-autofill:active + label  {
-      color: $text-color-element-active;
+      color: $accent-color;
       transform: translateY(-0.6em) scale(0.8);
     }
 

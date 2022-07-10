@@ -10,10 +10,6 @@ import { ref, onMounted } from 'vue';
 export default {
   name: 'CustomProgressBar',
   props: {
-    color: {
-      type: String,
-      required: true,
-    },
     value: {
       type: Number,
       required: true,
@@ -23,7 +19,6 @@ export default {
     const progress = ref(null);
 
     onMounted(() => {
-      progress.value.style.setProperty('--color', props.color);
       progress.value.style.setProperty('--value', `${props.value}%`);
     });
 
@@ -38,18 +33,16 @@ export default {
 .progress-bar {
   --border-radius: 1rem;
   $border-radius: var(--border-radius);
-  --color: none;
-  $color: var(--color);
   --value: none;
   $value: var(--value);
 
   height: .7rem;
   width: 100%;
   border-radius: $border-radius;
-  background-color: #dedede;
+  background-color: $secondary-color;
 
   .progress {
-    background-color: $color;
+    background-color: $accent-color;
     height: 100%;
     width: $value;
     border-radius: $border-radius 0 0 $border-radius;

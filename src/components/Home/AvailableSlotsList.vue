@@ -138,7 +138,7 @@ export default {
 
   .available-dates {
     width: 100%;
-    background-color: #f2f2f2;
+    background-color: $secondary-color;
     color: black;
     display: grid;
     row-gap: 2rem;

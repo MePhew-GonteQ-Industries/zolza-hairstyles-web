@@ -2,14 +2,14 @@
   <div class="notifications-wrapper" ref="notificationsPanel">
     <i class="bell-icon"
     :class="notificationsPanelExpanded ? 'ph-bell-fill': 'ph-bell-light'"
-    @click='toggleNotificationsPanel(); toggleButton();'></i>
+    @click='toggleNotificationsPanel'></i>
     <span class="unread-notifications-count"
-    @click='toggleNotificationsPanel(); toggleButton();'>2</span>
+    @click='toggleNotificationsPanel'>2</span>
     <div class="notifications-panel" v-show="notificationsPanelExpanded">
       <div class="panel-header">
         <h3>Notifications</h3>
         <router-link to="/notification-settings" @click="collapseNotificationsPanel">
-          <img class="notification-settings" src="@/assets/settings.svg" alt="settings-icon">
+          <i class="ph-gear-six-light notification-settings"></i>
         </router-link>
       </div>
       <div class="tab-selector">
@@ -49,8 +49,6 @@
 import { ref } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 import ComposedNotification from '@/components/Navbar/ComposedNotification.vue';
-import bellFill from '@/assets/bell-fill.svg';
-import bellOutline from '@/assets/bell-outline.svg';
 
 export default {
   name: 'NotificationsPanel',
@@ -71,12 +69,9 @@ export default {
         { title: 'Password Updated' },
         { title: 'Two Factor Authentication Enabled' },
         { title: 'Notification Test' },
-        { title: 'Notification Test' },
       ],
       [
         { title: 'New feature: appointment history' },
-        { title: 'Notification Test 2' },
-        { title: 'Notification Test 2' },
         { title: 'Notification Test 2' },
       ],
     ]);
@@ -103,16 +98,6 @@ export default {
       notifications.value[currentTabIndex.value] = [];
     }
 
-    const buttonClicked = ref(false);
-
-    function toggleButton() {
-      buttonClicked.value = true;
-
-      setTimeout(() => {
-        buttonClicked.value = false;
-      }, 500);
-    }
-
     return {
       notificationsPanelExpanded,
       toggleNotificationsPanel,
@@ -122,10 +107,6 @@ export default {
       collapseNotificationsPanel,
       clearNotifications,
       notifications,
-      bellFill,
-      bellOutline,
-      toggleButton,
-      buttonClicked,
     };
   },
 };
@@ -139,23 +120,6 @@ export default {
   justify-content: center;
   position: relative;
 
-  @keyframes ripple {
-    0% {
-      background-color: #55575e;
-      border-color: transparent;
-    }
-
-    50% {
-      border-color: $border-color-active-secondary;
-      background-color: #55575e;
-    }
-
-    100% {
-      border-color: transparent;
-      background-color: transparent;
-    }
-  }
-
   .bell-icon {
     font-size: 25px;
     cursor: pointer;
@@ -165,17 +129,12 @@ export default {
     border: .1px solid transparent;
 
     &:active {
-      background-color: #55575e;
-    }
-
-    &.clicked {
-      animation: ripple .4s;
+      background-color: $secondary-color;
     }
   }
 
   .unread-notifications-count {
-    background-color: $text-color-element-active;
-    color: white;
+    background-color: $accent-color;
     display: flex;
     width: 20px;
     height: 20px;
@@ -193,19 +152,20 @@ export default {
   .notifications-panel {
     border-width: 0 1px 1px 1px;
     border-style: solid;
-    border-color: #363b41;
+    border-color: $secondary-color;
     height: 50vh;
     width: 50vw;
     min-height: 450px;
     max-height: 500px;
     min-width: 400px;
     max-width: 500px;
-    background-color: #202427;
+    background-color: $primary-color;
     position: absolute;
     top: 100%;
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
+    z-index: 10;
 
     h3 {
       font-weight: 600;
@@ -218,9 +178,9 @@ export default {
       padding: 20px 20px 0 20px;
 
       .notification-settings {
-        height: 25px;
-        width: 25px;
+        font-size: 2rem;
         cursor: pointer;
+        color: $primary-text-color;
       }
     }
 
@@ -229,18 +189,18 @@ export default {
       display: flex;
       justify-content: space-evenly;
       padding: 20px;
-      border-bottom: 1px solid #363b41;
+      border-bottom: 1px solid $secondary-color;
 
       .tab {
         font-size: 1rem;
         background-color: transparent;
         border: none;
-        color: grey;
+        color: $primary-text-color;
         cursor: pointer;
         position: relative;
 
         &.active {
-          color: white
+          color: $secondary-text-color
         }
 
         &.active::after {
@@ -249,9 +209,8 @@ export default {
           bottom: -21px;
           height: 1px;
           width: 100%;
-          background-color: #43C2FC;
+          background-color: $accent-color;
           left: 0;
-          transition: transform 500ms;
         }
       }
     }
@@ -284,15 +243,14 @@ export default {
       .clear-notifications {
         padding: 10px 20px;
         border-radius: 5px;
-        background-color: #43C2FC;
+        background-color: $accent-color;
         cursor: pointer;
         outline: none;
         border: none;
         border: 2px solid transparent;
-        transition: border-color 600ms;
 
         &:hover {
-          border-color: $border-color-active-secondary;
+          border-color: $accent-color;
         }
       }
     }
