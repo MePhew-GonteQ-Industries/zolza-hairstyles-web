@@ -1,6 +1,7 @@
 <template>
   <section class="app-page" id="dashboard-page">
       <DasboardNavigation class='dashboard-navigation'/>
+      <router-view></router-view>
   </section>
 </template>
 
@@ -15,12 +16,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #dashboard-page {
-  justify-content: flex-start;
-
-  .dashboard-navigation {
-    width: 100%;
-  }
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: stretch;
+  background-color: $secondary-color;
 }
 </style>
