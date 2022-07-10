@@ -1,126 +1,29 @@
 :root {
-    --text-color-element-active: #00a2e8;
+    --primary-color: #2D2833;
+    --secondary-color: #3D3943;
+    --accent-color: #00E8B0;
+    
+    --primary-text-color: #B3B1B5;
+    --secondary-text-color: white;
+    --accent-text-color: #77747B;
 }
 
 #app-wrapper[data-theme='light'] {
-    /* general */
-    --primary-fg-color: #231F20;
-    --primary-bg-color: #FFF;
-    --accent-bg-color: #e5e6e8;
-    --page-fg-color: #506AD4;
-    --link-active-color: #BD4BBF;
+    --primary-color: #F8FAFB;
+    --secondary-color: #e2e2e2;
+    --accent-color: #00a2e8;
 
-    --primary-text-color: black;
-    --accent-text-color: #84868f;
-    --text-color-element-active: #00a2e8;
-
-    --element-bg-color: #F2F6FC;
-    --element-secondary-accent-bg-color: #1A92F0;
-    --element-secondary-accent-text-color: white;
-    --element-bg-color-active: white;
-    --element-bg-color-hover-secondary: #d1cccc;
-    --element-bg-color-active-secondary: #b4b4b4;
-
-    --element-box-shadow-active: #ECF5FD;
-    --element-box-shadow-active-secondary: #9c9c9c;
-
-    --border-color-invalid: #f3716f;
-    --box-shadow-color-invalid: #eebdc9;
-
-    --border-color-hover-primary: #5BB3FC;
-    --border-color-active-primary: #39a3fa;
-    --border-color-active-secondary: white;
-    --color-danger: #F95249;
-    --color-invalid: #853635;
-
-    /*reactive*/
-    --hover-color: #fb69ff;
-
-    /* mobile menu */
-    --mobile-menu-icon-filter: brightness(0);
-    --mobile-menu-icon-link-active-filter: brightness(0)
-        invert(30%)
-        sepia(88%)
-        saturate(627%)
-        hue-rotate(255deg)
-        brightness(112%)
-        contrast(95%);
-
-    /* footer */
-    --footer-fg-color: #5D626C;
-    --footer-icon-filter: brightness(0)
-        invert(40%)
-        sepia(4%)
-        saturate(1175%)
-        hue-rotate(182deg)
-        brightness(91%)
-        contrast(90%);
-    --footer-icon-hover-filter: invert(32%)
-        sepia(24%)
-        saturate(1776%)
-        hue-rotate(252deg)
-        brightness(94%)
-        contrast(93%);
-
-    /* logo */
-    --logo-filter: invert(0);
+    --primary-text-color: rgb(44, 44, 44);
+    --secondary-text-color: black;
+    --accent-text-color: #77747B;
 }
 
 #app-wrapper[data-theme='dark'] {
-    /* general */
-    --primary-fg-color: #F5F5F5;
-    --primary-bg-color: #272A36; /* #3D3D3D */
-    --accent-bg-color: #232327; /* #121212 */
-    --page-fg-color: orange; /* #fff28c */
-    --link-active-color: pink; /* #3EB595 */
-
-    --primary-text-color: white;
-    --accent-text-color: #84868f;
-    --text-color-element-active: #00a2e8;
-
-    --element-bg-color: #323644;
-    --element-secondary-accent-bg-color: #1A92F0;
-    --element-secondary-accent-text-color: white;
-    --element-bg-color-active: #3d4049;
-    --element-bg-color-hover-secondary: #2b2d33;
-    --element-bg-color-active-secondary: #55575e;
-
-    --element-box-shadow-active: #274b6d;
-    --element-box-shadow-active-secondary: #9c9c9c;
-
-    --border-color-invalid: #853635;
-    --box-shadow-color-invalid: #382328;
-
-    --border-color-hover-primary: #2167a0;
-    --border-color-active-primary: #3e83ba;
-    --border-color-active-secondary: white;
-    --color-danger: #F95249;
-    --color-invalid: #853635;
-
-    /*reactive*/
-    --hover-color: pink; /* #2C8C99 */
-
-    /* mobile menu */
-    --mobile-menu-icon-filter: brightness(0) invert(1);
-    --mobile-menu-icon-link-active-filter: brightness(0)
-        invert(65%)
-        sepia(21%)
-        saturate(1055%)
-        hue-rotate(113deg)
-        brightness(90%)
-        contrast(91%);
-
-    /* footer */
-    --footer-fg-color: #a4afb7;
-    --footer-icon-filter: none;
-    --footer-icon-hover-filter: brightness(0)
-        invert(46%)
-        sepia(13%)
-        saturate(1971%)
-        hue-rotate(139deg)
-        brightness(99%)
-        contrast(90%);
-
-    /* logo */
-    --logo-filter: brightness(0) saturate(0) invert(100%);
+    --primary-color: #2D2833;
+    --secondary-color: #3D3943;
+    --accent-color: #00E8B0;
+    
+    --primary-text-color: #B3B1B5;
+    --secondary-text-color: white;
+    --accent-text-color: #77747B;
 }

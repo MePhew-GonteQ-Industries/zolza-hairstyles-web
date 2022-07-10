@@ -1,51 +1,14 @@
 @import '_colors';
 
-// general
-$primary-fg-color: var(--primary-fg-color);
-$primary-bg-color: var(--primary-bg-color);
-$accent-bg-color: var(--accent-bg-color);
-$page-fg-color: var(--page-fg-color);
-$link-active-color: var(--link-active-color);
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$accent-color: var(--accent-color);
 
 $primary-text-color: var(--primary-text-color);
+$secondary-text-color: var(--secondary-text-color);
 $accent-text-color: var(--accent-text-color);
-$text-color-element-active: var(--text-color-element-active);
 
-$element-bg-color: var(--element-bg-color);
-$element-secondary-accent-bg-color: var(--element-secondary-accent-bg-color);
-$element-secondary-accent-text-color: var(--element-secondary-accent-text-color);
-$element-bg-color-active: var(--element-bg-color-active);
-$element-bg-color-hover-secondary: var(--element-bg-color-hover-secondary);
-$element-bg-color-active-secondary: var(--element-bg-color-active-secondary);
+$color-danger: red;
+$color-invalid: #853635;
 
-$element-box-shadow-active: var(--element-box-shadow-active);
-$element-box-shadow-active-secondary: var(--element-box-shadow-active-secondary);
-
-$border-color-invalid: var(--border-color-invalid); 
-$box-shadow-color-invalid: var(--box-shadow-color-invalid); 
-
-$border-color-hover-primary: var(--border-color-hover-primary);
-$border-color-active-primary: var(--border-color-active-primary);
-
-$border-color-active-secondary: var(--border-color-active-secondary);
-
-$color-danger: var(--color-danger);
-
-// reactive
-$hover-color: var(--hover-color);
-
-// mobile menu
-$mobile-menu-icon-filter: var(--mobile-menu-icon-filter);
-$mobile-menu-icon-link-active-filter: var(--mobile-menu-icon-link-active-filter);
-
-// footer
-$footer-fg-color: var(--footer-fg-color);
-$footer-icon-filter: var(--footer-icon-filter);
-$footer-icon-hover-filter: var(--footer-icon-hover-filter);
-
-// logo
-$logo-filter: var(--logo-filter);
-
-// constants
-$modal-bg-color: rgba(0, 0, 0, .75);
-$copyright-note-color: #aaa;
+$main-section-color: white;
