@@ -1,5 +1,5 @@
 <template>
-  <section class="app-page" id="rodo-notice-page">
+  <section class="app-page document-page">
     <article>
       <h1 style="text-align:center">Obowiązek informacyjny RODO</h1>
       <p class="last-change">Ostatnia zmiana: 05.07.2022</p>
@@ -203,79 +203,4 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-#rodo-notice-page {
-  padding: 2rem 20vw;
-  justify-content: space-evenly;
-
-  article {
-    max-width: 900px;
-    color: #283742;
-
-    .last-change {
-      font-weight: 500;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 28px;
-      font-weight: 700;
-      line-height: 1.25;
-      color: #0f0e0e;
-    }
-
-    h2 {
-      font-size: 1.625rem;
-      margin: 2.2rem 0 2rem 0;
-      color: #0f0e0e;
-    }
-
-    span.strong {
-      font-weight: 600;
-    }
-
-    span.small {
-      font-size: 85%;
-    }
-
-    span.new-line {
-      display: block;
-    }
-
-    span.bottom-spacing {
-      margin-bottom: 2rem;
-    }
-
-    p {
-      margin: 0 0 1rem;
-      font-size: 1rem;
-    }
-
-    a {
-      color: #4200ff;
-      text-decoration: underline;
-      font-size: 1rem;
-    }
-
-    ul > li {
-      list-style-type: disc;
-    }
-
-    ul, li ul {
-      padding-left: 3rem;
-    }
-
-    li ul > li {
-      list-style-type: circle;
-    }
-
-    li ul li ul > li {
-      list-style-type: square;
-    }
-
-    li:last-of-type {
-      margin-bottom: 1rem;
-    }
-  }
-}
 </style>
