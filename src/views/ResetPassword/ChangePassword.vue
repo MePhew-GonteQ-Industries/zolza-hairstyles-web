@@ -159,7 +159,6 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    transition: all .3s;
     padding: 100px 20px;
     position: relative;
     max-width: 420px;

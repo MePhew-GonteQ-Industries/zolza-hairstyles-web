@@ -14,7 +14,8 @@
       </div>
 
       <form class="login-form" @submit.prevent="handleSubmit" novalidate>
-        <CustomInput :label="t('logIn.emailField.label')" :iconSrc='emailIcon' inputType='email'
+        <CustomInput :label="t('logIn.emailField.label')"
+        iconClass='ph-envelope-simple-light' inputType='email'
         autocomplete="email" v-model:value="userData.email"
         :forceValidate="forceValidate"
         :invalid="emailInvalid"
@@ -50,7 +51,6 @@ import { useRouter } from 'vue-router';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
-import emailIcon from '@/assets/email.svg';
 import validateEmail from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
 
@@ -137,7 +137,6 @@ export default {
       userData,
       loginUser,
       message,
-      emailIcon,
       validateData,
       handleSubmit,
       emailInvalid,
@@ -161,15 +160,15 @@ export default {
     .state-message {
       margin-top: 70px;
       margin-bottom: 5px;
-      background-color: rgba(24, 25, 27, 0.6);
+      background-color: $secondary-color;
       padding: 20px;
       border-radius: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #4F8A10;
-      background-color: #DFF2BF;
+      color: $accent-color;
+      background-color: $secondary-color;
     }
 
     .login-form {
@@ -177,13 +176,12 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: all .3s;
       padding: 100px 20px;
       position: relative;
       max-width: 420px;
 
       .forgot-password-link {
-        color: $text-color-element-active;
+        color: $accent-color;
         font-size: 1em;
         position: absolute;
         top: 60%;

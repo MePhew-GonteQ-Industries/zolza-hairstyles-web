@@ -34,14 +34,13 @@
   #business-card {
     height: 400px;
     width: 675px;
-    background-color: $primary-bg-color;
+    background-color: $primary-color;
     background-image: url('@/assets/wizytowka-tlo.svg');
     background-size: cover;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
-    transition: all 500ms;
     backface-visibility: hidden;
     cursor: pointer;
 
@@ -61,8 +60,6 @@
         width: 250px;
         padding: 10px;
         border-radius: 5px;
-        transition: all 500ms;
-        perspective: 1000px;
 
         &:hover {
           transform: scale(1.1);

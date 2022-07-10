@@ -9,7 +9,7 @@
     <form @submit.prevent='handleResetPasswordRequest' novalidate>
 
     <CustomInput :label="t('resetPassword.requestPasswordReset.emailField.label')"
-    :iconSrc='emailIcon' inputType='email'
+    iconClass='ph-envelope-simple-light' inputType='email'
     autocomplete="email" v-model:value="userEmail"
     :invalid="emailInvalid" :forceValidate="forceValidate" :required='true'
     :messageEmpty="t('resetPassword.requestPasswordReset.emailField.messageEmpty')"
@@ -29,7 +29,6 @@ import { useI18n } from 'vue-i18n';
 import validateEmail from '@/utils';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
-import emailIcon from '@/assets/email.svg';
 
 export default {
   name: 'RequestPasswordReset',
@@ -97,7 +96,6 @@ export default {
     return {
       t,
       userEmail,
-      emailIcon,
       handleResetPasswordRequest,
       emailInvalid,
       forceValidate,
@@ -122,7 +120,6 @@ export default {
   .description {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     h2 {
       font-size: 1em;
@@ -140,7 +137,6 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    transition: all .3s;
     padding: 100px 20px;
     max-width: 420px;
     position: relative;

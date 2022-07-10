@@ -7,20 +7,22 @@
         <input class="hidden-input" type="text" autocomplete="username">
 
         <CustomInput :label="t('signUp.nameField.label')"
-        :iconSrc='contactIcon' autocomplete="given-name"
+        iconClass='ph-identification-card-light' autocomplete="given-name"
         :required='true' :messageEmpty="t('signUp.nameField.messageEmpty')"
         :messageInvalid="t('signUp.nameField.messageInvalid')"
         v-model:value="userData.name"
         :forceValidate="forceValidate" :invalid="!userData.name"/>
 
-        <CustomInput :label="t('signUp.surnameField.label')" :iconSrc='contactIcon'
+        <CustomInput :label="t('signUp.surnameField.label')"
+        iconClass='ph-identification-card-light'
         autocomplete="family-name"
         v-model:value="userData.surname"
         :required='true' :messageEmpty="t('signUp.surnameField.messageEmpty')"
         :messageInvalid="t('signUp.surnameField.messageInvalid')"
         :invalid="!userData.surname" :forceValidate="forceValidate"/>
 
-        <CustomInput :label="t('signUp.emailField.label')" :iconSrc='emailIcon'
+        <CustomInput :label="t('signUp.emailField.label')"
+        iconClass='ph-envelope-simple-light'
         autocomplete="email" inputType='email'
         v-model:value="userData.email"
         :required='true' :messageEmpty="t('signUp.emailField.messageEmpty')"
@@ -29,7 +31,7 @@
 
         <CustomSelect class="selector"
         :header="t('signUp.genderField.header')"
-        :iconSrc="selectGenderIcon"
+        iconClass="ph-gender-intersex-light"
         :options="genderOptions"
         v-model:selected-value="userData.gender"
         :required='true' :messageEmpty="t('signUp.genderField.messageEmpty')"
@@ -72,12 +74,6 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
-import maleIcon from '@/assets/male.svg';
-import femaleIcon from '@/assets/female.svg';
-import otherGenderIcon from '@/assets/other-gender.svg';
-import selectGenderIcon from '@/assets/genders-icon.svg';
-import emailIcon from '@/assets/email.svg';
-import contactIcon from '@/assets/contact.svg';
 import validateEmail from '@/utils';
 import PasswordStrengthFeedback from '@/components/PasswordStrengthFeedback.vue';
 
@@ -209,19 +205,19 @@ export default {
       {
         title: 'Male',
         value: 'male',
-        iconSrc: maleIcon,
+        iconClass: 'ph-gender-male-light',
         iconAlt: 'male gender icon',
       },
       {
         title: 'Female',
         value: 'female',
-        iconSrc: femaleIcon,
+        iconClass: 'ph-gender-female-light',
         iconAlt: 'female gender icon',
       },
       {
         title: 'Other',
         value: 'other',
-        iconSrc: otherGenderIcon,
+        iconClass: 'ph-gender-neuter-light',
         iconAlt: 'other gender icon',
       },
     ];
@@ -234,9 +230,6 @@ export default {
       signUpUser,
       passwordRepeat,
       genderOptions,
-      selectGenderIcon,
-      emailIcon,
-      contactIcon,
       handleSubmit,
       validateEmail,
       onScore,
@@ -251,6 +244,7 @@ export default {
 
 <style lang='scss' scoped>
 #sign-up-page {
+  padding-block: 2rem;
 
   h1 {
     font-size: 3rem;
@@ -261,8 +255,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
-    padding: 50px 20px;
+    padding: 4rem 1.5rem;
     max-width: 420px;
     box-sizing: content-box;
 

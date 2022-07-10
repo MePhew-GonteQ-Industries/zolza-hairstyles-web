@@ -90,14 +90,14 @@ export default {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    background-color: white;
-    color: white;
+    background-color: $primary-color;
 
     .mobile-app-banner {
       margin-top: 1.5rem;
       width: 100%;
-      color: black;
       background-image: url('@/assets/app-baner-background.png');
+      background-color: $secondary-color;
+      color: $secondary-text-color;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -105,7 +105,6 @@ export default {
       background-position: 50vw;
       background-size: 70%;
       background-repeat: no-repeat;
-      background-color: #f2f2f2;
       padding: 0 10%;
 
       .cta {
@@ -122,7 +121,7 @@ export default {
             display: block;
             width: 1.75rem;
             height: .625rem;
-            background-color: #fec92c;
+            background-color: $accent-color;
             margin-right: .75rem;
             border-radius: .75rem;
           }

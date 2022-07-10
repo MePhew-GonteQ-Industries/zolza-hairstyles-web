@@ -73,7 +73,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 10%;
-  background-color: white;
+  background-color: $primary-color;
   height: 5rem;
   box-sizing: content-box;
 
@@ -96,7 +96,7 @@ export default {
   }
 
   li, a {
-    color: #28262c;
+    color: $primary-text-color;
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     display: flex;
