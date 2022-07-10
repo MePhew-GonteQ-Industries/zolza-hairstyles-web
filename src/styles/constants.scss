@@ -1,1 +1,4 @@
-$color-transition-duration: .5s;
+@import '_constants';
+
+$transition-duration: var(--transition-duration);
+$translucent-color: var(--translucent-color);

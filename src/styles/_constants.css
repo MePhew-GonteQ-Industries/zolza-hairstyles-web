@@ -1,0 +1,4 @@
+:root {
+  --transition-duration: .6s;
+  --translucent-color: rgba(33, 33, 33, .6);
+}
