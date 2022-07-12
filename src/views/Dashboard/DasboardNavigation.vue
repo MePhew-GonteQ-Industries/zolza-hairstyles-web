@@ -157,6 +157,7 @@ export default {
       align-items: center;
       gap: 2rem;
       width: 200px;
+      font-family: 'Open Sans', sans-serif;
     }
 
     i {

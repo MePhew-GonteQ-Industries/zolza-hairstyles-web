@@ -283,6 +283,10 @@ export default {
             top: 0;
             background-color: $translucent-color;
           }
+
+          * {
+            font-family: 'Open Sans', sans-serif;
+          }
         }
 
         .ph-caret-down-light {
