@@ -113,7 +113,7 @@
       <div class="user-prof" v-else>
         <ul>
           <li><NotificationsPanel /></li>
-          <li><i @click="logout" class="ph-user-light prof-icon"></i></li>
+          <li><UserProfilePanel /></li>
         </ul>
       </div>
     </nav>
@@ -124,39 +124,25 @@ import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 import NotificationsPanel from '@/components/Navbar/NotificationsPanel.vue';
+import UserProfilePanel from '@/components/Navbar/UserProfilePanel.vue';
 
 export default {
   name: 'desktopNavigation',
   components: {
     NotificationsPanel,
+    UserProfilePanel,
   },
-  props: {
-    dataTheme: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(_props, { emit }) {
+  setup() {
     const { t } = useI18n({ useScope: 'global' });
 
     const store = useStore();
 
     const userLoggedIn = computed(() => store.state.user.loggedIn);
-    const userIsAdmin = computed(() => store.state.user.userData.permission_level.includes('admin'));
-
-    function logout() {
-      store.dispatch('logout');
-    }
-
-    function toggleTheme() {
-      emit('theme-toggled');
-    }
+    const userIsAdmin = computed(() => store.state.user.userData && store.state.user.userData.permission_level.includes('admin'));
 
     return {
-      toggleTheme,
       userLoggedIn,
       userIsAdmin,
-      logout,
       t,
     };
   },
