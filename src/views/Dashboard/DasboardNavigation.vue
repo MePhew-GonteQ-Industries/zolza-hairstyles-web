@@ -1,56 +1,47 @@
 <template>
   <nav class="dashboard-navigation">
-    <ul>
-      <li>
-        <router-link :to='{ name: "summaryView" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-table-light"></i>Podsumowanie</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-      <li>
-        <router-link :to='{ name: "appointmentsManagement" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-bookmarks-light"></i>Wizyty</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-      <li>
-        <router-link :to='{ name: "servicesManagement" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-scissors-light"></i>Usługi</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-      <li>
-        <router-link :to='{ name: "usersManagement" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-users-light"></i>Użytkownicy</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-      <li>
-        <router-link :to='{ name: "workHoursManagement" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-clock-light"></i>Godziny pracy</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-      <li>
-        <router-link :to='{ name: "statsView" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-chart-line-light"></i>Statystyki</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-      <li>
-        <router-link :to='{ name: "serviceSettings" }'>
-          <div class="selection-indicator"></div>
-          <span><i class="ph-gear-six-light"></i>Ustawienia</span>
-          <div class="edge top"></div>
-          <div class="edge bottom"></div></router-link>
-      </li>
-    </ul>
+    <router-link :to='{ name: "summaryView" }'>
+      <span><i class="ph-table-light"></i>Podsumowanie</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+
+    <router-link :to='{ name: "appointmentsManagement" }'>
+      <span><i class="ph-bookmarks-light"></i>Wizyty</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+
+    <router-link :to='{ name: "servicesManagement" }'>
+      <span><i class="ph-scissors-light"></i>Usługi</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+
+    <router-link :to='{ name: "usersManagement" }'>
+      <span><i class="ph-users-light"></i>Użytkownicy</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+
+    <router-link :to='{ name: "workHoursManagement" }'>
+      <span><i class="ph-clock-light"></i>Godziny pracy</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+
+    <router-link :to='{ name: "statsView" }'>
+      <span><i class="ph-chart-line-light"></i>Statystyki</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+
+    <router-link :to='{ name: "serviceSettings" }'>
+      <span><i class="ph-gear-six-light"></i>Ustawienia</span>
+      <div class="edge top"></div>
+      <div class="edge bottom"></div>
+    </router-link>
+    <div class="active-tab-indicator"></div>
   </nav>
 </template>
 
@@ -64,21 +55,52 @@ export default {
 .dashboard-navigation {
   background-color: $secondary-color;
   color: $accent-text-color;
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+  justify-content: center;
+  height: calc(100vh - 6rem);
+  width: 100%;
+  position: relative;
 
-  ul {
-    display: flex;
-    flex-direction: column;
-    justify-items: stretch;
-    justify-content: center;
-    height: calc(100vh - 6rem);
-    width: 100%;
-    position: relative;
+  $offset: 88px;
+
+  & a:nth-child(1).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 0));
   }
 
-  li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  & a:nth-child(2).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 1));
+  }
+
+  & a:nth-child(3).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 2));
+  }
+
+  & a:nth-child(4).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 3));
+  }
+
+  & a:nth-child(5).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 4));
+  }
+
+  & a:nth-child(6).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 5));
+  }
+
+  & a:nth-child(7).router-link-exact-active  ~ .active-tab-indicator {
+      transform: translateY(calc($offset * 6));
+  }
+
+  .active-tab-indicator {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 138px;
+    left: -8px;
+    border-radius: 100%;
+    background-color: $accent-color;
   }
 
   a {
@@ -91,13 +113,7 @@ export default {
     position: relative;
     font-size: 1rem;
     transition: none;
-
-    &.router-link-exact-active{
-
-      .selection-indicator {
-        background-color: $accent-color;
-      }
-    }
+    margin-bottom: 1rem;
 
     &:hover, &.router-link-exact-active {
       background-color: $primary-color;
@@ -142,14 +158,6 @@ export default {
 
     * {
       transition: none;
-    }
-
-    .selection-indicator {
-      height: 15px;
-      width: 15px;
-      position: absolute;
-      left: -10px;
-      border-radius: 100%;
     }
 
     span {
