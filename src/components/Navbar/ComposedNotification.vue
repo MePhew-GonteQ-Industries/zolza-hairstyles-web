@@ -26,6 +26,10 @@ export default {
 
 <style lang='scss' scoped>
 .notification-wrapper{
+  width: calc(50vw - 40px);
+  min-width: 360px;
+  max-width: 450px;
+
   .notification {
     padding: 10px;
     border-bottom: 1px solid #363b41;

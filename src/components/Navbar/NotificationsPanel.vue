@@ -8,7 +8,7 @@
     <div class="notifications-panel" v-show="notificationsPanelExpanded">
       <div class="panel-header">
         <h3>Notifications</h3>
-        <router-link to="/notification-settings" @click="collapseNotificationsPanel">
+        <router-link to="/settings/notifications" @click="collapseNotificationsPanel">
           <i class="ph-gear-six-light notification-settings"></i>
         </router-link>
       </div>
@@ -19,6 +19,7 @@
           @click="switchTab(1)">My account</button>
         <button class="tab" :class='{ active: currentTabIndex === 2 }'
           @click="switchTab(2)">What's new</button>
+          <div class="active-tab-indicator"></div>
       </div>
       <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
         <p>There aren't any notifications yet</p>
@@ -68,6 +69,23 @@ export default {
       [
         { title: 'Password Updated' },
         { title: 'Two Factor Authentication Enabled' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
+        { title: 'Notification Test' },
         { title: 'Notification Test' },
       ],
       [
@@ -119,6 +137,7 @@ export default {
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 500;
 
   .bell-icon {
     font-size: 25px;
@@ -153,10 +172,9 @@ export default {
     border-width: 0 1px 1px 1px;
     border-style: solid;
     border-color: $secondary-color;
-    height: 50vh;
+    min-height: 50vh;
+    max-height: 90vh;
     width: 50vw;
-    min-height: 450px;
-    max-height: 500px;
     min-width: 400px;
     max-width: 500px;
     background-color: $primary-color;
@@ -165,7 +183,7 @@ export default {
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
-    z-index: 10;
+    z-index: 1000;
 
     h3 {
       font-weight: 600;
@@ -187,9 +205,33 @@ export default {
     .tab-selector {
       width: 100%;
       display: flex;
-      justify-content: space-evenly;
-      padding: 20px;
+      justify-content: space-between;
+      padding: .625rem 2rem;
       border-bottom: 1px solid $secondary-color;
+      position: relative;
+
+      $offset: 158px;
+
+      & .tab:nth-child(1).active ~ .active-tab-indicator {
+        transform: translateX(calc($offset * 0));
+      }
+
+      & .tab:nth-child(2).active ~ .active-tab-indicator {
+        transform: translateX(calc($offset * 1));
+      }
+
+      & .tab:nth-child(3).active ~ .active-tab-indicator {
+        transform: translateX(calc($offset * 2));
+      }
+
+      .active-tab-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 2rem;
+        height: 1px;
+        width: 120px;
+        background-color: $accent-color;
+      }
 
       .tab {
         font-size: 1rem;
@@ -198,19 +240,15 @@ export default {
         color: $primary-text-color;
         cursor: pointer;
         position: relative;
+        height: 40px;
+        width: 120px;
+        padding: .5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &.active {
           color: $secondary-text-color
-        }
-
-        &.active::after {
-          content: '';
-          position: absolute;
-          bottom: -21px;
-          height: 1px;
-          width: 100%;
-          background-color: $accent-color;
-          left: 0;
         }
       }
     }
@@ -223,12 +261,16 @@ export default {
     }
 
     .notifications {
-      padding: 0 10px 10px 10px;
+      padding: 0 20px 0 20px;
+      max-height: 65vh;
+      overflow-y: hidden;
+
+      &:hover {
+        overflow-y: auto;
+      }
     }
 
     .panel-footer {
-      position: absolute;
-      bottom: 0;
       width: 100%;
       display: flex;
       align-items: center;
