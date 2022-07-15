@@ -10,6 +10,22 @@
     transition: transform $transition-duration, 
         background-color $transition-duration,
         box-shadow $transition-duration;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: hsla(0,0%,100%,.32941176470588235); // todo: change to variables
+        // border-radius: 5px;
+        outline: none;
+        border: none;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        background-color: rgba(0,0,0,.137);
+    }
 }
 
 a {
@@ -33,8 +49,9 @@ ul {
 
 .dashboard-page {
     margin-block: 1rem;
-    padding: 2rem 6rem;
+    padding: 2rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
