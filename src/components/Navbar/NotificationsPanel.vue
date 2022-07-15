@@ -24,16 +24,16 @@
       <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
         <p>There aren't any notifications yet</p>
       </div>
-      <div class="notifications" v-if="currentTabIndex === 0">
+      <div class="notifications" v-if="currentTabIndex === 0" ref="notificationsList">
         <ComposedNotification v-for="(notification, index) in notifications[0]"
         :key="index" :title="notification.title"/>
       </div>
-      <div class="notifications" v-else-if="currentTabIndex === 1">
+      <div class="notifications" v-else-if="currentTabIndex === 1" ref="notificationsList">
         <ComposedNotification v-for="(notification, index) in notifications[1]"
         :key="index" :title="notification.title"/>
 
       </div>
-      <div class="notifications" v-else-if="currentTabIndex === 2">
+      <div class="notifications" v-else-if="currentTabIndex === 2" ref="notificationsList">
         <ComposedNotification v-for="(notification, index) in notifications[2]"
         :key="index" :title="notification.title"/>
       </div>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { onClickOutside, useMouseInElement } from '@vueuse/core';
 import ComposedNotification from '@/components/Navbar/ComposedNotification.vue';
 
@@ -86,7 +86,7 @@ export default {
         { title: 'Notification Test' },
         { title: 'Notification Test' },
         { title: 'Notification Test' },
-        { title: 'Notification Test' },
+        { title: 'KEKW' },
       ],
       [
         { title: 'New feature: appointment history' },
@@ -120,19 +120,41 @@ export default {
 
     const mouseIsOutsideNotificationsPanel = useMouseInElement(notificationsPanel).isOutside;
 
-    const scrollHandler = () => {
+    const notificationsList = ref(null);
+
+    const notificationsListOverflows = computed(
+      () => notificationsList.value.clientHeight
+      < notificationsList.value.scrollHeight,
+    );
+
+    const scrollHandler = (e) => {
+      if (!notificationsPanelExpanded.value) {
+        document.removeEventListener('wheel', scrollHandler);
+        return;
+      }
+
       if (mouseIsOutsideNotificationsPanel.value) {
         collapseNotificationsPanel();
+      } else if (!notificationsListOverflows.value) {
+        e.preventDefault();
+      } else if (
+        (
+          notificationsList.value.scrollTop === 0 && e.deltaY < 0) || (
+          (notificationsList.value.scrollTop === (
+            notificationsList.value.scrollHeight - notificationsList.value.offsetHeight
+          )) && e.deltaY > 0
+        )) {
+        e.preventDefault();
       }
     };
 
     watch(notificationsPanelExpanded, (newValue) => {
       if (newValue) {
-        document.addEventListener('scroll', scrollHandler);
+        document.addEventListener('wheel', scrollHandler, { passive: false });
         return;
       }
 
-      document.removeEventListener('scroll', scrollHandler);
+      document.removeEventListener('wheel', scrollHandler);
     });
 
     return {
@@ -145,6 +167,7 @@ export default {
       collapseNotificationsPanel,
       clearNotifications,
       notifications,
+      notificationsList,
     };
   },
 };
@@ -280,7 +303,7 @@ export default {
     }
 
     .notifications {
-      padding: 0 20px 0 20px;
+      padding: .5rem 20px .5rem 20px;
       max-height: 65vh;
       overflow-y: hidden;
 
