@@ -203,7 +203,6 @@ export default {
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
-    z-index: 1000;
 
     h3 {
       font-weight: 600;
