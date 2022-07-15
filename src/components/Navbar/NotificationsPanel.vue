@@ -1,11 +1,11 @@
 <template>
-  <div class="notifications-wrapper" ref="notificationsPanel">
+  <div class="notifications-wrapper" ref="notificationsWrapper">
     <i class="bell-icon"
     :class="notificationsPanelExpanded ? 'ph-bell-fill': 'ph-bell-light'"
     @click='toggleNotificationsPanel'></i>
     <span class="unread-notifications-count"
     @click='toggleNotificationsPanel'>2</span>
-    <div class="notifications-panel" v-show="notificationsPanelExpanded">
+    <div class="notifications-panel" v-show="notificationsPanelExpanded" ref="notificationsPanel">
       <div class="panel-header">
         <h3>Notifications</h3>
         <router-link to="/settings/notifications" @click="collapseNotificationsPanel">
@@ -47,8 +47,8 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import { ref, watch } from 'vue';
+import { onClickOutside, useMouseInElement } from '@vueuse/core';
 import ComposedNotification from '@/components/Navbar/ComposedNotification.vue';
 
 export default {
@@ -106,9 +106,9 @@ export default {
       currentTabIndex.value = index;
     }
 
-    const notificationsPanel = ref(null);
+    const notificationsWrapper = ref(null);
 
-    onClickOutside(notificationsPanel, () => {
+    onClickOutside(notificationsWrapper, () => {
       collapseNotificationsPanel();
     });
 
@@ -116,11 +116,31 @@ export default {
       notifications.value[currentTabIndex.value] = [];
     }
 
+    const notificationsPanel = ref(null);
+
+    const mouseIsOutsideNotificationsPanel = useMouseInElement(notificationsPanel).isOutside;
+
+    const scrollHandler = () => {
+      if (mouseIsOutsideNotificationsPanel.value) {
+        collapseNotificationsPanel();
+      }
+    };
+
+    watch(notificationsPanelExpanded, (newValue) => {
+      if (newValue) {
+        document.addEventListener('scroll', scrollHandler);
+        return;
+      }
+
+      document.removeEventListener('scroll', scrollHandler);
+    });
+
     return {
       notificationsPanelExpanded,
       toggleNotificationsPanel,
       currentTabIndex,
       switchTab,
+      notificationsWrapper,
       notificationsPanel,
       collapseNotificationsPanel,
       clearNotifications,
