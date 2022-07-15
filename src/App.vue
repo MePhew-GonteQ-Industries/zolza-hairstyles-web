@@ -1,10 +1,10 @@
 <template>
-  <div id="app-wrapper" :data-theme="state.theme">
+  <div id="app-wrapper" :data-theme="$store.state.settings.theme">
 
     <main ref='main' :class="{collapsed: !onHomePage}">
       <div id="nav" ref="navbar"
         :class="navbarClasses">
-        <navbarSection :data-theme="state.theme" @theme-toggled="toggleTheme"/>
+        <navbarSection/>
       </div>
       <div class="wrapper" v-if="onHomePage">
         <section class="hero">
@@ -118,7 +118,7 @@
 <script>
 import { useStore } from 'vuex';
 import {
-  reactive, onMounted, ref, watch, computed,
+  onMounted, ref, watch, computed,
 } from 'vue';
 import { useElementVisibility, useWindowScroll } from '@vueuse/core';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
@@ -139,33 +139,11 @@ export default {
 
     const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    let theme;
-
-    if (prefersDarkMode) {
-      theme = 'dark';
-    } else {
-      theme = 'light';
-    }
-
-    const state = reactive({
-      theme,
-    });
-
-    function toggleTheme() {
-      switch (state.theme) {
-        case 'light':
-          state.theme = 'dark';
-          break;
-        case 'dark':
-          state.theme = 'light';
-          break;
-        default:
-          console.error('Theme was in an incorrect state');
-      }
-    }
+    const theme = prefersDarkMode ? 'dark' : 'light';
 
     onMounted(() => {
       store.dispatch('loadUserData');
+      store.commit('setTheme', theme);
     });
 
     const scrolledToServices = ref(false);
@@ -231,8 +209,6 @@ export default {
     });
 
     return {
-      state,
-      toggleTheme,
       scrollToServices,
       scrolledToServices,
       navbarFixed,
