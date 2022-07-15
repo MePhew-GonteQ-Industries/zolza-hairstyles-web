@@ -1,5 +1,3 @@
-// noinspection JSCheckFunctionSignatures
-
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '@/store/index';
 import Home from '@/views/Home/HomePage.vue';
@@ -22,11 +20,19 @@ const routes = [{
   path: '/',
   name: 'Home',
   component: () => import(/* webpackChunkName: "home" */ '@/views/Home/HomePage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/email-verification',
   name: 'EmailVerification',
   component: EmailVerification,
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/contact',
@@ -35,47 +41,74 @@ const routes = [{
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
   component: () => import(/* webpackChunkName: "contact" */ '@/views/Contact/ContactPage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/sign-up',
   name: 'SignUp',
   component: () => import(/* webpackChunkName: "signup" */ '@/views/SignUp/SignUpPage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/login',
   name: 'Login',
   component: () => import(/* webpackChunkName: "login" */ '@/views/LogIn/LoginPage.vue'),
   props: loginProps,
-},
-{
-  path: '/services',
-  name: 'Services',
-  component: () => import(/* webpackChunkName: "services" */ '@/views/ServicesPage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/terms-of-use',
   name: 'TermsOfUse',
   component: () => import(/* webpackChunkName: "terms" */ '@/views/TermsOfUsePage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/privacy-policy',
   name: 'PrivacyPolicy',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/PrivacyPolicyPage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/cookies-policy',
   name: 'CookiesPolicy',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/CookiesPolicyPage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/rodo',
   name: 'RodoNotice',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/RodoNoticePage.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/password-reset',
   name: 'ResetPassword',
   component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword/ResetPassword.vue'),
+  meta: {
+    requiresAuth: false,
+    requiredPermissionLevel: 'user',
+  },
   children: [
     {
       path: '',
@@ -88,14 +121,22 @@ const routes = [{
   ],
 },
 {
-  path: '/notification-settings',
-  name: 'NotificationSettings',
-  component: () => import('@/views/NotificationSettings.vue'),
+  path: '/settings',
+  name: 'SettingsPage',
+  component: () => import('@/views/Settings/SettingsPage.vue'),
+  meta: {
+    requiresAuth: true,
+    requiredPermissionLevel: 'user',
+  },
 },
 {
   path: '/dashboard',
   name: 'Dashboard',
   component: () => import('@/views/Dashboard/DashboardPage.vue'),
+  meta: {
+    requiresAuth: true,
+    requiredPermissionLevel: 'admin',
+  },
   children: [
     {
       path: '/dashboard',

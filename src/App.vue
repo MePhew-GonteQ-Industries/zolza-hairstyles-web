@@ -165,7 +165,7 @@ export default {
     }
 
     onMounted(() => {
-      store.dispatch('loadUser');
+      store.dispatch('loadUserData');
     });
 
     const scrolledToServices = ref(false);
@@ -201,6 +201,34 @@ export default {
       fixed: navbarFixed.value && onHomePage.value,
       'static-outside-viewport': !navbarFixed.value && !navbarVisible.value,
     }));
+
+    const userIsLoggedIn = computed(() => store.state.user.loggedIn);
+    const userIsAdmin = computed(() => store.state.user.userData && store.state.user.userData.permission_level.includes('admin'));
+    const userIsOwner = computed(() => store.state.user.userData && store.state.user.userData.permission_level.includes('owner'));
+
+    watch(userIsLoggedIn, (newValue) => {
+      if (!newValue) {
+        if (router.currentRoute.value.meta.requiredLogIn) {
+          router.push('/');
+        }
+      }
+    });
+
+    watch(userIsAdmin, (newValue) => {
+      if (!newValue) {
+        if (router.currentRoute.value.meta.requiredPermissionLevel === 'admin') {
+          router.push('/');
+        }
+      }
+    });
+
+    watch(userIsOwner, (newValue) => {
+      if (!newValue) {
+        if (router.currentRoute.value.meta.requiredPermissionLevel === 'owner') {
+          router.push('/');
+        }
+      }
+    });
 
     return {
       state,
@@ -267,7 +295,7 @@ export default {
           transition: transform $transition-duration;
 
           &.static {
-            position: static;
+            position: relative;
             background-color: $secondary-color;
             color: $secondary-text-color;
           }
