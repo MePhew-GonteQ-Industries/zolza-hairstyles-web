@@ -47,10 +47,11 @@ export default {
         state.accessToken}`;
     },
 
-    loadUser({ commit }) {
+    async loadUserData({ commit, dispatch }) {
       if (localStorage.getItem('loginData') && localStorage.getItem('userData')) {
-        commit('relogin', JSON.parse(localStorage.getItem('loginData')));
-        commit('setUserData', JSON.parse(localStorage.getItem('userData')));
+        await commit('relogin', JSON.parse(localStorage.getItem('loginData')));
+        await commit('setUserData', JSON.parse(localStorage.getItem('userData')));
+        await dispatch('setAuthHeader');
       }
     },
 
