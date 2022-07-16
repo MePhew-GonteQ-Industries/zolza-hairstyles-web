@@ -307,9 +307,7 @@ export default {
     .dropdown {
       position: absolute;
       margin-top: 10px;
-      width: 50vw;
-      min-width: 200px;
-      max-width: 380px;
+      width: 100%;
       z-index: 1;
       border-radius: 0 0 .5rem .5rem;
       border-width: 0;
