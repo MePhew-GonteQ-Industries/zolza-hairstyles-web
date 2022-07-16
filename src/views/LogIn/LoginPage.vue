@@ -33,8 +33,12 @@
         :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
         :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
 
-        <router-link class="forgot-password-link" to="/password-reset"
-        tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+        <div class="under-form-section">
+          <CustomCheckbox>Zapamiętaj mnie</CustomCheckbox>
+
+          <router-link class="forgot-password-link" to="/password-reset"
+          tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+        </div>
 
         <CustomButton class="login-btn" v-if='!loading'>Zaloguj się</CustomButton>
 
@@ -55,6 +59,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import validateEmail from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
+import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
 export default {
   name: 'LoginPage',
@@ -62,6 +67,7 @@ export default {
     CustomButton,
     CustomInput,
     CustomLoader,
+    CustomCheckbox,
   },
   props: {
     emailConfirmed: {
@@ -151,8 +157,8 @@ export default {
 <style lang='scss' scoped>
   .login-wrapper {
     background-color: red;
-    height: 70vh;
-    width: 60vw;
+    height: 60vh;
+    width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -181,7 +187,6 @@ export default {
       align-items: center;
       justify-content: center;
       padding: 30px 20px 0 20px;
-      position: relative;
       height: 70%;
       max-width: 420px;
 
@@ -190,16 +195,18 @@ export default {
         height: 70%;
       }
 
-      .forgot-password-link {
+      .under-form-section{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .forgot-password-link {
         color: $accent-color;
         font-size: 1em;
-        position: absolute;
-        top: 60%;
-        left: 0;
 
         &:hover {
           text-decoration: underline;
         }
+      }
       }
 
       .login-btn, .loader {
