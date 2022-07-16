@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <desktopNavigation :data-theme="dataTheme"  @theme-toggled="toggleTheme"/>
+    <desktopNavigation />
   </nav>
 </template>
 
@@ -13,8 +13,7 @@ export default {
   components: {
     desktopNavigation,
   },
-  props: ['dataTheme'],
-  setup(_props, ctx) {
+  setup() {
     const state = reactive({
       mobileMenuActive: false,
     });
@@ -23,14 +22,9 @@ export default {
       state.mobileMenuActive = !state.mobileMenuActive;
     }
 
-    function toggleTheme() {
-      ctx.emit('theme-toggled');
-    }
-
     return {
       state,
       toggleMobileMenu,
-      toggleTheme,
     };
   },
 };
