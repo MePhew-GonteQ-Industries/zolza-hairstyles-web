@@ -15,8 +15,9 @@
     :messageEmpty="t('resetPassword.requestPasswordReset.emailField.messageEmpty')"
     :messageInvalid="t('resetPassword.requestPasswordReset.emailField.messageInvalid')"/>
 
-    <CustomButton class="reset-password-btn"
-    :content="t('resetPassword.requestPasswordReset.resetPasswordBtn')"/>
+    <CustomButton class="reset-password-btn">
+      {{ t('resetPassword.requestPasswordReset.resetPasswordBtn') }}
+    </CustomButton>
 
     </form>
   </div>

@@ -29,8 +29,9 @@
       :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
       :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
 
-      <CustomButton class="reset-password-btn"
-      :content="t('resetPassword.changePassword.changePasswordBtn')"/>
+      <CustomButton class="reset-password-btn">
+        {{ t('resetPassword.changePassword.changePasswordBtn') }}
+      </CustomButton>
     </form>
   </div>
 </template>

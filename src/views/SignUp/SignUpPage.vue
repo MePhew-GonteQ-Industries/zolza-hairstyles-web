@@ -38,28 +38,25 @@
         :messageInvalid="t('signUp.genderField.messageInvalid')"
         :invalid="!userData.gender" :forceValidate="forceValidate"/>
 
-        <CustomPasswordInput autocomplete="new-password"
-        :label="t('signUp.passwordField.label')"
-        v-model:password="userData.password"
+        <CustomInput :label="t('signUp.passwordField.label')"
+        autocomplete="new-password"
+        type='password'
+        v-model:value="userData.password"
         :invalid="!passwordRepeat || passwordRepeat !== userData.password"
         :forceValidate="forceValidate"
         :required='true' :messageEmpty="t('signUp.passwordField.messageEmpty')"
-        :messageInvalid="t('signUp.passwordField.messageInvalid')"
-        @focus='passwordInputFocused = true'
-        @blur='passwordInputFocused = false'/>
+        :messageInvalid="t('signUp.passwordField.messageInvalid')"/>
 
-        <PasswordStrengthFeedback :password="userData.password" :show="passwordInputFocused"
-        @score="onScore"/>
-
-        <CustomPasswordInput autocomplete="new-password"
-        :label="t('signUp.repeatPasswordField.label')"
-        v-model:password="passwordRepeat"
+        <CustomInput :label="t('signUp.repeatPasswordField.label')"
+        autocomplete="new-password"
+        type='password'
+        v-model:value="passwordRepeat"
         :invalid="!passwordRepeat || passwordRepeat !== userData.password"
         :forceValidate="forceValidate"
         :required='true' :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
         :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"/>
 
-        <CustomButton content="Sign up"/>
+        <CustomButton>Utwórz konto</CustomButton>
       </form>
     </div>
   </section>
@@ -73,9 +70,7 @@ import { useI18n } from 'vue-i18n';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
-import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
 import validateEmail from '@/utils';
-import PasswordStrengthFeedback from '@/components/PasswordStrengthFeedback.vue';
 
 export default {
   name: 'SignUpPage',
@@ -83,8 +78,6 @@ export default {
     CustomButton,
     CustomSelect,
     CustomInput,
-    CustomPasswordInput,
-    PasswordStrengthFeedback,
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -106,8 +99,6 @@ export default {
     function onScore(payload) {
       passwordScore.value = payload.score;
     }
-
-    const passwordInputFocused = ref(false);
 
     const forceValidate = ref(false);
 
@@ -235,7 +226,6 @@ export default {
       onScore,
       passwordScore,
       emailInvalid,
-      passwordInputFocused,
       forceValidate,
     };
   },
@@ -258,6 +248,7 @@ export default {
     padding: 4rem 1.5rem;
     max-width: 420px;
     box-sizing: content-box;
+    gap: 1rem;
 
     .hidden-input {
       display: none;
