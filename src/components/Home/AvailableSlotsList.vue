@@ -17,7 +17,7 @@ import { useNavigatorLanguage } from '@vueuse/core';
 import AvailableDateTile from '@/components/Home/AvailableSlotTile.vue';
 import CustomLoader from '@/components/CustomLoader.vue';
 import {
-  computed, onMounted, ref, watch,
+  computed, ref, watch,
 } from 'vue';
 import axios from 'axios';
 
@@ -75,53 +75,13 @@ export default {
       loading.value = false;
     };
 
-    const shuffleArray = (array) => {
-      const shuffledArray = [...array];
-
-      for (let i = array.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = shuffledArray[i];
-        shuffledArray[i] = shuffledArray[j];
-        shuffledArray[j] = temp;
-      }
-
-      return shuffledArray;
-    };
-
-    const allColors = [
-      ['#87BBA2', '#C9E4CA', '#FF729F'],
-      ['#8EB8E5', '#FED18C', '#C98CA7'],
-      ['#FC9E4F', '#C8D5B9', '#8FC0A9'],
-      ['#C7EAE4', '#A7E8BD', '#FFD972'],
-      ['#D3A588', '#ECE2D0', '#7FD1B9'],
-      ['#96ADC8', '#CBFF8C', '#E3E36A'],
-      ['#D7C0D0', '#F7C7DB', '#F79AD3'],
-      ['#D782BA', '#E1DD8F', '#B1E5F2'],
-      ['#59C3C3', '#E0A458', '#FFDBB5'],
-      ['#B4ADEA', '#C6B38E', '#9CF6F6'],
-      // ['#b88f8f', '#C0C999', '#A3A57E'], // brown
-      // ['#e3cd35'], // yellow
-      // ['#f47b2e'], // orange
-      // ['#56f396', '#1ab85c', '#79de6b', '#40baa2', '#96d50e', '#2bdb7e', '#28e861'], // green
-      // ['#65a1ce', '#44d4fa', '#4beaef', '#1ee1c5'], // blue
-      // ['#ca3eb7', '#fe79fd', ''#858163''], // purple
-    ];
-
-    const colors = ref(null);
-
-    onMounted(() => {
-      colors.value = allColors[Math.floor(Math.random() * allColors.length)];
-    });
-
     watch(() => props.selectedServiceId, (newValue) => {
       loading.value = true;
       loadAppointments(newValue);
-      colors.value = shuffleArray(colors.value);
     });
 
     return {
       availableSlots,
-      colors,
       loading,
     };
   },
