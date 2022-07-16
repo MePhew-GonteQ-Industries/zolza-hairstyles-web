@@ -4,11 +4,12 @@
     <form @submit.prevent='handlePasswordReset' novalidate>
       <input class="hidden-input" type="text" autocomplete="username">
 
-      <CustomPasswordInput autocomplete="new-password"
-      v-model:password="newPassword"
+      <CustomInput :label="t('resetPassword.changePassword.newPasswordField.label')"
+      autocomplete="new-password"
+      type='password'
+      v-model:value="newPassword"
       :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
       :forceValidate="forceValidate"
-      :label="t('resetPassword.changePassword.newPasswordField.label')"
       :required='true'
       :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
       :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"
@@ -18,11 +19,13 @@
       <PasswordStrengthFeedback :password="newPassword" :show="passwordInputFocused"
       @score="onScore"/>
 
-      <CustomPasswordInput autocomplete="new-password"
-      :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
-      v-model:password="newPasswordRepeat"
+      <CustomInput :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
+      autocomplete="new-password"
+      type='password'
+      v-model:value="newPasswordRepeat"
       :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-      :forceValidate="forceValidate" :required='true'
+      :forceValidate="forceValidate"
+      :required='true'
       :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
       :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
 
@@ -37,16 +40,16 @@ import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
+import CustomInput from '@/components/CustomInput.vue';
 import CustomButton from '@/components/CustomButton.vue';
-import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
 import PasswordStrengthFeedback from '@/components/PasswordStrengthFeedback.vue';
 
 export default {
   name: 'ChangePassword',
   components: {
+    CustomInput,
     CustomButton,
     PasswordStrengthFeedback,
-    CustomPasswordInput,
   },
   setup() {
     const { t } = useI18n();
