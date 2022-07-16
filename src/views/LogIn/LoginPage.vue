@@ -44,7 +44,10 @@
 
         <CustomLoader class='loader' v-else />
       </form>
-
+      <div class="signup-redirection">
+        <h3>Nie masz jeszcze konta? </h3>
+        <router-link to="/">Utwórz konto</router-link>
+      </div>
       <p>{{message}}</p>
     </div>
   </section>
@@ -156,9 +159,10 @@ export default {
 
 <style lang='scss' scoped>
   .login-wrapper {
-    background-color: red;
-    height: 60vh;
-    width: 50vw;
+    text-align: center;
+    background-color: $secondary-color;
+    height: 80vh;
+    width: 40vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -191,11 +195,12 @@ export default {
       max-width: 420px;
 
       .input{
-        padding: 10px 0;
+        padding-top: 10px;
         height: 70%;
       }
 
       .under-form-section{
+        margin-top: 10px;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -203,15 +208,22 @@ export default {
         color: $accent-color;
         font-size: 1em;
 
-        &:hover {
-          text-decoration: underline;
+          &:hover {
+            text-decoration: underline;
+          }
         }
-      }
       }
 
       .login-btn, .loader {
-        margin-top: 50px;
+        margin: 30px 0;
         height: 70%;
+      }
+    }
+    .signup-redirection{
+      margin-bottom: 10px;
+      display: flex;
+      a{
+        color: $accent-color;
       }
     }
   }

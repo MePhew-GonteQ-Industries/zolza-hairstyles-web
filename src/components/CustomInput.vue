@@ -207,7 +207,8 @@ export default {
   input {
     padding: 20px 90px 0 30px;
     border: 2px solid transparent;
-    background-color: $secondary-color;
+    // background-color: $secondary-color;
+    background-color: $primary-color;
     color: $secondary-text-color;
     height: 100%;
     width: 100%;
