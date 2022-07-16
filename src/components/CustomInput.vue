@@ -135,6 +135,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 55px;
+  width: 50vw;
+  min-width: 200px;
+  max-width: 380px;
 
   .invalid-wrapper {
     position: absolute;
@@ -205,10 +209,8 @@ export default {
     border: 2px solid transparent;
     background-color: $secondary-color;
     color: $secondary-text-color;
-    height: 55px;
-    width: 50vw;
-    min-width: 200px;
-    max-width: 380px;
+    height: 100%;
+    width: 100%;
     border-radius: .5rem;
     box-shadow: none;
     font-weight: 600;

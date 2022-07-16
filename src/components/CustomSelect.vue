@@ -197,6 +197,10 @@ export default {
 <style lang='scss' scoped>
 .select-wrapper {
   position: relative;
+  height: 55px;
+  width: 50vw;
+  min-width: 200px;
+  max-width: 380px;
 
   .invalid-wrapper {
     position: absolute;
@@ -225,10 +229,8 @@ export default {
     outline: none;
     border: 2px solid transparent;
     background-color: $secondary-color;
-    height: 55px;
-    width: 50vw;
-    min-width: 200px;
-    max-width: 380px;
+    height: 100%;
+    width: 100%;
     border-radius: .5rem;
     box-shadow: none;
     display: flex;
