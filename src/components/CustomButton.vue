@@ -1,37 +1,36 @@
 <template>
-  <button class="login">{{ content }}</button>
+  <button class="login">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
 export default {
   name: 'CustomButton',
-  props: {
-    content: String,
-  },
 };
 </script>
 
 <style lang='scss' scoped>
   button {
-    height: 60px;
-    width: 200px;
-    border-radius: 30px;
-    background-color: $secondary-color;
-    color: $accent-color;
+    height: 40px;
+    width: 330px;
+    border-radius: .5rem;
+    background-color: $accent-color;
+    color: $secondary-text-color;
     font-size: 1.2rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
     cursor: pointer;
     outline: none;
     border: none;
+    box-shadow: 0 4px 8px -4px $box-shadow-color;
 
     &:focus {
       outline: none;
     }
 
     &:hover, &:active, &:focus  {
-      box-shadow: 0 0 4px 3px $accent-color;
-      border-color: none;
+      border: none;
       outline: none;
     }
 
