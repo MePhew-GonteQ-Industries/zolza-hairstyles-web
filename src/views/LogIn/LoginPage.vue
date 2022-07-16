@@ -22,18 +22,19 @@
         :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
         :messageInvalid="t('logIn.emailField.messageInvalid')"/>
 
-        <CustomPasswordInput class='current-password' autocomplete="current-password"
-        v-model:password="userData.password"
-        :forceValidate="forceValidate"
+        <CustomInput class='current-password' :label="t('logIn.currentPasswordField.label')"
+        autocomplete="new-password"
+        type='password'
+        v-model:value="userData.password"
         :invalid="!userData.password"
-        :label="t('logIn.currentPasswordField.label')"
+        :forceValidate="forceValidate"
         :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
         :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
 
         <router-link class="forgot-password-link" to="/password-reset"
         tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
 
-        <CustomButton class="login-btn" content="Log In" v-if='!loading'/>
+        <CustomButton class="login-btn" v-if='!loading'>Zaloguj się</CustomButton>
 
         <CustomLoader class='loader' v-else />
       </form>
@@ -50,7 +51,6 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
-import CustomPasswordInput from '@/components/CustomPasswordInput.vue';
 import validateEmail from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
 
@@ -59,7 +59,6 @@ export default {
   components: {
     CustomButton,
     CustomInput,
-    CustomPasswordInput,
     CustomLoader,
   },
   props: {
