@@ -2,6 +2,7 @@
   <section class="app-page" id="login-page">
     <div class="login-wrapper">
       <h1>{{ t('logIn.heading') }}</h1>
+      <h3>{{ t('logIn.subtitle') }}</h3>
 
       <div class="state-message" v-if="emailConfirmed">
           <h4>Email address has been confirmed successfully</h4>
@@ -20,9 +21,10 @@
         :forceValidate="forceValidate"
         :invalid="emailInvalid"
         :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
-        :messageInvalid="t('logIn.emailField.messageInvalid')"/>
+        :messageInvalid="t('logIn.emailField.messageInvalid')"
+        class="input"/>
 
-        <CustomInput class='current-password' :label="t('logIn.currentPasswordField.label')"
+        <CustomInput class='current-password input' :label="t('logIn.currentPasswordField.label')"
         autocomplete="new-password"
         type='password'
         v-model:value="userData.password"
@@ -148,10 +150,13 @@ export default {
 
 <style lang='scss' scoped>
   .login-wrapper {
+    background-color: red;
+    height: 70vh;
+    width: 60vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    padding-top: 30px;
     h1 {
       font-size: 3rem;
     }
@@ -175,9 +180,15 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 100px 20px;
+      padding: 30px 20px 0 20px;
       position: relative;
+      height: 70%;
       max-width: 420px;
+
+      .input{
+        padding: 10px 0;
+        height: 70%;
+      }
 
       .forgot-password-link {
         color: $accent-color;
@@ -193,6 +204,7 @@ export default {
 
       .login-btn, .loader {
         margin-top: 50px;
+        height: 70%;
       }
     }
   }
