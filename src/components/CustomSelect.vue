@@ -197,7 +197,6 @@ export default {
 <style lang='scss' scoped>
 .select-wrapper {
   position: relative;
-  margin-bottom: 45px;
 
   .invalid-wrapper {
     position: absolute;
@@ -226,11 +225,11 @@ export default {
     outline: none;
     border: 2px solid transparent;
     background-color: $secondary-color;
-    height: 65px;
+    height: 55px;
     width: 50vw;
-    min-width: 250px;
-    max-width: 420px;
-    border-radius: 15px;
+    min-width: 200px;
+    max-width: 380px;
+    border-radius: .5rem;
     box-shadow: none;
     display: flex;
     align-items: center;
@@ -307,10 +306,10 @@ export default {
       position: absolute;
       margin-top: 10px;
       width: 50vw;
-      min-width: 250px;
-      max-width: 420px;
+      min-width: 200px;
+      max-width: 380px;
       z-index: 1;
-      border-radius: 0 0 15px 15px;
+      border-radius: 0 0 .5rem .5rem;
       border-width: 0;
       border-style: solid;
       border-color: transparent;
