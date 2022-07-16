@@ -12,6 +12,7 @@
     "@vueuse/components": "^8.4.2",
     "@vueuse/core": "^8.4.2",
     "@vueuse/integrations": "^8.7.5",
+    "apexcharts": "^3.35.3",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "firebase": "^9.7.0",
@@ -27,6 +28,7 @@
     "vue-select": "^4.0.0-beta.3",
     "vue-simple-password-meter": "^1.1.0",
     "vue-splash": "^1.2.1",
+    "vue3-apexcharts": "^1.4.1",
     "vuex": "^4.0.0-0",
     "webpack": "^5.73.0"
   },
