@@ -1,14 +1,27 @@
 <template>
   <div class="input-wrapper">
-    <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete"
+    <input :type="inputType" :id="inputId" name="input"
+    :autocomplete="autocomplete"
     :placeholder="label" :value="value"
     @input="event => $emit('update:value', event.target.value)"
     :class="{ invalid: invalid && (validate || forceValidate) }"
-    @blur="validate = true"/>
+    @focus="$emit('focus')"
+    @blur="handleBlur"/>
 
-    <label :for="inputId">{{ label }}</label>
+    <label class="search-label" v-if="type === 'search'" :for="inputId">{{ label }}</label>
+    <label class='form-label' v-else :for="inputId">{{ label }}</label>
 
-    <i :class="iconClass"></i>
+    <div v-if="type === 'search'" class="button" @click="$emit('searchBtnClick')">
+      <i class="ph-magnifying-glass-light"></i>
+    </div>
+    <div v-else-if="type === 'password'" class="button" @click="showPassword">
+
+      <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+
+      <i class="ph-eye-light" v-if="!passwordHidden"></i>
+
+    </div>
+    <i v-else :class="iconClass" class="input-icon"></i>
 
     <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
       <i class="ph-warning-circle-light invalid-icon"></i>
@@ -33,7 +46,6 @@ export default {
     value: String,
     autocomplete: {
       type: String,
-      required: true,
     },
     label: {
       type: String,
@@ -41,21 +53,17 @@ export default {
     },
     iconClass: {
       type: String,
-      required: true,
     },
     messageInvalid: {
       type: String,
-      required: true,
     },
     messageEmpty: {
       type: String,
-      required: false,
     },
     required: {
       type: Boolean,
-      required: true,
     },
-    inputType: {
+    type: {
       type: String,
       default: 'text',
     },
@@ -70,8 +78,11 @@ export default {
   },
   emits: [
     'update:value',
+    'blur',
+    'focus',
+    'searchBtnClick',
   ],
-  setup(props) {
+  setup(props, { emit }) {
     const inputId = ref(null);
 
     onMounted(() => {
@@ -82,10 +93,37 @@ export default {
 
     const validate = ref(false);
 
+    const handleBlur = () => {
+      emit('blur');
+      validate.value = true;
+    };
+
+    const passwordHidden = ref(true);
+
+    function showPassword() {
+      if (empty.value) return;
+      passwordHidden.value = !passwordHidden.value;
+    }
+
+    const inputType = computed(() => {
+      switch (props.type) {
+        case 'password': {
+          return passwordHidden.value ? 'password' : 'text';
+        }
+        default: {
+          return props.type;
+        }
+      }
+    });
+
     return {
       inputId,
       empty,
       validate,
+      handleBlur,
+      passwordHidden,
+      showPassword,
+      inputType,
     };
   },
 };
@@ -97,7 +135,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 45px;
 
   .invalid-wrapper {
     position: absolute;
@@ -127,12 +164,40 @@ export default {
     pointer-events: none;
     backface-visibility: hidden;
     transform-origin: 0 0;
+
+    &.search-label {
+      left: 32px;
+    }
   }
 
-  i {
+  .input-icon {
     font-size: 2rem;
     position: absolute;
     right: 30px
+  }
+
+  .button {
+    position: absolute;
+    right: 23px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+
+    i {
+      font-size: 2rem;
+      user-select: none;
+    }
   }
 
   input {
@@ -140,15 +205,31 @@ export default {
     border: 2px solid transparent;
     background-color: $secondary-color;
     color: $secondary-text-color;
-    height: 65px;
+    height: 55px;
     width: 50vw;
-    min-width: 250px;
-    max-width: 420px;
-    border-radius: 15px;
+    min-width: 200px;
+    max-width: 380px;
+    border-radius: .5rem;
     box-shadow: none;
     font-weight: 600;
     transition: all calc($transition-duration * 2);
     filter: none;
+    font-family: 'Inter', sans-serif;
+
+    &[type="password"] {
+      letter-spacing: .313rem;
+    }
+
+    &[type="search"] {
+    padding: 0 90px 0 30px;
+    }
+
+    &[type="search"]::-webkit-search-decoration,
+    &[type="search"]::-webkit-search-cancel-button,
+    &[type="search"]::-webkit-search-results-button,
+    &[type="search"]::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
 
     &.invalid {
       border-color: $color-invalid;
@@ -188,11 +269,15 @@ export default {
       outline: none;
     }
 
-    &:focus + label,
-    &:not(:placeholder-shown) + label,
-    &:-webkit-autofill:active + label  {
+    &:focus + .form-label,
+    &:not(:placeholder-shown) + .form-label,
+    &:-webkit-autofill:active + .form-label  {
       color: $accent-color;
       transform: translateY(-0.6em) scale(0.8);
+    }
+
+    &:not(:placeholder-shown) + .search-label {
+      display: none;
     }
 
     &::placeholder {
