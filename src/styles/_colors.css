@@ -6,6 +6,8 @@
     --primary-text-color: #B3B1B5;
     --secondary-text-color: white;
     --accent-text-color: #77747B;
+
+    --box-shadow-color: rgba(19,17,32,.42);
 }
 
 #app-wrapper[data-theme='light'] {
@@ -16,6 +18,8 @@
     --primary-text-color: rgb(44, 44, 44);
     --secondary-text-color: black;
     --accent-text-color: #77747B;
+
+    --box-shadow-color: rgba(19,17,32,.42);
 }
 
 #app-wrapper[data-theme='dark'] {
@@ -26,4 +30,6 @@
     --primary-text-color: #B3B1B5;
     --secondary-text-color: white;
     --accent-text-color: #77747B;
+
+    --box-shadow-color: rgba(19,17,32,.42);
 }
