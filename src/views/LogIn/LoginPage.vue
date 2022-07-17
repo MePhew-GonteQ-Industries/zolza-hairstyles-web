@@ -33,14 +33,21 @@
         :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
         :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
 
-        <router-link class="forgot-password-link" to="/password-reset"
-        tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+        <div class="under-form-section">
+          <CustomCheckbox v-model:checked="saveUser">Zapamiętaj mnie</CustomCheckbox>
+
+          <router-link class="forgot-password-link" to="/password-reset"
+          tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+        </div>
 
         <CustomButton class="login-btn" v-if='!loading'>Zaloguj się</CustomButton>
 
         <CustomLoader class='loader' v-else />
       </form>
-
+      <div class="signup-redirection">
+        <h3>Nie masz jeszcze konta? </h3>
+        <router-link to="/">Utwórz konto</router-link>
+      </div>
       <p>{{message}}</p>
     </div>
   </section>
@@ -55,6 +62,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import validateEmail from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
+import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
 export default {
   name: 'LoginPage',
@@ -62,6 +70,7 @@ export default {
     CustomButton,
     CustomInput,
     CustomLoader,
+    CustomCheckbox,
   },
   props: {
     emailConfirmed: {
@@ -82,6 +91,8 @@ export default {
 
     const { t } = useI18n();
     const store = useStore();
+
+    const saveUser = ref(false);
 
     const userData = ref({
       email: 'matib0029@gmaila.com',
@@ -143,6 +154,7 @@ export default {
       emailInvalid,
       loading,
       forceValidate,
+      saveUser,
     };
   },
 };
@@ -150,9 +162,10 @@ export default {
 
 <style lang='scss' scoped>
   .login-wrapper {
-    background-color: red;
-    height: 70vh;
-    width: 60vw;
+    text-align: center;
+    background-color: $secondary-color;
+    height: 75vh;
+    width: 40vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -181,30 +194,41 @@ export default {
       align-items: center;
       justify-content: center;
       padding: 30px 20px 0 20px;
-      position: relative;
       height: 70%;
       max-width: 420px;
 
       .input{
-        padding: 10px 0;
-        height: 70%;
+        padding-top: 10px;
+        height: 100%;
       }
 
-      .forgot-password-link {
+      .under-form-section{
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .forgot-password-link {
         color: $accent-color;
         font-size: 1em;
-        position: absolute;
-        top: 60%;
-        left: 0;
 
-        &:hover {
-          text-decoration: underline;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
       .login-btn, .loader {
-        margin-top: 50px;
-        height: 70%;
+        margin: 30px 0;
+        height: 100%;
+      }
+    }
+    .signup-redirection{
+      font-size: .8rem;
+      margin-bottom: 60px;
+      display: flex;
+      a{
+        color: $accent-color;
+        font-size: .8rem;
       }
     }
   }
