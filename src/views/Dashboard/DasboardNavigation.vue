@@ -62,35 +62,41 @@ export default {
   height: calc(100vh - 6rem);
   width: 100%;
   position: relative;
-
   $offset: 88px;
 
   & a:nth-child(1).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 0));
+      opacity: 1;
   }
 
   & a:nth-child(2).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 1));
+      opacity: 1;
   }
 
   & a:nth-child(3).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 2));
+      opacity: 1;
   }
 
   & a:nth-child(4).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 3));
+      opacity: 1;
   }
 
   & a:nth-child(5).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 4));
+      opacity: 1;
   }
 
   & a:nth-child(6).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 5));
+      opacity: 1;
   }
 
   & a:nth-child(7).router-link-exact-active  ~ .active-tab-indicator {
       transform: translateY(calc($offset * 6));
+      opacity: 1;
   }
 
   .active-tab-indicator {
@@ -101,6 +107,10 @@ export default {
     left: -8px;
     border-radius: 100%;
     background-color: $accent-color;
+    opacity: 0;
+    transition-property: transform, opacity;
+    transform: translateY(calc($offset * -3));
+    z-index: 600;
   }
 
   a {
