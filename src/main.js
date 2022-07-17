@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import axios from 'axios';
+import { SetupCalendar } from 'v-calendar';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -11,4 +12,5 @@ axios.defaults.baseURL = VUE_APP_API_URL;
 createApp(App).use(i18n)
   .use(store)
   .use(router)
+  .use(SetupCalendar, {})
   .mount('#app');
