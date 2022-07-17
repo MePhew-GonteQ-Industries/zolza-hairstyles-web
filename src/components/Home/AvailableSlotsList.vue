@@ -3,9 +3,8 @@
     <CustomLoader class='loader' v-if="loading"/>
 
     <div class="available-dates" v-if="!loading">
-    <template v-for="(slot, index) in availableSlots" :key="slot.id">
-        <AvailableDateTile :color="colors[Math.floor(index / 3)]"
-        :day="slot.day" :time="slot.time"/>
+    <template v-for="slot in availableSlots" :key="slot.id">
+        <AvailableDateTile :day="slot.day" :time="slot.time"/>
     </template>
 
   </div>
