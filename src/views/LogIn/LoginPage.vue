@@ -161,7 +161,7 @@ export default {
   .login-wrapper {
     text-align: center;
     background-color: $secondary-color;
-    height: 80vh;
+    height: 75vh;
     width: 40vw;
     display: flex;
     flex-direction: column;
@@ -196,7 +196,7 @@ export default {
 
       .input{
         padding-top: 10px;
-        height: 70%;
+        height: 100%;
       }
 
       .under-form-section{
@@ -216,14 +216,16 @@ export default {
 
       .login-btn, .loader {
         margin: 30px 0;
-        height: 70%;
+        height: 100%;
       }
     }
     .signup-redirection{
-      margin-bottom: 10px;
+      font-size: .8rem;
+      margin-bottom: 60px;
       display: flex;
       a{
         color: $accent-color;
+        font-size: .8rem;
       }
     }
   }
