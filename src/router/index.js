@@ -139,7 +139,7 @@ const routes = [{
   },
   children: [
     {
-      path: '/dashboard',
+      path: '',
       component: () => import('@/views/Dashboard/SummaryView.vue'),
       name: 'summaryView',
     },
@@ -149,14 +149,26 @@ const routes = [{
       name: 'appointmentsManagement',
     },
     {
+      path: 'appointment/:id',
+      component: () => import('@/views/Dashboard/AppointmentView.vue'),
+    },
+    {
       path: 'services',
       component: () => import('@/views/Dashboard/ServicesManagement.vue'),
       name: 'servicesManagement',
     },
     {
+      path: 'service/:id',
+      component: () => import('@/views/Dashboard/ServiceView.vue'),
+    },
+    {
       path: 'users',
       component: () => import('@/views/Dashboard/UsersManagement.vue'),
       name: 'usersManagement',
+    },
+    {
+      path: 'user/:id',
+      component: () => import('@/views/Dashboard/UserView.vue'),
     },
     {
       path: 'work-hours',
