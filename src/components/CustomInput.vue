@@ -223,7 +223,7 @@ export default {
     }
 
     &[type="search"] {
-    padding: 0 90px 0 30px;
+      padding: 0 90px 0 30px;
     }
 
     &[type="search"]::-webkit-search-decoration,
