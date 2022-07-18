@@ -16,9 +16,6 @@
       @focus='passwordInputFocused = true'
       @blur='passwordInputFocused = false'/>
 
-      <PasswordStrengthFeedback :password="newPassword" :show="passwordInputFocused"
-      @score="onScore"/>
-
       <CustomInput :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
       autocomplete="new-password"
       type='password'
@@ -43,14 +40,12 @@ import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomButton from '@/components/CustomButton.vue';
-import PasswordStrengthFeedback from '@/components/PasswordStrengthFeedback.vue';
 
 export default {
   name: 'ChangePassword',
   components: {
     CustomInput,
     CustomButton,
-    PasswordStrengthFeedback,
   },
   setup() {
     const { t } = useI18n();
