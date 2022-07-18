@@ -6,58 +6,76 @@
       <form class="sing-up-form" @submit.prevent="handleSubmit" novalidate>
         <input class="hidden-input" type="text" autocomplete="username">
 
-        <CustomInput :label="t('signUp.nameField.label')"
-        iconClass='ph-identification-card-light' autocomplete="given-name"
-        :required='true' :messageEmpty="t('signUp.nameField.messageEmpty')"
-        :messageInvalid="t('signUp.nameField.messageInvalid')"
-        v-model:value="userData.name"
-        :forceValidate="forceValidate" :invalid="!userData.name"/>
+        <div class="inputs">
+          <CustomInput :label="t('signUp.nameField.label')"
+          iconClass='ph-identification-card-light' autocomplete="given-name"
+          :required='true' :messageEmpty="t('signUp.nameField.messageEmpty')"
+          :messageInvalid="t('signUp.nameField.messageInvalid')"
+          v-model:value="userData.name"
+          :forceValidate="forceValidate" :invalid="!userData.name"/>
 
-        <CustomInput :label="t('signUp.surnameField.label')"
-        iconClass='ph-identification-card-light'
-        autocomplete="family-name"
-        v-model:value="userData.surname"
-        :required='true' :messageEmpty="t('signUp.surnameField.messageEmpty')"
-        :messageInvalid="t('signUp.surnameField.messageInvalid')"
-        :invalid="!userData.surname" :forceValidate="forceValidate"/>
+          <CustomInput :label="t('signUp.surnameField.label')"
+          iconClass='ph-identification-card-light'
+          autocomplete="family-name"
+          v-model:value="userData.surname"
+          :required='true' :messageEmpty="t('signUp.surnameField.messageEmpty')"
+          :messageInvalid="t('signUp.surnameField.messageInvalid')"
+          :invalid="!userData.surname" :forceValidate="forceValidate"/>
 
-        <CustomInput :label="t('signUp.emailField.label')"
-        iconClass='ph-envelope-simple-light'
-        autocomplete="email" inputType='email'
-        v-model:value="userData.email"
-        :required='true' :messageEmpty="t('signUp.emailField.messageEmpty')"
-        :messageInvalid="t('signUp.emailField.messageInvalid')"
-        :invalid="emailInvalid" :forceValidate="forceValidate"/>
+          <CustomInput :label="t('signUp.emailField.label')"
+          iconClass='ph-envelope-simple-light'
+          autocomplete="email" inputType='email'
+          v-model:value="userData.email"
+          :required='true' :messageEmpty="t('signUp.emailField.messageEmpty')"
+          :messageInvalid="t('signUp.emailField.messageInvalid')"
+          :invalid="emailInvalid" :forceValidate="forceValidate"/>
 
-        <CustomSelect class="selector"
-        :header="t('signUp.genderField.header')"
-        iconClass="ph-gender-intersex-light"
-        :options="genderOptions"
-        v-model:selected-value="userData.gender"
-        :required='true' :messageEmpty="t('signUp.genderField.messageEmpty')"
-        :messageInvalid="t('signUp.genderField.messageInvalid')"
-        :invalid="!userData.gender" :forceValidate="forceValidate"/>
+          <CustomSelect class="selector"
+          :header="t('signUp.genderField.header')"
+          iconClass="ph-gender-intersex-light"
+          :options="genderOptions"
+          v-model:selected-value="userData.gender"
+          :required='true' :messageEmpty="t('signUp.genderField.messageEmpty')"
+          :messageInvalid="t('signUp.genderField.messageInvalid')"
+          :invalid="!userData.gender" :forceValidate="forceValidate"/>
 
-        <CustomInput :label="t('signUp.passwordField.label')"
-        autocomplete="new-password"
-        type='password'
-        v-model:value="userData.password"
-        :invalid="!passwordRepeat || passwordRepeat !== userData.password"
-        :forceValidate="forceValidate"
-        :required='true' :messageEmpty="t('signUp.passwordField.messageEmpty')"
-        :messageInvalid="t('signUp.passwordField.messageInvalid')"/>
+          <CustomInput :label="t('signUp.passwordField.label')"
+          autocomplete="new-password"
+          type='password'
+          v-model:value="userData.password"
+          :invalid="!passwordRepeat || passwordRepeat !== userData.password"
+          :forceValidate="forceValidate"
+          :required='true' :messageEmpty="t('signUp.passwordField.messageEmpty')"
+          :messageInvalid="t('signUp.passwordField.messageInvalid')"/>
 
-        <CustomInput :label="t('signUp.repeatPasswordField.label')"
-        autocomplete="new-password"
-        type='password'
-        v-model:value="passwordRepeat"
-        :invalid="!passwordRepeat || passwordRepeat !== userData.password"
-        :forceValidate="forceValidate"
-        :required='true' :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
-        :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"/>
+          <CustomInput :label="t('signUp.repeatPasswordField.label')"
+          autocomplete="new-password"
+          type='password'
+          v-model:value="passwordRepeat"
+          :invalid="!passwordRepeat || passwordRepeat !== userData.password"
+          :forceValidate="forceValidate"
+          :required='true' :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
+          :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"/>
+        </div>
 
-        <CustomButton>Utwórz konto</CustomButton>
+        <div class="under-form-section">
+          <CustomCheckbox>Akceptuję
+            <router-link to="/">
+              regulamin serwisu
+            </router-link>
+            i
+            <router-link to="/">
+              politykę prywatności
+            </router-link>
+          </CustomCheckbox>
+        </div>
+
+        <CustomButton class="sign-up-button">Utwórz konto</CustomButton>
       </form>
+      <div class="login-redirection">
+        <h3>Masz już konto?</h3>
+        <router-link to="/">Zaloguj się</router-link>
+      </div>
     </div>
   </section>
 </template>
@@ -71,6 +89,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import validateEmail from '@/utils';
+import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
 export default {
   name: 'SignUpPage',
@@ -78,6 +97,7 @@ export default {
     CustomButton,
     CustomSelect,
     CustomInput,
+    CustomCheckbox,
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -240,7 +260,7 @@ export default {
   box-shadow: 0 0 8px -2px $box-shadow-color;
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
+  align-items: flex-start;
   padding: .9375rem .875rem;
 
   .sign-up-wrapper{
@@ -256,13 +276,43 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 4rem 1.5rem;
-      max-width: 420px;
-      box-sizing: content-box;
-      gap: 1rem;
+      padding: 30px 20px 0 20px;
+
+      .inputs{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .under-form-section{
+        margin-top: 10px;
+        width: 100%;
+        font-size: 1em;
+        display: flex;
+        align-items: flex-start;
+        a{
+          font-size: 1em;
+          color: $accent-color;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+      .sign-up-button{
+        margin: 30px 0;
+      }
 
       .hidden-input {
         display: none;
+      }
+    }
+    .login-redirection{
+      font-size: .8rem;
+      display: flex;
+      align-items: center;
+      a{
+        color: $accent-color;
+        font-size: .8rem;
       }
     }
   }
