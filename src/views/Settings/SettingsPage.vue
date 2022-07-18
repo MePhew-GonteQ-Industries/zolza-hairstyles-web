@@ -1,6 +1,6 @@
 <template>
   <section class="app-page" id="notification-settings-page">
-    <h1>This is a settings page</h1>
+    <router-view></router-view>
   </section>
 </template>
 

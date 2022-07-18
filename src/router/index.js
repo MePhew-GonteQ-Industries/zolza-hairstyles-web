@@ -18,7 +18,7 @@ function loginProps(route) {
 
 const routes = [{
   path: '/',
-  name: 'Home',
+  name: 'home',
   component: () => import(/* webpackChunkName: "home" */ '@/views/Home/HomePage.vue'),
   meta: {
     requiresAuth: false,
@@ -27,7 +27,7 @@ const routes = [{
 },
 {
   path: '/email-verification',
-  name: 'EmailVerification',
+  name: 'emailVerification',
   component: EmailVerification,
   meta: {
     requiresAuth: false,
@@ -36,7 +36,7 @@ const routes = [{
 },
 {
   path: '/contact',
-  name: 'Contact',
+  name: 'contact',
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
@@ -48,7 +48,7 @@ const routes = [{
 },
 {
   path: '/sign-up',
-  name: 'SignUp',
+  name: 'signUp',
   component: () => import(/* webpackChunkName: "signup" */ '@/views/SignUp/SignUpPage.vue'),
   meta: {
     requiresAuth: false,
@@ -57,7 +57,7 @@ const routes = [{
 },
 {
   path: '/login',
-  name: 'Login',
+  name: 'login',
   component: () => import(/* webpackChunkName: "login" */ '@/views/LogIn/LoginPage.vue'),
   props: loginProps,
   meta: {
@@ -67,7 +67,7 @@ const routes = [{
 },
 {
   path: '/terms-of-use',
-  name: 'TermsOfUse',
+  name: 'termsOfUse',
   component: () => import(/* webpackChunkName: "terms" */ '@/views/TermsOfUsePage.vue'),
   meta: {
     requiresAuth: false,
@@ -76,7 +76,7 @@ const routes = [{
 },
 {
   path: '/privacy-policy',
-  name: 'PrivacyPolicy',
+  name: 'privacyPolicy',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/PrivacyPolicyPage.vue'),
   meta: {
     requiresAuth: false,
@@ -85,7 +85,7 @@ const routes = [{
 },
 {
   path: '/cookies-policy',
-  name: 'CookiesPolicy',
+  name: 'cookiesPolicy',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/CookiesPolicyPage.vue'),
   meta: {
     requiresAuth: false,
@@ -94,7 +94,7 @@ const routes = [{
 },
 {
   path: '/rodo',
-  name: 'RodoNotice',
+  name: 'rodoNotice',
   component: () => import(/* webpackChunkName: "privacypolicy" */ '@/views/RodoNoticePage.vue'),
   meta: {
     requiresAuth: false,
@@ -103,7 +103,7 @@ const routes = [{
 },
 {
   path: '/password-reset',
-  name: 'ResetPassword',
+  name: 'resetPassword',
   component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword/ResetPassword.vue'),
   meta: {
     requiresAuth: false,
@@ -122,16 +122,42 @@ const routes = [{
 },
 {
   path: '/settings',
-  name: 'SettingsPage',
+  name: 'settings',
   component: () => import('@/views/Settings/SettingsPage.vue'),
   meta: {
     requiresAuth: true,
     requiredPermissionLevel: 'user',
   },
+  children: [
+    {
+      path: '',
+      component: () => import('@/views/Settings/UserAccountSettings.vue'),
+    },
+    {
+      path: 'account',
+      component: () => import('@/views/Settings/UserAccountSettings.vue'),
+      name: 'userAccountSettings',
+    },
+    {
+      path: 'notifications',
+      component: () => import('@/views/Settings/NotificationsSettings.vue'),
+      name: 'notificationsSettings',
+    },
+    {
+      path: 'theme',
+      component: () => import('@/views/Settings/ThemeSettings.vue'),
+      name: 'themeSettings',
+    },
+    {
+      path: 'language',
+      component: () => import('@/views/Settings/LanguageSettings.vue'),
+      name: 'languageSettings',
+    },
+  ],
 },
 {
   path: '/dashboard',
-  name: 'Dashboard',
+  name: 'dashboard',
   component: () => import('@/views/Dashboard/DashboardPage.vue'),
   meta: {
     requiresAuth: true,
@@ -189,7 +215,7 @@ const routes = [{
 },
 {
   path: '/:catchAll(.*)',
-  name: 'NotFound',
+  name: 'notFound',
   component: () => import('@/views/PageNotFound/PageNotFound.vue'),
 },
 ];

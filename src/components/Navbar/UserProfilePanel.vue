@@ -1,25 +1,40 @@
 <template>
   <div class="profile-wrapper" ref="profileWrapper">
-    <i class="user-icon"
-    :class="profilePanelExpanded ? 'ph-user-fill': 'ph-user-light'"
-    @click='toggleProfilePanel'></i>
+    <i
+      class="user-icon"
+      :class="profilePanelExpanded ? 'ph-user-fill' : 'ph-user-light'"
+      @click="toggleProfilePanel"
+    ></i>
 
     <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
       <div class="panel-header" v-if="$store.state.user.userData">
-        <i class="ph-user-circle-fill user-avatar"></i>
-        <span>{{ $store.state.user.userData.name }} {{ $store.state.user.userData.surname }}</span>
+        <router-link :to="{ name: 'userAccountSettings' }"
+          ><i class="ph-user-circle-fill user-avatar"></i
+        ></router-link>
+        <router-link :to="{ name: 'userAccountSettings' }">
+          <span
+            >{{ $store.state.user.userData.name }}
+            {{ $store.state.user.userData.surname }}</span
+          >
+        </router-link>
       </div>
       <div class="primary-options" @click="collapseProfilePanel">
-        <router-link to="/settings/theme" class="option-tile">
-          <i class="tile-icon"
-          :class="$store.state.settings.theme === 'dark' ? 'ph-moon-light' : 'ph-sun-light'"></i>
+        <router-link :to="{ name: 'themeSettings' }" class="option-tile">
+          <i
+            class="tile-icon"
+            :class="
+              $store.state.settings.theme === 'dark'
+                ? 'ph-moon-light'
+                : 'ph-sun-light'
+            "
+          ></i>
           <span class="tile-title">Motyw</span>
         </router-link>
-        <router-link to="/settings/language" class="option-tile">
+        <router-link  :to='{ name: "languageSettings" }' class="option-tile">
           <i class="ph-translate-light tile-icon"></i>
           <span class="tile-title">Język</span>
         </router-link>
-        <router-link to="/settings" class="option-tile">
+        <router-link to='/settings' class="option-tile">
           <i class="ph-gear-six-light tile-icon"></i>
           <span class="tile-title">Ustawienia</span>
         </router-link>
@@ -113,7 +128,6 @@ export default {
     };
   },
 };
-
 </script>
 
 <style lang='scss' scoped>
@@ -158,6 +172,10 @@ export default {
       border-bottom: 1px solid $secondary-color;
       font-size: 1.125rem;
 
+      a {
+        color: inherit;
+      }
+
       .user-avatar {
         font-size: 3rem;
       }
@@ -167,10 +185,11 @@ export default {
       border-bottom: 1px solid $secondary-color;
     }
 
-    .primary-options, .secondary-options {
+    .primary-options,
+    .secondary-options {
       display: flex;
       flex-direction: column;
-      padding-block: .5rem;
+      padding-block: 0.5rem;
     }
 
     .option-tile {
