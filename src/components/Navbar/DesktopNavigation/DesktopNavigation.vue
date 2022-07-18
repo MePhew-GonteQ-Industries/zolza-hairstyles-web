@@ -157,9 +157,10 @@ export default {
 .navigation {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  justify-items: center;
 
   a {
     font-size: 1rem;
@@ -173,7 +174,7 @@ export default {
   }
 
   .primary-nav {
-    gap: 1.125rem;
+    gap: 1rem;
   }
 
   .secondary-nav {
