@@ -199,17 +199,11 @@ export default {
       align-items: center;
       justify-content: center;
       padding: 30px 20px 0 20px;
-      height: 70%;
-      max-width: 420px;
 
       .inputs{
         display: flex;
         flex-direction: column;
         gap: 10px;
-        .input{
-        // padding-top: 10px;
-        // gap: 10px;
-      }
       }
 
       .under-form-section{

@@ -234,27 +234,37 @@ export default {
 
 <style lang='scss' scoped>
 #sign-up-page {
-  padding-block: 2rem;
+  text-align: center;
+  background-color: $secondary-color;
+  border-radius: .375rem;
+  box-shadow: 0 0 8px -2px $box-shadow-color;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: .9375rem .875rem;
 
   .sign-up-wrapper{
     h1 {
-    font-size: 3rem;
-  }
-
-  .sing-up-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 1.5rem;
-    max-width: 420px;
-    box-sizing: content-box;
-    gap: 1rem;
-
-    .hidden-input {
-      display: none;
+      font-size: 1.5rem;
     }
-  }
+    h4{
+      font-size: .875rem;
+    }
+
+    .sing-up-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1.5rem;
+      max-width: 420px;
+      box-sizing: content-box;
+      gap: 1rem;
+
+      .hidden-input {
+        display: none;
+      }
+    }
   }
 }
 </style>
