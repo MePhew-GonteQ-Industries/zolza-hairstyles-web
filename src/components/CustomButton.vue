@@ -12,18 +12,19 @@ export default {
 
 <style lang='scss' scoped>
   button {
-    height: 38px;
+    height: 45px;
     width: 408px;
-    border-radius: .5rem;
+    border-radius: 0.313rem;
     background-color: $accent-color;
     color: $secondary-text-color;
-    font-size: 1.2rem;
+    font-size: 0.875rem;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     cursor: pointer;
     outline: none;
     border: none;
-    box-shadow: 0 4px 8px -4px $box-shadow-color;
+    box-shadow: 0 0 8px -2px $box-shadow-color;
+    text-transform: uppercase;
 
     &:focus {
       outline: none;
