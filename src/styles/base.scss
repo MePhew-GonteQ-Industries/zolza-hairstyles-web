@@ -167,7 +167,7 @@ ul {
   th {
     padding: 0 1rem;
     text-transform: uppercase;
-    background-color: rgb(61 57 67 / 76%);
+    background-color: $background-accent-high;
     user-select: none;
     height: 3.375rem;
     font-size: .75rem;
@@ -200,14 +200,14 @@ ul {
   }
 
   tr:hover>td {
-    background-color: rgb(61 57 67 / 65%);
+    background-color: $background-accent-medium;
   }
 
   td {
     padding: 1rem;
     font-size: .875rem;
     height: 3.125rem;
-    background-color: rgb(61 57 67 / 32%);
+    background-color: $background-accent-low;
     transition: none;
     border-bottom: thin solid $secondary-color;
 
