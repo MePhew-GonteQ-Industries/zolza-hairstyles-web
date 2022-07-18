@@ -1,56 +1,68 @@
 <template>
-  <section class="app-page" id="login-page">
-    <div class="login-wrapper">
-      <h1>{{ t('logIn.heading') }}</h1>
-      <h3>{{ t('logIn.subtitle') }}</h3>
+  <section class="app-page form-page">
+    <div class="form-wrapper">
+      <h1>{{ t("logIn.heading") }}</h1>
+      <h3>{{ t("logIn.subtitle") }}</h3>
 
       <div class="state-message" v-if="emailConfirmed">
-          <h4>Email address has been confirmed successfully</h4>
-          <h4>You can now login to your account</h4>
+        <h4>Email address has been confirmed successfully</h4>
+        <h4>You can now login to your account</h4>
       </div>
 
       <div class="state-message" v-if="accountCreated">
-          <h4>Account created successfully</h4>
-          <h4>You can now login</h4>
+        <h4>Account created successfully</h4>
+        <h4>You can now login</h4>
       </div>
 
-      <form class="login-form" @submit.prevent="handleSubmit" novalidate>
+      <form @submit.prevent="handleSubmit" novalidate>
         <div class="inputs">
-          <CustomInput :label="t('logIn.emailField.label')"
-          iconClass='ph-envelope-simple-light' inputType='email'
-          autocomplete="email" v-model:value="userData.email"
-          :forceValidate="forceValidate"
-          :invalid="emailInvalid"
-          :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
-          :messageInvalid="t('logIn.emailField.messageInvalid')"
-          class="input"/>
+          <CustomInput
+            :label="t('logIn.emailField.label')"
+            iconClass="ph-envelope-simple-light"
+            inputType="email"
+            autocomplete="email"
+            v-model:value="userData.email"
+            :forceValidate="forceValidate"
+            :invalid="emailInvalid"
+            :required="true"
+            :messageEmpty="t('logIn.emailField.messageEmpty')"
+            :messageInvalid="t('logIn.emailField.messageInvalid')"
+            class="input"
+          />
 
-          <CustomInput class='current-password input' :label="t('logIn.currentPasswordField.label')"
-          autocomplete="new-password"
-          type='password'
-          v-model:value="userData.password"
-          :invalid="!userData.password"
-          :forceValidate="forceValidate"
-          :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
-          :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
+          <CustomInput
+            class="current-password input"
+            :label="t('logIn.currentPasswordField.label')"
+            autocomplete="new-password"
+            type="password"
+            v-model:value="userData.password"
+            :invalid="!userData.password"
+            :forceValidate="forceValidate"
+            :required="true"
+            :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
+            :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"
+          />
         </div>
 
-        <div class="under-form-section">
-          <CustomCheckbox v-model:checked="saveUser">Zapamiętaj mnie</CustomCheckbox>
+        <div class="under-inputs-section">
+          <CustomCheckbox v-model:checked="saveUser"
+            >Zapamiętaj mnie</CustomCheckbox
+          >
 
-          <router-link class="forgot-password-link" to="/password-reset"
-          tabindex="-1">{{t('logIn.forgotPasswordBtn')}}</router-link>
+          <router-link to="/password-reset" tabindex="-1">{{
+            t("logIn.forgotPasswordBtn")
+          }}</router-link>
         </div>
 
-        <CustomButton class="login-btn" v-if='!loading'>Zaloguj się</CustomButton>
+        <CustomButton class="btn" v-if="!loading">Zaloguj się</CustomButton>
 
-        <CustomLoader class='loader' v-else />
+        <CustomLoader class="loader" v-else />
       </form>
-      <div class="signup-redirection">
-        <h3>Nie masz jeszcze konta? </h3>
+      <div class="under-form-section">
+        <span>Nie masz jeszcze konta?</span>
         <router-link to="/">Utwórz konto</router-link>
       </div>
-      <p>{{message}}</p>
+      <p>{{ message }}</p>
     </div>
   </section>
 </template>
@@ -125,13 +137,16 @@ export default {
 
     function loginUser() {
       loading.value = true;
-      store.dispatch('login', userData.value).then(() => {
-        loading.value = false;
-        router.push('/');
-      }).catch((err) => {
-        message.value = err;
-        loading.value = false;
-      });
+      store
+        .dispatch('login', userData.value)
+        .then(() => {
+          loading.value = false;
+          router.push('/');
+        })
+        .catch((err) => {
+          message.value = err;
+          loading.value = false;
+        });
     }
 
     function handleSubmit() {
@@ -162,78 +177,5 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-  .login-wrapper {
-    text-align: center;
-    background-color: $secondary-color;
-    border-radius: .375rem;
-    box-shadow: 0 0 8px -2px $box-shadow-color;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: .9375rem .875rem;
-    h1 {
-      font-size: 1.5rem;
-    }
-    h3{
-      font-size: .875rem;
-    }
-
-    .state-message {
-      margin-top: 70px;
-      margin-bottom: 5px;
-      background-color: $secondary-color;
-      padding: 20px;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: $accent-color;
-      background-color: $secondary-color;
-    }
-
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px 20px 0 20px;
-
-      .inputs{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .under-form-section{
-        margin-top: 10px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        .forgot-password-link {
-        color: $accent-color;
-        font-size: 1em;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-
-      .login-btn, .loader {
-        margin: 30px 0;
-      }
-    }
-    .signup-redirection{
-      margin: auto;
-      font-size: .8rem;
-      display: flex;
-      align-items: center;
-      a{
-        color: $accent-color;
-        font-size: .8rem;
-      }
-    }
-  }
+<style lang='scss'>
 </style>
