@@ -9,7 +9,8 @@
     "languageSelector": ["Polski", "Angielski"]
   },
   "signUp": {
-    "heading": "Utwórz swoje konto",
+    "heading": "Utwórz konto",
+    "subtitle": "Utwórz swoje konto i umów się na wizytę już dziś",
     "nameField": {
       "label": "Imię",
       "messageEmpty": "Podaj swoje imię",
