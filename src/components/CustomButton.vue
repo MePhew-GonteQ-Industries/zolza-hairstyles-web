@@ -16,7 +16,7 @@ export default {
     width: 408px;
     border-radius: 0.313rem;
     background-color: $accent-color;
-    color: $secondary-text-color;
+    color: $primary-color;
     font-size: 0.875rem;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
