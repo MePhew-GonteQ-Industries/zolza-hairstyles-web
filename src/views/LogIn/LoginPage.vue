@@ -226,6 +226,7 @@ export default {
       }
     }
     .signup-redirection{
+      margin: auto;
       font-size: .8rem;
       display: flex;
       align-items: center;

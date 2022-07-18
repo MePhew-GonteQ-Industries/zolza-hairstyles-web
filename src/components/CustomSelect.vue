@@ -228,7 +228,7 @@ export default {
     position: relative;
     outline: none;
     border: 2px solid transparent;
-    background-color: $secondary-color;
+    background-color: $primary-color;
     height: 100%;
     width: 100%;
     border-radius: .5rem;

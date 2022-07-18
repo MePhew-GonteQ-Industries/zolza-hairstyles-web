@@ -135,7 +135,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 65px;
   width: 408px;
 
   .invalid-wrapper {

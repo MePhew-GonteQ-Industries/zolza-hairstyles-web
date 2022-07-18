@@ -308,6 +308,7 @@ export default {
     }
     .login-redirection{
       font-size: .8rem;
+      margin: auto;
       display: flex;
       align-items: center;
       a{
