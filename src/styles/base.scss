@@ -134,7 +134,7 @@ ul {
     align-items: flex-start;
     padding: 2.188rem 2.125rem;
     box-shadow: 0 0 8px -2px $box-shadow-color;
-    max-width: 480px;
+    max-width: 485px;
 
     * {
       font-family: "Inter", sans-serif;
@@ -203,7 +203,7 @@ ul {
         flex-direction: column;
         gap: 10px;
 
-        input {
+        input, .select {
           background-color: transparent;
 
           &.hidden-input {
@@ -214,6 +214,17 @@ ul {
             border-color: $primary-text-color;
           }
         }
+
+        .names {
+          display: flex;
+          width: 408px;
+          align-items: center;
+          justify-content: space-between;
+
+          .input-wrapper {
+            width: 45%;
+          }
+        }
       }
 
       .under-inputs-section {
@@ -222,6 +233,14 @@ ul {
         width: 100%;
         display: flex;
         justify-content: space-between;
+
+        label {
+          text-align: left;
+          a {
+            padding: 0;
+            font-size: inherit;
+          }
+        }
       }
 
       .btn {
