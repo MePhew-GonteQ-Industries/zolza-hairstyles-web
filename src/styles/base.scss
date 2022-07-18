@@ -134,9 +134,11 @@ ul {
     align-items: flex-start;
     padding: 2.188rem 2.125rem;
     box-shadow: 0 0 8px -2px $box-shadow-color;
+    max-width: 480px;
 
     * {
       font-family: "Inter", sans-serif;
+      overflow-wrap: break-word;
     }
 
     a {
@@ -146,6 +148,21 @@ ul {
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    .icon-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      i {
+        font-size: 1.5rem;
+        margin-bottom: .313rem;
+      }
+    }
+
+    h1, h3 {
+      text-align: left;
     }
 
     h1 {
@@ -189,6 +206,10 @@ ul {
         input {
           background-color: transparent;
 
+          &.hidden-input {
+            display: none;
+          }
+
           &:not(:focus, :hover, .invalid) {
             border-color: $primary-text-color;
           }
@@ -217,6 +238,20 @@ ul {
       font-size: 0.875rem;
       display: flex;
       align-items: center;
+
+      .return-link {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        &:hover {
+          text-decoration: none;
+          
+          span {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 }
