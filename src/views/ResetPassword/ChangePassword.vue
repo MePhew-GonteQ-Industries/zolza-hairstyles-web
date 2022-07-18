@@ -1,35 +1,66 @@
 <template v-if='resetToken'>
-  <div class="wrapper">
-    <h1>{{t('resetPassword.changePassword.heading')}}</h1>
-    <form @submit.prevent='handlePasswordReset' novalidate>
-      <input class="hidden-input" type="text" autocomplete="username">
+  <div class="form-wrapper">
+    <div class="icon-header">
+      <h1>{{ t("resetPassword.changePassword.heading") }}</h1>
+      <i class="ph-lock-key-bold"></i>
+    </div>
+    <h3>{{ t("resetPassword.changePassword.subtitle") }}</h3>
 
-      <CustomInput :label="t('resetPassword.changePassword.newPasswordField.label')"
-      autocomplete="new-password"
-      type='password'
-      v-model:value="newPassword"
-      :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-      :forceValidate="forceValidate"
-      :required='true'
-      :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
-      :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"
-      @focus='passwordInputFocused = true'
-      @blur='passwordInputFocused = false'/>
+    <form @submit.prevent="handlePasswordReset" novalidate>
+      <div class="inputs">
+        <input class="hidden-input" type="text" autocomplete="username" />
 
-      <CustomInput :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
-      autocomplete="new-password"
-      type='password'
-      v-model:value="newPasswordRepeat"
-      :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-      :forceValidate="forceValidate"
-      :required='true'
-      :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
-      :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"/>
+        <CustomInput
+          :label="t('resetPassword.changePassword.newPasswordField.label')"
+          autocomplete="new-password"
+          type="password"
+          v-model:value="newPassword"
+          :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
+          :forceValidate="forceValidate"
+          :required="true"
+          :messageEmpty="
+            t('resetPassword.changePassword.newPasswordField.messageEmpty')
+          "
+          :messageInvalid="
+            t('resetPassword.changePassword.newPasswordField.messageInvalid')
+          "
+          @focus="passwordInputFocused = true"
+          @blur="passwordInputFocused = false"
+        />
 
-      <CustomButton class="reset-password-btn">
-        {{ t('resetPassword.changePassword.changePasswordBtn') }}
+        <CustomInput
+          :label="
+            t('resetPassword.changePassword.repeatNewPasswordField.label')
+          "
+          autocomplete="new-password"
+          type="password"
+          v-model:value="newPasswordRepeat"
+          :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
+          :forceValidate="forceValidate"
+          :required="true"
+          :messageEmpty="
+            t(
+              'resetPassword.changePassword.repeatNewPasswordField.messageEmpty'
+            )
+          "
+          :messageInvalid="
+            t(
+              'resetPassword.changePassword.repeatNewPasswordField.messageInvalid'
+            )
+          "
+        />
+      </div>
+
+      <CustomButton class="btn">
+        {{ t("resetPassword.changePassword.changePasswordBtn") }}
       </CustomButton>
     </form>
+    <div class="under-form-section">
+      <router-link to="/login" class="return-link">
+        <i class="ph-caret-left-bold"></i>
+        <span>Powrót do logowania</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -73,10 +104,11 @@ export default {
     });
 
     function resetPassword() {
-      axios.put('auth/reset-password', {
-        reset_token: resetToken.value,
-        new_password: newPassword.value,
-      })
+      axios
+        .put('auth/reset-password', {
+          reset_token: resetToken.value,
+          new_password: newPassword.value,
+        })
         .then((response) => {
           if (response.status === 200) {
             const { email } = response.data;
@@ -164,7 +196,7 @@ export default {
     box-sizing: content-box;
 
     .hidden-input {
-        display: none;
+      display: none;
     }
   }
 }

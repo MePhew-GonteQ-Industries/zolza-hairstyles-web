@@ -1,25 +1,41 @@
 <template>
-  <div class="recovery-wrapper">
-    <h1>{{t('resetPassword.requestPasswordReset.heading')}}</h1>
-    <div class="description">
-      <h2>{{t('resetPassword.requestPasswordReset.description[0]')}}</h2>
-      <h2>{{t('resetPassword.requestPasswordReset.description[1]')}}</h2>
+  <div class="form-wrapper">
+    <div class="icon-header">
+      <h1>{{ t("resetPassword.requestPasswordReset.heading") }}</h1>
+      <i class="ph-lock-key-bold"></i>
     </div>
+    <h3>{{ t("resetPassword.requestPasswordReset.subtitle") }}</h3>
 
-    <form @submit.prevent='handleResetPasswordRequest' novalidate>
+    <form @submit.prevent="handleResetPasswordRequest" novalidate>
+      <div class="inputs">
+        <CustomInput
+          :label="t('resetPassword.requestPasswordReset.emailField.label')"
+          iconClass="ph-envelope-simple-light"
+          inputType="email"
+          autocomplete="email"
+          v-model:value="userEmail"
+          :invalid="emailInvalid"
+          :forceValidate="forceValidate"
+          :required="true"
+          :messageEmpty="
+            t('resetPassword.requestPasswordReset.emailField.messageEmpty')
+          "
+          :messageInvalid="
+            t('resetPassword.requestPasswordReset.emailField.messageInvalid')
+          "
+        />
+      </div>
 
-    <CustomInput :label="t('resetPassword.requestPasswordReset.emailField.label')"
-    iconClass='ph-envelope-simple-light' inputType='email'
-    autocomplete="email" v-model:value="userEmail"
-    :invalid="emailInvalid" :forceValidate="forceValidate" :required='true'
-    :messageEmpty="t('resetPassword.requestPasswordReset.emailField.messageEmpty')"
-    :messageInvalid="t('resetPassword.requestPasswordReset.emailField.messageInvalid')"/>
-
-    <CustomButton class="reset-password-btn">
-      {{ t('resetPassword.requestPasswordReset.resetPasswordBtn') }}
-    </CustomButton>
-
+      <CustomButton class="btn">
+        {{ t("resetPassword.requestPasswordReset.resetPasswordBtn") }}
+      </CustomButton>
     </form>
+    <div class="under-form-section">
+      <router-link to="/login" class="return-link">
+        <i class="ph-caret-left-bold"></i>
+        <span>Powrót do logowania</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -57,11 +73,13 @@ export default {
     }
 
     function requestPasswordReset() {
-      axios.post('auth/request-password-reset', {
-        email: userEmail.value,
-      }).then((response) => {
-        console.log(response);
-      })
+      axios
+        .post('auth/request-password-reset', {
+          email: userEmail.value,
+        })
+        .then((response) => {
+          console.log(response);
+        })
         .catch((error) => {
           if (error.response) {
             // The request was made and the server responded with a status code
@@ -106,42 +124,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.recovery-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  max-width: 600px;
-
-      h2 {
-      font-size: 1em;
-      font-weight: normal;
-    }
-
-  .description {
-    display: flex;
-    flex-direction: column;
-
-    h2 {
-      font-size: 1em;
-      font-weight: normal;
-    }
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 100px 20px;
-    max-width: 420px;
-    position: relative;
-    box-sizing: content-box;
-  }
-}
 </style>
