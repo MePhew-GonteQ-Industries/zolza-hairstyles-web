@@ -15,23 +15,25 @@
       </div>
 
       <form class="login-form" @submit.prevent="handleSubmit" novalidate>
-        <CustomInput :label="t('logIn.emailField.label')"
-        iconClass='ph-envelope-simple-light' inputType='email'
-        autocomplete="email" v-model:value="userData.email"
-        :forceValidate="forceValidate"
-        :invalid="emailInvalid"
-        :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
-        :messageInvalid="t('logIn.emailField.messageInvalid')"
-        class="input"/>
+        <div class="inputs">
+          <CustomInput :label="t('logIn.emailField.label')"
+          iconClass='ph-envelope-simple-light' inputType='email'
+          autocomplete="email" v-model:value="userData.email"
+          :forceValidate="forceValidate"
+          :invalid="emailInvalid"
+          :required='true' :messageEmpty="t('logIn.emailField.messageEmpty')"
+          :messageInvalid="t('logIn.emailField.messageInvalid')"
+          class="input"/>
 
-        <CustomInput class='current-password input' :label="t('logIn.currentPasswordField.label')"
-        autocomplete="new-password"
-        type='password'
-        v-model:value="userData.password"
-        :invalid="!userData.password"
-        :forceValidate="forceValidate"
-        :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
-        :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
+          <CustomInput class='current-password input' :label="t('logIn.currentPasswordField.label')"
+          autocomplete="new-password"
+          type='password'
+          v-model:value="userData.password"
+          :invalid="!userData.password"
+          :forceValidate="forceValidate"
+          :required='true' :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
+          :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"/>
+        </div>
 
         <div class="under-form-section">
           <CustomCheckbox v-model:checked="saveUser">Zapamiętaj mnie</CustomCheckbox>
@@ -164,14 +166,17 @@ export default {
   .login-wrapper {
     text-align: center;
     background-color: $secondary-color;
-    height: 75vh;
-    width: 40vw;
+    border-radius: .375rem;
+    box-shadow: 0 0 8px -2px $box-shadow-color;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 30px;
+    align-items: flex-start;
+    padding: .9375rem .875rem;
     h1 {
-      font-size: 3rem;
+      font-size: 1.5rem;
+    }
+    h3{
+      font-size: .875rem;
     }
 
     .state-message {
@@ -197,9 +202,14 @@ export default {
       height: 70%;
       max-width: 420px;
 
-      .input{
-        padding-top: 10px;
-        height: 100%;
+      .inputs{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .input{
+        // padding-top: 10px;
+        // gap: 10px;
+      }
       }
 
       .under-form-section{
@@ -219,13 +229,12 @@ export default {
 
       .login-btn, .loader {
         margin: 30px 0;
-        height: 100%;
       }
     }
     .signup-redirection{
       font-size: .8rem;
-      margin-bottom: 60px;
       display: flex;
+      align-items: center;
       a{
         color: $accent-color;
         font-size: .8rem;

@@ -12,8 +12,8 @@ export default {
 
 <style lang='scss' scoped>
   button {
-    height: 40px;
-    width: 330px;
+    height: 38px;
+    width: 408px;
     border-radius: .5rem;
     background-color: $accent-color;
     color: $secondary-text-color;

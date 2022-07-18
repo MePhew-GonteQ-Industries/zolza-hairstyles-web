@@ -236,7 +236,8 @@ export default {
 #sign-up-page {
   padding-block: 2rem;
 
-  h1 {
+  .sign-up-wrapper{
+    h1 {
     font-size: 3rem;
   }
 
@@ -253,6 +254,7 @@ export default {
     .hidden-input {
       display: none;
     }
+  }
   }
 }
 </style>

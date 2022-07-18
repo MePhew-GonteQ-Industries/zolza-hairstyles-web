@@ -135,10 +135,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 55px;
-  width: 50vw;
-  min-width: 200px;
-  max-width: 380px;
+  height: 70px;
+  width: 408px;
 
   .invalid-wrapper {
     position: absolute;
