@@ -60,20 +60,18 @@
   },
   "resetPassword": {
     "requestPasswordReset": {
-      "heading": "Resetowanie hasła",
-      "description": [
-        "Wpisz adres email powiązany z twoim kontem.",
-        "Wyślemy do Ciebie wiadomość zawierającą link umożliwiający zmianę hasła."
-      ],
+      "heading": "Nie pamiętasz hasła?",
+      "subtitle": "Podaj adres email powiązany z twoim kontem, a wyślemy do Ciebie wiadomość zawierającą link umożliwiający zmianę hasła",
       "emailField": {
         "label": "Email",
         "messageEmpty": "Podaj swój adres email",
         "messageInvalid": "Podany adres email jest niepoprawny"
       },
-      "resetPasswordBtn": "Zresetuj hasło"
+      "resetPasswordBtn": "Wyślij link"
     },
     "changePassword": {
       "heading": "Ustaw nowe hasło",
+      "subtitle": "Twoje nowe hasło musi różnić się od pięciu ostatnich używanych przez ciebie haseł",
       "newPasswordField": {
         "label": "Nowe hasło",
         "messageEmpty": "Podaj swoje nowe hasło",
