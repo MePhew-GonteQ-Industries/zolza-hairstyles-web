@@ -254,16 +254,16 @@ export default {
 
 <style lang='scss' scoped>
 #sign-up-page {
-  text-align: center;
-  background-color: $secondary-color;
-  border-radius: .375rem;
-  box-shadow: 0 0 8px -2px $box-shadow-color;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: .9375rem .875rem;
 
   .sign-up-wrapper{
+    text-align: center;
+    background-color: $secondary-color;
+    border-radius: .375rem;
+    box-shadow: 0 0 8px -2px $box-shadow-color;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: .9375rem .875rem;
     h1 {
       font-size: 1.5rem;
     }
