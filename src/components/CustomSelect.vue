@@ -198,9 +198,9 @@ export default {
 .select-wrapper {
   position: relative;
   height: 55px;
-  width: 50vw;
+  width: 408px;
   min-width: 200px;
-  max-width: 380px;
+  max-width: 408px;
 
   .invalid-wrapper {
     position: absolute;
