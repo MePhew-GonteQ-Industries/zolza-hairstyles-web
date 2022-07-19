@@ -30,11 +30,11 @@
           ></i>
           <span class="tile-title">Motyw</span>
         </router-link>
-        <router-link  :to='{ name: "languageSettings" }' class="option-tile">
+        <router-link :to="{ name: 'languageSettings' }" class="option-tile">
           <i class="ph-translate-light tile-icon"></i>
           <span class="tile-title">Język</span>
         </router-link>
-        <router-link to='/settings' class="option-tile">
+        <router-link :to="{ name: 'userAccountSettings' }" class="option-tile">
           <i class="ph-gear-six-light tile-icon"></i>
           <span class="tile-title">Ustawienia</span>
         </router-link>
