@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { createApp } from 'vue';
 import axios from 'axios';
 import { SetupCalendar } from 'v-calendar';
