@@ -186,7 +186,7 @@ export default {
 
     watch(userIsLoggedIn, (newValue) => {
       if (!newValue) {
-        if (router.currentRoute.value.meta.requiredLogIn) {
+        if (router.currentRoute.value.meta.requiresAuth) {
           router.push('/');
         }
       }
