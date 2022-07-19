@@ -6,12 +6,24 @@
     --background-accent-high: rgb(61 57 67 / 76%);
     --background-accent-medium: rgb(61 57 67 / 65%);
     --background-accent-low: rgb(61 57 67 / 32%);
-    
+
+    --success-color: rgba(86, 202, 0, 1);
+    --success-color-low: rgba(86, 202, 0, .2);
+
+    --info-color: rgba(22, 177, 255, 1);
+    --info-color-low: rgba(22, 177, 255, .2);
+
+    --warning-color: rgba(255, 180, 0, 1);
+    --warning-color-low: rgba(255, 180, 0, .2);
+
+    --error-color: rgba(255, 76, 81, 1);
+    --error-color-low: rgba(255, 76, 81, .2);
+
     --primary-text-color: #B3B1B5;
     --secondary-text-color: white;
     --accent-text-color: #77747B;
 
-    --box-shadow-color: rgba(19,17,32,.42);
+    --box-shadow-color: rgba(19, 17, 32, .42);
 }
 
 #app-wrapper[data-theme='light'] {
@@ -23,17 +35,17 @@
     --secondary-text-color: black;
     --accent-text-color: #77747B;
 
-    --box-shadow-color: rgba(19,17,32,.42);
+    --box-shadow-color: rgba(19, 17, 32, .42);
 }
 
 #app-wrapper[data-theme='dark'] {
     --primary-color: #2D2833;
     --secondary-color: #3D3943;
     --accent-color: #00E8B0;
-    
+
     --primary-text-color: #B3B1B5;
     --secondary-text-color: white;
     --accent-text-color: #77747B;
 
-    --box-shadow-color: rgba(19,17,32,.42);
+    --box-shadow-color: rgba(19, 17, 32, .42);
 }
