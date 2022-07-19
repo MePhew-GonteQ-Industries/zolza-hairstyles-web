@@ -133,7 +133,7 @@ export default {
   setup() {
     const router = useRouter();
 
-    const onHomePage = computed(() => router.currentRoute.value.name === 'Home');
+    const onHomePage = computed(() => router.currentRoute.value.name === 'home');
 
     const store = useStore();
 
