@@ -1,10 +1,12 @@
 <template>
-  <div class="settings-page">Account Settings</div>
+<div class="settings-page">
+  Account Security
+</div>
 </template>
 
 <script>
 export default {
-  name: 'UserAccountSettings',
+  name: 'LanguageSettings',
 };
 </script>
 
