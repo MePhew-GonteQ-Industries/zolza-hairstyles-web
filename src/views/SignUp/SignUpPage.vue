@@ -114,7 +114,7 @@ import { useI18n } from 'vue-i18n';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
-import validateEmail from '@/utils';
+import { validateEmail } from '@/utils';
 import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
 export default {

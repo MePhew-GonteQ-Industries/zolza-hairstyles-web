@@ -43,7 +43,7 @@
 import { ref, computed } from 'vue';
 import axios from 'axios';
 import { useI18n } from 'vue-i18n';
-import validateEmail from '@/utils';
+import { validateEmail } from '@/utils';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 
