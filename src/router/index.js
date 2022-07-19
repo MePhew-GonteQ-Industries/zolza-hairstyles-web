@@ -131,12 +131,17 @@ const routes = [{
   children: [
     {
       path: '',
-      component: () => import('@/views/Settings/UserAccountSettings.vue'),
+      redirect: { name: 'userAccountSettings' },
     },
     {
       path: 'account',
       component: () => import('@/views/Settings/UserAccountSettings.vue'),
       name: 'userAccountSettings',
+    },
+    {
+      path: 'account-security',
+      component: () => import('@/views/Settings/AccountSecuritySettings.vue'),
+      name: 'accountSecuritySettings',
     },
     {
       path: 'notifications',
