@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, setCssPropertyValue } from 'vue';
 
 export default {
   name: 'CustomProgressBar',
@@ -19,7 +19,7 @@ export default {
     const progress = ref(null);
 
     onMounted(() => {
-      progress.value.style.setProperty('--value', `${props.value}%`);
+      setCssPropertyValue(progress.value, '--value', `${props.value}%`);
     });
 
     return {

@@ -16,6 +16,7 @@
 
 <script>
 import { ref } from 'vue';
+import { setCssPropertyValue } from '@/utils';
 
 export default {
   name: 'SideMenu',
@@ -29,7 +30,7 @@ export default {
     const menu = ref(null);
 
     const changeOffset = (index) => {
-      menu.value.style.setProperty('--offset', `${88 * index}px`);
+      setCssPropertyValue(menu.value, '--offset', `${88 * index}px`);
     };
 
     return {

@@ -22,15 +22,9 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-
 export default {
   name: 'AvailableSlotTile',
   props: {
-    color: {
-      type: String,
-      required: true,
-    },
     day: {
       type: String,
       required: true,
@@ -40,25 +34,11 @@ export default {
       required: true,
     },
   },
-  setup(props) {
-    const availableSlot = ref(null);
-
-    onMounted(() => {
-      availableSlot.value.style.setProperty('--color', props.color);
-    });
-
-    return {
-      availableSlot,
-    };
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .available-slot {
-  --color: none;
-  $color: var(--color);
-
   display: flex;
   align-items: center;
   justify-content: center;
