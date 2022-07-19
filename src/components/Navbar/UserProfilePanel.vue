@@ -8,10 +8,15 @@
 
     <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
       <div class="panel-header" v-if="$store.state.user.userData">
-        <router-link :to="{ name: 'userAccountSettings' }"
+        <router-link
+          :to="{ name: 'userAccountSettings' }"
+          @click="collapseProfilePanel"
           ><i class="ph-user-circle-fill user-avatar"></i
         ></router-link>
-        <router-link :to="{ name: 'userAccountSettings' }">
+        <router-link
+          :to="{ name: 'userAccountSettings' }"
+          @click="collapseProfilePanel"
+        >
           <span
             >{{ $store.state.user.userData.name }}
             {{ $store.state.user.userData.surname }}</span
