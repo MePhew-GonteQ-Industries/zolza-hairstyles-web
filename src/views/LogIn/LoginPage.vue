@@ -60,7 +60,7 @@
       </form>
       <div class="under-form-section">
         <span>Nie masz jeszcze konta?</span>
-        <router-link to="/">Utwórz konto</router-link>
+        <router-link to="/sign-up">Utwórz konto</router-link>
       </div>
       <p>{{ message }}</p>
     </div>
