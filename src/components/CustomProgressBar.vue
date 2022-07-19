@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { ref, onMounted, setCssPropertyValue } from 'vue';
+import { ref, onMounted } from 'vue';
+import { setCssPropertyValue } from '@/utils';
 
 export default {
   name: 'CustomProgressBar',
