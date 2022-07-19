@@ -106,7 +106,7 @@ export default {
     const { t } = useI18n();
     const store = useStore();
 
-    const saveUser = ref(false);
+    const saveUser = ref(true);
 
     const userData = ref({
       email: 'matib0029@gmaila.com',
