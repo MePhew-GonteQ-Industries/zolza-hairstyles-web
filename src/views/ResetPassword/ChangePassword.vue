@@ -174,30 +174,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 100px 20px;
-    position: relative;
-    max-width: 420px;
-    box-sizing: content-box;
-
-    .hidden-input {
-      display: none;
-    }
-  }
-}
 </style>
