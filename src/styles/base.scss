@@ -275,7 +275,14 @@ ul {
   }
 }
 
-.dashboard-page {
+#dashboard-page, #settings-page {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: stretch;
+  background-color: $secondary-color;
+}
+
+.dashboard-page, .settings-page {
   margin-block: 1rem;
   padding: 2rem;
   display: flex;
@@ -292,7 +299,7 @@ ul {
   }
 }
 
-.dashboard-data-page {
+.dashboard-data-page, .settings-page {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 150px 1fr 50px;
