@@ -100,7 +100,7 @@
       </form>
       <div class="under-form-section">
         <span>Masz już konto?</span>
-        <router-link to="/">Zaloguj się</router-link>
+        <router-link to="/login">Zaloguj się</router-link>
       </div>
     </div>
   </section>
