@@ -120,7 +120,7 @@ import { useStore } from 'vuex';
 import {
   onMounted, ref, watch, computed,
 } from 'vue';
-import { useElementVisibility, useWindowScroll } from '@vueuse/core';
+import { useElementVisibility, useWindowScroll, useNavigatorLanguage } from '@vueuse/core';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
 import { useRouter } from 'vue-router';
@@ -159,6 +159,9 @@ export default {
     const navbarHeight = ref(null);
 
     const navbarVisible = computed(() => y.value <= navbarHeight.value);
+
+    const navigatorLanguage = useNavigatorLanguage();
+    store.commit('setLanguage', navigatorLanguage.language.value);
 
     onMounted(() => {
       navbarHeight.value = navbar.value.offsetHeight;
