@@ -1,49 +1,73 @@
 <template>
   <div class="select-wrapper">
-    <div class="select" tabindex="0"
-      :class="{ expanded: expanded, 'hover-enabled': selectHoverEnabled,
-      invalid: invalid && (validate || forceValidate) }"
+    <div
+      class="select"
+      tabindex="0"
+      :class="{
+        expanded: expanded,
+        'hover-enabled': selectHoverEnabled,
+        invalid: invalid && (validate || forceValidate),
+      }"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down.prevent="selectNextOption"
       @keydown.up.prevent="selectPreviousOption"
       @keydown.tab="collapseDropdown"
       ref="select"
-      @blur="validate = true">
+      @blur="validate = true"
+    >
+      <span
+        class="header"
+        :class="{ expanded: expanded, 'value-selected': selectedItem !== null }"
+      >
+        {{ header }}</span
+      >
 
-      <span class="header"
-      :class="{ expanded: expanded, 'value-selected': selectedItem !== null}">
-      {{ header }}</span>
+      <span class="selected-value"> {{ title }}</span>
 
-      <span class="selected-value">
-      {{ title }}</span>
+      <i
+        class="ph-caret-down-light dropdown-arrow"
+        :class="{ flipped: !expanded }"
+      ></i>
 
-      <i class="ph-caret-down-light dropdown-arrow"
-      :class="{ flipped: !expanded }"></i>
-
-      <i class="select-icon" :class="currentIconClass"
-      @focus.stop
-      @mousedown.stop
-      @mouseenter="toggleSelectHover"
-      @mouseleave="toggleSelectHover" tabindex="-1"></i>
-
+      <i
+        class="select-icon"
+        :class="currentIconClass"
+        @focus.stop
+        @mousedown.stop
+        @mouseenter="toggleSelectHover"
+        @mouseleave="toggleSelectHover"
+        tabindex="-1"
+      ></i>
     </div>
-    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
+    <div
+      v-show="(validate || forceValidate) && invalid"
+      class="invalid-wrapper"
+    >
       <i class="ph-warning-circle-light invalid-icon"></i>
 
-      <p class="messageInvalid messageValueEmpty"
-      v-if="required && selectedItem === null">{{ messageEmpty }}</p>
-
+      <p
+        class="messageInvalid messageValueEmpty"
+        v-if="required && selectedItem === null"
+      >
+        {{ messageEmpty }}
+      </p>
     </div>
     <div class="dropdown" :class="{ show: expanded }">
       <ol>
-        <li v-for="(option, index) in options" :key="option.value"
-        @click="changeValue(index); collapseDropdown();"
-        @keydown.down="selectNextOption"
-        @keydown.up="selectPreviousOption">
-
+        <li
+          v-for="(option, index) in options"
+          :key="option.value"
+          @click="
+            changeValue(index);
+            collapseDropdown();
+          "
+          @keydown.down="selectNextOption"
+          @keydown.up="selectPreviousOption"
+        >
           <span :class="{ selected: index === selectedItem }">
-          {{ option.title }}</span>
+            {{ option.title }}</span
+          >
 
           <i :class="option.iconClass"></i>
         </li>
@@ -53,12 +77,16 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
 export default {
   name: 'CustomSelect',
   props: {
+    selectedValue: {
+      type: String,
+      required: true,
+    },
     header: {
       type: String,
       required: true,
@@ -70,9 +98,6 @@ export default {
     options: {
       type: Array,
       required: true,
-    },
-    initialItem: {
-      type: Number,
     },
     invalid: {
       type: Boolean,
@@ -108,17 +133,10 @@ export default {
 
     function changeCurrentItem() {
       selectedValue.value = props.options[selectedItem.value].value;
-      ctx.emit('update:selected-value', selectedValue.value);
+      ctx.emit('update:selectedValue', selectedValue.value);
       currentIconClass.value = props.options[selectedItem.value].iconClass;
       title.value = props.options[selectedItem.value].title;
     }
-
-    onMounted(() => {
-      if (props.initialItem) {
-        selectedValue.value = props.options[props.initialItem].value;
-        changeCurrentItem();
-      }
-    });
 
     function toggleDropdown() {
       expanded.value = !expanded.value;
@@ -140,6 +158,29 @@ export default {
       selectedItem.value = index;
       changeCurrentItem();
     }
+
+    onMounted(() => {
+      if (props.selectedValue) {
+        const currentItem = props.options.findIndex(
+          (item) => item.value === props.selectedValue,
+        );
+
+        changeValue(currentItem);
+      }
+    });
+
+    watch(
+      () => props.selectedValue,
+      (newValue) => {
+        ctx.emit('update:selectedValue', newValue);
+
+        const currentItem = props.options.findIndex(
+          (item) => item.value === props.selectedValue,
+        );
+
+        changeValue(currentItem);
+      },
+    );
 
     function selectNextOption() {
       if (selectedItem.value !== null) {
@@ -174,7 +215,6 @@ export default {
     });
 
     return {
-      selectedValue,
       expanded,
       toggleDropdown,
       collapseDropdown,
@@ -206,7 +246,7 @@ export default {
     position: absolute;
     top: 100%;
     left: 0;
-    margin: .5rem 1rem;
+    margin: 0.5rem 1rem;
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -216,11 +256,11 @@ export default {
     .invalid-icon {
       position: static;
       font-size: 2rem;
-      color: $color-danger;
+      color: $error-color;
     }
 
     .messageInvalid {
-      color: $color-danger;
+      color: $error-color;
     }
   }
 
@@ -231,7 +271,7 @@ export default {
     background-color: $primary-color;
     height: 100%;
     width: 100%;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     box-shadow: none;
     display: flex;
     align-items: center;
@@ -239,139 +279,140 @@ export default {
     cursor: pointer;
     transition: all $transition-duration;
 
-  &.invalid {
-    border-color: $color-invalid;
-    box-shadow: 0 0 10px 1px $color-invalid;
-  }
-
-  &.hover-enabled:hover:not(.expanded) {
-    border-color: $accent-color;
-    box-shadow: none;
-  }
-
-  &.expanded {
-    border-color: $accent-color;
-    background-color: $secondary-color;
-    box-shadow: 0 0 10px 1px $accent-color;
-    border-radius: 15px 15px 0 0;
-    border-width: 2px;
-  }
-
-  .header {
-    position: absolute;
-    left: 30px;
-    transform-origin: 0 0;
-    user-select: none;
-    color: $primary-text-color;
-
-    &.expanded, &.value-selected {
-      color: $accent-color;
+    &.invalid {
+      border-color: $error-color;
+      box-shadow: 0 0 10px 1px $error-color-low;
     }
 
-    &.value-selected {
-      transform: translateY(-0.6em) scale(0.8);
+    &.hover-enabled:hover:not(.expanded) {
+      border-color: $accent-color;
+      box-shadow: none;
     }
-  }
 
-  i {
-    font-size: 2rem;
-  }
+    &.expanded {
+      border-color: $accent-color;
+      background-color: $secondary-color;
+      box-shadow: 0 0 10px 1px $accent-color;
+      border-radius: 15px 15px 0 0;
+      border-width: 2px;
+    }
 
-  .select-icon {
-    position: absolute;
-    right: 30px;
-    cursor: default;
-  }
+    .header {
+      position: absolute;
+      left: 30px;
+      transform-origin: 0 0;
+      user-select: none;
+      color: $primary-text-color;
 
-  .selected-value {
-    padding-top: 20px;
-    position: absolute;
-    left: 30px;
-    backface-visibility: hidden;
-    transform-origin: 0 0;
-    color: $secondary-text-color;
-    font-size: .8em;
-    font-weight: 600;
-  }
+      &.expanded,
+      &.value-selected {
+        color: $accent-color;
+      }
+
+      &.value-selected {
+        transform: translateY(-0.6em) scale(0.8);
+      }
+    }
+
+    i {
+      font-size: 2rem;
+    }
+
+    .select-icon {
+      position: absolute;
+      right: 30px;
+      cursor: default;
+    }
+
+    .selected-value {
+      padding-top: 20px;
+      position: absolute;
+      left: 30px;
+      backface-visibility: hidden;
+      transform-origin: 0 0;
+      color: $secondary-text-color;
+      font-size: 0.8em;
+      font-weight: 600;
+    }
 
     .dropdown-arrow {
       position: absolute;
       user-select: none;
 
       &.flipped {
-      transform: rotateZ(180deg);
+        transform: rotateZ(180deg);
       }
     }
-}
+  }
 
-    .dropdown {
-      position: absolute;
-      margin-top: 10px;
-      width: 100%;
-      z-index: 1;
-      border-radius: 0 0 .5rem .5rem;
-      border-width: 0;
-      border-style: solid;
-      border-color: transparent;
-      background-color: $secondary-color;
-      box-shadow: none;
-      max-height: 0;
-      overflow: hidden;
+  .dropdown {
+    position: absolute;
+    margin-top: 10px;
+    width: 100%;
+    z-index: 1;
+    border-radius: 0 0 0.5rem 0.5rem;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    background-color: $secondary-color;
+    box-shadow: none;
+    max-height: 0;
+    overflow: hidden;
 
-      @keyframes expand {
-        from {
-          max-height: 0;
-        }
-
-        to {
-          max-height: 200px;
-          // overflow-y: auto;
-        }
+    @keyframes expand {
+      from {
+        max-height: 0;
       }
 
-      &.show {
-        animation: expand .6s forwards;
-        border-color: $accent-color;
-        box-shadow: 0 0 10px 1px $accent-color;
-        border-width: 2px;
+      to {
+        max-height: 200px;
+        // overflow-y: auto;
       }
+    }
 
-      ol {
-        list-style-type: none;
+    &.show {
+      animation: expand 0.6s forwards;
+      border-color: $accent-color;
+      box-shadow: 0 0 10px 1px $accent-color;
+      border-width: 2px;
+    }
 
-        li {
-          height: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          cursor: pointer;
+    ol {
+      list-style-type: none;
 
-          &:focus {
-            outline: none;
-          }
+      li {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
 
-          &:hover, &:focus {
-            background-color: $primary-color;
+        &:focus {
+          outline: none;
+        }
+
+        &:hover,
+        &:focus {
+          background-color: $primary-color;
+          color: $secondary-text-color;
+        }
+
+        span {
+          position: absolute;
+          left: 30px;
+
+          &.selected {
             color: $secondary-text-color;
           }
+        }
 
-          span {
-            position: absolute;
-            left: 30px;
-
-            &.selected {
-              color: $secondary-text-color;
-            }
-          }
-
-          i {
-            position: absolute;
-            right: 30px;
-            font-size: 2rem;
-          }
+        i {
+          position: absolute;
+          right: 30px;
+          font-size: 2rem;
         }
       }
     }
+  }
 }
-
 </style>
