@@ -1,5 +1,5 @@
 <template>
-  <section class="app-page" id="page-not-found">
+  <section class="app-page error-page page-not-found">
     <!-- eslint-disable max-len -->
     <svg version="1.1" viewBox="0 0 108.38 48.388" xmlns="http://www.w3.org/2000/svg">
     <g transform="matrix(7.6159 0 0 7.6159 -243.7 .28036)" fill="currentColor">
@@ -43,15 +43,19 @@
     </svg>
     <!-- eslint-enable max-len -->
     <h3>{{ t('pageNotFound.heading') }}</h3>
-    <router-link to="/">{{ t('pageNotFound.button') }}</router-link>
+    <LinkButton to="/">Powrót na stronę główną</LinkButton>
   </section>
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n';
+import LinkButton from '@/components/LinkButton.vue';
 
 export default {
   name: 'NotFoundPage',
+  components: {
+    LinkButton,
+  },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
 
@@ -63,50 +67,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#page-not-found{
-  height: 92%;
-  justify-content: space-around;
-
-  svg {
-    height: 40vh;
-    color: $secondary-text-color;
-  }
-
-  h3 {
-    font-size: 6rem;
-    color: $secondary-text-color;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  a {
-    display: flex;
-    height: 60px;
-    width: 200px;
-    border-radius: 30px;
-    border: 2px solid transparent;
-    background-color: $secondary-color;
-    color: $accent-color;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-
-    &:hover {
-        box-shadow: 0 0 4px 3px $accent-color;
-    }
-  }
-}
-
-@media only screen and(max-width: 1024px){
-  #page-not-found{
-    img{
-      height: 15vh;
-    }
-    h3{
-      font-size: 2em;
-    }
-  }
-}
 </style>
