@@ -151,11 +151,11 @@ export default {
     .invalid-icon {
       position: static;
       font-size: 2rem;
-      color: $color-danger;
+      color: $error-color;
       }
 
     .message-invalid {
-      color: $color-danger;
+      color: $error-color;
     }
   }
 
@@ -232,8 +232,8 @@ export default {
     }
 
     &.invalid {
-      border-color: $color-invalid;
-      box-shadow: 0 0 10px 1px $color-invalid;
+      border-color: $error-color;
+      box-shadow: 0 0 10px 1px $error-color-low;
     }
 
    &:-webkit-autofill,
