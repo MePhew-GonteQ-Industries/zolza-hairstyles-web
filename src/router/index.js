@@ -219,6 +219,11 @@ const routes = [{
   ],
 },
 {
+  path: '/insufficient-permissions',
+  name: 'insufficientPermissions',
+  component: () => import('@/views/InsufficientPermissionsPage.vue'),
+},
+{
   path: '/:catchAll(.*)',
   name: 'notFound',
   component: () => import('@/views/PageNotFound/PageNotFound.vue'),
@@ -232,23 +237,24 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  switch (to.name) {
-    case 'Login': {
-      if (!store.state.user.loggedIn) {
-        return true;
-      }
-      return { name: 'Home' };
+  if (to.meta.requiresAuth) {
+    if (!store.state.user.userData) {
+      return { name: 'login' };
     }
-    case 'Dashboard': {
-      if (!store.state.user.loggedIn || !store.state.user.userData.permission_level.includes('admin')) {
-        return { name: 'Login' };
+    switch (to.meta.requiredPermissionLevel) {
+      case 'admin': {
+        return { name: 'insufficientPermissions' };
       }
-      return true;
-    }
-    default: {
-      return true;
+      case 'owner': {
+        return { name: 'insufficientPermissions' };
+      }
+      default: {
+        break;
+      }
     }
   }
+
+  return true;
 });
 
 export default router;
