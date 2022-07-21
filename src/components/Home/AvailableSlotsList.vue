@@ -1,23 +1,20 @@
 <template>
-<div class="available-slots-wrapper" v-if="selectedServiceId">
-    <CustomLoader class='loader' v-if="loading"/>
+  <div class="available-slots-wrapper" v-if="selectedServiceId">
+    <CustomLoader class="loader" v-if="loading" />
 
     <div class="available-dates" v-if="!loading">
-    <template v-for="slot in availableSlots" :key="slot.id">
-        <AvailableDateTile :day="slot.day" :time="slot.time"/>
-    </template>
-
+      <template v-for="slot in availableSlots" :key="slot.id">
+        <AvailableDateTile :day="slot.day" :time="slot.time" />
+      </template>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import { useNavigatorLanguage } from '@vueuse/core';
 import AvailableDateTile from '@/components/Home/AvailableSlotTile.vue';
 import CustomLoader from '@/components/CustomLoader.vue';
-import {
-  computed, ref, watch,
-} from 'vue';
+import { computed, ref, watch } from 'vue';
+import { useStore } from 'vuex';
 import axios from 'axios';
 
 export default {
@@ -32,7 +29,9 @@ export default {
     },
   },
   setup(props) {
-    const locale = useNavigatorLanguage();
+    const store = useStore();
+
+    const locale = store.state.settings.language;
 
     const availableSlotsData = ref(null);
 
@@ -48,13 +47,18 @@ export default {
       availableSlotsData.value.forEach((service) => {
         const date = new Date(`${service.start_time}Z`);
 
-        const day = date === now ? 'Dzisiaj' : date.toLocaleDateString(locale, {
-          weekday: 'long',
-        });
+        const day = date === now
+          ? 'Dzisiaj'
+          : date.toLocaleDateString(locale, {
+            weekday: 'long',
+          });
 
         slots.push({
           day: `${day[0].toUpperCase()}${day.slice(1)}`,
-          time: date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
+          time: date.toLocaleTimeString(locale, {
+            hour: '2-digit',
+            minute: '2-digit',
+          }),
         });
       });
 
@@ -66,7 +70,9 @@ export default {
     const loadAppointments = async (selectedServiceId) => {
       loading.value = true;
       try {
-        const response = await axios.get(`appointments/nearest/${selectedServiceId}`);
+        const response = await axios.get(
+          `appointments/nearest/${selectedServiceId}`,
+        );
         availableSlotsData.value = response.data;
       } catch (err) {
         console.error(err);
@@ -74,10 +80,13 @@ export default {
       loading.value = false;
     };
 
-    watch(() => props.selectedServiceId, (newValue) => {
-      loading.value = true;
-      loadAppointments(newValue);
-    });
+    watch(
+      () => props.selectedServiceId,
+      (newValue) => {
+        loading.value = true;
+        loadAppointments(newValue);
+      },
+    );
 
     return {
       availableSlots,
