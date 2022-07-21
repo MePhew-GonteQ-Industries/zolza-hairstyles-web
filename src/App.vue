@@ -190,7 +190,7 @@ export default {
     watch(userIsLoggedIn, (newValue) => {
       if (!newValue) {
         if (router.currentRoute.value.meta.requiresAuth) {
-          router.push('/');
+          router.push({ name: 'login' });
         }
       }
     });
@@ -198,7 +198,7 @@ export default {
     watch(userIsAdmin, (newValue) => {
       if (!newValue) {
         if (router.currentRoute.value.meta.requiredPermissionLevel === 'admin') {
-          router.push('/');
+          router.push({ name: 'insufficientPermissions' });
         }
       }
     });
@@ -206,7 +206,7 @@ export default {
     watch(userIsOwner, (newValue) => {
       if (!newValue) {
         if (router.currentRoute.value.meta.requiredPermissionLevel === 'owner') {
-          router.push('/');
+          router.push({ name: 'insufficientPermissions' });
         }
       }
     });
