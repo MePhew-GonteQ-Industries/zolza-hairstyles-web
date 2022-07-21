@@ -243,10 +243,12 @@ router.beforeEach((to) => {
     }
     switch (to.meta.requiredPermissionLevel) {
       case 'admin': {
-        return { name: 'insufficientPermissions' };
+        if (!store.state.user.userData.permission_level.includes('admin')) return { name: 'insufficientPermissions' };
+        break;
       }
       case 'owner': {
-        return { name: 'insufficientPermissions' };
+        if (!store.state.user.userData.permission_level.includes('owner')) return { name: 'insufficientPermissions' };
+        break;
       }
       default: {
         break;
