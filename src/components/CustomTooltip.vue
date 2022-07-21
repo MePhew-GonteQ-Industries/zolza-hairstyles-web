@@ -1,7 +1,7 @@
 <template>
-  <div class="tooltip" ref="tooltip">
-    <slot>
-    </slot>
+  <div class="tooltip-wrapper">
+    <slot name="activator" />
+    <div class="tooltip" ref="tooltip"><slot></slot></div>
   </div>
 </template>
 
@@ -14,39 +14,50 @@ export default {
   props: {
     type: {
       type: String,
+      default: 'default',
     },
   },
   setup(props) {
-    const tooltip = ref();
+    const tooltip = ref(null);
 
     onMounted(() => {
       let mainColor;
       let accentColor;
 
       switch (props.type) {
+        case 'primary': {
+          mainColor = getCssPropertyValue('--primary-color');
+          accentColor = getCssPropertyValue('--accent-color');
+          break;
+        }
+        case 'secondary': {
+          mainColor = 'white';
+          accentColor = 'grey';
+          break;
+        }
         case 'success': {
-          mainColor = getCssPropertyValue('--success-color');
-          accentColor = getCssPropertyValue('--success-color-low');
+          mainColor = 'white';
+          accentColor = getCssPropertyValue('--success-color');
           break;
         }
         case 'info': {
-          mainColor = getCssPropertyValue('--info-color');
-          accentColor = getCssPropertyValue('--info-color-low');
+          mainColor = 'white';
+          accentColor = getCssPropertyValue('--info-color');
           break;
         }
         case 'warning': {
-          mainColor = getCssPropertyValue('--warning-color');
-          accentColor = getCssPropertyValue('--warning-color-low');
+          mainColor = 'white';
+          accentColor = getCssPropertyValue('--warning-color');
           break;
         }
         case 'error': {
-          mainColor = getCssPropertyValue('--error-color');
-          accentColor = getCssPropertyValue('--error-color-low');
+          mainColor = 'white';
+          accentColor = getCssPropertyValue('--error-color');
           break;
         }
         default: {
-          mainColor = getCssPropertyValue('--primary-text-color');
-          accentColor = getCssPropertyValue('--background-accent-low');
+          mainColor = 'white';
+          accentColor = getCssPropertyValue('--secondary-color');
           break;
         }
       }
@@ -61,13 +72,43 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-  .tooltip{
+<style lang='scss'>
+.tooltip-wrapper {
+  position: relative;
+
+  .activator {
+    &:hover ~ .tooltip {
+      transform: translateX(-50%) scale(1) translateZ(0);
+      opacity: 1;
+    }
+  }
+
+  .tooltip {
     --main-color: none;
     --accent-color: none;
     $main-color: var(--main-color);
     $accent-color: var(--accent-color);
     background-color: $accent-color;
     color: $main-color;
+
+    position: absolute;
+    padding: 0.25rem;
+    min-height: 20px;
+    background-color: $accent-color;
+    color: $main-color;
+    font-size: .75rem;
+    border-radius: 0.313rem;
+    opacity: 0;
+    top: 100%;
+    left: 50%;
+    margin-top: 0.25rem;
+    transform: translateX(-50%) scale(0) translateZ(0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    z-index: 999;
+    box-shadow: 0 0 8px -2px $box-shadow-color;
   }
+}
 </style>
