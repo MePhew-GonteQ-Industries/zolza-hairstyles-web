@@ -396,3 +396,18 @@ ul {
     }
   }
 }
+
+.error-page {
+  height: 92%;
+  justify-content: space-evenly;
+  color: $secondary-text-color;
+
+  svg {
+    height: 40vh;
+  }
+
+  h3 {
+    font-size: 6rem;
+    font-family: 'Poppins', sans-serif;
+  }
+}
