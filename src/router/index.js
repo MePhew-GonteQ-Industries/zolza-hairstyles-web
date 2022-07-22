@@ -103,7 +103,6 @@ const routes = [{
 },
 {
   path: '/password-reset',
-  name: 'resetPassword',
   component: () => import(/* webpackChunkName: "recoverpassword" */ '@/views/ResetPassword/ResetPassword.vue'),
   meta: {
     requiresAuth: false,
@@ -113,6 +112,7 @@ const routes = [{
     {
       path: '',
       component: RequestPasswordReset,
+      name: 'resetPassword',
     },
     {
       path: 'change',
@@ -122,7 +122,6 @@ const routes = [{
 },
 {
   path: '/settings',
-  name: 'settings',
   component: () => import('@/views/Settings/SettingsPage.vue'),
   meta: {
     requiresAuth: true,
@@ -132,6 +131,7 @@ const routes = [{
     {
       path: '',
       redirect: { name: 'userAccountSettings' },
+      name: 'settings',
     },
     {
       path: 'account',
