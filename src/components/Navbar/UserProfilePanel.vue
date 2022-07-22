@@ -4,6 +4,7 @@
       class="user-icon"
       :class="profilePanelExpanded ? 'ph-user-fill' : 'ph-user-light'"
       @click="toggleProfilePanel"
+      @keyup.enter="toggleProfilePanel"
     ></i>
 
     <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
@@ -23,7 +24,11 @@
           >
         </router-link>
       </div>
-      <div class="primary-options" @click="collapseProfilePanel">
+      <div
+        class="primary-options"
+        @click="collapseProfilePanel"
+        @keyup.enter="collapseProfilePanel"
+      >
         <router-link :to="{ name: 'themeSettings' }" class="option-tile">
           <i
             class="tile-icon"
@@ -48,7 +53,11 @@
           <span class="tile-title">Wyloguj się</span>
         </button>
       </div>
-      <div class="secondary-options" @click="collapseProfilePanel">
+      <div
+        class="secondary-options"
+        @click="collapseProfilePanel"
+        @keyup.enter="collapseProfilePanel"
+      >
         <button class="option-tile">
           <i class="ph-question-light tile-icon"></i>
           <span class="tile-title">Pomoc</span>

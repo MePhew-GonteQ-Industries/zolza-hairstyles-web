@@ -6,7 +6,13 @@
 
       <form @submit.prevent="handleSubmit" novalidate>
         <div class="inputs">
-          <input class="hidden-input" type="text" autocomplete="username" />
+          <input
+            id="sign-up-hidden-username-input"
+            class="hidden-input"
+            type="text"
+            autocomplete="username"
+          />
+          <label for="sign-up-hidden-username-input"></label>
 
           <div class="names">
             <CustomInput

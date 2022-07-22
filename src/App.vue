@@ -111,7 +111,11 @@
             naszą ofertą, oraz prezentacją wykonanych przez nas fryzur.
           </h1>
         </section>
-        <i class="ph-caret-down-light" @click="scrollToServices"></i>
+        <i
+          class="ph-caret-down-light"
+          @click="scrollToServices"
+          @keyup.down="scrollToServices"
+        ></i>
 
         <!-- eslint-disable max-len -->
         <svg

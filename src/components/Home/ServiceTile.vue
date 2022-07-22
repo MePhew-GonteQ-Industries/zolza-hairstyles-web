@@ -17,12 +17,14 @@
       <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span></p>
   </div>
   <input class='select-service'
-  type="radio" name="select-service" @change="$emit('updateSelectedService', id)" id="">
+  type="radio" name="select-service" @change="$emit('updateSelectedService', id)" :id="tileId">
+  <label :for="tileId"></label>
 </div>
 </template>
 
 <script>
 import CustomProgressBar from '@/components/CustomProgressBar.vue';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'ServiceTile',
@@ -57,6 +59,13 @@ export default {
     priceMax: {
       type: Number,
     },
+  },
+  setup() {
+    const tileId = uuidv4();
+
+    return {
+      tileId,
+    };
   },
 };
 </script>

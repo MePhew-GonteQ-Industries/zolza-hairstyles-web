@@ -1,37 +1,59 @@
 <template>
   <div class="input-wrapper">
-    <input :type="inputType" :id="inputId" name="input"
-    :autocomplete="autocomplete"
-    :placeholder="label" :value="value"
-    @input="event => $emit('update:value', event.target.value)"
-    :class="{ invalid: invalid && (validate || forceValidate) }"
-    @focus="$emit('focus')"
-    @blur="handleBlur"/>
+    <input
+      :type="inputType"
+      :id="inputId"
+      name="input"
+      :autocomplete="autocomplete"
+      :placeholder="label"
+      :value="value"
+      @input="(event) => $emit('update:value', event.target.value)"
+      :class="{ invalid: invalid && (validate || forceValidate) }"
+      @focus="$emit('focus')"
+      @blur="handleBlur"
+    />
 
-    <label class="search-label" v-if="type === 'search'" :for="inputId">{{ label }}</label>
-    <label class='form-label' v-else :for="inputId">{{ label }}</label>
+    <label class="search-label" v-if="type === 'search'" :for="inputId">{{
+      label
+    }}</label>
+    <label class="form-label" v-else :for="inputId">{{ label }}</label>
 
-    <div v-if="type === 'search'" class="button" @click="$emit('searchBtnClick')">
+    <div
+      v-if="type === 'search'"
+      class="button"
+      @click="$emit('searchBtnClick')"
+      @keyup.enter="searchBtnClick"
+    >
       <i class="ph-magnifying-glass-light"></i>
     </div>
-    <div v-else-if="type === 'password'" class="button" @click="showPassword">
-
+    <div
+      v-else-if="type === 'password'"
+      class="button"
+      @click="showPassword"
+      @keyup.enter="showPassword"
+    >
       <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
 
       <i class="ph-eye-light" v-if="!passwordHidden"></i>
-
     </div>
     <i v-else :class="iconClass" class="input-icon"></i>
 
-    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
+    <div
+      v-show="(validate || forceValidate) && invalid"
+      class="invalid-wrapper"
+    >
       <i class="ph-warning-circle-light invalid-icon"></i>
 
-      <p class="message-invalid message-value-empty"
-      v-if="required && empty">{{ messageEmpty }}</p>
+      <p class="message-invalid message-value-empty" v-if="required && empty">
+        {{ messageEmpty }}
+      </p>
 
-      <p class="message-invalid message-value-invalid"
-      v-if="!(required && empty)">{{ messageInvalid }}</p>
-
+      <p
+        class="message-invalid message-value-invalid"
+        v-if="!(required && empty)"
+      >
+        {{ messageInvalid }}
+      </p>
     </div>
   </div>
 </template>
@@ -76,12 +98,7 @@ export default {
       default: false,
     },
   },
-  emits: [
-    'update:value',
-    'blur',
-    'focus',
-    'searchBtnClick',
-  ],
+  emits: ['update:value', 'blur', 'focus', 'searchBtnClick'],
   setup(props, { emit }) {
     const inputId = ref(null);
 
@@ -142,7 +159,7 @@ export default {
     position: absolute;
     top: 100%;
     left: 0;
-    margin: .5rem 1rem;
+    margin: 0.5rem 1rem;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -152,7 +169,7 @@ export default {
       position: static;
       font-size: 2rem;
       color: $error-color;
-      }
+    }
 
     .message-invalid {
       color: $error-color;
@@ -175,7 +192,7 @@ export default {
   .input-icon {
     font-size: 2rem;
     position: absolute;
-    right: 30px
+    right: 30px;
   }
 
   .button {
@@ -209,15 +226,15 @@ export default {
     color: $secondary-text-color;
     height: 100%;
     width: 100%;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     box-shadow: none;
     font-weight: 600;
     transition: all calc($transition-duration * 2);
     filter: none;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
 
     &[type="password"] {
-      letter-spacing: .313rem;
+      letter-spacing: 0.313rem;
     }
 
     &[type="search"] {
@@ -236,8 +253,8 @@ export default {
       box-shadow: 0 0 10px 1px $error-color-low;
     }
 
-   &:-webkit-autofill,
-   &:autofill {
+    &:-webkit-autofill,
+    &:autofill {
       -webkit-text-fill-color: $secondary-text-color;
       background: $secondary-color;
       color: $secondary-text-color;
@@ -250,11 +267,11 @@ export default {
     &:-webkit-autofill:focus,
     &:autofill:focus {
       transition: background-color 5000s ease-in-out 0s,
-      border-color $transition-duration,
-      box-shadow $transition-duration;
+        border-color $transition-duration, box-shadow $transition-duration;
     }
 
-    &:focus, &:hover {
+    &:focus,
+    &:hover {
       outline: none;
     }
 
@@ -271,7 +288,7 @@ export default {
 
     &:focus + .form-label,
     &:not(:placeholder-shown) + .form-label,
-    &:-webkit-autofill:active + .form-label  {
+    &:-webkit-autofill:active + .form-label {
       color: $accent-color;
       transform: translateY(-0.6em) scale(0.8);
     }

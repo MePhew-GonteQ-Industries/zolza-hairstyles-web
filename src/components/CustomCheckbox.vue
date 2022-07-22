@@ -1,9 +1,14 @@
 <template>
   <div class="checkbox-wrapper">
     <i class="ph-check-bold checkbox-icon" v-if="checked"></i>
-    <input :aria-checked="checked" role="checkbox" type="checkbox" :checked="checked"
-    @change="event => $emit('update:checked', event.target.checked)"
-    name='custom-checkbox' :id="checkboxId">
+    <input
+      :aria-checked="checked"
+      type="checkbox"
+      :checked="checked"
+      @change="(event) => $emit('update:checked', event.target.checked)"
+      name="custom-checkbox"
+      :id="checkboxId"
+    />
     <label :for="checkboxId">
       <slot></slot>
     </label>
@@ -16,9 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default {
   name: 'CustomCheckbox',
-  emits: [
-    'update:checked',
-  ],
+  emits: ['update:checked'],
   props: {
     checked: {
       type: Boolean,
@@ -43,7 +46,7 @@ export default {
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   position: relative;
   height: 20px;
 
@@ -66,7 +69,7 @@ export default {
     cursor: pointer;
     background-color: transparent;
     border: 2px solid $primary-text-color;
-    border-radius: .2rem;
+    border-radius: 0.2rem;
   }
 
   input:checked {

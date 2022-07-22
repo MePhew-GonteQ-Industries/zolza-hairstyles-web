@@ -8,7 +8,13 @@
 
     <form @submit.prevent="handlePasswordReset" novalidate>
       <div class="inputs">
-        <input class="hidden-input" type="text" autocomplete="username" />
+        <input
+          class="hidden-input"
+          type="text"
+          autocomplete="username"
+          id="change-password-hidden-username-input"
+        />
+        <label for="change-password-hidden-username-input"></label>
 
         <CustomInput
           :label="t('resetPassword.changePassword.newPasswordField.label')"

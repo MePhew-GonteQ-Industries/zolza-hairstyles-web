@@ -1,56 +1,69 @@
 <template>
-    <div class="footer-basic">
-      <div class="info-section">
-        <ul>
-          <li><span class="copyright-note"><i class="ph-copyright-light"></i>
-          2022 Zołza Hairstyles</span></li>
-        </ul>
-      </div>
-
-      <div class="contact">
-        <ul>
-          <li><router-link class="link" to="/terms-of-use">{{ t('footer[0]') }}</router-link>
-          </li>
-          <li>
-            <router-link class="link" to="/privacy-policy">{{ t('footer[1]') }}
-            </router-link>
-          </li>
-          <li>
-            <router-link class="link" to="/cookies-policy">Polityka cookies
-            </router-link>
-          </li>
-          <li>
-            <router-link class="link" to="/rodo">Obowiązek informacyjny RODO
-            </router-link>
-          </li>
-          <li>
-              <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank">
-                <i class="ph-facebook-logo-light"></i>
-              </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank">
-              <i class="ph-instagram-logo-light"></i>
-            </a>
-          </li>
-          <li>
-            <a href="tel:+48 730 601 830" target="_blank">
-              <i class="ph-phone-light"></i>
-            </a>
-          </li>
-          <li>
-            <a href="mailto: zolza.hairstyles@gmail.com" target="_blank">
-              <i class="ph-envelope-simple-light"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank">
-              <i class="ph-file-code-light"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div class="footer-basic">
+    <div class="info-section">
+      <ul>
+        <li>
+          <span class="copyright-note"
+            ><i class="ph-copyright-light"></i> 2022 Zołza Hairstyles</span
+          >
+        </li>
+      </ul>
     </div>
+
+    <div class="contact">
+      <ul>
+        <li>
+          <router-link class="link" to="/terms-of-use">{{
+            t("footer[0]")
+          }}</router-link>
+        </li>
+        <li>
+          <router-link class="link" to="/privacy-policy"
+            >{{ t("footer[1]") }}
+          </router-link>
+        </li>
+        <li>
+          <router-link class="link" to="/cookies-policy"
+            >Polityka cookies
+          </router-link>
+        </li>
+        <li>
+          <router-link class="link" to="/rodo"
+            >Obowiązek informacyjny RODO
+          </router-link>
+        </li>
+        <li>
+          <a
+            href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161"
+            target="_blank"
+            aria-label="facebook"
+          >
+            <i class="ph-facebook-logo-light"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank" aria-label="Instagram">
+            <i class="ph-instagram-logo-light"></i>
+          </a>
+        </li>
+        <li>
+          <a href="tel:+48 730 601 830" target="_blank" aria-label="Numer telefonu">
+            <i class="ph-phone-light"></i>
+          </a>
+        </li>
+        <li>
+          <a href="mailto: zolza.hairstyles@gmail.com" target="_blank" aria-label="Adres email">
+            <i class="ph-envelope-simple-light"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank" aria-label="Deweloperzy platformy Zołza Hairstyles">
+            <i class="ph-file-code-light"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -92,12 +105,13 @@ export default {
   }
 
   a {
-    font-size: .875rem !important;
+    font-size: 0.875rem !important;
   }
 
-  li, a {
+  li,
+  a {
     color: $primary-text-color;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     display: flex;
     flex-direction: column;
@@ -110,7 +124,10 @@ export default {
     }
   }
 
-  .contact, .contact ul, li, a {
+  .contact,
+  .contact ul,
+  li,
+  a {
     display: flex;
     flex-direction: row;
     align-items: center;

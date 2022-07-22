@@ -1,46 +1,99 @@
 <template>
   <div class="notifications-wrapper" ref="notificationsWrapper">
-    <i class="bell-icon"
-    :class="notificationsPanelExpanded ? 'ph-bell-fill': 'ph-bell-light'"
-    @click='toggleNotificationsPanel'></i>
-    <span class="unread-notifications-count"
-    @click='toggleNotificationsPanel'>2</span>
-    <div class="notifications-panel" v-show="notificationsPanelExpanded" ref="notificationsPanel">
+    <i
+      class="bell-icon"
+      :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
+      @click="toggleNotificationsPanel"
+      @keyup.enter="toggleNotificationsPanel"
+    ></i>
+    <span
+      class="unread-notifications-count"
+      @click="toggleNotificationsPanel"
+      @keyup.enter="toggleNotificationsPanel"
+      >2</span
+    >
+    <div
+      class="notifications-panel"
+      v-show="notificationsPanelExpanded"
+      ref="notificationsPanel"
+    >
       <div class="panel-header">
         <h3>Notifications</h3>
-        <router-link to="/settings/notifications" @click="collapseNotificationsPanel">
+        <router-link
+          to="/settings/notifications"
+          @click="collapseNotificationsPanel"
+        >
           <i class="ph-gear-six-light notification-settings"></i>
         </router-link>
       </div>
       <div class="tab-selector">
-        <button class="tab" :class='{ active: currentTabIndex === 0 }'
-          @click="switchTab(0)">Events</button>
-        <button class="tab" :class='{ active: currentTabIndex === 1 }'
-          @click="switchTab(1)">My account</button>
-        <button class="tab" :class='{ active: currentTabIndex === 2 }'
-          @click="switchTab(2)">What's new</button>
-          <div class="active-tab-indicator"></div>
+        <button
+          class="tab"
+          :class="{ active: currentTabIndex === 0 }"
+          @click="switchTab(0)"
+        >
+          Events
+        </button>
+        <button
+          class="tab"
+          :class="{ active: currentTabIndex === 1 }"
+          @click="switchTab(1)"
+        >
+          My account
+        </button>
+        <button
+          class="tab"
+          :class="{ active: currentTabIndex === 2 }"
+          @click="switchTab(2)"
+        >
+          What's new
+        </button>
+        <div class="active-tab-indicator"></div>
       </div>
-      <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
+      <div
+        class="no-notifications-info"
+        v-if="notifications[currentTabIndex].length === 0"
+      >
         <p>There aren't any notifications yet</p>
       </div>
-      <div class="notifications" v-if="currentTabIndex === 0" ref="notificationsList">
-        <ComposedNotification v-for="(notification, index) in notifications[0]"
-        :key="index" :title="notification.title"/>
+      <div
+        class="notifications"
+        v-if="currentTabIndex === 0"
+        ref="notificationsList"
+      >
+        <ComposedNotification
+          v-for="(notification, index) in notifications[0]"
+          :key="index"
+          :title="notification.title"
+        />
       </div>
-      <div class="notifications" v-else-if="currentTabIndex === 1" ref="notificationsList">
-        <ComposedNotification v-for="(notification, index) in notifications[1]"
-        :key="index" :title="notification.title"/>
-
+      <div
+        class="notifications"
+        v-else-if="currentTabIndex === 1"
+        ref="notificationsList"
+      >
+        <ComposedNotification
+          v-for="(notification, index) in notifications[1]"
+          :key="index"
+          :title="notification.title"
+        />
       </div>
-      <div class="notifications" v-else-if="currentTabIndex === 2" ref="notificationsList">
-        <ComposedNotification v-for="(notification, index) in notifications[2]"
-        :key="index" :title="notification.title"/>
+      <div
+        class="notifications"
+        v-else-if="currentTabIndex === 2"
+        ref="notificationsList"
+      >
+        <ComposedNotification
+          v-for="(notification, index) in notifications[2]"
+          :key="index"
+          :title="notification.title"
+        />
       </div>
       <div class="panel-footer">
         <p class="notifications-count">3 notifications</p>
         <button class="clear-notifications" @click="clearNotifications">
-          Clear all</button>
+          Clear all
+        </button>
       </div>
     </div>
   </div>
@@ -124,7 +177,7 @@ export default {
 
     const notificationsListOverflows = computed(
       () => notificationsList.value.clientHeight
-      < notificationsList.value.scrollHeight,
+        < notificationsList.value.scrollHeight,
     );
 
     const scrollHandler = (e) => {
@@ -138,12 +191,12 @@ export default {
       } else if (!notificationsListOverflows.value) {
         e.preventDefault();
       } else if (
-        (
-          notificationsList.value.scrollTop === 0 && e.deltaY < 0) || (
-          (notificationsList.value.scrollTop === (
-            notificationsList.value.scrollHeight - notificationsList.value.offsetHeight
-          )) && e.deltaY > 0
-        )) {
+        (notificationsList.value.scrollTop === 0 && e.deltaY < 0)
+        || (notificationsList.value.scrollTop
+          === notificationsList.value.scrollHeight
+            - notificationsList.value.offsetHeight
+          && e.deltaY > 0)
+      ) {
         e.preventDefault();
       }
     };
@@ -171,7 +224,6 @@ export default {
     };
   },
 };
-
 </script>
 
 <style lang='scss' scoped>
@@ -188,7 +240,7 @@ export default {
     box-sizing: content-box;
     padding: 1rem;
     border-radius: 50%;
-    border: .1px solid transparent;
+    border: 0.1px solid transparent;
 
     &:active {
       background-color: $secondary-color;
@@ -206,7 +258,7 @@ export default {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: .688rem;
+    font-size: 0.688rem;
     font-weight: 600;
     cursor: pointer;
   }
@@ -248,7 +300,7 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: .625rem 2rem;
+      padding: 0.625rem 2rem;
       border-bottom: 1px solid $secondary-color;
       position: relative;
 
@@ -284,13 +336,13 @@ export default {
         position: relative;
         height: 40px;
         width: 120px;
-        padding: .5rem;
+        padding: 0.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &.active {
-          color: $secondary-text-color
+          color: $secondary-text-color;
         }
       }
     }
@@ -303,7 +355,7 @@ export default {
     }
 
     .notifications {
-      padding: .5rem 20px .5rem 20px;
+      padding: 0.5rem 20px 0.5rem 20px;
       max-height: 65vh;
       overflow-y: hidden;
 
@@ -321,7 +373,7 @@ export default {
 
       .notifications-count {
         color: grey;
-        font-size: .9rem;
+        font-size: 0.9rem;
       }
 
       .clear-notifications {
