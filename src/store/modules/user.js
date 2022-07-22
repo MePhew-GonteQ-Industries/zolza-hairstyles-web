@@ -91,8 +91,8 @@ export default {
     async loadUserData({ commit, dispatch }) {
       if (localStorage.getItem('loginData') && localStorage.getItem('userData')) {
         await commit('relogin', JSON.parse(localStorage.getItem('loginData')));
-        await commit('setUserData', JSON.parse(localStorage.getItem('userData')));
         await dispatch('configureAxiosLoggedIn');
+        await dispatch('checkUserData');
       }
     },
 
@@ -102,9 +102,6 @@ export default {
           accessToken: state.accessToken,
           refreshToken: state.refreshToken,
         },
-      ));
-      localStorage.setItem('userData', JSON.stringify(
-        state.userData,
       ));
     },
 
