@@ -69,11 +69,14 @@
 <script>
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import { onClickOutside, useMouseInElement } from '@vueuse/core';
 
 export default {
   name: 'UserProfilePanel',
   setup() {
+    const router = useRouter();
+
     const profilePanelExpanded = ref(false);
 
     function toggleProfilePanel() {
@@ -120,7 +123,9 @@ export default {
     const store = useStore();
 
     function logout() {
-      store.dispatch('logout');
+      store.dispatch('logout').then(() => {
+        router.push({ name: 'home' });
+      });
     }
 
     return {
