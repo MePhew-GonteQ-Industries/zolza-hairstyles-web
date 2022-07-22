@@ -7,6 +7,7 @@ export default {
     accessToken: '',
     refreshToken: '',
     userData: null,
+    axiosInterceptor: null,
   },
 
   getters: {
@@ -38,6 +39,10 @@ export default {
     setUserData(state, userData) {
       state.userData = userData;
     },
+
+    setRefreshTokenInterceptor(state, interceptor) {
+      state.axiosInterceptor = interceptor;
+    },
   },
 
   actions: {
@@ -47,15 +52,47 @@ export default {
     },
 
     setAuthHeader({ state }) {
-      axios.defaults.headers.common.Authorization = `Bearer ${
-        state.accessToken}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${state.accessToken}`;
+    },
+
+    removeAuthHeader() {
+      axios.defaults.headers.common.Authorization = '';
+    },
+
+    addRefreshTokenInterceptor({ commit, dispatch }) {
+      const refreshTokenInterceptor = axios.interceptors.response.use(
+        (response) => response, async (error) => {
+          const originalRequest = error.config;
+          if (error.response.status === 401 && !originalRequest.retry) {
+            originalRequest.retry = true;
+            dispatch('refreshToken').then(() => axios(originalRequest));
+          }
+          return Promise.reject(error);
+        },
+      );
+      commit('setRefreshTokenInterceptor', refreshTokenInterceptor);
+    },
+
+    removeRefreshTokenInterceptor({ state, commit }) {
+      axios.interceptors.response.eject(state.refreshTokenInterceptor);
+      commit('setRefreshTokenInterceptor', null);
+    },
+
+    configureAxiosLoggedIn({ dispatch }) {
+      dispatch('setAuthHeader');
+      dispatch('addRefreshTokenInterceptor');
+    },
+
+    configureAxiosLoggedOut({ dispatch }) {
+      dispatch('removeAuthHeader');
+      dispatch('removeRefreshTokenInterceptor');
     },
 
     async loadUserData({ commit, dispatch }) {
       if (localStorage.getItem('loginData') && localStorage.getItem('userData')) {
         await commit('relogin', JSON.parse(localStorage.getItem('loginData')));
         await commit('setUserData', JSON.parse(localStorage.getItem('userData')));
-        await dispatch('setAuthHeader');
+        await dispatch('configureAxiosLoggedIn');
       }
     },
 
@@ -82,29 +119,25 @@ export default {
         },
       }).then(async (response) => {
         commit('login', response.data);
-        await dispatch('setAuthHeader');
+        await dispatch('configureAxiosLoggedIn');
         await dispatch('checkUserData');
         await dispatch('saveUserData');
       })
         .catch((error) => {
           if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
             throw new Error(error.response.status);
           } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
             throw new Error(error.reques);
           } else {
-          // Something happened in setting up the request that triggered an Error
+            // Something happened in setting up the request that triggered an Error
             throw new Error(error.message);
           }
         });
-    },
-
-    removeAuthHeader() {
-      axios.defaults.headers.common.Authorization = '';
     },
 
     deleteUser() {
@@ -141,13 +174,14 @@ export default {
 
     refreshToken({ state, commit, dispatch }) {
       return new Promise((resolve, reject) => {
-        axios.post('auth/login', new URLSearchParams({
+        axios.post('auth/refresh-token', new URLSearchParams({
           grant_type: 'refresh_token',
           refresh_token: state.refreshToken,
-        })).then((response) => {
-          console.log(response);
-          commit('login', response.data);
-          dispatch('setAuthHeader');
+        })).then(async (response) => {
+          await commit('login', response.data);
+          await dispatch('checkUserData');
+          await dispatch('configureAxiosLoggedIn');
+          await dispatch('saveUserData');
           resolve();
         })
           .catch((error) => {
