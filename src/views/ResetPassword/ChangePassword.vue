@@ -113,7 +113,7 @@ export default {
           if (response.status === 200) {
             const { email } = response.data;
             console.log(email);
-            router.push({ name: 'Login', params: { email } });
+            router.push({ name: 'login', params: { email } });
           }
         })
         .catch((error) => {
