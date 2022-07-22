@@ -115,6 +115,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import { validateEmail } from '@/utils';
+import { useStore } from 'vuex';
 import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
 export default {
@@ -128,6 +129,7 @@ export default {
   setup() {
     const { t } = useI18n({ useScope: 'global' });
     const router = useRouter();
+    const store = useStore();
 
     const userData = ref({
       name: '',
@@ -138,15 +140,9 @@ export default {
     });
     const passwordRepeat = ref('');
 
-    const passwordScore = ref(null);
-
     const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
     const termsAccepted = ref(false);
-
-    function onScore(payload) {
-      passwordScore.value = payload.score;
-    }
 
     const forceValidate = ref(false);
 
@@ -185,9 +181,9 @@ export default {
         return false;
       }
 
-      if (passwordScore.value < 3) {
-        return false;
-      }
+      // if () {
+      //   return false; // todo: validate password
+      // }
 
       if (userData.value.password !== passwordRepeat.value) {
         return false;
@@ -200,14 +196,14 @@ export default {
       axios
         .post('users/register', userData.value, {
           headers: {
-            'content-language': navigator.language,
+            'content-language': store.state.settings.language.substr(0, 2),
             'preferred-theme': 'dark',
           },
         })
         .then((response) => {
           const { email } = response.data;
           router.push({
-            name: 'Login',
+            name: 'login',
             params: { email, accountCreated: true },
           });
         })
@@ -222,6 +218,7 @@ export default {
               }
               default: {
                 console.error(error.response.status);
+                console.log(error.response);
                 break;
               }
             }
@@ -274,8 +271,6 @@ export default {
       genderOptions,
       handleSubmit,
       validateEmail,
-      onScore,
-      passwordScore,
       emailInvalid,
       forceValidate,
       termsAccepted,
