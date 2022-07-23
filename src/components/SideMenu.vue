@@ -1,10 +1,9 @@
 <template>
   <nav class="menu" ref="menu">
     <router-link
-      v-for="(link, index) in links"
+      v-for="link in links"
       :key="link.id"
       :to="{ name: link.toName }"
-      @click="changeOffset(index)"
     >
       <span><i :class="link.iconClass"></i>{{ link.text }}</span>
       <div class="edge top"></div>
@@ -16,7 +15,6 @@
 
 <script>
 import { ref } from 'vue';
-import { setCssPropertyValue } from '@/utils';
 
 export default {
   name: 'SideMenu',
@@ -29,13 +27,8 @@ export default {
   setup() {
     const menu = ref(null);
 
-    const changeOffset = (index) => {
-      setCssPropertyValue(menu.value, '--offset', `${88 * index}px`);
-    };
-
     return {
       menu,
-      changeOffset,
     };
   },
 };
@@ -52,14 +45,75 @@ export default {
   height: calc(100vh - 6rem);
   width: 100%;
   position: relative;
-  --offset: 0;
-  $offset: var(--offset);
-
   & a.router-link-exact-active ~ .active-tab-indicator {
     opacity: 1;
   }
 
+  a:nth-child(1).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 0);
+  }
+  a:nth-child(2).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 1);
+  }
+  a:nth-child(3).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 2);
+  }
+  a:nth-child(4).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 3);
+  }
+  a:nth-child(5).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 4);
+  }
+  a:nth-child(6).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 5);
+  }
+  a:nth-child(7).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 6);
+  }
+  a:nth-child(8).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 7);
+  }
+  a:nth-child(9).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 8);
+  }
+  a:nth-child(10).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 9);
+  }
+  a:nth-child(11).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 10);
+  }
+  a:nth-child(12).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 11);
+  }
+  a:nth-child(13).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 12);
+  }
+  a:nth-child(14).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 13);
+  }
+  a:nth-child(15).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 14);
+  }
+  a:nth-child(16).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 15);
+  }
+  a:nth-child(17).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 16);
+  }
+  a:nth-child(18).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 17);
+  }
+  a:nth-child(19).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 18);
+  }
+  a:nth-child(20).router-link-exact-active ~ .active-tab-indicator {
+    --offset: calc(88px * 19);
+  }
+
   .active-tab-indicator {
+    --offset: 0;
+    $offset: var(--offset);
+
     height: 15px;
     width: 15px;
     position: absolute;
