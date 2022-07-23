@@ -236,18 +236,31 @@ const router = createRouter({
   default: Home,
 });
 
-router.beforeEach((to) => {
+router.beforeEach(async (to, from) => {
+  console.log(to, from);
+  await store.dispatch('loadAuthData');
+  if (store.getters.isLoggedIn) {
+    if (to.name === 'login' || to.name === 'sign-up') return '/';
+  }
   if (to.meta.requiresAuth) {
-    if (!store.state.user.userData) {
+    if (!store.getters.isLoggedIn) {
       return { name: 'login' };
     }
     switch (to.meta.requiredPermissionLevel) {
       case 'admin': {
-        if (!store.state.user.userData.permission_level.includes('admin')) return { name: 'insufficientPermissions' };
+        if (!store.getters.isAdmin) {
+          return {
+            name: 'insufficientPermissions',
+          };
+        }
         break;
       }
       case 'owner': {
-        if (!store.state.user.userData.permission_level.includes('owner')) return { name: 'insufficientPermissions' };
+        if (!store.getters.isOwner) {
+          return {
+            name: 'insufficientPermissions',
+          };
+        }
         break;
       }
       default: {
