@@ -1,7 +1,7 @@
 <template>
   <section class="app-page" id="settings-page">
     <SideMenu id="settings-navigation" :links="links" />
-    <router-view v-if="$store.state.user.userData"></router-view>
+    <router-view v-if="$store.getters.isLoggedIn"></router-view>
   </section>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-wrapper" ref="profileWrapper">
+  <div class="profile-wrapper" ref="profileWrapper" v-if="$store.getters.isLoggedIn">
     <i
       class="user-icon"
       :class="profilePanelExpanded ? 'ph-user-fill' : 'ph-user-light'"
@@ -8,7 +8,7 @@
     ></i>
 
     <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
-      <div class="panel-header" v-if="$store.state.user.userData">
+      <div class="panel-header">
         <router-link
           :to="{ name: 'userAccountSettings' }"
           @click="collapseProfilePanel"
@@ -19,8 +19,8 @@
           @click="collapseProfilePanel"
         >
           <span
-            >{{ $store.state.user.userData.name }}
-            {{ $store.state.user.userData.surname }}</span
+            >{{ $store.state.user.name }}
+            {{ $store.state.user.surname }}</span
           >
         </router-link>
       </div>

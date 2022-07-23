@@ -90,13 +90,12 @@
 
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
-        <li v-if="userLoggedIn && userIsAdmin">
+        <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
           <router-link to='/dashboard'>Panel administracyjny</router-link>
         </li>
         <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
       </ul>
-
-      <ul class="secondary-nav" v-if="!userLoggedIn">
+      <ul class="secondary-nav" v-if="!$store.getters.isLoggedIn">
           <li>
             <router-link to="/login" class="login-btn">
               <i class="ph-user-light"></i>{{ t('nav.secondaryNav[0]') }}
@@ -121,8 +120,6 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
-import { computed } from 'vue';
 import NotificationsPanel from '@/components/Navbar/NotificationsPanel.vue';
 import UserProfilePanel from '@/components/Navbar/UserProfilePanel.vue';
 
@@ -135,14 +132,7 @@ export default {
   setup() {
     const { t } = useI18n({ useScope: 'global' });
 
-    const store = useStore();
-
-    const userLoggedIn = computed(() => store.state.user.loggedIn);
-    const userIsAdmin = computed(() => store.state.user.userData && store.state.user.userData.permission_level.includes('admin'));
-
     return {
-      userLoggedIn,
-      userIsAdmin,
       t,
     };
   },

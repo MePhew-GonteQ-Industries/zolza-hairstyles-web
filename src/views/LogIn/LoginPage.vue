@@ -101,16 +101,22 @@ export default {
     },
   },
   setup(props) {
-    const router = useRouter();
-
-    const { t } = useI18n();
     const store = useStore();
-
-    const saveUser = ref(true);
+    const router = useRouter();
+    const { t } = useI18n();
 
     const userData = ref({
-      email: 'matib0029@gmaila.com',
-      password: 'Kwakwa5!',
+      email: '',
+      password: '',
+    });
+
+    const saveUser = computed({
+      get() {
+        return store.state.auth.rememberUser;
+      },
+      set(newValue) {
+        store.commit('setRememberUser', newValue);
+      },
     });
 
     const loading = ref(false);
