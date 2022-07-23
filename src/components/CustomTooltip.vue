@@ -1,7 +1,7 @@
 <template>
   <div class="tooltip-wrapper">
     <slot name="activator" />
-    <div class="tooltip" ref="tooltip"><slot></slot></div>
+    <div class="tooltip" ref="tooltip"><slot /></div>
   </div>
 </template>
 
@@ -72,11 +72,11 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .tooltip-wrapper {
   position: relative;
 
-  .activator {
+  :slotted(*:not(.tooltip)) {
     &:hover ~ .tooltip {
       transform: translateX(-50%) scale(1) translateZ(0);
       opacity: 1;
