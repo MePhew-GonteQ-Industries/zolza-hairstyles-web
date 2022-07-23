@@ -91,9 +91,9 @@
       </div>
       <div class="panel-footer">
         <p class="notifications-count">3 notifications</p>
-        <button class="clear-notifications" @click="clearNotifications">
-          Clear all
-        </button>
+        <CustomButton class="clear-notifications" @click="clearNotifications"
+          >Clear all</CustomButton
+        >
       </div>
     </div>
   </div>
@@ -103,11 +103,13 @@
 import { computed, ref, watch } from 'vue';
 import { onClickOutside, useMouseInElement } from '@vueuse/core';
 import ComposedNotification from '@/components/Navbar/ComposedNotification.vue';
+import CustomButton from '@/components/CustomButton.vue';
 
 export default {
   name: 'NotificationsPanel',
   components: {
     ComposedNotification,
+    CustomButton,
   },
   setup() {
     const notificationsPanelExpanded = ref(false);
@@ -377,17 +379,8 @@ export default {
       }
 
       .clear-notifications {
-        padding: 10px 20px;
-        border-radius: 5px;
-        background-color: $accent-color;
-        cursor: pointer;
-        outline: none;
-        border: none;
-        border: 2px solid transparent;
-
-        &:hover {
-          border-color: $accent-color;
-        }
+        width: 100px;
+        text-transform: none;
       }
     }
   }
