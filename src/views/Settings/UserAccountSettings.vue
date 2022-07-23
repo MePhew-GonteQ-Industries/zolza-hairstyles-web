@@ -37,7 +37,7 @@
         <CustomButton type="success">Kwakwa</CustomButton>
         <CustomButton type="error">Kwakwa</CustomButton>
       </CustomModal>
-      <MessageBox type="warning" v-if="$store.state.user.verified">
+      <MessageBox type="warning" v-if="!$store.state.user.verified">
         <template #title>
           Twój adres email {{ $store.state.user.email }}
           nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.
