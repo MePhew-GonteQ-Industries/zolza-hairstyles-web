@@ -160,6 +160,7 @@ import { computed, onMounted, ref } from 'vue';
 import axios from 'axios';
 import SortedHeader from '@/components/SortedHeader.vue';
 import 'v-calendar/dist/style.css';
+import { handleRequestError } from '@/utils';
 // import { DatePicker } from 'v-calendar';
 
 export default {
@@ -245,9 +246,9 @@ export default {
       try {
         const response = await axios.get('appointments/all?limit=6');
         appointmentsData.value = response.data;
-      } catch (err) {
+      } catch (error) {
         // loadingFailed.value = true;
-        console.error(err);
+        handleRequestError(error);
       }
       // loading.value = false;
       setTimeout(() => {

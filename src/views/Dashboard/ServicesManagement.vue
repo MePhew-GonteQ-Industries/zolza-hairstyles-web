@@ -107,6 +107,7 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
+import { handleRequestError } from '@/utils';
 
 export default {
   name: 'ServicesManagement',
@@ -136,9 +137,9 @@ export default {
       try {
         const response = await axios.get('services/details');
         servicesData.value = response.data;
-      } catch (err) {
+      } catch (error) {
         // loadingFailed.value = true;
-        console.error(err);
+        handleRequestError(error);
       }
       // loading.value = false;
       setTimeout(() => {

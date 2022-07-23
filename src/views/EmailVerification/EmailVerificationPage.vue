@@ -9,6 +9,7 @@
 import { onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
+import { handleRequestError } from '@/utils';
 
 export default {
   name: 'EmailVerification',
@@ -31,7 +32,7 @@ export default {
               }
             })
             .catch((error) => {
-              console.log(error);
+              handleRequestError(error);
             });
         }
       }

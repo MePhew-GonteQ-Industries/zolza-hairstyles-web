@@ -16,6 +16,7 @@ import CustomLoader from '@/components/CustomLoader.vue';
 import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
+import { handleRequestError } from '@/utils';
 
 export default {
   name: 'availableSlotsList',
@@ -74,8 +75,8 @@ export default {
           `appointments/nearest/${selectedServiceId}`,
         );
         availableSlotsData.value = response.data;
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        handleRequestError(error);
       }
       loading.value = false;
     };

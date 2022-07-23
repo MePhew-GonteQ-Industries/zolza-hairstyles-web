@@ -77,6 +77,7 @@ import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomButton from '@/components/CustomButton.vue';
+import { handleRequestError } from '@/utils';
 
 export default {
   name: 'ChangePassword',
@@ -123,7 +124,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.log(error);
+          handleRequestError(error);
         });
     }
 

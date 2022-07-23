@@ -74,7 +74,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
-import { validateEmail } from '@/utils';
+import { validateEmail, handleRequestError } from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
 import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
@@ -149,8 +149,9 @@ export default {
           loading.value = false;
           router.push('/');
         })
-        .catch((err) => {
-          message.value = err;
+        .catch((error) => {
+          handleRequestError(error);
+          message.value = error;
           loading.value = false;
         });
     }

@@ -33,6 +33,7 @@ import ServiceTile from '@/components/Home/ServiceTile.vue';
 import axios from 'axios';
 import { ref, onMounted, watch } from 'vue';
 import CustomLoader from '@/components/CustomLoader.vue';
+import { handleRequestError } from '@/utils';
 
 export default {
   name: 'ServicesList',
@@ -60,9 +61,9 @@ export default {
       try {
         const response = await axios.get('services');
         servicesData.value = response.data;
-      } catch (err) {
+      } catch (error) {
         loadingFailed.value = true;
-        console.error(err);
+        handleRequestError(error);
       }
       loading.value = false;
       setTimeout(() => {

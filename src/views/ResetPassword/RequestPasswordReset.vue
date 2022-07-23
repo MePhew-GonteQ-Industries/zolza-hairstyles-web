@@ -43,7 +43,7 @@
 import { ref, computed } from 'vue';
 import axios from 'axios';
 import { useI18n } from 'vue-i18n';
-import { validateEmail } from '@/utils';
+import { validateEmail, handleRequestError } from '@/utils';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 
@@ -81,28 +81,7 @@ export default {
           console.log(response);
         })
         .catch((error) => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            switch (error.response.status) {
-              case 404: {
-                console.error(error.response.status);
-                break;
-              }
-              default: {
-                console.error(error.response.status);
-                break;
-              }
-            }
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-          }
+          handleRequestError(error);
         });
     }
 

@@ -120,7 +120,7 @@ import { useI18n } from 'vue-i18n';
 import CustomButton from '@/components/CustomButton.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomInput from '@/components/CustomInput.vue';
-import { validateEmail } from '@/utils';
+import { validateEmail, handleRequestError } from '@/utils';
 import { useStore } from 'vuex';
 import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
@@ -214,29 +214,7 @@ export default {
           });
         })
         .catch((error) => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            switch (error.response.status) {
-              case 404: {
-                // message.value = 'Incorrect user data';
-                break;
-              }
-              default: {
-                console.error(error.response.status);
-                console.log(error.response);
-                break;
-              }
-            }
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-          }
+          handleRequestError(error);
         });
     }
 

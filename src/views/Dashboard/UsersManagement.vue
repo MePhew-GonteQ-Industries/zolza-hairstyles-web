@@ -136,6 +136,7 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
+import { handleRequestError } from '@/utils';
 
 export default {
   name: 'UsersManagement',
@@ -204,9 +205,9 @@ export default {
         const response = await axios.get('users');
         usersData.value = response.data;
         console.log(usersData.value);
-      } catch (err) {
+      } catch (error) {
         // loadingFailed.value = true;
-        console.error(err);
+        handleRequestError(error);
       }
       // loading.value = false;
       setTimeout(() => {
