@@ -1,7 +1,7 @@
 <template>
   <div class="chip" ref="chip">
     <i :class="iconClass"></i>
-    <span><slot></slot></span>
+    <span><slot /></span>
   </div>
 </template>
 

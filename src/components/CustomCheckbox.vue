@@ -10,7 +10,7 @@
       :id="checkboxId"
     />
     <label :for="checkboxId">
-      <slot></slot>
+      <slot />
     </label>
   </div>
 </template>

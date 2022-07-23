@@ -5,7 +5,7 @@
     @click="$emit('toggleSort')"
     @keyup.enter="$emit('toggleSort')"
   >
-    <span><slot></slot></span>
+    <span><slot /></span>
     <div class="sort-wrapper">
       <i class="ph-sort-ascending-light" v-if="sortAscending"></i>
       <i class="ph-sort-descending-light" v-if="!sortAscending"></i>

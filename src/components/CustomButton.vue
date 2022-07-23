@@ -5,7 +5,7 @@
     :class="{ secondary: type === 'secondary' }"
     v-ripple
   >
-    <slot></slot>
+    <slot />
   </button>
 </template>
 
