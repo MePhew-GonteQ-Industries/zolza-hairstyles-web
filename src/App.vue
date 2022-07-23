@@ -176,11 +176,10 @@ export default {
       && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const theme = prefersDarkMode ? 'dark' : 'light';
+    store.commit('setTheme', theme);
 
-    onMounted(() => {
-      store.dispatch('loadUserData');
-      store.commit('setTheme', theme);
-    });
+    const navigatorLanguage = useNavigatorLanguage();
+    store.commit('setLanguage', navigatorLanguage.language.value);
 
     const scrolledToServices = ref(false);
 
@@ -196,10 +195,7 @@ export default {
 
     const navbarVisible = computed(() => y.value <= navbarHeight.value);
 
-    const navigatorLanguage = useNavigatorLanguage();
-    store.commit('setLanguage', navigatorLanguage.language.value);
-
-    onMounted(() => {
+    onMounted(async () => {
       navbarHeight.value = navbar.value.offsetHeight;
     });
 
@@ -218,44 +214,6 @@ export default {
       fixed: navbarFixed.value && onHomePage.value,
       'static-outside-viewport': !navbarFixed.value && !navbarVisible.value,
     }));
-
-    const userIsLoggedIn = computed(() => store.state.user.loggedIn);
-    const userIsAdmin = computed(
-      () => store.state.user.userData
-        && store.state.user.userData.permission_level.includes('admin'),
-    );
-    const userIsOwner = computed(
-      () => store.state.user.userData
-        && store.state.user.userData.permission_level.includes('owner'),
-    );
-
-    watch(userIsLoggedIn, (newValue) => {
-      if (!newValue && !store.state.user.manuallyLoggedOut) {
-        if (router.currentRoute.value.meta.requiresAuth) {
-          router.push({ name: 'login' });
-        }
-      }
-    });
-
-    watch(userIsAdmin, (newValue) => {
-      if (!newValue && userIsLoggedIn.value) {
-        if (
-          router.currentRoute.value.meta.requiredPermissionLevel === 'admin'
-        ) {
-          router.push({ name: 'insufficientPermissions' });
-        }
-      }
-    });
-
-    watch(userIsOwner, (newValue) => {
-      if (!newValue && userIsLoggedIn.value) {
-        if (
-          router.currentRoute.value.meta.requiredPermissionLevel === 'owner'
-        ) {
-          router.push({ name: 'insufficientPermissions' });
-        }
-      }
-    });
 
     return {
       scrollToServices,
