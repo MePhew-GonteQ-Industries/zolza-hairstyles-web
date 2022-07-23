@@ -1,14 +1,356 @@
 <template>
-  <section class="dashboard-page">
-    <h1>Appointments</h1>
+  <section class="dashboard-page dashboard-data-page appointments-management">
+    <form class="appointments-filters">
+      <CustomInput
+        class="search"
+        label="Szukaj wizyt"
+        v-model:value="q"
+        type="search"
+      />
+
+      <div class="search-filters">
+        <!-- <DatePicker
+        :is-dark="$store.state. settings.theme === 'dark'"
+        is-required
+        is-range
+        color="green"
+        mode="date"
+        v-model="selectedDate"/> -->
+        <CustomSelect class="select" />
+        <CustomSelect class="select" />
+        <CustomSelect class="select" />
+      </div>
+    </form>
+
+    <div class="dashboard-data-table-wrapper">
+      <table>
+        <colgroup>
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="id"
+              @toggleSort="toggleSort('id')"
+              class="activator"
+              >#id</SortedHeader
+            >
+          </th>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="service"
+              @toggleSort="toggleSort('service')"
+              >Usługa</SortedHeader
+            >
+          </th>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="user"
+              @toggleSort="toggleSort('user')"
+            >
+              Użytkownik</SortedHeader
+            >
+          </th>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="startDate"
+              @toggleSort="toggleSort('startDate')"
+              >Data rozpoczęcia</SortedHeader
+            >
+          </th>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="endDate"
+              @toggleSort="toggleSort('endDate')"
+              >Data zakończenia</SortedHeader
+            >
+          </th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr v-for="appointment in appointments" :key="appointment.id">
+            <td class="id">
+              <CustomTooltip>
+                <template #activator>
+                  <router-link
+                    :to="`appointment/${appointment.id}`"
+                    class="activator"
+                  >
+                    #{{ appointment.shortId }}...</router-link
+                  >
+                </template>
+                {{ appointment.id }}
+              </CustomTooltip>
+            </td>
+            <td class="service">
+              <CustomTooltip>
+                <template #activator>
+                  <router-link
+                    :to="`service/${appointment.service.id}`"
+                    class="activator"
+                    >Strzyżenie męskie</router-link
+                  >
+                </template>
+                {{ appointment.service.id }}
+              </CustomTooltip>
+            </td>
+            <td class="user">
+              <CustomTooltip>
+                <template #activator>
+                  <router-link
+                    :to="`user/${appointment.user.id}`"
+                    class="activator"
+                  >
+                    {{ appointment.user.name }}
+                    {{ appointment.user.surname }}</router-link
+                  >
+                </template>
+                {{ appointment.service.id }}
+              </CustomTooltip>
+              <span>{{ appointment.user.email }}</span>
+            </td>
+            <td>{{ appointment.start_slot.start_time_str }}</td>
+            <td>{{ appointment.end_slot.end_time_str }}</td>
+            <td class="status">
+              <div class="data-icon-wrapper">
+                <i :class="appointment.icon_class"></i>
+                <span>{{ appointment.status }}</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <i class="ph-caret-left-light"></i>
+      <span class="pagination-number">1</span>
+      <span class="pagination-number">...</span>
+      <span class="pagination-number">371</span>
+      <span class="pagination-number current">372</span>
+      <span class="pagination-number">373</span>
+      <span class="pagination-number">...</span>
+      <span class="pagination-number">744</span>
+      <i class="ph-caret-right-light"></i>
+    </div>
   </section>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import CustomInput from '@/components/CustomInput.vue';
+import CustomSelect from '@/components/CustomSelect.vue';
+import CustomTooltip from '@/components/CustomTooltip.vue';
+import { computed, onMounted, ref } from 'vue';
+import axios from 'axios';
+import SortedHeader from '@/components/SortedHeader.vue';
+import 'v-calendar/dist/style.css';
+// import { DatePicker } from 'v-calendar';
+
 export default {
   name: 'AppointmentsManagement',
+  components: {
+    CustomInput,
+    CustomSelect,
+    CustomTooltip,
+    SortedHeader,
+    // DatePicker,
+  },
+  setup() {
+    const q = ref('');
+
+    const store = useStore();
+
+    const locale = store.state.settings.language;
+
+    const sortBy = ref('startDate');
+    const sortAscending = ref(false);
+
+    const appointmentsData = ref(null);
+
+    const toggleSort = (sortName) => {
+      if (sortBy.value === sortName) {
+        sortAscending.value = !sortAscending.value;
+      } else {
+        sortAscending.value = true;
+        sortBy.value = sortName;
+      }
+    };
+
+    const appointments = computed(() => {
+      if (!appointmentsData.value) return [];
+
+      const appointmentsTemp = [];
+
+      appointmentsData.value.items.forEach((appointment) => {
+        const startTime = new Date(`${appointment.start_slot.start_time}Z`);
+        const endTime = new Date(`${appointment.end_slot.end_time}Z`);
+
+        const appointmentTemp = appointment;
+
+        appointmentTemp.start_slot.start_time_str = startTime.toLocaleTimeString(locale, {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+
+        appointmentTemp.end_slot.end_time_str = endTime.toLocaleTimeString(
+          locale,
+          {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          },
+        );
+
+        appointmentTemp.shortId = appointment.id.substr(0, 4);
+
+        if (appointment.archival) {
+          appointmentTemp.status = 'Archiwalna';
+          appointmentTemp.icon_class = 'ph-archive';
+        } else if (appointment.canceled) {
+          appointmentTemp.status = 'Odwołana';
+          appointmentTemp.icon_class = 'ph-calendar-x';
+        } else {
+          appointmentTemp.status = 'Nadchodząca';
+          appointmentTemp.icon_class = 'ph-arrow-square-up-right';
+        }
+
+        appointmentTemp.icon_class += '-light';
+
+        appointmentsTemp.push(appointmentTemp);
+      });
+
+      return appointmentsTemp;
+    });
+
+    onMounted(async () => {
+      try {
+        const response = await axios.get('appointments/all?limit=6');
+        appointmentsData.value = response.data;
+      } catch (err) {
+        // loadingFailed.value = true;
+        console.error(err);
+      }
+      // loading.value = false;
+      setTimeout(() => {
+        // loaderAnimationFinished.value = true;
+      }, 1000);
+    });
+
+    const selectedDate = ref(new Date());
+
+    return {
+      appointmentsData,
+      appointments,
+      q,
+      selectedDate,
+      sortBy,
+      sortAscending,
+      toggleSort,
+    };
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.appointments-filters {
+  display: grid;
+  grid-template-rows: 50px 50px;
+  gap: 1rem;
+  justify-items: center;
+  padding-block: 1rem;
+  width: 70%;
+
+  .search,
+  .select {
+    height: 50px;
+  }
+
+  .select {
+    .select {
+      background-color: $secondary-color;
+      box-shadow: 0 0 8px -2px $box-shadow-color;
+    }
+  }
+
+  .search {
+    input {
+      background-color: $secondary-color;
+      box-shadow: 0 0 8px -2px $box-shadow-color;
+    }
+  }
+
+  .select {
+    width: 200px;
+  }
+
+  .search-filters {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  i {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px -2px $box-shadow-color;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+
+  .pagination-number {
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px -2px $box-shadow-color;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+
+    &.current {
+      background-color: $secondary-color;
+      color: $accent-color;
+    }
+  }
+}
 </style>
