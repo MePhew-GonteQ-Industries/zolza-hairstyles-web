@@ -39,7 +39,6 @@
               :sortAscending="sortAscending"
               sortName="id"
               @toggleSort="toggleSort('id')"
-              class="activator"
               >#id</SortedHeader
             >
           </th>
@@ -89,7 +88,6 @@
                 <template #activator>
                   <router-link
                     :to="`appointment/${appointment.id}`"
-                    class="activator"
                   >
                     #{{ appointment.shortId }}...</router-link
                   >
@@ -102,7 +100,6 @@
                 <template #activator>
                   <router-link
                     :to="`service/${appointment.service.id}`"
-                    class="activator"
                     >Strzyżenie męskie</router-link
                   >
                 </template>
@@ -114,7 +111,6 @@
                 <template #activator>
                   <router-link
                     :to="`user/${appointment.user.id}`"
-                    class="activator"
                   >
                     {{ appointment.user.name }}
                     {{ appointment.user.surname }}</router-link
