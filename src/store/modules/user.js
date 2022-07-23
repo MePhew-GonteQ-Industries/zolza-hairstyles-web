@@ -1,203 +1,85 @@
 import axios from 'axios';
+import { handleRequestError } from '@/utils';
 
 export default {
   state: {
-    loggedIn: false,
-    manuallyLoggedOut: false,
-    accessToken: '',
-    refreshToken: '',
-    userData: null,
-    axiosInterceptor: null,
+    name: '',
+    surname: '',
+    gender: '',
+    email: '',
+    permissionLevel: [],
+    verified: null,
+    createdAt: '',
   },
 
   getters: {
+    isLoggedIn(state) {
+      return !!(state.name && state.surname && state.gender
+        && state.email && state.permissionLevel && state.verified !== null && state.createdAt);
+    },
+    isAdmin(state, getters) {
+      return (getters.isLoggedIn && state.permissionLevel.includes('admin'));
+    },
+    isOwner(state, getters) {
+      return (getters.isAdmin && state.permissionLevel.includes('owner'));
+    },
   },
 
   mutations: {
-    login(state, loginData) {
-      state.loggedIn = true;
-      state.manuallyLoggedOut = false;
-      state.accessToken = loginData.access_token;
-      state.refreshToken = loginData.refresh_token;
-    },
-
-    relogin(state, loginData) {
-      state.loggedIn = true;
-      state.manuallyLoggedOut = false;
-      state.accessToken = loginData.accessToken;
-      state.refreshToken = loginData.refreshToken;
-    },
-
-    logout(state) {
-      state.loggedIn = false;
-      state.manuallyLoggedOut = true;
-      state.accessToken = '';
-      state.refreshToken = '';
-      state.userData = null;
-    },
-
     setUserData(state, userData) {
-      state.userData = userData;
-    },
-
-    setRefreshTokenInterceptor(state, interceptor) {
-      state.axiosInterceptor = interceptor;
+      state.name = userData.name;
+      state.surname = userData.surname;
+      state.gender = userData.gender;
+      state.email = userData.email;
+      state.permissionLevel = userData.permissionLevel
+        ? userData.permissionLevel : userData.permission_level;
+      state.verified = userData.verified;
+      state.createdAt = userData.createdAt ? userData.createdAt : userData.created_at;
     },
   },
 
   actions: {
-    async checkUserData({ commit }) {
-      const response = await axios.get('users/me');
-      commit('setUserData', response.data);
+    async checkUserData({ commit, dispatch }) {
+      try {
+        const response = await axios.get('users/me');
+        commit('setUserData', response.data);
+        await dispatch('saveUserData');
+      } catch (error) {
+        handleRequestError(error);
+      }
     },
 
-    setAuthHeader({ state }) {
-      axios.defaults.headers.common.Authorization = `Bearer ${state.accessToken}`;
-    },
+    async loadUserData({ commit }) {
+      const userData = JSON.parse(localStorage.getItem('userData'));
 
-    removeAuthHeader() {
-      axios.defaults.headers.common.Authorization = '';
-    },
-
-    addRefreshTokenInterceptor({ commit, dispatch }) {
-      const refreshTokenInterceptor = axios.interceptors.response.use(
-        (response) => response, async (error) => {
-          const originalRequest = error.config;
-          if (error.response.status === 401 && !originalRequest.retry) {
-            originalRequest.retry = true;
-            dispatch('refreshToken').then(() => axios(originalRequest));
-          }
-          return Promise.reject(error);
-        },
-      );
-      commit('setRefreshTokenInterceptor', refreshTokenInterceptor);
-    },
-
-    removeRefreshTokenInterceptor({ state, commit }) {
-      axios.interceptors.response.eject(state.refreshTokenInterceptor);
-      commit('setRefreshTokenInterceptor', null);
-    },
-
-    configureAxiosLoggedIn({ dispatch }) {
-      dispatch('setAuthHeader');
-      dispatch('addRefreshTokenInterceptor');
-    },
-
-    configureAxiosLoggedOut({ dispatch }) {
-      dispatch('removeAuthHeader');
-      dispatch('removeRefreshTokenInterceptor');
-    },
-
-    async loadUserData({ commit, dispatch }) {
-      if (localStorage.getItem('loginData') && localStorage.getItem('userData')) {
-        await commit('relogin', JSON.parse(localStorage.getItem('loginData')));
-        await dispatch('configureAxiosLoggedIn');
-        await dispatch('checkUserData');
+      if (userData) {
+        await commit('setUserData', userData);
       }
     },
 
     saveUserData({ state }) {
-      localStorage.setItem('loginData', JSON.stringify(
-        {
-          accessToken: state.accessToken,
-          refreshToken: state.refreshToken,
-        },
-      ));
+      localStorage.setItem('userData', JSON.stringify({
+        name: state.name,
+        surname: state.surname,
+        gender: state.gender,
+        email: state.email,
+        permissionLevel: state.permissionLevel,
+        verified: state.verified,
+        createdAt: state.createdAt,
+      }));
     },
 
-    async login({ commit, dispatch }, userData) {
-      axios.post('auth/login', new URLSearchParams({
-        grant_type: 'password',
-        username: userData.email,
-        password: userData.password,
-      }), {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }).then(async (response) => {
-        commit('login', response.data);
-        await dispatch('configureAxiosLoggedIn');
-        await dispatch('checkUserData');
-        await dispatch('saveUserData');
-      })
-        .catch((error) => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            throw new Error(error.response.status);
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            throw new Error(error.reques);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            throw new Error(error.message);
-          }
-        });
-    },
-
-    deleteUser() {
-      localStorage.removeItem('loginData');
+    deleteUserData({ commit }) {
+      commit('setUserData', {
+        name: '',
+        surname: '',
+        gender: '',
+        email: '',
+        permissionLevel: [],
+        verified: null,
+        createdAt: '',
+      });
       localStorage.removeItem('userData');
-    },
-
-    logout({ commit, dispatch }) {
-      return new Promise((resolve, reject) => {
-        axios.post('auth/logout').then(() => {
-          dispatch('deleteUser');
-          dispatch('removeAuthHeader');
-          commit('logout');
-          resolve();
-        })
-          .catch((error) => {
-            if (error.response) {
-              // The request was made and the server responded with a status code
-              // that falls out of the range of 2xx
-              reject(error.response.status);
-            } else if (error.request) {
-              // The request was made but no response was received
-              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-              // http.ClientRequest in node.js
-              reject(error.request);
-            } else {
-              // Something happened in setting up the request that triggered an Error
-              reject(error.message);
-            }
-            reject();
-          });
-      });
-    },
-
-    refreshToken({ state, commit, dispatch }) {
-      return new Promise((resolve, reject) => {
-        axios.post('auth/refresh-token', new URLSearchParams({
-          grant_type: 'refresh_token',
-          refresh_token: state.refreshToken,
-        })).then(async (response) => {
-          await commit('login', response.data);
-          await dispatch('checkUserData');
-          await dispatch('configureAxiosLoggedIn');
-          await dispatch('saveUserData');
-          resolve();
-        })
-          .catch((error) => {
-            if (error.response) {
-              // The request was made and the server responded with a status code
-              // that falls out of the range of 2xx
-              reject(error.response.status);
-            } else if (error.request) {
-              // The request was made but no response was received
-              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-              // http.ClientRequest in node.js
-              reject(error.request);
-            } else {
-              // Something happened in setting up the request that triggered an Error
-              reject(error.message);
-            }
-            reject();
-          });
-      });
     },
   },
 };
