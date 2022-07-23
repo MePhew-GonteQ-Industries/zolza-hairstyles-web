@@ -236,8 +236,7 @@ const router = createRouter({
   default: Home,
 });
 
-router.beforeEach(async (to, from) => {
-  console.log(to, from);
+router.beforeEach(async (to) => {
   await store.dispatch('loadAuthData');
   if (store.getters.isLoggedIn) {
     if (to.name === 'login' || to.name === 'sign-up') return '/';
