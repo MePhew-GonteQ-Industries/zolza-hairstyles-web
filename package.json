@@ -16,6 +16,7 @@
     "axios": "^0.27.2",
     "core-js": "^3.23.5",
     "firebase": "^9.9.1",
+    "focus-trap": "^6.9.4",
     "swiper": "^8.3.1",
     "update": "^0.7.4",
     "upgrade": "^1.1.0",
@@ -35,6 +36,7 @@
     "webpack": "^5.73.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.5.4",
     "@intlify/vue-i18n-loader": "^4.2.0",
     "@types/uuid": "^8.3.4",
     "@types/vue-select": "^3.16.1",
@@ -45,7 +47,6 @@
     "@vue/cli-service": "^5.0.8",
     "@vue/compiler-sfc": "^3.2.37",
     "@vue/eslint-config-airbnb": "^6.0.0",
-    "@babel/eslint-parser": "^7.5.4",
     "eslint": "^8.20.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-vue": "^9.2.0",
