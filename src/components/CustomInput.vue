@@ -8,7 +8,7 @@
       :placeholder="label"
       :value="value"
       @input="(event) => $emit('update:value', event.target.value)"
-      :class="{ invalid: invalid && (validate || forceValidate) }"
+      :class="[{ invalid: invalid && (validate || forceValidate) }, appearance]"
       @focus="$emit('focus')"
       @blur="handleBlur"
     />
@@ -68,6 +68,7 @@ export default {
     value: String,
     autocomplete: {
       type: String,
+      required: true,
     },
     label: {
       type: String,
@@ -97,6 +98,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    appearance: {
+      type: String,
+      default: 'outlined',
+    },
   },
   emits: ['update:value', 'blur', 'focus', 'searchBtnClick'],
   setup(props, { emit }) {
@@ -106,7 +111,7 @@ export default {
       inputId.value = uuidv4();
     });
 
-    const empty = computed(() => props.value.length === 0);
+    const empty = computed(() => props.value && props.value.length === 0);
 
     const validate = ref(false);
 
@@ -248,15 +253,10 @@ export default {
       -webkit-appearance: none;
     }
 
-    &.invalid {
-      border-color: $error-color;
-      box-shadow: 0 0 10px 1px $error-color-low;
-    }
-
     &:-webkit-autofill,
     &:autofill {
       -webkit-text-fill-color: $secondary-text-color;
-      background: $secondary-color;
+      background-color: $secondary-color;
       color: $secondary-text-color;
     }
 
@@ -282,7 +282,7 @@ export default {
 
     &:focus {
       border-color: $accent-color;
-      box-shadow: 0 0 10px 1px $accent-color;
+      box-shadow: 0 0 8px -2px $accent-color;
       outline: none;
     }
 
@@ -300,6 +300,24 @@ export default {
     &::placeholder {
       color: transparent;
       user-select: none;
+    }
+
+    &.invalid {
+      border-color: $error-color;
+      box-shadow: 0 0 8px -2px $error-color-low;
+    }
+
+    &.outlined {
+      background-color: transparent;
+
+      &:not(:focus, :hover, .invalid) {
+        border-color: $primary-text-color;
+      }
+    }
+
+    &.secondary {
+      background-color: $secondary-color;
+      box-shadow: 0 0 8px -2px $box-shadow-color;
     }
   }
 }
