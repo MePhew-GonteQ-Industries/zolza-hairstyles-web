@@ -1,19 +1,10 @@
 @import 'colors';
 @import 'constants';
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  // font-family: 'Open Sans', sans-serif;
-  font-family: 'Poppins', sans-serif;
-  transition: transform $transition-duration,
-    background-color $transition-duration,
-    box-shadow $transition-duration;
-
+body {
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 1rem;
+    height: 1rem;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -25,6 +16,22 @@
 
   &::-webkit-scrollbar-track-piece {
     background-color: rgba(0, 0, 0, .137);
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  // font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  transition: transform $transition-duration,
+    background-color $transition-duration,
+    box-shadow $transition-duration;
+
+  ::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
   }
 }
 
