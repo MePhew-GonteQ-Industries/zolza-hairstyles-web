@@ -7,13 +7,17 @@
     <i :class="iconClass"></i>
     <div class="content">
       <p><slot name="title"></slot></p>
+      <span v-if="!interactive" class="subtitle"
+        ><slot name="subtitle"></slot>
+      </span>
       <span
+        v-else
         class="subtitle"
-        :tabindex="interactive ? 0 : ''"
+        :tabindex="0"
         @click="onInteraction"
         @keydown.enter="onInteraction"
-        ><slot name="subtitle"></slot
-      ></span>
+        ><slot name="subtitle"></slot>
+      </span>
     </div>
   </div>
 </template>
