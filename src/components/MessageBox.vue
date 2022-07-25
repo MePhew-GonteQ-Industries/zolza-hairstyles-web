@@ -1,9 +1,19 @@
 <template>
-  <div class="message-box" ref="messageBox">
+  <div
+    class="message-box"
+    :class="{ interactive: interactive }"
+    ref="messageBox"
+  >
     <i :class="iconClass"></i>
-    <div class="heading">
+    <div class="content">
       <p><slot name="title"></slot></p>
-      <span><slot name="subtitle"></slot></span>
+      <span
+        class="subtitle"
+        :tabindex="interactive ? 0 : ''"
+        @click="onInteraction"
+        @keydown.enter="onInteraction"
+        ><slot name="subtitle"></slot
+      ></span>
     </div>
   </div>
 </template>
@@ -17,6 +27,18 @@ export default {
   props: {
     type: {
       type: String,
+    },
+    interactive: {
+      type: Boolean,
+      default: false,
+    },
+    onInteraction: {
+      type: Function,
+      default: () => {
+        console.error(
+          'specify interaction handler when using interactive option',
+        );
+      },
     },
   },
   setup(props) {
@@ -82,30 +104,31 @@ export default {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-
-  i {
-    font-size: 2rem;
-  }
-
   background-color: $accent-color;
   border-radius: 0.375rem;
   padding: 1rem 1rem;
   color: $main-color;
   box-shadow: 0 0 8px -2px $box-shadow-color;
 
-  .heading {
+  i {
+    font-size: 2rem;
+  }
+
+  &.interactive .content .subtitle {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: .25rem;
+    gap: 0.25rem;
 
-    span {
-      cursor: pointer;
-      font-size: .875rem;
-
-      &:hover {
-        text-decoration: underline;
-      }
+    .subtitle {
+      font-size: 0.875rem;
     }
   }
 }
