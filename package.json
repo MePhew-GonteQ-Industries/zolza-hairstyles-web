@@ -33,6 +33,7 @@
     "vue-simple-password-meter": "^1.1.0",
     "vue-splash": "^1.2.1",
     "vue3-apexcharts": "^1.4.1",
+    "vue3-autocounter": "^1.0.6",
     "vuex": "^4.0.2",
     "webpack": "^5.73.0"
   },
