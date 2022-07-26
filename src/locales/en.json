@@ -1,12 +1,25 @@
 {
   "nav": {
-    "primaryNav": ["Home", "Services", "Contact"],
-    "secondaryNav": ["Log in", "Sign up"]
+    "primaryNav": [
+      "Home",
+      "Services",
+      "Contact"
+    ],
+    "secondaryNav": [
+      "Log in",
+      "Sign up"
+    ]
   },
-  "footer": ["Terms of use", "Privacy policy"],
+  "footer": [
+    "Terms of use",
+    "Privacy policy"
+  ],
   "home": "HOME",
   "settings": {
-    "languageSelector": ["Polish", "English"]
+    "languageSelector": [
+      "Polish",
+      "English"
+    ]
   },
   "signUp": {
     "heading": "Welcome to Zołza Hairstyles",
@@ -49,5 +62,8 @@
   "pageNotFound": {
     "notFound": "Page not found",
     "button": "Go Home"
+  },
+  "userAccountSettings": {
+    "confirmDeleteAccount": "delete my account"
   }
 }

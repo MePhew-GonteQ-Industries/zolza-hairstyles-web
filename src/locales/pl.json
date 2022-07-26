@@ -89,5 +89,8 @@
   "pageNotFound": {
     "heading": "Nie znaleziono strony",
     "button": "Powrót"
+  },
+  "userAccountSettings": {
+    "confirmDeleteAccount": "usuń moje konto"
   }
 }
