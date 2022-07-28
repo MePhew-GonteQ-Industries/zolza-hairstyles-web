@@ -4,11 +4,11 @@
     <div
       class="select"
       tabindex="0"
-      :class="{
+      :class="[{
         expanded: expanded,
         'hover-enabled': selectHoverEnabled,
-        invalid: invalid && (validate || forceValidate),
-      }"
+        invalid: invalid && (validate || forceValidate)
+      },appearance]"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down.prevent="selectNextOption"
@@ -120,6 +120,10 @@ export default {
     forceValidate: {
       type: Boolean,
       default: false,
+    },
+    appearance: {
+      type: String,
+      default: 'outlined',
     },
   },
   setup(props, ctx) {
@@ -282,6 +286,14 @@ export default {
     &.invalid {
       border-color: $error-color;
       box-shadow: 0 0 10px 1px $error-color-low;
+    }
+
+    &.outlined {
+      background-color: transparent;
+
+      &:not(:focus, :hover, .invalid) {
+        border-color: $primary-text-color;
+      }
     }
 
     &.hover-enabled:hover:not(.expanded) {
