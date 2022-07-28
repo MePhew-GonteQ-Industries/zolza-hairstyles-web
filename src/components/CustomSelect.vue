@@ -4,11 +4,11 @@
     <div
       class="select"
       tabindex="0"
-      :class="{
+      :class="[{
         expanded: expanded,
         'hover-enabled': selectHoverEnabled,
-        invalid: invalid && (validate || forceValidate),
-      }"
+        invalid: invalid && (validate || forceValidate)
+      },appearance]"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down.prevent="selectNextOption"
@@ -24,13 +24,6 @@
         {{ header }}</span
       >
 
-      <span class="selected-value"> {{ title }}</span>
-
-      <i
-        class="ph-caret-down-light dropdown-arrow"
-        :class="{ flipped: !expanded }"
-      ></i>
-
       <i
         class="select-icon"
         :class="currentIconClass"
@@ -40,6 +33,14 @@
         @mouseleave="toggleSelectHover"
         tabindex="-1"
       ></i>
+
+      <span class="selected-value"> {{ title }}</span>
+
+      <i
+        class="ph-caret-down-light dropdown-arrow"
+        :class="{ flipped: !expanded }"
+      ></i>
+
     </div>
     <div
       v-show="(validate || forceValidate) && invalid"
@@ -119,6 +120,10 @@ export default {
     forceValidate: {
       type: Boolean,
       default: false,
+    },
+    appearance: {
+      type: String,
+      default: 'outlined',
     },
   },
   setup(props, ctx) {
@@ -238,10 +243,8 @@ export default {
 <style lang='scss' scoped>
 .select-wrapper {
   position: relative;
-  height: 55px;
+  height: 65px;
   width: 408px;
-  min-width: 200px;
-  max-width: 408px;
 
   .invalid-wrapper {
     position: absolute;
@@ -285,6 +288,14 @@ export default {
       box-shadow: 0 0 10px 1px $error-color-low;
     }
 
+    &.outlined {
+      background-color: transparent;
+
+      &:not(:focus, :hover, .invalid) {
+        border-color: $primary-text-color;
+      }
+    }
+
     &.hover-enabled:hover:not(.expanded) {
       border-color: $accent-color;
       box-shadow: none;
@@ -300,7 +311,6 @@ export default {
 
     .header {
       position: absolute;
-      left: 30px;
       transform-origin: 0 0;
       user-select: none;
       color: $primary-text-color;
@@ -321,23 +331,23 @@ export default {
 
     .select-icon {
       position: absolute;
-      right: 30px;
+      left: 30px;
       cursor: default;
     }
 
     .selected-value {
       padding-top: 20px;
       position: absolute;
-      left: 30px;
       backface-visibility: hidden;
       transform-origin: 0 0;
       color: $secondary-text-color;
-      font-size: 0.8em;
+      font-size: 1em;
       font-weight: 600;
     }
 
     .dropdown-arrow {
       position: absolute;
+      right: 30px;
       user-select: none;
 
       &.flipped {
