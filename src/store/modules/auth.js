@@ -129,7 +129,10 @@ export default {
         await dispatch('configureAxiosAuthorized');
         await dispatch('checkUserData');
       } catch (error) {
-        handleRequestError(error);
+        const errorStatus = handleRequestError(error);
+        if (errorStatus === 404) {
+          throw new Error(error);
+        }
       }
     },
 
