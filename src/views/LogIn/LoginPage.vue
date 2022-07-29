@@ -33,7 +33,7 @@
           <CustomInput
             class="current-password input"
             :label="t('logIn.currentPasswordField.label')"
-            autocomplete="new-password"
+            autocomplete="current-password"
             type="password"
             v-model:value="userData.password"
             :invalid="!userData.password"
