@@ -1,10 +1,5 @@
 <template>
-  <button
-    class="login"
-    ref="button"
-    :class="{ secondary: type === 'secondary' }"
-    v-ripple
-  >
+  <button ref="button" :class="{ secondary: type === 'secondary' }" v-ripple>
     <slot />
   </button>
 </template>
@@ -93,15 +88,14 @@ button {
   box-shadow: 0 0 8px -2px $box-shadow-color;
   text-transform: uppercase;
 
-  &:focus {
+  &:hover,
+  &:active {
+    border: none;
     outline: none;
   }
 
-  &:hover,
-  &:active,
   &:focus {
-    border: none;
-    outline: none;
+    border: 2px solid $accent-color;
   }
 
   &.secondary {
