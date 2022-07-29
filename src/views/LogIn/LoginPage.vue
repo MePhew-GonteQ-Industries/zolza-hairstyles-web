@@ -1,5 +1,5 @@
 <template>
-  <section class="app-page form-page">
+  <section class="app-page form-page login-page">
     <div class="form-wrapper">
       <h1>{{ t("logIn.heading") }}</h1>
       <h3>{{ t("logIn.subtitle") }}</h3>
@@ -62,8 +62,11 @@
         <span>Nie masz jeszcze konta?</span>
         <router-link to="/sign-up">Utwórz konto</router-link>
       </div>
-      <p>{{ message }}</p>
     </div>
+    <MessageBox type="error" v-if="message" class="error-message">
+      <template #title> Wystąpił błąd </template>
+      <template #subtitle>{{ message }}</template>
+    </MessageBox>
   </section>
 </template>
 
@@ -76,6 +79,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomInput from '@/components/CustomInput.vue';
 import { validateEmail, handleRequestError } from '@/utils';
 import CustomLoader from '@/components/CustomLoader.vue';
+import MessageBox from '@/components/MessageBox.vue';
 import CustomCheckbox from '../../components/CustomCheckbox.vue';
 
 export default {
@@ -85,6 +89,7 @@ export default {
     CustomInput,
     CustomLoader,
     CustomCheckbox,
+    MessageBox,
   },
   props: {
     emailConfirmed: {
