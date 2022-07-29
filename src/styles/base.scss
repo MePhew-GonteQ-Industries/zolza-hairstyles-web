@@ -136,6 +136,9 @@ ul {
 }
 
 .form-page {
+  justify-content: center;
+  gap: 1rem;
+
   .form-wrapper {
     text-align: center;
     background-color: $background-accent-low;
