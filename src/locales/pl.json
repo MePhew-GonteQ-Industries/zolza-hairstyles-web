@@ -14,12 +14,12 @@
     "nameField": {
       "label": "Imię",
       "messageEmpty": "Podaj swoje imię",
-      "messageInvalid": "Imię musi mieć nie mniej niż 3 i nie więcej niż 50 znaków."
+      "messageInvalid": "Imię musi mieć nie mniej niż 3 i nie więcej niż 50 znaków oraz nie może zawierać spacji."
     },
     "surnameField": {
       "label": "Nazwisko",
       "messageEmpty": "Podaj swoje nazwisko",
-      "messageInvalid": "Nazwisko musi mieć nie mniej niż 3 i nie więcej niż 50 znaków."
+      "messageInvalid": "Nazwisko musi mieć nie mniej niż 3 i nie więcej niż 50 znaków oraz nie może zawierać spacji."
     },
     "emailField": {
       "label": "Email",

@@ -107,6 +107,7 @@ export default {
   setup(props, { emit }) {
     const inputId = ref(null);
     const strongPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
+    const whitespace = /\s/g;
 
     onMounted(() => {
       console.log(props.type);
@@ -116,7 +117,10 @@ export default {
     const invalid = computed(() => {
       switch (props.type) {
         case 'name': {
-          if ((props.value.length < 3 || props.value.length > 50) && props.value.length !== 0) {
+          if ((props.value.length < 3 || props.value.length > 50)
+          && props.value.length !== 0) {
+            return true;
+          } if (props.value.trim().match(whitespace)) {
             return true;
           }
           return false;
