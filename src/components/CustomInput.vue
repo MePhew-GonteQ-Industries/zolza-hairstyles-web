@@ -127,7 +127,7 @@ export default {
       inputId.value = uuidv4();
     });
 
-    const invalid = computed(() => {
+    const invalidInternal = computed(() => {
       switch (props.type) {
         case 'name': {
           if (
@@ -200,8 +200,7 @@ export default {
     });
 
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      invalid,
+      invalidInternal,
       inputId,
       empty,
       validate,
