@@ -14,7 +14,7 @@
     "nameField": {
       "label": "Imię",
       "messageEmpty": "Podaj swoje imię",
-      "messageInvalid": "Imię musi mieć nie mniej niż 3 i nie więcej niż 50 znaków oraz nie może zawierać spacji."
+      "messageInvalid": "Imię musi mieć nie mniej niż 3 i nie więcej niż 50 znaków oraz nie może zawierać spacji i powinno składać się z samych liter."
     },
     "surnameField": {
       "label": "Nazwisko",

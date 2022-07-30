@@ -36,6 +36,16 @@
 
       <i class="ph-eye-light" v-if="!passwordHidden"></i>
     </div>
+    <div
+      v-else-if="type === 'password-login'"
+      class="button"
+      @click="showPassword"
+      @keyup.enter="showPassword"
+    >
+      <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+
+      <i class="ph-eye-light" v-if="!passwordHidden"></i>
+    </div>
     <i v-else :class="iconClass" class="input-icon"></i>
 
     <div
@@ -108,6 +118,7 @@ export default {
     const inputId = ref(null);
     const strongPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
     const whitespace = /\s/g;
+    const specialCharacter = /^[A-Za-z]+$/;
 
     onMounted(() => {
       console.log(props.type);
@@ -120,7 +131,7 @@ export default {
           if ((props.value.length < 3 || props.value.length > 50)
           && props.value.length !== 0) {
             return true;
-          } if (props.value.trim().match(whitespace)) {
+          } if (props.value.trim().match(whitespace) || !props.value.match(specialCharacter)) {
             return true;
           }
           return false;
@@ -129,6 +140,9 @@ export default {
           if (!props.value.match(strongPassword) && props.value.length !== 0) {
             return true;
           }
+          return false;
+        }
+        case 'password-login': {
           return false;
         }
         default: {
@@ -164,6 +178,9 @@ export default {
         case 'password': {
           return passwordHidden.value ? 'password' : 'text';
         }
+        case 'password-login': {
+          return passwordHidden.value ? 'password-login' : 'text';
+        }
         default: {
           return props.type;
         }
@@ -196,6 +213,7 @@ export default {
 
   .invalid-wrapper {
     position: absolute;
+    height: 25px;
     top: 100%;
     left: 0;
     margin: 0.5rem 1rem;
@@ -212,6 +230,7 @@ export default {
 
     .message-invalid {
       color: $error-color;
+      font-size: 1rem;
     }
   }
 

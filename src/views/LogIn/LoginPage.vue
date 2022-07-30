@@ -34,7 +34,7 @@
             class="current-password input"
             :label="t('logIn.currentPasswordField.label')"
             autocomplete="new-password"
-            type="password"
+            type="password-login"
             v-model:value="userData.password"
             :invalid="!userData.password"
             :forceValidate="forceValidate"

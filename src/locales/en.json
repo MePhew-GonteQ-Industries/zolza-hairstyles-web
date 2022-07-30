@@ -18,7 +18,7 @@
     "surnameField": {
       "label": "Surname",
       "messageEmpty": "Please enter your surname.",
-      "messageInvalid": "Surname should be at least 3 and max 50 characters long also excluding space."
+      "messageInvalid": "Surname should be at least 3 and max 50 characters long also excluding space and it can onlu include letters."
     },
     "emailField": {
       "label": "Email",
