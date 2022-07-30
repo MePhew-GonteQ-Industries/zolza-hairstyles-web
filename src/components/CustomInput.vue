@@ -8,7 +8,10 @@
       :placeholder="label"
       :value="value"
       @input="(event) => $emit('update:value', event.target.value)"
-      :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]"
+      :class="[
+        { invalid: (invalid || empty) && (validate || forceValidate) },
+        appearance,
+      ]"
       @focus="$emit('focus')"
       @blur="handleBlur"
     />
@@ -128,16 +131,26 @@ export default {
     const invalid = computed(() => {
       switch (props.type) {
         case 'name': {
-          if ((props.value.length < 3 || props.value.length > 50)
-          && props.value.length !== 0) {
+          if (
+            (props.value.length < 3 || props.value.length > 50)
+            && props.value.length !== 0
+          ) {
             return true;
-          } if (props.value.trim().match(whitespace) || !props.value.match(specialCharacter)) {
+          }
+          if (
+            (props.value && props.value.trim().match(whitespace))
+            || !props.value.match(specialCharacter)
+          ) {
             return true;
           }
           return false;
         }
         case 'password': {
-          if (!props.value.match(strongPassword) && props.value.length !== 0) {
+          if (
+            props.value
+            && !props.value.match(strongPassword)
+            && props.value.length !== 0
+          ) {
             return true;
           }
           return false;
@@ -153,7 +166,7 @@ export default {
     });
 
     const empty = computed(() => {
-      if (props.value.length === 0) {
+      if (props.value && props.value.length === 0) {
         return true;
       }
       return false;
