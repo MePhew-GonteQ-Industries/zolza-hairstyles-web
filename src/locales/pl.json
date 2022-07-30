@@ -14,12 +14,12 @@
     "nameField": {
       "label": "Imię",
       "messageEmpty": "Podaj swoje imię",
-      "messageInvalid": ""
+      "messageInvalid": "Imię musi mieć nie mniej niż 3 i nie więcej niż 50 znaków."
     },
     "surnameField": {
       "label": "Nazwisko",
       "messageEmpty": "Podaj swoje nazwisko",
-      "messageInvalid": ""
+      "messageInvalid": "Nazwisko musi mieć nie mniej niż 3 i nie więcej niż 50 znaków."
     },
     "emailField": {
       "label": "Email",
@@ -34,12 +34,19 @@
     "passwordField": {
       "label": "Hasło",
       "messageEmpty": "Podaj swoje hasło",
-      "messageInvalid": "Podane hasło jest za słabe"
+      "messageInvalid": "Hasło musi zawierać co najmniej: jedną dużą literę, jedną małą literę, jedną cyfre, jeden znak specjalny i mieć conajmniej 8 znaków długości."
     },
     "repeatPasswordField": {
       "label": "Powtórz hasło",
       "messageEmpty": "Powtórz podane hasło",
       "messageInvalid": "Hasła nie są takie same"
+    },
+    "checkbox": {
+      "label": "Akceptuję ",
+      "termsOfServices": "regulamin serwisu",
+      "separator": " i ",
+      "privacyPolicy": "politykę prywatności.",
+      "messageUnchecked": "Należy zaakceptować warunki korzystania z serwisu i politykę prywatności."
     },
     "logInBtn": "Utwórz konto"
   },

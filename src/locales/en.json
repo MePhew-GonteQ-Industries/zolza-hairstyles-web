@@ -1,57 +1,51 @@
 {
   "nav": {
-    "primaryNav": [
-      "Home",
-      "Services",
-      "Contact"
-    ],
-    "secondaryNav": [
-      "Log in",
-      "Sign up"
-    ]
+    "primaryNav": ["Home", "Services", "Contact"],
+    "secondaryNav": ["Log in", "Sign up"]
   },
-  "footer": [
-    "Terms of use",
-    "Privacy policy"
-  ],
+  "footer": ["Terms of use", "Privacy policy"],
   "home": "HOME",
   "settings": {
-    "languageSelector": [
-      "Polish",
-      "English"
-    ]
+    "languageSelector": ["Polish", "English"]
   },
   "signUp": {
     "heading": "Welcome to Zołza Hairstyles",
     "nameField": {
       "label": "Name",
-      "messageEmpty": "",
-      "messageInvalid": ""
+      "messageEmpty": "Please enter your name.",
+      "messageInvalid": "Name should be at least 3 and max 50 characters long."
     },
     "surnameField": {
       "label": "Surname",
-      "messageEmpty": "",
-      "messageInvalid": ""
+      "messageEmpty": "Please enter your surname.",
+      "messageInvalid": "Surname should be at least 3 and max 50 characters long."
     },
     "emailField": {
       "label": "Email",
-      "messageEmpty": "",
-      "messageInvalid": ""
+      "messageEmpty": "Please enter your Email.",
+      "messageInvalid": "Please enter valid Email address."
     },
     "genderField": {
       "label": "Gender",
-      "messageEmpty": "",
+      "messageEmpty": "Please select your gender.",
       "messageInvalid": ""
     },
     "passwordField": {
       "label": "Password",
-      "messageEmpty": "",
-      "messageInvalid": ""
+      "messageEmpty": "Please enter your password.",
+      "messageInvalid": "Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars."
     },
     "repeatPasswordField": {
       "label": "Repeat Password",
-      "messageEmpty": "",
-      "messageInvalid": ""
+      "messageEmpty": "Plase repeat your password.",
+      "messageInvalid": "Passwords must be the same."
+    },
+    "checkbox": {
+      "label": "I accept ",
+      "termsOfServices": "terms of services",
+      "separator": " and ",
+      "privacyPolicy": "privacy policy.",
+      "messageUnchecked": "You have to accept terms of services and policy privacy."
     },
     "logInBtn": "Sign up"
   },

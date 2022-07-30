@@ -19,6 +19,7 @@
               :label="t('signUp.nameField.label')"
               iconClass="ph-identification-card-light"
               autocomplete="given-name"
+              type="name"
               :required="true"
               :messageEmpty="t('signUp.nameField.messageEmpty')"
               :messageInvalid="t('signUp.nameField.messageInvalid')"
@@ -31,6 +32,7 @@
               :label="t('signUp.surnameField.label')"
               iconClass="ph-identification-card-light"
               autocomplete="family-name"
+              type="name"
               v-model:value="userData.surname"
               :required="true"
               :messageEmpty="t('signUp.surnameField.messageEmpty')"
@@ -44,7 +46,7 @@
             :label="t('signUp.emailField.label')"
             iconClass="ph-envelope-simple-light"
             autocomplete="email"
-            inputType="email"
+            type="email"
             v-model:value="userData.email"
             :required="true"
             :messageEmpty="t('signUp.emailField.messageEmpty')"
@@ -93,11 +95,15 @@
 
         <div class="under-inputs-section">
           <CustomCheckbox v-model:checked="termsAccepted"
-            >Akceptuję
-            <router-link to="/terms-of-use"> regulamin serwisu </router-link>
-            i
+            :forceValidate="forceValidate"
+            :messageUnchecked="t('signUp.checkbox.messageUnchecked')"
+            >
+            {{ t('signUp.checkbox.label') }}
+            <router-link to="/terms-of-use"> {{ t('signUp.checkbox.termsOfServices') }}
+             </router-link>
+            {{ t('signUp.checkbox.separator') }}
             <router-link to="/privacy-policy">
-              politykę prywatności
+              {{ t('signUp.checkbox.privacyPolicy') }}
             </router-link>
           </CustomCheckbox>
         </div>
@@ -192,6 +198,10 @@ export default {
       // }
 
       if (userData.value.password !== passwordRepeat.value) {
+        return false;
+      }
+
+      if (!termsAccepted.value) {
         return false;
       }
 
