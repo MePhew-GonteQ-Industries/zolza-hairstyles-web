@@ -122,7 +122,7 @@ export default {
           return false;
         }
         case 'password': {
-          if (!strongPassword && props.value.length !== 0) {
+          if (!props.value.match(strongPassword) && props.value.length !== 0) {
             return true;
           }
           return false;
