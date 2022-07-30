@@ -8,7 +8,7 @@
       :placeholder="label"
       :value="value"
       @input="(event) => $emit('update:value', event.target.value)"
-      :class="[{ invalid: invalid && (validate || forceValidate) }, appearance]"
+      :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]"
       @focus="$emit('focus')"
       @blur="handleBlur"
     />
@@ -36,10 +36,20 @@
 
       <i class="ph-eye-light" v-if="!passwordHidden"></i>
     </div>
+    <div
+      v-else-if="type === 'password-login'"
+      class="button"
+      @click="showPassword"
+      @keyup.enter="showPassword"
+    >
+      <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+
+      <i class="ph-eye-light" v-if="!passwordHidden"></i>
+    </div>
     <i v-else :class="iconClass" class="input-icon"></i>
 
     <div
-      v-show="(validate || forceValidate) && invalid"
+      v-show="(validate || forceValidate) && (invalid || empty)"
       class="invalid-wrapper"
     >
       <i class="ph-warning-circle-light invalid-icon"></i>
@@ -106,12 +116,48 @@ export default {
   emits: ['update:value', 'blur', 'focus', 'searchBtnClick'],
   setup(props, { emit }) {
     const inputId = ref(null);
+    const strongPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
+    const whitespace = /\s/g;
+    const specialCharacter = /^[A-Za-z]+$/;
 
     onMounted(() => {
+      console.log(props.type);
       inputId.value = uuidv4();
     });
 
-    const empty = computed(() => props.value && props.value.length === 0);
+    const invalid = computed(() => {
+      switch (props.type) {
+        case 'name': {
+          if ((props.value.length < 3 || props.value.length > 50)
+          && props.value.length !== 0) {
+            return true;
+          } if (props.value.trim().match(whitespace) || !props.value.match(specialCharacter)) {
+            return true;
+          }
+          return false;
+        }
+        case 'password': {
+          if (!props.value.match(strongPassword) && props.value.length !== 0) {
+            return true;
+          }
+          return false;
+        }
+        case 'password-login': {
+          return false;
+        }
+        default: {
+          return true;
+        }
+      }
+      // return false;
+    });
+
+    const empty = computed(() => {
+      if (props.value.length === 0) {
+        return true;
+      }
+      return false;
+    });
 
     const validate = ref(false);
 
@@ -132,6 +178,9 @@ export default {
         case 'password': {
           return passwordHidden.value ? 'password' : 'text';
         }
+        case 'password-login': {
+          return passwordHidden.value ? 'password' : 'text';
+        }
         default: {
           return props.type;
         }
@@ -139,6 +188,8 @@ export default {
     });
 
     return {
+      // eslint-disable-next-line vue/no-dupe-keys
+      invalid,
       inputId,
       empty,
       validate,
@@ -162,6 +213,7 @@ export default {
 
   .invalid-wrapper {
     position: absolute;
+    height: 25px;
     top: 100%;
     left: 0;
     margin: 0.5rem 1rem;
@@ -178,6 +230,7 @@ export default {
 
     .message-invalid {
       color: $error-color;
+      font-size: 1rem;
     }
   }
 

@@ -8,10 +8,21 @@
       @change="(event) => $emit('update:checked', event.target.checked)"
       name="custom-checkbox"
       :id="checkboxId"
+      :class="forceValidate"
     />
     <label :for="checkboxId">
       <slot />
     </label>
+    <div
+      v-show="forceValidate"
+      class="invalid-wrapper"
+    >
+      <i class="ph-warning-circle-light invalid-icon"></i>
+
+      <p class="message-invalid message-value-empty">
+        {{ messageUnchecked }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -26,6 +37,13 @@ export default {
     checked: {
       type: Boolean,
       required: true,
+    },
+    forceValidate: {
+      type: Boolean,
+      default: false,
+    },
+    messageUnchecked: {
+      type: String,
     },
   },
   setup() {
@@ -49,6 +67,27 @@ export default {
   gap: 0.5rem;
   position: relative;
   height: 20px;
+
+  .invalid-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transform: translate3d(0, 0, 0);
+
+    .invalid-icon {
+      position: static;
+      font-size: 2rem;
+      color: $error-color;
+    }
+
+    .message-invalid {
+      color: $error-color;
+    }
+  }
 
   .checkbox-icon {
     position: absolute;

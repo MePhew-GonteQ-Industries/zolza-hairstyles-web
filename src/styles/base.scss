@@ -141,7 +141,7 @@ ul {
 
   .form-wrapper {
     text-align: center;
-    background-color: $background-accent-low;
+    background-color: $background-accent-color-low;
     border-radius: 0.375rem;
     display: flex;
     flex-direction: column;
@@ -182,7 +182,7 @@ ul {
 
     h1 {
       font-size: 1.5rem;
-      color: white;
+      color: $primary-text-color;
       margin-bottom: 0.5rem;
       font-weight: 600;
     }

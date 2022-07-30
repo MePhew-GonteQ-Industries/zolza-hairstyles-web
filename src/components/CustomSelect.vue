@@ -38,7 +38,7 @@
 
       <i
         class="ph-caret-down-light dropdown-arrow"
-        :class="{ flipped: !expanded }"
+        :class="{ flipped: expanded }"
       ></i>
 
     </div>
@@ -331,7 +331,7 @@ export default {
 
     .select-icon {
       position: absolute;
-      left: 30px;
+      left: 24px;
       cursor: default;
     }
 
@@ -349,6 +349,7 @@ export default {
       position: absolute;
       right: 30px;
       user-select: none;
+      // transform: rotateZ(180deg);
 
       &.flipped {
         transform: rotateZ(180deg);
