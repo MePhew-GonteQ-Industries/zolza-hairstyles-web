@@ -124,7 +124,6 @@ export default {
     const specialCharacter = /^[A-Za-z]+$/;
 
     onMounted(() => {
-      console.log(props.type);
       inputId.value = uuidv4();
     });
 
