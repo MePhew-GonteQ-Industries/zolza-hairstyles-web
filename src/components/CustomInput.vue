@@ -179,7 +179,7 @@ export default {
           return passwordHidden.value ? 'password' : 'text';
         }
         case 'password-login': {
-          return passwordHidden.value ? 'password-login' : 'text';
+          return passwordHidden.value ? 'password' : 'text';
         }
         default: {
           return props.type;
