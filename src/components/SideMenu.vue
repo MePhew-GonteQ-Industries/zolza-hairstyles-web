@@ -45,6 +45,7 @@ export default {
   height: calc(100vh - 6rem);
   width: 100%;
   position: relative;
+
   & a.router-link-exact-active ~ .active-tab-indicator {
     opacity: 1;
   }
@@ -111,7 +112,7 @@ export default {
   }
 
   .active-tab-indicator {
-    --offset: 0;
+    --offset: -400px;
     $offset: var(--offset);
 
     height: 15px;
@@ -123,7 +124,6 @@ export default {
     background-color: $accent-color;
     opacity: 0;
     transition-property: transform, opacity;
-    transform: translateY(calc($offset * -3));
     z-index: 600;
     transform: translateY($offset);
   }
