@@ -212,7 +212,7 @@ export default {
       axios
         .post('users/register', userData.value, {
           headers: {
-            'content-language': store.state.settings.language.substr(0, 2),
+            'content-language': store.state.settings.language,
             'preferred-theme': 'dark',
           },
         })
