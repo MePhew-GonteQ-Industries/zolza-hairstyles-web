@@ -158,6 +158,10 @@ const routes = [{
       component: () => import('@/views/Settings/LanguageSettings.vue'),
       name: 'languageSettings',
     },
+    {
+      path: 'sessions/:id',
+      component: () => import('@/views/Settings/SessionView.vue'),
+    },
   ],
 },
 {
@@ -180,7 +184,7 @@ const routes = [{
       name: 'appointmentsManagement',
     },
     {
-      path: 'appointment/:id',
+      path: 'appointments/:id',
       component: () => import('@/views/Dashboard/AppointmentView.vue'),
     },
     {
@@ -189,7 +193,7 @@ const routes = [{
       name: 'servicesManagement',
     },
     {
-      path: 'service/:id',
+      path: 'services/:id',
       component: () => import('@/views/Dashboard/ServiceView.vue'),
     },
     {
@@ -198,7 +202,7 @@ const routes = [{
       name: 'usersManagement',
     },
     {
-      path: 'user/:id',
+      path: 'users/:id',
       component: () => import('@/views/Dashboard/UserView.vue'),
     },
     {
