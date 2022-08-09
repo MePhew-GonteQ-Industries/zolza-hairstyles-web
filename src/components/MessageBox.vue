@@ -14,8 +14,8 @@
         v-else
         class="subtitle"
         :tabindex="0"
-        @click="onInteraction"
-        @keydown.enter="onInteraction"
+        @click="interactionHandler"
+        @keydown.enter="interactionHandler"
         ><slot name="subtitle"></slot>
       </span>
     </div>
@@ -36,7 +36,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    onInteraction: {
+    interactionHandler: {
       type: Function,
       default: () => {
         console.error(
