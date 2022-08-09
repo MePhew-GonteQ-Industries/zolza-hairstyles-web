@@ -1,14 +1,112 @@
 <template>
-<div class="settings-page">
-  Theme Settings
-</div>
+  <div class="settings-page">
+    <div class="elevated-card">
+      <h1>Wybierz motyw</h1>
+      <div class="theme-selection">
+        <ThemeCard themeName="dark" v-model:selectedTheme="selectedTheme">
+          Ciemny
+        </ThemeCard>
+        <ThemeCard themeName="light" v-model:selectedTheme="selectedTheme">
+          Jasny
+        </ThemeCard>
+      </div>
+      <div class="buttons-row" v-if="selectedTheme !== initialTheme">
+        <CustomButton type="success" @click="changeTheme"
+          >Zapisz zmiany</CustomButton
+        >
+        <CustomButton
+          type="secondary"
+          @click="selectedTheme = $store.state.settings.theme"
+          >Anuluj</CustomButton
+        >
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { ref, watch } from 'vue';
+import { useStore } from 'vuex';
+import ThemeCard from '@/components/Settings/ThemeCard.vue';
+import CustomButton from '@/components/CustomButton.vue';
+import axios from 'axios';
+import { handleRequestError } from '@/utils';
+import { onBeforeRouteLeave } from 'vue-router';
+
 export default {
   name: 'ThemeSettings',
+  components: {
+    ThemeCard,
+    CustomButton,
+  },
+  setup() {
+    const store = useStore();
+
+    const selectedTheme = ref(store.state.settings.theme);
+
+    watch(selectedTheme, (newValue) => {
+      store.commit('setTheme', newValue);
+    });
+
+    const initialTheme = ref(store.state.settings.theme);
+
+    const changeTheme = () => {
+      axios
+        .put('settings', {
+          settings: [
+            {
+              name: 'language',
+              new_value: store.state.settings.language,
+            },
+            {
+              name: 'preferred_theme',
+              new_value: selectedTheme.value,
+            },
+          ],
+        })
+        .then((response) => {
+          const { settings } = response.data;
+          const language = settings.find(
+            (setting) => setting.name === 'language',
+          ).current_value;
+          store.commit('setLanguage', language);
+          initialTheme.value = store.state.settings.theme;
+        })
+        .catch((error) => {
+          handleRequestError(error);
+        });
+    };
+
+    onBeforeRouteLeave(() => {
+      store.commit('setTheme', initialTheme.value);
+    });
+
+    return {
+      selectedTheme,
+      changeTheme,
+      initialTheme,
+    };
+  },
 };
 </script>
 
 <style lang='scss' scoped>
+.theme-selection {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+
+  @media screen and (max-width: 1600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.buttons-row {
+  display: flex;
+  gap: 1rem;
+
+  button {
+    width: 200px;
+  }
+}
 </style>
