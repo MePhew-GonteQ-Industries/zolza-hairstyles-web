@@ -1,43 +1,117 @@
 <template>
   <div class="settings-page">
-    <div class="settings-card">
+    <div class="elevated-card">
       <div class="avatar-row">
         <i class="ph-user-square-light avatar-icon"></i>
         <div class="user-data">
-          <CustomChip type="info" :customIconClass="userIconClass"
-            >{{ userRole }}</CustomChip
-          >
+          <CustomChip type="info" :customIconClass="userIconClass">{{
+            userRole
+          }}</CustomChip>
           <p class="email">{{ $store.state.user.email }}</p>
-          <p class="username">Kwakwa Bisaga!</p>
+          <p>Użytkownik od {{ accountCreationDateStr }}</p>
+          <p>({{ timeSinceCreationDate }})</p>
         </div>
-        Użytkownik od {{ accountCreatedTimeAgo }}
       </div>
       <div class="inputs-section">
         <div class="text-inputs">
-          <CustomInput label="Imię" v-model:value="userData.name" />
-          <CustomInput label="Nazwisko" v-model:value="userData.surname" />
+          <CustomInput
+            label="Imię"
+            v-model:value="userData.name"
+            appearance="primary"
+            autocomplete="name"
+          />
+          <CustomInput
+            label="Nazwisko"
+            v-model:value="userData.surname"
+            appearance="primary"
+            autocomplete="surname"
+          />
         </div>
         <CustomSelect
           header="Płeć"
           iconClass="ph-gender-intersex-light"
           :options="genderOptions"
           v-model:selectedValue="userData.gender"
+          appearance="primary"
         />
       </div>
       <CustomButton
         type="error"
-        class="delete-account"
+        class="delete-account-btn"
         @click="deleteAccountModalOpen = true"
         >Usuń konto</CustomButton
       >
       <CustomModal v-model:open="deleteAccountModalOpen">
-        <template #title>
-          Czy jesteś pewny że chcesz usunąć swoje konto?
-        </template>
-        <CustomButton type="success">Kwakwa</CustomButton>
-        <CustomButton type="error">Kwakwa</CustomButton>
+        <template #title> Czy na pewno chcesz usunąć swoje konto? </template>
+        <div class="delete-account-wrappper">
+          <MessageBox type="error">
+            <template #title>UWAGA</template>
+            <template #subtitle>
+              Usunięcie konta jest nieodwracalne
+              <p>Twoje nadchodzące wizyty zostaną odowołane</p>
+            </template>
+          </MessageBox>
+          <MessageBox
+            type="error"
+            v-if="$store.getters.isAdmin || $store.getters.isOwner"
+          >
+            <template #title>UWAGA</template>
+            <template #subtitle>
+              Usuwasz konto o podniesionym poziomie uprawnień
+            </template>
+          </MessageBox>
+          <form @submit.prevent="" class="delete-account">
+            <input
+              type="text"
+              autocomplete="username"
+              class="hidden-input"
+              id="hidden-username-input-delete-account"
+            />
+            <label for="hidden-username-input-delete-account"></label>
+            <div class="input-with-title">
+              <p>Podaj swoje hasło:</p>
+              <CustomInput
+                label="Hasło"
+                autocomplete="current-password"
+                type="password"
+                :required="true"
+                v-model:value="deleteAccountPassword"
+              />
+            </div>
+            <div class="input-with-title">
+              <p>
+                Aby potwierdzić wpisz
+                <span class="confirm-delete">{{
+                  t("userAccountSettings.confirmDeleteAccount")
+                }}</span>
+                :
+              </p>
+              <CustomInput
+                :label="t('userAccountSettings.confirmDeleteAccount')"
+                iconClass="ph-trash-light"
+                autocomplete=""
+                v-model:value="confirmAccountDeletion"
+              />
+            </div>
+            <div class="buttons-row">
+              <CustomButton type="error" @click="deleteAccount"
+                >Usuń konto</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="deleteAccountModalOpen = false"
+                >Anuluj</CustomButton
+              >
+            </div>
+          </form>
+        </div>
       </CustomModal>
-      <MessageBox type="warning" v-if="!$store.state.user.verified">
+      <MessageBox
+        interactive
+        :interactionHandler="requestEmailVerification"
+        type="warning"
+        v-if="!$store.state.user.verified"
+      >
         <template #title>
           Twój adres email {{ $store.state.user.email }}
           nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.
@@ -45,7 +119,50 @@
         <template #subtitle> Wyślij link ponownie </template>
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
-        <CustomButton class="save">Zapisz zmiany</CustomButton>
+        <CustomButton class="save" type="success" @click="changeUserData"
+          >Zapisz zmiany</CustomButton
+        >
+        <CustomModal v-model:open="passwordPromptOpen">
+          <template #title> Podaj swoje hasło </template>
+          <div class="logout-everywhere-wrappper">
+            <MessageBox type="info">
+              <template #title>Próbujesz zmodyfikować kluczowe dane</template>
+              <template #subtitle
+                >Podaj hasło aby potwierdzić swoją tożsamość</template
+              >
+            </MessageBox>
+            <form @submit.prevent="changeUserDataSudoMode">
+              <input
+                class="hidden-input"
+                type="text"
+                autocomplete="username"
+                id="password-prompt-hidden-username-input"
+              />
+              <label for="password-prompt-hidden-username-input"></label>
+              <div class="enter-password-wrapper">
+                <CustomInput
+                  label="Hasło"
+                  autocomplete="new-password"
+                  type="password"
+                  v-model:value="password"
+                />
+                <router-link to="/password-reset" tabindex="-1"
+                  >Nie pamiętasz hasła?</router-link
+                >
+              </div>
+              <div class="buttons-row">
+                <CustomButton type="warning" @click="changeUserDataSudoMode"
+                  >Dalej</CustomButton
+                >
+                <CustomButton
+                  type="secondary"
+                  @click="passwordPromptOpen = false"
+                  >Anuluj</CustomButton
+                >
+              </div>
+            </form>
+          </div>
+        </CustomModal>
         <CustomButton type="secondary" class="cancel" @click="revertChanges"
           >Anuluj</CustomButton
         >
@@ -63,7 +180,11 @@ import CustomButton from '@/components/CustomButton.vue';
 import CustomModal from '@/components/CustomModal.vue';
 import { computed, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
-import { useTimeAgo } from '@vueuse/core';
+import { useI18n } from 'vue-i18n';
+import TimeAgo from '@/timeAgo';
+import axios from 'axios';
+import { handleRequestError } from '@/utils';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'UserAccountSettings',
@@ -76,17 +197,16 @@ export default {
     CustomModal,
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
+    const router = useRouter();
     const store = useStore();
+    const locale = store.state.settings.language;
 
     const userData = reactive({
       name: store.state.user.name,
       surname: store.state.user.surname,
       gender: store.state.user.gender,
     });
-
-    const accountCreatedTimeAgo = useTimeAgo(
-      store.state.user.created_at,
-    );
 
     let userRole;
     let userIconClass;
@@ -137,87 +257,278 @@ export default {
 
     const deleteAccountModalOpen = ref(false);
 
+    const accountCreationDate = new Date(`${store.state.user.createdAt}Z`);
+
+    const accountCreationDateStr = accountCreationDate.toLocaleTimeString(
+      locale,
+      {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      },
+    );
+
+    const timeAgo = new TimeAgo(locale);
+
+    const timeSinceCreationDate = timeAgo.format(accountCreationDate);
+
+    const validateUserData = () => {
+      if (
+        !userData.name
+        || userData.name.length < 3
+        || userData.name.length > 50
+      ) {
+        return false;
+      }
+      if (
+        !userData.surname
+        || userData.surname.length < 3
+        || userData.surname.length > 50
+      ) {
+        return false;
+      }
+
+      return true;
+    };
+
+    const requestEmailVerification = () => {
+      axios
+        .post('/users/request-email-verification', {
+          email: store.state.user.email,
+        })
+        .then((response) => {
+          if (response.status === 202) {
+            console.log(response.data);
+          }
+        })
+        .catch((error) => {
+          handleRequestError(error);
+        });
+    };
+
+    const passwordPromptOpen = ref(false);
+
+    const password = ref('');
+
+    const requestUserDataChange = () => {
+      axios
+        .put('/users/me/update-details', {
+          name: userData.name,
+          surname: userData.surname,
+          gender: userData.gender,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            store.commit('setUserData', response.data);
+          }
+        })
+        .catch((error) => {
+          const { status } = handleRequestError(error);
+          if (status === 403) {
+            passwordPromptOpen.value = true;
+          }
+        });
+    };
+
+    const changeUserData = () => {
+      if (validateUserData()) {
+        if (store.getters.sudoModeActive) {
+          requestUserDataChange();
+        } else {
+          passwordPromptOpen.value = true;
+        }
+      }
+    };
+
+    const changeUserDataSudoMode = () => {
+      if (password.value) {
+        store.dispatch('enterSudoMode', password.value).then(() => {
+          passwordPromptOpen.value = false;
+          changeUserData();
+        });
+      }
+    };
+
+    const deleteAccountPassword = ref('');
+    const confirmAccountDeletion = ref('');
+
+    const validateDeleteData = () => {
+      if (!deleteAccountPassword.value) return false;
+      if (
+        confirmAccountDeletion.value
+        !== t('userAccountSettings.confirmDeleteAccount')
+      ) {
+        return false;
+      }
+
+      return true;
+    };
+
+    const requestAccountDeletion = () => {
+      axios.put('users/me/delete', new URLSearchParams({
+        password: deleteAccountPassword.value,
+      })).then(() => {
+        store.dispatch('logout').then(() => {
+          router.push({ name: 'home' });
+        });
+      }).catch((error) => {
+        handleRequestError(error);
+      });
+    };
+
+    const deleteAccount = () => {
+      if (validateDeleteData()) {
+        requestAccountDeletion();
+      }
+    };
+
     return {
       userData,
-      accountCreatedTimeAgo,
       userRole,
       userIconClass,
       userDatamodified,
       revertChanges,
       genderOptions,
       deleteAccountModalOpen,
+      accountCreationDateStr,
+      timeSinceCreationDate,
+      changeUserData,
+      requestEmailVerification,
+      passwordPromptOpen,
+      password,
+      changeUserDataSudoMode,
+      deleteAccount,
+      deleteAccountPassword,
+      confirmAccountDeletion,
+      t,
     };
   },
 };
 </script>
 
-<style lang='scss'>
-.settings-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+<style lang='scss' scoped>
+.delete-account-wrappper,
+.logout-everywhere-wrappper {
+  .buttons-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+
+    button {
+      width: 100%;
+    }
+  }
 }
 
-.settings-card {
-  display: grid;
-  grid-template-rows: auto;
-  background-color: $background-accent-low;
-  box-shadow: 0 0 8px -2px $box-shadow-color;
-  border-radius: 0.375rem;
-  padding: 2.188rem 2.125rem;
+.logout-everywhere-wrappper {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 
-  .avatar-row {
+  .enter-password-wrapper {
     display: flex;
-    align-items: center;
-    font-size: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-block: 1rem;
 
-    .user-data {
-      .username {
-        font-size: 1.5rem;
+    a {
+      padding: 0;
+      font-size: inherit;
+      color: $accent-color;
+      font-size: 0.875rem;
+      align-self: flex-end;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
-
-    .avatar-icon {
-      margin-left: -1.25rem;
-      font-size: 10rem;
-    }
   }
 
-  .inputs-section {
-    display: grid;
-    align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
-
-    .text-inputs {
-      display: flex;
-      gap: inherit;
-    }
-
-    .input-wrapper,
-    .select-wrapper {
-      height: 55px;
-      width: 200px;
-    }
   }
+
+  .btns-wrapper {
+    display: flex;
+  }
+}
+
+.delete-account-wrappper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
   .delete-account {
-    margin-left: auto;
-    width: 200px;
-  }
-
-  .save-changes {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
 
-    .save {
-      width: 170px;
+    .input-with-title {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
     }
 
-    .cancel {
-      width: 100px;
+    .confirm-delete {
+      font-style: italic;
+      font-weight: 200;
     }
+  }
+}
+
+.avatar-row {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+
+  .user-data {
+    .email {
+      font-size: 1.2rem;
+    }
+  }
+
+  .avatar-icon {
+    margin-left: -1.25rem;
+    font-size: 10rem;
+  }
+}
+
+.inputs-section {
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+
+  .text-inputs {
+    display: flex;
+    gap: inherit;
+  }
+
+  .input-wrapper,
+  .select-wrapper {
+    height: 55px;
+    width: 200px;
+  }
+}
+
+.delete-account-btn {
+  margin-left: auto;
+  width: 200px;
+}
+
+.save-changes {
+  display: flex;
+  gap: 1rem;
+
+  .save {
+    width: 170px;
+  }
+
+  .cancel {
+    width: 100px;
   }
 }
 </style>
