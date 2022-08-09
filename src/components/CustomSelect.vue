@@ -4,11 +4,14 @@
     <div
       class="select"
       tabindex="0"
-      :class="[{
-        expanded: expanded,
-        'hover-enabled': selectHoverEnabled,
-        invalid: invalid && (validate || forceValidate)
-      },appearance]"
+      :class="[
+        {
+          expanded: expanded,
+          'hover-enabled': selectHoverEnabled,
+          invalid: invalid && (validate || forceValidate),
+        },
+        appearance,
+      ]"
       @mousedown="toggleDropdown"
       @focus.self="expandDropdown"
       @keydown.down.prevent="selectNextOption"
@@ -32,7 +35,11 @@
         @mouseenter="toggleSelectHover"
         @mouseleave="toggleSelectHover"
         tabindex="-1"
+        v-if="currentIconClass"
       ></i>
+      <div class="select-text-icon" v-else-if="currentIconText">
+        {{ currentIconText }}
+      </div>
 
       <span class="selected-value"> {{ title }}</span>
 
@@ -40,7 +47,6 @@
         class="ph-caret-down-light dropdown-arrow"
         :class="{ flipped: expanded }"
       ></i>
-
     </div>
     <div
       v-show="(validate || forceValidate) && invalid"
@@ -71,7 +77,10 @@
             {{ option.title }}</span
           >
 
-          <i :class="option.iconClass"></i>
+          <i :class="option.iconClass" v-if="option.iconClass"></i>
+          <div class="text-icon" v-else-if="option.iconText">
+            {{ option.iconText }}
+          </div>
         </li>
       </ol>
     </div>
@@ -95,7 +104,6 @@ export default {
     },
     iconClass: {
       type: String,
-      required: true,
     },
     options: {
       type: Array,
@@ -107,7 +115,7 @@ export default {
     },
     messageInvalid: {
       type: String,
-      required: true,
+      required: false,
     },
     messageEmpty: {
       type: String,
@@ -115,7 +123,7 @@ export default {
     },
     required: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     forceValidate: {
       type: Boolean,
@@ -132,6 +140,7 @@ export default {
     const expanded = ref(false);
     const title = ref('');
     const currentIconClass = ref(props.iconClass);
+    const currentIconText = ref('');
 
     const select = ref(null);
 
@@ -140,8 +149,12 @@ export default {
     function changeCurrentItem() {
       selectedValue.value = props.options[selectedItem.value].value;
       ctx.emit('update:selectedValue', selectedValue.value);
-      currentIconClass.value = props.options[selectedItem.value].iconClass;
       title.value = props.options[selectedItem.value].title;
+      if (props.options[selectedItem.value].iconClass) {
+        currentIconClass.value = props.options[selectedItem.value].iconClass;
+      } else if (props.options[selectedItem.value].iconText) {
+        currentIconText.value = props.options[selectedItem.value].iconText;
+      }
     }
 
     function toggleDropdown() {
@@ -227,6 +240,7 @@ export default {
       changeValue,
       title,
       currentIconClass,
+      currentIconText,
       expandDropdown,
       selectNextOption,
       selectedItem,
@@ -329,10 +343,14 @@ export default {
       font-size: 2rem;
     }
 
-    .select-icon {
+    .select-icon, .select-text-icon {
       position: absolute;
-      left: 24px;
+      left: 1.5rem;
       cursor: default;
+    }
+
+    .select-text-icon {
+      font-size: 1.5rem;
     }
 
     .selected-value {
@@ -341,7 +359,7 @@ export default {
       backface-visibility: hidden;
       transform-origin: 0 0;
       color: $secondary-text-color;
-      font-size: 1em;
+      font-size: 0.875em;
       font-weight: 600;
     }
 
@@ -418,10 +436,15 @@ export default {
           }
         }
 
-        i {
+        i,
+        .text-icon {
           position: absolute;
           right: 30px;
           font-size: 2rem;
+        }
+
+        .text-icon {
+          font-size: 1.5rem;
         }
       }
     }
