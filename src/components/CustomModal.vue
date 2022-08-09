@@ -1,6 +1,6 @@
 <template>
   <teleport to="body">
-    <Transition v-if="open" appear>
+    <Transition v-if="modalOpen" appear>
       <FocusTrap
         :active="true"
         :escapeDeactivates="false"
@@ -9,7 +9,7 @@
         <div
           ref="modal"
           class="modal"
-          :class="{ open: open, closing: closing }"
+          :class="{ open: modalOpen, closing: closing }"
           @click.self="handleModalClick"
           @keyup.esc="handleModalClose"
           tabindex="0"
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { FocusTrap } from 'focus-trap-vue';
 
 export default {
@@ -66,13 +66,27 @@ export default {
     const shake = ref(false);
     const closing = ref(false);
 
+    const modalOpen = ref(false);
+
     const closeModal = () => {
       closing.value = true;
+      emit('update:open', false);
       setTimeout(() => {
-        emit('update:open', false);
+        modalOpen.value = false;
         closing.value = false;
       }, 400);
     };
+
+    watch(
+      () => props.open,
+      (newValue) => {
+        if (newValue) {
+          modalOpen.value = true;
+        } else {
+          closeModal();
+        }
+      },
+    );
 
     const shakeModal = () => {
       shake.value = true;
@@ -98,6 +112,7 @@ export default {
     };
 
     return {
+      modalOpen,
       handleModalClick,
       handleModalClose,
       shake,
@@ -115,7 +130,7 @@ export default {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 900;
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
