@@ -1,7 +1,48 @@
 :root {
-  --primary-color: #2d2833;
-  --secondary-color: #3d3943;
-  --accent-color: #00e8b0;
+  /* Theme: dark */
+
+  --theme-color-dark: grey;
+
+  --primary-color-dark: #2d2833;
+  --secondary-color-dark: #3d3943;
+  --accent-color-dark: #00e8b0;
+  --background-accent-color-low-dark: rgb(61 57 67 / 65%);
+
+  --primary-text-color-dark: #b3b1b5;
+  --secondary-text-color-dark: white;
+  --accent-text-color-dark: #77747b;
+  --box-shadow-color-dark: rgba(19, 17, 32, 0.42);
+
+  /* Theme: light */
+
+  --theme-color-light: white;
+
+
+  --primary-color-light: #f8fafb;
+  --secondary-color-light: #e2e2e2;
+  --accent-color-light: #00a2e8;
+  --background-accent-color-low-light: rgb(255 255 255 / 65%);
+
+  --primary-text-color-light: rgb(44, 44, 44);
+  --secondary-text-color-light: black;
+  --accent-text-color-light: #77747b;
+
+  --box-shadow-color-light: rgba(19, 17, 32, 0.42);
+
+  /* Fallback colors from default theme (dark) */
+
+  --primary-color: var(--primary-color-dark);
+  --secondary-color: var(--secondary-color-dark);
+  --accent-color: var(--accent-color-dark);
+  --background-accent-color-low: var(--background-accent-color-low-dark);
+
+  --primary-text-color: var(--primary-text-color-dark);
+  --secondary-text-color: var(--secondary-text-color-dark);
+  --accent-text-color: var(--accent-text-color-dark);
+
+  --box-shadow-color: var(--box-shadow-color-dark);
+
+  /* Utility colors */
 
   --background-accent-high: rgb(61 57 67 / 76%);
   --background-accent-medium: rgb(61 57 67 / 65%);
@@ -18,36 +59,30 @@
 
   --error-color: rgba(255, 76, 81, 1);
   --error-color-low: rgba(255, 76, 81, 0.2);
-
-  --primary-text-color: #b3b1b5;
-  --secondary-text-color: white;
-  --accent-text-color: #77747b;
-
-  --box-shadow-color: rgba(19, 17, 32, 0.42);
-}
-
-#app-wrapper[data-theme="light"] {
-  --primary-color: #f8fafb;
-  --secondary-color: #e2e2e2;
-  --accent-color: #00a2e8;
-  --background-accent-color-low: rgb(255 255 255 / 65%);
-
-  --primary-text-color: rgb(44, 44, 44);
-  --secondary-text-color: black;
-  --accent-text-color: #77747b;
-
-  --box-shadow-color: rgba(19, 17, 32, 0.42);
 }
 
 #app-wrapper[data-theme="dark"] {
-  --primary-color: #2d2833;
-  --secondary-color: #3d3943;
-  --accent-color: #00e8b0;
-  --background-accent-color-low: rgb(61 57 67 / 65%);
+  --primary-color: var(--primary-color-dark);
+  --secondary-color: var(--secondary-color-dark);
+  --accent-color: var(--accent-color-dark);
+  --background-accent-color-low: var(--background-accent-color-low-dark);
 
-  --primary-text-color: #b3b1b5;
-  --secondary-text-color: white;
-  --accent-text-color: #77747b;
+  --primary-text-color: var(--primary-text-color-dark);
+  --secondary-text-color: var(--secondary-text-color-dark);
+  --accent-text-color: var(--accent-text-color-dark);
 
-  --box-shadow-color: rgba(19, 17, 32, 0.42);
+  --box-shadow-color: var(--box-shadow-color-dark);
+}
+
+#app-wrapper[data-theme="light"] {
+  --primary-color: var(--primary-color-light);
+  --secondary-color: var(--secondary-color-light);
+  --accent-color: var(--accent-color-light);
+  --background-accent-color-low: var(--background-accent-color-low-light);
+
+  --primary-text-color: var(--primary-text-color-light);
+  --secondary-text-color: var(--secondary-text-color-light);
+  --accent-text-color: var(--accent-text-color-light);
+
+  --box-shadow-color: var(--box-shadow-color-light);
 }
