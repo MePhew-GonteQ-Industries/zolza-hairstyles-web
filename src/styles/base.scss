@@ -417,3 +417,13 @@ ul {
     font-family: 'Poppins', sans-serif;
   }
 }
+
+.elevated-card {
+  display: grid;
+  grid-template-rows: auto;
+  background-color: $background-accent-low;
+  box-shadow: 0 0 8px -2px $box-shadow-color;
+  border-radius: 0.375rem;
+  padding: 2.188rem 2.125rem;
+  gap: 1rem;
+}
