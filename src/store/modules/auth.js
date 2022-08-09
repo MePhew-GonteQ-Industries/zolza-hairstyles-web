@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { handleRequestError } from '@/utils';
 
 export default {
@@ -8,11 +9,24 @@ export default {
     refreshTokenInterceptor: null,
     tokenRefreshStarted: false,
     rememberUser: true,
+    sessionId: '',
+    sudoModeActivated: '',
+    sudoModeExpires: '',
   },
 
   getters: {
     isAuthenticated(state) {
-      return !!(state.accessToken && state.axiosInterceptor !== null);
+      if (!state.accessToken) return false;
+      if (!state.sessionId) return false;
+      if (state.axiosInterceptor === null) return false;
+      return true;
+    },
+    sudoModeActive(state) {
+      if (!state.sudoModeActivated) return false;
+      if (!state.sudoModeExpires) return false;
+      const sudoModeExpires = new Date(state.sudoModeExpires);
+      if (sudoModeExpires > new Date()) return false;
+      return true;
     },
   },
 
@@ -20,6 +34,9 @@ export default {
     login(state, authData) {
       state.accessToken = authData.accessToken ? authData.accessToken : authData.access_token;
       state.refreshToken = authData.refreshToken ? authData.refreshToken : authData.refresh_token;
+      state.sessionId = authData.session.id;
+      state.sudoModeActivated = authData.sudoModeActivated;
+      state.sudoModeExpires = authData.sudoModeExpires;
     },
 
     logout(state) {
@@ -37,6 +54,11 @@ export default {
 
     setRememberUser(state, newValue) {
       state.rememberUser = newValue;
+    },
+
+    setSudoMode(state, newValue) {
+      state.sudoModeActivated = newValue.sudo_mode_activated;
+      state.sudoModeExpires = newValue.sudo_mode_expires;
     },
   },
 
@@ -57,9 +79,11 @@ export default {
           if (originalRequest && error.response && error.response.status === 401) {
             if (!state.tokenRefreshStarted) {
               await dispatch('refreshToken');
+              originalRequest.headers.Authorization = `Bearer ${state.accessToken}`;
+              axios(originalRequest);
             }
           }
-          throw new Error(error);
+          throw error;
         },
       );
       commit('setRefreshTokenInterceptor', refreshTokenInterceptor);
@@ -87,6 +111,10 @@ export default {
         state.accessToken,
       ));
 
+      localStorage.setItem('sessionId', JSON.stringify(
+        state.sessionId,
+      ));
+
       if (state.rememberUser) {
         localStorage.setItem('refreshToken', JSON.stringify(
           state.refreshToken,
@@ -94,15 +122,38 @@ export default {
       }
     },
 
+    saveSudoModeData({ state }) {
+      localStorage.setItem('sudoModeActivated', JSON.stringify(
+        state.sudoModeActivated,
+      ));
+
+      localStorage.setItem('sudoModeExpires', JSON.stringify(
+        state.sudoModeExpires,
+      ));
+    },
+
     async loadAuthData({ commit, dispatch }) {
       const authData = {
         accessToken: JSON.parse(localStorage.getItem('accessToken')),
         refreshToken: JSON.parse(localStorage.getItem('refreshToken')),
+        session: {
+          id: JSON.parse(localStorage.getItem('sessionId')),
+        },
+        sudoModeActivated: JSON.parse(localStorage.getItem('sudoModeActivated')),
+        sudoModeExpires: JSON.parse(localStorage.getItem('sudoModeExpires')),
       };
-      if (authData.accessToken !== null && authData.refreshToken !== null) {
+      if (authData.accessToken !== null && authData.session.id !== null) {
         commit('login', authData);
         await dispatch('configureAxiosAuthorized');
-        await dispatch('checkUserData');
+        try {
+          await dispatch('checkUserData');
+          await dispatch('loadSettings');
+        } catch {
+          dispatch('logout');
+          dispatch('loadDefaultSettings');
+        }
+      } else {
+        dispatch('loadDefaultSettings');
       }
     },
 
@@ -110,6 +161,7 @@ export default {
       commit('logout');
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
+      localStorage.removeItem('sessionId');
       await dispatch('deleteUserData');
     },
 
@@ -119,19 +171,16 @@ export default {
           grant_type: 'password',
           username: userData.email,
           password: userData.password,
-        }), {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        });
+        }));
         commit('login', response.data);
         await dispatch('saveAuthData');
         await dispatch('configureAxiosAuthorized');
-        await dispatch('checkUserData');
+        commit('setUserData', response.data.session.user);
+        await dispatch('loadSettings');
       } catch (error) {
-        const errorStatus = handleRequestError(error);
-        if (errorStatus === 404) {
-          throw new Error(error);
+        const { status } = handleRequestError(error);
+        if (status === 404) {
+          throw error;
         }
       }
     },
@@ -142,7 +191,11 @@ export default {
         await dispatch('deleteAuthData');
         await dispatch('configureAxiosUnauthorized');
       } catch (error) {
-        handleRequestError(error);
+        const { status } = handleRequestError(error);
+        if (status === 401 || status === 404) {
+          await dispatch('deleteAuthData');
+          await dispatch('configureAxiosUnauthorized');
+        }
       }
     },
 
@@ -156,14 +209,28 @@ export default {
         await commit('login', response.data);
         await dispatch('saveAuthData');
         await dispatch('configureAxiosAuthorized');
-        await dispatch('checkUserData');
+        commit('setUserData', response.data.session.user);
+        await dispatch('loadSettings');
         commit('setTokenRefreshStarted', false);
       } catch (error) {
-        const errorStatus = handleRequestError(error);
-        if (errorStatus === 401 && state.refreshToken === null) {
+        const { status } = handleRequestError(error);
+        if (status === 401 && state.refreshToken === null) {
           await dispatch('logout');
-        } else {
-          throw new Error(error);
+        }
+      }
+    },
+
+    async enterSudoMode({ commit, dispatch }, password) {
+      try {
+        const response = await axios.post('auth/enter-sudo-mode', new URLSearchParams({
+          password,
+        }));
+        commit('setSudoMode', response.data);
+        await dispatch('saveSudoModeData');
+      } catch (error) {
+        const { status } = handleRequestError(error);
+        if (status === 404) {
+          throw error;
         }
       }
     },
