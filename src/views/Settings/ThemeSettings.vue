@@ -16,7 +16,7 @@
         >
         <CustomButton
           type="secondary"
-          @click="selectedTheme = $store.state.settings.theme"
+          @click="selectedTheme = initialTheme"
           >Anuluj</CustomButton
         >
       </div>
