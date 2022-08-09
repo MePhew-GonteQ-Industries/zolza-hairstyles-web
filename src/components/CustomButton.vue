@@ -75,7 +75,7 @@ button {
   $accent-color: var(--accent-color);
 
   height: 45px;
-  width: 408px;
+  max-width: 400px;
   border-radius: 0.313rem;
   background-color: $accent-color;
   color: $main-color;
@@ -84,13 +84,14 @@ button {
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  border: none;
+  border: 2px solid transparent;
   box-shadow: 0 0 8px -2px $box-shadow-color;
   text-transform: uppercase;
+  padding-inline: .5rem;
 
   &:hover,
   &:active {
-    border: none;
+    border: 2px solid transparent;
     outline: none;
   }
 

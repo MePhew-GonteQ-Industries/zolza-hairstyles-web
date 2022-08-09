@@ -79,7 +79,7 @@ export default {
   --accent-color: none;
   $main-color: var(--main-color);
   $accent-color: var(--accent-color);
-  height: 45px;
+  min-height: 45px;
   width: 408px;
 
   a {
@@ -100,15 +100,15 @@ export default {
     align-items: center;
     justify-content: center;
 
-    &:focus {
-      outline: none;
-    }
-
     &:hover,
     &:active,
     &:focus {
       border: none;
       outline: none;
+    }
+
+    &:focus {
+      border: 2px solid $accent-color;
     }
 
     &.secondary {

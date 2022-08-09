@@ -289,7 +289,7 @@ export default {
   }
 
   input {
-    padding: 20px 90px 0 30px;
+    padding: 20px 30px 0 30px;
     border: 2px solid transparent;
     background-color: $primary-color;
     color: $secondary-text-color;
@@ -301,6 +301,7 @@ export default {
     transition: all calc($transition-duration * 2);
     filter: none;
     font-family: "Inter", sans-serif;
+    font-size: 0.875em;
 
     &[type="password"] {
       letter-spacing: 0.313rem;
