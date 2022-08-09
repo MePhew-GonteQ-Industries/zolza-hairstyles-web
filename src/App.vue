@@ -145,14 +145,12 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
 import {
   onMounted, ref, watch, computed,
 } from 'vue';
 import {
   useElementVisibility,
   useWindowScroll,
-  useNavigatorLanguage,
 } from '@vueuse/core';
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
@@ -169,17 +167,6 @@ export default {
     const onHomePage = computed(
       () => router.currentRoute.value.name === 'home',
     );
-
-    const store = useStore();
-
-    const prefersDarkMode = window.matchMedia
-      && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    const theme = prefersDarkMode ? 'dark' : 'light';
-    store.commit('setTheme', theme);
-
-    const navigatorLanguage = useNavigatorLanguage();
-    store.commit('setLanguage', navigatorLanguage.language.value);
 
     const scrolledToServices = ref(false);
 
