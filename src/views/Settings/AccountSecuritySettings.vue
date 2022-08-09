@@ -1,5 +1,53 @@
 <template>
   <div class="settings-page account-security-settings">
+    <div class="elevated-card change-password">
+      <h1>Zmiana hasła</h1>
+      <form @submit.prevent>
+        <input
+          class="hidden-input"
+          type="text"
+          autocomplete="username"
+          id="settings-change-password-hidden-username-input"
+        />
+        <label for="settings-change-password-hidden-username-input"></label>
+        <CustomInput
+          v-model:value="passwordData.current"
+          label="Obecne hasło"
+          autocomplete="current-password"
+          type="password"
+          :required="true"
+        />
+        <CustomInput
+          v-model:value="passwordData.new"
+          label="Nowe hasło"
+          autocomplete="new-password"
+          type="password"
+          :required="true"
+        />
+        <CustomInput
+          v-model:value="passwordData.repeat"
+          label="Powtórz nowe hasło"
+          autocomplete="new-password"
+          type="password"
+          :required="true"
+        />
+        <router-link to="/password-reset" tabindex="-1"
+          >Nie pamiętasz hasła?</router-link
+        >
+        <CustomButton @click="changePassword">Zmień hasło</CustomButton>
+      </form>
+    </div>
+    <div class="elevated-card two-fa" v-if="false">
+      <div class="header">
+        <h1>Uwierzytelnianie dwuetapowe</h1>
+        <CustomChip type="warning">Nie skonfigurowano</CustomChip>
+      </div>
+      <p>
+        Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo
+        twojego konta
+      </p>
+      <CustomButton type="success">Skonfiguruj teraz</CustomButton>
+    </div>
     <div class="elevated-card active-sessions">
       <div class="header">
         <h1>Aktywne sesje</h1>
@@ -49,54 +97,6 @@
         >
         </LoginSession>
       </div>
-    </div>
-    <div class="elevated-card change-password">
-      <h1>Zmiana hasła</h1>
-      <form @submit.prevent>
-        <input
-          class="hidden-input"
-          type="text"
-          autocomplete="username"
-          id="settings-change-password-hidden-username-input"
-        />
-        <label for="settings-change-password-hidden-username-input"></label>
-        <CustomInput
-          v-model:value="passwordData.current"
-          label="Obecne hasło"
-          autocomplete="current-password"
-          type="password"
-          :required="true"
-        />
-        <CustomInput
-          v-model:value="passwordData.new"
-          label="Nowe hasło"
-          autocomplete="new-password"
-          type="password"
-          :required="true"
-        />
-        <CustomInput
-          v-model:value="passwordData.repeat"
-          label="Powtórz nowe hasło"
-          autocomplete="new-password"
-          type="password"
-          :required="true"
-        />
-        <router-link to="/password-reset" tabindex="-1"
-          >Nie pamiętasz hasła?</router-link
-        >
-        <CustomButton @click="changePassword">Zmień hasło</CustomButton>
-      </form>
-    </div>
-    <div class="elevated-card two-fa" v-if="false">
-      <div class="header">
-        <h1>Uwierzytelnianie dwuetapowe</h1>
-        <CustomChip type="warning">Nie skonfigurowano</CustomChip>
-      </div>
-      <p>
-        Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo
-        twojego konta
-      </p>
-      <CustomButton type="success">Skonfiguruj teraz</CustomButton>
     </div>
   </div>
 </template>
