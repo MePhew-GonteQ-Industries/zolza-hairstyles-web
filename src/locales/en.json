@@ -13,12 +13,12 @@
     "nameField": {
       "label": "Name",
       "messageEmpty": "Please enter your name.",
-      "messageInvalid": "Name should be at least 3 and max 50 characters long also excluding space."
+      "messageInvalid": "Enter proper name"
     },
     "surnameField": {
       "label": "Surname",
       "messageEmpty": "Please enter your surname.",
-      "messageInvalid": "Surname should be at least 3 and max 50 characters long also excluding space and it can onlu include letters."
+      "messageInvalid": "Enter proper surname."
     },
     "emailField": {
       "label": "Email",
