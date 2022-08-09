@@ -39,13 +39,16 @@ export default {
   },
 
   actions: {
-    async checkUserData({ commit, dispatch }) {
-      try {
-        const response = await axios.get('users/me');
-        commit('setUserData', response.data);
-        await dispatch('saveUserData');
-      } catch (error) {
-        handleRequestError(error);
+    async checkUserData({ getters, commit, dispatch }) {
+      if (!getters.isLoggedIn) {
+        try {
+          const response = await axios.get('users/me');
+          commit('setUserData', response.data);
+          await dispatch('saveUserData');
+        } catch (error) {
+          handleRequestError(error);
+          throw error;
+        }
       }
     },
 
