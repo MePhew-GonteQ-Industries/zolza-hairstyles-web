@@ -44,22 +44,24 @@
       <CustomModal v-model:open="deleteAccountModalOpen">
         <template #title> Czy na pewno chcesz usunąć swoje konto? </template>
         <div class="delete-account-wrappper">
-          <MessageBox type="error">
-            <template #title>UWAGA</template>
-            <template #subtitle>
-              Usunięcie konta jest nieodwracalne
-              <p>Twoje nadchodzące wizyty zostaną odowołane</p>
-            </template>
-          </MessageBox>
-          <MessageBox
-            type="error"
-            v-if="$store.getters.isAdmin || $store.getters.isOwner"
-          >
-            <template #title>UWAGA</template>
-            <template #subtitle>
-              Usuwasz konto o podniesionym poziomie uprawnień
-            </template>
-          </MessageBox>
+          <div class="messages-wrapper">
+            <MessageBox type="error">
+              <template #title>UWAGA</template>
+              <template #subtitle>
+                Usunięcie konta jest nieodwracalne
+                <p>Twoje nadchodzące wizyty zostaną odowołane</p>
+              </template>
+            </MessageBox>
+            <MessageBox
+              type="error"
+              v-if="$store.getters.isAdmin || $store.getters.isOwner"
+            >
+              <template #title>UWAGA</template>
+              <template #subtitle>
+                Usuwasz konto o podniesionym poziomie uprawnień
+              </template>
+            </MessageBox>
+          </div>
           <form @submit.prevent="" class="delete-account">
             <input
               type="text"
@@ -151,7 +153,7 @@
                 >
               </div>
               <div class="buttons-row">
-                <CustomButton type="warning" @click="changeUserDataSudoMode"
+                <CustomButton type="success" @click="changeUserDataSudoMode"
                   >Dalej</CustomButton
                 >
                 <CustomButton
@@ -366,15 +368,21 @@ export default {
     };
 
     const requestAccountDeletion = () => {
-      axios.put('users/me/delete', new URLSearchParams({
-        password: deleteAccountPassword.value,
-      })).then(() => {
-        store.dispatch('logout').then(() => {
-          router.push({ name: 'home' });
+      axios
+        .put(
+          'users/me/delete',
+          new URLSearchParams({
+            password: deleteAccountPassword.value,
+          }),
+        )
+        .then(() => {
+          store.dispatch('logout').then(() => {
+            router.push({ name: 'home' });
+          });
+        })
+        .catch((error) => {
+          handleRequestError(error);
         });
-      }).catch((error) => {
-        handleRequestError(error);
-      });
     };
 
     const deleteAccount = () => {
@@ -460,7 +468,12 @@ export default {
 .delete-account-wrappper {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+
+  .messages-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
   .delete-account {
     display: flex;
@@ -470,6 +483,7 @@ export default {
     .input-with-title {
       display: flex;
       flex-direction: column;
+      margin: 0 auto;
       gap: 0.375rem;
     }
 
