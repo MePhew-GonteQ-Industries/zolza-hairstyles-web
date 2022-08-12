@@ -5,6 +5,7 @@
       :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
       @click="toggleNotificationsPanel"
       @keyup.enter="toggleNotificationsPanel"
+      v-ripple
     ></i>
     <span
       class="unread-notifications-count"
@@ -243,10 +244,6 @@ export default {
     padding: 1rem;
     border-radius: 50%;
     border: 0.1px solid transparent;
-
-    &:active {
-      background-color: $secondary-color;
-    }
   }
 
   .unread-notifications-count {

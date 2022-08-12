@@ -5,6 +5,7 @@
       :class="profilePanelExpanded ? 'ph-user-fill' : 'ph-user-light'"
       @click="toggleProfilePanel"
       @keyup.enter="toggleProfilePanel"
+      v-ripple
     ></i>
 
     <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
@@ -163,10 +164,6 @@ export default {
     box-sizing: content-box;
     padding: 1rem;
     border-radius: 50%;
-
-    &:active {
-      background-color: $secondary-color;
-    }
   }
 
   .profile-panel {
