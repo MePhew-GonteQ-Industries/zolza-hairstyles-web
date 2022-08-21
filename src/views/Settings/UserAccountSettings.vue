@@ -15,20 +15,20 @@
       <div class="inputs-section">
         <div class="text-inputs">
           <CustomInput
-            label="Imię"
+            label="t('userAccountSettings.name')"
             v-model:value="userData.name"
             appearance="primary"
             autocomplete="name"
           />
           <CustomInput
-            label="Nazwisko"
+            label="t('userAccountSettings.surname')"
             v-model:value="userData.surname"
             appearance="primary"
             autocomplete="surname"
           />
         </div>
         <CustomSelect
-          header="Płeć"
+          header="t('userAccountSettings.gender')"
           iconClass="ph-gender-intersex-light"
           :options="genderOptions"
           v-model:selectedValue="userData.gender"
@@ -49,7 +49,7 @@
               <template #title>{{ t("userAccountSettings.warning") }}</template>
               <template #subtitle>
                 {{ t("userAccountSettings.deleteAccountInformation") }}
-                <p>{{ t("userAccountSettings.appointmentCancellation") }}</p>
+                <p>{{ t("userAccountSettings.appointmentsCancellation") }}</p>
               </template>
             </MessageBox>
             <MessageBox

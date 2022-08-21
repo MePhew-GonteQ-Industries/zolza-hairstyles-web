@@ -64,7 +64,14 @@
       "messageInvalid": "Podane hasło jest za słabe"
     },
     "forgotPasswordBtn": "Nie pamiętasz hasła?",
-    "logInBtn": "Zaloguj się"
+    "logInBtn": "Zaloguj się",
+    "emailConfirmed": "Adres email został potwierdzony",
+    "allowLogin": "Możesz się teraz zalogować",
+    "accountCreated": "Pomyślnie utworzono konto",
+    "saveUser": "Zapamiętaj mnie",
+    "dontHaveAnAccount": "Nie masz jeszcze konta?",
+    "createAccount": "Utwórz konto",
+    "error": "Wystąpił błąd"
   },
   "resetPassword": {
     "requestPasswordReset": {
