@@ -28,7 +28,7 @@
           />
         </div>
         <CustomSelect
-          header="t('userAccountSettings.gender')"
+          :header="t('userAccountSettings.gender')"
           iconClass="ph-gender-intersex-light"
           :options="genderOptions"
           v-model:selectedValue="userData.gender"
