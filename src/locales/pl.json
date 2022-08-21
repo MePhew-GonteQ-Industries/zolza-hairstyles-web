@@ -1,7 +1,17 @@
 {
+  "shared": {
+    "login": "Zaloguj się",
+    "signUp": "Zarejestruj się",
+    "name": "Imię",
+    "surname": "Nazwisko",
+    "email": "Email",
+    "emailEmpty": "Podaj swój adres email",
+    "emailInvalid": "Podany adres email jest niepoprawny",
+    "gender": "Płeć",
+    "password": "Hasło"
+  },
   "nav": {
-    "primaryNav": ["Strona główna", "Usługi", "Kontakt"],
-    "secondaryNav": ["Zaloguj się", "Zarejestruj się"]
+    "primaryNav": ["Strona główna", "Usługi", "Kontakt"]
   },
   "footer": ["Warunki korzystania", "Polityka prywatności"],
   "home": "DOM",
@@ -12,27 +22,18 @@
     "heading": "Utwórz konto",
     "subtitle": "Utwórz swoje konto i umów się na wizytę już dziś",
     "nameField": {
-      "label": "Imię",
       "messageEmpty": "Podaj swoje imię",
       "messageInvalid": "Podaj poprawne imię."
     },
     "surnameField": {
-      "label": "Nazwisko",
       "messageEmpty": "Podaj swoje nazwisko",
       "messageInvalid": "Podaj poprawne nazwisko."
     },
-    "emailField": {
-      "label": "Email",
-      "messageEmpty": "Podaj swój adres email",
-      "messageInvalid": "Podany adres email jest niepoprawny"
-    },
     "genderField": {
-      "header": "Płeć",
       "messageEmpty": "Wybierz swoją płeć",
       "messageInvalid": ""
     },
     "passwordField": {
-      "label": "Hasło",
       "messageEmpty": "Podaj swoje hasło",
       "messageInvalid": "Hasło musi zawierać co najmniej: jedną dużą literę, jedną małą literę, jedną cyfre, jeden znak specjalny i mieć conajmniej 8 znaków długości."
     },
@@ -53,36 +54,22 @@
   "logIn": {
     "heading": "Witamy w Zołza Hairstyles",
     "subtitle": "Zaloguj się na swoje konto i umów się na wizytę już dziś",
-    "emailField": {
-      "label": "Email",
-      "messageEmpty": "Podaj swój adres email",
-      "messageInvalid": "Podany adres email jest niepoprawny"
-    },
     "currentPasswordField": {
-      "label": "Hasło",
       "messageEmpty": "Podaj swoje hasło",
       "messageInvalid": "Podane hasło jest za słabe"
     },
     "forgotPasswordBtn": "Nie pamiętasz hasła?",
-    "logInBtn": "Zaloguj się",
     "emailConfirmed": "Adres email został potwierdzony",
     "allowLogin": "Możesz się teraz zalogować",
     "accountCreated": "Pomyślnie utworzono konto",
     "saveUser": "Zapamiętaj mnie",
     "dontHaveAnAccount": "Nie masz jeszcze konta?",
-    "createAccount": "Utwórz konto",
-    "error": "Wystąpił błąd",
-    "login": "Zaloguj się"
+    "error": "Wystąpił błąd"
   },
   "resetPassword": {
     "requestPasswordReset": {
       "heading": "Nie pamiętasz hasła?",
       "subtitle": "Podaj adres email powiązany z twoim kontem, a wyślemy do Ciebie wiadomość zawierającą link umożliwiający zmianę hasła",
-      "emailField": {
-        "label": "Email",
-        "messageEmpty": "Podaj swój adres email",
-        "messageInvalid": "Podany adres email jest niepoprawny"
-      },
       "resetPasswordBtn": "Wyślij link"
     },
     "changePassword": {
@@ -108,9 +95,6 @@
   "userAccountSettings": {
     "userSince": "Użutkownik od",
     "confirmDeleteAccount": "usuń moje konto",
-    "name": "Imię",
-    "surname": "Nazwisko",
-    "gender": "Płeć",
     "deleteAccount": "Usuń konto",
     "deleteAccountReassurance": "Czy napewno chcesz usunąć swoje konto?",
     "warning": "UWAGA",

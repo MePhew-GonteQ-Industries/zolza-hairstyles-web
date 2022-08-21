@@ -16,7 +16,7 @@
 
           <div class="names">
             <CustomInput
-              :label="t('signUp.nameField.label')"
+              :label="t('shared.name')"
               iconClass="ph-identification-card-light"
               autocomplete="given-name"
               type="name"
@@ -29,7 +29,7 @@
             />
 
             <CustomInput
-              :label="t('signUp.surnameField.label')"
+              :label="t('shared.surname')"
               iconClass="ph-identification-card-light"
               autocomplete="family-name"
               type="name"
@@ -43,21 +43,21 @@
           </div>
 
           <CustomInput
-            :label="t('signUp.emailField.label')"
+            :label="t('shared.email')"
             iconClass="ph-envelope-simple-light"
             autocomplete="email"
             type="email"
             v-model:value="userData.email"
             :required="true"
-            :messageEmpty="t('signUp.emailField.messageEmpty')"
-            :messageInvalid="t('signUp.emailField.messageInvalid')"
+            :messageEmpty="t('shared.emailEmpty')"
+            :messageInvalid="t('shared.emailInvalid')"
             :invalid="emailInvalid"
             :forceValidate="forceValidate"
           />
 
           <CustomSelect
             class="select"
-            :header="t('signUp.genderField.header')"
+            :header="t('shared.gender')"
             iconClass="ph-gender-intersex-light"
             :options="genderOptions"
             v-model:selected-value="userData.gender"
@@ -69,7 +69,7 @@
           />
 
           <CustomInput
-            :label="t('signUp.passwordField.label')"
+            :label="t('shared.password')"
             autocomplete="new-password"
             type="password"
             v-model:value="userData.password"

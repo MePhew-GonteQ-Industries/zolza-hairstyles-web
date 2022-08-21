@@ -15,20 +15,20 @@
       <div class="inputs-section">
         <div class="text-inputs">
           <CustomInput
-            :label="t('userAccountSettings.name')"
+            :label="t('shared.name')"
             v-model:value="userData.name"
             appearance="primary"
             autocomplete="name"
           />
           <CustomInput
-            :label="t('userAccountSettings.surname')"
+            :label="t('shared.surname')"
             v-model:value="userData.surname"
             appearance="primary"
             autocomplete="surname"
           />
         </div>
         <CustomSelect
-          :header="t('userAccountSettings.gender')"
+          :header="t('shared.gender')"
           iconClass="ph-gender-intersex-light"
           :options="genderOptions"
           v-model:selectedValue="userData.gender"

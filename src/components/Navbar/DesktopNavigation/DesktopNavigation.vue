@@ -98,13 +98,13 @@
       <ul class="secondary-nav" v-if="!$store.getters.isLoggedIn">
           <li>
             <router-link to="/login" class="login-btn">
-              <i class="ph-user-light"></i>{{ t('nav.secondaryNav[0]') }}
+              <i class="ph-user-light"></i>{{ t('shared.login') }}
             </router-link>
           </li>
 
           <li>
             <router-link to="/sign-up" class="signup-btn">
-              <i class="ph-user-plus-light"></i>{{ t('nav.secondaryNav[1]') }}
+              <i class="ph-user-plus-light"></i>{{ t('shared.signUp') }}
             </router-link>
           </li>
       </ul>
