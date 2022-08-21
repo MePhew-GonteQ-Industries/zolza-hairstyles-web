@@ -98,6 +98,29 @@
     "button": "Powrót"
   },
   "userAccountSettings": {
-    "confirmDeleteAccount": "usuń moje konto"
+    "userSince": "Użutkownik od",
+    "confirmDeleteAccount": "usuń moje konto",
+    "name": "Imię",
+    "surname": "Nazwisko",
+    "gender": "Płeć",
+    "deleteAccount": "Usuń konto",
+    "deleteAccountReassurance": "Czy napewno chcesz usunąć swoje konto?",
+    "warning": "UWAGA",
+    "deleteAccountInformation": "Usunięcie konta jest niedowracalne",
+    "appointmentsCancellation": "Twoje nadchodzące wizyty zostaną odwołane",
+    "deleteHighLevelAccount": "Usuwasz konto o podniesionym poziomie uprawnień",
+    "password": "Podaj swoje hasło:",
+    "confirmationQuote": "Aby potwierdzić wpisz",
+    "confirmationButton": "Usuń konto",
+    "operationCancel": "Anuluj",
+    "emailLabel": "Twój adres email",
+    "emailNotConfirmed": "nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.",
+    "emailLinkResend": "Wyślij link ponownie",
+    "saveChanges": "Zapisz zmiany",
+    "passwordInput": "Podaj swoje hasło",
+    "keyDataModification": "Próbujesz zmodyfikować kluczowe dane",
+    "identityConfirmation": "Podaj swoje haslo aby potwierdzić swoją tożsamość",
+    "forgotYourPassword": "Nie pamiętasz hasła?",
+    "next": "Dalej"
   }
 }
