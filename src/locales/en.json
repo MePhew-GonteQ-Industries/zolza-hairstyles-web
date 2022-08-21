@@ -58,6 +58,29 @@
     "button": "Go Home"
   },
   "userAccountSettings": {
-    "confirmDeleteAccount": "delete my account"
+    "userSince": "User since",
+    "confirmDeleteAccount": "delete my account",
+    "name": "Name",
+    "surname": "Surname",
+    "gender": "Gender",
+    "deleteAccount": "Delete account",
+    "deleteAccountReassurance": "Are you sure you want to delete your account?",
+    "warning": "WARNING",
+    "deleteAccountInformation": "Deleting account is irreversible",
+    "appointmentsCancellation": "Your appointments will be cancelled",
+    "deleteHighLevelAccount": "You are deleting higher level account",
+    "password": "Insert your password:",
+    "confirmationQuote": "Type to confirm",
+    "confirmationButton": "Delete account",
+    "operationCancel": "Cancel",
+    "emailLabel": "Your email address",
+    "emailNotConfirmed": "is not confirmed. Check your mailbox.",
+    "emailLinkResend": "Resend confirmation link",
+    "saveChanges": "Save changes",
+    "passwordInput": "Insert your password",
+    "keyDataModification": "You are trying to modify key data",
+    "identityConfirmation": "Insert your password to confirm your identity",
+    "forgotYourPassword": "Forgot your password?",
+    "next": "Next"
   }
 }
