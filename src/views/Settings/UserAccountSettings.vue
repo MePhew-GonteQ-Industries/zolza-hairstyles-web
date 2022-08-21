@@ -8,27 +8,27 @@
             userRole
           }}</CustomChip>
           <p class="email">{{ $store.state.user.email }}</p>
-          <p>Użytkownik od {{ accountCreationDateStr }}</p>
+          <p>{{ t("userAccountSettings.userSince") }} {{ accountCreationDateStr }}</p>
           <p>({{ timeSinceCreationDate }})</p>
         </div>
       </div>
       <div class="inputs-section">
         <div class="text-inputs">
           <CustomInput
-            label="Imię"
+            :label="t('userAccountSettings.name')"
             v-model:value="userData.name"
             appearance="primary"
             autocomplete="name"
           />
           <CustomInput
-            label="Nazwisko"
+            :label="t('userAccountSettings.surname')"
             v-model:value="userData.surname"
             appearance="primary"
             autocomplete="surname"
           />
         </div>
         <CustomSelect
-          header="Płeć"
+          :header="t('userAccountSettings.gender')"
           iconClass="ph-gender-intersex-light"
           :options="genderOptions"
           v-model:selectedValue="userData.gender"
@@ -39,26 +39,26 @@
         type="error"
         class="delete-account-btn"
         @click="deleteAccountModalOpen = true"
-        >Usuń konto</CustomButton
+        >{{ t("userAccountSettings.deleteAccount") }}</CustomButton
       >
       <CustomModal v-model:open="deleteAccountModalOpen">
-        <template #title> Czy na pewno chcesz usunąć swoje konto? </template>
+        <template #title> {{ t("userAccountSettings.deleteAccountReassurance") }}</template>
         <div class="delete-account-wrappper">
           <div class="messages-wrapper">
             <MessageBox type="error">
-              <template #title>UWAGA</template>
+              <template #title>{{ t("userAccountSettings.warning") }}</template>
               <template #subtitle>
-                Usunięcie konta jest nieodwracalne
-                <p>Twoje nadchodzące wizyty zostaną odowołane</p>
+                {{ t("userAccountSettings.deleteAccountInformation") }}
+                <p>{{ t("userAccountSettings.appointmentsCancellation") }}</p>
               </template>
             </MessageBox>
             <MessageBox
               type="error"
               v-if="$store.getters.isAdmin || $store.getters.isOwner"
             >
-              <template #title>UWAGA</template>
+              <template #title>{{ t("userAccountSettings.warning") }}</template>
               <template #subtitle>
-                Usuwasz konto o podniesionym poziomie uprawnień
+                {{ t("userAccountSettings.deleteHighLevelAccount") }}
               </template>
             </MessageBox>
           </div>
@@ -71,7 +71,7 @@
             />
             <label for="hidden-username-input-delete-account"></label>
             <div class="input-with-title">
-              <p>Podaj swoje hasło:</p>
+              <p>{{ t("userAccountSettings.password") }}</p>
               <CustomInput
                 label="Hasło"
                 autocomplete="current-password"
@@ -82,7 +82,7 @@
             </div>
             <div class="input-with-title">
               <p>
-                Aby potwierdzić wpisz
+                {{ t("userAccountSettings.confirmationQuote") }}
                 <span class="confirm-delete">{{
                   t("userAccountSettings.confirmDeleteAccount")
                 }}</span>
@@ -97,12 +97,12 @@
             </div>
             <div class="buttons-row">
               <CustomButton type="error" @click="deleteAccount"
-                >Usuń konto</CustomButton
+                >{{ t("userAccountSettings.confirmationButton") }}</CustomButton
               >
               <CustomButton
                 type="secondary"
                 @click="deleteAccountModalOpen = false"
-                >Anuluj</CustomButton
+                >{{ t("userAccountSettings.operationCancel") }}</CustomButton
               >
             </div>
           </form>
@@ -115,23 +115,22 @@
         v-if="!$store.state.user.verified"
       >
         <template #title>
-          Twój adres email {{ $store.state.user.email }}
-          nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.
+          {{ t("userAccountSettings.emailLabel") }} {{ $store.state.user.email }}
+          {{ t("userAccountSettings.emailNotConfirmed") }}
         </template>
-        <template #subtitle> Wyślij link ponownie </template>
+        <template #subtitle>  {{ t("userAccountSettings.emailLinkResend") }} </template>
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
         <CustomButton class="save" type="success" @click="changeUserData"
-          >Zapisz zmiany</CustomButton
+          >{{ t("userAccountSettings.saveChanges") }}</CustomButton
         >
         <CustomModal v-model:open="passwordPromptOpen">
-          <template #title> Podaj swoje hasło </template>
+          <template #title> {{ t("userAccountSettings.passwordInput") }} </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="info">
-              <template #title>Próbujesz zmodyfikować kluczowe dane</template>
+              <template #title>{{ t("userAccountSettings.keyDataModification") }}</template>
               <template #subtitle
-                >Podaj hasło aby potwierdzić swoją tożsamość</template
-              >
+                >{{ t("userAccountSettings.identityConfirmation") }}</template>
             </MessageBox>
             <form @submit.prevent="changeUserDataSudoMode">
               <input
@@ -149,24 +148,24 @@
                   v-model:value="password"
                 />
                 <router-link to="/password-reset" tabindex="-1"
-                  >Nie pamiętasz hasła?</router-link
+                  >{{ t("userAccountSettings.forgotYourPassword") }}</router-link
                 >
               </div>
               <div class="buttons-row">
                 <CustomButton type="success" @click="changeUserDataSudoMode"
-                  >Dalej</CustomButton
+                  >{{ t("userAccountSettings.next") }}</CustomButton
                 >
                 <CustomButton
                   type="secondary"
                   @click="passwordPromptOpen = false"
-                  >Anuluj</CustomButton
+                  >{{ t("userAccountSettings.operationCancel") }}</CustomButton
                 >
               </div>
             </form>
           </div>
         </CustomModal>
         <CustomButton type="secondary" class="cancel" @click="revertChanges"
-          >Anuluj</CustomButton
+          >{{ t("userAccountSettings.operationCancel") }}</CustomButton
         >
       </div>
     </div>
