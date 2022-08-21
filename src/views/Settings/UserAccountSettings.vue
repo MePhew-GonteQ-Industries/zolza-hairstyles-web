@@ -15,13 +15,13 @@
       <div class="inputs-section">
         <div class="text-inputs">
           <CustomInput
-            label="t('userAccountSettings.name')"
+            :label="t('userAccountSettings.name')"
             v-model:value="userData.name"
             appearance="primary"
             autocomplete="name"
           />
           <CustomInput
-            label="t('userAccountSettings.surname')"
+            :label="t('userAccountSettings.surname')"
             v-model:value="userData.surname"
             appearance="primary"
             autocomplete="surname"

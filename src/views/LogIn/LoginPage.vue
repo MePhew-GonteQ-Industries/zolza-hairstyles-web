@@ -5,13 +5,13 @@
       <h3>{{ t("logIn.subtitle") }}</h3>
 
       <div class="state-message" v-if="emailConfirmed">
-        <h4>Email address has been confirmed successfully</h4>
-        <h4>You can now login to your account</h4>
+        <h4>{{ t("logIn.emailConfirmed") }}</h4>
+        <h4>{{ t("logIn.allowLogin") }}</h4>
       </div>
 
       <div class="state-message" v-if="accountCreated">
-        <h4>Account created successfully</h4>
-        <h4>You can now login</h4>
+        <h4>{{ t("logIn.accountCreated") }}</h4>
+        <h4>{{ t("logIn.allowLogin") }}</h4>
       </div>
 
       <form @submit.prevent="handleSubmit" novalidate>
@@ -46,25 +46,24 @@
 
         <div class="under-inputs-section">
           <CustomCheckbox v-model:checked="saveUser"
-            >Zapamiętaj mnie</CustomCheckbox
-          >
+            >{{ t("logIn.saveUser") }}</CustomCheckbox>
 
           <router-link to="/password-reset" tabindex="-1">{{
             t("logIn.forgotPasswordBtn")
           }}</router-link>
         </div>
 
-        <CustomButton class="btn" v-if="!loading">Zaloguj się</CustomButton>
+        <CustomButton class="btn" v-if="!loading">{{ t("logIn.login") }}</CustomButton>
 
         <CustomLoader class="loader" v-else />
       </form>
       <div class="under-form-section">
-        <span>Nie masz jeszcze konta?</span>
-        <router-link to="/sign-up">Utwórz konto</router-link>
+        <span>{{ t("logIn.dontHaveAnAccount") }}</span>
+        <router-link to="/sign-up">{{ t("logIn.createAccount") }}</router-link>
       </div>
     </div>
     <MessageBox type="error" v-if="message" class="error-message">
-      <template #title> Wystąpił błąd </template>
+      <template #title> {{ t("logIn.error") }} </template>
       <template #subtitle>{{ message }}</template>
     </MessageBox>
   </section>

@@ -71,7 +71,8 @@
     "saveUser": "Zapamiętaj mnie",
     "dontHaveAnAccount": "Nie masz jeszcze konta?",
     "createAccount": "Utwórz konto",
-    "error": "Wystąpił błąd"
+    "error": "Wystąpił błąd",
+    "login": "Zaloguj się"
   },
   "resetPassword": {
     "requestPasswordReset": {
