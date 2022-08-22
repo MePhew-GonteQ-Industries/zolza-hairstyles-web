@@ -8,10 +8,12 @@
     "emailEmpty": "Please enter your email",
     "emailInvalid": "Please enter correct email",
     "gender": "Gender",
-    "password": "Password"
+    "password": "Password",
+    "saveChanges": "Save changes",
+    "operationCancel": "Cancel"
   },
   "nav": {
-    "primaryNav": ["Home", "Services", "Contact"]
+    "primaryNav": ["Home", "Dashboard", "Contact"]
   },
   "footer": ["Terms of use", "Privacy policy"],
   "home": "HOME",
@@ -104,15 +106,17 @@
     "password": "Insert your password:",
     "confirmationQuote": "Type to confirm",
     "confirmationButton": "Delete account",
-    "operationCancel": "Cancel",
     "emailLabel": "Your email address",
     "emailNotConfirmed": "is not confirmed. Check your mailbox.",
     "emailLinkResend": "Resend confirmation link",
-    "saveChanges": "Save changes",
     "passwordInput": "Insert your password",
     "keyDataModification": "You are trying to modify key data",
     "identityConfirmation": "Insert your password to confirm your identity",
     "forgotYourPassword": "Forgot your password?",
     "next": "Next"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Choose language",
+    "language": "Language"
   }
 }

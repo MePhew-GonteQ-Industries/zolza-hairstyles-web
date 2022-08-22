@@ -8,10 +8,12 @@
     "emailEmpty": "Podaj swój adres email",
     "emailInvalid": "Podany adres email jest niepoprawny",
     "gender": "Płeć",
-    "password": "Hasło"
+    "password": "Hasło",
+    "saveChanges": "Zapisz zmiany",
+    "operationCancel": "Anuluj"
   },
   "nav": {
-    "primaryNav": ["Strona główna", "Usługi", "Kontakt"]
+    "primaryNav": ["Strona główna", "Panel administracyjny", "Kontakt"]
   },
   "footer": ["Warunki korzystania", "Polityka prywatności"],
   "home": "DOM",
@@ -104,15 +106,17 @@
     "password": "Podaj swoje hasło:",
     "confirmationQuote": "Aby potwierdzić wpisz",
     "confirmationButton": "Usuń konto",
-    "operationCancel": "Anuluj",
     "emailLabel": "Twój adres email",
     "emailNotConfirmed": "nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.",
     "emailLinkResend": "Wyślij link ponownie",
-    "saveChanges": "Zapisz zmiany",
     "passwordInput": "Podaj swoje hasło",
     "keyDataModification": "Próbujesz zmodyfikować kluczowe dane",
     "identityConfirmation": "Podaj swoje haslo aby potwierdzić swoją tożsamość",
     "forgotYourPassword": "Nie pamiętasz hasła?",
     "next": "Dalej"
+  },
+  "languageSettings": {
+    "chooseLanguage": "Wybierz język",
+    "language": "Język"
   }
 }

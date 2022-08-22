@@ -102,7 +102,7 @@
               <CustomButton
                 type="secondary"
                 @click="deleteAccountModalOpen = false"
-                >{{ t("userAccountSettings.operationCancel") }}</CustomButton
+                >{{ t("shared.operationCancel") }}</CustomButton
               >
             </div>
           </form>
@@ -122,7 +122,7 @@
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
         <CustomButton class="save" type="success" @click="changeUserData"
-          >{{ t("userAccountSettings.saveChanges") }}</CustomButton
+          >{{ t("shared.saveChanges") }}</CustomButton
         >
         <CustomModal v-model:open="passwordPromptOpen">
           <template #title> {{ t("userAccountSettings.passwordInput") }} </template>

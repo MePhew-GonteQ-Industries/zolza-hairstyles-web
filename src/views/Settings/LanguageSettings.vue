@@ -1,9 +1,9 @@
 <template>
   <div class="settings-page">
     <div class="elevated-card">
-      <h1>Wybierz język</h1>
+      <h1>{{ t("languageSettings.chooseLanguage") }}</h1>
       <CustomSelect
-        header="Język"
+        :header="t('languageSettings.language')"
         :options="languageOptions"
         v-model:selectedValue="selectedLanguage"
         appearance="primary"
@@ -13,12 +13,12 @@
         v-if="!(selectedLanguage === initialLanguage)"
       >
         <CustomButton type="success" @click="changeLanguage"
-          >Zapisz zmiany</CustomButton
+          >{{ t("shared.saveChanges") }}</CustomButton
         >
         <CustomButton
           type="secondary"
           @click="selectedLanguage = initialLanguage"
-          >Anuluj</CustomButton
+          >{{ t("shared.operationCancel") }}</CustomButton
         >
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
 
     const languageOptions = [
       {
-        title: 'Polish',
+        title: 'Polski',
         value: 'pl',
         iconText: 'PL',
       },
