@@ -17,7 +17,7 @@
       <form @submit.prevent="handleSubmit" novalidate>
         <div class="inputs">
           <CustomInput
-            :label="t('logIn.emailField.label')"
+            :label="t('shared.email')"
             iconClass="ph-envelope-simple-light"
             inputType="email"
             autocomplete="email"
@@ -25,14 +25,14 @@
             :forceValidate="forceValidate"
             :invalid="emailInvalid"
             :required="true"
-            :messageEmpty="t('logIn.emailField.messageEmpty')"
-            :messageInvalid="t('logIn.emailField.messageInvalid')"
+            :messageEmpty="t('shared.emailEmpty')"
+            :messageInvalid="t('shared.emailInvalid')"
             class="input"
           />
 
           <CustomInput
             class="current-password input"
-            :label="t('logIn.currentPasswordField.label')"
+            :label="t('shared.password')"
             autocomplete="current-password"
             type="password-login"
             v-model:value="userData.password"
@@ -53,13 +53,13 @@
           }}</router-link>
         </div>
 
-        <CustomButton class="btn" v-if="!loading">{{ t("logIn.login") }}</CustomButton>
+        <CustomButton class="btn" v-if="!loading">{{ t("shared.login") }}</CustomButton>
 
         <CustomLoader class="loader" v-else />
       </form>
       <div class="under-form-section">
         <span>{{ t("logIn.dontHaveAnAccount") }}</span>
-        <router-link to="/sign-up">{{ t("logIn.createAccount") }}</router-link>
+        <router-link to="/sign-up">{{ t("shared.signUp") }}</router-link>
       </div>
     </div>
     <MessageBox type="error" v-if="message" class="error-message">

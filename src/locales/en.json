@@ -1,7 +1,17 @@
 {
+  "shared": {
+    "login": "Log in",
+    "signUp": "Sign up",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "emailEmpty": "Please enter your email",
+    "emailInvalid": "Please enter correct email",
+    "gender": "Gender",
+    "password": "Password"
+  },
   "nav": {
-    "primaryNav": ["Home", "Services", "Contact"],
-    "secondaryNav": ["Log in", "Sign up"]
+    "primaryNav": ["Home", "Services", "Contact"]
   },
   "footer": ["Terms of use", "Privacy policy"],
   "home": "HOME",
@@ -11,32 +21,22 @@
   "signUp": {
     "heading": "Welcome to Zołza Hairstyles",
     "nameField": {
-      "label": "Name",
       "messageEmpty": "Please enter your name.",
       "messageInvalid": "Enter proper name"
     },
     "surnameField": {
-      "label": "Surname",
       "messageEmpty": "Please enter your surname.",
       "messageInvalid": "Enter proper surname."
     },
-    "emailField": {
-      "label": "Email",
-      "messageEmpty": "Please enter your Email.",
-      "messageInvalid": "Please enter valid Email address."
-    },
     "genderField": {
-      "label": "Gender",
       "messageEmpty": "Please select your gender.",
       "messageInvalid": ""
     },
     "passwordField": {
-      "label": "Password",
       "messageEmpty": "Please enter your password.",
       "messageInvalid": "Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars."
     },
     "repeatPasswordField": {
-      "label": "Repeat Password",
       "messageEmpty": "Plase repeat your password.",
       "messageInvalid": "Passwords must be the same."
     },
@@ -52,26 +52,39 @@
   "logIn": {
     "heading": "Welcome to Zołza Hairstyles",
     "subtitle": "Login to your account and book an appointment today",
-    "emailField": {
-      "label": "Email",
-      "messageEmpty": "Please enter your email",
-      "messageInvalid": "Password is not strong enough"
-    },
     "currentPasswordField": {
-      "label": "Password",
       "messageEmpty": "Please enter your password",
       "messageInvalid": "Password is not strong enough"
     },
     "forgotPasswordBtn": "Forgot password?",
-    "logInBtn": "Log in",
     "emailConfirmed": "Email has been confirmed",
     "allowLogin": "You can now login",
     "accountCreated": "Account has been created",
     "saveUser": "Remember me",
     "dontHaveAnAccount": "Don't have an account yet?",
-    "createAccount": "Create an account",
-    "error": "Error",
-    "login": "Log in"
+    "error": "Error"
+  },
+  "resetPassword": {
+    "requestPasswordReset": {
+      "heading": "Forgot your password?",
+      "subtitle": "Enter email connected to your account and we will send you a message providing link to reset your password",
+      "resetPasswordBtn": "Send link"
+    },
+    "changePassword": {
+      "heading": "Set up new password",
+      "subtitle": "Your new password must be diffrent than five last used by you passwords",
+      "newPasswordField": {
+        "label": "New password",
+        "messageEmpty": "Enter new password",
+        "messageInvalid": "Password is not strong enough"
+      },
+      "repeatNewPasswordField": {
+        "label": "Repeat new password",
+        "messageEmpty": "Enter new password",
+        "messageInvalid": "Passwords must be the same."
+      },
+      "changePasswordBtn": "Change password"
+    }
   },
   "pageNotFound": {
     "notFound": "Page not found",
@@ -80,7 +93,6 @@
   "userAccountSettings": {
     "userSince": "User since",
     "confirmDeleteAccount": "delete my account",
-    "name": "Name",
     "surname": "Surname",
     "gender": "Gender",
     "deleteAccount": "Delete account",

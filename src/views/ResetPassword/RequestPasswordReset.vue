@@ -9,7 +9,7 @@
     <form @submit.prevent="handleResetPasswordRequest" novalidate>
       <div class="inputs">
         <CustomInput
-          :label="t('resetPassword.requestPasswordReset.emailField.label')"
+          :label="t('shared.email')"
           iconClass="ph-envelope-simple-light"
           inputType="email"
           autocomplete="email"
@@ -18,10 +18,10 @@
           :forceValidate="forceValidate"
           :required="true"
           :messageEmpty="
-            t('resetPassword.requestPasswordReset.emailField.messageEmpty')
+            t('shared.emailEmpty')
           "
           :messageInvalid="
-            t('resetPassword.requestPasswordReset.emailField.messageInvalid')
+            t('shared.emailInvalid')
           "
         />
       </div>
