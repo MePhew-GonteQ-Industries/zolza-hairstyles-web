@@ -45,7 +45,7 @@ export default {
 
     const languageOptions = [
       {
-        title: 'Polish',
+        title: 'Polski',
         value: 'pl',
         iconText: 'PL',
       },
