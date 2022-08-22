@@ -3,7 +3,7 @@
     <div class="elevated-card">
       <h1>{{ t("languageSettings.chooseLanguage") }}</h1>
       <CustomSelect
-        :header="t('languageSettings.language')"
+        :header="t('shared.language')"
         :options="languageOptions"
         v-model:selectedValue="selectedLanguage"
         appearance="primary"

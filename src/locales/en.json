@@ -10,7 +10,8 @@
     "gender": "Gender",
     "password": "Password",
     "saveChanges": "Save changes",
-    "operationCancel": "Cancel"
+    "operationCancel": "Cancel",
+    "language": "Language"
   },
   "nav": {
     "primaryNav": ["Home", "Dashboard", "Contact"]
@@ -18,7 +19,11 @@
   "footer": ["Terms of use", "Privacy policy"],
   "home": "HOME",
   "settings": {
-    "languageSelector": ["Polish", "English"]
+    "languageSelector": ["Polish", "English"],
+    "account": "Account",
+    "security": "Security",
+    "notifications": "Notifications",
+    "theme": "Theme"
   },
   "signUp": {
     "heading": "Welcome to Zołza Hairstyles",
@@ -116,7 +121,6 @@
     "next": "Next"
   },
   "languageSettings": {
-    "chooseLanguage": "Choose language",
-    "language": "Language"
+    "chooseLanguage": "Choose language"
   }
 }

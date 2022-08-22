@@ -10,7 +10,8 @@
     "gender": "Płeć",
     "password": "Hasło",
     "saveChanges": "Zapisz zmiany",
-    "operationCancel": "Anuluj"
+    "operationCancel": "Anuluj",
+    "language": "Język"
   },
   "nav": {
     "primaryNav": ["Strona główna", "Panel administracyjny", "Kontakt"]
@@ -18,7 +19,11 @@
   "footer": ["Warunki korzystania", "Polityka prywatności"],
   "home": "DOM",
   "settings": {
-    "languageSelector": ["Polski", "Angielski"]
+    "languageSelector": ["Polski", "Angielski"],
+    "account": "Konto",
+    "security": "Bezpieczeństwo",
+    "notifications": "Powiadomienia",
+    "theme": "Motyw"
   },
   "signUp": {
     "heading": "Utwórz konto",
@@ -116,7 +121,6 @@
     "next": "Dalej"
   },
   "languageSettings": {
-    "chooseLanguage": "Wybierz język",
-    "language": "Język"
+    "chooseLanguage": "Wybierz język"
   }
 }
