@@ -145,5 +145,10 @@
   },
   "notificationsSettings": {
     "pageName": "Notifications settings"
+  },
+  "themeSettings": {
+    "selectTheme": "Select theme",
+    "dark": "Dark",
+    "light": "Light"
   }
 }

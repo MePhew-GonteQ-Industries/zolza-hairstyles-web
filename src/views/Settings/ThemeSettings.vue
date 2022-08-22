@@ -1,23 +1,23 @@
 <template>
   <div class="settings-page">
     <div class="elevated-card">
-      <h1>Wybierz motyw</h1>
+      <h1>{{ t("themeSettings.selectTheme") }}</h1>
       <div class="theme-selection">
         <ThemeCard themeName="dark" v-model:selectedTheme="selectedTheme">
-          Ciemny
+          {{ t("themeSettings.dark") }}
         </ThemeCard>
         <ThemeCard themeName="light" v-model:selectedTheme="selectedTheme">
-          Jasny
+          {{ t("themeSettings.light") }}
         </ThemeCard>
       </div>
       <div class="buttons-row" v-if="selectedTheme !== initialTheme">
         <CustomButton type="success" @click="changeTheme"
-          >Zapisz zmiany</CustomButton
+          >{{ t("shared.saveChanges") }}</CustomButton
         >
         <CustomButton
           type="secondary"
           @click="selectedTheme = initialTheme"
-          >Anuluj</CustomButton
+          >{{ t("shared.operationCancel") }}</CustomButton
         >
       </div>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import ThemeCard from '@/components/Settings/ThemeCard.vue';
@@ -41,6 +42,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
 
     const selectedTheme = ref(store.state.settings.theme);
 
@@ -85,6 +87,7 @@ export default {
       selectedTheme,
       changeTheme,
       initialTheme,
+      t,
     };
   },
 };

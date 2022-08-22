@@ -145,5 +145,10 @@
   },
   "notificationsSettings": {
     "pageName": "Ustawienia powiadomień"
+  },
+  "themeSettings": {
+    "selectTheme": "Wybierz motyw",
+    "dark": "Ciemny",
+    "light": "Jasny"
   }
 }
