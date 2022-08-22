@@ -1,7 +1,7 @@
 <template>
   <div class="settings-page account-security-settings">
     <div class="elevated-card change-password">
-      <h1>Zmiana hasła</h1>
+      <h1>{{ t("accountSecuritySettings.passwordChange") }}</h1>
       <form @submit.prevent>
         <input
           class="hidden-input"
