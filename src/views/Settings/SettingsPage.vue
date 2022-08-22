@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { v4 as uuidv4 } from 'uuid';
 import SideMenu from '@/components/SideMenu.vue';
@@ -17,6 +18,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
 
     const links = [
       {
@@ -55,6 +57,7 @@ export default {
 
     return {
       links,
+      t,
     };
   },
 };

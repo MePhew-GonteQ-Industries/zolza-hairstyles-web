@@ -140,7 +140,7 @@
     "warning": "WARNING",
     "irreversibleInfo": "Action is irrevirsible",
     "logOut": "Log out",
-    "devicesList": "This list shows all devices you are currently logged.",
+    "devicesList": "This list shows all devices you are currently logged in.",
     "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
   }
 }
