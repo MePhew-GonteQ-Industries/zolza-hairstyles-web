@@ -12,14 +12,14 @@
         <label for="settings-change-password-hidden-username-input"></label>
         <CustomInput
           v-model:value="passwordData.current"
-          :label="t('accountSecurityPage.currentPassword')"
+          :label="t('accountSecuritySettings.currentPassword')"
           autocomplete="current-password"
           type="password"
           :required="true"
         />
         <CustomInput
           v-model:value="passwordData.new"
-          :label="t('accountSecurityPage.newPassword')"
+          :label="t('accountSecuritySettings.newPassword')"
           autocomplete="new-password"
           type="password"
           :required="true"
@@ -32,10 +32,10 @@
           :required="true"
         />
         <router-link to="/password-reset" tabindex="-1"
-          >{{ t('accountSecurityPage.forgotYourPassword') }}</router-link
+          >{{ t('accountSecuritySettings.forgotYourPassword') }}</router-link
         >
         <CustomButton @click="changePassword">
-        {{ t('accountSecurityPage.changePassword') }}</CustomButton>
+        {{ t('accountSecuritySettings.changePassword') }}</CustomButton>
       </form>
     </div>
     <div class="elevated-card two-fa" v-if="false">
