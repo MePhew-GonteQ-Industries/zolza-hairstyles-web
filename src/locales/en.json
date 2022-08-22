@@ -16,7 +16,12 @@
   "nav": {
     "primaryNav": ["Home", "Dashboard", "Contact"]
   },
-  "footer": ["Terms of use", "Privacy policy"],
+  "footer": [
+    "Terms of use",
+    "Privacy policy",
+    "Cookies policy",
+    "RODO infromation obligation"
+  ],
   "home": "HOME",
   "settings": {
     "languageSelector": ["Polish", "English"],

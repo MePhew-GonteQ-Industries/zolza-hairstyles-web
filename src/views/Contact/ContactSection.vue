@@ -24,12 +24,12 @@
         </li>
         <li>
           <router-link class="link" to="/cookies-policy"
-            >Polityka cookies
+            >{{ t("footer[2]") }}
           </router-link>
         </li>
         <li>
           <router-link class="link" to="/rodo"
-            >Obowiązek informacyjny RODO
+            >{{ t("footer[3]") }}
           </router-link>
         </li>
         <li>

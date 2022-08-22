@@ -16,7 +16,12 @@
   "nav": {
     "primaryNav": ["Strona główna", "Panel administracyjny", "Kontakt"]
   },
-  "footer": ["Warunki korzystania", "Polityka prywatności"],
+  "footer": [
+    "Warunki korzystania",
+    "Polityka prywatności",
+    "Polityka cookies",
+    "Obowiązek informacyjny RODO"
+  ],
   "home": "DOM",
   "settings": {
     "languageSelector": ["Polski", "Angielski"],
