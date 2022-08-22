@@ -11,14 +11,12 @@
 
     <div class="mobile-app-banner">
       <div class="cta">
-        <p class="primary">Jedna aplikacja wiele możliwości</p>
+        <p class="primary">{{ t("home.appHeading") }}</p>
         <p class="description">
-          W aplikacji mobilnej na telefon możesz przeglądać wolne terminy,
-          umawiać się na wizytę oraz kontrolować wszystkie swoje wizyty w naszym
-          salonie.
+          {{ t("home.appDescription") }}
         </p>
         <p class="secondary">
-          Aplikacja dostępna jest na urządzeniach z systemem Android oraz IOS.
+          {{ t("home.appDescriptionSecondary") }}
         </p>
         <div class="download-links">
           <a href="">

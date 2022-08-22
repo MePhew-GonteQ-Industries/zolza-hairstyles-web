@@ -22,7 +22,11 @@
     "Polityka cookies",
     "Obowiązek informacyjny RODO"
   ],
-  "home": "DOM",
+  "home": {
+    "appHeading": "Jedna aplikacja wiele możliwości",
+    "appDescription": "W aplikacji mobilnej na telefon możesz przeglądać wolne terminy, umawiać się na wizytę oraz kontrolować wszystkie swoje wizyty w naszym salonie.",
+    "appDescriptionSecondary": "Aplikacja dostępna jest na urządzeniach z systemem Android oraz IOS."
+  },
   "settings": {
     "languageSelector": ["Polski", "Angielski"],
     "account": "Konto",
