@@ -142,5 +142,8 @@
     "logOut": "Log out",
     "devicesList": "This list shows all devices you are currently logged in.",
     "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
+  },
+  "notificationsSettings": {
+    "pageName": "Notifications settings"
   }
 }

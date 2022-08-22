@@ -142,5 +142,8 @@
     "logOut": "Wyloguj",
     "devicesList": "Poniższa lista przedstawia wszystkie urządzenia na których jesteś obecnie zalogowany.",
     "logOutUnrecognisedDevices": "Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz."
+  },
+  "notificationsSettings": {
+    "pageName": "Ustawienia powiadomień"
   }
 }
