@@ -12,69 +12,69 @@
         <label for="settings-change-password-hidden-username-input"></label>
         <CustomInput
           v-model:value="passwordData.current"
-          label="Obecne hasło"
+          :label="t('accountSecurityPage.currentPassword')"
           autocomplete="current-password"
           type="password"
           :required="true"
         />
         <CustomInput
           v-model:value="passwordData.new"
-          label="Nowe hasło"
+          :label="t('accountSecurityPage.newPassword')"
           autocomplete="new-password"
           type="password"
           :required="true"
         />
         <CustomInput
           v-model:value="passwordData.repeat"
-          label="Powtórz nowe hasło"
+          :label="t('accountSecuritySettings.repeatNewPassword')"
           autocomplete="new-password"
           type="password"
           :required="true"
         />
         <router-link to="/password-reset" tabindex="-1"
-          >Nie pamiętasz hasła?</router-link
+          >{{ t('accountSecurityPage.forgotYourPassword') }}</router-link
         >
-        <CustomButton @click="changePassword">Zmień hasło</CustomButton>
+        <CustomButton @click="changePassword">
+        {{ t('accountSecurityPage.changePassword') }}</CustomButton>
       </form>
     </div>
     <div class="elevated-card two-fa" v-if="false">
       <div class="header">
-        <h1>Uwierzytelnianie dwuetapowe</h1>
-        <CustomChip type="warning">Nie skonfigurowano</CustomChip>
+        <h1>{{ t("accountSecuritySettings.twoFactorAuthentication") }}</h1>
+        <CustomChip type="warning">{{ t("accountSecuritySettings.notConfigured") }}</CustomChip>
       </div>
       <p>
-        Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo
-        twojego konta
+        {{ t("accountSecuritySettings.twoFAInfo") }}
       </p>
-      <CustomButton type="success">Skonfiguruj teraz</CustomButton>
+      <CustomButton type="success">{{ t("accountSecuritySettings.configureNow") }}</CustomButton>
     </div>
     <div class="elevated-card active-sessions">
       <div class="header">
-        <h1>Aktywne sesje</h1>
+        <h1>{{ t("accountSecuritySettings.sessions") }}</h1>
         <CustomButton
           type="warning"
           class="logout-everywhere"
           v-if="sessions.length > 1"
           @click="logoutEverywhereModalOpen = true"
-          >Wyloguj się wszędzie</CustomButton
+          >{{ t("accountSecuritySettings.logOutEverywhere") }}</CustomButton
         >
         <CustomModal v-model:open="logoutEverywhereModalOpen">
           <template #title>
-            Czy na pewno chcesz wylogować się ze wszystkich urządzeń?
+            {{ t("accountSecuritySettings.logOutReassurance") }}
           </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="warning">
-              <template #title>UWAGA</template>
-              <template #subtitle> Akcja jest nieodwracalna </template>
+              <template #title>{{ t("accountSecuritySettings.warning") }}</template>
+              <template #subtitle> {{ t("accountSecuritySettings.irrevirsibleInfo") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logoutEverywhere"
-                >Wyloguj</CustomButton
+                >{{ t("accountSecuritySettings.logOut") }}</CustomButton
               >
               <CustomButton
                 type="secondary"
                 @click="logoutEverywhereModalOpen = false"
-                >Anuluj</CustomButton
+                >{{ t("shared.operationCancel") }}</CustomButton
               >
             </div>
           </div>
@@ -82,11 +82,10 @@
       </div>
       <MessageBox type="info">
         <template #title>
-          Poniższa lista przedstawia wszystkie urządzenia na których jesteś
-          obecnie zalogowany.
+          {{ t("accountSecuritySettings.devicesList") }}
         </template>
         <template #subtitle>
-          Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz.
+          {{ t("accountSecuritySettings.logOutUnrecognisedDevices") }}
         </template>
       </MessageBox>
       <div class="active-sessions-wrapper">

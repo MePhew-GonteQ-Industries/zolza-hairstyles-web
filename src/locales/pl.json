@@ -124,6 +124,23 @@
     "chooseLanguage": "Wybierz język"
   },
   "accountSecuritySettings": {
-    "passwordChange": "Zmiana hasła"
+    "passwordChange": "Zmiana hasła",
+    "currentPassword": "Obecne hasło",
+    "newPassword": "Nowe hasło",
+    "repeatNewPassword": "Powtórz nowe hasło",
+    "forgotYourPassword": "Nie pamiętasz hasła?",
+    "changePassword": "Zmień hasło",
+    "twoFactorAuthentication": "Uwierzytelnianie dwuetapowe",
+    "notConfigured": "Nie skonfigurowano",
+    "twoFAInfo": "Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo twojego konta",
+    "configureNow": "Skonfiguruj teraz",
+    "sessions": "Aktywne sesje",
+    "logOutEverywhere": "Wyloguj się wszędzie",
+    "logOutReassurance": "Czy napewno chcesz wylogować się ze wszystkich urządzeń?",
+    "warning": "UWAGA",
+    "irreversibleInfo": "Akcja jest nieodwracalna",
+    "logOut": "Wyloguj",
+    "devicesList": "Poniższa lista przedstawia wszystkie urządzenia na których jesteś obecnie zalogowany.",
+    "logOutUnrecognisedDevices": "Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz."
   }
 }

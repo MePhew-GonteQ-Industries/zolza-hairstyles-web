@@ -124,6 +124,23 @@
     "chooseLanguage": "Choose language"
   },
   "accountSecuritySettings": {
-    "passwordChange": "Password change"
+    "passwordChange": "Password change",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "repeatNewPassword": "Repeat new password",
+    "forgotYourPassword": "Forgot your password?",
+    "changePassword": "Change password",
+    "twoFactorAuthentication": "Two factor authentication",
+    "notConfigured": "Not configured",
+    "twoFAInfo": "Two factor authentication(2FA) increases acount security",
+    "configureNow": "Configure now",
+    "sessions": "Active sessions",
+    "logOutEverywhere": "Log out everywhere",
+    "logOutReassurance": "Are you sure you want to log out from all devices?",
+    "warning": "WARNING",
+    "irreversibleInfo": "Action is irrevirsible",
+    "logOut": "Log out",
+    "devicesList": "This list shows all devices you are currently logged.",
+    "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
   }
 }
