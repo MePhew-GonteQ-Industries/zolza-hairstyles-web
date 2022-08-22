@@ -105,6 +105,7 @@
 import {
   ref, onMounted, computed, reactive,
 } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomChip from '@/components/CustomChip.vue';
@@ -128,6 +129,7 @@ export default {
   setup() {
     const store = useStore();
     const locale = store.state.settings.language;
+    const { t } = useI18n({ useScope: 'global' });
 
     const sessions = computed(() => {
       if (!store.state.sessions.sessions.length) return [];
@@ -252,6 +254,7 @@ export default {
       logoutEverywhere,
       passwordData,
       changePassword,
+      t,
     };
   },
 };

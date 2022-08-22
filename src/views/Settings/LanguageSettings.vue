@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, watch } from 'vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomButton from '@/components/CustomButton.vue';
@@ -42,6 +43,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
 
     const languageOptions = [
       {
@@ -100,6 +102,7 @@ export default {
       selectedLanguage,
       initialLanguage,
       changeLanguage,
+      t,
     };
   },
 };
