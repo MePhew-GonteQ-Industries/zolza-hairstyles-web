@@ -122,5 +122,8 @@
   },
   "languageSettings": {
     "chooseLanguage": "Choose language"
+  },
+  "accountSecuritySettings": {
+    "passwordChange": "Password change"
   }
 }
