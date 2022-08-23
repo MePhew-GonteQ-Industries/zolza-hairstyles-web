@@ -32,7 +32,7 @@
           :required="true"
         />
         <router-link to="/password-reset" tabindex="-1"
-          >{{ t('settings.accountSecuritySettings.forgotYourPassword') }}</router-link
+          >{{ t('shared.forgotYourPassword') }}</router-link
         >
         <CustomButton @click="changePassword">
         {{ t('settings.accountSecuritySettings.changePassword') }}</CustomButton>
@@ -66,13 +66,13 @@
           </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="warning">
-              <template #title>{{ t("settings.accountSecuritySettings.warning") }}</template>
+              <template #title>{{ t("shared.warning") }}</template>
               <template #subtitle>
-                {{ t("settings.accountSecuritySettings.irrevirsibleInfo") }} </template>
+                {{ t("shared.irrevirsible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logoutEverywhere"
-                >{{ t("settings.accountSecuritySettings.logOut") }}</CustomButton
+                >{{ t("shared.logOut") }}</CustomButton
               >
               <CustomButton
                 type="secondary"

@@ -47,7 +47,7 @@
         <div class="delete-account-wrappper">
           <div class="messages-wrapper">
             <MessageBox type="error">
-              <template #title>{{ t("settings.userAccountSettings.warning") }}</template>
+              <template #title>{{ t("shared.warning") }}</template>
               <template #subtitle>
                 {{ t("settings.userAccountSettings.deleteAccountInformation") }}
                 <p>{{ t("settings.userAccountSettings.appointmentsCancellation") }}</p>
@@ -150,7 +150,7 @@
                   v-model:value="password"
                 />
                 <router-link to="/password-reset" tabindex="-1"
-                  >{{ t("settings.userAccountSettings.forgotYourPassword") }}</router-link
+                  >{{ t("shared.forgotYourPassword") }}</router-link
                 >
               </div>
               <div class="buttons-row">

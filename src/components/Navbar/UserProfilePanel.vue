@@ -50,7 +50,7 @@
         </router-link>
         <button class="option-tile" @click="logout">
           <i class="ph-sign-out-light tile-icon"></i>
-          <span class="tile-title">{{ t("userProfilePanel.logOut") }}</span>
+          <span class="tile-title">{{ t("shared.logOut") }}</span>
         </button>
       </div>
       <div

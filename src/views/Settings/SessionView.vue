@@ -44,12 +44,12 @@
           </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="warning">
-              <template #title>{{ t("settings.sessionView.warning") }}</template>
-              <template #subtitle> {{ t("settings.sessionView.irreversible") }} </template>
+              <template #title>{{ t("shared.warning") }}</template>
+              <template #subtitle> {{ t("shared.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logout"
-                >{{ t("settings.sessionView.logOut") }}</CustomButton
+                >{{ t("shared.logOut") }}</CustomButton
               >
               <CustomButton type="secondary" @click="logoutModalOpen = false"
                 >{{ t("shared.operationCancel") }}</CustomButton

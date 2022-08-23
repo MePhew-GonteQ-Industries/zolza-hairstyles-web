@@ -11,7 +11,11 @@
     "password": "Password",
     "saveChanges": "Save changes",
     "operationCancel": "Cancel",
-    "language": "Language"
+    "language": "Language",
+    "warning": "WARNING",
+    "logOut": "Log out",
+    "forgotYourPassword": "Forgot your password?",
+    "irreversible": "Action is irreversible"
   },
   "nav": {
     "primaryNav": ["Home", "Dashboard", "Contact"]
@@ -56,7 +60,6 @@
       "gender": "Gender",
       "deleteAccount": "Delete account",
       "deleteAccountReassurance": "Are you sure you want to delete your account?",
-      "warning": "WARNING",
       "deleteAccountInformation": "Deleting account is irreversible",
       "appointmentsCancellation": "Your appointments will be cancelled",
       "deleteHighLevelAccount": "You are deleting higher level account",
@@ -69,7 +72,6 @@
       "passwordInput": "Insert your password",
       "keyDataModification": "You are trying to modify key data",
       "identityConfirmation": "Insert your password to confirm your identity",
-      "forgotYourPassword": "Forgot your password?",
       "next": "Next"
     },
     "accountSecuritySettings": {
@@ -77,7 +79,6 @@
       "currentPassword": "Current password",
       "newPassword": "New password",
       "repeatNewPassword": "Repeat new password",
-      "forgotYourPassword": "Forgot your password?",
       "changePassword": "Change password",
       "twoFactorAuthentication": "Two factor authentication",
       "notConfigured": "Not configured",
@@ -86,9 +87,6 @@
       "sessions": "Active sessions",
       "logOutEverywhere": "Log out everywhere",
       "logOutReassurance": "Are you sure you want to log out from all devices?",
-      "warning": "WARNING",
-      "irreversibleInfo": "Action is irrevirsible",
-      "logOut": "Log out",
       "devicesList": "This list shows all devices you are currently logged in.",
       "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
     },
@@ -105,17 +103,14 @@
     },
     "sessionView": {
       "device": "Device:",
-      "logOut": "Log out",
       "currentSession": "Your current session",
       "logOutReassurance": "Are you sure you want to log out from this device?",
-      "warning": "WARNING",
-      "irreversible": "Action is irreversible",
       "lastAccess": "Last access:",
       "ip": "Your ip address:",
       "location": "Location",
       "showOnMap": "Show on map",
       "noData": "No data",
-      "login": "Log in"
+      "login": "Logging in"
     }
   },
   "signUp": {
@@ -193,7 +188,6 @@
   "userProfilePanel": {
     "theme": "Theme",
     "settings": "Settings",
-    "logOut": "Log out",
     "help": "Help",
     "sendOpinion": "Send opinion",
     "reportIssue": "Report an issue"

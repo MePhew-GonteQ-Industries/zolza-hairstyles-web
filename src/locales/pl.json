@@ -11,7 +11,11 @@
     "password": "Hasło",
     "saveChanges": "Zapisz zmiany",
     "operationCancel": "Anuluj",
-    "language": "Język"
+    "language": "Język",
+    "warning": "UWAGA",
+    "logOut": "Wyloguj się",
+    "forgotYourPassword": "Nie pamiętasz hasła?",
+    "irreversible": "Akcja jest nieodwracalna"
   },
   "nav": {
     "primaryNav": ["Strona główna", "Panel administracyjny", "Kontakt"]
@@ -51,10 +55,9 @@
     },
     "userAccountSettings": {
       "userSince": "Użutkownik od",
-      "confirmDeleteAccount": "usuń moje konto",
+      "confirmDeleteAccount": "Usuń moje konto",
       "deleteAccount": "Usuń konto",
       "deleteAccountReassurance": "Czy napewno chcesz usunąć swoje konto?",
-      "warning": "UWAGA",
       "deleteAccountInformation": "Usunięcie konta jest niedowracalne",
       "appointmentsCancellation": "Twoje nadchodzące wizyty zostaną odwołane",
       "deleteHighLevelAccount": "Usuwasz konto o podniesionym poziomie uprawnień",
@@ -67,7 +70,6 @@
       "passwordInput": "Podaj swoje hasło",
       "keyDataModification": "Próbujesz zmodyfikować kluczowe dane",
       "identityConfirmation": "Podaj swoje haslo aby potwierdzić swoją tożsamość",
-      "forgotYourPassword": "Nie pamiętasz hasła?",
       "next": "Dalej"
     },
     "accountSecuritySettings": {
@@ -75,7 +77,6 @@
       "currentPassword": "Obecne hasło",
       "newPassword": "Nowe hasło",
       "repeatNewPassword": "Powtórz nowe hasło",
-      "forgotYourPassword": "Nie pamiętasz hasła?",
       "changePassword": "Zmień hasło",
       "twoFactorAuthentication": "Uwierzytelnianie dwuetapowe",
       "notConfigured": "Nie skonfigurowano",
@@ -84,9 +85,6 @@
       "sessions": "Aktywne sesje",
       "logOutEverywhere": "Wyloguj się wszędzie",
       "logOutReassurance": "Czy napewno chcesz wylogować się ze wszystkich urządzeń?",
-      "warning": "UWAGA",
-      "irreversibleInfo": "Akcja jest nieodwracalna",
-      "logOut": "Wyloguj",
       "devicesList": "Poniższa lista przedstawia wszystkie urządzenia na których jesteś obecnie zalogowany.",
       "logOutUnrecognisedDevices": "Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz."
     },
@@ -103,11 +101,8 @@
     },
     "sessionView": {
       "device": "Urządzenie:",
-      "logOut": "Wyloguj się",
       "currentSession": "Twoja obecna sesja",
       "logOutReassurance": "Czy napewno chcesz wylogować się z tego urządzenia?",
-      "warning": "UWAGA",
-      "irreversible": "Akcja jest nieodwracalna",
       "lastAccess": "Ostatni dostęp:",
       "ip": "Adres ip:",
       "location": "Lokalizacja",
@@ -193,7 +188,6 @@
   "userProfilePanel": {
     "theme": "Motyw",
     "settings": "Ustawienia",
-    "logOut": "Wyloguj się",
     "help": "Pomoc",
     "sendOpinion": "Prześlij opinie",
     "reportIssue": "Zgłoś błąd"
