@@ -33,6 +33,9 @@
       "time": "Czas: ",
       "availableDates": "Dostepne terminy",
       "price": "Cena: "
+    },
+    "servicesList": {
+      "error": "Wystąpił błąd przy pobieraniu usług"
     }
   },
   "settings": {

@@ -28,7 +28,15 @@
   "home": {
     "appHeading": "One app lots of possibilites",
     "appDescription": "With mobile app you can book and take care of your appointments in our salon.",
-    "appDescriptionSecondary": "You can get this app as well on android and IOS devices."
+    "appDescriptionSecondary": "You can get this app as well on android and IOS devices.",
+    "serviceTile": {
+      "time": "Time: ",
+      "availableDates": "Available dates",
+      "price": "Price: "
+    },
+    "servicesList": {
+      "error": "There was an error while loading services"
+    }
   },
   "settings": {
     "languageSelector": ["Polish", "English"],
