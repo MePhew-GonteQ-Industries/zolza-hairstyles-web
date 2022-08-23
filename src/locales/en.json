@@ -36,6 +36,10 @@
     },
     "servicesList": {
       "error": "There was an error while loading services"
+    },
+    "availableSlotTile": {
+      "book": "Book an appointment",
+      "info": "More info"
     }
   },
   "settings": {

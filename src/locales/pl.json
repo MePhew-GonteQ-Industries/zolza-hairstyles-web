@@ -36,6 +36,10 @@
     },
     "servicesList": {
       "error": "Wystąpił błąd przy pobieraniu usług"
+    },
+    "availableSlotTile": {
+      "book": "Umów wizytę",
+      "info": "Więcej informacji"
     }
   },
   "settings": {
