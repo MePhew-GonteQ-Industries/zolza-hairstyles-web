@@ -176,6 +176,14 @@
       "newUsers": "New users",
       "verifiedUsers": "Verified users",
       "numberOfAppointments": "Entities of appointments"
+    },
+    "appointmentsManagement": {
+      "search": "Search for appointments",
+      "service": "Service",
+      "user": "User",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "status": "Status"
     }
   }
 }

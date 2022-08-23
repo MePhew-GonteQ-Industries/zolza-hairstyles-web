@@ -176,6 +176,14 @@
       "newUsers": "Nowych użytkowników",
       "verifiedUsers": "Zweryfikowanych użytkowników",
       "numberOfAppointments": "Liczba wizyt"
+    },
+    "appointmentsManagement": {
+      "search": "Szukaj wizyt",
+      "service": "Usługa",
+      "user": "Użytkownik",
+      "startDate": "Data rozpoczęcia",
+      "endDate": "Data zakończenia",
+      "status": "Status"
     }
   }
 }
