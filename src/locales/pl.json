@@ -184,6 +184,13 @@
       "startDate": "Data rozpoczęcia",
       "endDate": "Data zakończenia",
       "status": "Status"
+    },
+    "servicesManagement": {
+      "search": "Szukaj usług",
+      "name": "Nazwa",
+      "averageDurationTime": "Średni czas trwania",
+      "minPrice": "Cena minimalna",
+      "maxPrice": "Cena maksymalna"
     }
   }
 }

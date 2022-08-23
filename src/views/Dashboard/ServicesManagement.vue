@@ -3,7 +3,7 @@
     <form class="appointments-filters">
       <CustomInput
         class="search"
-        label="Szukaj usług"
+        :label="t('dashboard.servicesManagement.search')"
         v-model:value="q"
         type="search"
       />
@@ -34,7 +34,7 @@
               :sortAscending="sortAscending"
               sortName="service"
               @toggleSort="toggleSort('service')"
-              >Nazwa</SortedHeader
+              >{{ t("dashboard.servicesManagement.name") }}</SortedHeader
             >
           </th>
           <th>
@@ -44,7 +44,7 @@
               sortName="user"
               @toggleSort="toggleSort('user')"
             >
-              Średni czas trwania</SortedHeader
+              {{ t("dashboard.servicesManagement.averageDurationTime") }}</SortedHeader
             >
           </th>
           <th>
@@ -53,7 +53,7 @@
               :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
-              >Cena minimalna</SortedHeader
+              >{{ t("dashboard.servicesManagement.minPrice") }}</SortedHeader
             >
           </th>
           <th>
@@ -62,7 +62,7 @@
               :sortAscending="sortAscending"
               sortName="endDate"
               @toggleSort="toggleSort('endDate')"
-              >Cena maksymalna</SortedHeader
+              >{{ t("dashboard.servicesManagement.maxPrice") }}</SortedHeader
             >
           </th>
         </thead>
@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
@@ -116,6 +117,8 @@ export default {
   },
   setup() {
     const servicesData = ref(null);
+
+    const { t } = useI18n({ useScope: 'global' });
 
     const services = computed(() => {
       if (!servicesData.value) return [];
@@ -150,6 +153,7 @@ export default {
     return {
       servicesData,
       services,
+      t,
     };
   },
 };

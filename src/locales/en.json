@@ -184,6 +184,13 @@
       "startDate": "Start date",
       "endDate": "End date",
       "status": "Status"
+    },
+    "servicesManagement": {
+      "search": "Search for services",
+      "name": "Name",
+      "averageDurationTime": "Average duration time",
+      "minPrice": "Lowest price",
+      "maxPrice": "Highest price"
     }
   }
 }
