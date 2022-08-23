@@ -22,6 +22,9 @@
     "Cookies policy",
     "RODO infromation obligation"
   ],
+  "app": {
+    "description": "Professional hairdressing salon. Razor shaving, hair cutting, wedding and occasional hairstyles. Feel free to see our offer and photos of our hairstyles."
+  },
   "home": {
     "appHeading": "One app lots of possibilites",
     "appDescription": "With mobile app you can book and take care of your appointments in our salon.",

@@ -6,14 +6,14 @@
   </div>
   <div class="right">
     <div class="time-wrapper">
-      <p class="time">Czas: <span>~{{ time }}min</span></p>
+      <p class="time">{{ t("home.serviceTile.time") }} <span>~{{ time }}min</span></p>
       <CustomProgressBar :value="time"/>
     </div>
     <div class="available-dates-wrapper">
-      <p class="available-dates">Dostępne terminy</p>
+      <p class="available-dates">{{ t("home.serviceTile.availableDates") }}</p>
       <CustomProgressBar :value="availability"/>
     </div>
-    <p class="price">Cena: <span>{{ priceMin }}
+    <p class="price">{{ t("home.serviceTile.price") }} <span>{{ priceMin }}
       <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span></p>
   </div>
   <input class='select-service'
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import CustomProgressBar from '@/components/CustomProgressBar.vue';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -61,10 +62,13 @@ export default {
     },
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
     const tileId = uuidv4();
 
     return {
       tileId,
+      t,
     };
   },
 };

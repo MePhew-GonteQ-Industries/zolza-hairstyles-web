@@ -22,10 +22,18 @@
     "Polityka cookies",
     "Obowiązek informacyjny RODO"
   ],
+  "app": {
+    "description": "Profesjonalny salon fryzjerski. Golenie brzytwą, stryżenie włosów,fryzury ślubne, oraz okolicznosciowe. Zapraszamy do zapoznania się znaszą ofertą, oraz prezentacją wykonanych przez nas fryzur."
+  },
   "home": {
     "appHeading": "Jedna aplikacja wiele możliwości",
     "appDescription": "W aplikacji mobilnej na telefon możesz przeglądać wolne terminy, umawiać się na wizytę oraz kontrolować wszystkie swoje wizyty w naszym salonie.",
-    "appDescriptionSecondary": "Aplikacja dostępna jest na urządzeniach z systemem Android oraz IOS."
+    "appDescriptionSecondary": "Aplikacja dostępna jest na urządzeniach z systemem Android oraz IOS.",
+    "serviceTile": {
+      "time": "Czas: ",
+      "availableDates": "Dostepne terminy",
+      "price": "Cena: "
+    }
   },
   "settings": {
     "languageSelector": ["Polski", "Angielski"],
