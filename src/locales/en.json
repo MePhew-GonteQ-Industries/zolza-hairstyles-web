@@ -167,5 +167,15 @@
     "help": "Help",
     "sendOpinion": "Send opinion",
     "reportIssue": "Report an issue"
+  },
+  "dashboard": {
+    "summaryView": {
+      "monthSummary": "Month summary",
+      "estimatedIncome": "Estimated income",
+      "entitiesOfAppointments": "Entities of appointments",
+      "newUsers": "New users",
+      "verifiedUsers": "Verified users",
+      "numberOfAppointments": "Entities of appointments"
+    }
   }
 }

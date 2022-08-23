@@ -167,5 +167,15 @@
     "help": "Pomoc",
     "sendOpinion": "Prześlij opinie",
     "reportIssue": "Zgłoś błąd"
+  },
+  "dashboard": {
+    "summaryView": {
+      "monthSummary": "Podsumowanie miesiąca",
+      "estimatedIncome": "Szacowany przychód",
+      "entitiesOfAppointments": "Umówionych wizyt",
+      "newUsers": "Nowych użytkowników",
+      "verifiedUsers": "Zweryfikowanych użytkowników",
+      "numberOfAppointments": "Liczba wizyt"
+    }
   }
 }
