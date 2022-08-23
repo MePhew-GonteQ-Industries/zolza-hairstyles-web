@@ -8,7 +8,7 @@
             userRole
           }}</CustomChip>
           <p class="email">{{ $store.state.user.email }}</p>
-          <p>{{ t("userAccountSettings.userSince") }} {{ accountCreationDateStr }}</p>
+          <p>{{ t("settings.userAccountSettings.userSince") }} {{ accountCreationDateStr }}</p>
           <p>({{ timeSinceCreationDate }})</p>
         </div>
       </div>
@@ -39,26 +39,27 @@
         type="error"
         class="delete-account-btn"
         @click="deleteAccountModalOpen = true"
-        >{{ t("userAccountSettings.deleteAccount") }}</CustomButton
+        >{{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton
       >
       <CustomModal v-model:open="deleteAccountModalOpen">
-        <template #title> {{ t("userAccountSettings.deleteAccountReassurance") }}</template>
+        <template #title>
+           {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template>
         <div class="delete-account-wrappper">
           <div class="messages-wrapper">
             <MessageBox type="error">
-              <template #title>{{ t("userAccountSettings.warning") }}</template>
+              <template #title>{{ t("settings.userAccountSettings.warning") }}</template>
               <template #subtitle>
-                {{ t("userAccountSettings.deleteAccountInformation") }}
-                <p>{{ t("userAccountSettings.appointmentsCancellation") }}</p>
+                {{ t("settings.userAccountSettings.deleteAccountInformation") }}
+                <p>{{ t("settings.userAccountSettings.appointmentsCancellation") }}</p>
               </template>
             </MessageBox>
             <MessageBox
               type="error"
               v-if="$store.getters.isAdmin || $store.getters.isOwner"
             >
-              <template #title>{{ t("userAccountSettings.warning") }}</template>
+              <template #title>{{ t("settings.userAccountSettings.warning") }}</template>
               <template #subtitle>
-                {{ t("userAccountSettings.deleteHighLevelAccount") }}
+                {{ t("settings.userAccountSettings.deleteHighLevelAccount") }}
               </template>
             </MessageBox>
           </div>
@@ -71,9 +72,9 @@
             />
             <label for="hidden-username-input-delete-account"></label>
             <div class="input-with-title">
-              <p>{{ t("userAccountSettings.password") }}</p>
+              <p>{{ t("settings.userAccountSettings.password") }}</p>
               <CustomInput
-                label="Hasło"
+                :label="t('shared.password')"
                 autocomplete="current-password"
                 type="password"
                 :required="true"
@@ -82,14 +83,14 @@
             </div>
             <div class="input-with-title">
               <p>
-                {{ t("userAccountSettings.confirmationQuote") }}
+                {{ t("settings.userAccountSettings.confirmationQuote") }}
                 <span class="confirm-delete">{{
-                  t("userAccountSettings.confirmDeleteAccount")
+                  t("settings.userAccountSettings.confirmDeleteAccount")
                 }}</span>
                 :
               </p>
               <CustomInput
-                :label="t('userAccountSettings.confirmDeleteAccount')"
+                :label="t('settings.userAccountSettings.confirmDeleteAccount')"
                 iconClass="ph-trash-light"
                 autocomplete=""
                 v-model:value="confirmAccountDeletion"
@@ -97,7 +98,7 @@
             </div>
             <div class="buttons-row">
               <CustomButton type="error" @click="deleteAccount"
-                >{{ t("userAccountSettings.confirmationButton") }}</CustomButton
+                >{{ t("settings.userAccountSettings.confirmationButton") }}</CustomButton
               >
               <CustomButton
                 type="secondary"
@@ -115,22 +116,23 @@
         v-if="!$store.state.user.verified"
       >
         <template #title>
-          {{ t("userAccountSettings.emailLabel") }} {{ $store.state.user.email }}
-          {{ t("userAccountSettings.emailNotConfirmed") }}
+          {{ t("settings.userAccountSettings.emailLabel") }} {{ $store.state.user.email }}
+          {{ t("settings.userAccountSettings.emailNotConfirmed") }}
         </template>
-        <template #subtitle>  {{ t("userAccountSettings.emailLinkResend") }} </template>
+        <template #subtitle>  {{ t("settings.userAccountSettings.emailLinkResend") }} </template>
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
         <CustomButton class="save" type="success" @click="changeUserData"
           >{{ t("shared.saveChanges") }}</CustomButton
         >
         <CustomModal v-model:open="passwordPromptOpen">
-          <template #title> {{ t("userAccountSettings.passwordInput") }} </template>
+          <template #title> {{ t("settings.userAccountSettings.passwordInput") }} </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="info">
-              <template #title>{{ t("userAccountSettings.keyDataModification") }}</template>
+              <template #title>
+                {{ t("settings.userAccountSettings.keyDataModification") }}</template>
               <template #subtitle
-                >{{ t("userAccountSettings.identityConfirmation") }}</template>
+                >{{ t("settings.userAccountSettings.identityConfirmation") }}</template>
             </MessageBox>
             <form @submit.prevent="changeUserDataSudoMode">
               <input
@@ -142,30 +144,30 @@
               <label for="password-prompt-hidden-username-input"></label>
               <div class="enter-password-wrapper">
                 <CustomInput
-                  label="Hasło"
+                  :label="t('shared.password')"
                   autocomplete="new-password"
                   type="password"
                   v-model:value="password"
                 />
                 <router-link to="/password-reset" tabindex="-1"
-                  >{{ t("userAccountSettings.forgotYourPassword") }}</router-link
+                  >{{ t("settings.userAccountSettings.forgotYourPassword") }}</router-link
                 >
               </div>
               <div class="buttons-row">
                 <CustomButton type="success" @click="changeUserDataSudoMode"
-                  >{{ t("userAccountSettings.next") }}</CustomButton
+                  >{{ t("settings.userAccountSettings.next") }}</CustomButton
                 >
                 <CustomButton
                   type="secondary"
                   @click="passwordPromptOpen = false"
-                  >{{ t("userAccountSettings.operationCancel") }}</CustomButton
+                  >{{ t("shared.operationCancel") }}</CustomButton
                 >
               </div>
             </form>
           </div>
         </CustomModal>
         <CustomButton type="secondary" class="cancel" @click="revertChanges"
-          >{{ t("userAccountSettings.operationCancel") }}</CustomButton
+          >{{ t("shared.operationCancel") }}</CustomButton
         >
       </div>
     </div>

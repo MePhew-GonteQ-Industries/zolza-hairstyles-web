@@ -1,13 +1,13 @@
 <template>
   <div class="settings-page">
     <div class="elevated-card">
-      <h1>{{ t("themeSettings.selectTheme") }}</h1>
+      <h1>{{ t("settings.themeSettings.selectTheme") }}</h1>
       <div class="theme-selection">
         <ThemeCard themeName="dark" v-model:selectedTheme="selectedTheme">
-          {{ t("themeSettings.dark") }}
+          {{ t("settings.themeSettings.dark") }}
         </ThemeCard>
         <ThemeCard themeName="light" v-model:selectedTheme="selectedTheme">
-          {{ t("themeSettings.light") }}
+          {{ t("settings.themeSettings.light") }}
         </ThemeCard>
       </div>
       <div class="buttons-row" v-if="selectedTheme !== initialTheme">

@@ -14,7 +14,7 @@
           </CustomTooltip>
         </div>
         <div class="title">
-          <p class="section-title">Urządzenie:</p>
+          <p class="section-title">{{ t("settings.sessionView.device") }}</p>
           <span>{{ session.deviceTooltip }}</span>
           <span
             v-if="
@@ -33,26 +33,26 @@
           class="logout-btn"
           v-if="!(session.id === $store.state.auth.sessionId)"
           @click="logoutModalOpen = true"
-          >Wyloguj się</CustomButton
+          >{{ t("settings.sessionView.logOut") }}</CustomButton
         >
         <CustomChip type="info" class="current-session-chip" v-else>
-          Twoja obecna sesja
+          {{ t("settings.sessionView.currentSession") }}
         </CustomChip>
         <CustomModal v-model:open="logoutModalOpen">
           <template #title>
-            Czy na pewno chcesz wylogować się z tego urządzenia?
+            {{ t("settings.sessionView.logOutReassurance") }}
           </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="warning">
-              <template #title>UWAGA</template>
-              <template #subtitle> Akcja jest nieodwracalna </template>
+              <template #title>{{ t("settings.sessionView.warning") }}</template>
+              <template #subtitle> {{ t("settings.sessionView.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logout"
-                >Wyloguj</CustomButton
+                >{{ t("settings.sessionView.logOut") }}</CustomButton
               >
               <CustomButton type="secondary" @click="logoutModalOpen = false"
-                >Anuluj</CustomButton
+                >{{ t("shared.operationCancel") }}</CustomButton
               >
             </div>
           </div>
@@ -61,16 +61,16 @@
       <div class="sessions-data">
         <div class="data-wrapper">
           <div class="session-data">
-            <p class="section-title">Ostatni dostęp:</p>
+            <p class="section-title">{{ t("settings.sessionView.lastAccess") }}</p>
             <p>{{ session.last_accessed_str }}</p>
             <p>({{ session.timeSinceLastAccessed }})</p>
           </div>
           <div class="session-data">
-            <p class="section-title">Adres ip:</p>
+            <p class="section-title">{{ t("settings.sessionView.ip") }}</p>
             <p>{{ session.last_access_data.ip_address }}</p>
           </div>
           <div class="session-data">
-            <p class="section-title">Lokalizacja:</p>
+            <p class="section-title">{{ t("settings.sessionView.location") }}</p>
             <template v-if="session.last_access_data.location">
               <p>
                 {{ session.last_access_data.location.city }},
@@ -81,10 +81,10 @@
                 type="info"
                 class="show-on-map-btn"
                 @click="showLastAccessMap"
-                >Pokaż na mapie</CustomButton
+                >{{ t("settings.sessionView.showOnMap") }}</CustomButton
               >
             </template>
-            <p v-else>Brak danych</p>
+            <p v-else>{{ t("settings.sessionView.noData") }}</p>
           </div>
           <CustomMap
             v-if="session.last_access_data.location"
@@ -95,16 +95,16 @@
 
         <div class="data-wrapper">
           <div class="session-data">
-            <p class="section-title">Logowanie:</p>
+            <p class="section-title">{{ t("settings.sessionView.login") }}</p>
             <p>{{ session.first_accessed_str }}</p>
             <p>({{ session.timeSinceFirstAccessed }})</p>
           </div>
           <div class="session-data">
-            <p class="section-title">Adres ip:</p>
+            <p class="section-title">{{ t("settings.sessionView.ip") }}</p>
             <p>{{ session.sign_in_data.ip_address }}</p>
           </div>
           <div class="session-data">
-            <p class="section-title">Lokalizacja:</p>
+            <p class="section-title">{{ t("settings.sessionView.location") }}</p>
             <template v-if="session.sign_in_data.location">
               <p>
                 {{ session.sign_in_data.location.city }},
@@ -115,10 +115,10 @@
                 type="info"
                 class="show-on-map-btn"
                 @click="showSignInMap"
-                >Pokaż na mapie</CustomButton
+                >{{ t("settings.sessionView.showOnMap") }}</CustomButton
               >
             </template>
-            <p v-else>Brak danych</p>
+            <p v-else>{{ t("settings.sessionView.noData") }}</p>
           </div>
           <CustomMap
             v-if="session.sign_in_data.location"
@@ -132,6 +132,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
@@ -156,6 +157,7 @@ export default {
     CustomMap,
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -282,6 +284,7 @@ export default {
       showSignInMap,
       lastAccessMapLoaded,
       signInMapLoaded,
+      t,
     };
   },
 };

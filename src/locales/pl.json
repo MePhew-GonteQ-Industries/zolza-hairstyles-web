@@ -43,11 +43,78 @@
     }
   },
   "settings": {
-    "languageSelector": ["Polski", "Angielski"],
-    "account": "Konto",
-    "security": "Bezpieczeństwo",
-    "notifications": "Powiadomienia",
-    "theme": "Motyw"
+    "sideMenu": {
+      "account": "Konto",
+      "security": "Bezpieczeństwo",
+      "notifications": "Powiadomienia",
+      "theme": "Motyw"
+    },
+    "userAccountSettings": {
+      "userSince": "Użutkownik od",
+      "confirmDeleteAccount": "usuń moje konto",
+      "deleteAccount": "Usuń konto",
+      "deleteAccountReassurance": "Czy napewno chcesz usunąć swoje konto?",
+      "warning": "UWAGA",
+      "deleteAccountInformation": "Usunięcie konta jest niedowracalne",
+      "appointmentsCancellation": "Twoje nadchodzące wizyty zostaną odwołane",
+      "deleteHighLevelAccount": "Usuwasz konto o podniesionym poziomie uprawnień",
+      "password": "Podaj swoje hasło:",
+      "confirmationQuote": "Aby potwierdzić wpisz",
+      "confirmationButton": "Usuń konto",
+      "emailLabel": "Twój adres email",
+      "emailNotConfirmed": "nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.",
+      "emailLinkResend": "Wyślij link ponownie",
+      "passwordInput": "Podaj swoje hasło",
+      "keyDataModification": "Próbujesz zmodyfikować kluczowe dane",
+      "identityConfirmation": "Podaj swoje haslo aby potwierdzić swoją tożsamość",
+      "forgotYourPassword": "Nie pamiętasz hasła?",
+      "next": "Dalej"
+    },
+    "accountSecuritySettings": {
+      "passwordChange": "Zmiana hasła",
+      "currentPassword": "Obecne hasło",
+      "newPassword": "Nowe hasło",
+      "repeatNewPassword": "Powtórz nowe hasło",
+      "forgotYourPassword": "Nie pamiętasz hasła?",
+      "changePassword": "Zmień hasło",
+      "twoFactorAuthentication": "Uwierzytelnianie dwuetapowe",
+      "notConfigured": "Nie skonfigurowano",
+      "twoFAInfo": "Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo twojego konta",
+      "configureNow": "Skonfiguruj teraz",
+      "sessions": "Aktywne sesje",
+      "logOutEverywhere": "Wyloguj się wszędzie",
+      "logOutReassurance": "Czy napewno chcesz wylogować się ze wszystkich urządzeń?",
+      "warning": "UWAGA",
+      "irreversibleInfo": "Akcja jest nieodwracalna",
+      "logOut": "Wyloguj",
+      "devicesList": "Poniższa lista przedstawia wszystkie urządzenia na których jesteś obecnie zalogowany.",
+      "logOutUnrecognisedDevices": "Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz."
+    },
+    "notificationsSettings": {
+      "pageName": "Ustawienia powiadomień"
+    },
+    "themeSettings": {
+      "selectTheme": "Wybierz motyw",
+      "dark": "Ciemny",
+      "light": "Jasny"
+    },
+    "languageSettings": {
+      "chooseLanguage": "Wybierz język"
+    },
+    "sessionView": {
+      "device": "Urządzenie:",
+      "logOut": "Wyloguj się",
+      "currentSession": "Twoja obecna sesja",
+      "logOutReassurance": "Czy napewno chcesz wylogować się z tego urządzenia?",
+      "warning": "UWAGA",
+      "irreversible": "Akcja jest nieodwracalna",
+      "lastAccess": "Ostatni dostęp:",
+      "ip": "Adres ip:",
+      "location": "Lokalizacja",
+      "showOnMap": "Pokaż na mapie",
+      "noData": "Brak danych",
+      "login": "Logowanie"
+    }
   },
   "signUp": {
     "heading": "Utwórz konto",
@@ -122,58 +189,6 @@
   "pageNotFound": {
     "heading": "Nie znaleziono strony",
     "button": "Powrót"
-  },
-  "userAccountSettings": {
-    "userSince": "Użutkownik od",
-    "confirmDeleteAccount": "usuń moje konto",
-    "deleteAccount": "Usuń konto",
-    "deleteAccountReassurance": "Czy napewno chcesz usunąć swoje konto?",
-    "warning": "UWAGA",
-    "deleteAccountInformation": "Usunięcie konta jest niedowracalne",
-    "appointmentsCancellation": "Twoje nadchodzące wizyty zostaną odwołane",
-    "deleteHighLevelAccount": "Usuwasz konto o podniesionym poziomie uprawnień",
-    "password": "Podaj swoje hasło:",
-    "confirmationQuote": "Aby potwierdzić wpisz",
-    "confirmationButton": "Usuń konto",
-    "emailLabel": "Twój adres email",
-    "emailNotConfirmed": "nie jest potwierdzony. Sprawdź swoją skrzynkę pocztową.",
-    "emailLinkResend": "Wyślij link ponownie",
-    "passwordInput": "Podaj swoje hasło",
-    "keyDataModification": "Próbujesz zmodyfikować kluczowe dane",
-    "identityConfirmation": "Podaj swoje haslo aby potwierdzić swoją tożsamość",
-    "forgotYourPassword": "Nie pamiętasz hasła?",
-    "next": "Dalej"
-  },
-  "languageSettings": {
-    "chooseLanguage": "Wybierz język"
-  },
-  "accountSecuritySettings": {
-    "passwordChange": "Zmiana hasła",
-    "currentPassword": "Obecne hasło",
-    "newPassword": "Nowe hasło",
-    "repeatNewPassword": "Powtórz nowe hasło",
-    "forgotYourPassword": "Nie pamiętasz hasła?",
-    "changePassword": "Zmień hasło",
-    "twoFactorAuthentication": "Uwierzytelnianie dwuetapowe",
-    "notConfigured": "Nie skonfigurowano",
-    "twoFAInfo": "Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo twojego konta",
-    "configureNow": "Skonfiguruj teraz",
-    "sessions": "Aktywne sesje",
-    "logOutEverywhere": "Wyloguj się wszędzie",
-    "logOutReassurance": "Czy napewno chcesz wylogować się ze wszystkich urządzeń?",
-    "warning": "UWAGA",
-    "irreversibleInfo": "Akcja jest nieodwracalna",
-    "logOut": "Wyloguj",
-    "devicesList": "Poniższa lista przedstawia wszystkie urządzenia na których jesteś obecnie zalogowany.",
-    "logOutUnrecognisedDevices": "Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz."
-  },
-  "notificationsSettings": {
-    "pageName": "Ustawienia powiadomień"
-  },
-  "themeSettings": {
-    "selectTheme": "Wybierz motyw",
-    "dark": "Ciemny",
-    "light": "Jasny"
   },
   "userProfilePanel": {
     "theme": "Motyw",

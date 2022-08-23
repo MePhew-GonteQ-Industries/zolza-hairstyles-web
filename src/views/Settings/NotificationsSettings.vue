@@ -1,6 +1,6 @@
 <template>
 <div class="settings-page">
-  {{  t("notificationsSettings.pageName") }}
+  {{  t("settings.notificationsSettings.pageName") }}
 </div>
 </template>
 

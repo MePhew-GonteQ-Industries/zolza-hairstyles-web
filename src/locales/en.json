@@ -43,11 +43,80 @@
     }
   },
   "settings": {
-    "languageSelector": ["Polish", "English"],
-    "account": "Account",
-    "security": "Security",
-    "notifications": "Notifications",
-    "theme": "Theme"
+    "sideMenu": {
+      "account": "Account",
+      "security": "Security",
+      "notifications": "Notifications",
+      "theme": "Theme"
+    },
+    "userAccountSettings": {
+      "userSince": "User since",
+      "confirmDeleteAccount": "delete my account",
+      "surname": "Surname",
+      "gender": "Gender",
+      "deleteAccount": "Delete account",
+      "deleteAccountReassurance": "Are you sure you want to delete your account?",
+      "warning": "WARNING",
+      "deleteAccountInformation": "Deleting account is irreversible",
+      "appointmentsCancellation": "Your appointments will be cancelled",
+      "deleteHighLevelAccount": "You are deleting higher level account",
+      "password": "Insert your password:",
+      "confirmationQuote": "Type to confirm",
+      "confirmationButton": "Delete account",
+      "emailLabel": "Your email address",
+      "emailNotConfirmed": "is not confirmed. Check your mailbox.",
+      "emailLinkResend": "Resend confirmation link",
+      "passwordInput": "Insert your password",
+      "keyDataModification": "You are trying to modify key data",
+      "identityConfirmation": "Insert your password to confirm your identity",
+      "forgotYourPassword": "Forgot your password?",
+      "next": "Next"
+    },
+    "accountSecuritySettings": {
+      "passwordChange": "Password change",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "repeatNewPassword": "Repeat new password",
+      "forgotYourPassword": "Forgot your password?",
+      "changePassword": "Change password",
+      "twoFactorAuthentication": "Two factor authentication",
+      "notConfigured": "Not configured",
+      "twoFAInfo": "Two factor authentication(2FA) increases acount security",
+      "configureNow": "Configure now",
+      "sessions": "Active sessions",
+      "logOutEverywhere": "Log out everywhere",
+      "logOutReassurance": "Are you sure you want to log out from all devices?",
+      "warning": "WARNING",
+      "irreversibleInfo": "Action is irrevirsible",
+      "logOut": "Log out",
+      "devicesList": "This list shows all devices you are currently logged in.",
+      "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
+    },
+    "notificationsSettings": {
+      "pageName": "Notifications settings"
+    },
+    "themeSettings": {
+      "selectTheme": "Select theme",
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "languageSettings": {
+      "chooseLanguage": "Choose language"
+    },
+    "sessionView": {
+      "device": "Device:",
+      "logOut": "Log out",
+      "currentSession": "Your current session",
+      "logOutReassurance": "Are you sure you want to log out from this device?",
+      "warning": "WARNING",
+      "irreversible": "Action is irreversible",
+      "lastAccess": "Last access:",
+      "ip": "Your ip address:",
+      "location": "Location",
+      "showOnMap": "Show on map",
+      "noData": "No data",
+      "login": "Log in"
+    }
   },
   "signUp": {
     "heading": "Welcome to Zołza Hairstyles",
@@ -120,60 +189,6 @@
   "pageNotFound": {
     "notFound": "Page not found",
     "button": "Go Home"
-  },
-  "userAccountSettings": {
-    "userSince": "User since",
-    "confirmDeleteAccount": "delete my account",
-    "surname": "Surname",
-    "gender": "Gender",
-    "deleteAccount": "Delete account",
-    "deleteAccountReassurance": "Are you sure you want to delete your account?",
-    "warning": "WARNING",
-    "deleteAccountInformation": "Deleting account is irreversible",
-    "appointmentsCancellation": "Your appointments will be cancelled",
-    "deleteHighLevelAccount": "You are deleting higher level account",
-    "password": "Insert your password:",
-    "confirmationQuote": "Type to confirm",
-    "confirmationButton": "Delete account",
-    "emailLabel": "Your email address",
-    "emailNotConfirmed": "is not confirmed. Check your mailbox.",
-    "emailLinkResend": "Resend confirmation link",
-    "passwordInput": "Insert your password",
-    "keyDataModification": "You are trying to modify key data",
-    "identityConfirmation": "Insert your password to confirm your identity",
-    "forgotYourPassword": "Forgot your password?",
-    "next": "Next"
-  },
-  "languageSettings": {
-    "chooseLanguage": "Choose language"
-  },
-  "accountSecuritySettings": {
-    "passwordChange": "Password change",
-    "currentPassword": "Current password",
-    "newPassword": "New password",
-    "repeatNewPassword": "Repeat new password",
-    "forgotYourPassword": "Forgot your password?",
-    "changePassword": "Change password",
-    "twoFactorAuthentication": "Two factor authentication",
-    "notConfigured": "Not configured",
-    "twoFAInfo": "Two factor authentication(2FA) increases acount security",
-    "configureNow": "Configure now",
-    "sessions": "Active sessions",
-    "logOutEverywhere": "Log out everywhere",
-    "logOutReassurance": "Are you sure you want to log out from all devices?",
-    "warning": "WARNING",
-    "irreversibleInfo": "Action is irrevirsible",
-    "logOut": "Log out",
-    "devicesList": "This list shows all devices you are currently logged in.",
-    "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
-  },
-  "notificationsSettings": {
-    "pageName": "Notifications settings"
-  },
-  "themeSettings": {
-    "selectTheme": "Select theme",
-    "dark": "Dark",
-    "light": "Light"
   },
   "userProfilePanel": {
     "theme": "Theme",

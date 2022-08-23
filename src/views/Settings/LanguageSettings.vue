@@ -1,7 +1,7 @@
 <template>
   <div class="settings-page">
     <div class="elevated-card">
-      <h1>{{ t("languageSettings.chooseLanguage") }}</h1>
+      <h1>{{ t("settings.languageSettings.chooseLanguage") }}</h1>
       <CustomSelect
         :header="t('shared.language')"
         :options="languageOptions"
