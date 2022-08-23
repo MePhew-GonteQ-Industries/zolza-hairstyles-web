@@ -25,19 +25,19 @@ export default {
         id: uuidv4(),
         toName: 'userAccountSettings',
         iconClass: 'ph-user-light',
-        text: "t('settings.account')",
+        text: t('settings.account'),
       },
       {
         id: uuidv4(),
         toName: 'accountSecuritySettings',
         iconClass: 'ph-lock-open-light',
-        text: "t('settings.security')",
+        text: t('settings.security'),
       },
       {
         id: uuidv4(),
         toName: 'notificationsSettings',
         iconClass: 'ph-bell-ringing-light',
-        text: "t('settings.notifications')",
+        text: t('settings.notifications'),
       },
       {
         id: uuidv4(),
@@ -45,13 +45,13 @@ export default {
         iconClass: store.state.settings.theme === 'dark'
           ? 'ph-moon-light'
           : 'ph-sun-light',
-        text: "t('settings.theme')",
+        text: t('settings.theme'),
       },
       {
         id: uuidv4(),
         toName: 'languageSettings',
         iconClass: 'ph-translate-light',
-        text: "t('shared.language')",
+        text: t('shared.language'),
       },
     ];
 

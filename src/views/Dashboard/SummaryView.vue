@@ -79,7 +79,7 @@ export default {
     const chartOptions = reactive({
       title: {
         // text: 'Liczba wizyt',
-        text: "t('dashboard.summaryView.numberOfAppointments')",
+        text: t('dashboard.summaryView.numberOfAppointments'),
         align: 'left',
         margin: 10,
         offsetX: 10,

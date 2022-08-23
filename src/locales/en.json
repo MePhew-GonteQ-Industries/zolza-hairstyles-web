@@ -175,7 +175,7 @@
       "entitiesOfAppointments": "Entities of appointments",
       "newUsers": "New users",
       "verifiedUsers": "Verified users",
-      "numberOfAppointments": "Entities of appointments"
+      "numberOfAppointments": "Number of appointments"
     },
     "appointmentsManagement": {
       "search": "Search for appointments",
@@ -197,6 +197,15 @@
       "accessLevel": "Access level",
       "verified": "Verified",
       "blocked": "Blocked"
+    },
+    "sideMenu": {
+      "summary": "Summary",
+      "appointments": "Appointments",
+      "services": "Services",
+      "users": "Users",
+      "workHours": "Work hours",
+      "statistics": "Statistics",
+      "settings": "Settings"
     }
   }
 }

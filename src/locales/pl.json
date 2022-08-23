@@ -197,6 +197,15 @@
       "accessLevel": "Poziom uprawnień",
       "verified": "Zweryfikowany",
       "blocked": "Zablokowany"
+    },
+    "sideMenu": {
+      "summary": "Podsumowanie",
+      "appointments": "Wizyty",
+      "services": "Usługi",
+      "users": "Użytkownicy",
+      "workHours": "Godziny pracy",
+      "statistics": "Statystyki",
+      "settings": "Ustawienia"
     }
   }
 }
