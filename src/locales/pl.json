@@ -191,6 +191,12 @@
       "averageDurationTime": "Średni czas trwania",
       "minPrice": "Cena minimalna",
       "maxPrice": "Cena maksymalna"
+    },
+    "usersManagement": {
+      "search": "Szukaj użytkowników",
+      "accessLevel": "Poziom uprawnień",
+      "verified": "Zweryfikowany",
+      "blocked": "Zablokowany"
     }
   }
 }

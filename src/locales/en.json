@@ -191,6 +191,12 @@
       "averageDurationTime": "Average duration time",
       "minPrice": "Lowest price",
       "maxPrice": "Highest price"
+    },
+    "usersManagement": {
+      "search": "Search for users",
+      "accessLevel": "Access level",
+      "verified": "Verified",
+      "blocked": "Blocked"
     }
   }
 }

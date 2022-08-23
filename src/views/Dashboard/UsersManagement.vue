@@ -3,7 +3,7 @@
     <form class="appointments-filters">
       <CustomInput
         class="search"
-        label="Szukaj użytkowników"
+        :label="t('dashboard.usersManagement.search')"
         v-model:value="q"
         type="search"
       />
@@ -37,7 +37,7 @@
               :sortAscending="sortAscending"
               sortName="service"
               @toggleSort="toggleSort('service')"
-              >Imię</SortedHeader
+              >{{ t("shared.name") }}</SortedHeader
             >
           </th>
           <th>
@@ -46,7 +46,7 @@
               :sortAscending="sortAscending"
               sortName="service"
               @toggleSort="toggleSort('service')"
-              >Nazwisko</SortedHeader
+              >{{ t("shared.surname") }}</SortedHeader
             >
           </th>
           <th>
@@ -56,7 +56,7 @@
               sortName="user"
               @toggleSort="toggleSort('user')"
             >
-              Email</SortedHeader
+              {{ t("shared.email") }}</SortedHeader
             >
           </th>
           <th>
@@ -66,7 +66,7 @@
               sortName="user"
               @toggleSort="toggleSort('user')"
             >
-              Płeć</SortedHeader
+              {{ t("shared.gender") }}</SortedHeader
             >
           </th>
           <th>
@@ -75,7 +75,7 @@
               :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
-              >Poziom uprawnień</SortedHeader
+              >{{ t('dashboard.usersManagement.accessLevel') }}</SortedHeader
             >
           </th>
           <th>
@@ -84,10 +84,10 @@
               :sortAscending="sortAscending"
               sortName="endDate"
               @toggleSort="toggleSort('endDate')"
-              >Zweryfikowany</SortedHeader
+              >{{ t('dashboard.usersManagement.verified') }}</SortedHeader
             >
           </th>
-          <th>Zablokowany</th>
+          <th>{{ t("dashboard.usersManagement.blocked") }}</th>
         </thead>
         <tbody>
           <tr v-for="user in users" :key="user.id">
@@ -133,6 +133,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
@@ -145,6 +146,8 @@ export default {
   },
   setup() {
     const usersData = ref(null);
+
+    const { t } = useI18n({ useScope: 'global' });
 
     const users = computed(() => {
       if (!usersData.value) return [];
@@ -218,6 +221,7 @@ export default {
     return {
       usersData,
       users,
+      t,
     };
   },
 };
