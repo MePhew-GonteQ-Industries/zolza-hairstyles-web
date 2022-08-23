@@ -159,5 +159,13 @@
     "selectTheme": "Select theme",
     "dark": "Dark",
     "light": "Light"
+  },
+  "userProfilePanel": {
+    "theme": "Theme",
+    "settings": "Settings",
+    "logOut": "Log out",
+    "help": "Help",
+    "sendOpinion": "Send opinion",
+    "reportIssue": "Report an issue"
   }
 }

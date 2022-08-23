@@ -159,5 +159,13 @@
     "selectTheme": "Wybierz motyw",
     "dark": "Ciemny",
     "light": "Jasny"
+  },
+  "userProfilePanel": {
+    "theme": "Motyw",
+    "settings": "Ustawienia",
+    "logOut": "Wyloguj się",
+    "help": "Pomoc",
+    "sendOpinion": "Prześlij opinie",
+    "reportIssue": "Zgłoś błąd"
   }
 }

@@ -38,19 +38,19 @@
                 : 'ph-sun-light'
             "
           ></i>
-          <span class="tile-title">Motyw</span>
+          <span class="tile-title">{{ t("userProfilePanel.theme") }}</span>
         </router-link>
         <router-link :to="{ name: 'languageSettings' }" class="option-tile">
           <i class="ph-translate-light tile-icon"></i>
-          <span class="tile-title">Język</span>
+          <span class="tile-title">{{ t("shared.language") }}</span>
         </router-link>
         <router-link :to="{ name: 'userAccountSettings' }" class="option-tile">
           <i class="ph-gear-six-light tile-icon"></i>
-          <span class="tile-title">Ustawienia</span>
+          <span class="tile-title">{{ t("userProfilePanel.settings") }}</span>
         </router-link>
         <button class="option-tile" @click="logout">
           <i class="ph-sign-out-light tile-icon"></i>
-          <span class="tile-title">Wyloguj się</span>
+          <span class="tile-title">{{ t("userProfilePanel.logOut") }}</span>
         </button>
       </div>
       <div
@@ -60,15 +60,15 @@
       >
         <button class="option-tile">
           <i class="ph-question-light tile-icon"></i>
-          <span class="tile-title">Pomoc</span>
+          <span class="tile-title">{{ t("userProfilePanel.help") }}</span>
         </button>
         <button class="option-tile">
           <i class="ph-chat-circle-text-light tile-icon"></i>
-          <span class="tile-title">Prześlij opinię</span>
+          <span class="tile-title">{{ t("userProfilePanel.sendOpinion") }}</span>
         </button>
         <button class="option-tile">
           <i class="ph-bug-light tile-icon"></i>
-          <span class="tile-title">Zgłoś błąd</span>
+          <span class="tile-title">{{ t("userProfilePanel.reportIssue") }}</span>
         </button>
       </div>
     </div>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -85,6 +86,7 @@ export default {
   name: 'UserProfilePanel',
   setup() {
     const router = useRouter();
+    const { t } = useI18n({ useScope: 'global' });
 
     const profilePanelExpanded = ref(false);
 
@@ -144,6 +146,7 @@ export default {
       profilePanel,
       logout,
       collapseProfilePanel,
+      t,
     };
   },
 };
