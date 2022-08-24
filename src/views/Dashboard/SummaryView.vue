@@ -7,7 +7,19 @@
           <i class="ph-credit-card-light tile-icon"></i>
           <i class="ph-info-light more-info"></i>
         </div>
-        <p class="tile-value">143 PLN</p>
+        <vue3-autocounter
+          class="tile-value"
+          ref="counter"
+          :startAmount="0"
+          :endAmount="143"
+          :duration="3"
+          prefix=""
+          suffix=" zł"
+          separator=","
+          decimalSeparator=","
+          :decimals="2"
+          :autoinit="true"
+        />
         <p class="tile-description">Szacowany przychód</p>
       </div>
       <div class="month-summary-tile">
@@ -15,7 +27,19 @@
           <i class="ph-bookmarks-light tile-icon"></i>
           <i class="ph-info-light more-info"></i>
         </div>
-        <p class="tile-value">127</p>
+        <vue3-autocounter
+          class="tile-value"
+          ref="counter"
+          :startAmount="0"
+          :endAmount="127"
+          :duration="3"
+          prefix=""
+          suffix=""
+          separator=","
+          decimalSeparator=","
+          :decimals="0"
+          :autoinit="true"
+        />
         <p class="tile-description">Umówionych wizyt</p>
       </div>
       <div class="month-summary-tile">
@@ -23,7 +47,19 @@
           <i class="ph-user-plus-light tile-icon"></i>
           <i class="ph-info-light more-info"></i>
         </div>
-        <p class="tile-value">46</p>
+        <vue3-autocounter
+          class="tile-value"
+          ref="counter"
+          :startAmount="0"
+          :endAmount="46"
+          :duration="3"
+          prefix=""
+          suffix=""
+          separator=","
+          decimalSeparator=","
+          :decimals="0"
+          :autoinit="true"
+        />
         <p class="tile-description">Nowych użytkowników</p>
       </div>
       <div class="month-summary-tile">
@@ -31,7 +67,19 @@
           <i class="ph-user-plus-light tile-icon"></i>
           <i class="ph-info-light more-info"></i>
         </div>
-        <p class="tile-value">21</p>
+        <vue3-autocounter
+          class="tile-value"
+          ref="counter"
+          :startAmount="0"
+          :endAmount="21"
+          :duration="3"
+          prefix=""
+          suffix=""
+          separator=","
+          decimalSeparator=","
+          :decimals="0"
+          :autoinit="true"
+        />
         <p class="tile-description">Zweryfikowanych użytkowników</p>
       </div>
     </div>
@@ -42,7 +90,19 @@
             <i class="ph-user-plus-light tile-icon"></i>
             <i class="ph-info-light more-info"></i>
           </div>
-          <p class="tile-value">46</p>
+          <vue3-autocounter
+            class="tile-value"
+            ref="counter"
+            :startAmount="0"
+            :endAmount="21"
+            :duration="3"
+            prefix=""
+            suffix=""
+            separator=","
+            decimalSeparator=","
+            :decimals="0"
+            :autoinit="true"
+          />
           <p class="tile-description">Nowych użytkowników</p>
         </div>
       </aside>
@@ -54,7 +114,8 @@
           type="line"
           toolbar="false"
           :options="chartOptions"
-          :series="series">
+          :series="series"
+        >
         </apexcharts>
       </aside>
     </div>
@@ -64,12 +125,14 @@
 <script>
 import { onMounted, ref, reactive } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
+import Vue3autocounter from 'vue3-autocounter';
 import { getCssPropertyValue } from '@/utils';
 
 export default {
   name: 'SummaryView',
   components: {
     apexcharts: VueApexCharts,
+    'vue3-autocounter': Vue3autocounter,
   },
   setup() {
     const summaryViewPage = ref(null);
@@ -119,10 +182,12 @@ export default {
       },
     });
 
-    const series = [{
-      name: 'Wizyty',
-      data: [3, 4, 3, 5, 4, 6, 7, 9, 12],
-    }];
+    const series = [
+      {
+        name: 'Wizyty',
+        data: [3, 4, 3, 5, 4, 6, 7, 9, 12],
+      },
+    ];
 
     onMounted(() => {
       const accentColor = getCssPropertyValue('--accent-color').trim();
@@ -184,14 +249,14 @@ export default {
 
     .tile-icon {
       color: $accent-color;
-      padding: .8rem;
+      padding: 0.8rem;
       font-size: 1.8rem;
       background-color: $primary-color;
       border-radius: 100%;
     }
 
     .more-info {
-      padding: .8rem;
+      padding: 0.8rem;
       font-size: 1.8rem;
       background-color: $primary-color;
       color: $accent-text-color;
@@ -207,7 +272,7 @@ export default {
   }
 
   .tile-description {
-    font-size: .938rem;
+    font-size: 0.938rem;
   }
 }
 
