@@ -92,7 +92,7 @@
         <tbody>
           <tr v-for="user in users" :key="user.id">
             <td class="id">
-              <router-link :to="`appointment/${user.id}`">
+              <router-link :to="`users/${user.id}`">
                 #{{ user.shortId }}...</router-link
               >
             </td>
@@ -116,14 +116,10 @@
               </div>
             </td>
             <td class="bool-column">
-              <div class="data-icon-wrapper">
-                <i :class="user.verified_status_icon_class"></i>
-              </div>
+              <StatusIndicator :statusSuccess="user.verified" />
             </td>
             <td class="bool-column">
-              <div class="data-icon-wrapper">
-                <i :class="user.blocked_status_icon_class"></i>
-              </div>
+              <StatusIndicator :statusSuccess="user.disabled" />
             </td>
           </tr>
         </tbody>
@@ -136,12 +132,14 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import CustomInput from '@/components/CustomInput.vue';
+import StatusIndicator from '@/components/StatusIndicator.vue';
 import { handleRequestError } from '@/utils';
 
 export default {
   name: 'UsersManagement',
   components: {
     CustomInput,
+    StatusIndicator,
   },
   setup() {
     const usersData = ref(null);
@@ -179,20 +177,6 @@ export default {
           userTemp.permission_level = 'Użytkownik';
         }
         userTemp.permission_level_icon_class += '-light';
-
-        if (user.verified) {
-          userTemp.verified_status_icon_class = 'ph-check-circle';
-        } else {
-          userTemp.verified_status_icon_class = 'ph-x-circle';
-        }
-        userTemp.verified_status_icon_class += '-light';
-
-        if (user.blocked) {
-          usersTemp.blocked_status_icon_class = 'ph-check-circle';
-        } else {
-          userTemp.blocked_status_icon_class = 'ph-x-circle';
-        }
-        userTemp.blocked_status_icon_class += '-light';
 
         usersTemp.push(userTemp);
       });
