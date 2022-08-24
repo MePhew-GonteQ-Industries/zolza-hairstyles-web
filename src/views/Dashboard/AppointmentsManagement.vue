@@ -3,9 +3,10 @@
     <form class="appointments-filters">
       <CustomInput
         class="search"
-        label="Szukaj wizyt"
+        label="Filtruj wizyty według id lub użytkownika"
         v-model:value="q"
         type="search"
+        appearance="secondary"
       />
 
       <div class="search-filters">
@@ -16,9 +17,9 @@
         color="green"
         mode="date"
         v-model="selectedDate"/> -->
-        <CustomSelect class="select" />
-        <CustomSelect class="select" />
-        <CustomSelect class="select" />
+        <CustomSelect class="select" appearance="secondary" />
+        <CustomSelect class="select" appearance="secondary" />
+        <CustomSelect class="select" appearance="secondary" />
       </div>
     </form>
 
@@ -86,9 +87,7 @@
             <td class="id">
               <CustomTooltip>
                 <template #activator>
-                  <router-link
-                    :to="`appointment/${appointment.id}`"
-                  >
+                  <router-link :to="`appointments/${appointment.id}`">
                     #{{ appointment.shortId }}...</router-link
                   >
                 </template>
@@ -98,8 +97,7 @@
             <td class="service">
               <CustomTooltip>
                 <template #activator>
-                  <router-link
-                    :to="`service/${appointment.service.id}`"
+                  <router-link :to="`service/${appointment.service.id}`"
                     >Strzyżenie męskie</router-link
                   >
                 </template>
@@ -109,9 +107,7 @@
             <td class="user">
               <CustomTooltip>
                 <template #activator>
-                  <router-link
-                    :to="`user/${appointment.user.id}`"
-                  >
+                  <router-link :to="`user/${appointment.user.id}`">
                     {{ appointment.user.name }}
                     {{ appointment.user.surname }}</router-link
                   >
@@ -273,7 +269,6 @@ export default {
   grid-template-rows: 50px 50px;
   gap: 1rem;
   justify-items: center;
-  padding-block: 1rem;
   width: 70%;
 
   .search,
@@ -283,13 +278,6 @@ export default {
 
   .select {
     .select {
-      background-color: $secondary-color;
-      box-shadow: 0 0 8px -2px $box-shadow-color;
-    }
-  }
-
-  .search {
-    input {
       background-color: $secondary-color;
       box-shadow: 0 0 8px -2px $box-shadow-color;
     }
@@ -314,30 +302,18 @@ export default {
 
   i {
     font-size: 1.5rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 8px -2px $box-shadow-color;
-
-    &:hover {
-      background-color: $secondary-color;
-    }
   }
 
-  .pagination-number {
+  .pagination-number, i {
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    height: 50px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: $background-accent-low;
     box-shadow: 0 0 8px -2px $box-shadow-color;
 
     &:hover {
@@ -345,7 +321,6 @@ export default {
     }
 
     &.current {
-      background-color: $secondary-color;
       color: $accent-color;
     }
   }

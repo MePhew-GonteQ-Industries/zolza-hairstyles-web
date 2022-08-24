@@ -69,7 +69,7 @@
         <tbody>
           <tr v-for="service in services" :key="service.id">
             <td class="id">
-              <router-link :to="`appointment/${service.id}`">
+              <router-link :to="`services/${service.id}`">
                 #{{ service.shortId }}...</router-link
               >
             </td>
