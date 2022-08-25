@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { v4 as uuidv4 } from 'uuid';
 import SideMenu from '@/components/SideMenu.vue';
@@ -17,25 +18,26 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
 
     const links = [
       {
         id: uuidv4(),
         toName: 'userAccountSettings',
         iconClass: 'ph-user-light',
-        text: 'Konto',
+        text: t('settings.sideMenu.account'),
       },
       {
         id: uuidv4(),
         toName: 'accountSecuritySettings',
         iconClass: 'ph-lock-open-light',
-        text: 'Bezpieczeństwo',
+        text: t('settings.sideMenu.security'),
       },
       {
         id: uuidv4(),
         toName: 'notificationsSettings',
         iconClass: 'ph-bell-ringing-light',
-        text: 'Powiadomienia',
+        text: t('settings.sideMenu.notifications'),
       },
       {
         id: uuidv4(),
@@ -43,18 +45,19 @@ export default {
         iconClass: store.state.settings.theme === 'dark'
           ? 'ph-moon-light'
           : 'ph-sun-light',
-        text: 'Motyw',
+        text: t('settings.sideMenu.theme'),
       },
       {
         id: uuidv4(),
         toName: 'languageSettings',
         iconClass: 'ph-translate-light',
-        text: 'Język',
+        text: t('shared.language'),
       },
     ];
 
     return {
       links,
+      t,
     };
   },
 };

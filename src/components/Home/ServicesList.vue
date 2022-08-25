@@ -21,13 +21,14 @@
   <div class="error-message" :class="{ hidden: loading }"
    v-if="loadingFailed && loaderAnimationFinished">
     <i class="ph-warning-circle-light"></i>
-    <p>Wystąpił błąd przy pobieraniu usług</p>
+    <p>{{ t("home.servicesList.error") }}</p>
   </div>
 
 </div>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 // todo: fix animations
 import ServiceTile from '@/components/Home/ServiceTile.vue';
 import axios from 'axios';
@@ -51,6 +52,7 @@ export default {
     },
   },
   setup(props) {
+    const { t } = useI18n({ useScope: 'global' });
     const loading = ref(true);
     const loadingFailed = ref(false);
     const loaderAnimationFinished = ref(false);
@@ -87,6 +89,7 @@ export default {
       loadingFailed,
       loading,
       loaderAnimationFinished,
+      t,
     };
   },
 };

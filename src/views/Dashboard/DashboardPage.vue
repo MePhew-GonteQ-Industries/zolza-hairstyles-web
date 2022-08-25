@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { v4 as uuidv4 } from 'uuid';
 import SideMenu from '@/components/SideMenu.vue';
 
@@ -15,53 +16,56 @@ export default {
     SideMenu,
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
     const links = [
       {
         id: uuidv4(),
         toName: 'summaryView',
         iconClass: 'ph-table-light',
-        text: 'Podsumowanie',
+        text: t('dashboard.sideMenu.summary'),
       },
       {
         id: uuidv4(),
         toName: 'appointmentsManagement',
         iconClass: 'ph-bookmarks-light',
-        text: 'Wizyty',
+        text: t('dashboard.sideMenu.appointments'),
       },
       {
         id: uuidv4(),
         toName: 'servicesManagement',
         iconClass: 'ph-scissors-light',
-        text: 'Usługi',
+        text: t('dashboard.sideMenu.services'),
       },
       {
         id: uuidv4(),
         toName: 'usersManagement',
         iconClass: 'ph-users-light',
-        text: 'Użytkownicy',
+        text: t('dashboard.sideMenu.users'),
       },
       {
         id: uuidv4(),
         toName: 'workHoursManagement',
         iconClass: 'ph-clock-light',
-        text: 'Godziny pracy',
+        text: t('dashboard.sideMenu.workHours'),
       },
       {
         id: uuidv4(),
         toName: 'statsView',
         iconClass: 'ph-chart-line-light',
-        text: 'Statystyki',
+        text: t('dashboard.sideMenu.statistics'),
       },
       {
         id: uuidv4(),
         toName: 'serviceSettings',
         iconClass: 'ph-gear-six-light',
-        text: 'Ustawienia',
+        text: t('dashboard.sideMenu.settings'),
       },
     ];
 
     return {
       links,
+      t,
     };
   },
 };

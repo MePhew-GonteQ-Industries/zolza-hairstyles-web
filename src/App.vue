@@ -106,9 +106,7 @@
           </svg>
           <!-- eslint-enable max-len -->
           <h1 class="description">
-            Profesjonalny salon fryzjerski. Golenie brzytwą, stryżenie włosów,
-            fryzury ślubne, oraz okolicznosciowe. Zapraszamy do zapoznania się z
-            naszą ofertą, oraz prezentacją wykonanych przez nas fryzur.
+            {{ t("app.description") }}
           </h1>
         </section>
         <i
@@ -145,6 +143,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import {
   onMounted, ref, watch, computed,
 } from 'vue';
@@ -162,6 +161,8 @@ export default {
     contactSection,
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
     const router = useRouter();
 
     const onHomePage = computed(
@@ -211,6 +212,7 @@ export default {
       onHomePage,
       navbar,
       navbarClasses,
+      t,
     };
   },
 };

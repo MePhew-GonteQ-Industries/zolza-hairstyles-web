@@ -1,9 +1,9 @@
 <template>
   <div class="settings-page">
     <div class="elevated-card">
-      <h1>Wybierz język</h1>
+      <h1>{{ t("settings.languageSettings.chooseLanguage") }}</h1>
       <CustomSelect
-        header="Język"
+        :header="t('shared.language')"
         :options="languageOptions"
         v-model:selectedValue="selectedLanguage"
         appearance="primary"
@@ -13,12 +13,12 @@
         v-if="!(selectedLanguage === initialLanguage)"
       >
         <CustomButton type="success" @click="changeLanguage"
-          >Zapisz zmiany</CustomButton
+          >{{ t("shared.saveChanges") }}</CustomButton
         >
         <CustomButton
           type="secondary"
           @click="selectedLanguage = initialLanguage"
-          >Anuluj</CustomButton
+          >{{ t("shared.operationCancel") }}</CustomButton
         >
       </div>
     </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { ref, watch } from 'vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomButton from '@/components/CustomButton.vue';
@@ -42,10 +43,11 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { t } = useI18n({ useScope: 'global' });
 
     const languageOptions = [
       {
-        title: 'Polish',
+        title: 'Polski',
         value: 'pl',
         iconText: 'PL',
       },
@@ -100,6 +102,7 @@ export default {
       selectedLanguage,
       initialLanguage,
       changeLanguage,
+      t,
     };
   },
 };

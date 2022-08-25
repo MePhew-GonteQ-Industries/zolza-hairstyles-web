@@ -91,7 +91,7 @@
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
         <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
-          <router-link to='/dashboard'>Panel administracyjny</router-link>
+          <router-link to='/dashboard'>{{ t("nav.primaryNav[1]") }}</router-link>
         </li>
         <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
       </ul>

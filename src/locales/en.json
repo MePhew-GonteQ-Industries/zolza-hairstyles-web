@@ -8,15 +8,110 @@
     "emailEmpty": "Please enter your email",
     "emailInvalid": "Please enter correct email",
     "gender": "Gender",
-    "password": "Password"
+    "password": "Password",
+    "saveChanges": "Save changes",
+    "operationCancel": "Cancel",
+    "language": "Language",
+    "warning": "WARNING",
+    "logOut": "Log out",
+    "forgotYourPassword": "Forgot your password?",
+    "irreversible": "Action is irreversible"
   },
   "nav": {
-    "primaryNav": ["Home", "Services", "Contact"]
+    "primaryNav": ["Home", "Dashboard", "Contact"]
   },
-  "footer": ["Terms of use", "Privacy policy"],
-  "home": "HOME",
+  "footer": [
+    "Terms of use",
+    "Privacy policy",
+    "Cookies policy",
+    "RODO infromation obligation"
+  ],
+  "app": {
+    "description": "Professional hairdressing salon. Razor shaving, hair cutting, wedding and occasional hairstyles. Feel free to see our offer and photos of our hairstyles."
+  },
+  "home": {
+    "appHeading": "One app lots of possibilites",
+    "appDescription": "With mobile app you can book and take care of your appointments in our salon.",
+    "appDescriptionSecondary": "You can get this app as well on android and IOS devices.",
+    "serviceTile": {
+      "time": "Time: ",
+      "availableDates": "Available dates",
+      "price": "Price: "
+    },
+    "servicesList": {
+      "error": "There was an error while loading services"
+    },
+    "availableSlotTile": {
+      "book": "Book an appointment",
+      "info": "More info"
+    }
+  },
   "settings": {
-    "languageSelector": ["Polish", "English"]
+    "sideMenu": {
+      "account": "Account",
+      "security": "Security",
+      "notifications": "Notifications",
+      "theme": "Theme"
+    },
+    "userAccountSettings": {
+      "userSince": "User since",
+      "confirmDeleteAccount": "delete my account",
+      "surname": "Surname",
+      "gender": "Gender",
+      "deleteAccount": "Delete account",
+      "deleteAccountReassurance": "Are you sure you want to delete your account?",
+      "deleteAccountInformation": "Deleting account is irreversible",
+      "appointmentsCancellation": "Your appointments will be cancelled",
+      "deleteHighLevelAccount": "You are deleting higher level account",
+      "password": "Insert your password:",
+      "confirmationQuote": "Type to confirm",
+      "confirmationButton": "Delete account",
+      "emailLabel": "Your email address",
+      "emailNotConfirmed": "is not confirmed. Check your mailbox.",
+      "emailLinkResend": "Resend confirmation link",
+      "passwordInput": "Insert your password",
+      "keyDataModification": "You are trying to modify key data",
+      "identityConfirmation": "Insert your password to confirm your identity",
+      "next": "Next"
+    },
+    "accountSecuritySettings": {
+      "passwordChange": "Password change",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "repeatNewPassword": "Repeat new password",
+      "changePassword": "Change password",
+      "twoFactorAuthentication": "Two factor authentication",
+      "notConfigured": "Not configured",
+      "twoFAInfo": "Two factor authentication(2FA) increases acount security",
+      "configureNow": "Configure now",
+      "sessions": "Active sessions",
+      "logOutEverywhere": "Log out everywhere",
+      "logOutReassurance": "Are you sure you want to log out from all devices?",
+      "devicesList": "This list shows all devices you are currently logged in.",
+      "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
+    },
+    "notificationsSettings": {
+      "pageName": "Notifications settings"
+    },
+    "themeSettings": {
+      "selectTheme": "Select theme",
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "languageSettings": {
+      "chooseLanguage": "Choose language"
+    },
+    "sessionView": {
+      "device": "Device:",
+      "currentSession": "Your current session",
+      "logOutReassurance": "Are you sure you want to log out from this device?",
+      "lastAccess": "Last access:",
+      "ip": "Your ip address:",
+      "location": "Location",
+      "showOnMap": "Show on map",
+      "noData": "No data",
+      "login": "Logging in"
+    }
   },
   "signUp": {
     "heading": "Welcome to Zołza Hairstyles",
@@ -90,29 +185,51 @@
     "notFound": "Page not found",
     "button": "Go Home"
   },
-  "userAccountSettings": {
-    "userSince": "User since",
-    "confirmDeleteAccount": "delete my account",
-    "surname": "Surname",
-    "gender": "Gender",
-    "deleteAccount": "Delete account",
-    "deleteAccountReassurance": "Are you sure you want to delete your account?",
-    "warning": "WARNING",
-    "deleteAccountInformation": "Deleting account is irreversible",
-    "appointmentsCancellation": "Your appointments will be cancelled",
-    "deleteHighLevelAccount": "You are deleting higher level account",
-    "password": "Insert your password:",
-    "confirmationQuote": "Type to confirm",
-    "confirmationButton": "Delete account",
-    "operationCancel": "Cancel",
-    "emailLabel": "Your email address",
-    "emailNotConfirmed": "is not confirmed. Check your mailbox.",
-    "emailLinkResend": "Resend confirmation link",
-    "saveChanges": "Save changes",
-    "passwordInput": "Insert your password",
-    "keyDataModification": "You are trying to modify key data",
-    "identityConfirmation": "Insert your password to confirm your identity",
-    "forgotYourPassword": "Forgot your password?",
-    "next": "Next"
+  "userProfilePanel": {
+    "theme": "Theme",
+    "settings": "Settings",
+    "help": "Help",
+    "sendOpinion": "Send opinion",
+    "reportIssue": "Report an issue"
+  },
+  "dashboard": {
+    "summaryView": {
+      "monthSummary": "Month summary",
+      "estimatedIncome": "Estimated income",
+      "entitiesOfAppointments": "Entities of appointments",
+      "newUsers": "New users",
+      "verifiedUsers": "Verified users",
+      "numberOfAppointments": "Number of appointments"
+    },
+    "appointmentsManagement": {
+      "search": "Search for appointments",
+      "service": "Service",
+      "user": "User",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "status": "Status"
+    },
+    "servicesManagement": {
+      "search": "Search for services",
+      "name": "Name",
+      "averageDurationTime": "Average duration time",
+      "minPrice": "Lowest price",
+      "maxPrice": "Highest price"
+    },
+    "usersManagement": {
+      "search": "Search for users",
+      "accessLevel": "Access level",
+      "verified": "Verified",
+      "blocked": "Blocked"
+    },
+    "sideMenu": {
+      "summary": "Summary",
+      "appointments": "Appointments",
+      "services": "Services",
+      "users": "Users",
+      "workHours": "Work hours",
+      "statistics": "Statistics",
+      "settings": "Settings"
+    }
   }
 }

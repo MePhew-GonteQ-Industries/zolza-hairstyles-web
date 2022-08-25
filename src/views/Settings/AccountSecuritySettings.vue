@@ -1,7 +1,7 @@
 <template>
   <div class="settings-page account-security-settings">
     <div class="elevated-card change-password">
-      <h1>Zmiana hasła</h1>
+      <h1>{{ t("settings.accountSecuritySettings.passwordChange") }}</h1>
       <form @submit.prevent>
         <input
           class="hidden-input"
@@ -12,69 +12,72 @@
         <label for="settings-change-password-hidden-username-input"></label>
         <CustomInput
           v-model:value="passwordData.current"
-          label="Obecne hasło"
+          :label="t('settings.accountSecuritySettings.currentPassword')"
           autocomplete="current-password"
           type="password"
           :required="true"
         />
         <CustomInput
           v-model:value="passwordData.new"
-          label="Nowe hasło"
+          :label="t('settings.accountSecuritySettings.newPassword')"
           autocomplete="new-password"
           type="password"
           :required="true"
         />
         <CustomInput
           v-model:value="passwordData.repeat"
-          label="Powtórz nowe hasło"
+          :label="t('settings.accountSecuritySettings.repeatNewPassword')"
           autocomplete="new-password"
           type="password"
           :required="true"
         />
         <router-link to="/password-reset" tabindex="-1"
-          >Nie pamiętasz hasła?</router-link
+          >{{ t('shared.forgotYourPassword') }}</router-link
         >
-        <CustomButton @click="changePassword">Zmień hasło</CustomButton>
+        <CustomButton @click="changePassword">
+        {{ t('settings.accountSecuritySettings.changePassword') }}</CustomButton>
       </form>
     </div>
     <div class="elevated-card two-fa" v-if="false">
       <div class="header">
-        <h1>Uwierzytelnianie dwuetapowe</h1>
-        <CustomChip type="warning">Nie skonfigurowano</CustomChip>
+        <h1>{{ t("settings.accountSecuritySettings.twoFactorAuthentication") }}</h1>
+        <CustomChip type="warning">
+          {{ t("settings.accountSecuritySettings.notConfigured") }}</CustomChip>
       </div>
       <p>
-        Uwierzytelnianie dwuetapowe (w skrócie 2FA) zwiększa bezpieczeństwo
-        twojego konta
+        {{ t("settings.accountSecuritySettings.twoFAInfo") }}
       </p>
-      <CustomButton type="success">Skonfiguruj teraz</CustomButton>
+      <CustomButton type="success">
+        {{ t("settings.accountSecuritySettings.configureNow") }}</CustomButton>
     </div>
     <div class="elevated-card active-sessions">
       <div class="header">
-        <h1>Aktywne sesje</h1>
+        <h1>{{ t("settings.accountSecuritySettings.sessions") }}</h1>
         <CustomButton
           type="warning"
           class="logout-everywhere"
           v-if="sessions.length > 1"
           @click="logoutEverywhereModalOpen = true"
-          >Wyloguj się wszędzie</CustomButton
+          >{{ t("settings.accountSecuritySettings.logOutEverywhere") }}</CustomButton
         >
         <CustomModal v-model:open="logoutEverywhereModalOpen">
           <template #title>
-            Czy na pewno chcesz wylogować się ze wszystkich urządzeń?
+            {{ t("settings.accountSecuritySettings.logOutReassurance") }}
           </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="warning">
-              <template #title>UWAGA</template>
-              <template #subtitle> Akcja jest nieodwracalna </template>
+              <template #title>{{ t("shared.warning") }}</template>
+              <template #subtitle>
+                {{ t("shared.irrevirsible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logoutEverywhere"
-                >Wyloguj</CustomButton
+                >{{ t("shared.logOut") }}</CustomButton
               >
               <CustomButton
                 type="secondary"
                 @click="logoutEverywhereModalOpen = false"
-                >Anuluj</CustomButton
+                >{{ t("shared.operationCancel") }}</CustomButton
               >
             </div>
           </div>
@@ -82,11 +85,10 @@
       </div>
       <MessageBox type="info">
         <template #title>
-          Poniższa lista przedstawia wszystkie urządzenia na których jesteś
-          obecnie zalogowany.
+          {{ t("settings.accountSecuritySettings.devicesList") }}
         </template>
         <template #subtitle>
-          Wyloguj się ze wszystkich urządzeń, których nie rozpoznajesz.
+          {{ t("settings.accountSecuritySettings.logOutUnrecognisedDevices") }}
         </template>
       </MessageBox>
       <div class="active-sessions-wrapper">
@@ -105,6 +107,7 @@
 import {
   ref, onMounted, computed, reactive,
 } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomChip from '@/components/CustomChip.vue';
@@ -128,6 +131,7 @@ export default {
   setup() {
     const store = useStore();
     const locale = store.state.settings.language;
+    const { t } = useI18n({ useScope: 'global' });
 
     const sessions = computed(() => {
       if (!store.state.sessions.sessions.length) return [];
@@ -252,6 +256,7 @@ export default {
       logoutEverywhere,
       passwordData,
       changePassword,
+      t,
     };
   },
 };

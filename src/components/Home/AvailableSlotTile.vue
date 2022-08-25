@@ -9,11 +9,13 @@
   <div class="buttons">
 
     <div class="button make-appointment">
-      <i class="ph-calendar-plus-light"></i>Umów wizytę
+      <i class="ph-calendar-plus-light"></i>
+      {{ t("home.availableSlotTile.book") }}
     </div>
 
     <div class="button more-info">
-      <i class="ph-info-light"></i>Więcej informacji
+      <i class="ph-info-light"></i>
+      {{ t("home.availableSlotTile.info") }}
     </div>
 
   </div>
@@ -22,6 +24,8 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
+
 export default {
   name: 'AvailableSlotTile',
   props: {
@@ -33,6 +37,12 @@ export default {
       type: String,
       required: true,
     },
+  },
+
+  setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
+    return { t };
   },
 };
 </script>

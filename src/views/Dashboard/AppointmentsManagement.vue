@@ -3,7 +3,7 @@
     <form class="appointments-filters">
       <CustomInput
         class="search"
-        label="Filtruj wizyty według id lub użytkownika"
+        :label="t('dashboard.appointmentsManagement.search')"
         v-model:value="q"
         type="search"
         appearance="secondary"
@@ -49,7 +49,7 @@
               :sortAscending="sortAscending"
               sortName="service"
               @toggleSort="toggleSort('service')"
-              >Usługa</SortedHeader
+              >{{ t("dashboard.appointmentsManagement.service") }}</SortedHeader
             >
           </th>
           <th>
@@ -59,7 +59,7 @@
               sortName="user"
               @toggleSort="toggleSort('user')"
             >
-              Użytkownik</SortedHeader
+              {{ t("dashboard.appointmentsManagement.user") }}</SortedHeader
             >
           </th>
           <th>
@@ -68,7 +68,7 @@
               :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
-              >Data rozpoczęcia</SortedHeader
+              >{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader
             >
           </th>
           <th>
@@ -77,10 +77,10 @@
               :sortAscending="sortAscending"
               sortName="endDate"
               @toggleSort="toggleSort('endDate')"
-              >Data zakończenia</SortedHeader
+              >{{ t("dashboard.appointmentsManagement.endDate") }}</SortedHeader
             >
           </th>
-          <th>Status</th>
+          <th>{{ t("dashboard.appointmentsManagement.status") }}</th>
         </thead>
         <tbody>
           <tr v-for="appointment in appointments" :key="appointment.id">
@@ -144,6 +144,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import CustomInput from '@/components/CustomInput.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
@@ -166,6 +167,8 @@ export default {
   },
   setup() {
     const q = ref('');
+
+    const { t } = useI18n({ useScope: 'global' });
 
     const store = useStore();
 
@@ -258,6 +261,7 @@ export default {
       sortBy,
       sortAscending,
       toggleSort,
+      t,
     };
   },
 };

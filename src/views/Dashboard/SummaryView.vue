@@ -1,6 +1,6 @@
 <template>
   <section class="dashboard-page" id="summary-view-page" ref="summaryViewPage">
-    <h2>Podsumowanie miesiąca</h2>
+    <h2>{{ t("dashboard.summaryView.monthSummary") }}</h2>
     <div class="month-summary-tiles">
       <div class="month-summary-tile">
         <div class="tile-icons">
@@ -20,7 +20,7 @@
           :decimals="2"
           :autoinit="true"
         />
-        <p class="tile-description">Szacowany przychód</p>
+        <p class="tile-description">{{ t("dashboard.summaryView.estimatedIncome") }}</p>
       </div>
       <div class="month-summary-tile">
         <div class="tile-icons">
@@ -40,7 +40,7 @@
           :decimals="0"
           :autoinit="true"
         />
-        <p class="tile-description">Umówionych wizyt</p>
+        <p class="tile-description">{{ t("dashboard.summaryView.entitiesOfAppointments") }}</p>
       </div>
       <div class="month-summary-tile">
         <div class="tile-icons">
@@ -60,7 +60,7 @@
           :decimals="0"
           :autoinit="true"
         />
-        <p class="tile-description">Nowych użytkowników</p>
+        <p class="tile-description">{{ t("dashboard.summaryView.newUsers") }}</p>
       </div>
       <div class="month-summary-tile">
         <div class="tile-icons">
@@ -80,7 +80,7 @@
           :decimals="0"
           :autoinit="true"
         />
-        <p class="tile-description">Zweryfikowanych użytkowników</p>
+        <p class="tile-description">{{ t("dashboard.summaryView.verifiedUsers") }}</p>
       </div>
     </div>
     <div class="main-summary">
@@ -103,7 +103,7 @@
             :decimals="0"
             :autoinit="true"
           />
-          <p class="tile-description">Nowych użytkowników</p>
+          <p class="tile-description">{{ t("dashboard.summaryView.newUsers") }}</p>
         </div>
       </aside>
       <aside class="right">
@@ -123,6 +123,7 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
 import { onMounted, ref, reactive } from 'vue';
 import VueApexCharts from 'vue3-apexcharts';
 import Vue3autocounter from 'vue3-autocounter';
@@ -136,10 +137,12 @@ export default {
   },
   setup() {
     const summaryViewPage = ref(null);
+    const { t } = useI18n({ useScope: 'global' });
 
     const chartOptions = reactive({
       title: {
-        text: 'Liczba wizyt',
+        // text: 'Liczba wizyt',
+        text: t('dashboard.summaryView.numberOfAppointments'),
         align: 'left',
         margin: 10,
         offsetX: 10,
@@ -204,6 +207,7 @@ export default {
       summaryViewPage,
       chartOptions,
       series,
+      t,
     };
   },
 };

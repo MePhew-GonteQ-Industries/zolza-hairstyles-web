@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
+
 import { ref } from 'vue';
 import CustomCheckbox from '@/components/CustomCheckbox.vue';
 
@@ -60,10 +62,13 @@ export default {
     CustomCheckbox,
   },
   setup() {
+    const { t } = useI18n({ useScope: 'global' });
+
     const upcomingAppointmentsPushNotificationsEnabled = ref(false);
     const upcomingAppointmentsEmailNotificationsEnabled = ref(false);
 
     return {
+      t,
       upcomingAppointmentsPushNotificationsEnabled,
       upcomingAppointmentsEmailNotificationsEnabled,
     };
