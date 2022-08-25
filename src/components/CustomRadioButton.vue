@@ -9,7 +9,7 @@
       :id="radioId"
       :value="value"
     />
-    <div class="radio-handle"></div>
+    <div class="radio-handle"><div class="indicator"></div></div>
     <label :for="radioId">
       <slot />
     </label>
@@ -60,12 +60,13 @@ export default {
   border-radius: 50%;
   padding: 4px;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &::after {
-    content: "";
-    width: 100%;
+  .indicator {
     height: 100%;
-    display: block;
+    width: 100%;
     transform: scale(0);
     background-color: $accent-color;
     border-radius: 50%;
@@ -95,7 +96,7 @@ export default {
     ~ .radio-handle {
       border-color: $accent-color;
 
-      &::after {
+      .indicator {
         transform: scale(1);
       }
     }
