@@ -80,7 +80,7 @@ export default {
             if (!state.tokenRefreshStarted) {
               await dispatch('refreshToken');
               originalRequest.headers.Authorization = `Bearer ${state.accessToken}`;
-              axios(originalRequest);
+              return axios(originalRequest);
             }
           }
           throw error;
@@ -148,7 +148,8 @@ export default {
         try {
           await dispatch('checkUserData');
           await dispatch('loadSettings');
-        } catch {
+        } catch (err) {
+          console.log(err);
           dispatch('logout');
           dispatch('loadDefaultSettings');
         }
@@ -179,7 +180,7 @@ export default {
         await dispatch('loadSettings');
       } catch (error) {
         const { status } = handleRequestError(error);
-        if (status === 404) {
+        if (status === 404 || !status) {
           throw error;
         }
       }
