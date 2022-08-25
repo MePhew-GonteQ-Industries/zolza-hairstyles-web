@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { handleRequestError } from '@/utils';
 
 export default {
   state: {
@@ -41,14 +40,9 @@ export default {
   actions: {
     async checkUserData({ getters, commit, dispatch }) {
       if (!getters.isLoggedIn) {
-        try {
-          const response = await axios.get('users/me');
-          commit('setUserData', response.data);
-          await dispatch('saveUserData');
-        } catch (error) {
-          handleRequestError(error);
-          throw error;
-        }
+        const response = await axios.get('users/me');
+        commit('setUserData', response.data);
+        await dispatch('saveUserData');
       }
     },
 
