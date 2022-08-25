@@ -307,10 +307,11 @@ ul {
 
 .dashboard-data-page {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 150px 1fr 50px;
+  grid-template-rows: repeat(3, auto);
   justify-items: center;
   padding: .5rem 1px;
+  align-content: center;
+  gap: 2rem;
 }
 
 .dashboard-data-table-wrapper {
