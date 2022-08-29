@@ -348,4 +348,14 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: $md){
+  #app-wrapper{
+    main{
+      #nav{
+        min-height: 20px;
+      }
+    }
+  }
+}
 </style>

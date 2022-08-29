@@ -33,7 +33,7 @@
           class="logout-btn"
           v-if="!(session.id === $store.state.auth.sessionId)"
           @click="logoutModalOpen = true"
-          >{{ t("settings.sessionView.logOut") }}</CustomButton
+          >{{ t("shared.logOut") }}</CustomButton
         >
         <CustomChip type="info" class="current-session-chip" v-else>
           {{ t("settings.sessionView.currentSession") }}

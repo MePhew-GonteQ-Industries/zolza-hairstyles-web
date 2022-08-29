@@ -88,7 +88,7 @@
         <!-- eslint-enable max-len -->
       </router-link>
 
-      <CustomHamburgerIcon></CustomHamburgerIcon>
+      <CustomHamburgerIcon class="custom-hamburger-icon"></CustomHamburgerIcon>
 
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
@@ -167,6 +167,12 @@ export default {
     }
   }
 
+  .custom-hamburger-icon{
+    width: 50px;
+    height: 39px;
+    display: none;
+  }
+
   .primary-nav {
     gap: 1rem;
   }
@@ -197,6 +203,33 @@ export default {
       .prof-icon {
         padding: 1rem;
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $sm) {
+  // .custom-hamburger-icon{
+  //   display: flex;
+  //   position: absolute;
+  //   left: 2vw;
+  //   top: 2vh;
+  // }
+  .navigation{
+    .wordmark{
+      width: 115pt;
+      height: 30pt;
+    }
+    a{
+      font-size: .7rem;
+    }
+    .primary-nav{
+      gap: .2rem;
+    }
+    .secondary-nav{
+      font-size: .4rem;
+      i{
+        font-size: 1rem;
       }
     }
   }

@@ -133,4 +133,25 @@ export default {
     align-items: center;
   }
 }
+
+@media only screen and (max-width: $xs){
+  .footer-basic{
+    height: 3rem;
+    padding: 0 2%;
+    .copyright-note{
+      font-size: .5rem;
+      i{
+        font-size: .9rem;
+        margin: 0 2px;
+      }
+    }
+    i{
+      font-size: 20px;
+    }
+    a{
+      font-size: .5rem !important;
+    }
+    li,a{}
+  }
+}
 </style>

@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mobile-menu-section-drawer{
+.hamburger-icon{
     flex-flow: column;
     z-index: 2500;
     display: flex;
