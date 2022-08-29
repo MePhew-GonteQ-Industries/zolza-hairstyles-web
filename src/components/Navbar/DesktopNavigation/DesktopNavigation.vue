@@ -88,6 +88,8 @@
         <!-- eslint-enable max-len -->
       </router-link>
 
+      <CustomHamburgerIcon></CustomHamburgerIcon>
+
       <ul class="primary-nav">
         <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
         <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
@@ -122,12 +124,14 @@
 import { useI18n } from 'vue-i18n';
 import NotificationsPanel from '@/components/Navbar/NotificationsPanel.vue';
 import UserProfilePanel from '@/components/Navbar/UserProfilePanel.vue';
+import CustomHamburgerIcon from '../../CustomHamburgerIcon.vue';
 
 export default {
   name: 'desktopNavigation',
   components: {
     NotificationsPanel,
     UserProfilePanel,
+    CustomHamburgerIcon,
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
