@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
-    <div class="hamburger-icon"
+    <div class="hamburger-icon nav-active"
         :class="{'nav-active': navbarActive}"
         @click="navSlide">
         <div class="line1"></div>
@@ -35,12 +35,23 @@ export default {
     top: 2.5vh;
     right: 2vw;
     div {
-        width: 40px;
+        width: 30px;
         height: 3px;
-        background-color: #0DB3D9;
+        background-color: $main-section-color;
         margin: 5px;
         border-radius: 50px;
         transition: all 0.3s ease;
     }
 }
+.nav-active{
+      .line1{
+        transform: rotate(-45deg) translate(-10px, 2px);
+      }
+      .line2{
+        opacity: 0;
+      }
+      .line3{
+        transform: rotate(45deg) translate(-10px, -2px);
+      }
+    }
 </style>

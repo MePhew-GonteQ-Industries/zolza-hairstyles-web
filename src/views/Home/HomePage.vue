@@ -192,4 +192,12 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: $xs){
+  #home-page{
+    .mobile-app-banner{
+      display: none;
+    }
+  }
+}
 </style>

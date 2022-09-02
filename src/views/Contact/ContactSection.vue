@@ -10,7 +10,7 @@
       </ul>
     </div>
 
-    <div class="contact">
+    <div class="policy">
       <ul>
         <li>
           <router-link class="link" to="/terms-of-use">{{
@@ -32,6 +32,10 @@
             >{{ t("footer[3]") }}
           </router-link>
         </li>
+      </ul>
+    </div>
+    <div class="contact">
+      <ul>
         <li>
           <a
             href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161"
@@ -125,6 +129,8 @@ export default {
   }
 
   .contact,
+  .policy,
+  .policy ul,
   .contact ul,
   li,
   a {
@@ -151,7 +157,22 @@ export default {
     a{
       font-size: .5rem !important;
     }
-    li,a{}
+    .policy{
+      position: fixed;
+      bottom: 40px;
+      left: 0px;
+      z-index: 100;
+      ul{
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+        li{
+          a{
+            font-size: 12px !important;
+          }
+        }
+      }
+    }
   }
 }
 </style>

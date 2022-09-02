@@ -1,6 +1,7 @@
 <template>
     <nav class="navigation">
-      <router-link class="wordmark-link" to="/">
+      <CustomHamburgerIcon class="custom-hamburger-icon"></CustomHamburgerIcon>
+        <router-link class="wordmark-link" to="/">
         <!-- eslint-disable max-len -->
         <svg
           class="wordmark"
@@ -87,35 +88,31 @@
         </svg>
         <!-- eslint-enable max-len -->
       </router-link>
-
-      <CustomHamburgerIcon class="custom-hamburger-icon"></CustomHamburgerIcon>
-
-      <ul class="primary-nav">
-        <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
-        <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
-          <router-link to='/dashboard'>{{ t("nav.primaryNav[1]") }}</router-link>
-        </li>
-        <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
-      </ul>
-      <ul class="secondary-nav" v-if="!$store.getters.isLoggedIn">
-          <li>
-            <router-link to="/login" class="login-btn">
-              <i class="ph-user-light"></i>{{ t('shared.login') }}
-            </router-link>
+        <ul class="primary-nav">
+          <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
+          <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
+            <router-link to='/dashboard'>{{ t("nav.primaryNav[1]") }}</router-link>
           </li>
-
-          <li>
-            <router-link to="/sign-up" class="signup-btn">
-              <i class="ph-user-plus-light"></i>{{ t('shared.signUp') }}
-            </router-link>
-          </li>
-      </ul>
-
-      <div class="user-prof" v-else>
-        <ul>
-          <li><NotificationsPanel /></li>
-          <li><UserProfilePanel /></li>
+          <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
         </ul>
+        <ul class="secondary-nav" v-if="!$store.getters.isLoggedIn">
+            <li>
+              <router-link to="/login" class="login-btn">
+                <i class="ph-user-light"></i>{{ t('shared.login') }}
+              </router-link>
+            </li>
+
+            <li>
+              <router-link to="/sign-up" class="signup-btn">
+                <i class="ph-user-plus-light"></i>{{ t('shared.signUp') }}
+              </router-link>
+            </li>
+        </ul>
+        <div class="user-prof" v-else>
+          <ul>
+            <li><NotificationsPanel /></li>
+            <li><UserProfilePanel /></li>
+          </ul>
       </div>
     </nav>
 </template>
@@ -234,4 +231,40 @@ export default {
     }
   }
 }
+
+  @media only screen and (max-width: $xs){
+    .navigation{
+      .custom-hamburger-icon{
+        position: absolute;
+        top: 20px;
+        left: 15px;
+        display: block;
+      }
+      .primary-nav{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 33vw;
+        background-color: $primary-color;
+        padding: 65px 0;
+        box-shadow: 10px 0px 45px white;
+        // transform: translateX(-100vw);
+        transition: transform 0.5s ease-in;
+        ul{
+          margin-top: 60px;
+        }
+        a{
+          font-size: 25px;
+        }
+      }
+      .secondary-nav{
+        position: absolute;
+        top: 25px;
+        right: 20px;
+      }
+    }
+  }
 </style>
