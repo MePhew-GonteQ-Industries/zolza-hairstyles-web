@@ -255,12 +255,12 @@ export default {
         top: 0;
         left: 0;
         height: 100vh;
-        width: 33vw;
+        width: 45vw;
         background-color: $primary-color;
         padding: 65px 0;
         box-shadow: 10px 0px 45px white;
         transform: translateX(-100vw);
-        transition: transform 0.5s ease-in;
+        transition: transform 0.2s ease-in;
         ul{
           margin-top: 60px;
         }
