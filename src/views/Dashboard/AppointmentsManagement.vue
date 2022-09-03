@@ -68,7 +68,9 @@
               :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
-              >{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader
+              >{{
+                t("dashboard.appointmentsManagement.startDate")
+              }}</SortedHeader
             >
           </th>
           <th>
@@ -97,7 +99,7 @@
             <td class="service">
               <CustomTooltip>
                 <template #activator>
-                  <router-link :to="`service/${appointment.service.id}`"
+                  <router-link :to="`services/${appointment.service.id}`"
                     >Strzyżenie męskie</router-link
                   >
                 </template>
@@ -107,7 +109,7 @@
             <td class="user">
               <CustomTooltip>
                 <template #activator>
-                  <router-link :to="`user/${appointment.user.id}`">
+                  <router-link :to="`users/${appointment.user.id}`">
                     {{ appointment.user.name }}
                     {{ appointment.user.surname }}</router-link
                   >
@@ -308,7 +310,8 @@ export default {
     font-size: 1.5rem;
   }
 
-  .pagination-number, i {
+  .pagination-number,
+  i {
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
@@ -325,6 +328,7 @@ export default {
     }
 
     &.current {
+      background-color: $secondary-color;
       color: $accent-color;
     }
   }
