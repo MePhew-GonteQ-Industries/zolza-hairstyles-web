@@ -1,6 +1,7 @@
 <template>
   <nav class="navbar">
-    <desktopNavigation />
+    <desktopNavigation
+    @slide-sidebar="sidebarSlide"/>
   </nav>
 </template>
 
@@ -12,6 +13,11 @@ export default {
   name: 'navbarSection',
   components: {
     desktopNavigation,
+  },
+  methods: {
+    sidebarSlide() {
+      this.$emit('slide-sidebar');
+    },
   },
   setup() {
     const state = reactive({

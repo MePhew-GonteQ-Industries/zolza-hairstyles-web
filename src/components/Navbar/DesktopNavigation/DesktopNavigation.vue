@@ -1,6 +1,7 @@
 <template>
     <nav class="navigation">
-      <CustomHamburgerIcon class="custom-hamburger-icon"></CustomHamburgerIcon>
+      <CustomHamburgerIcon class="custom-hamburger-icon"
+      @slide-sidebar="sidebarSlide"></CustomHamburgerIcon>
         <router-link class="wordmark-link" to="/">
         <!-- eslint-disable max-len -->
         <svg
@@ -88,7 +89,8 @@
         </svg>
         <!-- eslint-enable max-len -->
       </router-link>
-        <ul class="primary-nav">
+        <ul class="primary-nav"
+        :class="{'sidebar-active': sidebarActive}">
           <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
           <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
             <router-link to='/dashboard'>{{ t("nav.primaryNav[1]") }}</router-link>
@@ -129,6 +131,18 @@ export default {
     NotificationsPanel,
     UserProfilePanel,
     CustomHamburgerIcon,
+  },
+  data() {
+    return {
+      sidebarActive: false,
+    };
+  },
+  methods: {
+    sidebarSlide() {
+      console.log('slide');
+      this.$emit('slide-sidebarw');
+      this.sidebarActive = !this.sidebarActive;
+    },
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -206,12 +220,6 @@ export default {
 }
 
 @media only screen and (max-width: $sm) {
-  // .custom-hamburger-icon{
-  //   display: flex;
-  //   position: absolute;
-  //   left: 2vw;
-  //   top: 2vh;
-  // }
   .navigation{
     .wordmark{
       width: 115pt;
@@ -236,8 +244,8 @@ export default {
     .navigation{
       .custom-hamburger-icon{
         position: absolute;
-        top: 20px;
-        left: 15px;
+        top: 22px;
+        left: 6px;
         display: block;
       }
       .primary-nav{
@@ -251,7 +259,7 @@ export default {
         background-color: $primary-color;
         padding: 65px 0;
         box-shadow: 10px 0px 45px white;
-        // transform: translateX(-100vw);
+        transform: translateX(-100vw);
         transition: transform 0.5s ease-in;
         ul{
           margin-top: 60px;
@@ -260,10 +268,17 @@ export default {
           font-size: 25px;
         }
       }
+      .sidebar-active{
+        transform: translateX(0vw);
+      }
       .secondary-nav{
         position: absolute;
         top: 25px;
         right: 20px;
+        font-size: .7rem;
+        i{
+          font-size: .5rem;
+        }
       }
     }
   }

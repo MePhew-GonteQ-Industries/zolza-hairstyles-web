@@ -108,4 +108,12 @@ export default {
     user-select: none;
   }
 }
+
+@media only screen and (max-width: $xs){
+  .slider{
+    .swiper-slide img {
+      width: 80px;
+    }
+  }
+}
 </style>

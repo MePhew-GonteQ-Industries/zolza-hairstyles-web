@@ -2,7 +2,8 @@
   <div id="app-wrapper" :data-theme="$store.state.settings.theme">
     <main ref="main" :class="{ collapsed: !onHomePage }">
       <div id="nav" ref="navbar" :class="navbarClasses">
-        <navbarSection />
+        <navbarSection
+        @slide-sidebar="sidebarSlide" />
       </div>
       <div class="wrapper" v-if="onHomePage">
         <section class="hero">
@@ -159,6 +160,11 @@ export default {
   components: {
     navbarSection,
     contactSection,
+  },
+  methods: {
+    sidebarSlide() {
+      console.log('sidebar');
+    },
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -354,6 +360,16 @@ export default {
     main{
       #nav{
         min-height: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $xs){
+  #app-wrapper{
+    main{
+      .hero{
+        padding: 0;
       }
     }
   }

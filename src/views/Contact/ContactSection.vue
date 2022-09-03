@@ -162,6 +162,7 @@ export default {
       bottom: 40px;
       left: 0px;
       z-index: 100;
+      transform: translateX(-100vw);
       ul{
         flex-direction: column;
         gap: 10px;
