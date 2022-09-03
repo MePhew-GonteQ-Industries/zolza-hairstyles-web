@@ -20,6 +20,7 @@ jobs:
             cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
             git reset --hard
             git pull
+            echo ${{secrets.DEPLOYMENT_PASSWORD}} | sudo -S npm update -g npm
             npm install
             npm run build
   deploy:
