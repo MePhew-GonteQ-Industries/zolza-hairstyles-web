@@ -247,7 +247,7 @@ export default {
 
       .sidebar{
         height: 100vh;
-        width: 45vw;
+        width: 100vw;
         z-index: 15;
         display: none;
       }
@@ -378,15 +378,16 @@ export default {
 @media only screen and (max-width: $xs){
   #app-wrapper{
     main{
-    .sidebar{
-      position: fixed;
-      top: 0;
-      left: 0;
-      // display: flex !important;
-    }
-    .hero{
-      padding: 0 !important;
-    }
+      .sidebar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex !important;
+      }
+      .hero{
+        margin-top: 5vh;
+        padding: 0 !important;
+      }
     }
   }
 }

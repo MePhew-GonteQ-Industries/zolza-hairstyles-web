@@ -118,9 +118,9 @@
         <div class="user-prof" v-else>
           <ul>
             <li><NotificationsPanel
-              @click="sidebarSlide"/></li>
+            /></li>
             <li><UserProfilePanel
-              @click="sidebarSlide"/></li>
+            /></li>
           </ul>
       </div>
     </nav>
