@@ -42,24 +42,50 @@
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank" aria-label="Instagram">
+          <a
+            href="https://www.instagram.com/zolza_hairstyles/"
+            target="_blank"
+            aria-label="Instagram"
+          >
             <i class="ph-instagram-logo-light"></i>
           </a>
         </li>
         <li>
-          <a href="tel:+48 730 601 830" target="_blank" aria-label="Numer telefonu">
+          <a
+            href="tel:+48 730 601 830"
+            target="_blank"
+            aria-label="Numer telefonu"
+          >
             <i class="ph-phone-light"></i>
           </a>
         </li>
         <li>
-          <a href="mailto: zolza.hairstyles@gmail.com" target="_blank" aria-label="Adres email">
+          <a
+            href="mailto: zolza.hairstyles@gmail.com"
+            target="_blank"
+            aria-label="Adres email"
+          >
             <i class="ph-envelope-simple-light"></i>
           </a>
         </li>
         <li>
-          <a href="#" target="_blank" aria-label="Deweloperzy platformy Zołza Hairstyles">
-            <i class="ph-file-code-light"></i>
-          </a>
+          <CustomModal v-model:open="devsModalOpen">
+            <template #title>
+              Deweloperzy platformy Zołza Hairstyles
+            </template>
+            <h1>Strona interetowa</h1>
+            <GitHubCard username="Me-Phew"/>
+            <GitHubCard username="biQte"/>
+            <h1>Projekt graficzny</h1>
+            <GitHubCard username="biQte"/>
+            <h1>Aplikacja mobilna</h1>
+            <GitHubCard username="biQte"/>
+          </CustomModal>
+          <i
+            class="ph-file-code-light code-icon"
+            @click="toggleDevsModal"
+            @keydown.enter="toggleDevsModal"
+          ></i>
         </li>
       </ul>
     </div>
@@ -67,14 +93,31 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import CustomModal from '@/components/CustomModal.vue';
+import GitHubCard from '@/components/GitHubCard.vue';
 
 export default {
   name: 'contactSection',
+  components: {
+    CustomModal,
+    GitHubCard,
+  },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
 
-    return { t };
+    const devsModalOpen = ref(false);
+
+    const toggleDevsModal = () => {
+      devsModalOpen.value = !devsModalOpen.value;
+    };
+
+    return {
+      t,
+      devsModalOpen,
+      toggleDevsModal,
+    };
   },
 };
 </script>
@@ -104,15 +147,23 @@ export default {
     font-size: 28px;
   }
 
+  li {
+    font-size: 1rem;
+
+    .code-icon {
+      margin: 0 5px 0 5px;
+      cursor: pointer;
+    }
+  }
+
   a {
-    font-size: 0.875rem !important;
+    font-size: 0.875rem;
   }
 
   li,
   a {
     color: $primary-text-color;
     font-family: "Poppins", sans-serif;
-    font-size: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
