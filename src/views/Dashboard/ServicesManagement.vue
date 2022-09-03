@@ -105,10 +105,9 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
+import { onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
 import CustomInput from '@/components/CustomInput.vue';
-import { handleRequestError } from '@/utils';
 
 export default {
   name: 'ServicesManagement',
@@ -116,16 +115,16 @@ export default {
     CustomInput,
   },
   setup() {
-    const servicesData = ref(null);
+    const store = useStore();
 
     const { t } = useI18n({ useScope: 'global' });
 
     const services = computed(() => {
-      if (!servicesData.value) return [];
+      if (!store.state.services.services) return [];
 
       const servicesTemp = [];
 
-      servicesData.value.forEach((service) => {
+      store.state.services.services.forEach((service) => {
         const serviceTemp = service;
 
         serviceTemp.shortId = service.id.substr(0, 4);
@@ -137,21 +136,10 @@ export default {
     });
 
     onMounted(async () => {
-      try {
-        const response = await axios.get('services/details');
-        servicesData.value = response.data;
-      } catch (error) {
-        // loadingFailed.value = true;
-        handleRequestError(error);
-      }
-      // loading.value = false;
-      setTimeout(() => {
-        // loaderAnimationFinished.value = true;
-      }, 1000);
+      await store.dispatch('loadServices');
     });
 
     return {
-      servicesData,
       services,
       t,
     };

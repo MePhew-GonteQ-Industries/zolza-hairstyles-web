@@ -152,10 +152,8 @@ import CustomInput from '@/components/CustomInput.vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import CustomTooltip from '@/components/CustomTooltip.vue';
 import { computed, onMounted, ref } from 'vue';
-import axios from 'axios';
 import SortedHeader from '@/components/SortedHeader.vue';
 import 'v-calendar/dist/style.css';
-import { handleRequestError } from '@/utils';
 // import { DatePicker } from 'v-calendar';
 
 export default {
@@ -179,8 +177,6 @@ export default {
     const sortBy = ref('startDate');
     const sortAscending = ref(false);
 
-    const appointmentsData = ref(null);
-
     const toggleSort = (sortName) => {
       if (sortBy.value === sortName) {
         sortAscending.value = !sortAscending.value;
@@ -191,11 +187,11 @@ export default {
     };
 
     const appointments = computed(() => {
-      if (!appointmentsData.value) return [];
+      if (!store.state.appointments.appointments.length) return [];
 
       const appointmentsTemp = [];
 
-      appointmentsData.value.items.forEach((appointment) => {
+      store.state.appointments.appointments.forEach((appointment) => {
         const startTime = new Date(`${appointment.start_slot.start_time}Z`);
         const endTime = new Date(`${appointment.end_slot.end_time}Z`);
 
@@ -240,23 +236,12 @@ export default {
     });
 
     onMounted(async () => {
-      try {
-        const response = await axios.get('appointments/all?limit=6');
-        appointmentsData.value = response.data;
-      } catch (error) {
-        // loadingFailed.value = true;
-        handleRequestError(error);
-      }
-      // loading.value = false;
-      setTimeout(() => {
-        // loaderAnimationFinished.value = true;
-      }, 1000);
+      await store.dispatch('loadAppointments');
     });
 
     const selectedDate = ref(new Date());
 
     return {
-      appointmentsData,
       appointments,
       q,
       selectedDate,
@@ -314,7 +299,6 @@ export default {
   i {
     padding: 0.5rem;
     border-radius: 50%;
-    cursor: pointer;
     height: 50px;
     width: 50px;
     display: flex;
@@ -323,6 +307,10 @@ export default {
     background-color: $background-accent-low;
     box-shadow: 0 0 8px -2px $box-shadow-color;
 
+    &:not(.current) {
+      cursor: pointer;
+    }
+
     &:hover {
       background-color: $secondary-color;
     }
@@ -330,6 +318,7 @@ export default {
     &.current {
       background-color: $secondary-color;
       color: $accent-color;
+      cursor: default;
     }
   }
 }

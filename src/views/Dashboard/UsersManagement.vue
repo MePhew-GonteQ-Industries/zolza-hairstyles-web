@@ -75,7 +75,7 @@
               :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
-              >{{ t('dashboard.usersManagement.accessLevel') }}</SortedHeader
+              >{{ t("dashboard.usersManagement.accessLevel") }}</SortedHeader
             >
           </th>
           <th>
@@ -84,7 +84,7 @@
               :sortAscending="sortAscending"
               sortName="endDate"
               @toggleSort="toggleSort('endDate')"
-              >{{ t('dashboard.usersManagement.verified') }}</SortedHeader
+              >{{ t("dashboard.usersManagement.verified") }}</SortedHeader
             >
           </th>
           <th>{{ t("dashboard.usersManagement.blocked") }}</th>
@@ -130,11 +130,10 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
+import { onMounted, computed } from 'vue';
 import CustomInput from '@/components/CustomInput.vue';
 import StatusIndicator from '@/components/StatusIndicator.vue';
-import { handleRequestError } from '@/utils';
+import { useStore } from 'vuex';
 
 export default {
   name: 'UsersManagement',
@@ -143,16 +142,16 @@ export default {
     StatusIndicator,
   },
   setup() {
-    const usersData = ref(null);
+    const store = useStore();
 
     const { t } = useI18n({ useScope: 'global' });
 
     const users = computed(() => {
-      if (!usersData.value) return [];
+      if (!store.state.users.users.length) return [];
 
       const usersTemp = [];
 
-      usersData.value.users.forEach((user) => {
+      store.state.users.users.forEach((user) => {
         const userTemp = user;
 
         userTemp.shortId = user.id.substr(0, 4);
@@ -188,22 +187,10 @@ export default {
     });
 
     onMounted(async () => {
-      try {
-        const response = await axios.get('users');
-        usersData.value = response.data;
-        console.log(usersData.value);
-      } catch (error) {
-        // loadingFailed.value = true;
-        handleRequestError(error);
-      }
-      // loading.value = false;
-      setTimeout(() => {
-        // loaderAnimationFinished.value = true;
-      }, 1000);
+      await store.dispatch('loadUsers');
     });
 
     return {
-      usersData,
       users,
       t,
     };
