@@ -131,4 +131,14 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: $xs){
+  .services-wrapper{
+    width: 20vw;
+    .services{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
 </style>>
