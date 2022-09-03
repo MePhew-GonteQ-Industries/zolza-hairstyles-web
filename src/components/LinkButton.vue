@@ -1,8 +1,21 @@
 <template>
   <div class="link-button-wrapper" ref="linkButton">
-    <router-link :to="to" :class="{ secondary: type === 'secondary' }" v-ripple
+    <router-link
+      v-if="mode === 'router-link'"
+      :to="to"
+      :class="{ secondary: type === 'secondary' }"
+      v-ripple
+    >
+      <slot />
+    </router-link>
+    <a
+      :class="{ secondary: type === 'secondary' }"
+      v-ripple
+      v-else-if="mode === 'link'"
+      :href="to"
+      :target="target"
       ><slot
-    /></router-link>
+    /></a>
   </div>
 </template>
 
@@ -20,6 +33,14 @@ export default {
     type: {
       type: String,
       default: 'primary',
+    },
+    mode: {
+      type: String,
+      default: 'router-link',
+    },
+    target: {
+      type: String,
+      default: '_self',
     },
   },
   setup(props) {
