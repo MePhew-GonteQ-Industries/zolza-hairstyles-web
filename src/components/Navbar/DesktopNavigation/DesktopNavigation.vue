@@ -91,29 +91,36 @@
       </router-link>
         <ul class="primary-nav"
         :class="{'sidebar-active': sidebarActive}">
-          <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
+          <li><router-link to='/'
+            @click="sidebarSlide">{{ t('nav.primaryNav[0]') }}</router-link></li>
           <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
-            <router-link to='/dashboard'>{{ t("nav.primaryNav[1]") }}</router-link>
+            <router-link to='/dashboard'
+            @click="sidebarSlide">{{ t("nav.primaryNav[1]") }}</router-link>
           </li>
-          <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
+          <li><router-link to="/contact"
+            @click="sidebarSlide">{{ t('nav.primaryNav[2]') }}</router-link></li>
         </ul>
         <ul class="secondary-nav" v-if="!$store.getters.isLoggedIn">
             <li>
-              <router-link to="/login" class="login-btn">
+              <router-link to="/login" class="login-btn"
+              @click="sidebarSlide">
                 <i class="ph-user-light"></i>{{ t('shared.login') }}
               </router-link>
             </li>
 
             <li>
-              <router-link to="/sign-up" class="signup-btn">
+              <router-link to="/sign-up" class="signup-btn"
+              @click="sidebarSlide">
                 <i class="ph-user-plus-light"></i>{{ t('shared.signUp') }}
               </router-link>
             </li>
         </ul>
         <div class="user-prof" v-else>
           <ul>
-            <li><NotificationsPanel /></li>
-            <li><UserProfilePanel /></li>
+            <li><NotificationsPanel
+              @click="sidebarSlide"/></li>
+            <li><UserProfilePanel
+              @click="sidebarSlide"/></li>
           </ul>
       </div>
     </nav>
@@ -158,6 +165,10 @@ export default {
 .navigation, .primary-nav, .secondary-nav {
    display: flex;
 }
+
+.wordmark-link{
+    z-index: 5;
+  }
 
 .navigation {
   width: 100%;
@@ -242,10 +253,15 @@ export default {
 
   @media only screen and (max-width: $xs){
     .navigation{
+      display: flex;
+      justify-content: space-between;
+      .wordmark-link{
+        display: none;
+      }
       .custom-hamburger-icon{
         position: absolute;
         top: 22px;
-        left: 6px;
+        left: 5vw;
         display: block;
       }
       .primary-nav{
@@ -279,6 +295,11 @@ export default {
         i{
           font-size: .5rem;
         }
+      }
+      .user-prof{
+        position: absolute;
+        top: 10px;
+        right: 0px;
       }
     }
   }

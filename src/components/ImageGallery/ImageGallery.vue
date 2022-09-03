@@ -8,6 +8,18 @@
         :pagination="{
           clickable: true,
         }"
+        :breakpoints="{
+          120: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+            spaceBetween: 15,
+          },
+          600: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spacebetween: 5,
+          }
+        }"
         :navigation="true"
         :modules="modules"
         :autoplay="{
@@ -106,14 +118,6 @@ export default {
     display: block;
     object-fit: cover;
     user-select: none;
-  }
-}
-
-@media only screen and (max-width: $xs){
-  .slider{
-    .swiper-slide img {
-      width: 80px;
-    }
   }
 }
 </style>

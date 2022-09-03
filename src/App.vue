@@ -5,6 +5,7 @@
         <navbarSection
         @slide-sidebar="sidebarSlide" />
       </div>
+      <CustomSidebar class="sidebar" />
       <div class="wrapper" v-if="onHomePage">
         <section class="hero">
           <!-- eslint-disable max-len -->
@@ -155,11 +156,13 @@ import {
 import navbarSection from '@/components/Navbar/NavbarSection.vue';
 import contactSection from '@/views/Contact/ContactSection.vue';
 import { useRouter } from 'vue-router';
+import CustomSidebar from './components/CustomSidebar.vue';
 
 export default {
   components: {
     navbarSection,
     contactSection,
+    CustomSidebar,
   },
   methods: {
     sidebarSlide() {
@@ -241,6 +244,13 @@ export default {
       background-position: 0 40%;
       color: $main-section-color;
       transition: none;
+
+      .sidebar{
+        height: 100vh;
+        width: 45vw;
+        z-index: 15;
+        display: none;
+      }
 
       &.collapsed {
         height: 80px;
@@ -368,9 +378,15 @@ export default {
 @media only screen and (max-width: $xs){
   #app-wrapper{
     main{
-      .hero{
-        padding: 0;
-      }
+    .sidebar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      // display: flex !important;
+    }
+    .hero{
+      padding: 0 !important;
+    }
     }
   }
 }

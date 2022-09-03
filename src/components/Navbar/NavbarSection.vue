@@ -46,4 +46,10 @@ export default {
     padding: 0 10vw;
     height: 100%;
   }
+
+  @media only screen and (max-width: $xs){
+    .navbar{
+      padding: 0 0 0 10vw;
+    }
+  }
 </style>

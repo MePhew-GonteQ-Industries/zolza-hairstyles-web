@@ -43,7 +43,7 @@
             <video
               class="app-showcase"
               src="@/assets/appDemo.mp4"
-              mute
+              muted
               loop
               webkit-playsinline
               playsinline
