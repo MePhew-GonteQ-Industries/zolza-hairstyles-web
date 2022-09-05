@@ -194,7 +194,6 @@ export default {
 @media only screen and (max-width: $xs){
   .footer-basic{
     height: 3rem;
-    padding: 0 2%;
     .copyright-note{
       font-size: .5rem;
       i{

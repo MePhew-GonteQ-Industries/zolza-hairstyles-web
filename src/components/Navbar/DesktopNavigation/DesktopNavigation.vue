@@ -1,7 +1,5 @@
 <template>
     <nav class="navigation">
-      <CustomHamburgerIcon class="custom-hamburger-icon"
-      @slide-sidebar="sidebarSlide"></CustomHamburgerIcon>
         <router-link class="wordmark-link" to="/">
         <!-- eslint-disable max-len -->
         <svg
@@ -89,38 +87,30 @@
         </svg>
         <!-- eslint-enable max-len -->
       </router-link>
-        <ul class="primary-nav"
-        :class="{'sidebar-active': sidebarActive}">
-          <li><router-link to='/'
-            @click="sidebarSlide">{{ t('nav.primaryNav[0]') }}</router-link></li>
+        <ul class="primary-nav">
+          <li><router-link to='/'>{{ t('nav.primaryNav[0]') }}</router-link></li>
           <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
-            <router-link to='/dashboard'
-            @click="sidebarSlide">{{ t("nav.primaryNav[1]") }}</router-link>
+            <router-link to='/dashboard'>{{ t("nav.primaryNav[1]") }}</router-link>
           </li>
-          <li><router-link to="/contact"
-            @click="sidebarSlide">{{ t('nav.primaryNav[2]') }}</router-link></li>
+          <li><router-link to="/contact">{{ t('nav.primaryNav[2]') }}</router-link></li>
         </ul>
         <ul class="secondary-nav" v-if="!$store.getters.isLoggedIn">
             <li>
-              <router-link to="/login" class="login-btn"
-              @click="sidebarSlide">
+              <router-link to="/login" class="login-btn">
                 <i class="ph-user-light"></i>{{ t('shared.login') }}
               </router-link>
             </li>
 
             <li>
-              <router-link to="/sign-up" class="signup-btn"
-              @click="sidebarSlide">
+              <router-link to="/sign-up" class="signup-btn">
                 <i class="ph-user-plus-light"></i>{{ t('shared.signUp') }}
               </router-link>
             </li>
         </ul>
         <div class="user-prof" v-else>
           <ul>
-            <li><NotificationsPanel
-            /></li>
-            <li><UserProfilePanel
-            /></li>
+            <li><NotificationsPanel/></li>
+            <li><UserProfilePanel/></li>
           </ul>
       </div>
     </nav>
@@ -130,26 +120,12 @@
 import { useI18n } from 'vue-i18n';
 import NotificationsPanel from '@/components/Navbar/NotificationsPanel.vue';
 import UserProfilePanel from '@/components/Navbar/UserProfilePanel.vue';
-import CustomHamburgerIcon from '../../CustomHamburgerIcon.vue';
 
 export default {
   name: 'desktopNavigation',
   components: {
     NotificationsPanel,
     UserProfilePanel,
-    CustomHamburgerIcon,
-  },
-  data() {
-    return {
-      sidebarActive: false,
-    };
-  },
-  methods: {
-    sidebarSlide() {
-      console.log('slide');
-      this.$emit('slide-sidebarw');
-      this.sidebarActive = !this.sidebarActive;
-    },
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -187,12 +163,6 @@ export default {
       color: $accent-color;
       font-weight: 500;
     }
-  }
-
-  .custom-hamburger-icon{
-    width: 50px;
-    height: 39px;
-    display: none;
   }
 
   .primary-nav {
@@ -258,31 +228,8 @@ export default {
       .wordmark-link{
         display: none;
       }
-      .custom-hamburger-icon{
-        position: absolute;
-        top: 22px;
-        left: 5vw;
-        display: block;
-      }
       .primary-nav{
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 45vw;
-        background-color: $primary-color;
-        padding: 65px 0;
-        box-shadow: 10px 0px 45px white;
-        transform: translateX(-100vw);
-        transition: transform 0.2s ease-in;
-        ul{
-          margin-top: 60px;
-        }
-        a{
-          font-size: 25px;
-        }
+        display: none;
       }
       .sidebar-active{
         transform: translateX(0vw);

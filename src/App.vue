@@ -250,6 +250,7 @@ export default {
         width: 100vw;
         z-index: 15;
         display: none;
+        transform: translateX(-100vw);
       }
 
       &.collapsed {

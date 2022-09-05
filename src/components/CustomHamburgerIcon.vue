@@ -2,7 +2,8 @@
 <template>
     <div class="hamburger-icon"
         :class="{'nav-active': navbarActive}"
-        @click="sidebarSlide">
+        @click="sidebarSlide"
+        >
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
@@ -13,16 +14,16 @@
 
 export default {
   name: 'CustomHarburgerIcon',
-  methods: {
-    sidebarSlide() {
-      this.navbarActive = !this.navbarActive;
-      this.$emit('slide-sidebar');
+  props: {
+    navbarActive: {
+      type: Boolean,
+      default: false,
     },
   },
-  data() {
-    return {
-      navbarActive: false,
-    };
+  methods: {
+    sidebarSlide() {
+      this.$emit('slide-sidebar');
+    },
   },
 };
 </script>
