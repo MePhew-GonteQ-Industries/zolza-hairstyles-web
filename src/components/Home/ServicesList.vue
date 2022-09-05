@@ -29,7 +29,6 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
-// todo: fix animations
 import ServiceTile from '@/components/Home/ServiceTile.vue';
 import axios from 'axios';
 import { ref, onMounted, watch } from 'vue';
@@ -134,7 +133,6 @@ export default {
 
 @media only screen and (max-width: $xs){
   .services-wrapper{
-    width: 20vw;
     .services{
       display: flex;
       flex-direction: column;

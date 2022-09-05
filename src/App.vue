@@ -385,12 +385,15 @@ export default {
           display: flex;
         }
         .wrapper{
+          .description{
+            max-width: 80vw;
+          }
           .hero{
-            margin-top: 5vh;
+            // margin-top: 5vh;
             padding: 0;
           }
           .divider{
-            height: 100px;
+            height: 80px;
           }
         }
       }

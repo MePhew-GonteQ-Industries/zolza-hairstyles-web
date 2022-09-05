@@ -84,6 +84,11 @@ export default {
   justify-items: center;
   align-items: center;
   color: $secondary-text-color;
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
   .select-service:focus {
     outline: orange;
