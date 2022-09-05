@@ -137,20 +137,28 @@ export default {
   height: 5rem;
   box-sizing: content-box;
 
-  .info-session{
+  .info-section{
     .copyright-note {
       display: flex;
       align-items: center;
-
+      @media only screen and (max-width: $xs){
+        font-size: .7rem;
+      }
       i {
         font-size: 1.375rem;
         margin: 0 5px;
+        @media only screen and (max-width: $xs){
+          font-size: 1rem;
+        }
       }
     }
   }
 
   i {
     font-size: 28px;
+    @media only screen and (max-width: $xs){
+        font-size: 1.2rem;
+    }
   }
 
   li {
