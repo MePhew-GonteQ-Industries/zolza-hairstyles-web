@@ -81,12 +81,9 @@ export default {
             height: 100%;
             width: 100%;
             z-index: 8;
-            // background-color: rgba(0,0,0,0.5);
-            // transform: translateX(100vw);
-            // transition: transform 0.2 ease-in;
             .sidebar-menu{
                 padding: 10vh 0;
-                width: 50vw !important;
+                width: 50vw;
                 height: 100%;
                 background-color: $primary-color;
                 display: flex;

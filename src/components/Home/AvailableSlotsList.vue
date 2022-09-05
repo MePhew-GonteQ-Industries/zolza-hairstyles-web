@@ -114,6 +114,10 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     padding: 3.5rem 10% 3.5rem 10%;
+    @media only screen and (max-width: $xs){
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 </style>>

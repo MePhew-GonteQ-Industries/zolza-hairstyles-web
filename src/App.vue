@@ -364,35 +364,38 @@ export default {
       height: 80px;
     }
   }
-}
 
-@media only screen and (max-width: $md){
-  #app-wrapper{
-    main{
-      #nav{
-        min-height: 20px;
+  @media only screen and (max-width: $md){
+    #app-wrapper{
+      main{
+        #nav{
+          min-height: 20px;
+        }
       }
     }
   }
-}
 
 @media only screen and (max-width: $xs){
   #app-wrapper{
     main{
-      .sidebar{
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex !important;
+        .sidebar{
+          position: fixed;
+          top: 0;
+          left: 0;
+          display: flex;
+        }
+        .wrapper{
+          .hero{
+            margin-top: 5vh;
+            padding: 0;
+          }
+          .divider{
+            height: 100px;
+          }
+        }
       }
-      .hero{
-        margin-top: 5vh;
-        padding: 0 !important;
-      }
-    }
-    .divider{
-      height: 100px !important;
     }
   }
 }
+
 </style>

@@ -137,13 +137,15 @@ export default {
   height: 5rem;
   box-sizing: content-box;
 
-  .copyright-note {
-    display: flex;
-    align-items: center;
+  .info-session{
+    .copyright-note {
+      display: flex;
+      align-items: center;
 
-    i {
-      font-size: 1.375rem;
-      margin: 0 5px;
+      i {
+        font-size: 1.375rem;
+        margin: 0 5px;
+      }
     }
   }
 
@@ -189,41 +191,34 @@ export default {
     flex-direction: row;
     align-items: center;
   }
-}
 
-@media only screen and (max-width: $xs){
-  .footer-basic{
-    height: 3rem;
-    .copyright-note{
-      font-size: .5rem;
-      i{
-        font-size: .9rem;
-        margin: 0 2px;
-      }
-    }
-    i{
-      font-size: 20px;
-    }
-    a{
-      font-size: .5rem !important;
-    }
-    .policy{
-      position: fixed;
-      bottom: 40px;
-      left: 0px;
-      z-index: 100;
-      transform: translateX(-100vw);
-      ul{
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-        li{
-          a{
-            font-size: 12px !important;
+  @media only screen and (max-width: $xs){
+    .footer-basic{
+      height: 3rem;
+      .info-session{
+        ul{
+          li{
+            .copyright-note{
+              font-size: .3rem;
+              .ph-copyright-light::before{
+                margin: 0 2px;
+                font-size: 15px;
+              }
+            }
           }
         }
       }
+      i{
+        font-size: 20px;
+      }
+      a{
+        font-size: .5rem;
+      }
     }
+    .policy{
+        display: none;
+      }
   }
 }
+
 </style>
