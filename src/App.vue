@@ -390,6 +390,9 @@ export default {
         padding: 0 !important;
       }
     }
+    .divider{
+      height: 100px !important;
+    }
   }
 }
 </style>
