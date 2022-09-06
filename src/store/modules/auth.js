@@ -7,7 +7,6 @@ export default {
     accessToken: '',
     refreshToken: '',
     refreshTokenInterceptor: null,
-    tokenRefreshStarted: false,
     rememberUser: true,
     sessionId: '',
     sudoModeActivated: '',
@@ -48,10 +47,6 @@ export default {
       state.refreshTokenInterceptor = interceptor;
     },
 
-    setTokenRefreshStarted(state, newValue) {
-      state.tokenRefreshStarted = newValue;
-    },
-
     setRememberUser(state, newValue) {
       state.rememberUser = newValue;
     },
@@ -76,11 +71,17 @@ export default {
         (response) => response,
         async (error) => {
           const originalRequest = error.config;
-          if (originalRequest && error.response && error.response.status === 401) {
-            if (!state.tokenRefreshStarted) {
-              await dispatch('refreshToken');
-              originalRequest.headers.Authorization = `Bearer ${state.accessToken}`;
-              return axios(originalRequest);
+          if (originalRequest) {
+            const { response } = error;
+            if (response) {
+              if (response.status === 401 && response.data && error.response.data.detail === 'Could not validate credentials') {
+                if (!originalRequest.retry) {
+                  originalRequest.retry = true;
+                  await dispatch('refreshToken');
+                  originalRequest.headers.Authorization = `Bearer ${state.accessToken}`;
+                  return axios(originalRequest);
+                }
+              }
             }
           }
           throw error;
@@ -201,7 +202,6 @@ export default {
     },
 
     async refreshToken({ state, commit, dispatch }) {
-      commit('setTokenRefreshStarted', true);
       try {
         const response = await axios.post('auth/refresh-token', new URLSearchParams({
           grant_type: 'refresh_token',
@@ -212,7 +212,6 @@ export default {
         await dispatch('configureAxiosAuthorized');
         commit('setUserData', response.data.session.user);
         await dispatch('loadSettings');
-        commit('setTokenRefreshStarted', false);
       } catch (error) {
         const { status } = handleRequestError(error);
         if (status === 401 && state.refreshToken === null) {
