@@ -196,7 +196,16 @@ export default {
 @media only screen and (max-width: $xs){
   #home-page{
     .mobile-app-banner{
-      display: none;
+      background-image: none;
+      .cta{
+        width: 95%;
+        .download-links{
+          flex-direction: column;
+        }
+      }
+      .banner{
+        display: none;
+      }
     }
   }
 }
