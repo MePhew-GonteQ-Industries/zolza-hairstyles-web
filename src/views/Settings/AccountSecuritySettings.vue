@@ -68,7 +68,7 @@
             <MessageBox type="warning">
               <template #title>{{ t("shared.warning") }}</template>
               <template #subtitle>
-                {{ t("shared.irrevirsible") }} </template>
+                {{ t("shared.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logoutEverywhere"
