@@ -285,6 +285,10 @@ ul {
   grid-template-columns: 1fr 4fr;
   align-items: stretch;
   background-color: $secondary-color;
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .dashboard-page,
@@ -299,7 +303,10 @@ ul {
   gap: 1rem;
   background-color: $primary-color;
   border-radius: 2.5rem 0 0 2.5rem;
-
+  @media only screen and (max-width: $xs){
+    width: 100vw;
+    border-radius: 0;
+  }
   h2 {
     color: $primary-text-color;
   }

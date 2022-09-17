@@ -57,7 +57,7 @@
               type="error"
               v-if="$store.getters.isAdmin || $store.getters.isOwner"
             >
-              <template #title>{{ t("settings.userAccountSettings.warning") }}</template>
+              <template #title>{{ t("shared.warning") }}</template>
               <template #subtitle>
                 {{ t("settings.userAccountSettings.deleteHighLevelAccount") }}
               </template>

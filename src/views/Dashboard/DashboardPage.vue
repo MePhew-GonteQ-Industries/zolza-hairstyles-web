@@ -1,6 +1,6 @@
 <template>
   <section class="app-page" id="dashboard-page">
-    <SideMenu :links="links"/>
+    <SideMenu :links="links" class="side-menu"/>
     <router-view></router-view>
   </section>
 </template>
@@ -71,5 +71,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  @media only screen and (max-width: $xs){
+    .side-menu{
+      display: none;
+    }
+  }
 </style>
