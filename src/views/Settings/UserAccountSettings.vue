@@ -546,7 +546,7 @@ export default {
   width: 200px;
   @media only screen and (max-width: $xs){
     position: absolute;
-    top: 17.5vh;
+    top: 18vh;
     left: 2vw;
     width: 115px;
   }
