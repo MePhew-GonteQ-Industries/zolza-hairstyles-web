@@ -364,6 +364,9 @@ export default {
       align-items: center;
       justify-content: center;
       padding-top: 20px;
+      @media only screen and (max-width: $xs){
+        font-size: .8rem;
+      }
     }
 
     .notifications {
@@ -389,6 +392,9 @@ export default {
       .notifications-count {
         color: grey;
         font-size: 0.9rem;
+        @media only screen and (max-width: $xs){
+          font-size: .7rem;
+        }
       }
 
       .clear-notifications {
