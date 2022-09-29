@@ -260,7 +260,7 @@ export default {
   height: 65px;
   width: 408px;
   @media only screen and (max-width: $xs){
-    width: 350px;
+    width: 330px;
   }
 
   .invalid-wrapper {

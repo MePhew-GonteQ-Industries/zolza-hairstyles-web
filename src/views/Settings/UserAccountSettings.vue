@@ -417,6 +417,9 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.settings-page{
+  min-height: 73.5vh;
+}
 .delete-account-wrappper,
 .logout-everywhere-wrappper {
   .buttons-row {
@@ -546,8 +549,8 @@ export default {
   width: 200px;
   @media only screen and (max-width: $xs){
     position: absolute;
-    top: 18vh;
-    left: 2vw;
+    top: 20vh;
+    right: 1vw;
     width: 115px;
   }
 }

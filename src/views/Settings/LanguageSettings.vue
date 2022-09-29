@@ -109,6 +109,12 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.settings-page{
+  min-height: 73.5vh;
+  .elevated-card{
+    width: 100vw;
+  }
+}
 .buttons-row {
   display: flex;
   gap: 1rem;
