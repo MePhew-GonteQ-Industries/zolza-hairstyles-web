@@ -280,7 +280,7 @@ export default {
     @media only screen and (max-width: $xs){
       min-width: 350px;
       min-height: 0;
-      right: -60px;
+      right: -70px;
     }
 
     h3 {
