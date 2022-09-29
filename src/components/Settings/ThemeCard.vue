@@ -137,6 +137,10 @@ export default {
   border-radius: 0.313rem;
   display: flex;
   flex-direction: column;
+  @media only screen and (max-width: $xs){
+    width: 80vw;
+    height: 40vh;
+  }
 
   * {
     border-radius: inherit;
@@ -197,6 +201,9 @@ export default {
       background-color: $secondary-theme-color;
       align-items: flex-start;
       font-size: 12rem;
+      @media only screen and (max-width: $xs){
+        padding: 0;
+      }
     }
 
     .right {

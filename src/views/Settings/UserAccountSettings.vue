@@ -424,7 +424,9 @@ export default {
     gap: 1rem;
     width: 100%;
     align-items: center;
-
+    @media only screen and (max-width: $xs){
+      flex-direction: column;
+    }
     button {
       width: 100%;
     }
@@ -499,6 +501,9 @@ export default {
   display: flex;
   align-items: center;
   font-size: 1rem;
+  @media only screen and (max-width: $xs){
+    flex-direction: column;
+  }
 
   .user-data {
     .email {
@@ -516,10 +521,17 @@ export default {
   display: grid;
   align-items: center;
   gap: 1rem;
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+  }
 
   .text-inputs {
     display: flex;
     gap: inherit;
+    @media only screen and (max-width: $xs){
+      flex-direction: column;
+    }
   }
 
   .input-wrapper,
@@ -532,11 +544,20 @@ export default {
 .delete-account-btn {
   margin-left: auto;
   width: 200px;
+  @media only screen and (max-width: $xs){
+    position: absolute;
+    top: 17.5vh;
+    left: 2vw;
+    width: 115px;
+  }
 }
 
 .save-changes {
   display: flex;
   gap: 1rem;
+  @media only screen and (max-width: $xs){
+    margin: auto;
+  }
 
   .save {
     width: 170px;

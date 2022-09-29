@@ -233,7 +233,12 @@ export default {
     height: 100vh;
 
     .router-view {
-      min-height: 92%;
+      // min-height: 92%;
+      // height: 92%;
+      // @media only screen and (max-width: $xs){
+      //   min-height: 0;
+      // }
+      justify-content: space-between;
     }
 
     main {

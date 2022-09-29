@@ -283,6 +283,10 @@ export default {
   display: grid;
   grid-template-columns: auto auto;
   align-items: stretch;
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+  }
 
   a {
     color: $accent-color;
@@ -303,6 +307,10 @@ export default {
     display: grid;
     gap: 1rem;
     grid-template-columns: auto auto;
+    @media only screen and (max-width: $xs){
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .active-sessions-wrapper {
