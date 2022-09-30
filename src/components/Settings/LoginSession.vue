@@ -75,6 +75,10 @@ export default {
   padding: 1rem;
   border-bottom: thin solid $secondary-color;
   align-items: center;
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+  }
 
   &:hover {
     background-color: $background-accent-medium;

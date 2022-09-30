@@ -77,6 +77,9 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.settings-page{
+  min-height: 73.5vh;
+}
 .notification-settings {
   display: flex;
   flex-direction: column;

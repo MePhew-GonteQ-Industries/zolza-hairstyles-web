@@ -259,6 +259,9 @@ export default {
   position: relative;
   height: 65px;
   width: 408px;
+  @media only screen and (max-width: $xs){
+    width: 330px;
+  }
 
   .invalid-wrapper {
     position: absolute;

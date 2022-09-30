@@ -221,6 +221,9 @@ export default {
   justify-content: center;
   height: 65px;
   width: 408px;
+  @media only screen and (max-width: $xs){
+    width: 310px;
+  }
 
   .invalid-wrapper {
     position: absolute;

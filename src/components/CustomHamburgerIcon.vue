@@ -36,21 +36,22 @@ export default {
     div {
         width: 25px;
         height:2px;
-        background-color: $main-section-color;
+        background-color: $accent-color;
         margin: 5px;
         border-radius: 50px;
         transition: all 0.3s ease;
     }
 }
 .nav-active{
-      .line1{
-        transform: rotate(-45deg) translate(-8px, 2px);
-      }
-      .line2{
-        opacity: 0;
-      }
-      .line3{
-        transform: rotate(45deg) translate(-8px, -2px);
-      }
-    }
+  .line1{
+    transform: rotate(-45deg) translate(-8px, 2px);
+  }
+  .line2{
+    opacity: 0;
+  }
+  .line3{
+    transform: rotate(45deg) translate(-8px, -2px);
+  }
+}
+
 </style>

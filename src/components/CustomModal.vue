@@ -191,6 +191,12 @@ export default {
     max-height: 80%;
     max-width: 50%;
     overflow: auto;
+    @media only screen and (max-width: $xs){
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      max-width: 92vw;
+    }
 
     &.shake {
       animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;

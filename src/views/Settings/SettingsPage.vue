@@ -1,5 +1,6 @@
 <template>
   <section class="app-page" id="settings-page">
+    <CustomHorizontalMenu :links="links" class="horizontal-menu"></CustomHorizontalMenu>
     <SideMenu id="settings-navigation" :links="links" />
     <router-view v-if="$store.getters.isLoggedIn"></router-view>
   </section>
@@ -10,11 +11,13 @@ import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import { v4 as uuidv4 } from 'uuid';
 import SideMenu from '@/components/SideMenu.vue';
+import CustomHorizontalMenu from '../../components/CustomHorizontalMenu.vue';
 
 export default {
   name: 'SettingsPage',
   components: {
     SideMenu,
+    CustomHorizontalMenu,
   },
   setup() {
     const store = useStore();
@@ -64,9 +67,21 @@ export default {
 </script>
 
 <style lang='scss'>
-#settings-navigation {
+#settings-page{
+  .horizontal-menu{
+    width: 92vw;
+    display: none;
+    @media only screen and (max-width: $xs){
+      display: block;
+    }
+  }
+  #settings-navigation {
     .active-tab-indicator {
       top: 225px;
     }
+    @media only screen and (max-width: $xs){
+      display:none;
+    }
+}
 }
 </style>

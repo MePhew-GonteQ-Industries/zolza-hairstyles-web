@@ -93,10 +93,10 @@ export default {
                     display: flex;
                     flex-direction: column;
                     a{
-                        color: $main-section-color;
+                        color: $secondary-text-color !important;
                         padding: 1.5vh 0 0 2vw;
                         &.router-link-active{
-                            color: $accent-color;
+                            color: $accent-color !important;
                         }
                     }
                 }
@@ -104,7 +104,7 @@ export default {
                     display: flex;
                     flex-direction: column;
                     a{
-                        color: $main-section-color;
+                        color: $secondary-text-color !important;
                         padding: 1.5vh 0 0 2vw;
                     }
                 }

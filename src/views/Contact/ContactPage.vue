@@ -62,9 +62,6 @@
     backface-visibility: hidden;
     cursor: pointer;
 
-    &.flipped {
-    }
-
     .data {
       grid-column-start: 2;
       display: flex;
@@ -88,8 +85,26 @@
       }
     }
   }
+}
 
-  .map-embed {
+@media only screen and (max-width: $xs){
+  #contact-page{
+    padding: 20px 0;
+    #business-card{
+      display: flex;
+      background-image: none;
+      background-color: white;
+      flex-direction: column;
+      width: 90vw;
+      justify-content: center;
+    }
+    .map-embed{
+      width: 90vw;
+      iframe{
+        width: 90vw;
+        border-radius: 20px;
+      }
+    }
   }
 }
 </style>

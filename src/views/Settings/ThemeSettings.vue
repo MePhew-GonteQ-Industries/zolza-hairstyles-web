@@ -102,6 +102,10 @@ export default {
   @media screen and (max-width: 1600px) {
     grid-template-columns: 1fr;
   }
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .buttons-row {

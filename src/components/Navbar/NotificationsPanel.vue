@@ -277,6 +277,11 @@ export default {
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
+    @media only screen and (max-width: $xs){
+      min-width: 350px;
+      min-height: 0;
+      right: -70px;
+    }
 
     h3 {
       font-weight: 600;
@@ -287,11 +292,17 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: 20px 20px 0 20px;
+      @media only screen and (max-width: $xs){
+        font-size: 1rem;
+      }
 
       .notification-settings {
         font-size: 2rem;
         cursor: pointer;
         color: $primary-text-color;
+        @media only screen and (max-width: $xs){
+          font-size: 1rem;
+        }
       }
     }
 
@@ -302,7 +313,9 @@ export default {
       padding: 0.625rem 2rem;
       border-bottom: 1px solid $secondary-color;
       position: relative;
-
+      @media only screen and (max-width: $xs){
+        font-size: .9rem;
+      }
       $offset: 158px;
 
       & .tab:nth-child(1).active ~ .active-tab-indicator {
@@ -351,13 +364,19 @@ export default {
       align-items: center;
       justify-content: center;
       padding-top: 20px;
+      @media only screen and (max-width: $xs){
+        font-size: .8rem;
+      }
     }
 
     .notifications {
       padding: 0.5rem 20px 0.5rem 20px;
       max-height: 65vh;
       overflow-y: hidden;
-
+      @media only screen and (max-width: $xs){
+        padding: 0;
+        font-size: .8rem;
+      }
       &:hover {
         overflow-y: auto;
       }
@@ -373,6 +392,9 @@ export default {
       .notifications-count {
         color: grey;
         font-size: 0.9rem;
+        @media only screen and (max-width: $xs){
+          font-size: .7rem;
+        }
       }
 
       .clear-notifications {

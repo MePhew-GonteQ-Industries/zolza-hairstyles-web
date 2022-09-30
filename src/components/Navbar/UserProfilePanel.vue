@@ -182,7 +182,10 @@ export default {
     top: 100%;
     right: 0;
     color: $primary-text-color;
-
+    @media only screen and (max-width: $xs){
+      min-width: 230px;
+      min-height: 0;
+    }
     .panel-header {
       display: flex;
       align-items: center;
@@ -190,13 +193,18 @@ export default {
       padding: 1rem;
       border-bottom: 1px solid $secondary-color;
       font-size: 1.125rem;
-
+      @media only screen and (max-width: $xs){
+        font-size: 1rem;
+      }
       a {
         color: inherit;
       }
 
       .user-avatar {
         font-size: 3rem;
+        @media only screen and (max-width: $xs){
+          font-size: 1rem;
+        }
       }
     }
 
@@ -222,7 +230,9 @@ export default {
       outline: none;
       color: inherit;
       font-size: inherit;
-
+      @media only screen and (max-width: $xs){
+        font-size: .9rem;
+      }
       &:hover {
         background-color: $secondary-color;
       }

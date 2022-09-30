@@ -232,6 +232,9 @@ export default {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  @media only screen and (max-width: $xs){
+    flex-direction: column;
+  }
 }
 
 .month-summary-tile {
@@ -284,5 +287,9 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media only screen and (max-width: $xs){
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

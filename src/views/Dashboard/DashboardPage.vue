@@ -1,6 +1,7 @@
 <template>
   <section class="app-page" id="dashboard-page">
-    <SideMenu :links="links"/>
+    <CustomHorizontalMenu :links="links" class="horizontal-menu"></CustomHorizontalMenu>
+    <SideMenu :links="links" class="side-menu"/>
     <router-view></router-view>
   </section>
 </template>
@@ -9,11 +10,13 @@
 import { useI18n } from 'vue-i18n';
 import { v4 as uuidv4 } from 'uuid';
 import SideMenu from '@/components/SideMenu.vue';
+import CustomHorizontalMenu from '../../components/CustomHorizontalMenu.vue';
 
 export default {
   name: 'DashboardPage',
   components: {
     SideMenu,
+    CustomHorizontalMenu,
   },
   setup() {
     const { t } = useI18n({ useScope: 'global' });
@@ -71,5 +74,19 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  #dashboard-page{
+    .horizontal-menu{
+      width: 92vw;
+      display: none;
+      @media only screen and (max-width: $xs){
+        display: block;
+      }
+    }
+  }
+  @media only screen and (max-width: $xs){
+    .side-menu{
+      display: none;
+    }
+  }
 </style>
