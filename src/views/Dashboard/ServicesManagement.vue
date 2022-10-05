@@ -74,7 +74,7 @@
               >
             </td>
             <td class="name">
-              <router-link :to="`service/${service.id}`"
+              <router-link :to="`services/${service.id}`"
                 >Strzyżenie męskie</router-link
               >
             </td>
