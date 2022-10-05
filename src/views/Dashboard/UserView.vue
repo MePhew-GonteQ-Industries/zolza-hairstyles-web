@@ -1,8 +1,30 @@
 <template>
-  <div class="dashboard-page user-view">
-    {{ $route.params.id }}
-    {{ userData }}
-  </div>
+  <div class="dashboard-page user-view"
+  v-if="userData">
+    <!-- {{ $route.params.id }} -->
+    <p>
+      ID użytkownika: {{ userData.id }}
+    </p>
+    <p>
+      Imie: {{ userData.name }}
+    </p>
+    <p>
+      Naziwsko: {{ userData.surname }}
+    </p>
+    <p>
+      Płeć: {{ userData.gender }}
+    </p>
+    <p>
+      Email: {{ userData.email }}
+    </p>
+    <p>
+      Zweryfikowany: {{ userData.verified }}
+    </p>
+    <p>
+      Wyłączony: {{ userData.disabled }}
+    </p>
+
+</div>
 </template>
 
 <script>
