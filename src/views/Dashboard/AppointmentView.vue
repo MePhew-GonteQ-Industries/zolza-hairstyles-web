@@ -42,8 +42,48 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error">Odwołaj</CustomButton>
-        <CustomButton type="info">Zmień termin</CustomButton>
+        <CustomButton type="error"
+        class="cancel-appointment-button"
+        @click="cancelAppointmentModalOpen = true"
+        >Odwołaj</CustomButton>
+        <CustomModal v-model:open="cancelAppointmentModalOpen">
+          <template #title>
+            Napewno chcesz anulować wizytę?
+          </template>
+            <div class="cancel-appointment-wrapper">
+              <MessageBox type="warning">
+                <template #title>Uwaga</template>
+                <template #subtitle>Akcja jest nieodwracalna</template>
+              </MessageBox>
+              <div class="buttons-wrapper">
+                <CustomButton type="error">Anuluj wizytę</CustomButton>
+                <CustomButton type="secondary"
+                @click="cancelAppointmentModalOpen = false">Zamknij</CustomButton>
+              </div>
+            </div>
+        </CustomModal>
+        <CustomButton type="info"
+        class="change-appointment-date"
+        @click="changeAppointmentDateModalOpen = true">
+          Zmień termin</CustomButton>
+          <CustomModal v-model:open="changeAppointmentDateModalOpen">
+            <template #title>
+              Zmiana daty wizyty
+            </template>
+            <div class="change-appointment-date-wrapper">
+              <MessageBox type="info">
+                <template #title>Obecny slot wizyty zwolni się</template>
+                <template #subtitle>
+                  Bieżący slot na którym była umówiona wizyta będzie mógł ponownie zostać zajęty.
+                </template>
+              </MessageBox>
+              <div class="buttons-wrapper">
+                <CustomButton type="info">Zmień termin</CustomButton>
+                <CustomButton type="secondary"
+                @click="changeAppointmentDateModalOpen = false">Zamknij</CustomButton>
+              </div>
+            </div>
+          </CustomModal>
       </div>
     </div>
   </div>
@@ -56,11 +96,15 @@ import { useRoute } from 'vue-router';
 import axios from 'axios';
 import { handleRequestError } from '@/utils';
 import CustomButton from '@/components/CustomButton.vue';
+import CustomModal from '../../components/CustomModal.vue';
+import MessageBox from '../../components/MessageBox.vue';
 
 export default {
   name: 'AppointmentView',
   components: {
     CustomButton,
+    CustomModal,
+    MessageBox,
   },
   setup() {
     const store = useStore();
@@ -86,6 +130,9 @@ export default {
         }
       }
     });
+
+    const cancelAppointmentModalOpen = ref(false);
+    const changeAppointmentDateModalOpen = ref(false);
 
     const appointment = computed(() => {
       if (!appointmentData.value) return null;
@@ -164,12 +211,34 @@ export default {
 
     return {
       appointment,
+      cancelAppointmentModalOpen,
+      changeAppointmentDateModalOpen,
     };
   },
 };
 </script>
 
 <style lang='scss' scoped>
+.cancel-appointment-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .buttons-wrapper{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+}
+.change-appointment-date-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .buttons-wrapper{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+}
 .appointment {
   grid-template-columns: 3fr 1.2fr;
 
