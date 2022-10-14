@@ -77,6 +77,13 @@
                   Bieżący slot na którym była umówiona wizyta będzie mógł ponownie zostać zajęty.
                 </template>
               </MessageBox>
+              <DatePicker
+              :is-dark="$store.state.settings.theme === 'dark'"
+              is-required
+              color="green"
+              mode="date"
+              v-model="selectedDate"
+              />
               <div class="buttons-wrapper">
                 <CustomButton type="info">Zmień termin</CustomButton>
                 <CustomButton type="secondary"
@@ -96,6 +103,7 @@ import { useRoute } from 'vue-router';
 import axios from 'axios';
 import { handleRequestError } from '@/utils';
 import CustomButton from '@/components/CustomButton.vue';
+import { DatePicker } from 'v-calendar';
 import CustomModal from '../../components/CustomModal.vue';
 import MessageBox from '../../components/MessageBox.vue';
 
@@ -105,6 +113,7 @@ export default {
     CustomButton,
     CustomModal,
     MessageBox,
+    DatePicker,
   },
   setup() {
     const store = useStore();
