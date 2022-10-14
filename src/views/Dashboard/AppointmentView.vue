@@ -77,13 +77,18 @@
                   Bieżący slot na którym była umówiona wizyta będzie mógł ponownie zostać zajęty.
                 </template>
               </MessageBox>
-              <DatePicker
-              :is-dark="$store.state.settings.theme === 'dark'"
-              is-required
-              color="green"
-              mode="date"
-              v-model="selectedDate"
-              />
+              <div class="date-picker-wrapper">
+                <DatePicker
+                :is-dark="$store.state.settings.theme === 'dark'"
+                is-required
+                color="green"
+                mode="date"
+                v-model="selectedDate"
+                />
+                <div class="loader">
+                  <CustomLoader></CustomLoader>
+                </div>
+              </div>
               <div class="buttons-wrapper">
                 <CustomButton type="info">Zmień termin</CustomButton>
                 <CustomButton type="secondary"
@@ -97,7 +102,9 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
+import {
+  ref, onMounted, computed, watch,
+} from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
@@ -106,6 +113,7 @@ import CustomButton from '@/components/CustomButton.vue';
 import { DatePicker } from 'v-calendar';
 import CustomModal from '../../components/CustomModal.vue';
 import MessageBox from '../../components/MessageBox.vue';
+import CustomLoader from '../../components/CustomLoader.vue';
 
 export default {
   name: 'AppointmentView',
@@ -114,14 +122,26 @@ export default {
     CustomModal,
     MessageBox,
     DatePicker,
+    CustomLoader,
   },
   setup() {
     const store = useStore();
     const route = useRoute();
 
     const appointmentData = ref(null);
+    const selectedDate = ref(new Date());
+
+    watch(selectedDate, (newDate) => {
+      console.log(newDate.toISOString().split('T')[0]);
+    });
 
     onMounted(async () => {
+      console.log(selectedDate.value.toISOString().split('T')[0]);
+      // try{
+      //   const awailableSlots = await axios.get()
+      // } catch (error) {
+      //   handleRequestError(error);
+      // }
       const storedAppointment = store.getters.getAppointmentById(
         route.params.id,
       );
@@ -222,6 +242,7 @@ export default {
       appointment,
       cancelAppointmentModalOpen,
       changeAppointmentDateModalOpen,
+      selectedDate,
     };
   },
 };
@@ -246,6 +267,15 @@ export default {
     display: flex;
     gap: 1rem;
     justify-content: flex-start;
+  }
+  .date-picker-wrapper{
+    display: flex;
+    .loader{
+      width: 75%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 .appointment {
