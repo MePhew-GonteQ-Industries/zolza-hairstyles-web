@@ -35,12 +35,12 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-import CustomRadioButton from '@/components/CustomRadioButton.vue';
-import { setCssPropertyValue, getCssPropertyValue } from '@/utils';
+import { onMounted, ref } from "vue";
+import CustomRadioButton from "@/components/CustomRadioButton.vue";
+import { setCssPropertyValue, getCssPropertyValue } from "@/utils";
 
 export default {
-  name: 'ThemeCard',
+  name: "ThemeCard",
   components: {
     CustomRadioButton,
   },
@@ -54,56 +54,24 @@ export default {
       required: true,
     },
   },
-  emits: ['update:selectedTheme'],
+  emits: ["update:selectedTheme"],
   setup(props) {
     const themePreview = ref(null);
 
     onMounted(() => {
-      const primaryColor = getCssPropertyValue(
-        `--primary-color-${props.themeName}`,
-      );
-      const secondaryColor = getCssPropertyValue(
-        `--secondary-color-${props.themeName}`,
-      );
-      const accentColor = getCssPropertyValue(
-        `--accent-color-${props.themeName}`,
-      );
-      const primaryTextColor = getCssPropertyValue(
-        `--primary-text-color-${props.themeName}`,
-      );
-      const secondaryTextColor = getCssPropertyValue(
-        `--secondary-text-color-${props.themeName}`,
-      );
-      const themeColor = getCssPropertyValue(
-        `--theme-color-${props.themeName}`,
-      );
+      const primaryColor = getCssPropertyValue(`--primary-color-${props.themeName}`);
+      const secondaryColor = getCssPropertyValue(`--secondary-color-${props.themeName}`);
+      const accentColor = getCssPropertyValue(`--accent-color-${props.themeName}`);
+      const primaryTextColor = getCssPropertyValue(`--primary-text-color-${props.themeName}`);
+      const secondaryTextColor = getCssPropertyValue(`--secondary-text-color-${props.themeName}`);
+      const themeColor = getCssPropertyValue(`--theme-color-${props.themeName}`);
 
-      setCssPropertyValue(
-        themePreview.value,
-        '--primary-theme-color',
-        primaryColor,
-      );
-      setCssPropertyValue(
-        themePreview.value,
-        '--secondary-theme-color',
-        secondaryColor,
-      );
-      setCssPropertyValue(
-        themePreview.value,
-        '--accent-theme-color',
-        accentColor,
-      );
-      setCssPropertyValue(
-        themePreview.value,
-        '--primary-text-theme-color',
-        primaryTextColor,
-      );
-      setCssPropertyValue(
-        themePreview.value,
-        '--secondary-text-theme-color',
-        secondaryTextColor,
-      );
-      setCssPropertyValue(themePreview.value, '--theme-color', themeColor);
+      setCssPropertyValue(themePreview.value, "--primary-theme-color", primaryColor);
+      setCssPropertyValue(themePreview.value, "--secondary-theme-color", secondaryColor);
+      setCssPropertyValue(themePreview.value, "--accent-theme-color", accentColor);
+      setCssPropertyValue(themePreview.value, "--primary-text-theme-color", primaryTextColor);
+      setCssPropertyValue(themePreview.value, "--secondary-text-theme-color", secondaryTextColor);
+      setCssPropertyValue(themePreview.value, "--theme-color", themeColor);
     });
 
     return {
@@ -137,7 +105,7 @@ export default {
   border-radius: 0.313rem;
   display: flex;
   flex-direction: column;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     width: 80vw;
     height: 40vh;
   }
@@ -201,7 +169,7 @@ export default {
       background-color: $secondary-theme-color;
       align-items: flex-start;
       font-size: 12rem;
-      @media only screen and (max-width: $xs){
+      @media only screen and (max-width: $xs) {
         padding: 0;
       }
     }

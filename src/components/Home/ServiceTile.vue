@@ -1,34 +1,46 @@
 <template>
-<div class="service">
-  <div class="left">
-    <p class="name">{{ name }}</p>
-    <p class="description">{{ description }}</p>
-  </div>
-  <div class="right">
-    <div class="time-wrapper">
-      <p class="time">{{ t("home.serviceTile.time") }} <span>~{{ time }}min</span></p>
-      <CustomProgressBar :value="time"/>
+  <div class="service">
+    <div class="left">
+      <p class="name">{{ name }}</p>
+      <p class="description">{{ description }}</p>
     </div>
-    <div class="available-dates-wrapper">
-      <p class="available-dates">{{ t("home.serviceTile.availableDates") }}</p>
-      <CustomProgressBar :value="availability"/>
+    <div class="right">
+      <div class="time-wrapper">
+        <p class="time">
+          {{ t("home.serviceTile.time") }} <span>~{{ time }}min</span>
+        </p>
+        <CustomProgressBar :value="time" />
+      </div>
+      <div class="available-dates-wrapper">
+        <p class="available-dates">{{ t("home.serviceTile.availableDates") }}</p>
+        <CustomProgressBar :value="availability" />
+      </div>
+      <p class="price">
+        {{ t("home.serviceTile.price") }}
+        <span
+          >{{ priceMin }}
+          <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span
+        >
+      </p>
     </div>
-    <p class="price">{{ t("home.serviceTile.price") }} <span>{{ priceMin }}
-      <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span></p>
+    <input
+      class="select-service"
+      type="radio"
+      name="select-service"
+      @change="$emit('updateSelectedService', id)"
+      :id="tileId"
+    />
+    <label :for="tileId"></label>
   </div>
-  <input class='select-service'
-  type="radio" name="select-service" @change="$emit('updateSelectedService', id)" :id="tileId">
-  <label :for="tileId"></label>
-</div>
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import CustomProgressBar from '@/components/CustomProgressBar.vue';
-import { v4 as uuidv4 } from 'uuid';
+import { useI18n } from "vue-i18n";
+import CustomProgressBar from "@/components/CustomProgressBar.vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
-  name: 'ServiceTile',
+  name: "ServiceTile",
   components: {
     CustomProgressBar,
   },
@@ -62,7 +74,7 @@ export default {
     },
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const tileId = uuidv4();
 
@@ -84,7 +96,7 @@ export default {
   justify-items: center;
   align-items: center;
   color: $secondary-text-color;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -101,14 +113,14 @@ export default {
     }
 
     .description {
-      margin-top: .125rem;
+      margin-top: 0.125rem;
     }
   }
 
   .right {
     display: flex;
     flex-direction: column;
-    gap: .875rem;
+    gap: 0.875rem;
   }
 }
 </style>

@@ -5,9 +5,7 @@
         <CustomTooltip type="info">
           <template #activator>
             <i
-              :class="
-                session.iconClass ? session.iconClass : 'ph-question-light'
-              "
+              :class="session.iconClass ? session.iconClass : 'ph-question-light'"
               class="device-icon"
             ></i>
           </template>
@@ -24,18 +22,12 @@
             ><span v-if="session.last_access_data.location">{{
               session.last_access_data.location.city
             }}</span>
-            <span
-              >&nbsp;{{ session.last_access_data.ip_address }}</span
-            ></router-link
+            <span>&nbsp;{{ session.last_access_data.ip_address }}</span></router-link
           >
         </span>
         <span class="last-access-notice">
-          <template v-if="session.id === $store.state.auth.sessionId"
-            >Twoja obecna sesja
-          </template>
-          <template v-else>
-            Ostatni dostęp {{ session.last_accessed_str }}
-          </template>
+          <template v-if="session.id === $store.state.auth.sessionId">Twoja obecna sesja </template>
+          <template v-else> Ostatni dostęp {{ session.last_accessed_str }} </template>
         </span>
       </div>
     </div>
@@ -46,11 +38,11 @@
 </template>
 
 <script>
-import LinkButton from '@/components/LinkButton.vue';
-import CustomTooltip from '@/components/CustomTooltip.vue';
+import LinkButton from "@/components/LinkButton.vue";
+import CustomTooltip from "@/components/CustomTooltip.vue";
 
 export default {
-  name: 'LoginSession',
+  name: "LoginSession",
   components: {
     LinkButton,
     CustomTooltip,
@@ -75,7 +67,7 @@ export default {
   padding: 1rem;
   border-bottom: thin solid $secondary-color;
   align-items: center;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
   }

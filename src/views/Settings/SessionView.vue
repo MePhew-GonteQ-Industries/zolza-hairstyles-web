@@ -5,10 +5,7 @@
         <div class="icon-wrapper">
           <CustomTooltip type="info">
             <template #activator>
-              <i
-                :class="session.iconClass || 'ph-question-light'"
-                class="session-icon"
-              ></i>
+              <i :class="session.iconClass || 'ph-question-light'" class="session-icon"></i>
             </template>
             {{ session.deviceTooltip }}
           </CustomTooltip>
@@ -48,12 +45,10 @@
               <template #subtitle> {{ t("shared.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
-              <CustomButton type="warning" @click="logout"
-                >{{ t("shared.logOut") }}</CustomButton
-              >
-              <CustomButton type="secondary" @click="logoutModalOpen = false"
-                >{{ t("shared.operationCancel") }}</CustomButton
-              >
+              <CustomButton type="warning" @click="logout">{{ t("shared.logOut") }}</CustomButton>
+              <CustomButton type="secondary" @click="logoutModalOpen = false">{{
+                t("shared.operationCancel")
+              }}</CustomButton>
             </div>
           </div>
         </CustomModal>
@@ -77,12 +72,9 @@
                 {{ session.last_access_data.location.region }},
                 {{ session.last_access_data.location.country }}
               </p>
-              <CustomButton
-                type="info"
-                class="show-on-map-btn"
-                @click="showLastAccessMap"
-                >{{ t("settings.sessionView.showOnMap") }}</CustomButton
-              >
+              <CustomButton type="info" class="show-on-map-btn" @click="showLastAccessMap">{{
+                t("settings.sessionView.showOnMap")
+              }}</CustomButton>
             </template>
             <p v-else>{{ t("settings.sessionView.noData") }}</p>
           </div>
@@ -111,12 +103,9 @@
                 {{ session.sign_in_data.location.region }},
                 {{ session.sign_in_data.location.country }}
               </p>
-              <CustomButton
-                type="info"
-                class="show-on-map-btn"
-                @click="showSignInMap"
-                >{{ t("settings.sessionView.showOnMap") }}</CustomButton
-              >
+              <CustomButton type="info" class="show-on-map-btn" @click="showSignInMap">{{
+                t("settings.sessionView.showOnMap")
+              }}</CustomButton>
             </template>
             <p v-else>{{ t("settings.sessionView.noData") }}</p>
           </div>
@@ -132,22 +121,22 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { ref, onMounted, computed } from 'vue';
-import { useStore } from 'vuex';
-import { useRoute, useRouter } from 'vue-router';
-import axios from 'axios';
-import { handleRequestError } from '@/utils';
-import CustomButton from '@/components/CustomButton.vue';
-import CustomTooltip from '@/components/CustomTooltip.vue';
-import CustomModal from '@/components/CustomModal.vue';
-import MessageBox from '@/components/MessageBox.vue';
-import CustomChip from '@/components/CustomChip.vue';
-import CustomMap from '@/components/CustomMap.vue';
-import TimeAgo from '@/timeAgo';
+import { useI18n } from "vue-i18n";
+import { ref, onMounted, computed } from "vue";
+import { useStore } from "vuex";
+import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
+import { handleRequestError } from "@/utils";
+import CustomButton from "@/components/CustomButton.vue";
+import CustomTooltip from "@/components/CustomTooltip.vue";
+import CustomModal from "@/components/CustomModal.vue";
+import MessageBox from "@/components/MessageBox.vue";
+import CustomChip from "@/components/CustomChip.vue";
+import CustomMap from "@/components/CustomMap.vue";
+import TimeAgo from "@/timeAgo";
 
 export default {
-  name: 'SessionView',
+  name: "SessionView",
   components: {
     CustomButton,
     CustomTooltip,
@@ -157,7 +146,7 @@ export default {
     CustomMap,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -175,25 +164,22 @@ export default {
       const lastAccessed = new Date(`${sessionTemp.last_accessed}Z`);
 
       sessionTemp.last_accessed_str = lastAccessed.toLocaleTimeString(locale, {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
 
       sessionTemp.timeSinceLastAccessed = timeAgo.format(lastAccessed);
 
       const firstAccessed = new Date(`${sessionTemp.first_accessed}Z`);
 
-      sessionTemp.first_accessed_str = firstAccessed.toLocaleTimeString(
-        locale,
-        {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        },
-      );
+      sessionTemp.first_accessed_str = firstAccessed.toLocaleTimeString(locale, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
 
       sessionTemp.timeSinceFirstAccessed = timeAgo.format(firstAccessed);
 
@@ -203,7 +189,7 @@ export default {
 
       let deviceTooltip = `${userAgentInfo.browser.family} ${userAgentInfo.browser.version}`;
 
-      if (userAgentInfo.os.family && userAgentInfo.os.family !== 'Other') {
+      if (userAgentInfo.os.family && userAgentInfo.os.family !== "Other") {
         deviceTooltip += ` na ${userAgentInfo.os.family} ${userAgentInfo.os.version}`;
       }
 
@@ -211,20 +197,20 @@ export default {
         const deviceInfo = userAgentInfo.device;
 
         if (deviceInfo) {
-          if (deviceInfo.is_bot) sessionIcon = 'ph-robot-light';
+          if (deviceInfo.is_bot) sessionIcon = "ph-robot-light";
 
-          if (deviceInfo.is_pc) sessionIcon = 'ph-desktop-light';
+          if (deviceInfo.is_pc) sessionIcon = "ph-desktop-light";
 
-          if (deviceInfo.is_tablet) sessionIcon = 'ph-device-tablet-light';
+          if (deviceInfo.is_tablet) sessionIcon = "ph-device-tablet-light";
 
-          if (deviceInfo.is_mobile) sessionIcon = 'ph-device-mobile-light';
+          if (deviceInfo.is_mobile) sessionIcon = "ph-device-mobile-light";
         }
       }
 
       if (!sessionIcon) {
-        if (sessionTemp.last_access_data.user_agent.includes('dart')) {
-          sessionIcon = 'ph-device-mobile-light';
-          deviceTooltip = 'Aplikacja Zołza Hairstyles na urządzenia mobilne';
+        if (sessionTemp.last_access_data.user_agent.includes("dart")) {
+          sessionIcon = "ph-device-mobile-light";
+          deviceTooltip = "Aplikacja Zołza Hairstyles na urządzenia mobilne";
         }
       }
 
@@ -256,8 +242,8 @@ export default {
         .delete(`auth/revoke-session/${session.value.id}`)
         .then((response) => {
           if (response.status === 200) {
-            store.dispatch('deleteSessions');
-            router.push({ name: 'accountSecuritySettings' });
+            store.dispatch("deleteSessions");
+            router.push({ name: "accountSecuritySettings" });
           }
         })
         .catch((error) => {

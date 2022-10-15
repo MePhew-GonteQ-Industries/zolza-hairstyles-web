@@ -6,15 +6,15 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-import { getCssPropertyValue, setCssPropertyValue } from '@/utils';
+import { onMounted, ref } from "vue";
+import { getCssPropertyValue, setCssPropertyValue } from "@/utils";
 
 export default {
-  name: 'CustomTooltip',
+  name: "CustomTooltip",
   props: {
     type: {
       type: String,
-      default: 'default',
+      default: "default",
     },
   },
   setup(props) {
@@ -25,45 +25,45 @@ export default {
       let accentColor;
 
       switch (props.type) {
-        case 'primary': {
-          mainColor = getCssPropertyValue('--primary-color');
-          accentColor = getCssPropertyValue('--accent-color');
+        case "primary": {
+          mainColor = getCssPropertyValue("--primary-color");
+          accentColor = getCssPropertyValue("--accent-color");
           break;
         }
-        case 'secondary': {
-          mainColor = 'white';
-          accentColor = 'grey';
+        case "secondary": {
+          mainColor = "white";
+          accentColor = "grey";
           break;
         }
-        case 'success': {
-          mainColor = 'white';
-          accentColor = getCssPropertyValue('--success-color');
+        case "success": {
+          mainColor = "white";
+          accentColor = getCssPropertyValue("--success-color");
           break;
         }
-        case 'info': {
-          mainColor = 'white';
-          accentColor = getCssPropertyValue('--info-color');
+        case "info": {
+          mainColor = "white";
+          accentColor = getCssPropertyValue("--info-color");
           break;
         }
-        case 'warning': {
-          mainColor = 'white';
-          accentColor = getCssPropertyValue('--warning-color');
+        case "warning": {
+          mainColor = "white";
+          accentColor = getCssPropertyValue("--warning-color");
           break;
         }
-        case 'error': {
-          mainColor = 'white';
-          accentColor = getCssPropertyValue('--error-color');
+        case "error": {
+          mainColor = "white";
+          accentColor = getCssPropertyValue("--error-color");
           break;
         }
         default: {
-          mainColor = 'white';
-          accentColor = getCssPropertyValue('--secondary-color');
+          mainColor = "white";
+          accentColor = getCssPropertyValue("--secondary-color");
           break;
         }
       }
 
-      setCssPropertyValue(tooltip.value, '--main-color', mainColor);
-      setCssPropertyValue(tooltip.value, '--accent-color', accentColor);
+      setCssPropertyValue(tooltip.value, "--main-color", mainColor);
+      setCssPropertyValue(tooltip.value, "--accent-color", accentColor);
     });
     return {
       tooltip,
@@ -72,7 +72,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .tooltip-wrapper {
   position: relative;
 
@@ -96,7 +96,7 @@ export default {
     min-height: 20px;
     background-color: $accent-color;
     color: $main-color;
-    font-size: .75rem;
+    font-size: 0.75rem;
     border-radius: 0.313rem;
     opacity: 0;
     top: 100%;

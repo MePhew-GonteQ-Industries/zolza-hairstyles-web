@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue';
-import { useStore } from 'vuex';
-import { v4 as uuidv4 } from 'uuid';
-import leaflet from 'leaflet';
+import { ref, watch } from "vue";
+import { useStore } from "vuex";
+import { v4 as uuidv4 } from "uuid";
+import leaflet from "leaflet";
 
 export default {
-  name: 'CustomMap',
+  name: "CustomMap",
   props: {
     location: {
       type: Object,
@@ -29,7 +29,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'range',
+      default: "range",
     },
   },
   setup(props) {
@@ -45,28 +45,28 @@ export default {
       const map = leaflet
         .map(mapId, {
           dragging: false,
-          scrollWheelZoom: 'center',
-          doubleClickZoom: 'center',
-          touchZoom: 'center',
+          scrollWheelZoom: "center",
+          doubleClickZoom: "center",
+          touchZoom: "center",
         })
         .setView([latitude, longitude], 5);
 
       map.attributionControl.setPrefix(
-        '<a href="https://leafletjs.com" title="A JavaScript library for interactive maps" target="_blank"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>',
+        '<a href="https://leafletjs.com" title="A JavaScript library for interactive maps" target="_blank"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>'
       );
 
       switch (props.type) {
-        case 'range': {
+        case "range": {
           leaflet
             .circle([latitude, longitude], {
-              color: 'var(--accent-color)',
+              color: "var(--accent-color)",
               fillOpacity: 0.2,
               radius: 100000,
             })
             .addTo(map);
           break;
         }
-        case 'location': {
+        case "location": {
           leaflet.marker([latitude, longitude]).addTo(map);
           break;
         }
@@ -76,14 +76,14 @@ export default {
 
       leaflet
         .tileLayer(
-          'https://api.mapbox.com/styles/v1/mapbox/{theme}-v10/tiles/{z}/{x}/{y}?access_token={accessToken}',
+          "https://api.mapbox.com/styles/v1/mapbox/{theme}-v10/tiles/{z}/{x}/{y}?access_token={accessToken}",
           {
             maxZoom: 19,
             attribution:
               "© <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-            theme: store.state.settings.theme === 'light' ? 'light' : 'dark',
-            accessToken: process.env.VUE_APP_MAPBOX_API_TOKEN,
-          },
+            theme: store.state.settings.theme === "light" ? "light" : "dark",
+            accessToken: import.meta.env.VITE_MAPBOX_API_TOKEN,
+          }
         )
         .addTo(map);
     };
@@ -97,7 +97,7 @@ export default {
             showMap();
           }, 100);
         }
-      },
+      }
     );
 
     return {

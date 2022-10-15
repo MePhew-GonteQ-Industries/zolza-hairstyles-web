@@ -1,8 +1,10 @@
 <template>
   <div class="data-icon-wrapper">
     <i
-      :class="[statusSuccess ? 'ph-check-circle-light' : 'ph-x-circle-light',
-      statusSuccess ? 'good' : 'wrong']"
+      :class="[
+        statusSuccess ? 'ph-check-circle-light' : 'ph-x-circle-light',
+        statusSuccess ? 'good' : 'wrong',
+      ]"
     >
     </i>
   </div>
@@ -10,7 +12,7 @@
 
 <script>
 export default {
-  name: 'StatusIndicator',
+  name: "StatusIndicator",
   props: {
     statusSuccess: {
       type: Boolean,

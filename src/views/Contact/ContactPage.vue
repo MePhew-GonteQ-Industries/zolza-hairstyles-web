@@ -5,23 +5,19 @@
         <a href="tel:+48 730 601 830" target="_blank" aria-label="Numer telefonu">
           <img class="contact-info" src="@/assets/wizytowka-tel.svg" alt="" />
         </a>
-        <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank" aria-label="Instagram">
-          <img
-            class="contact-info social"
-            src="@/assets/wizytowka-insta.svg"
-            alt=""
-          />
+        <a
+          href="https://www.instagram.com/zolza_hairstyles/"
+          target="_blank"
+          aria-label="Instagram"
+        >
+          <img class="contact-info social" src="@/assets/wizytowka-insta.svg" alt="" />
         </a>
         <a
           href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161"
           target="_blank"
           aria-label="Facebook"
         >
-          <img
-            class="contact-info social"
-            src="@/assets/wizytowka-fb.svg"
-            alt=""
-          />
+          <img class="contact-info social" src="@/assets/wizytowka-fb.svg" alt="" />
         </a>
         <a href="mailto: zolza.hairstyles@gmail.com" target="_blank" aria-label="Adres email">
           <img class="contact-info" src="@/assets/wizytowka-mail.svg" alt="" />
@@ -87,10 +83,10 @@
   }
 }
 
-@media only screen and (max-width: $xs){
-  #contact-page{
+@media only screen and (max-width: $xs) {
+  #contact-page {
     padding: 20px 0;
-    #business-card{
+    #business-card {
       display: flex;
       background-image: none;
       background-color: white;
@@ -98,9 +94,9 @@
       width: 90vw;
       justify-content: center;
     }
-    .map-embed{
+    .map-embed {
       width: 90vw;
-      iframe{
+      iframe {
         width: 90vw;
         border-radius: 20px;
       }

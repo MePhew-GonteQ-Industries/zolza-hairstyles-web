@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'SortedHeader',
+  name: "SortedHeader",
   props: {
     sortBy: {
       type: String,
@@ -30,11 +30,11 @@ export default {
       required: true,
     },
   },
-  emits: ['toggleSort'],
+  emits: ["toggleSort"],
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .sorted-header {
   display: flex;
   align-items: center;

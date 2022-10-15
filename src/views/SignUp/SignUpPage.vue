@@ -94,16 +94,18 @@
         </div>
 
         <div class="under-inputs-section">
-          <CustomCheckbox v-model:checked="termsAccepted"
+          <CustomCheckbox
+            v-model:checked="termsAccepted"
             :forceValidate="forceValidate"
             :messageUnchecked="t('signUp.checkbox.messageUnchecked')"
-            >
-            {{ t('signUp.checkbox.label') }}
-            <router-link to="/terms-of-use"> {{ t('signUp.checkbox.termsOfServices') }}
-             </router-link>
-            {{ t('signUp.checkbox.separator') }}
+          >
+            {{ t("signUp.checkbox.label") }}
+            <router-link to="/terms-of-use">
+              {{ t("signUp.checkbox.termsOfServices") }}
+            </router-link>
+            {{ t("signUp.checkbox.separator") }}
             <router-link to="/privacy-policy">
-              {{ t('signUp.checkbox.privacyPolicy') }}
+              {{ t("signUp.checkbox.privacyPolicy") }}
             </router-link>
           </CustomCheckbox>
         </div>
@@ -119,19 +121,19 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
-import { useI18n } from 'vue-i18n';
-import CustomButton from '@/components/CustomButton.vue';
-import CustomSelect from '@/components/CustomSelect.vue';
-import CustomInput from '@/components/CustomInput.vue';
-import { validateEmail, handleRequestError } from '@/utils';
-import { useStore } from 'vuex';
-import CustomCheckbox from '../../components/CustomCheckbox.vue';
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+import { useI18n } from "vue-i18n";
+import CustomButton from "@/components/CustomButton.vue";
+import CustomSelect from "@/components/CustomSelect.vue";
+import CustomInput from "@/components/CustomInput.vue";
+import { validateEmail, handleRequestError } from "@/utils";
+import { useStore } from "vuex";
+import CustomCheckbox from "../../components/CustomCheckbox.vue";
 
 export default {
-  name: 'SignUpPage',
+  name: "SignUpPage",
   components: {
     CustomButton,
     CustomSelect,
@@ -139,18 +141,18 @@ export default {
     CustomCheckbox,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
     const router = useRouter();
     const store = useStore();
 
     const userData = ref({
-      name: '',
-      surname: '',
-      email: '',
-      gender: '',
-      password: '',
+      name: "",
+      surname: "",
+      email: "",
+      gender: "",
+      password: "",
     });
-    const passwordRepeat = ref('');
+    const passwordRepeat = ref("");
 
     const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
@@ -210,16 +212,16 @@ export default {
 
     function signUpUser() {
       axios
-        .post('users/register', userData.value, {
+        .post("users/register", userData.value, {
           headers: {
-            'content-language': store.state.settings.language,
-            'preferred-theme': 'dark',
+            "content-language": store.state.settings.language,
+            "preferred-theme": "dark",
           },
         })
         .then((response) => {
           const { email } = response.data;
           router.push({
-            name: 'login',
+            name: "login",
             params: { email, accountCreated: true },
           });
         })
@@ -236,22 +238,22 @@ export default {
 
     const genderOptions = [
       {
-        title: 'Male',
-        value: 'male',
-        iconClass: 'ph-gender-male-light',
-        iconAlt: 'male gender icon',
+        title: "Male",
+        value: "male",
+        iconClass: "ph-gender-male-light",
+        iconAlt: "male gender icon",
       },
       {
-        title: 'Female',
-        value: 'female',
-        iconClass: 'ph-gender-female-light',
-        iconAlt: 'female gender icon',
+        title: "Female",
+        value: "female",
+        iconClass: "ph-gender-female-light",
+        iconAlt: "female gender icon",
       },
       {
-        title: 'Other',
-        value: 'other',
-        iconClass: 'ph-gender-neuter-light',
-        iconAlt: 'other gender icon',
+        title: "Other",
+        value: "other",
+        iconClass: "ph-gender-neuter-light",
+        iconAlt: "other gender icon",
       },
     ];
 
@@ -273,5 +275,4 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

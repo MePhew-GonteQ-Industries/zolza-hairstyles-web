@@ -92,9 +92,7 @@
         <tbody>
           <tr v-for="user in users" :key="user.id">
             <td class="id">
-              <router-link :to="`users/${user.id}`">
-                #{{ user.shortId }}...</router-link
-              >
+              <router-link :to="`users/${user.id}`"> #{{ user.shortId }}...</router-link>
             </td>
             <td class="user-name">
               {{ user.name }}
@@ -129,14 +127,14 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { onMounted, computed } from 'vue';
-import CustomInput from '@/components/CustomInput.vue';
-import StatusIndicator from '@/components/StatusIndicator.vue';
-import { useStore } from 'vuex';
+import { useI18n } from "vue-i18n";
+import { onMounted, computed } from "vue";
+import CustomInput from "@/components/CustomInput.vue";
+import StatusIndicator from "@/components/StatusIndicator.vue";
+import { useStore } from "vuex";
 
 export default {
-  name: 'UsersManagement',
+  name: "UsersManagement",
   components: {
     CustomInput,
     StatusIndicator,
@@ -144,7 +142,7 @@ export default {
   setup() {
     const store = useStore();
 
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const users = computed(() => {
       if (!store.state.users.users.length) return [];
@@ -156,29 +154,29 @@ export default {
 
         userTemp.shortId = user.id.substr(0, 4);
 
-        if (user.gender === 'female') {
-          userTemp.gender_icon_class = 'ph-gender-female';
-          userTemp.gender = 'Żeńska';
-        } else if (user.gender === 'male') {
-          userTemp.gender_icon_class = 'ph-gender-male';
-          userTemp.gender = 'Męska';
+        if (user.gender === "female") {
+          userTemp.gender_icon_class = "ph-gender-female";
+          userTemp.gender = "Żeńska";
+        } else if (user.gender === "male") {
+          userTemp.gender_icon_class = "ph-gender-male";
+          userTemp.gender = "Męska";
         } else {
-          userTemp.gender_icon_class = 'ph-gender-neuter';
-          userTemp.gender = 'Inna';
+          userTemp.gender_icon_class = "ph-gender-neuter";
+          userTemp.gender = "Inna";
         }
-        userTemp.gender_icon_class += '-light';
+        userTemp.gender_icon_class += "-light";
 
-        if (user.permission_level.includes('owner')) {
-          userTemp.permission_level_icon_class = 'ph-user-gear';
-          userTemp.permission_level = 'Właściciel';
-        } else if (user.permission_level.includes('admin')) {
-          userTemp.permission_level_icon_class = 'ph-wrench';
-          userTemp.permission_level = 'Administrator';
+        if (user.permission_level.includes("owner")) {
+          userTemp.permission_level_icon_class = "ph-user-gear";
+          userTemp.permission_level = "Właściciel";
+        } else if (user.permission_level.includes("admin")) {
+          userTemp.permission_level_icon_class = "ph-wrench";
+          userTemp.permission_level = "Administrator";
         } else {
-          userTemp.permission_level_icon_class = 'ph-user';
-          userTemp.permission_level = 'Użytkownik';
+          userTemp.permission_level_icon_class = "ph-user";
+          userTemp.permission_level = "Użytkownik";
         }
-        userTemp.permission_level_icon_class += '-light';
+        userTemp.permission_level_icon_class += "-light";
 
         usersTemp.push(userTemp);
       });
@@ -187,7 +185,7 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch('loadUsers');
+      await store.dispatch("loadUsers");
     });
 
     return {

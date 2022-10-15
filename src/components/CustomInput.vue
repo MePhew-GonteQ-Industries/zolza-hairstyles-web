@@ -8,17 +8,12 @@
       :placeholder="label"
       :value="value"
       @input="(event) => $emit('update:value', event.target.value)"
-      :class="[
-        { invalid: (invalid || empty) && (validate || forceValidate) },
-        appearance,
-      ]"
+      :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]"
       @focus="$emit('focus')"
       @blur="handleBlur"
     />
 
-    <label class="search-label" v-if="type === 'search'" :for="inputId">{{
-      label
-    }}</label>
+    <label class="search-label" v-if="type === 'search'" :for="inputId">{{ label }}</label>
     <label class="form-label" v-else :for="inputId">{{ label }}</label>
 
     <div
@@ -51,20 +46,14 @@
     </div>
     <i v-else :class="iconClass" class="input-icon"></i>
 
-    <div
-      v-show="(validate || forceValidate) && (invalid || empty)"
-      class="invalid-wrapper"
-    >
+    <div v-show="(validate || forceValidate) && (invalid || empty)" class="invalid-wrapper">
       <i class="ph-warning-circle-light invalid-icon"></i>
 
       <p class="message-invalid message-value-empty" v-if="required && empty">
         {{ messageEmpty }}
       </p>
 
-      <p
-        class="message-invalid message-value-invalid"
-        v-if="!(required && empty)"
-      >
+      <p class="message-invalid message-value-invalid" v-if="!(required && empty)">
         {{ messageInvalid }}
       </p>
     </div>
@@ -72,11 +61,11 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
+import { ref, onMounted, computed } from "vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
-  name: 'CustomInput',
+  name: "CustomInput",
   props: {
     value: String,
     autocomplete: {
@@ -101,7 +90,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'text',
+      default: "text",
     },
     invalid: {
       type: Boolean,
@@ -113,10 +102,10 @@ export default {
     },
     appearance: {
       type: String,
-      default: 'outlined',
+      default: "outlined",
     },
   },
-  emits: ['update:value', 'blur', 'focus', 'searchBtnClick'],
+  emits: ["update:value", "blur", "focus", "searchBtnClick"],
   setup(props, { emit }) {
     const inputId = ref(null);
     const strongPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
@@ -129,32 +118,25 @@ export default {
 
     const invalidInternal = computed(() => {
       switch (props.type) {
-        case 'name': {
-          if (
-            (props.value.length < 3 || props.value.length > 50)
-            && props.value.length !== 0
-          ) {
+        case "name": {
+          if ((props.value.length < 3 || props.value.length > 50) && props.value.length !== 0) {
             return true;
           }
           if (
-            (props.value && props.value.trim().match(whitespace))
-            || !props.value.match(specialCharacter)
-          ) {
-            return true;
-          }
-          return false;
-        }
-        case 'password': {
-          if (
-            props.value
-            && !props.value.match(strongPassword)
-            && props.value.length !== 0
+            (props.value && props.value.trim().match(whitespace)) ||
+            !props.value.match(specialCharacter)
           ) {
             return true;
           }
           return false;
         }
-        case 'password-login': {
+        case "password": {
+          if (props.value && !props.value.match(strongPassword) && props.value.length !== 0) {
+            return true;
+          }
+          return false;
+        }
+        case "password-login": {
           return false;
         }
         default: {
@@ -174,7 +156,7 @@ export default {
     const validate = ref(false);
 
     const handleBlur = () => {
-      emit('blur');
+      emit("blur");
       validate.value = true;
     };
 
@@ -187,11 +169,11 @@ export default {
 
     const inputType = computed(() => {
       switch (props.type) {
-        case 'password': {
-          return passwordHidden.value ? 'password' : 'text';
+        case "password": {
+          return passwordHidden.value ? "password" : "text";
         }
-        case 'password-login': {
-          return passwordHidden.value ? 'password' : 'text';
+        case "password-login": {
+          return passwordHidden.value ? "password" : "text";
         }
         default: {
           return props.type;
@@ -213,7 +195,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .input-wrapper {
   position: relative;
   display: flex;
@@ -221,7 +203,7 @@ export default {
   justify-content: center;
   height: 65px;
   width: 408px;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     width: 310px;
   }
 
@@ -334,8 +316,8 @@ export default {
     &:autofill:hover,
     &:-webkit-autofill:focus,
     &:autofill:focus {
-      transition: background-color 5000s ease-in-out 0s,
-        border-color $transition-duration, box-shadow $transition-duration;
+      transition: background-color 5000s ease-in-out 0s, border-color $transition-duration,
+        box-shadow $transition-duration;
     }
 
     &:focus,

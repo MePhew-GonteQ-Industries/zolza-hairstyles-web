@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
+import { ref, onMounted } from "vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
-  name: 'CustomRadioButton',
-  emits: ['update:checked'],
+  name: "CustomRadioButton",
+  emits: ["update:checked"],
   props: {
     name: {
       type: String,
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .radio-handle {
   position: absolute;
   height: 20px;

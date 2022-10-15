@@ -2,8 +2,7 @@
   <div id="app-wrapper" :data-theme="$store.state.settings.theme">
     <main ref="main" :class="{ collapsed: !onHomePage }">
       <div id="nav" ref="navbar" :class="navbarClasses">
-        <navbarSection
-        @slide-sidebar="sidebarSlide" />
+        <navbarSection @slide-sidebar="sidebarSlide" />
       </div>
       <CustomSidebar class="sidebar" />
       <div class="wrapper" v-if="onHomePage">
@@ -111,11 +110,7 @@
             {{ t("app.description") }}
           </h1>
         </section>
-        <i
-          class="ph-caret-down-light"
-          @click="scrollToServices"
-          @keyup.down="scrollToServices"
-        ></i>
+        <i class="ph-caret-down-light" @click="scrollToServices" @keyup.down="scrollToServices"></i>
 
         <!-- eslint-disable max-len -->
         <svg
@@ -145,18 +140,13 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import {
-  onMounted, ref, watch, computed,
-} from 'vue';
-import {
-  useElementVisibility,
-  useWindowScroll,
-} from '@vueuse/core';
-import navbarSection from '@/components/Navbar/NavbarSection.vue';
-import contactSection from '@/views/Contact/ContactSection.vue';
-import { useRouter } from 'vue-router';
-import CustomSidebar from './components/CustomSidebar.vue';
+import { useI18n } from "vue-i18n";
+import { onMounted, ref, watch, computed } from "vue";
+import { useElementVisibility, useWindowScroll } from "@vueuse/core";
+import navbarSection from "@/components/Navbar/NavbarSection.vue";
+import contactSection from "@/views/Contact/ContactSection.vue";
+import { useRouter } from "vue-router";
+import CustomSidebar from "./components/CustomSidebar.vue";
 
 export default {
   components: {
@@ -166,17 +156,15 @@ export default {
   },
   methods: {
     sidebarSlide() {
-      console.log('sidebar');
+      console.log("sidebar");
     },
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const router = useRouter();
 
-    const onHomePage = computed(
-      () => router.currentRoute.value.name === 'home',
-    );
+    const onHomePage = computed(() => router.currentRoute.value.name === "home");
 
     const scrolledToServices = ref(false);
 
@@ -209,7 +197,7 @@ export default {
     const navbarClasses = computed(() => ({
       static: !onHomePage.value,
       fixed: navbarFixed.value && onHomePage.value,
-      'static-outside-viewport': !navbarFixed.value && !navbarVisible.value,
+      "static-outside-viewport": !navbarFixed.value && !navbarVisible.value,
     }));
 
     return {
@@ -250,7 +238,7 @@ export default {
       color: $main-section-color;
       transition: none;
 
-      .sidebar{
+      .sidebar {
         height: 100vh;
         width: 100vw;
         z-index: 15;
@@ -370,34 +358,34 @@ export default {
     }
   }
 
-  @media only screen and (max-width: $md){
-    #app-wrapper{
-      main{
-        #nav{
+  @media only screen and (max-width: $md) {
+    #app-wrapper {
+      main {
+        #nav {
           min-height: 20px;
         }
       }
     }
   }
 
-@media only screen and (max-width: $xs){
-  #app-wrapper{
-    main{
-        .sidebar{
+  @media only screen and (max-width: $xs) {
+    #app-wrapper {
+      main {
+        .sidebar {
           position: fixed;
           top: 0;
           left: 0;
           display: flex;
         }
-        .wrapper{
-          .description{
+        .wrapper {
+          .description {
             max-width: 80vw;
           }
-          .hero{
+          .hero {
             // margin-top: 5vh;
             padding: 0;
           }
-          .divider{
+          .divider {
             height: 80px;
           }
         }
@@ -405,5 +393,4 @@ export default {
     }
   }
 }
-
 </style>

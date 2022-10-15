@@ -123,46 +123,46 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { onMounted, ref, reactive } from 'vue';
-import VueApexCharts from 'vue3-apexcharts';
-import Vue3autocounter from 'vue3-autocounter';
-import { getCssPropertyValue } from '@/utils';
+import { useI18n } from "vue-i18n";
+import { onMounted, ref, reactive } from "vue";
+import VueApexCharts from "vue3-apexcharts";
+import Vue3autocounter from "vue3-autocounter";
+import { getCssPropertyValue } from "@/utils";
 
 export default {
-  name: 'SummaryView',
+  name: "SummaryView",
   components: {
     apexcharts: VueApexCharts,
-    'vue3-autocounter': Vue3autocounter,
+    "vue3-autocounter": Vue3autocounter,
   },
   setup() {
     const summaryViewPage = ref(null);
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const chartOptions = reactive({
       title: {
         // text: 'Liczba wizyt',
-        text: t('dashboard.summaryView.numberOfAppointments'),
-        align: 'left',
+        text: t("dashboard.summaryView.numberOfAppointments"),
+        align: "left",
         margin: 10,
         offsetX: 10,
         offsetY: 10,
         floating: false,
         style: {
-          fontSize: '1rem',
-          fontWeight: 'bold',
-          fontFamily: 'Poppins, Sans-Serif',
+          fontSize: "1rem",
+          fontWeight: "bold",
+          fontFamily: "Poppins, Sans-Serif",
         },
       },
       stroke: {
-        curve: 'smooth',
+        curve: "smooth",
       },
       chart: {
         zoom: {
           enabled: false,
         },
-        foreColor: '#B3B1B5',
-        background: '#fff',
+        foreColor: "#B3B1B5",
+        background: "#fff",
         toolbar: {
           show: false,
         },
@@ -175,8 +175,8 @@ export default {
       theme: {
         monochrome: {
           enabled: true,
-          color: '#202020',
-          shadeTo: 'dark',
+          color: "#202020",
+          shadeTo: "dark",
           shadeIntensity: 0.65,
         },
       },
@@ -187,15 +187,15 @@ export default {
 
     const series = [
       {
-        name: 'Wizyty',
+        name: "Wizyty",
         data: [3, 4, 3, 5, 4, 6, 7, 9, 12],
       },
     ];
 
     onMounted(() => {
-      const accentColor = getCssPropertyValue('--accent-color').trim();
-      const secondaryColor = getCssPropertyValue('--secondary-color').trim();
-      const foreColor = getCssPropertyValue('--primary-text-color').trim();
+      const accentColor = getCssPropertyValue("--accent-color").trim();
+      const secondaryColor = getCssPropertyValue("--secondary-color").trim();
+      const foreColor = getCssPropertyValue("--primary-text-color").trim();
 
       chartOptions.theme.monochrome.color = accentColor;
       chartOptions.chart.foreColor = foreColor;
@@ -232,7 +232,7 @@ export default {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     flex-direction: column;
   }
 }
@@ -287,7 +287,7 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
   }

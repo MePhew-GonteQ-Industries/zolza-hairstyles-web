@@ -4,9 +4,7 @@
       <div class="avatar-row">
         <i class="ph-user-square-light avatar-icon"></i>
         <div class="user-data">
-          <CustomChip type="info" :customIconClass="userIconClass">{{
-            userRole
-          }}</CustomChip>
+          <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }}</CustomChip>
           <p class="email">{{ $store.state.user.email }}</p>
           <p>{{ t("settings.userAccountSettings.userSince") }} {{ accountCreationDateStr }}</p>
           <p>({{ timeSinceCreationDate }})</p>
@@ -43,7 +41,8 @@
       >
       <CustomModal v-model:open="deleteAccountModalOpen">
         <template #title>
-           {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template>
+          {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template
+        >
         <div class="delete-account-wrappper">
           <div class="messages-wrapper">
             <MessageBox type="error">
@@ -53,10 +52,7 @@
                 <p>{{ t("settings.userAccountSettings.appointmentsCancellation") }}</p>
               </template>
             </MessageBox>
-            <MessageBox
-              type="error"
-              v-if="$store.getters.isAdmin || $store.getters.isOwner"
-            >
+            <MessageBox type="error" v-if="$store.getters.isAdmin || $store.getters.isOwner">
               <template #title>{{ t("shared.warning") }}</template>
               <template #subtitle>
                 {{ t("settings.userAccountSettings.deleteHighLevelAccount") }}
@@ -97,14 +93,12 @@
               />
             </div>
             <div class="buttons-row">
-              <CustomButton type="error" @click="deleteAccount"
-                >{{ t("settings.userAccountSettings.confirmationButton") }}</CustomButton
-              >
-              <CustomButton
-                type="secondary"
-                @click="deleteAccountModalOpen = false"
-                >{{ t("shared.operationCancel") }}</CustomButton
-              >
+              <CustomButton type="error" @click="deleteAccount">{{
+                t("settings.userAccountSettings.confirmationButton")
+              }}</CustomButton>
+              <CustomButton type="secondary" @click="deleteAccountModalOpen = false">{{
+                t("shared.operationCancel")
+              }}</CustomButton>
             </div>
           </form>
         </div>
@@ -119,20 +113,22 @@
           {{ t("settings.userAccountSettings.emailLabel") }} {{ $store.state.user.email }}
           {{ t("settings.userAccountSettings.emailNotConfirmed") }}
         </template>
-        <template #subtitle>  {{ t("settings.userAccountSettings.emailLinkResend") }} </template>
+        <template #subtitle> {{ t("settings.userAccountSettings.emailLinkResend") }} </template>
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
-        <CustomButton class="save" type="success" @click="changeUserData"
-          >{{ t("shared.saveChanges") }}</CustomButton
-        >
+        <CustomButton class="save" type="success" @click="changeUserData">{{
+          t("shared.saveChanges")
+        }}</CustomButton>
         <CustomModal v-model:open="passwordPromptOpen">
           <template #title> {{ t("settings.userAccountSettings.passwordInput") }} </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="info">
               <template #title>
-                {{ t("settings.userAccountSettings.keyDataModification") }}</template>
-              <template #subtitle
-                >{{ t("settings.userAccountSettings.identityConfirmation") }}</template>
+                {{ t("settings.userAccountSettings.keyDataModification") }}</template
+              >
+              <template #subtitle>{{
+                t("settings.userAccountSettings.identityConfirmation")
+              }}</template>
             </MessageBox>
             <form @submit.prevent="changeUserDataSudoMode">
               <input
@@ -149,48 +145,46 @@
                   type="password"
                   v-model:value="password"
                 />
-                <router-link to="/password-reset" tabindex="-1"
-                  >{{ t("shared.forgotYourPassword") }}</router-link
-                >
+                <router-link to="/password-reset" tabindex="-1">{{
+                  t("shared.forgotYourPassword")
+                }}</router-link>
               </div>
               <div class="buttons-row">
-                <CustomButton type="success" @click="changeUserDataSudoMode"
-                  >{{ t("settings.userAccountSettings.next") }}</CustomButton
-                >
-                <CustomButton
-                  type="secondary"
-                  @click="passwordPromptOpen = false"
-                  >{{ t("shared.operationCancel") }}</CustomButton
-                >
+                <CustomButton type="success" @click="changeUserDataSudoMode">{{
+                  t("settings.userAccountSettings.next")
+                }}</CustomButton>
+                <CustomButton type="secondary" @click="passwordPromptOpen = false">{{
+                  t("shared.operationCancel")
+                }}</CustomButton>
               </div>
             </form>
           </div>
         </CustomModal>
-        <CustomButton type="secondary" class="cancel" @click="revertChanges"
-          >{{ t("shared.operationCancel") }}</CustomButton
-        >
+        <CustomButton type="secondary" class="cancel" @click="revertChanges">{{
+          t("shared.operationCancel")
+        }}</CustomButton>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CustomInput from '@/components/CustomInput.vue';
-import CustomSelect from '@/components/CustomSelect.vue';
-import CustomChip from '@/components/CustomChip.vue';
-import MessageBox from '@/components/MessageBox.vue';
-import CustomButton from '@/components/CustomButton.vue';
-import CustomModal from '@/components/CustomModal.vue';
-import { computed, reactive, ref } from 'vue';
-import { useStore } from 'vuex';
-import { useI18n } from 'vue-i18n';
-import TimeAgo from '@/timeAgo';
-import axios from 'axios';
-import { handleRequestError } from '@/utils';
-import { useRouter } from 'vue-router';
+import CustomInput from "@/components/CustomInput.vue";
+import CustomSelect from "@/components/CustomSelect.vue";
+import CustomChip from "@/components/CustomChip.vue";
+import MessageBox from "@/components/MessageBox.vue";
+import CustomButton from "@/components/CustomButton.vue";
+import CustomModal from "@/components/CustomModal.vue";
+import { computed, reactive, ref } from "vue";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import TimeAgo from "@/timeAgo";
+import axios from "axios";
+import { handleRequestError } from "@/utils";
+import { useRouter } from "vue-router";
 
 export default {
-  name: 'UserAccountSettings',
+  name: "UserAccountSettings",
   components: {
     CustomInput,
     CustomSelect,
@@ -200,7 +194,7 @@ export default {
     CustomModal,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
     const router = useRouter();
     const store = useStore();
     const locale = store.state.settings.language;
@@ -215,20 +209,21 @@ export default {
     let userIconClass;
 
     if (store.getters.isOwner) {
-      userIconClass = 'ph-user-gear-light';
-      userRole = 'Właściciel';
+      userIconClass = "ph-user-gear-light";
+      userRole = "Właściciel";
     } else if (store.getters.isAdmin) {
-      userIconClass = 'ph-wrench-light';
-      userRole = 'Administrator';
+      userIconClass = "ph-wrench-light";
+      userRole = "Administrator";
     } else {
-      userIconClass = 'ph-user-light';
-      userRole = 'Użytkownik';
+      userIconClass = "ph-user-light";
+      userRole = "Użytkownik";
     }
 
     const userDatamodified = computed(
-      () => store.state.user.name !== userData.name
-        || store.state.user.surname !== userData.surname
-        || store.state.user.gender !== userData.gender,
+      () =>
+        store.state.user.name !== userData.name ||
+        store.state.user.surname !== userData.surname ||
+        store.state.user.gender !== userData.gender
     );
 
     const revertChanges = () => {
@@ -239,22 +234,22 @@ export default {
 
     const genderOptions = [
       {
-        title: 'Male',
-        value: 'male',
-        iconClass: 'ph-gender-male-light',
-        iconAlt: 'male gender icon',
+        title: "Male",
+        value: "male",
+        iconClass: "ph-gender-male-light",
+        iconAlt: "male gender icon",
       },
       {
-        title: 'Female',
-        value: 'female',
-        iconClass: 'ph-gender-female-light',
-        iconAlt: 'female gender icon',
+        title: "Female",
+        value: "female",
+        iconClass: "ph-gender-female-light",
+        iconAlt: "female gender icon",
       },
       {
-        title: 'Other',
-        value: 'other',
-        iconClass: 'ph-gender-neuter-light',
-        iconAlt: 'other gender icon',
+        title: "Other",
+        value: "other",
+        iconClass: "ph-gender-neuter-light",
+        iconAlt: "other gender icon",
       },
     ];
 
@@ -262,33 +257,22 @@ export default {
 
     const accountCreationDate = new Date(`${store.state.user.createdAt}Z`);
 
-    const accountCreationDateStr = accountCreationDate.toLocaleTimeString(
-      locale,
-      {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      },
-    );
+    const accountCreationDateStr = accountCreationDate.toLocaleTimeString(locale, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
     const timeAgo = new TimeAgo(locale);
 
     const timeSinceCreationDate = timeAgo.format(accountCreationDate);
 
     const validateUserData = () => {
-      if (
-        !userData.name
-        || userData.name.length < 3
-        || userData.name.length > 50
-      ) {
+      if (!userData.name || userData.name.length < 3 || userData.name.length > 50) {
         return false;
       }
-      if (
-        !userData.surname
-        || userData.surname.length < 3
-        || userData.surname.length > 50
-      ) {
+      if (!userData.surname || userData.surname.length < 3 || userData.surname.length > 50) {
         return false;
       }
 
@@ -297,7 +281,7 @@ export default {
 
     const requestEmailVerification = () => {
       axios
-        .post('/users/request-email-verification', {
+        .post("/users/request-email-verification", {
           email: store.state.user.email,
         })
         .then((response) => {
@@ -312,18 +296,18 @@ export default {
 
     const passwordPromptOpen = ref(false);
 
-    const password = ref('');
+    const password = ref("");
 
     const requestUserDataChange = () => {
       axios
-        .put('/users/me/update-details', {
+        .put("/users/me/update-details", {
           name: userData.name,
           surname: userData.surname,
           gender: userData.gender,
         })
         .then((response) => {
           if (response.status === 200) {
-            store.commit('setUserData', response.data);
+            store.commit("setUserData", response.data);
           }
         })
         .catch((error) => {
@@ -346,22 +330,19 @@ export default {
 
     const changeUserDataSudoMode = () => {
       if (password.value) {
-        store.dispatch('enterSudoMode', password.value).then(() => {
+        store.dispatch("enterSudoMode", password.value).then(() => {
           passwordPromptOpen.value = false;
           changeUserData();
         });
       }
     };
 
-    const deleteAccountPassword = ref('');
-    const confirmAccountDeletion = ref('');
+    const deleteAccountPassword = ref("");
+    const confirmAccountDeletion = ref("");
 
     const validateDeleteData = () => {
       if (!deleteAccountPassword.value) return false;
-      if (
-        confirmAccountDeletion.value
-        !== t('userAccountSettings.confirmDeleteAccount')
-      ) {
+      if (confirmAccountDeletion.value !== t("userAccountSettings.confirmDeleteAccount")) {
         return false;
       }
 
@@ -371,14 +352,14 @@ export default {
     const requestAccountDeletion = () => {
       axios
         .put(
-          'users/me/delete',
+          "users/me/delete",
           new URLSearchParams({
             password: deleteAccountPassword.value,
-          }),
+          })
         )
         .then(() => {
-          store.dispatch('logout').then(() => {
-            router.push({ name: 'home' });
+          store.dispatch("logout").then(() => {
+            router.push({ name: "home" });
           });
         })
         .catch((error) => {
@@ -416,8 +397,8 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.settings-page{
+<style lang="scss" scoped>
+.settings-page {
   min-height: 73.5vh;
 }
 .delete-account-wrappper,
@@ -427,7 +408,7 @@ export default {
     gap: 1rem;
     width: 100%;
     align-items: center;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       flex-direction: column;
     }
     button {
@@ -504,7 +485,7 @@ export default {
   display: flex;
   align-items: center;
   font-size: 1rem;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     flex-direction: column;
   }
 
@@ -524,7 +505,7 @@ export default {
   display: grid;
   align-items: center;
   gap: 1rem;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
   }
@@ -532,7 +513,7 @@ export default {
   .text-inputs {
     display: flex;
     gap: inherit;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       flex-direction: column;
     }
   }
@@ -547,7 +528,7 @@ export default {
 .delete-account-btn {
   margin-left: auto;
   width: 200px;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     position: absolute;
     top: 20vh;
     right: 1vw;
@@ -558,7 +539,7 @@ export default {
 .save-changes {
   display: flex;
   gap: 1rem;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     margin: auto;
   }
 

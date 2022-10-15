@@ -1,10 +1,6 @@
 <template>
   <nav class="menu" ref="menu">
-    <router-link
-      v-for="link in links"
-      :key="link.id"
-      :to="{ name: link.toName }"
-    >
+    <router-link v-for="link in links" :key="link.id" :to="{ name: link.toName }">
       <span><i :class="link.iconClass"></i>{{ link.text }}</span>
       <div class="edge top"></div>
       <div class="edge bottom"></div>
@@ -14,10 +10,10 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
-  name: 'SideMenu',
+  name: "SideMenu",
   props: {
     links: {
       type: Array,
@@ -202,4 +198,5 @@ export default {
     }
   }
 }
-</style>>
+</style>
+>

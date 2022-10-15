@@ -6,9 +6,8 @@
 
 <script>
 export default {
-  name: 'WorkHoursManagement',
+  name: "WorkHoursManagement",
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

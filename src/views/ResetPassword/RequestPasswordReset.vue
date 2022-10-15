@@ -17,12 +17,8 @@
           :invalid="emailInvalid"
           :forceValidate="forceValidate"
           :required="true"
-          :messageEmpty="
-            t('shared.emailEmpty')
-          "
-          :messageInvalid="
-            t('shared.emailInvalid')
-          "
+          :messageEmpty="t('shared.emailEmpty')"
+          :messageInvalid="t('shared.emailInvalid')"
         />
       </div>
 
@@ -40,15 +36,15 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
-import axios from 'axios';
-import { useI18n } from 'vue-i18n';
-import { validateEmail, handleRequestError } from '@/utils';
-import CustomButton from '@/components/CustomButton.vue';
-import CustomInput from '@/components/CustomInput.vue';
+import { ref, computed } from "vue";
+import axios from "axios";
+import { useI18n } from "vue-i18n";
+import { validateEmail, handleRequestError } from "@/utils";
+import CustomButton from "@/components/CustomButton.vue";
+import CustomInput from "@/components/CustomInput.vue";
 
 export default {
-  name: 'RequestPasswordReset',
+  name: "RequestPasswordReset",
   components: {
     CustomInput,
     CustomButton,
@@ -56,7 +52,7 @@ export default {
   setup() {
     const { t } = useI18n();
 
-    const userEmail = ref('');
+    const userEmail = ref("");
 
     const emailInvalid = computed(() => !validateEmail(userEmail.value));
 
@@ -74,7 +70,7 @@ export default {
 
     function requestPasswordReset() {
       axios
-        .post('auth/request-password-reset', {
+        .post("auth/request-password-reset", {
           email: userEmail.value,
         })
         .then((response) => {
@@ -102,5 +98,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

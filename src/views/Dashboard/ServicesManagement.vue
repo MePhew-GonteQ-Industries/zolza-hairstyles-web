@@ -102,14 +102,14 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { onMounted, computed } from 'vue';
-import { useStore } from 'vuex';
-import CustomInput from '@/components/CustomInput.vue';
-import CustomButton from '@/components/CustomButton.vue';
+import { useI18n } from "vue-i18n";
+import { onMounted, computed } from "vue";
+import { useStore } from "vuex";
+import CustomInput from "@/components/CustomInput.vue";
+import CustomButton from "@/components/CustomButton.vue";
 
 export default {
-  name: 'ServicesManagement',
+  name: "ServicesManagement",
   components: {
     CustomInput,
     CustomButton,
@@ -117,7 +117,7 @@ export default {
   setup() {
     const store = useStore();
 
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const services = computed(() => {
       if (!store.state.services.services) return [];
@@ -136,7 +136,7 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch('loadServices');
+      await store.dispatch("loadServices");
     });
 
     return {

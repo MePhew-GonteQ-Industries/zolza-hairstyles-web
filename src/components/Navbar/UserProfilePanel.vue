@@ -10,19 +10,11 @@
 
     <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
       <div class="panel-header">
-        <router-link
-          :to="{ name: 'userAccountSettings' }"
-          @click="collapseProfilePanel"
+        <router-link :to="{ name: 'userAccountSettings' }" @click="collapseProfilePanel"
           ><i class="ph-user-circle-fill user-avatar"></i
         ></router-link>
-        <router-link
-          :to="{ name: 'userAccountSettings' }"
-          @click="collapseProfilePanel"
-        >
-          <span
-            >{{ $store.state.user.name }}
-            {{ $store.state.user.surname }}</span
-          >
+        <router-link :to="{ name: 'userAccountSettings' }" @click="collapseProfilePanel">
+          <span>{{ $store.state.user.name }} {{ $store.state.user.surname }}</span>
         </router-link>
       </div>
       <div
@@ -33,11 +25,7 @@
         <router-link :to="{ name: 'themeSettings' }" class="option-tile">
           <i
             class="tile-icon"
-            :class="
-              $store.state.settings.theme === 'dark'
-                ? 'ph-moon-light'
-                : 'ph-sun-light'
-            "
+            :class="$store.state.settings.theme === 'dark' ? 'ph-moon-light' : 'ph-sun-light'"
           ></i>
           <span class="tile-title">{{ t("userProfilePanel.theme") }}</span>
         </router-link>
@@ -77,17 +65,17 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { ref, watch } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import { onClickOutside, useMouseInElement } from '@vueuse/core';
+import { useI18n } from "vue-i18n";
+import { ref, watch } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { onClickOutside, useMouseInElement } from "@vueuse/core";
 
 export default {
-  name: 'UserProfilePanel',
+  name: "UserProfilePanel",
   setup() {
     const router = useRouter();
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const profilePanelExpanded = ref(false);
 
@@ -111,7 +99,7 @@ export default {
 
     const scrollHandler = (e) => {
       if (!profilePanelExpanded.value) {
-        document.removeEventListener('wheel', scrollHandler);
+        document.removeEventListener("wheel", scrollHandler);
         return;
       }
 
@@ -125,18 +113,18 @@ export default {
 
     watch(profilePanelExpanded, (newValue) => {
       if (newValue) {
-        document.addEventListener('wheel', scrollHandler, { passive: false });
+        document.addEventListener("wheel", scrollHandler, { passive: false });
         return;
       }
 
-      document.removeEventListener('wheel', scrollHandler);
+      document.removeEventListener("wheel", scrollHandler);
     });
 
     const store = useStore();
 
     function logout() {
-      store.dispatch('logout').then(() => {
-        router.push({ name: 'home' });
+      store.dispatch("logout").then(() => {
+        router.push({ name: "home" });
       });
     }
 
@@ -153,7 +141,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .profile-wrapper {
   display: flex;
   align-items: center;
@@ -182,7 +170,7 @@ export default {
     top: 100%;
     right: 0;
     color: $primary-text-color;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       min-width: 230px;
       min-height: 0;
     }
@@ -193,7 +181,7 @@ export default {
       padding: 1rem;
       border-bottom: 1px solid $secondary-color;
       font-size: 1.125rem;
-      @media only screen and (max-width: $xs){
+      @media only screen and (max-width: $xs) {
         font-size: 1rem;
       }
       a {
@@ -202,7 +190,7 @@ export default {
 
       .user-avatar {
         font-size: 3rem;
-        @media only screen and (max-width: $xs){
+        @media only screen and (max-width: $xs) {
           font-size: 1rem;
         }
       }
@@ -230,8 +218,8 @@ export default {
       outline: none;
       color: inherit;
       font-size: inherit;
-      @media only screen and (max-width: $xs){
-        font-size: .9rem;
+      @media only screen and (max-width: $xs) {
+        font-size: 0.9rem;
       }
       &:hover {
         background-color: $secondary-color;

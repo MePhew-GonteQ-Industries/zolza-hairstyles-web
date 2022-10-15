@@ -1,14 +1,12 @@
 <template>
-  <div
-    class="message-box"
-    :class="{ interactive: interactive }"
-    ref="messageBox"
-  >
+  <div class="message-box" :class="{ interactive: interactive }" ref="messageBox">
     <i :class="iconClass"></i>
     <div class="content">
-      <p><slot name="title"></slot></p>
-      <span v-if="!interactive" class="subtitle"
-        ><slot name="subtitle"></slot>
+      <p>
+        <slot name="title"></slot>
+      </p>
+      <span v-if="!interactive" class="subtitle">
+        <slot name="subtitle"></slot>
       </span>
       <span
         v-else
@@ -16,18 +14,19 @@
         :tabindex="0"
         @click="interactionHandler"
         @keydown.enter="interactionHandler"
-        ><slot name="subtitle"></slot>
+      >
+        <slot name="subtitle"></slot>
       </span>
     </div>
   </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-import { getCssPropertyValue, setCssPropertyValue } from '@/utils';
+import { onMounted, ref } from "vue";
+import { getCssPropertyValue, setCssPropertyValue } from "@/utils";
 
 export default {
-  name: 'CustomTooltip',
+  name: "CustomTooltip",
   props: {
     type: {
       type: String,
@@ -39,9 +38,7 @@ export default {
     interactionHandler: {
       type: Function,
       default: () => {
-        console.error(
-          'specify interaction handler when using interactive option',
-        );
+        console.error("specify interaction handler when using interactive option");
       },
     },
   },
@@ -55,39 +52,39 @@ export default {
       let accentColor;
 
       switch (props.type) {
-        case 'success': {
-          iconClass.value = 'ph-check-circle-light';
-          mainColor = getCssPropertyValue('--success-color');
-          accentColor = getCssPropertyValue('--success-color-low');
+        case "success": {
+          iconClass.value = "ph-check-circle-light";
+          mainColor = getCssPropertyValue("--success-color");
+          accentColor = getCssPropertyValue("--success-color-low");
           break;
         }
-        case 'info': {
-          iconClass.value = 'ph-info-light';
-          mainColor = getCssPropertyValue('--info-color');
-          accentColor = getCssPropertyValue('--info-color-low');
+        case "info": {
+          iconClass.value = "ph-info-light";
+          mainColor = getCssPropertyValue("--info-color");
+          accentColor = getCssPropertyValue("--info-color-low");
           break;
         }
-        case 'warning': {
-          iconClass.value = 'ph-warning-circle-light';
-          mainColor = getCssPropertyValue('--warning-color');
-          accentColor = getCssPropertyValue('--warning-color-low');
+        case "warning": {
+          iconClass.value = "ph-warning-circle-light";
+          mainColor = getCssPropertyValue("--warning-color");
+          accentColor = getCssPropertyValue("--warning-color-low");
           break;
         }
-        case 'error': {
-          iconClass.value = 'ph-warning-light';
-          mainColor = getCssPropertyValue('--error-color');
-          accentColor = getCssPropertyValue('--error-color-low');
+        case "error": {
+          iconClass.value = "ph-warning-light";
+          mainColor = getCssPropertyValue("--error-color");
+          accentColor = getCssPropertyValue("--error-color-low");
           break;
         }
         default: {
-          mainColor = getCssPropertyValue('--primary-text-color');
-          accentColor = getCssPropertyValue('--background-accent-low');
+          mainColor = getCssPropertyValue("--primary-text-color");
+          accentColor = getCssPropertyValue("--background-accent-low");
           break;
         }
       }
 
-      setCssPropertyValue(messageBox.value, '--main-color', mainColor);
-      setCssPropertyValue(messageBox.value, '--accent-color', accentColor);
+      setCssPropertyValue(messageBox.value, "--main-color", mainColor);
+      setCssPropertyValue(messageBox.value, "--accent-color", accentColor);
     });
 
     return {
@@ -98,7 +95,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .message-box {
   --main-color: none;
   --accent-color: none;
@@ -120,6 +117,7 @@ export default {
 
   &.interactive .content .subtitle {
     cursor: pointer;
+
     &:hover {
       text-decoration: underline;
     }

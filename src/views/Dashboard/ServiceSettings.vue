@@ -6,9 +6,8 @@
 
 <script>
 export default {
-  name: 'ServiceSettings',
+  name: "ServiceSettings",
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

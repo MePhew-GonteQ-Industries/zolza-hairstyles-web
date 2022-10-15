@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-import { getCssPropertyValue, setCssPropertyValue } from '@/utils';
+import { onMounted, ref } from "vue";
+import { getCssPropertyValue, setCssPropertyValue } from "@/utils";
 
 export default {
-  name: 'CustomTooltip',
+  name: "CustomTooltip",
   props: {
     type: {
       type: String,
@@ -32,20 +32,20 @@ export default {
         iconClass.value = props.customIconClass;
       } else {
         switch (props.type) {
-          case 'success': {
-            iconClass.value = 'ph-check-circle-light';
+          case "success": {
+            iconClass.value = "ph-check-circle-light";
             break;
           }
-          case 'info': {
-            iconClass.value = 'ph-info-light';
+          case "info": {
+            iconClass.value = "ph-info-light";
             break;
           }
-          case 'warning': {
-            iconClass.value = 'ph-warning-circle-light';
+          case "warning": {
+            iconClass.value = "ph-warning-circle-light";
             break;
           }
-          case 'error': {
-            iconClass.value = 'ph-warning-light';
+          case "error": {
+            iconClass.value = "ph-warning-light";
             break;
           }
           default: {
@@ -55,35 +55,35 @@ export default {
       }
 
       switch (props.type) {
-        case 'success': {
-          mainColor = getCssPropertyValue('--success-color');
-          accentColor = getCssPropertyValue('--success-color-low');
+        case "success": {
+          mainColor = getCssPropertyValue("--success-color");
+          accentColor = getCssPropertyValue("--success-color-low");
           break;
         }
-        case 'info': {
-          mainColor = getCssPropertyValue('--info-color');
-          accentColor = getCssPropertyValue('--info-color-low');
+        case "info": {
+          mainColor = getCssPropertyValue("--info-color");
+          accentColor = getCssPropertyValue("--info-color-low");
           break;
         }
-        case 'warning': {
-          mainColor = getCssPropertyValue('--warning-color');
-          accentColor = getCssPropertyValue('--warning-color-low');
+        case "warning": {
+          mainColor = getCssPropertyValue("--warning-color");
+          accentColor = getCssPropertyValue("--warning-color-low");
           break;
         }
-        case 'error': {
-          mainColor = getCssPropertyValue('--error-color');
-          accentColor = getCssPropertyValue('--error-color-low');
+        case "error": {
+          mainColor = getCssPropertyValue("--error-color");
+          accentColor = getCssPropertyValue("--error-color-low");
           break;
         }
         default: {
-          mainColor = getCssPropertyValue('--primary-text-color');
-          accentColor = getCssPropertyValue('--background-accent-low');
+          mainColor = getCssPropertyValue("--primary-text-color");
+          accentColor = getCssPropertyValue("--background-accent-low");
           break;
         }
       }
 
-      setCssPropertyValue(chip.value, '--main-color', mainColor);
-      setCssPropertyValue(chip.value, '--accent-color', accentColor);
+      setCssPropertyValue(chip.value, "--main-color", mainColor);
+      setCssPropertyValue(chip.value, "--accent-color", accentColor);
     });
 
     return {
@@ -94,7 +94,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .chip {
   --main-color: none;
   --accent-color: none;
@@ -106,10 +106,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .5rem;
-  padding: .25rem .75rem;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 1rem;
-  font-size: .938rem;
+  font-size: 0.938rem;
   width: fit-content;
 
   i {

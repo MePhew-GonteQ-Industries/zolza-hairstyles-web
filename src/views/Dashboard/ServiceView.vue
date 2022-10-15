@@ -17,15 +17,15 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
-import axios from 'axios';
-import { handleRequestError } from '@/utils';
-import CustomButton from '@/components/CustomButton.vue';
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import axios from "axios";
+import { handleRequestError } from "@/utils";
+import CustomButton from "@/components/CustomButton.vue";
 
 export default {
-  name: 'ServiceView',
+  name: "ServiceView",
   components: {
     CustomButton,
   },
@@ -42,9 +42,7 @@ export default {
         serviceData.value = storedService;
       } else {
         try {
-          const response = await axios.get(
-            `services/details/${route.params.id}`,
-          );
+          const response = await axios.get(`services/details/${route.params.id}`);
           serviceData.value = response.data;
         } catch (error) {
           handleRequestError(error);
@@ -59,7 +57,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .service {
   display: grid;
   grid-template-columns: 3fr 1fr;

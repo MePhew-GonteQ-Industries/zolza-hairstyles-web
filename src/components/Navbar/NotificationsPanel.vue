@@ -13,77 +13,43 @@
       @keyup.enter="toggleNotificationsPanel"
       >2</span
     >
-    <div
-      class="notifications-panel"
-      v-show="notificationsPanelExpanded"
-      ref="notificationsPanel"
-    >
+    <div class="notifications-panel" v-show="notificationsPanelExpanded" ref="notificationsPanel">
       <div class="panel-header">
         <h3>Notifications</h3>
-        <router-link
-          to="/settings/notifications"
-          @click="collapseNotificationsPanel"
-        >
+        <router-link to="/settings/notifications" @click="collapseNotificationsPanel">
           <i class="ph-gear-six-light notification-settings"></i>
         </router-link>
       </div>
       <div class="tab-selector">
-        <button
-          class="tab"
-          :class="{ active: currentTabIndex === 0 }"
-          @click="switchTab(0)"
-        >
+        <button class="tab" :class="{ active: currentTabIndex === 0 }" @click="switchTab(0)">
           Events
         </button>
-        <button
-          class="tab"
-          :class="{ active: currentTabIndex === 1 }"
-          @click="switchTab(1)"
-        >
+        <button class="tab" :class="{ active: currentTabIndex === 1 }" @click="switchTab(1)">
           My account
         </button>
-        <button
-          class="tab"
-          :class="{ active: currentTabIndex === 2 }"
-          @click="switchTab(2)"
-        >
+        <button class="tab" :class="{ active: currentTabIndex === 2 }" @click="switchTab(2)">
           What's new
         </button>
         <div class="active-tab-indicator"></div>
       </div>
-      <div
-        class="no-notifications-info"
-        v-if="notifications[currentTabIndex].length === 0"
-      >
+      <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
         <p>There aren't any notifications yet</p>
       </div>
-      <div
-        class="notifications"
-        v-if="currentTabIndex === 0"
-        ref="notificationsList"
-      >
+      <div class="notifications" v-if="currentTabIndex === 0" ref="notificationsList">
         <ComposedNotification
           v-for="(notification, index) in notifications[0]"
           :key="index"
           :title="notification.title"
         />
       </div>
-      <div
-        class="notifications"
-        v-else-if="currentTabIndex === 1"
-        ref="notificationsList"
-      >
+      <div class="notifications" v-else-if="currentTabIndex === 1" ref="notificationsList">
         <ComposedNotification
           v-for="(notification, index) in notifications[1]"
           :key="index"
           :title="notification.title"
         />
       </div>
-      <div
-        class="notifications"
-        v-else-if="currentTabIndex === 2"
-        ref="notificationsList"
-      >
+      <div class="notifications" v-else-if="currentTabIndex === 2" ref="notificationsList">
         <ComposedNotification
           v-for="(notification, index) in notifications[2]"
           :key="index"
@@ -101,13 +67,13 @@
 </template>
 
 <script>
-import { computed, ref, watch } from 'vue';
-import { onClickOutside, useMouseInElement } from '@vueuse/core';
-import ComposedNotification from '@/components/Navbar/ComposedNotification.vue';
-import CustomButton from '@/components/CustomButton.vue';
+import { computed, ref, watch } from "vue";
+import { onClickOutside, useMouseInElement } from "@vueuse/core";
+import ComposedNotification from "@/components/Navbar/ComposedNotification.vue";
+import CustomButton from "@/components/CustomButton.vue";
 
 export default {
-  name: 'NotificationsPanel',
+  name: "NotificationsPanel",
   components: {
     ComposedNotification,
     CustomButton,
@@ -117,37 +83,34 @@ export default {
     const currentTabIndex = ref(0);
     const notifications = ref([
       [
-        { title: 'You have an upcoming visit' },
-        { title: 'NOTification' },
-        { title: 'NOTification' },
-        { title: 'NOTification' },
+        { title: "You have an upcoming visit" },
+        { title: "NOTification" },
+        { title: "NOTification" },
+        { title: "NOTification" },
       ],
       [
-        { title: 'Password Updated' },
-        { title: 'Two Factor Authentication Enabled' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'Notification Test' },
-        { title: 'KEKW' },
+        { title: "Password Updated" },
+        { title: "Two Factor Authentication Enabled" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "Notification Test" },
+        { title: "KEKW" },
       ],
-      [
-        { title: 'New feature: appointment history' },
-        { title: 'Notification Test 2' },
-      ],
+      [{ title: "New feature: appointment history" }, { title: "Notification Test 2" }],
     ]);
 
     function toggleNotificationsPanel() {
@@ -179,13 +142,12 @@ export default {
     const notificationsList = ref(null);
 
     const notificationsListOverflows = computed(
-      () => notificationsList.value.clientHeight
-        < notificationsList.value.scrollHeight,
+      () => notificationsList.value.clientHeight < notificationsList.value.scrollHeight
     );
 
     const scrollHandler = (e) => {
       if (!notificationsPanelExpanded.value) {
-        document.removeEventListener('wheel', scrollHandler);
+        document.removeEventListener("wheel", scrollHandler);
         return;
       }
 
@@ -194,11 +156,10 @@ export default {
       } else if (!notificationsListOverflows.value) {
         e.preventDefault();
       } else if (
-        (notificationsList.value.scrollTop === 0 && e.deltaY < 0)
-        || (notificationsList.value.scrollTop
-          === notificationsList.value.scrollHeight
-            - notificationsList.value.offsetHeight
-          && e.deltaY > 0)
+        (notificationsList.value.scrollTop === 0 && e.deltaY < 0) ||
+        (notificationsList.value.scrollTop ===
+          notificationsList.value.scrollHeight - notificationsList.value.offsetHeight &&
+          e.deltaY > 0)
       ) {
         e.preventDefault();
       }
@@ -206,11 +167,11 @@ export default {
 
     watch(notificationsPanelExpanded, (newValue) => {
       if (newValue) {
-        document.addEventListener('wheel', scrollHandler, { passive: false });
+        document.addEventListener("wheel", scrollHandler, { passive: false });
         return;
       }
 
-      document.removeEventListener('wheel', scrollHandler);
+      document.removeEventListener("wheel", scrollHandler);
     });
 
     return {
@@ -229,7 +190,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .notifications-wrapper {
   display: flex;
   align-items: center;
@@ -277,7 +238,7 @@ export default {
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       min-width: 350px;
       min-height: 0;
       right: -70px;
@@ -292,7 +253,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: 20px 20px 0 20px;
-      @media only screen and (max-width: $xs){
+      @media only screen and (max-width: $xs) {
         font-size: 1rem;
       }
 
@@ -300,7 +261,7 @@ export default {
         font-size: 2rem;
         cursor: pointer;
         color: $primary-text-color;
-        @media only screen and (max-width: $xs){
+        @media only screen and (max-width: $xs) {
           font-size: 1rem;
         }
       }
@@ -313,8 +274,8 @@ export default {
       padding: 0.625rem 2rem;
       border-bottom: 1px solid $secondary-color;
       position: relative;
-      @media only screen and (max-width: $xs){
-        font-size: .9rem;
+      @media only screen and (max-width: $xs) {
+        font-size: 0.9rem;
       }
       $offset: 158px;
 
@@ -364,8 +325,8 @@ export default {
       align-items: center;
       justify-content: center;
       padding-top: 20px;
-      @media only screen and (max-width: $xs){
-        font-size: .8rem;
+      @media only screen and (max-width: $xs) {
+        font-size: 0.8rem;
       }
     }
 
@@ -373,9 +334,9 @@ export default {
       padding: 0.5rem 20px 0.5rem 20px;
       max-height: 65vh;
       overflow-y: hidden;
-      @media only screen and (max-width: $xs){
+      @media only screen and (max-width: $xs) {
         padding: 0;
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
       &:hover {
         overflow-y: auto;
@@ -392,8 +353,8 @@ export default {
       .notifications-count {
         color: grey;
         font-size: 0.9rem;
-        @media only screen and (max-width: $xs){
-          font-size: .7rem;
+        @media only screen and (max-width: $xs) {
+          font-size: 0.7rem;
         }
       }
 

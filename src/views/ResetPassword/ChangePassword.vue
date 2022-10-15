@@ -1,4 +1,4 @@
-<template v-if='resetToken'>
+<template v-if="resetToken">
   <div class="form-wrapper">
     <div class="icon-header">
       <h1>{{ t("resetPassword.changePassword.heading") }}</h1>
@@ -24,36 +24,22 @@
           :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
           :forceValidate="forceValidate"
           :required="true"
-          :messageEmpty="
-            t('resetPassword.changePassword.newPasswordField.messageEmpty')
-          "
-          :messageInvalid="
-            t('resetPassword.changePassword.newPasswordField.messageInvalid')
-          "
+          :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
+          :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"
           @focus="passwordInputFocused = true"
           @blur="passwordInputFocused = false"
         />
 
         <CustomInput
-          :label="
-            t('resetPassword.changePassword.repeatNewPasswordField.label')
-          "
+          :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
           autocomplete="new-password"
           type="password"
           v-model:value="newPasswordRepeat"
           :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
           :forceValidate="forceValidate"
           :required="true"
-          :messageEmpty="
-            t(
-              'resetPassword.changePassword.repeatNewPasswordField.messageEmpty'
-            )
-          "
-          :messageInvalid="
-            t(
-              'resetPassword.changePassword.repeatNewPasswordField.messageInvalid'
-            )
-          "
+          :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
+          :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"
         />
       </div>
 
@@ -71,16 +57,16 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { ref, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import axios from 'axios';
-import CustomInput from '@/components/CustomInput.vue';
-import CustomButton from '@/components/CustomButton.vue';
-import { handleRequestError } from '@/utils';
+import { useI18n } from "vue-i18n";
+import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import axios from "axios";
+import CustomInput from "@/components/CustomInput.vue";
+import CustomButton from "@/components/CustomButton.vue";
+import { handleRequestError } from "@/utils";
 
 export default {
-  name: 'ChangePassword',
+  name: "ChangePassword",
   components: {
     CustomInput,
     CustomButton,
@@ -90,8 +76,8 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const newPassword = ref('');
-    const newPasswordRepeat = ref('');
+    const newPassword = ref("");
+    const newPasswordRepeat = ref("");
 
     const newPasswordScore = ref(null);
     const newPasswordStrength = ref(null);
@@ -112,7 +98,7 @@ export default {
 
     function resetPassword() {
       axios
-        .put('auth/reset-password', {
+        .put("auth/reset-password", {
           reset_token: resetToken.value,
           new_password: newPassword.value,
         })
@@ -120,7 +106,7 @@ export default {
           if (response.status === 200) {
             const { email } = response.data;
             console.log(email);
-            router.push({ name: 'login', params: { email } });
+            router.push({ name: "login", params: { email } });
           }
         })
         .catch((error) => {
@@ -180,5 +166,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

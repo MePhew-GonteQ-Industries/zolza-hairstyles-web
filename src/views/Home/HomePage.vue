@@ -1,9 +1,7 @@
 <template>
   <section class="app-page" id="home-page">
-    <ServicesList
-      :scrolledToServices="scrolledToServices"
-      v-model:selectedServiceId="selectedServiceId"
-    />
+    <ServicesList :scrolledToServices="scrolledToServices"
+      v-model:selectedServiceId="selectedServiceId" />
 
     <AvailableSlotsList :selectedServiceId="selectedServiceId" />
 
@@ -20,18 +18,13 @@
         </p>
         <div class="download-links">
           <a href="">
-            <img
-              class="app-store-badge"
-              src="@/assets/app-store-badge.svg"
-              alt="Pobierz z App Store"
-            />
+            <img class="app-store-badge" src="@/assets/app-store-badge.svg"
+              alt="Pobierz z App Store" />
           </a>
           <a href="">
-            <img
-              class="gp-badge"
+            <img class="gp-badge"
               src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
-              alt="Pobierz w Google Play"
-            />
+              alt="Pobierz w Google Play" />
           </a>
         </div>
       </div>
@@ -40,15 +33,10 @@
         <div class="app-showcase-container">
           <div class="wrapper">
             <img class="iphone" src="@/assets/iphone-13-pro-max.png" alt="" />
-            <video
-              class="app-showcase"
-              src="@/assets/appDemo.mp4"
-              muted
-              loop
-              webkit-playsinline
-              playsinline
-              autoplay
-            ><track kind="captions" /></video>
+            <video class="app-showcase" src="@/assets/appDemo.mp4" muted loop webkit-playsinline
+              playsinline autoplay>
+              <track kind="captions" />
+            </video>
           </div>
         </div>
       </div>
@@ -57,14 +45,15 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import ImageGallery from '@/components/ImageGallery/ImageGallery.vue';
-import ServicesList from '@/components/Home/ServicesList.vue';
-import AvailableSlotsList from '@/components/Home/AvailableSlotsList.vue';
+import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+import ImageGallery from "@/components/ImageGallery/ImageGallery.vue";
+import ServicesList from "@/components/Home/ServicesList.vue";
+import AvailableSlotsList from "@/components/Home/AvailableSlotsList.vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   components: {
     ImageGallery,
     ServicesList,
@@ -77,15 +66,17 @@ export default {
     },
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
-    const photos = [];
+    const modules = import.meta.glob("@/assets/work-photos/*.jpg");
+    const photos = ref([]);
 
-    for (let i = 1; i <= 21; i += 1) {
-      const photo = require(`@/assets/work-photos/${i}.jpg`); // eslint-disable-line
-      photos.push({
-        id: i,
-        path: photo,
+    for (const path in modules) {
+      modules[path]().then(() => {
+        photos.value.push({
+          id: uuidv4(),
+          path: path,
+        });
       });
     }
 
@@ -193,17 +184,20 @@ export default {
   }
 }
 
-@media only screen and (max-width: $xs){
-  #home-page{
-    .mobile-app-banner{
+@media only screen and (max-width: $xs) {
+  #home-page {
+    .mobile-app-banner {
       background-image: none;
-      .cta{
+
+      .cta {
         width: 95%;
-        .download-links{
+
+        .download-links {
           flex-direction: column;
         }
       }
-      .banner{
+
+      .banner {
         display: none;
       }
     }

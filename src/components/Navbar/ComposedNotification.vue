@@ -1,14 +1,14 @@
 <template>
   <div class="notification-wrapper">
-      <h3 class="notification">{{ notificationTitle }}</h3>
+    <h3 class="notification">{{ notificationTitle }}</h3>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
-  name: 'ComposedNotification',
+  name: "ComposedNotification",
   props: {
     title: {
       type: String,
@@ -21,11 +21,10 @@ export default {
     return { notificationTitle };
   },
 };
-
 </script>
 
-<style lang='scss' scoped>
-.notification-wrapper{
+<style lang="scss" scoped>
+.notification-wrapper {
   width: calc(50vw - 40px);
   min-width: 360px;
   max-width: 450px;

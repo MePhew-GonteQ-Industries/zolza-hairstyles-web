@@ -23,7 +23,7 @@
     crossorigin="" />
   <script src="https://unpkg.com/phosphor-icons"></script>
   <title>
-    <%= htmlWebpackPlugin.options.title %>
+    Zołza Hairstyles
   </title>
 </head>
 
@@ -33,14 +33,15 @@
       <h1>It appears your browser has JavaScript disabled</h1>
       <div class="wrapper">
         <span>!</span>
-        <p>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without
-            JavaScript enabled.
-            <br>Please enable it to continue.</p>
+        <p>We're sorry but this app doesn't work properly without
+          JavaScript enabled.
+          <br>Please enable it to continue.
+        </p>
       </div>
     </div>
   </noscript>
   <div id="app"></div>
-  <!-- built files will be auto injected -->
+  <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>

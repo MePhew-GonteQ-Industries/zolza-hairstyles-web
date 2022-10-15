@@ -70,9 +70,7 @@
               :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
-              >{{
-                t("dashboard.appointmentsManagement.startDate")
-              }}</SortedHeader
+              >{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader
             >
           </th>
           <th>
@@ -148,19 +146,19 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
-import CustomInput from '@/components/CustomInput.vue';
-import CustomSelect from '@/components/CustomSelect.vue';
-import CustomTooltip from '@/components/CustomTooltip.vue';
-import { computed, onMounted, ref } from 'vue';
-import SortedHeader from '@/components/SortedHeader.vue';
-import CustomButton from '@/components/CustomButton.vue';
-import 'v-calendar/dist/style.css';
+import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
+import CustomInput from "@/components/CustomInput.vue";
+import CustomSelect from "@/components/CustomSelect.vue";
+import CustomTooltip from "@/components/CustomTooltip.vue";
+import { computed, onMounted, ref } from "vue";
+import SortedHeader from "@/components/SortedHeader.vue";
+import CustomButton from "@/components/CustomButton.vue";
+import "v-calendar/dist/style.css";
 // import { DatePicker } from 'v-calendar';
 
 export default {
-  name: 'AppointmentsManagement',
+  name: "AppointmentsManagement",
   components: {
     CustomInput,
     CustomSelect,
@@ -170,15 +168,15 @@ export default {
     // DatePicker,
   },
   setup() {
-    const q = ref('');
+    const q = ref("");
 
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const store = useStore();
 
     const locale = store.state.settings.language;
 
-    const sortBy = ref('startDate');
+    const sortBy = ref("startDate");
     const sortAscending = ref(false);
 
     const toggleSort = (sortName) => {
@@ -202,36 +200,33 @@ export default {
         const appointmentTemp = appointment;
 
         appointmentTemp.start_slot.start_time_str = startTime.toLocaleTimeString(locale, {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
         });
 
-        appointmentTemp.end_slot.end_time_str = endTime.toLocaleTimeString(
-          locale,
-          {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          },
-        );
+        appointmentTemp.end_slot.end_time_str = endTime.toLocaleTimeString(locale, {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
 
         appointmentTemp.shortId = appointment.id.substr(0, 4);
 
         if (appointment.archival) {
-          appointmentTemp.status = 'Archiwalna';
-          appointmentTemp.icon_class = 'ph-archive';
+          appointmentTemp.status = "Archiwalna";
+          appointmentTemp.icon_class = "ph-archive";
         } else if (appointment.canceled) {
-          appointmentTemp.status = 'Odwołana';
-          appointmentTemp.icon_class = 'ph-calendar-x';
+          appointmentTemp.status = "Odwołana";
+          appointmentTemp.icon_class = "ph-calendar-x";
         } else {
-          appointmentTemp.status = 'Nadchodząca';
-          appointmentTemp.icon_class = 'ph-arrow-square-up-right';
+          appointmentTemp.status = "Nadchodząca";
+          appointmentTemp.icon_class = "ph-arrow-square-up-right";
         }
 
-        appointmentTemp.icon_class += '-light';
+        appointmentTemp.icon_class += "-light";
 
         appointmentsTemp.push(appointmentTemp);
       });
@@ -240,7 +235,7 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch('loadAppointments');
+      await store.dispatch("loadAppointments");
     });
 
     const selectedDate = ref(new Date());

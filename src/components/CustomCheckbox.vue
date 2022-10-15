@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
-import { getCssPropertyValue, setCssPropertyValue } from '@/utils';
+import { ref, onMounted } from "vue";
+import { v4 as uuidv4 } from "uuid";
+import { getCssPropertyValue, setCssPropertyValue } from "@/utils";
 
 export default {
-  name: 'CustomCheckbox',
-  emits: ['update:checked'],
+  name: "CustomCheckbox",
+  emits: ["update:checked"],
   props: {
     checked: {
       type: Boolean,
@@ -45,11 +45,11 @@ export default {
     },
     appearance: {
       type: String,
-      default: 'checkbox',
+      default: "checkbox",
     },
     type: {
       type: String,
-      default: 'primary',
+      default: "primary",
     },
     disabled: {
       type: Boolean,
@@ -67,36 +67,36 @@ export default {
       let accentColor;
 
       switch (props.appearance) {
-        case 'switch': {
+        case "switch": {
           switch (props.type) {
-            case 'secondary': {
-              mainColor = getCssPropertyValue('--primary-text-color');
-              accentColor = 'grey';
+            case "secondary": {
+              mainColor = getCssPropertyValue("--primary-text-color");
+              accentColor = "grey";
               break;
             }
-            case 'success': {
-              mainColor = getCssPropertyValue('--success-color');
-              accentColor = getCssPropertyValue('--success-color-low');
+            case "success": {
+              mainColor = getCssPropertyValue("--success-color");
+              accentColor = getCssPropertyValue("--success-color-low");
               break;
             }
-            case 'info': {
-              mainColor = getCssPropertyValue('--info-color');
-              accentColor = getCssPropertyValue('--info-color-low');
+            case "info": {
+              mainColor = getCssPropertyValue("--info-color");
+              accentColor = getCssPropertyValue("--info-color-low");
               break;
             }
-            case 'warning': {
-              mainColor = getCssPropertyValue('--warning-color');
-              accentColor = getCssPropertyValue('--warning-color-low');
+            case "warning": {
+              mainColor = getCssPropertyValue("--warning-color");
+              accentColor = getCssPropertyValue("--warning-color-low");
               break;
             }
-            case 'error': {
-              mainColor = getCssPropertyValue('--error-color');
-              accentColor = getCssPropertyValue('--error-color-low');
+            case "error": {
+              mainColor = getCssPropertyValue("--error-color");
+              accentColor = getCssPropertyValue("--error-color-low");
               break;
             }
             default: {
-              mainColor = getCssPropertyValue('--accent-color');
-              accentColor = getCssPropertyValue('--accent-color-low');
+              mainColor = getCssPropertyValue("--accent-color");
+              accentColor = getCssPropertyValue("--accent-color-low");
               break;
             }
           }
@@ -104,34 +104,34 @@ export default {
         }
         default: {
           switch (props.type) {
-            case 'secondary': {
-              mainColor = getCssPropertyValue('--primary-text-color');
-              accentColor = 'grey';
+            case "secondary": {
+              mainColor = getCssPropertyValue("--primary-text-color");
+              accentColor = "grey";
               break;
             }
-            case 'success': {
-              mainColor = getCssPropertyValue('--success-color');
-              accentColor = getCssPropertyValue('--success-color-low');
+            case "success": {
+              mainColor = getCssPropertyValue("--success-color");
+              accentColor = getCssPropertyValue("--success-color-low");
               break;
             }
-            case 'info': {
-              mainColor = getCssPropertyValue('--info-color');
-              accentColor = getCssPropertyValue('--info-color-low');
+            case "info": {
+              mainColor = getCssPropertyValue("--info-color");
+              accentColor = getCssPropertyValue("--info-color-low");
               break;
             }
-            case 'warning': {
-              mainColor = getCssPropertyValue('--warning-color');
-              accentColor = getCssPropertyValue('--warning-color-low');
+            case "warning": {
+              mainColor = getCssPropertyValue("--warning-color");
+              accentColor = getCssPropertyValue("--warning-color-low");
               break;
             }
-            case 'error': {
-              mainColor = getCssPropertyValue('--error-color');
-              accentColor = getCssPropertyValue('--error-color-low');
+            case "error": {
+              mainColor = getCssPropertyValue("--error-color");
+              accentColor = getCssPropertyValue("--error-color-low");
               break;
             }
             default: {
-              mainColor = getCssPropertyValue('--accent-color');
-              accentColor = getCssPropertyValue('--accent-color-low');
+              mainColor = getCssPropertyValue("--accent-color");
+              accentColor = getCssPropertyValue("--accent-color-low");
               break;
             }
           }
@@ -139,8 +139,8 @@ export default {
         }
       }
 
-      setCssPropertyValue(checkbox.value, '--main-color', mainColor);
-      setCssPropertyValue(checkbox.value, '--accent-color', accentColor);
+      setCssPropertyValue(checkbox.value, "--main-color", mainColor);
+      setCssPropertyValue(checkbox.value, "--accent-color", accentColor);
     });
 
     return {
@@ -151,7 +151,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .checkbox {
   --main-color: none;
   --accent-color: none;

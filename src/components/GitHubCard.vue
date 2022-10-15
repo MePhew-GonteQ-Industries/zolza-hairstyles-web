@@ -15,11 +15,7 @@
       >
       <img
         class="github-mark"
-        :src="
-          $store.state.settings.theme === 'dark'
-            ? GitHubMarkLight
-            : GitHubMarkDark
-        "
+        :src="$store.state.settings.theme === 'dark' ? GitHubMarkLight : GitHubMarkDark"
         alt="GitHub Mark"
       />
     </template>
@@ -27,15 +23,15 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { handleRequestError } from '@/utils';
-import { ref, onMounted } from 'vue';
-import LinkButton from '@/components/CustomButton.vue';
-import GitHubMarkLight from '@/assets/GitHub-Mark-Light-32px.png';
-import GitHubMarkDark from '@/assets/GitHub-Mark-32px.png';
+import axios from "axios";
+import { handleRequestError } from "@/utils";
+import { ref, onMounted } from "vue";
+import LinkButton from "@/components/CustomButton.vue";
+import GitHubMarkLight from "@/assets/GitHub-Mark-Light-32px.png";
+import GitHubMarkDark from "@/assets/GitHub-Mark-32px.png";
 
 export default {
-  name: 'GitHubCard',
+  name: "GitHubCard",
   components: {
     LinkButton,
   },

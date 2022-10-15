@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import LinkButton from '@/components/LinkButton.vue';
+import LinkButton from "@/components/LinkButton.vue";
 
 export default {
-  name: 'InsufficientPermissionPage',
+  name: "InsufficientPermissionPage",
   components: {
     LinkButton,
   },

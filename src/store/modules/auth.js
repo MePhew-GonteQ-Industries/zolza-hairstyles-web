@@ -1,16 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { handleRequestError } from '@/utils';
+import { handleRequestError } from "@/utils";
 
 export default {
   state: {
-    accessToken: '',
-    refreshToken: '',
+    accessToken: "",
+    refreshToken: "",
     refreshTokenInterceptor: null,
     rememberUser: true,
-    sessionId: '',
-    sudoModeActivated: '',
-    sudoModeExpires: '',
+    sessionId: "",
+    sudoModeActivated: "",
+    sudoModeExpires: "",
   },
 
   getters: {
@@ -39,8 +39,8 @@ export default {
     },
 
     logout(state) {
-      state.accessToken = '';
-      state.refreshToken = '';
+      state.accessToken = "";
+      state.refreshToken = "";
     },
 
     setRefreshTokenInterceptor(state, interceptor) {
@@ -63,7 +63,7 @@ export default {
     },
 
     removeAuthHeader() {
-      axios.defaults.headers.common.Authorization = '';
+      axios.defaults.headers.common.Authorization = "";
     },
 
     async addRefreshTokenInterceptor({ state, commit, dispatch }) {
@@ -74,10 +74,14 @@ export default {
           if (originalRequest) {
             const { response } = error;
             if (response) {
-              if (response.status === 401 && response.data && error.response.data.detail === 'Could not validate credentials') {
+              if (
+                response.status === 401 &&
+                response.data &&
+                error.response.data.detail === "Could not validate credentials"
+              ) {
                 if (!originalRequest.retry) {
                   originalRequest.retry = true;
-                  await dispatch('refreshToken');
+                  await dispatch("refreshToken");
                   originalRequest.headers.Authorization = `Bearer ${state.accessToken}`;
                   return axios(originalRequest);
                 }
@@ -85,100 +89,93 @@ export default {
             }
           }
           throw error;
-        },
+        }
       );
-      commit('setRefreshTokenInterceptor', refreshTokenInterceptor);
+      commit("setRefreshTokenInterceptor", refreshTokenInterceptor);
     },
 
     removeRefreshTokenInterceptor({ state, commit }) {
       axios.interceptors.response.eject(state.refreshTokenInterceptor);
-      commit('setRefreshTokenInterceptor', null);
+      commit("setRefreshTokenInterceptor", null);
     },
 
     async configureAxiosAuthorized({ state, dispatch }) {
-      await dispatch('setAuthHeader');
+      await dispatch("setAuthHeader");
       if (!state.refreshTokenInterceptor) {
-        await dispatch('addRefreshTokenInterceptor');
+        await dispatch("addRefreshTokenInterceptor");
       }
     },
 
     async configureAxiosUnauthorized({ dispatch }) {
-      await dispatch('removeAuthHeader');
-      await dispatch('removeRefreshTokenInterceptor');
+      await dispatch("removeAuthHeader");
+      await dispatch("removeRefreshTokenInterceptor");
     },
 
     saveAuthData({ state }) {
-      localStorage.setItem('accessToken', JSON.stringify(
-        state.accessToken,
-      ));
+      localStorage.setItem("accessToken", JSON.stringify(state.accessToken));
 
-      localStorage.setItem('sessionId', JSON.stringify(
-        state.sessionId,
-      ));
+      localStorage.setItem("sessionId", JSON.stringify(state.sessionId));
 
       if (state.rememberUser) {
-        localStorage.setItem('refreshToken', JSON.stringify(
-          state.refreshToken,
-        ));
+        localStorage.setItem("refreshToken", JSON.stringify(state.refreshToken));
       }
     },
 
     saveSudoModeData({ state }) {
-      localStorage.setItem('sudoModeActivated', JSON.stringify(
-        state.sudoModeActivated,
-      ));
+      localStorage.setItem("sudoModeActivated", JSON.stringify(state.sudoModeActivated));
 
-      localStorage.setItem('sudoModeExpires', JSON.stringify(
-        state.sudoModeExpires,
-      ));
+      localStorage.setItem("sudoModeExpires", JSON.stringify(state.sudoModeExpires));
     },
 
     async loadAuthData({ commit, dispatch }) {
       const authData = {
-        accessToken: JSON.parse(localStorage.getItem('accessToken')),
-        refreshToken: JSON.parse(localStorage.getItem('refreshToken')),
+        accessToken: JSON.parse(localStorage.getItem("accessToken")),
+        refreshToken: JSON.parse(localStorage.getItem("refreshToken")),
         session: {
-          id: JSON.parse(localStorage.getItem('sessionId')),
+          id: JSON.parse(localStorage.getItem("sessionId")),
         },
-        sudoModeActivated: JSON.parse(localStorage.getItem('sudoModeActivated')),
-        sudoModeExpires: JSON.parse(localStorage.getItem('sudoModeExpires')),
+        sudoModeActivated: JSON.parse(localStorage.getItem("sudoModeActivated")),
+        sudoModeExpires: JSON.parse(localStorage.getItem("sudoModeExpires")),
       };
       if (authData.accessToken !== null && authData.session.id !== null) {
-        commit('login', authData);
-        await dispatch('configureAxiosAuthorized');
+        commit("login", authData);
+        await dispatch("configureAxiosAuthorized");
         try {
-          await dispatch('checkUserData');
-          await dispatch('loadSettings');
+          await dispatch("checkUserData");
+          await dispatch("loadSettings");
         } catch (err) {
           console.log(err);
-          dispatch('logout');
-          dispatch('loadDefaultSettings');
+          dispatch("logout");
+          dispatch("loadDefaultSettings");
         }
       } else {
-        dispatch('loadDefaultSettings');
+        dispatch("loadDefaultSettings");
       }
     },
 
     async deleteAuthData({ commit, dispatch }) {
-      commit('logout');
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('sessionId');
-      await dispatch('deleteUserData');
+      commit("logout");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("sessionId");
+      await dispatch("deleteUserData");
     },
 
     async login({ commit, dispatch }, userData) {
       try {
-        const response = await axios.post('auth/login', new URLSearchParams({
-          grant_type: 'password',
-          username: userData.email,
-          password: userData.password,
-        }));
-        commit('login', response.data);
-        await dispatch('saveAuthData');
-        await dispatch('configureAxiosAuthorized');
-        commit('setUserData', response.data.session.user);
-        await dispatch('loadSettings');
+        const response = await axios.post(
+          "auth/login",
+          new URLSearchParams({
+            grant_type: "password",
+            username: userData.email,
+            password: userData.password,
+          })
+        );
+        commit("login", response.data);
+        await dispatch("saveAuthData");
+        await dispatch("configureAxiosAuthorized");
+        commit("setUserData", response.data.session.user);
+        await dispatch("loadSettings");
       } catch (error) {
         const { status } = handleRequestError(error);
         if (status === 404 || !status) {
@@ -189,44 +186,50 @@ export default {
 
     async logout({ dispatch }) {
       try {
-        await axios.post('auth/logout');
-        await dispatch('deleteAuthData');
-        await dispatch('configureAxiosUnauthorized');
+        await axios.post("auth/logout");
+        await dispatch("deleteAuthData");
+        await dispatch("configureAxiosUnauthorized");
       } catch (error) {
         const { status } = handleRequestError(error);
         if (status === 401 || status === 404) {
-          await dispatch('deleteAuthData');
-          await dispatch('configureAxiosUnauthorized');
+          await dispatch("deleteAuthData");
+          await dispatch("configureAxiosUnauthorized");
         }
       }
     },
 
     async refreshToken({ state, commit, dispatch }) {
       try {
-        const response = await axios.post('auth/refresh-token', new URLSearchParams({
-          grant_type: 'refresh_token',
-          refresh_token: state.refreshToken,
-        }));
-        await commit('login', response.data);
-        await dispatch('saveAuthData');
-        await dispatch('configureAxiosAuthorized');
-        commit('setUserData', response.data.session.user);
-        await dispatch('loadSettings');
+        const response = await axios.post(
+          "auth/refresh-token",
+          new URLSearchParams({
+            grant_type: "refresh_token",
+            refresh_token: state.refreshToken,
+          })
+        );
+        await commit("login", response.data);
+        await dispatch("saveAuthData");
+        await dispatch("configureAxiosAuthorized");
+        commit("setUserData", response.data.session.user);
+        await dispatch("loadSettings");
       } catch (error) {
         const { status } = handleRequestError(error);
         if (status === 401 && state.refreshToken === null) {
-          await dispatch('logout');
+          await dispatch("logout");
         }
       }
     },
 
     async enterSudoMode({ commit, dispatch }, password) {
       try {
-        const response = await axios.post('auth/enter-sudo-mode', new URLSearchParams({
-          password,
-        }));
-        commit('setSudoMode', response.data);
-        await dispatch('saveSudoModeData');
+        const response = await axios.post(
+          "auth/enter-sudo-mode",
+          new URLSearchParams({
+            password,
+          })
+        );
+        commit("setSudoMode", response.data);
+        await dispatch("saveSudoModeData");
       } catch (error) {
         const { status } = handleRequestError(error);
         if (status === 404) {

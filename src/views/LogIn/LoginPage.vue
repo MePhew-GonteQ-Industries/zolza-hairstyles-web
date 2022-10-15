@@ -45,8 +45,7 @@
         </div>
 
         <div class="under-inputs-section">
-          <CustomCheckbox v-model:checked="saveUser"
-            >{{ t("logIn.saveUser") }}</CustomCheckbox>
+          <CustomCheckbox v-model:checked="saveUser">{{ t("logIn.saveUser") }}</CustomCheckbox>
 
           <router-link to="/password-reset" tabindex="-1">{{
             t("logIn.forgotPasswordBtn")
@@ -70,19 +69,19 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
-import { useStore } from 'vuex';
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
-import CustomButton from '@/components/CustomButton.vue';
-import CustomInput from '@/components/CustomInput.vue';
-import { validateEmail, handleRequestError } from '@/utils';
-import CustomLoader from '@/components/CustomLoader.vue';
-import MessageBox from '@/components/MessageBox.vue';
-import CustomCheckbox from '../../components/CustomCheckbox.vue';
+import { ref, onMounted, computed } from "vue";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import CustomButton from "@/components/CustomButton.vue";
+import CustomInput from "@/components/CustomInput.vue";
+import { validateEmail, handleRequestError } from "@/utils";
+import CustomLoader from "@/components/CustomLoader.vue";
+import MessageBox from "@/components/MessageBox.vue";
+import CustomCheckbox from "../../components/CustomCheckbox.vue";
 
 export default {
-  name: 'LoginPage',
+  name: "LoginPage",
   components: {
     CustomButton,
     CustomInput,
@@ -101,7 +100,7 @@ export default {
     },
     email: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   setup(props) {
@@ -110,8 +109,8 @@ export default {
     const { t } = useI18n();
 
     const userData = ref({
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     });
 
     const saveUser = computed({
@@ -119,13 +118,13 @@ export default {
         return store.state.auth.rememberUser;
       },
       set(newValue) {
-        store.commit('setRememberUser', newValue);
+        store.commit("setRememberUser", newValue);
       },
     });
 
     const loading = ref(false);
 
-    const message = ref('');
+    const message = ref("");
 
     const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
@@ -148,10 +147,10 @@ export default {
     function loginUser() {
       loading.value = true;
       store
-        .dispatch('login', userData.value)
+        .dispatch("login", userData.value)
         .then(() => {
           loading.value = false;
-          router.push('/');
+          router.push("/");
         })
         .catch((error) => {
           handleRequestError(error);
@@ -188,5 +187,4 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-</style>
+<style lang="scss"></style>

@@ -1,43 +1,33 @@
 <template>
-    <div class="slider">
-      <swiper
-        :slidesPerView="3"
-        :slidesPerGroup="3"
-        :loop="true"
-        :loopFillGroupWithBlank="true"
-        :pagination="{
-          clickable: true,
-        }"
-        :breakpoints="{
-          120: {
-            slidesPerView: 1,
-            slidesPerGroup: 1,
-            spaceBetween: 15,
-          },
-          600: {
-            slidesPerView: 3,
-            slidesPerGroup: 3,
-            spacebetween: 5,
-          }
-        }"
-        :navigation="true"
-        :modules="modules"
-        :autoplay="{
-          delay: 2500,
-          disableOnInteraction: true,
-        }"
-        class="mySwiper"
-      >
-        <swiper-slide v-for="photo in photos" :key="photo.id">
-          <img :src="photo.path" alt="">
-        </swiper-slide>
-      </swiper>
-    </div>
+  <div class="slider">
+    <swiper :slidesPerView="3" :slidesPerGroup="3" :loop="true" :loopFillGroupWithBlank="true"
+      :pagination="{
+        clickable: true,
+      }" :breakpoints="{
+        120: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          spaceBetween: 15,
+        },
+        600: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+          spacebetween: 5,
+        },
+      }" :navigation="true" :modules="modules" :autoplay="{
+        delay: 2500,
+        disableOnInteraction: true,
+      }" class="mySwiper">
+      <swiper-slide v-for="photo in photos" :key="photo.id">
+        <img :src="photo.path" alt="" />
+      </swiper-slide>
+    </swiper>
+  </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Autoplay, Pagination, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 /* eslint-disable */
 import 'swiper/scss';
@@ -45,6 +35,7 @@ import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/thumbs';
+import { onMounted } from "vue";
 
 export default {
   name: 'ImageGallery',
@@ -58,7 +49,11 @@ export default {
       required: true,
     },
   },
-  setup() {
+  setup(props) {
+    onMounted(() => {
+      console.log(props.photos);
+    })
+
     return {
       modules: [Autoplay, Pagination, Navigation],
     };

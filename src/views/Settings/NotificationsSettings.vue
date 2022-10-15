@@ -51,18 +51,18 @@
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
-import { ref } from 'vue';
-import CustomCheckbox from '@/components/CustomCheckbox.vue';
+import { ref } from "vue";
+import CustomCheckbox from "@/components/CustomCheckbox.vue";
 
 export default {
-  name: 'NotificationsSettings',
+  name: "NotificationsSettings",
   components: {
     CustomCheckbox,
   },
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const upcomingAppointmentsPushNotificationsEnabled = ref(false);
     const upcomingAppointmentsEmailNotificationsEnabled = ref(false);
@@ -76,8 +76,8 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.settings-page{
+<style lang="scss" scoped>
+.settings-page {
   min-height: 73.5vh;
 }
 .notification-settings {

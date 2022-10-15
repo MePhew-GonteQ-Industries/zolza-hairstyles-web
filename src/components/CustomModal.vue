@@ -1,11 +1,7 @@
 <template>
   <teleport to="body">
     <Transition v-if="modalOpen" appear>
-      <FocusTrap
-        :active="true"
-        :escapeDeactivates="false"
-        :initial-focus="$refs.modal"
-      >
+      <FocusTrap :active="true" :escapeDeactivates="false" :initial-focus="$refs.modal">
         <div
           ref="modal"
           class="modal"
@@ -14,11 +10,7 @@
           @keyup.esc="handleModalClose"
           tabindex="0"
         >
-          <div
-            ref="modalContent"
-            class="modal-content"
-            :class="{ shake: shake }"
-          >
+          <div ref="modalContent" class="modal-content" :class="{ shake: shake }">
             <div class="header">
               <div class="title"><slot name="title" /></div>
               <i
@@ -39,11 +31,11 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue';
-import { FocusTrap } from 'focus-trap-vue';
+import { ref, watch } from "vue";
+import { FocusTrap } from "focus-trap-vue";
 
 export default {
-  name: 'CustomModal',
+  name: "CustomModal",
   components: {
     FocusTrap,
   },
@@ -61,7 +53,7 @@ export default {
       default: false,
     },
   },
-  emits: ['update:open'],
+  emits: ["update:open"],
   setup(props, { emit }) {
     const shake = ref(false);
     const closing = ref(false);
@@ -70,7 +62,7 @@ export default {
 
     const closeModal = () => {
       closing.value = true;
-      emit('update:open', false);
+      emit("update:open", false);
       setTimeout(() => {
         modalOpen.value = false;
         closing.value = false;
@@ -85,7 +77,7 @@ export default {
         } else {
           closeModal();
         }
-      },
+      }
     );
 
     const shakeModal = () => {
@@ -123,7 +115,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .modal {
   position: fixed;
   top: 0;
@@ -191,7 +183,7 @@ export default {
     max-height: 80%;
     max-width: 50%;
     overflow: auto;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       display: flex;
       flex-direction: column;
       max-height: 90vh;

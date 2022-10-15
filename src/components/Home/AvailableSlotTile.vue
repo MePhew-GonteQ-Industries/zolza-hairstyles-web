@@ -1,37 +1,30 @@
 <template>
-<div class="available-slot" ref="availableSlot">
-
-  <div class="date">
-    <p class="day">{{ day }}</p>
-    <p class="time">{{ time }}</p>
-  </div>
-
-  <div class="buttons">
-
-    <div class="button make-appointment"
-    @click="bookAppointment"
-    @keyup.enter="bookAppointment"
-    >
-      <i class="ph-calendar-plus-light"></i>
-      {{ t("home.availableSlotTile.book") }}
+  <div class="available-slot" ref="availableSlot">
+    <div class="date">
+      <p class="day">{{ day }}</p>
+      <p class="time">{{ time }}</p>
     </div>
 
-    <div class="button more-info">
-      <i class="ph-info-light"></i>
-      {{ t("home.availableSlotTile.info") }}
+    <div class="buttons">
+      <div class="button make-appointment" @click="bookAppointment" @keyup.enter="bookAppointment">
+        <i class="ph-calendar-plus-light"></i>
+        {{ t("home.availableSlotTile.book") }}
+      </div>
+
+      <div class="button more-info">
+        <i class="ph-info-light"></i>
+        {{ t("home.availableSlotTile.info") }}
+      </div>
     </div>
-
   </div>
-
-</div>
 </template>
 
 <script>
 // import axios from 'axios';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 export default {
-  name: 'AvailableSlotTile',
+  name: "AvailableSlotTile",
   props: {
     day: {
       type: String,
@@ -44,7 +37,7 @@ export default {
   },
 
   setup() {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const bookAppointment = async () => {
       // await axios.post
@@ -63,20 +56,20 @@ export default {
   gap: 1rem;
 
   .date {
-      background-color: $primary-color;
-      color: $secondary-text-color;
-      border-radius: 1rem;
-      padding: 10px;
-      font-size: 1.125rem;
-      letter-spacing: .5px;
-      font-weight: 500;
-      height: 100px;
-      width: 140px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-sizing: content-box;
+    background-color: $primary-color;
+    color: $secondary-text-color;
+    border-radius: 1rem;
+    padding: 10px;
+    font-size: 1.125rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    height: 100px;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
   }
 
   .buttons {
@@ -89,7 +82,7 @@ export default {
     .button {
       display: flex;
       align-items: center;
-      gap: .375rem;
+      gap: 0.375rem;
       cursor: pointer;
 
       i {

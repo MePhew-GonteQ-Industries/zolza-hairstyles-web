@@ -11,15 +11,15 @@
 </template>
 
 <script>
-import AvailableDateTile from '@/components/Home/AvailableSlotTile.vue';
-import CustomLoader from '@/components/CustomLoader.vue';
-import { computed, ref, watch } from 'vue';
-import { useStore } from 'vuex';
-import axios from 'axios';
-import { handleRequestError } from '@/utils';
+import AvailableDateTile from "@/components/Home/AvailableSlotTile.vue";
+import CustomLoader from "@/components/CustomLoader.vue";
+import { computed, ref, watch } from "vue";
+import { useStore } from "vuex";
+import axios from "axios";
+import { handleRequestError } from "@/utils";
 
 export default {
-  name: 'availableSlotsList',
+  name: "availableSlotsList",
   components: {
     AvailableDateTile,
     CustomLoader,
@@ -48,17 +48,18 @@ export default {
       availableSlotsData.value.forEach((service) => {
         const date = new Date(`${service.start_time}Z`);
 
-        const day = date === now
-          ? 'Dzisiaj'
-          : date.toLocaleDateString(locale, {
-            weekday: 'long',
-          });
+        const day =
+          date === now
+            ? "Dzisiaj"
+            : date.toLocaleDateString(locale, {
+                weekday: "long",
+              });
 
         slots.push({
           day: `${day[0].toUpperCase()}${day.slice(1)}`,
           time: date.toLocaleTimeString(locale, {
-            hour: '2-digit',
-            minute: '2-digit',
+            hour: "2-digit",
+            minute: "2-digit",
           }),
         });
       });
@@ -71,9 +72,7 @@ export default {
     const loadAppointments = async (selectedServiceId) => {
       loading.value = true;
       try {
-        const response = await axios.get(
-          `appointments/nearest/${selectedServiceId}`,
-        );
+        const response = await axios.get(`appointments/nearest/${selectedServiceId}`);
         availableSlotsData.value = response.data;
       } catch (error) {
         handleRequestError(error);
@@ -86,7 +85,7 @@ export default {
       (newValue) => {
         loading.value = true;
         loadAppointments(newValue);
-      },
+      }
     );
 
     return {
@@ -114,10 +113,11 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     padding: 3.5rem 10% 3.5rem 10%;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       display: flex;
       flex-direction: column;
     }
   }
 }
-</style>>
+</style>
+>

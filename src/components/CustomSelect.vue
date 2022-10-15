@@ -20,10 +20,7 @@
       ref="select"
       @blur="validate = true"
     >
-      <span
-        class="header"
-        :class="{ expanded: expanded, 'value-selected': selectedItem !== null }"
-      >
+      <span class="header" :class="{ expanded: expanded, 'value-selected': selectedItem !== null }">
         {{ header }}</span
       >
 
@@ -43,21 +40,12 @@
 
       <span class="selected-value"> {{ title }}</span>
 
-      <i
-        class="ph-caret-down-light dropdown-arrow"
-        :class="{ flipped: expanded }"
-      ></i>
+      <i class="ph-caret-down-light dropdown-arrow" :class="{ flipped: expanded }"></i>
     </div>
-    <div
-      v-show="(validate || forceValidate) && invalid"
-      class="invalid-wrapper"
-    >
+    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
       <i class="ph-warning-circle-light invalid-icon"></i>
 
-      <p
-        class="messageInvalid messageValueEmpty"
-        v-if="required && selectedItem === null"
-      >
+      <p class="messageInvalid messageValueEmpty" v-if="required && selectedItem === null">
         {{ messageEmpty }}
       </p>
     </div>
@@ -73,9 +61,7 @@
           @keydown.down="selectNextOption"
           @keydown.up="selectPreviousOption"
         >
-          <span :class="{ selected: index === selectedItem }">
-            {{ option.title }}</span
-          >
+          <span :class="{ selected: index === selectedItem }"> {{ option.title }}</span>
 
           <i :class="option.iconClass" v-if="option.iconClass"></i>
           <div class="text-icon" v-else-if="option.iconText">
@@ -88,11 +74,11 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import { ref, onMounted, watch } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
 export default {
-  name: 'CustomSelect',
+  name: "CustomSelect",
   props: {
     selectedValue: {
       type: String,
@@ -131,16 +117,16 @@ export default {
     },
     appearance: {
       type: String,
-      default: 'outlined',
+      default: "outlined",
     },
   },
   setup(props, ctx) {
     const selectedValue = ref(null);
     const selectedItem = ref(null);
     const expanded = ref(false);
-    const title = ref('');
+    const title = ref("");
     const currentIconClass = ref(props.iconClass);
-    const currentIconText = ref('');
+    const currentIconText = ref("");
 
     const select = ref(null);
 
@@ -148,7 +134,7 @@ export default {
 
     function changeCurrentItem() {
       selectedValue.value = props.options[selectedItem.value].value;
-      ctx.emit('update:selectedValue', selectedValue.value);
+      ctx.emit("update:selectedValue", selectedValue.value);
       title.value = props.options[selectedItem.value].title;
       if (props.options[selectedItem.value].iconClass) {
         currentIconClass.value = props.options[selectedItem.value].iconClass;
@@ -180,9 +166,7 @@ export default {
 
     onMounted(() => {
       if (props.selectedValue) {
-        const currentItem = props.options.findIndex(
-          (item) => item.value === props.selectedValue,
-        );
+        const currentItem = props.options.findIndex((item) => item.value === props.selectedValue);
 
         changeValue(currentItem);
       }
@@ -191,14 +175,12 @@ export default {
     watch(
       () => props.selectedValue,
       (newValue) => {
-        ctx.emit('update:selectedValue', newValue);
+        ctx.emit("update:selectedValue", newValue);
 
-        const currentItem = props.options.findIndex(
-          (item) => item.value === props.selectedValue,
-        );
+        const currentItem = props.options.findIndex((item) => item.value === props.selectedValue);
 
         changeValue(currentItem);
-      },
+      }
     );
 
     function selectNextOption() {
@@ -254,12 +236,12 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .select-wrapper {
   position: relative;
   height: 65px;
   width: 408px;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     width: 330px;
   }
 
@@ -346,7 +328,8 @@ export default {
       font-size: 2rem;
     }
 
-    .select-icon, .select-text-icon {
+    .select-icon,
+    .select-text-icon {
       position: absolute;
       left: 1.5rem;
       cursor: default;

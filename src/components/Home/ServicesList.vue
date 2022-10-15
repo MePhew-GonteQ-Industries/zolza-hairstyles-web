@@ -1,42 +1,52 @@
 <template>
-<div class="services-wrapper" ref="services">
-  <CustomLoader :class="{ hidden: !loading }" v-if="!loaderAnimationFinished"/>
+  <div class="services-wrapper" ref="services">
+    <CustomLoader :class="{ hidden: !loading }" v-if="!loaderAnimationFinished" />
 
-  <div class="services" :class="{ hidden: loading }"
-  v-if="loaderAnimationFinished && !loadingFailed">
-    <template v-for="service in servicesData" :key="service.id">
-      <ServiceTile
-        :id="service.id"
-        :name="service.name"
-        description="Nasze usługi wyróżnia indywidualne podejście do klienta.
+    <div
+      class="services"
+      :class="{ hidden: loading }"
+      v-if="loaderAnimationFinished && !loadingFailed"
+    >
+      <template v-for="service in servicesData" :key="service.id">
+        <ServiceTile
+          :id="service.id"
+          :name="service.name"
+          description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-        :time="service.average_time_minutes"
-        :availability="40"
-        :priceMin="service.min_price"
-        :priceMax="service.max_price"
-        @updateSelectedService="(newValue) => { $emit('update:selectedServiceId', newValue) }"/>
-    </template>
-  </div>
+          :time="service.average_time_minutes"
+          :availability="40"
+          :priceMin="service.min_price"
+          :priceMax="service.max_price"
+          @updateSelectedService="
+            (newValue) => {
+              $emit('update:selectedServiceId', newValue);
+            }
+          "
+        />
+      </template>
+    </div>
 
-  <div class="error-message" :class="{ hidden: loading }"
-   v-if="loadingFailed && loaderAnimationFinished">
-    <i class="ph-warning-circle-light"></i>
-    <p>{{ t("home.servicesList.error") }}</p>
+    <div
+      class="error-message"
+      :class="{ hidden: loading }"
+      v-if="loadingFailed && loaderAnimationFinished"
+    >
+      <i class="ph-warning-circle-light"></i>
+      <p>{{ t("home.servicesList.error") }}</p>
+    </div>
   </div>
-
-</div>
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
-import ServiceTile from '@/components/Home/ServiceTile.vue';
-import axios from 'axios';
-import { ref, onMounted, watch } from 'vue';
-import CustomLoader from '@/components/CustomLoader.vue';
-import { handleRequestError } from '@/utils';
+import { useI18n } from "vue-i18n";
+import ServiceTile from "@/components/Home/ServiceTile.vue";
+import axios from "axios";
+import { ref, onMounted, watch } from "vue";
+import CustomLoader from "@/components/CustomLoader.vue";
+import { handleRequestError } from "@/utils";
 
 export default {
-  name: 'ServicesList',
+  name: "ServicesList",
   components: {
     ServiceTile,
     CustomLoader,
@@ -51,7 +61,7 @@ export default {
     },
   },
   setup(props) {
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
     const loading = ref(true);
     const loadingFailed = ref(false);
     const loaderAnimationFinished = ref(false);
@@ -60,7 +70,7 @@ export default {
 
     onMounted(async () => {
       try {
-        const response = await axios.get('services');
+        const response = await axios.get("services");
         servicesData.value = response.data;
       } catch (error) {
         loadingFailed.value = true;
@@ -75,12 +85,15 @@ export default {
     const services = ref(null);
 
     const scrollToServices = () => {
-      services.value.scrollIntoView({ behavior: 'smooth' });
+      services.value.scrollIntoView({ behavior: "smooth" });
     };
 
-    watch(() => props.scrolledToServices, () => {
-      scrollToServices();
-    });
+    watch(
+      () => props.scrolledToServices,
+      () => {
+        scrollToServices();
+      }
+    );
 
     return {
       servicesData,
@@ -103,9 +116,9 @@ export default {
   justify-content: center;
 
   .hidden {
-      display: none;
-      opacity: 0;
-    }
+    display: none;
+    opacity: 0;
+  }
 
   .services {
     grid-template-columns: repeat(2, 1fr);
@@ -122,21 +135,22 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.250rem;
+    font-size: 1.25rem;
     gap: 1rem;
 
     i {
-      font-size: 2.250rem;
+      font-size: 2.25rem;
     }
   }
 }
 
-@media only screen and (max-width: $xs){
-  .services-wrapper{
-    .services{
+@media only screen and (max-width: $xs) {
+  .services-wrapper {
+    .services {
       display: flex;
       flex-direction: column;
     }
   }
 }
-</style>>
+</style>
+>

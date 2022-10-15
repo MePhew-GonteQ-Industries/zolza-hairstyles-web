@@ -31,24 +31,27 @@
           type="password"
           :required="true"
         />
-        <router-link to="/password-reset" tabindex="-1"
-          >{{ t('shared.forgotYourPassword') }}</router-link
-        >
+        <router-link to="/password-reset" tabindex="-1">{{
+          t("shared.forgotYourPassword")
+        }}</router-link>
         <CustomButton @click="changePassword">
-        {{ t('settings.accountSecuritySettings.changePassword') }}</CustomButton>
+          {{ t("settings.accountSecuritySettings.changePassword") }}</CustomButton
+        >
       </form>
     </div>
     <div class="elevated-card two-fa" v-if="false">
       <div class="header">
         <h1>{{ t("settings.accountSecuritySettings.twoFactorAuthentication") }}</h1>
         <CustomChip type="warning">
-          {{ t("settings.accountSecuritySettings.notConfigured") }}</CustomChip>
+          {{ t("settings.accountSecuritySettings.notConfigured") }}</CustomChip
+        >
       </div>
       <p>
         {{ t("settings.accountSecuritySettings.twoFAInfo") }}
       </p>
       <CustomButton type="success">
-        {{ t("settings.accountSecuritySettings.configureNow") }}</CustomButton>
+        {{ t("settings.accountSecuritySettings.configureNow") }}</CustomButton
+      >
     </div>
     <div class="elevated-card active-sessions">
       <div class="header">
@@ -67,18 +70,15 @@
           <div class="logout-everywhere-wrappper">
             <MessageBox type="warning">
               <template #title>{{ t("shared.warning") }}</template>
-              <template #subtitle>
-                {{ t("shared.irreversible") }} </template>
+              <template #subtitle> {{ t("shared.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
-              <CustomButton type="warning" @click="logoutEverywhere"
-                >{{ t("shared.logOut") }}</CustomButton
-              >
-              <CustomButton
-                type="secondary"
-                @click="logoutEverywhereModalOpen = false"
-                >{{ t("shared.operationCancel") }}</CustomButton
-              >
+              <CustomButton type="warning" @click="logoutEverywhere">{{
+                t("shared.logOut")
+              }}</CustomButton>
+              <CustomButton type="secondary" @click="logoutEverywhereModalOpen = false">{{
+                t("shared.operationCancel")
+              }}</CustomButton>
             </div>
           </div>
         </CustomModal>
@@ -92,11 +92,7 @@
         </template>
       </MessageBox>
       <div class="active-sessions-wrapper">
-        <LoginSession
-          v-for="session in sessions"
-          :key="session.id"
-          :session="session"
-        >
+        <LoginSession v-for="session in sessions" :key="session.id" :session="session">
         </LoginSession>
       </div>
     </div>
@@ -104,22 +100,20 @@
 </template>
 
 <script>
-import {
-  ref, onMounted, computed, reactive,
-} from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
-import CustomInput from '@/components/CustomInput.vue';
-import CustomChip from '@/components/CustomChip.vue';
-import CustomButton from '@/components/CustomButton.vue';
-import LoginSession from '@/components/Settings/LoginSession.vue';
-import MessageBox from '@/components/MessageBox.vue';
-import CustomModal from '@/components/CustomModal.vue';
-import axios from 'axios';
-import { handleRequestError } from '@/utils';
+import { ref, onMounted, computed, reactive } from "vue";
+import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
+import CustomInput from "@/components/CustomInput.vue";
+import CustomChip from "@/components/CustomChip.vue";
+import CustomButton from "@/components/CustomButton.vue";
+import LoginSession from "@/components/Settings/LoginSession.vue";
+import MessageBox from "@/components/MessageBox.vue";
+import CustomModal from "@/components/CustomModal.vue";
+import axios from "axios";
+import { handleRequestError } from "@/utils";
 
 export default {
-  name: 'AccountSecuritySettings',
+  name: "AccountSecuritySettings",
   components: {
     CustomInput,
     CustomChip,
@@ -131,7 +125,7 @@ export default {
   setup() {
     const store = useStore();
     const locale = store.state.settings.language;
-    const { t } = useI18n({ useScope: 'global' });
+    const { t } = useI18n({ useScope: "global" });
 
     const sessions = computed(() => {
       if (!store.state.sessions.sessions.length) return [];
@@ -141,14 +135,15 @@ export default {
       store.state.sessions.sessions.forEach((session) => {
         const sessionTemp = session;
 
-        sessionTemp.last_accessed_str = new Date(
-          `${session.last_accessed}Z`,
-        ).toLocaleTimeString(locale, {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
+        sessionTemp.last_accessed_str = new Date(`${session.last_accessed}Z`).toLocaleTimeString(
+          locale,
+          {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }
+        );
 
         let sessionIcon;
 
@@ -156,7 +151,7 @@ export default {
 
         let deviceTooltip = `${userAgentInfo.browser.family} ${userAgentInfo.browser.version}`;
 
-        if (userAgentInfo.os.family && userAgentInfo.os.family !== 'Other') {
+        if (userAgentInfo.os.family && userAgentInfo.os.family !== "Other") {
           deviceTooltip += ` na ${userAgentInfo.os.family} ${userAgentInfo.os.version}`;
         }
 
@@ -164,20 +159,20 @@ export default {
           const deviceInfo = userAgentInfo.device;
 
           if (deviceInfo) {
-            if (deviceInfo.is_bot) sessionIcon = 'ph-robot-light';
+            if (deviceInfo.is_bot) sessionIcon = "ph-robot-light";
 
-            if (deviceInfo.is_pc) sessionIcon = 'ph-desktop-light';
+            if (deviceInfo.is_pc) sessionIcon = "ph-desktop-light";
 
-            if (deviceInfo.is_tablet) sessionIcon = 'ph-device-tablet-light';
+            if (deviceInfo.is_tablet) sessionIcon = "ph-device-tablet-light";
 
-            if (deviceInfo.is_mobile) sessionIcon = 'ph-device-mobile-light';
+            if (deviceInfo.is_mobile) sessionIcon = "ph-device-mobile-light";
           }
         }
 
         if (!sessionIcon) {
-          if (session.last_access_data.user_agent.includes('dart')) {
-            sessionIcon = 'ph-device-mobile-light';
-            deviceTooltip = 'Aplikacja Zołza Hairstyles dla urządzeń mobilnych';
+          if (session.last_access_data.user_agent.includes("dart")) {
+            sessionIcon = "ph-device-mobile-light";
+            deviceTooltip = "Aplikacja Zołza Hairstyles dla urządzeń mobilnych";
           }
         }
 
@@ -191,18 +186,18 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch('loadSessions');
+      await store.dispatch("loadSessions");
     });
 
     const logoutEverywhereModalOpen = ref(false);
 
     const logoutEverywhere = () => {
       axios
-        .post('auth/logout-everywhere')
+        .post("auth/logout-everywhere")
         .then((response) => {
           if (response.status === 200) {
-            store.dispatch('deleteSessions').then(() => {
-              store.dispatch('loadSessions').then(() => {
+            store.dispatch("deleteSessions").then(() => {
+              store.dispatch("loadSessions").then(() => {
                 logoutEverywhereModalOpen.value = false;
               });
             });
@@ -214,14 +209,14 @@ export default {
     };
 
     const passwordData = reactive({
-      current: '',
-      new: '',
-      repeat: '',
+      current: "",
+      new: "",
+      repeat: "",
     });
 
     const requestPasswordChange = () => {
       axios
-        .post('auth/change-password', {
+        .post("auth/change-password", {
           old_password: passwordData.current,
           new_password: passwordData.new,
         })
@@ -262,7 +257,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .logout-everywhere-wrappper {
   display: flex;
   flex-direction: column;
@@ -283,7 +278,7 @@ export default {
   display: grid;
   grid-template-columns: auto auto;
   align-items: stretch;
-  @media only screen and (max-width: $xs){
+  @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
   }
@@ -307,7 +302,7 @@ export default {
     display: grid;
     gap: 1rem;
     grid-template-columns: auto auto;
-    @media only screen and (max-width: $xs){
+    @media only screen and (max-width: $xs) {
       display: flex;
       flex-direction: column;
     }
