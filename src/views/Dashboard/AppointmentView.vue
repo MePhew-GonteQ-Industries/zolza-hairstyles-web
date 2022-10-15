@@ -42,33 +42,129 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error">Odwołaj</CustomButton>
-        <CustomButton type="info">Zmień termin</CustomButton>
+        <CustomButton type="error"
+        class="cancel-appointment-button"
+        @click="cancelAppointmentModalOpen = true"
+        >Odwołaj</CustomButton>
+        <CustomModal v-model:open="cancelAppointmentModalOpen">
+          <template #title>
+            Napewno chcesz anulować wizytę?
+          </template>
+            <div class="cancel-appointment-wrapper">
+              <MessageBox type="warning">
+                <template #title>Uwaga</template>
+                <template #subtitle>Akcja jest nieodwracalna</template>
+              </MessageBox>
+              <div class="buttons-wrapper">
+                <CustomButton type="error">Anuluj wizytę</CustomButton>
+                <CustomButton type="secondary"
+                @click="cancelAppointmentModalOpen = false">Zamknij</CustomButton>
+              </div>
+            </div>
+        </CustomModal>
+        <CustomButton type="info"
+        class="change-appointment-date"
+        @click="changeAppointmentDateModalOpen = true">
+          Zmień termin</CustomButton>
+          <CustomModal v-model:open="changeAppointmentDateModalOpen">
+            <template #title>
+              Zmiana daty wizyty
+            </template>
+            <div class="change-appointment-date-wrapper">
+              <MessageBox type="info">
+                <template #title>Obecny slot wizyty zwolni się</template>
+                <template #subtitle>
+                  Bieżący slot na którym była umówiona wizyta będzie mógł ponownie zostać zajęty.
+                </template>
+              </MessageBox>
+              <div class="date-picker-wrapper">
+                <DatePicker
+                :is-dark="$store.state.settings.theme === 'dark'"
+                is-required
+                color="green"
+                mode="date"
+                v-model="selectedDate"
+                />
+                <div class="hours">
+                  <CustomLoader
+                  v-if="loading">
+                  </CustomLoader>
+                  <div class="single-hour"
+                  v-else
+                  v-for="availableSlot in availableSlots"
+                  :key="availableSlot.id">
+                    {{ availableSlot.startTime }}
+                  </div>
+                </div>
+              </div>
+              <div class="buttons-wrapper">
+                <CustomButton type="info">Zmień termin</CustomButton>
+                <CustomButton type="secondary"
+                @click="changeAppointmentDateModalOpen = false">Zamknij</CustomButton>
+              </div>
+            </div>
+          </CustomModal>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
+import {
+  ref, onMounted, computed, watch,
+} from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import { handleRequestError } from '@/utils';
 import CustomButton from '@/components/CustomButton.vue';
+import { DatePicker } from 'v-calendar';
+import CustomModal from '../../components/CustomModal.vue';
+import MessageBox from '../../components/MessageBox.vue';
+import CustomLoader from '../../components/CustomLoader.vue';
 
 export default {
   name: 'AppointmentView',
   components: {
     CustomButton,
+    CustomModal,
+    MessageBox,
+    DatePicker,
+    CustomLoader,
   },
   setup() {
     const store = useStore();
     const route = useRoute();
 
     const appointmentData = ref(null);
+    const selectedDate = ref(new Date());
+    const loading = ref(false);
+    const availableSlots = ref(null);
+
+    const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split('T')[0]);
+
+    const loadAvailableTimeSlots = async (date) => {
+      // console.log(`fetching data ${date}`);
+      try {
+        const response = await axios.get(`appointments/slots?date=${date}`);
+        loading.value = false;
+        availableSlots.value = response.data;
+        console.log(availableSlots.value);
+      } catch (error) {
+        handleRequestError(error);
+      }
+    };
+
+    watch(selectedDateFormatted, async (newDate) => {
+      // console.log(newDate);
+      loading.value = true;
+      await loadAvailableTimeSlots(newDate);
+    });
 
     onMounted(async () => {
+      loading.value = true;
+      // console.log(selectedDate);
+      await loadAvailableTimeSlots(selectedDateFormatted.value);
       const storedAppointment = store.getters.getAppointmentById(
         route.params.id,
       );
@@ -86,6 +182,9 @@ export default {
         }
       }
     });
+
+    const cancelAppointmentModalOpen = ref(false);
+    const changeAppointmentDateModalOpen = ref(false);
 
     const appointment = computed(() => {
       if (!appointmentData.value) return null;
@@ -164,12 +263,48 @@ export default {
 
     return {
       appointment,
+      cancelAppointmentModalOpen,
+      changeAppointmentDateModalOpen,
+      selectedDate,
+      loading,
+      selectedDateFormatted,
+      loadAvailableTimeSlots,
+      availableSlots,
     };
   },
 };
 </script>
 
 <style lang='scss' scoped>
+.cancel-appointment-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .buttons-wrapper{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+}
+.change-appointment-date-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .buttons-wrapper{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+  .date-picker-wrapper{
+    display: flex;
+    .hours{
+      width: 75%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 .appointment {
   grid-template-columns: 3fr 1.2fr;
 

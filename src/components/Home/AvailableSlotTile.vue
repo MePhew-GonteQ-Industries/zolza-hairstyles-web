@@ -8,7 +8,10 @@
 
   <div class="buttons">
 
-    <div class="button make-appointment">
+    <div class="button make-appointment"
+    @click="bookAppointment"
+    @keyup.enter="bookAppointment"
+    >
       <i class="ph-calendar-plus-light"></i>
       {{ t("home.availableSlotTile.book") }}
     </div>
@@ -24,6 +27,7 @@
 </template>
 
 <script>
+// import axios from 'axios';
 import { useI18n } from 'vue-i18n';
 
 export default {
@@ -42,7 +46,11 @@ export default {
   setup() {
     const { t } = useI18n({ useScope: 'global' });
 
-    return { t };
+    const bookAppointment = async () => {
+      // await axios.post
+    };
+
+    return { t, bookAppointment };
   },
 };
 </script>
