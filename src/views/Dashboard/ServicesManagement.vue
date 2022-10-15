@@ -9,6 +9,8 @@
       />
     </form>
 
+    <CustomButton>Dodaj usługę</CustomButton>
+
     <div class="dashboard-data-table-wrapper">
       <table>
         <colgroup>
@@ -44,7 +46,9 @@
               sortName="user"
               @toggleSort="toggleSort('user')"
             >
-              {{ t("dashboard.servicesManagement.averageDurationTime") }}</SortedHeader
+              {{
+                t("dashboard.servicesManagement.averageDurationTime")
+              }}</SortedHeader
             >
           </th>
           <th>
@@ -73,11 +77,7 @@
                 #{{ service.shortId }}...</router-link
               >
             </td>
-            <td class="name">
-              <router-link :to="`service/${service.id}`"
-                >Strzyżenie męskie</router-link
-              >
-            </td>
+            <td class="name">Strzyżenie męskie</td>
             <td class="average-time">
               <div class="data-icon-wrapper">
                 <i class="ph-clock-light"></i>
@@ -108,11 +108,13 @@ import { useI18n } from 'vue-i18n';
 import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import CustomInput from '@/components/CustomInput.vue';
+import CustomButton from '@/components/CustomButton.vue';
 
 export default {
   name: 'ServicesManagement',
   components: {
     CustomInput,
+    CustomButton,
   },
   setup() {
     const store = useStore();
