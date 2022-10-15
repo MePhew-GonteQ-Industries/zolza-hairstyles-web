@@ -23,6 +23,8 @@
       </div>
     </form>
 
+    <CustomButton>Utwórz wizytę</CustomButton>
+
     <div class="dashboard-data-table-wrapper">
       <table>
         <colgroup>
@@ -153,6 +155,7 @@ import CustomSelect from '@/components/CustomSelect.vue';
 import CustomTooltip from '@/components/CustomTooltip.vue';
 import { computed, onMounted, ref } from 'vue';
 import SortedHeader from '@/components/SortedHeader.vue';
+import CustomButton from '@/components/CustomButton.vue';
 import 'v-calendar/dist/style.css';
 // import { DatePicker } from 'v-calendar';
 
@@ -163,6 +166,7 @@ export default {
     CustomSelect,
     CustomTooltip,
     SortedHeader,
+    CustomButton,
     // DatePicker,
   },
   setup() {
