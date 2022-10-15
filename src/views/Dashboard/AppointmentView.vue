@@ -85,8 +85,16 @@
                 mode="date"
                 v-model="selectedDate"
                 />
-                <div class="loader">
-                  <CustomLoader></CustomLoader>
+                <div class="hours">
+                  <CustomLoader
+                  v-if="loading">
+                  </CustomLoader>
+                  <div class="single-hour"
+                  v-else
+                  v-for="availableSlot in availableSlots"
+                  :key="availableSlot.id">
+                    {{ availableSlot.startTime }}
+                  </div>
                 </div>
               </div>
               <div class="buttons-wrapper">
@@ -130,18 +138,33 @@ export default {
 
     const appointmentData = ref(null);
     const selectedDate = ref(new Date());
+    const loading = ref(false);
+    const availableSlots = ref(null);
 
-    watch(selectedDate, (newDate) => {
-      console.log(newDate.toISOString().split('T')[0]);
+    const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split('T')[0]);
+
+    const loadAvailableTimeSlots = async (date) => {
+      // console.log(`fetching data ${date}`);
+      try {
+        const response = await axios.get(`appointments/slots?date=${date}`);
+        loading.value = false;
+        availableSlots.value = response.data;
+        console.log(availableSlots.value);
+      } catch (error) {
+        handleRequestError(error);
+      }
+    };
+
+    watch(selectedDateFormatted, async (newDate) => {
+      // console.log(newDate);
+      loading.value = true;
+      await loadAvailableTimeSlots(newDate);
     });
 
     onMounted(async () => {
-      console.log(selectedDate.value.toISOString().split('T')[0]);
-      // try{
-      //   const awailableSlots = await axios.get()
-      // } catch (error) {
-      //   handleRequestError(error);
-      // }
+      loading.value = true;
+      // console.log(selectedDate);
+      await loadAvailableTimeSlots(selectedDateFormatted.value);
       const storedAppointment = store.getters.getAppointmentById(
         route.params.id,
       );
@@ -243,6 +266,10 @@ export default {
       cancelAppointmentModalOpen,
       changeAppointmentDateModalOpen,
       selectedDate,
+      loading,
+      selectedDateFormatted,
+      loadAvailableTimeSlots,
+      availableSlots,
     };
   },
 };
@@ -270,7 +297,7 @@ export default {
   }
   .date-picker-wrapper{
     display: flex;
-    .loader{
+    .hours{
       width: 75%;
       display: flex;
       justify-content: center;
