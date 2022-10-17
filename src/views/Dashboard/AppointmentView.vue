@@ -91,7 +91,7 @@
                   v-for="availableSlot in availableSlots"
                   :key="availableSlot.id"
                 >
-                  {{ availableSlot.startTime }}
+                  {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
                 </div>
               </div>
             </div>
@@ -141,26 +141,24 @@ export default {
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
     const loadAvailableTimeSlots = async (date) => {
-      // console.log(`fetching data ${date}`);
       try {
         const response = await axios.get(`appointments/slots?date=${date}`);
         loading.value = false;
         availableSlots.value = response.data;
-        console.log(availableSlots.value);
+        console.log((availableSlots.value[0]));
+        console.log(availableSlots.value[0]['start_time']);
       } catch (error) {
         handleRequestError(error);
       }
     };
 
     watch(selectedDateFormatted, async (newDate) => {
-      // console.log(newDate);
       loading.value = true;
       await loadAvailableTimeSlots(newDate);
     });
 
     onMounted(async () => {
       loading.value = true;
-      // console.log(selectedDate);
       await loadAvailableTimeSlots(selectedDateFormatted.value);
       const storedAppointment = store.getters.getAppointmentById(route.params.id);
 
@@ -175,6 +173,10 @@ export default {
         }
       }
     });
+
+    // const availableSlotsData = computed(()=>{
+    //   console.log(availableSlots.value[0]['start_time']);
+    // });
 
     const cancelAppointmentModalOpen = ref(false);
     const changeAppointmentDateModalOpen = ref(false);
@@ -285,8 +287,17 @@ export default {
     .hours {
       width: 75%;
       display: flex;
-      justify-content: center;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      gap: 1rem;
+      // justify-content: center;
+      // padding: 10px;
       align-items: center;
+      .single-hour{
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 }
