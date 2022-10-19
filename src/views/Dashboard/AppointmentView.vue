@@ -285,18 +285,19 @@ export default {
   .date-picker-wrapper {
     display: flex;
     .hours {
+      margin-left: 10px;
       width: 75%;
       display: flex;
-      // flex-direction: column;
       flex-wrap: wrap;
-      gap: 1rem;
-      // justify-content: center;
-      // padding: 10px;
+      gap: .5rem;
       align-items: center;
       .single-hour{
         padding: 25px;
         display: flex;
         flex-direction: column;
+        border: 1px solid $accent-color;
+        width: 90px; 
+        border-radius: 12px;
       }
     }
   }
