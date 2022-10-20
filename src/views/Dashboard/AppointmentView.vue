@@ -84,14 +84,20 @@
                 v-model="selectedDate"
               />
               <div class="hours">
-                <CustomLoader v-if="loading"> </CustomLoader>
-                <div
-                  class="single-hour"
-                  v-else
+                <CustomLoader v-if="loading"></CustomLoader>
+                <div class="slots-wrapper"
+                  v-if="availableSlots.length && !loading"
+                >
+                  <div class="single-hour"
                   v-for="availableSlot in availableSlots"
                   :key="availableSlot.id"
-                >
-                  {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
+                  >
+                    {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
+                  </div>
+                </div>
+                <div class="no-slots"
+                v-if="!availableSlots.length && !loading">
+                  Brak wolnych miejsc
                 </div>
               </div>
             </div>
@@ -137,31 +143,62 @@ export default {
     const selectedDate = ref(new Date());
     const loading = ref(false);
     const availableSlots = ref(null);
+    const validatedSlots = ref(null);
 
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
-    const loadAvailableTimeSlots = async (date) => {
-      try {
-        const response = await axios.get(`appointments/slots?date=${date}`);
-        loading.value = false;
-        availableSlots.value = response.data;
-        console.log((availableSlots.value[0]));
-        console.log(availableSlots.value[0]['start_time']);
-      } catch (error) {
-        handleRequestError(error);
+    const vaildateSlots = (() => {
+      const requiredSlots = appointmentData.value.service.required_slots;
+      for(let i = 0; i < availableSlots.value.length; i++){
+        let currentSlotFits = 0;
+        if(i + requiredSlots <= availableSlots.value.length){
+          for(let j = i; j < (i + requiredSlots); j++){
+            let slot = availableSlots.value[j];
+            if(slot['occupied']){
+              break;
+            }
+            if(slot['reserved']){
+              break;
+            }
+            if(slot['holiday']){
+              break;
+            }
+            if(slot['sunday']){
+              break;
+            }
+            if(slot['break_time']){
+              break;
+            }
+            if(currentSlotFits === requiredSlots){
+              validatedSlots.value.push(slot);
+              break;
+            }
+            currentSlotFits++;
+          }
+        }
       }
-    };
-
-    watch(selectedDateFormatted, async (newDate) => {
-      loading.value = true;
-      await loadAvailableTimeSlots(newDate);
+      console.log(validatedSlots);
     });
 
+    const loadAvailableTimeSlots = async (date) => {
+      try {
+          const response = await axios.get(`appointments/slots?date=${date}`);
+          availableSlots.value = response.data;
+          // vaildateSlots();
+          loading.value = false;
+        } catch (error) {
+          handleRequestError(error);
+        }
+      };
+
+      watch(selectedDateFormatted, async (newDate) => {
+        loading.value = true;
+        await loadAvailableTimeSlots(newDate);
+    });
+    
     onMounted(async () => {
       loading.value = true;
-      await loadAvailableTimeSlots(selectedDateFormatted.value);
       const storedAppointment = store.getters.getAppointmentById(route.params.id);
-
       if (storedAppointment) {
         appointmentData.value = storedAppointment;
       } else {
@@ -172,11 +209,9 @@ export default {
           handleRequestError(error);
         }
       }
+      await loadAvailableTimeSlots(selectedDateFormatted.value);
+      console.log(appointmentData.value.service.required_slots);
     });
-
-    // const availableSlotsData = computed(()=>{
-    //   console.log(availableSlots.value[0]['start_time']);
-    // });
 
     const cancelAppointmentModalOpen = ref(false);
     const changeAppointmentDateModalOpen = ref(false);
@@ -286,18 +321,34 @@ export default {
     display: flex;
     .hours {
       margin-left: 10px;
-      width: 75%;
       display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
+      width: 100%;
       align-items: center;
-      .single-hour{
-        padding: 25px;
+      justify-content: center;
+      .slots-wrapper{
         display: flex;
-        flex-direction: column;
-        border: 1px solid $accent-color;
-        width: 90px; 
-        border-radius: 12px;
+        flex-wrap: wrap;
+        gap: .5rem;
+        .single-hour{
+          padding: 25px;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid $accent-color;
+          width: 90px; 
+          border-radius: 12px;
+          &:hover{
+            border: none;
+            background-color: grey;
+            cursor: pointer;
+          }
+          &:active{
+            border: none;
+            background-color: $accent-color;
+          }
+        }
+      }
+      .no-slots{
+        color: $error-color;
       }
     }
   }
