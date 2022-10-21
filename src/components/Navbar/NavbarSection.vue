@@ -13,15 +13,14 @@ export default {
   components: {
     desktopNavigation,
   },
-  methods: {
-    sidebarSlide() {
-      this.$emit("slide-sidebar");
-    },
-  },
-  setup() {
+  setup(_, { emit }) {
     const state = reactive({
       mobileMenuActive: false,
     });
+
+    const sidebarSlide = () => {
+      emit('slide-sidebar');
+    }
 
     function toggleMobileMenu() {
       state.mobileMenuActive = !state.mobileMenuActive;
@@ -30,6 +29,7 @@ export default {
     return {
       state,
       toggleMobileMenu,
+      sidebarSlide,
     };
   },
 };

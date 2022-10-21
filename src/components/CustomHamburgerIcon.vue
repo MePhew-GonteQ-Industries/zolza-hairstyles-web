@@ -1,6 +1,5 @@
-<!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
-  <div class="hamburger-icon" :class="{ 'nav-active': navbarActive }" @click="sidebarSlide">
+  <div class="hamburger-icon" :class="{ 'nav-active': navbarActive }">
     <div class="line1"></div>
     <div class="line2"></div>
     <div class="line3"></div>
@@ -16,11 +15,6 @@ export default {
       default: false,
     },
   },
-  methods: {
-    sidebarSlide() {
-      this.$emit("slide-sidebar");
-    },
-  },
 };
 </script>
 
@@ -29,6 +23,7 @@ export default {
   flex-flow: column;
   z-index: 2500;
   display: flex;
+
   div {
     width: 25px;
     height: 2px;
@@ -38,13 +33,16 @@ export default {
     transition: all 0.3s ease;
   }
 }
+
 .nav-active {
   .line1 {
     transform: rotate(-45deg) translate(-8px, 2px);
   }
+
   .line2 {
     opacity: 0;
   }
+
   .line3 {
     transform: rotate(45deg) translate(-8px, -2px);
   }

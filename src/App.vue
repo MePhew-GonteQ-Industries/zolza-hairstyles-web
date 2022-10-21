@@ -2,7 +2,7 @@
   <div id="app-wrapper" :data-theme="$store.state.settings.theme">
     <main ref="main" :class="{ collapsed: !onHomePage }">
       <div id="nav" ref="navbar" :class="navbarClasses">
-        <navbarSection @slide-sidebar="sidebarSlide" />
+        <navbarSection />
       </div>
       <CustomSidebar class="sidebar" />
       <div class="wrapper" v-if="onHomePage">
