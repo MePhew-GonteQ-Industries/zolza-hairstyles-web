@@ -8,18 +8,10 @@
 
     <form @submit.prevent="handleResetPasswordRequest" novalidate>
       <div class="inputs">
-        <CustomInput
-          :label="t('shared.email')"
-          iconClass="ph-envelope-simple-light"
-          inputType="email"
-          autocomplete="email"
-          v-model:value="userEmail"
-          :invalid="emailInvalid"
-          :forceValidate="forceValidate"
-          :required="true"
-          :messageEmpty="t('shared.emailEmpty')"
-          :messageInvalid="t('shared.emailInvalid')"
-        />
+        <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light"
+          inputType="email" autocomplete="email" v-model:value="userEmail" :invalid="emailInvalid"
+          :forceValidate="forceValidate" :required="true" :messageEmpty="t('shared.emailEmpty')"
+          :messageInvalid="t('shared.emailInvalid')" />
       </div>
 
       <CustomButton class="btn">
@@ -73,9 +65,6 @@ export default {
         .post("auth/request-password-reset", {
           email: userEmail.value,
         })
-        .then((response) => {
-          console.log(response);
-        })
         .catch((error) => {
           handleRequestError(error);
         });
@@ -98,4 +87,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

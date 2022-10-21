@@ -35,7 +35,6 @@ import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/thumbs';
-import { onMounted } from "vue";
 
 export default {
   name: 'ImageGallery',
@@ -50,10 +49,6 @@ export default {
     },
   },
   setup(props) {
-    onMounted(() => {
-      console.log(props.photos);
-    })
-
     return {
       modules: [Autoplay, Pagination, Navigation],
     };

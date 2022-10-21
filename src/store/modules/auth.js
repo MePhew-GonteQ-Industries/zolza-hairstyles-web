@@ -144,7 +144,7 @@ export default {
           await dispatch("checkUserData");
           await dispatch("loadSettings");
         } catch (err) {
-          console.log(err);
+          console.error(err);
           dispatch("logout");
           dispatch("loadDefaultSettings");
         }

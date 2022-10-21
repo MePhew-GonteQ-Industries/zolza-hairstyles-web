@@ -1,17 +1,14 @@
 <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="sidebar">
-    <CustomHamburgerIcon
-      class="custom-hamburger-icon"
-      @slide-sidebar="slideSidebar"
-      :navbarActive="sidebarActive"
-    />
+    <CustomHamburgerIcon class="custom-hamburger-icon" @slide-sidebar="slideSidebar"
+      :navbarActive="sidebarActive" />
     <div class="sidebar-wrapper">
       <div class="sidebar-menu" :class="{ 'sidebar-active': sidebarActive }">
         <div class="nav-section" @click="slideSidebar">
           <router-link to="/">{{ t("nav.primaryNav[0]") }}</router-link>
           <router-link v-if="$store.getters.isLoggedIn && $store.getters.isAdmin" to="/dashboard">{{
-            t("nav.primaryNav[1]")
+          t("nav.primaryNav[1]")
           }}</router-link>
           <router-link to="/contact">{{ t("nav.primaryNav[2]") }}</router-link>
         </div>
@@ -23,11 +20,8 @@
         </div>
       </div>
     </div>
-    <div
-      class="sidebar-background"
-      :class="{ 'sidebar-menu-background': sidebarActive }"
-      @click.self="slideSidebar"
-    ></div>
+    <div class="sidebar-background" :class="{ 'sidebar-menu-background': sidebarActive }"
+      @click.self="slideSidebar"></div>
   </div>
 </template>
 
@@ -46,9 +40,7 @@ export default {
     const sidebarActive = ref(false);
 
     function slideSidebar() {
-      console.log("this");
       sidebarActive.value = !sidebarActive.value;
-      console.log("slide");
     }
 
     return {
@@ -70,10 +62,12 @@ export default {
     transform: translateX(100vw);
     z-index: 2500;
   }
+
   .sidebar-wrapper {
     height: 100%;
     width: 100%;
     z-index: 8;
+
     .sidebar-menu {
       padding: 10vh 0;
       width: 50vw;
@@ -82,20 +76,25 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       .nav-section {
         display: flex;
         flex-direction: column;
+
         a {
           color: $secondary-text-color !important;
           padding: 1.5vh 0 0 2vw;
+
           &.router-link-active {
             color: $accent-color !important;
           }
         }
       }
+
       .footer-section {
         display: flex;
         flex-direction: column;
+
         a {
           color: $secondary-text-color !important;
           padding: 1.5vh 0 0 2vw;
@@ -103,6 +102,7 @@ export default {
       }
     }
   }
+
   .sidebar-background {
     position: absolute;
     top: 0;
@@ -114,9 +114,11 @@ export default {
     display: none;
     transition: display 2s ease-in-out;
   }
+
   .sidebar-active {
     transform: translateX(100vw);
   }
+
   .sidebar-menu-background {
     display: block;
   }

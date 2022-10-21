@@ -12,37 +12,19 @@
       </div>
       <div class="inputs-section">
         <div class="text-inputs">
-          <CustomInput
-            :label="t('shared.name')"
-            v-model:value="userData.name"
-            appearance="primary"
-            autocomplete="name"
-          />
-          <CustomInput
-            :label="t('shared.surname')"
-            v-model:value="userData.surname"
-            appearance="primary"
-            autocomplete="surname"
-          />
+          <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
+            autocomplete="name" />
+          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname"
+            appearance="primary" autocomplete="surname" />
         </div>
-        <CustomSelect
-          :header="t('shared.gender')"
-          iconClass="ph-gender-intersex-light"
-          :options="genderOptions"
-          v-model:selectedValue="userData.gender"
-          appearance="primary"
-        />
+        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light"
+          :options="genderOptions" v-model:selectedValue="userData.gender" appearance="primary" />
       </div>
-      <CustomButton
-        type="error"
-        class="delete-account-btn"
-        @click="deleteAccountModalOpen = true"
-        >{{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton
-      >
+      <CustomButton type="error" class="delete-account-btn" @click="deleteAccountModalOpen = true">
+        {{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton>
       <CustomModal v-model:open="deleteAccountModalOpen">
         <template #title>
-          {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template
-        >
+          {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template>
         <div class="delete-account-wrappper">
           <div class="messages-wrapper">
             <MessageBox type="error">
@@ -60,55 +42,38 @@
             </MessageBox>
           </div>
           <form @submit.prevent="" class="delete-account">
-            <input
-              type="text"
-              autocomplete="username"
-              class="hidden-input"
-              id="hidden-username-input-delete-account"
-            />
+            <input type="text" autocomplete="username" class="hidden-input"
+              id="hidden-username-input-delete-account" />
             <label for="hidden-username-input-delete-account"></label>
             <div class="input-with-title">
               <p>{{ t("settings.userAccountSettings.password") }}</p>
-              <CustomInput
-                :label="t('shared.password')"
-                autocomplete="current-password"
-                type="password"
-                :required="true"
-                v-model:value="deleteAccountPassword"
-              />
+              <CustomInput :label="t('shared.password')" autocomplete="current-password"
+                type="password" :required="true" v-model:value="deleteAccountPassword" />
             </div>
             <div class="input-with-title">
               <p>
                 {{ t("settings.userAccountSettings.confirmationQuote") }}
                 <span class="confirm-delete">{{
-                  t("settings.userAccountSettings.confirmDeleteAccount")
+                t("settings.userAccountSettings.confirmDeleteAccount")
                 }}</span>
                 :
               </p>
-              <CustomInput
-                :label="t('settings.userAccountSettings.confirmDeleteAccount')"
-                iconClass="ph-trash-light"
-                autocomplete=""
-                v-model:value="confirmAccountDeletion"
-              />
+              <CustomInput :label="t('settings.userAccountSettings.confirmDeleteAccount')"
+                iconClass="ph-trash-light" autocomplete="" v-model:value="confirmAccountDeletion" />
             </div>
             <div class="buttons-row">
               <CustomButton type="error" @click="deleteAccount">{{
-                t("settings.userAccountSettings.confirmationButton")
+              t("settings.userAccountSettings.confirmationButton")
               }}</CustomButton>
               <CustomButton type="secondary" @click="deleteAccountModalOpen = false">{{
-                t("shared.operationCancel")
+              t("shared.operationCancel")
               }}</CustomButton>
             </div>
           </form>
         </div>
       </CustomModal>
-      <MessageBox
-        interactive
-        :interactionHandler="requestEmailVerification"
-        type="warning"
-        v-if="!$store.state.user.verified"
-      >
+      <MessageBox interactive :interactionHandler="requestEmailVerification" type="warning"
+        v-if="!$store.state.user.verified">
         <template #title>
           {{ t("settings.userAccountSettings.emailLabel") }} {{ $store.state.user.email }}
           {{ t("settings.userAccountSettings.emailNotConfirmed") }}
@@ -117,51 +82,42 @@
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
         <CustomButton class="save" type="success" @click="changeUserData">{{
-          t("shared.saveChanges")
+        t("shared.saveChanges")
         }}</CustomButton>
         <CustomModal v-model:open="passwordPromptOpen">
           <template #title> {{ t("settings.userAccountSettings.passwordInput") }} </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="info">
               <template #title>
-                {{ t("settings.userAccountSettings.keyDataModification") }}</template
-              >
+                {{ t("settings.userAccountSettings.keyDataModification") }}</template>
               <template #subtitle>{{
-                t("settings.userAccountSettings.identityConfirmation")
+              t("settings.userAccountSettings.identityConfirmation")
               }}</template>
             </MessageBox>
             <form @submit.prevent="changeUserDataSudoMode">
-              <input
-                class="hidden-input"
-                type="text"
-                autocomplete="username"
-                id="password-prompt-hidden-username-input"
-              />
+              <input class="hidden-input" type="text" autocomplete="username"
+                id="password-prompt-hidden-username-input" />
               <label for="password-prompt-hidden-username-input"></label>
               <div class="enter-password-wrapper">
-                <CustomInput
-                  :label="t('shared.password')"
-                  autocomplete="new-password"
-                  type="password"
-                  v-model:value="password"
-                />
+                <CustomInput :label="t('shared.password')" autocomplete="new-password"
+                  type="password" v-model:value="password" />
                 <router-link to="/password-reset" tabindex="-1">{{
-                  t("shared.forgotYourPassword")
+                t("shared.forgotYourPassword")
                 }}</router-link>
               </div>
               <div class="buttons-row">
                 <CustomButton type="success" @click="changeUserDataSudoMode">{{
-                  t("settings.userAccountSettings.next")
+                t("settings.userAccountSettings.next")
                 }}</CustomButton>
                 <CustomButton type="secondary" @click="passwordPromptOpen = false">{{
-                  t("shared.operationCancel")
+                t("shared.operationCancel")
                 }}</CustomButton>
               </div>
             </form>
           </div>
         </CustomModal>
         <CustomButton type="secondary" class="cancel" @click="revertChanges">{{
-          t("shared.operationCancel")
+        t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -286,7 +242,7 @@ export default {
         })
         .then((response) => {
           if (response.status === 202) {
-            console.log(response.data);
+            // todo: snackbar ?
           }
         })
         .catch((error) => {
@@ -401,6 +357,7 @@ export default {
 .settings-page {
   min-height: 73.5vh;
 }
+
 .delete-account-wrappper,
 .logout-everywhere-wrappper {
   .buttons-row {
@@ -408,9 +365,11 @@ export default {
     gap: 1rem;
     width: 100%;
     align-items: center;
+
     @media only screen and (max-width: $xs) {
       flex-direction: column;
     }
+
     button {
       width: 100%;
     }
@@ -485,6 +444,7 @@ export default {
   display: flex;
   align-items: center;
   font-size: 1rem;
+
   @media only screen and (max-width: $xs) {
     flex-direction: column;
   }
@@ -505,6 +465,7 @@ export default {
   display: grid;
   align-items: center;
   gap: 1rem;
+
   @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
@@ -513,6 +474,7 @@ export default {
   .text-inputs {
     display: flex;
     gap: inherit;
+
     @media only screen and (max-width: $xs) {
       flex-direction: column;
     }
@@ -528,6 +490,7 @@ export default {
 .delete-account-btn {
   margin-left: auto;
   width: 200px;
+
   @media only screen and (max-width: $xs) {
     position: absolute;
     top: 20vh;
@@ -539,6 +502,7 @@ export default {
 .save-changes {
   display: flex;
   gap: 1rem;
+
   @media only screen and (max-width: $xs) {
     margin: auto;
   }

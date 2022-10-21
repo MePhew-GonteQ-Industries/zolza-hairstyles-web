@@ -8,39 +8,24 @@
 
     <form @submit.prevent="handlePasswordReset" novalidate>
       <div class="inputs">
-        <input
-          class="hidden-input"
-          type="text"
-          autocomplete="username"
-          id="change-password-hidden-username-input"
-        />
+        <input class="hidden-input" type="text" autocomplete="username"
+          id="change-password-hidden-username-input" />
         <label for="change-password-hidden-username-input"></label>
 
-        <CustomInput
-          :label="t('resetPassword.changePassword.newPasswordField.label')"
-          autocomplete="new-password"
-          type="password"
-          v-model:value="newPassword"
+        <CustomInput :label="t('resetPassword.changePassword.newPasswordField.label')"
+          autocomplete="new-password" type="password" v-model:value="newPassword"
           :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-          :forceValidate="forceValidate"
-          :required="true"
+          :forceValidate="forceValidate" :required="true"
           :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
           :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"
-          @focus="passwordInputFocused = true"
-          @blur="passwordInputFocused = false"
-        />
+          @focus="passwordInputFocused = true" @blur="passwordInputFocused = false" />
 
-        <CustomInput
-          :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
-          autocomplete="new-password"
-          type="password"
-          v-model:value="newPasswordRepeat"
+        <CustomInput :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
+          autocomplete="new-password" type="password" v-model:value="newPasswordRepeat"
           :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-          :forceValidate="forceValidate"
-          :required="true"
+          :forceValidate="forceValidate" :required="true"
           :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
-          :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"
-        />
+          :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')" />
       </div>
 
       <CustomButton class="btn">
@@ -105,7 +90,6 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             const { email } = response.data;
-            console.log(email);
             router.push({ name: "login", params: { email } });
           }
         })
@@ -166,4 +150,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

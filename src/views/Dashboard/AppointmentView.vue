@@ -38,7 +38,8 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button" @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton type="error" class="cancel-appointment-button"
+          @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -49,11 +50,13 @@
             </MessageBox>
             <div class="buttons-wrapper">
               <CustomButton type="error">Anuluj wizytę</CustomButton>
-              <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false">Zamknij</CustomButton>
+              <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false">Zamknij
+              </CustomButton>
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date" @click="changeAppointmentDateModalOpen = true">
+        <CustomButton type="info" class="change-appointment-date"
+          @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
@@ -65,12 +68,13 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
+                color="green" mode="date" v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id">
+                  <div class="single-hour" v-for="availableSlot in validatedSlots"
+                    :key="availableSlot.id">
                     {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
                   </div>
                 </div>
@@ -81,7 +85,8 @@
             </div>
             <div class="buttons-wrapper">
               <CustomButton type="info">Zmień termin</CustomButton>
-              <CustomButton type="secondary" @click="changeAppointmentDateModalOpen = false">Zamknij</CustomButton>
+              <CustomButton type="secondary" @click="changeAppointmentDateModalOpen = false">Zamknij
+              </CustomButton>
             </div>
           </div>
         </CustomModal>
@@ -129,13 +134,9 @@ export default {
 
       for (let i = 0; i < availableSlots.value.length; i++) {
         let currentSlotFits = 0;
-        console.log('first loop');
 
         if (i + requiredSlots <= availableSlots.value.length) {
           for (let j = i; j < (i + requiredSlots); j++) {
-            // console.log(currentSlotFits);
-            console.log('second loop');
-            // console.log(i, j);
             let slot = availableSlots.value[j];
 
             if (slot.occupied) break;
@@ -148,11 +149,9 @@ export default {
               break;
             }
             currentSlotFits++;
-            // console.log(currentSlotFits);
           }
         }
       }
-      console.log(slots);
       return slots;
     });
 
@@ -160,7 +159,6 @@ export default {
       try {
         const response = await axios.get(`appointments/slots?date=${date}`);
         availableSlots.value = response.data;
-        // vaildateSlots();
         loading.value = false;
       } catch (error) {
         handleRequestError(error);
@@ -186,7 +184,6 @@ export default {
         }
       }
       await loadAvailableTimeSlots(selectedDateFormatted.value);
-      console.log(appointmentData.value.service.required_slots);
     });
 
     const cancelAppointmentModalOpen = ref(false);
