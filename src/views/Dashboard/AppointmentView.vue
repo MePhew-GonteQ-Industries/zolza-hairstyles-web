@@ -86,17 +86,17 @@
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper"
-                  v-if="availableSlots.length && !loading"
+                  v-if="validatedSlots.length && !loading"
                 >
                   <div class="single-hour"
-                  v-for="availableSlot in availableSlots"
+                  v-for="availableSlot in validatedSlots"
                   :key="availableSlot.id"
                   >
                     {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
                   </div>
                 </div>
                 <div class="no-slots"
-                v-if="!availableSlots.length && !loading">
+                v-if="!validatedSlots.length && !loading">
                   Brak wolnych miejsc
                 </div>
               </div>
@@ -142,42 +142,49 @@ export default {
     const appointmentData = ref(null);
     const selectedDate = ref(new Date());
     const loading = ref(false);
-    const availableSlots = ref(null);
-    const validatedSlots = ref(null);
+    const availableSlots = ref([]);
 
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
-    const vaildateSlots = (() => {
+    const validatedSlots = computed(() => {
       const requiredSlots = appointmentData.value.service.required_slots;
+
+      const slots = [];
+
       for(let i = 0; i < availableSlots.value.length; i++){
         let currentSlotFits = 0;
+
         if(i + requiredSlots <= availableSlots.value.length){
           for(let j = i; j < (i + requiredSlots); j++){
+            // console.log(currentSlotFits);
+            console.log(i, j);
             let slot = availableSlots.value[j];
-            if(slot['occupied']){
+
+            if(slot.occupied){
               break;
             }
-            if(slot['reserved']){
+            if(slot.reserved){
               break;
             }
-            if(slot['holiday']){
+            if(slot.holiday){
               break;
             }
-            if(slot['sunday']){
+            if(slot.sunday){
               break;
             }
-            if(slot['break_time']){
+            if(slot.break_time){
               break;
-            }
+            } 
             if(currentSlotFits === requiredSlots){
-              validatedSlots.value.push(slot);
+              slots.push(slot);
               break;
             }
             currentSlotFits++;
+            // console.log(currentSlotFits);
           }
         }
       }
-      console.log(validatedSlots);
+      return slots;
     });
 
     const loadAvailableTimeSlots = async (date) => {
@@ -292,6 +299,7 @@ export default {
       selectedDateFormatted,
       loadAvailableTimeSlots,
       availableSlots,
+      validatedSlots
     };
   },
 };
