@@ -38,8 +38,7 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button"
-          @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton type="error" class="cancel-appointment-button" @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -55,8 +54,7 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date"
-          @click="changeAppointmentDateModalOpen = true">
+        <CustomButton type="info" class="change-appointment-date" @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
@@ -68,13 +66,12 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
-                color="green" mode="date" v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
+                v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots"
-                    :key="availableSlot.id">
+                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id">
                     {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
                   </div>
                 </div>
@@ -133,6 +130,7 @@ export default {
       const slots = [];
 
       for (let i = 0; i < availableSlots.value.length; i++) {
+        let appointment = availableSlots.value[i];
         let currentSlotFits = 0;
 
         if (i + requiredSlots <= availableSlots.value.length) {
@@ -144,11 +142,11 @@ export default {
             if (slot.holiday) break
             if (slot.sunday) break;
             if (slot.break_time) break;
-            if (currentSlotFits === requiredSlots) {
-              slots.push(slot);
-              break;
-            }
+            if (currentSlotFits === requiredSlots) break;
             currentSlotFits++;
+          }
+          if (currentSlotFits === requiredSlots) {
+            slots.push(appointment);
           }
         }
       }
