@@ -38,8 +38,7 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button"
-          @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton type="error" class="cancel-appointment-button" @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -55,8 +54,7 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date"
-          @click="changeAppointmentDateModalOpen = true">
+        <CustomButton type="info" class="change-appointment-date" @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
@@ -68,13 +66,13 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
-                color="green" mode="date" v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
+                v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots"
-                    :key="availableSlot.id">
+                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                    @click="selectAppointmentHour(availableSlot)">
                     {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(
                     locale, {
                     hour: "2-digit",
@@ -89,7 +87,7 @@
               </div>
             </div>
             <div class="buttons-wrapper">
-              <CustomButton type="info">Zmień termin</CustomButton>
+              <CustomButton type="info" @click="changeAppointmentDate">Zmień termin</CustomButton>
               <CustomButton type="secondary" @click="changeAppointmentDateModalOpen = false">Zamknij
               </CustomButton>
             </div>
@@ -131,6 +129,7 @@ export default {
     const selectedDate = ref(new Date());
     const loading = ref(false);
     const availableSlots = ref([]);
+    const selectedSlotId = ref(null);
 
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
@@ -168,6 +167,23 @@ export default {
         const response = await axios.get(`appointments/slots?date=${date}`);
         availableSlots.value = response.data;
         loading.value = false;
+      } catch (error) {
+        handleRequestError(error);
+      }
+    };
+
+    const selectAppointmentHour = (availableSlot) => {
+      selectedSlotId.value = availableSlot.id;
+      console.log(selectedSlotId.value);
+    };
+
+    const changeAppointmentDate = async () => {
+      try {
+        const response = await axios.put(`appointments/any/${route.params.id}`,
+          {
+            first_slot_id: selectedSlotId.value,
+          });
+        console.log(response);
       } catch (error) {
         handleRequestError(error);
       }
@@ -275,6 +291,9 @@ export default {
       availableSlots,
       validatedSlots,
       locale,
+      changeAppointmentDate,
+      selectedSlotId,
+      selectAppointmentHour,
     };
   },
 };
