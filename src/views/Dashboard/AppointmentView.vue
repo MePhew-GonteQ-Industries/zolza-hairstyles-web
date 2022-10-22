@@ -38,7 +38,8 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button" @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton type="error" class="cancel-appointment-button"
+          @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -54,7 +55,8 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date" @click="changeAppointmentDateModalOpen = true">
+        <CustomButton type="info" class="change-appointment-date"
+          @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
@@ -66,13 +68,19 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
+                color="green" mode="date" v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id">
-                    {{ availableSlot.start_time.split("T")[1].slice(0,5) }}
+                  <div class="single-hour" v-for="availableSlot in validatedSlots"
+                    :key="availableSlot.id">
+                    {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(
+                    locale, {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    }
+                    ) }}
                   </div>
                 </div>
                 <div class="no-slots" v-if="!validatedSlots.length && !loading">
@@ -103,6 +111,7 @@ import { DatePicker } from "v-calendar";
 import CustomModal from "../../components/CustomModal.vue";
 import MessageBox from "../../components/MessageBox.vue";
 import CustomLoader from "../../components/CustomLoader.vue";
+import "v-calendar/dist/style.css";
 
 export default {
   name: "AppointmentView",
@@ -116,6 +125,7 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const locale = store.state.settings.language;
 
     const appointmentData = ref(null);
     const selectedDate = ref(new Date());
@@ -130,23 +140,23 @@ export default {
       const slots = [];
 
       for (let i = 0; i < availableSlots.value.length; i++) {
-        let appointment = availableSlots.value[i];
+        let slot = availableSlots.value[i];
         let currentSlotFits = 0;
 
         if (i + requiredSlots <= availableSlots.value.length) {
           for (let j = i; j < (i + requiredSlots); j++) {
-            let slot = availableSlots.value[j];
+            let innerSlot = availableSlots.value[j];
 
-            if (slot.occupied) break;
-            if (slot.reserved) break;
-            if (slot.holiday) break
-            if (slot.sunday) break;
-            if (slot.break_time) break;
+            if (innerSlot.occupied) break;
+            if (innerSlot.reserved) break;
+            if (innerSlot.holiday) break
+            if (innerSlot.sunday) break;
+            if (innerSlot.break_time) break;
             if (currentSlotFits === requiredSlots) break;
             currentSlotFits++;
           }
           if (currentSlotFits === requiredSlots) {
-            slots.push(appointment);
+            slots.push(slot);
           }
         }
       }
@@ -263,7 +273,8 @@ export default {
       selectedDateFormatted,
       loadAvailableTimeSlots,
       availableSlots,
-      validatedSlots
+      validatedSlots,
+      locale,
     };
   },
 };
@@ -315,16 +326,16 @@ export default {
           border: 1px solid $accent-color;
           width: 90px;
           border-radius: 12px;
+          cursor: pointer;
 
           &:hover {
-            border: none;
-            background-color: grey;
-            cursor: pointer;
+            background-color: $secondary-color;
+            color: $accent-color;
           }
 
           &:active {
             border: none;
-            background-color: $accent-color;
+            color: $accent-color;
           }
         }
       }
