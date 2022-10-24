@@ -269,7 +269,7 @@ export default {
       if (appointmentData.value.user.permission_level.includes("owner")) {
         appointmentTemp.user.permission_level_icon_class = "ph-user-gear";
         appointmentTemp.user.permission_level = "Właściciel";
-      } else if (appointmentData.value.permission_level.includes("admin")) {
+      } else if (appointmentData.value.user.permission_level.includes("admin")) {
         appointmentTemp.user.permission_level_icon_class = "ph-wrench";
         appointmentTemp.user.permission_level = "Administrator";
       } else {
