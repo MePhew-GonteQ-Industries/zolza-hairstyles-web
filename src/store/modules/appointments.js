@@ -18,7 +18,7 @@ export default {
     async loadAppointments({ state, commit }) {
       if (!state.appointments.length) {
         try {
-          const response = await axios.get("appointments/all?limit=6");
+          const response = await axios.get("appointments/all");
           commit("updateAppointments", response.data.items);
         } catch (error) {
           handleRequestError(error);
@@ -26,7 +26,7 @@ export default {
       }
     },
     deleteAppointments({ commit }) {
-      commit("updateSessions", []);
+      commit("updateAppointments", []);
     },
   },
 };
