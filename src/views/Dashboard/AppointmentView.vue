@@ -48,7 +48,7 @@
               <template #subtitle>Akcja jest nieodwracalna</template>
             </MessageBox>
             <div class="buttons-wrapper">
-              <CustomButton type="error">Anuluj wizytę</CustomButton>
+              <CustomButton type="error" @click="cancelAppointment">Anuluj wizytę</CustomButton>
               <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false">Zamknij
               </CustomButton>
             </div>
@@ -192,6 +192,16 @@ export default {
       }
     };
 
+    const cancelAppointment = async () => {
+      try {
+        await axios.post(`appointments/any/${route.params.id}`);
+        store.dispatch("deleteAppointments");
+        cancelAppointmentModalOpen.value = false;
+      } catch (error) {
+        handleRequestError(error);
+      }
+    };
+
     watch(selectedDateFormatted, async (newDate) => {
       loading.value = true;
       await loadAvailableTimeSlots(newDate);
@@ -297,6 +307,7 @@ export default {
       changeAppointmentDate,
       selectedSlotId,
       selectAppointmentHour,
+      cancelAppointment,
     };
   },
 };
