@@ -38,8 +38,7 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button"
-          @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton type="error" class="cancel-appointment-button" @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -55,8 +54,7 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date"
-          @click="changeAppointmentDateModalOpen = true">
+        <CustomButton type="info" class="change-appointment-date" @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
@@ -68,20 +66,21 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
-                color="green" mode="date" v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
+                v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots"
-                    :key="availableSlot.id" @click="selectAppointmentHour(availableSlot)"
-                    :class="{'selected': availableSlot.id === selectedSlotId}">
+                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                    @click="selectAppointmentHour(availableSlot)"
+                    :class="{ 'selected': availableSlot.id === selectedSlotId }">
                     {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(
-                    locale, {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    }
-                    ) }}
+                        locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                      )
+                    }}
                   </div>
                 </div>
                 <div class="no-slots" v-if="!validatedSlots.length && !loading">
@@ -182,11 +181,12 @@ export default {
 
     const changeAppointmentDate = async () => {
       try {
-        const response = await axios.put(`appointments/any/${route.params.id}`,
+        await axios.put(`appointments/any/${route.params.id}`,
           {
             first_slot_id: selectedSlotId.value,
           });
-        console.log(response);
+        store.dispatch("deleteAppointments");
+        changeAppointmentDateModalOpen.value = false;
       } catch (error) {
         handleRequestError(error);
       }
