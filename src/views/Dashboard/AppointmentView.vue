@@ -38,7 +38,8 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button" @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton type="error" class="cancel-appointment-button"
+          v-if="!appointment.archival && !appointment.canceled" @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -54,7 +55,8 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date" @click="changeAppointmentDateModalOpen = true">
+        <CustomButton type="info" class="change-appointment-date" v-if="!appointment.archival && !appointment.canceled"
+          @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
