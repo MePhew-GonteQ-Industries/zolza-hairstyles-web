@@ -278,6 +278,7 @@ export default {
     &[type="search"]::-webkit-search-cancel-button,
     &[type="search"]::-webkit-search-results-button,
     &[type="search"]::-webkit-search-results-decoration {
+      appearance: none;
       -webkit-appearance: none;
     }
 
