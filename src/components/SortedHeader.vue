@@ -1,11 +1,9 @@
 <template>
-  <div
-    class="sorted-header"
-    :class="{ active: sortBy === sortName }"
-    @click="$emit('toggleSort')"
-    @keyup.enter="$emit('toggleSort')"
-  >
-    <span><slot /></span>
+  <div class="sorted-header" :class="{ active: sortBy === sortName }" @click="toggleSort"
+    @keyup.enter="$emit('toggleSort')">
+    <span>
+      <slot />
+    </span>
     <div class="sort-wrapper">
       <i class="ph-sort-ascending-light" v-if="sortAscending"></i>
       <i class="ph-sort-descending-light" v-if="!sortAscending"></i>
@@ -14,23 +12,39 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   name: "SortedHeader",
   props: {
-    sortBy: {
-      type: String,
-      required: true,
-    },
     sortName: {
       type: String,
       required: true,
     },
-    sortAscending: {
-      type: Boolean,
+    sortBy: {
+      type: String,
       required: true,
     },
   },
   emits: ["toggleSort"],
+  setup(props, { emit }) {
+    const sortAscending = ref(false);
+
+    const toggleSort = () => {
+      if (props.sortBy === props.sortName) {
+        sortAscending.value = !sortAscending.value;
+      }
+
+      console.log(sortAscending.value);
+
+      emit('toggleSort');
+    }
+
+    return {
+      sortAscending,
+      toggleSort,
+    }
+  }
 };
 </script>
 
