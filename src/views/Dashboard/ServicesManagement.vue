@@ -8,14 +8,16 @@
     <CustomModal v-model:open="addServiceModalOpen">
       <template #title>Dodaj nową usługę</template>
       <div class="add-service-wrapper">
-        <CustomInput label="Nazwa usługi" autocomplete="off"></CustomInput>
-        <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off"></CustomInput>
-        <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off"></CustomInput>
-        <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off"></CustomInput>
-      </div>
-      <div class="buttons-wrapper">
-        <CustomButton type="info" @click="addServiceModalOpen = false">Zapisz</CustomButton>
-        <CustomButton type="error" @click="addServiceModalOpen = false">Anuluj</CustomButton>
+        <div class="input-wrapper">
+          <CustomInput label="Nazwa usługi" autocomplete="off"></CustomInput>
+          <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off"></CustomInput>
+          <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off"></CustomInput>
+          <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off"></CustomInput>
+        </div>
+        <div class="buttons-wrapper">
+          <CustomButton type="info" @click="addServiceModalOpen = false">Zapisz</CustomButton>
+          <CustomButton type="secondary" @click="addServiceModalOpen = false">Anuluj</CustomButton>
+        </div>
       </div>
     </CustomModal>
 
@@ -151,6 +153,12 @@ td {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .buttons-wrapper {
