@@ -7,6 +7,16 @@
         <div class="user-data">
           <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }}</CustomChip>
           <p class="email">{{ userData.email }}</p>
+          <div class="indicators-wrapper">
+            <div class="single-indicator">
+              <p>Zweryfikowany</p>
+              <StatusIndicator :statusSuccess="userData.verified"></StatusIndicator>
+            </div>
+            <div class="single-indicator">
+              <p>Zablokowany</p>
+              <StatusIndicator :statusSuccess="userData.blocked"></StatusIndicator>
+            </div>
+          </div>
         </div>
       </div>
       <div class="inputs-section">
@@ -43,6 +53,7 @@ import CustomInput from "@/components/CustomInput.vue";
 import { useI18n } from "vue-i18n";
 import CustomSelect from "@/components/CustomSelect.vue";
 import CustomButton from "@/components/CustomButton.vue";
+import StatusIndicator from "@/components/StatusIndicator.vue";
 
 export default {
   name: "UserView",
@@ -51,6 +62,7 @@ export default {
     CustomInput,
     CustomSelect,
     CustomButton,
+    StatusIndicator,
   },
   setup() {
     const { t } = useI18n({ useScope: "global" });
@@ -141,6 +153,18 @@ export default {
       .avatar-icon {
         margin-left: -1.25rem;
         font-size: 10rem;
+      }
+
+      .indicators-wrapper {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 10px;
+
+        .single-indicator {
+          display: flex;
+          gap: 1rem;
+        }
       }
     }
 
