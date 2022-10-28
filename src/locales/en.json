@@ -57,7 +57,7 @@
       "theme": "Theme"
     },
     "userAccountSettings": {
-      "userSince": "User since",
+      "userSince": "User since:",
       "confirmDeleteAccount": "delete my account",
       "surname": "Surname",
       "gender": "Gender",

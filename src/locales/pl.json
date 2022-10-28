@@ -57,7 +57,7 @@
       "theme": "Motyw"
     },
     "userAccountSettings": {
-      "userSince": "Użutkownik od",
+      "userSince": "Użytkownik od:",
       "confirmDeleteAccount": "Usuń moje konto",
       "deleteAccount": "Usuń konto",
       "deleteAccountReassurance": "Czy napewno chcesz usunąć swoje konto?",
