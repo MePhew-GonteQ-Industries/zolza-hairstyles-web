@@ -14,11 +14,11 @@
         <div class="text-inputs">
           <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
             autocomplete="name" />
-          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname"
-            appearance="primary" autocomplete="surname" />
+          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
+            autocomplete="surname" />
         </div>
-        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light"
-          :options="genderOptions" v-model:selectedValue="userData.gender" appearance="primary" />
+        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
+          v-model:selectedValue="userData.gender" appearance="primary" />
       </div>
       <CustomButton type="error" class="delete-account-btn" @click="deleteAccountModalOpen = true">
         {{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton>
@@ -42,31 +42,30 @@
             </MessageBox>
           </div>
           <form @submit.prevent="" class="delete-account">
-            <input type="text" autocomplete="username" class="hidden-input"
-              id="hidden-username-input-delete-account" />
+            <input type="text" autocomplete="username" class="hidden-input" id="hidden-username-input-delete-account" />
             <label for="hidden-username-input-delete-account"></label>
             <div class="input-with-title">
               <p>{{ t("settings.userAccountSettings.password") }}</p>
-              <CustomInput :label="t('shared.password')" autocomplete="current-password"
-                type="password" :required="true" v-model:value="deleteAccountPassword" />
+              <CustomInput :label="t('shared.password')" autocomplete="current-password" type="password"
+                :required="true" v-model:value="deleteAccountPassword" />
             </div>
             <div class="input-with-title">
               <p>
                 {{ t("settings.userAccountSettings.confirmationQuote") }}
                 <span class="confirm-delete">{{
-                t("settings.userAccountSettings.confirmDeleteAccount")
+                    t("settings.userAccountSettings.confirmDeleteAccount")
                 }}</span>
                 :
               </p>
-              <CustomInput :label="t('settings.userAccountSettings.confirmDeleteAccount')"
-                iconClass="ph-trash-light" autocomplete="" v-model:value="confirmAccountDeletion" />
+              <CustomInput :label="t('settings.userAccountSettings.confirmDeleteAccount')" iconClass="ph-trash-light"
+                autocomplete="" v-model:value="confirmAccountDeletion" />
             </div>
             <div class="buttons-row">
               <CustomButton type="error" @click="deleteAccount">{{
-              t("settings.userAccountSettings.confirmationButton")
+                  t("settings.userAccountSettings.confirmationButton")
               }}</CustomButton>
               <CustomButton type="secondary" @click="deleteAccountModalOpen = false">{{
-              t("shared.operationCancel")
+                  t("shared.operationCancel")
               }}</CustomButton>
             </div>
           </form>
@@ -82,7 +81,7 @@
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
         <CustomButton class="save" type="success" @click="changeUserData">{{
-        t("shared.saveChanges")
+            t("shared.saveChanges")
         }}</CustomButton>
         <CustomModal v-model:open="passwordPromptOpen">
           <template #title> {{ t("settings.userAccountSettings.passwordInput") }} </template>
@@ -91,7 +90,7 @@
               <template #title>
                 {{ t("settings.userAccountSettings.keyDataModification") }}</template>
               <template #subtitle>{{
-              t("settings.userAccountSettings.identityConfirmation")
+                  t("settings.userAccountSettings.identityConfirmation")
               }}</template>
             </MessageBox>
             <form @submit.prevent="changeUserDataSudoMode">
@@ -99,25 +98,25 @@
                 id="password-prompt-hidden-username-input" />
               <label for="password-prompt-hidden-username-input"></label>
               <div class="enter-password-wrapper">
-                <CustomInput :label="t('shared.password')" autocomplete="new-password"
-                  type="password" v-model:value="password" />
+                <CustomInput :label="t('shared.password')" autocomplete="new-password" type="password"
+                  v-model:value="password" />
                 <router-link to="/password-reset" tabindex="-1">{{
-                t("shared.forgotYourPassword")
+                    t("shared.forgotYourPassword")
                 }}</router-link>
               </div>
               <div class="buttons-row">
                 <CustomButton type="success" @click="changeUserDataSudoMode">{{
-                t("settings.userAccountSettings.next")
+                    t("settings.userAccountSettings.next")
                 }}</CustomButton>
                 <CustomButton type="secondary" @click="passwordPromptOpen = false">{{
-                t("shared.operationCancel")
+                    t("shared.operationCancel")
                 }}</CustomButton>
               </div>
             </form>
           </div>
         </CustomModal>
         <CustomButton type="secondary" class="cancel" @click="revertChanges">{{
-        t("shared.operationCancel")
+            t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -190,19 +189,19 @@ export default {
 
     const genderOptions = [
       {
-        title: "Male",
+        title: t('shared.male'),
         value: "male",
         iconClass: "ph-gender-male-light",
         iconAlt: "male gender icon",
       },
       {
-        title: "Female",
+        title: t('shared.female'),
         value: "female",
         iconClass: "ph-gender-female-light",
         iconAlt: "female gender icon",
       },
       {
-        title: "Other",
+        title: t('shared.other'),
         value: "other",
         iconClass: "ph-gender-neuter-light",
         iconAlt: "other gender icon",

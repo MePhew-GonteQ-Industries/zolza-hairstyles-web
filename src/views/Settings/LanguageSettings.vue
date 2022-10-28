@@ -2,18 +2,14 @@
   <div class="settings-page">
     <div class="elevated-card">
       <h1>{{ t("settings.languageSettings.chooseLanguage") }}</h1>
-      <CustomSelect
-        :header="t('shared.language')"
-        :options="languageOptions"
-        v-model:selectedValue="selectedLanguage"
-        appearance="primary"
-      />
+      <CustomSelect :header="t('shared.language')" :options="languageOptions" v-model:selectedValue="selectedLanguage"
+        appearance="primary" />
       <div class="buttons-row" v-if="!(selectedLanguage === initialLanguage)">
         <CustomButton type="success" @click="changeLanguage">{{
-          t("shared.saveChanges")
+            t("shared.saveChanges")
         }}</CustomButton>
         <CustomButton type="secondary" @click="selectedLanguage = initialLanguage">{{
-          t("shared.operationCancel")
+            t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -104,10 +100,9 @@ export default {
 <style lang="scss" scoped>
 .settings-page {
   min-height: 73.5vh;
-  .elevated-card {
-    width: 100vw;
-  }
+
 }
+
 .buttons-row {
   display: flex;
   gap: 1rem;

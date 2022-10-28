@@ -15,7 +15,10 @@
     "warning": "UWAGA",
     "logOut": "Wyloguj się",
     "forgotYourPassword": "Nie pamiętasz hasła?",
-    "irreversible": "Akcja jest nieodwracalna"
+    "irreversible": "Akcja jest nieodwracalna",
+    "male": "Mężczyzna",
+    "female": "Kobieta",
+    "other": "Inna"
   },
   "nav": {
     "primaryNav": ["Strona główna", "Panel administracyjny", "Kontakt"]

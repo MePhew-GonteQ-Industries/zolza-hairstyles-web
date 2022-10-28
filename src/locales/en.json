@@ -15,7 +15,10 @@
     "warning": "WARNING",
     "logOut": "Log out",
     "forgotYourPassword": "Forgot your password?",
-    "irreversible": "Action is irreversible"
+    "irreversible": "Action is irreversible",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
   },
   "nav": {
     "primaryNav": ["Home", "Dashboard", "Contact"]
