@@ -58,7 +58,7 @@
     },
     "userAccountSettings": {
       "userSince": "User since:",
-      "confirmDeleteAccount": "delete my account",
+      "confirmDeleteAccount": "Delete my account",
       "surname": "Surname",
       "gender": "Gender",
       "deleteAccount": "Delete account",
