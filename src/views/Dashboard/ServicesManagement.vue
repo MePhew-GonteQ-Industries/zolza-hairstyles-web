@@ -1,5 +1,5 @@
 <template>
-  <section class="dashboard-page dashboard-data-page services-management">
+  <section class="dashboard-page dashboard-data-page services-management" v-if="!loading">
     <form class="appointments-filters">
       <CustomInput class="search" :label="t('dashboard.servicesManagement.search')" v-model:value="q" type="search" />
     </form>
@@ -84,6 +84,9 @@
       </table>
     </div>
   </section>
+  <div class="dashboard-page dashboard-data-page services-management" v-else>
+    <CustomLoader></CustomLoader>
+  </div>
 </template>
 
 <script>
@@ -93,6 +96,7 @@ import { useStore } from "vuex";
 import CustomInput from "@/components/CustomInput.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import CustomModal from "../../components/CustomModal.vue";
+import CustomLoader from "@/components/CustomLoader.vue";
 
 export default {
   name: "ServicesManagement",
@@ -100,11 +104,13 @@ export default {
     CustomInput,
     CustomButton,
     CustomModal,
+    CustomLoader,
   },
   setup() {
     const store = useStore();
 
     const addServiceModalOpen = ref(false);
+    const loading = ref(true);
 
     const { t } = useI18n({ useScope: "global" });
 
@@ -128,6 +134,7 @@ export default {
 
     onMounted(async () => {
       await store.dispatch("loadServices");
+      loading.value = false;
     });
 
     return {
@@ -135,6 +142,7 @@ export default {
       t,
       addService,
       addServiceModalOpen,
+      loading,
     };
   },
 };

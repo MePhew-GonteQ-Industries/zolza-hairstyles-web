@@ -1,13 +1,8 @@
 <template>
-  <section class="dashboard-page dashboard-data-page appointments-management">
+  <section class="dashboard-page dashboard-data-page appointments-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput
-        class="search"
-        :label="t('dashboard.appointmentsManagement.search')"
-        v-model:value="q"
-        type="search"
-        appearance="secondary"
-      />
+      <CustomInput class="search" :label="t('dashboard.appointmentsManagement.search')" v-model:value="q" type="search"
+        appearance="secondary" />
 
       <div class="search-filters">
         <!-- <DatePicker
@@ -37,50 +32,25 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader
-              :sortBy="sortBy"
-              :sortAscending="sortAscending"
-              sortName="id"
-              @toggleSort="toggleSort('id')"
-              >#id</SortedHeader
-            >
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
+              #id</SortedHeader>
           </th>
           <th>
-            <SortedHeader
-              :sortBy="sortBy"
-              :sortAscending="sortAscending"
-              sortName="service"
-              @toggleSort="toggleSort('service')"
-              >{{ t("dashboard.appointmentsManagement.service") }}</SortedHeader
-            >
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
+              @toggleSort="toggleSort('service')">{{ t("dashboard.appointmentsManagement.service") }}</SortedHeader>
           </th>
           <th>
-            <SortedHeader
-              :sortBy="sortBy"
-              :sortAscending="sortAscending"
-              sortName="user"
-              @toggleSort="toggleSort('user')"
-            >
-              {{ t("dashboard.appointmentsManagement.user") }}</SortedHeader
-            >
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
+              @toggleSort="toggleSort('user')">
+              {{ t("dashboard.appointmentsManagement.user") }}</SortedHeader>
           </th>
           <th>
-            <SortedHeader
-              :sortBy="sortBy"
-              :sortAscending="sortAscending"
-              sortName="startDate"
-              @toggleSort="toggleSort('startDate')"
-              >{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader
-            >
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
+              @toggleSort="toggleSort('startDate')">{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader>
           </th>
           <th>
-            <SortedHeader
-              :sortBy="sortBy"
-              :sortAscending="sortAscending"
-              sortName="endDate"
-              @toggleSort="toggleSort('endDate')"
-              >{{ t("dashboard.appointmentsManagement.endDate") }}</SortedHeader
-            >
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
+              @toggleSort="toggleSort('endDate')">{{ t("dashboard.appointmentsManagement.endDate") }}</SortedHeader>
           </th>
           <th>{{ t("dashboard.appointmentsManagement.status") }}</th>
         </thead>
@@ -90,8 +60,7 @@
               <CustomTooltip>
                 <template #activator>
                   <router-link :to="`appointments/${appointment.id}`">
-                    #{{ appointment.shortId }}...</router-link
-                  >
+                    #{{ appointment.shortId }}...</router-link>
                 </template>
                 {{ appointment.id }}
               </CustomTooltip>
@@ -99,9 +68,7 @@
             <td class="service">
               <CustomTooltip>
                 <template #activator>
-                  <router-link :to="`services/${appointment.service.id}`"
-                    >Strzyżenie męskie</router-link
-                  >
+                  <router-link :to="`services/${appointment.service.id}`">Strzyżenie męskie</router-link>
                 </template>
                 {{ appointment.service.id }}
               </CustomTooltip>
@@ -111,8 +78,7 @@
                 <template #activator>
                   <router-link :to="`users/${appointment.user.id}`">
                     {{ appointment.user.name }}
-                    {{ appointment.user.surname }}</router-link
-                  >
+                    {{ appointment.user.surname }}</router-link>
                 </template>
                 {{ appointment.service.id }}
               </CustomTooltip>
@@ -143,6 +109,9 @@
       <i class="ph-caret-right-light"></i>
     </div>
   </section>
+  <div class="dashboard-page dashboard-data-page users-management" v-else>
+    <CustomLoader></CustomLoader>
+  </div>
 </template>
 
 <script>
@@ -156,6 +125,7 @@ import SortedHeader from "@/components/SortedHeader.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import "v-calendar/dist/style.css";
 // import { DatePicker } from 'v-calendar';
+import CustomLoader from "@/components/CustomLoader.vue";
 
 export default {
   name: "AppointmentsManagement",
@@ -166,6 +136,7 @@ export default {
     SortedHeader,
     CustomButton,
     // DatePicker,
+    CustomLoader,
   },
   setup() {
     const q = ref("");
@@ -173,6 +144,8 @@ export default {
     const { t } = useI18n({ useScope: "global" });
 
     const store = useStore();
+
+    const loading = ref(true);
 
     const locale = store.state.settings.language;
 
@@ -236,6 +209,7 @@ export default {
 
     onMounted(async () => {
       await store.dispatch("loadAppointments");
+      loading.value = false;
     });
 
     const selectedDate = ref(new Date());
@@ -248,6 +222,7 @@ export default {
       sortAscending,
       toggleSort,
       t,
+      loading,
     };
   },
 };
