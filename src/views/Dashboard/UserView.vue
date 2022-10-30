@@ -1,42 +1,49 @@
 <template>
   <div class="dashboard-page user-view" v-if="userData">
     <!-- {{ $route.params.id }} -->
-    <div class="user elevated-card">
-      <div class="avatar-row">
-        <i class="ph-user-square-light avatar-icon"></i>
-        <div class="user-data">
-          <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }}</CustomChip>
-          <p class="email">{{ userData.email }}</p>
-          <div class="indicators-wrapper">
-            <div class="single-indicator">
-              <p>Zweryfikowany</p>
-              <StatusIndicator :statusSuccess="userData.verified"></StatusIndicator>
-            </div>
-            <div class="single-indicator">
-              <p>Zablokowany</p>
-              <StatusIndicator :statusSuccess="userData.blocked"></StatusIndicator>
+    <div class="elevated-card">
+      <div class="user" v-if="userData && !loading">
+        <div class="avatar-row">
+          <i class="ph-user-square-light avatar-icon"></i>
+          <div class="user-data">
+            <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }}
+            </CustomChip>
+            <p class="email">{{ userData.email }}</p>
+            <div class="indicators-wrapper">
+              <div class="single-indicator">
+                <p>Zweryfikowany</p>
+                <StatusIndicator :statusSuccess="userData.verified"></StatusIndicator>
+              </div>
+              <div class="single-indicator">
+                <p>Zablokowany</p>
+                <StatusIndicator :statusSuccess="userData.blocked"></StatusIndicator>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="inputs-section">
-        <div class="text-inputs">
-          <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary" autocomplete="name">
-          </CustomInput>
-          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
-            autocomplete="surname"></CustomInput>
+        <div class="inputs-section">
+          <div class="text-inputs">
+            <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
+              autocomplete="name">
+            </CustomInput>
+            <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
+              autocomplete="surname"></CustomInput>
+          </div>
+          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
+            v-model:selectedValue="userData.gender" appearance="primary"></CustomSelect>
         </div>
-        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
-          v-model:selectedValue="userData.gender" appearance="primary"></CustomSelect>
+        <div class="user-account-buttons">
+          <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
+          <CustomButton type="error" class="delete-account-button">{{ t('settings.userAccountSettings.deleteAccount') }}
+          </CustomButton>
+        </div>
+        <div class="save-changes" v-if="userDataModified">
+          <CustomButton class="save" type="success">{{ t('shared.saveChanges') }}</CustomButton>
+          <CustomButton class="cancel" type="secondary">{{ t('shared.operationCancel') }}</CustomButton>
+        </div>
       </div>
-      <div class="user-account-buttons">
-        <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
-        <CustomButton type="error" class="delete-account-button">{{ t('settings.userAccountSettings.deleteAccount') }}
-        </CustomButton>
-      </div>
-      <div class="save-changes" v-if="userDataModified">
-        <CustomButton class="save" type="success">{{ t('shared.saveChanges') }}</CustomButton>
-        <CustomButton class="cancel" type="secondary">{{ t('shared.operationCancel') }}</CustomButton>
+      <div class="loader" v-else>
+        <CustomLoader></CustomLoader>
       </div>
     </div>
   </div>
@@ -54,6 +61,7 @@ import { useI18n } from "vue-i18n";
 import CustomSelect from "@/components/CustomSelect.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import StatusIndicator from "@/components/StatusIndicator.vue";
+import CustomLoader from "@/components/CustomLoader.vue";
 
 export default {
   name: "UserView",
@@ -63,20 +71,12 @@ export default {
     CustomSelect,
     CustomButton,
     StatusIndicator,
+    CustomLoader,
   },
   setup() {
     const { t } = useI18n({ useScope: "global" });
     const store = useStore();
     const route = useRoute();
-
-    const userData = ref(null);
-
-    const userRole = ref(null);
-    let userIconClass;
-
-    // const userDataModified = computed(() =>
-    //   storedUser.name !== userData.value.name
-    // );
 
     const genderOptions = [
       {
@@ -99,7 +99,18 @@ export default {
       }
     ];
 
+    const userData = ref(null);
+
+    const userRole = ref(null);
+    const loading = ref(true);
+    let userIconClass;
+
+    // const userDataModified = computed(() =>
+    //   storedUser.name !== userData.value.name
+    // );
+
     onMounted(async () => {
+      console.log('yo');
       const storedUser = store.getters.getUserById(route.params.id);
 
       if (storedUser) {
@@ -113,17 +124,21 @@ export default {
         }
       }
 
-      if (userData.value.isOwner) {
+      loading.value = false;
+
+      if (userData.value['permission_level'].includes('owner')) {
         userIconClass = "ph-user-gear-light";
         userRole.value = "Właściciel";
-      } else if (userData.value.isAdmin) {
+      } else if (userData.value['permission_level'].includes('admin')) {
         userIconClass = "ph-wrench-light";
         userRole.value = "Admin";
       } else {
         userIconClass = "ph-user-light";
         userRole.value = "Użytkownik";
       }
+
     });
+
 
     return {
       t,
@@ -131,6 +146,7 @@ export default {
       userRole,
       userIconClass,
       genderOptions,
+      loading,
     };
   },
 };
@@ -139,6 +155,10 @@ export default {
 <style lang="scss" scoped>
 .user-view {
   .user {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
     .avatar-row {
       display: flex;
       align-items: center;
