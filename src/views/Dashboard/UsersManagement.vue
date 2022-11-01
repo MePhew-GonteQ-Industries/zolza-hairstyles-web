@@ -133,10 +133,12 @@ export default {
         }
         userTemp.gender_icon_class += "-light";
 
-        if (user.permission_level.includes("owner")) {
+        console.log(user.permission_level);
+
+        if (user.permission_level.includes("owner") || user.permission_level === "Właściciel") {
           userTemp.permission_level_icon_class = "ph-user-gear";
           userTemp.permission_level = "Właściciel";
-        } else if (user.permission_level.includes("admin")) {
+        } else if (user.permission_level.includes("admin") || user.permission_level === "Admin") {
           userTemp.permission_level_icon_class = "ph-wrench";
           userTemp.permission_level = "Administrator";
         } else {
