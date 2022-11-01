@@ -30,7 +30,7 @@
               autocomplete="surname"></CustomInput>
           </div>
           <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
-            v-model:selectedValue="userData.gender" appearance="primary"></CustomSelect>
+            v-model:selectedValue="userData.gender" appearance="primary" v-if="!loading"></CustomSelect>
         </div>
         <div class="user-account-buttons">
           <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
@@ -115,30 +115,54 @@ export default {
 
       if (storedUser) {
         userData.value = storedUser;
+        userRole.value = userData.value.permission_level;
+        switch (userRole.value) {
+          case 'Właściciel':
+            userIconClass = 'ph-user-gear-light';
+            break;
+          case 'Admin':
+            userIconClass = 'ph-wrench-light';
+            break;
+          default:
+            userIconClass = 'ph-user-light';
+            break;
+        }
       } else {
         try {
           const response = await axios.get(`users/${route.params.id}`);
           userData.value = response.data;
+          if (userData.value['permission_level'].includes('owner')) {
+            userIconClass = "ph-user-gear-light";
+            userRole.value = "Właściciel";
+          } else if (userData.value['permission_level'].includes('admin')) {
+            userIconClass = "ph-wrench-light";
+            userRole.value = "Admin";
+          } else {
+            userIconClass = "ph-user-light";
+            userRole.value = "Użytkownik";
+          }
         } catch (error) {
           handleRequestError(error);
         }
       }
 
-      loading.value = false;
-
-      if (userData.value['permission_level'].includes('owner')) {
-        userIconClass = "ph-user-gear-light";
-        userRole.value = "Właściciel";
-      } else if (userData.value['permission_level'].includes('admin')) {
-        userIconClass = "ph-wrench-light";
-        userRole.value = "Admin";
-      } else {
-        userIconClass = "ph-user-light";
-        userRole.value = "Użytkownik";
+      switch (userData.value.gender) {
+        case 'Męska':
+          userData.value.gender = 'male';
+          break;
+        case "Żeńska":
+          userData.value.gender = 'female';
+          break;
+        case "Inna":
+          userData.value.gender = 'other';
+          break;
       }
 
-    });
+      console.log(userData);
 
+      loading.value = false;
+
+    });
 
     return {
       t,
