@@ -1,7 +1,6 @@
 <template>
   <section class="app-page" id="home-page">
-    <ServicesList :scrolledToServices="scrolledToServices"
-      v-model:selectedServiceId="selectedServiceId" />
+    <ServicesList :scrolledToServices="scrolledToServices" v-model:selectedServiceId="selectedServiceId" />
 
     <AvailableSlotsList :selectedServiceId="selectedServiceId" />
 
@@ -17,13 +16,11 @@
           {{ t("home.appDescriptionSecondary") }}
         </p>
         <div class="download-links">
-          <a href="">
-            <img class="app-store-badge" src="@/assets/app-store-badge.svg"
-              alt="Pobierz z App Store" />
+          <a href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055" target="_blank">
+            <img class="app-store-badge" src="@/assets/app-store-badge.svg" alt="Pobierz z App Store" />
           </a>
           <a href="">
-            <img class="gp-badge"
-              src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
+            <img class="gp-badge" src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
               alt="Pobierz w Google Play" />
           </a>
         </div>
@@ -33,8 +30,7 @@
         <div class="app-showcase-container">
           <div class="wrapper">
             <img class="iphone" src="@/assets/iphone-13-pro-max.png" alt="" />
-            <video class="app-showcase" src="@/assets/appDemo.mp4" muted loop webkit-playsinline
-              playsinline autoplay>
+            <video class="app-showcase" src="@/assets/appDemo.mp4" muted loop webkit-playsinline playsinline autoplay>
               <track kind="captions" />
             </video>
           </div>
