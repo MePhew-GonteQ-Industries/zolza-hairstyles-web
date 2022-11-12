@@ -18,7 +18,31 @@
       </div>
     </form>
 
-    <CustomButton>Utwórz wizytę</CustomButton>
+    <CustomButton @click="addAppointmentModalOpen = true">Utwórz wizytę</CustomButton>
+    <CustomModal v-model:open="addAppointmentModalOpen">
+      <template #title>Dodaj wizytę</template>
+      <div class="add-appointment-wrapper">
+        <div class="modal-content-wrapper">
+          <div class="input-wrapper">
+            <CustomInput label="Email" type="email" autocomplete="off" v-if="!userWithoutAccount"></CustomInput>
+            <CustomInput label="Imię" type="text" autocomplete="off"></CustomInput>
+            <CustomInput label="Nazwisko" type="text" autocomplete="off"></CustomInput>
+            <CustomCheckbox v-model:checked="userWithoutAccountChecked">Użytkownik bez konta</CustomCheckbox>
+          </div>
+          <div class="services-wrapper">
+            <div class="service" v-for="service in servicesOptions" :key="service.id">
+              <p>{{ service.name }}</p>
+              <input class="select-service" type="radio" name="select-service"
+                @change="$emit('updateSelectedService', id)" :id="tileId" />
+            </div>
+          </div>
+        </div>
+        <div class="buttons-wrapper">
+          <CustomButton type="info" @click="addAppointmentModalOpen = false">Zapisz</CustomButton>
+          <CustomButton type="secondary" @click="addAppointmentModalOpen = false">Anuluj</CustomButton>
+        </div>
+      </div>
+    </CustomModal>
 
     <div class="dashboard-data-table-wrapper">
       <table>
@@ -125,7 +149,11 @@ import SortedHeader from "@/components/SortedHeader.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import "v-calendar/dist/style.css";
 // import { DatePicker } from 'v-calendar';
+import CustomModal from '@/components/CustomModal.vue';
 import CustomLoader from "@/components/CustomLoader.vue";
+import CustomCheckbox from '@/components/CustomCheckbox.vue';
+import axios from 'axios';
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "AppointmentsManagement",
@@ -136,7 +164,9 @@ export default {
     SortedHeader,
     CustomButton,
     // DatePicker,
+    CustomModal,
     CustomLoader,
+    CustomCheckbox,
   },
   setup() {
     const q = ref("");
@@ -145,12 +175,23 @@ export default {
 
     const store = useStore();
 
+    const addAppointmentModalOpen = ref(false);
+    const userWithoutAccount = ref(false);
     const loading = ref(true);
+    const tileId = uuidv4();
 
     const locale = store.state.settings.language;
 
     const sortBy = ref("startDate");
     const sortAscending = ref(false);
+
+    const servicesOptions = ref(null);
+
+    const userWithoutAccountChecked = (() => {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      userWithoutAccount.value = true;
+    }
+    );
 
     const toggleSort = (sortName) => {
       if (sortBy.value === sortName) {
@@ -208,6 +249,9 @@ export default {
     });
 
     onMounted(async () => {
+      const response = await axios.get('services');
+      servicesOptions.value = response.data;
+      console.log(servicesOptions.value);
       await store.dispatch("loadAppointments");
       loading.value = false;
     });
@@ -223,6 +267,11 @@ export default {
       toggleSort,
       t,
       loading,
+      addAppointmentModalOpen,
+      userWithoutAccount,
+      servicesOptions,
+      tileId,
+      userWithoutAccountChecked,
     };
   },
 };
@@ -294,6 +343,47 @@ export default {
       color: $accent-color;
       cursor: default;
     }
+  }
+}
+
+.add-appointment-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .modal-content-wrapper {
+    display: flex;
+    gap: 1rem;
+
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .services-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .service {
+        width: 40%;
+        height: 45px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        .select-service:focus {
+          outline: orange;
+        }
+      }
+    }
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    gap: 1rem;
   }
 }
 </style>
