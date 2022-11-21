@@ -36,6 +36,15 @@ const routes = [
     },
   },
   {
+    path: "/make-an-appointment",
+    name: "makeAnAppointment",
+    component:  () => import("@/views/MakeAnAppointment/MakeAnAppointment.vue"),
+    meta: {
+      requiresAuth: false,
+      requiredPermissionLevel: "user",
+    }
+  },
+  {
     path: "/contact",
     name: "contact",
     component: () => import("@/views/Contact/ContactPage.vue"),

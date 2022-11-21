@@ -19,7 +19,7 @@
           <a href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055" target="_blank">
             <img class="app-store-badge" src="@/assets/app-store-badge.svg" alt="Pobierz z App Store" />
           </a>
-          <a href="">
+          <a href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app" target="_blank">
             <img class="gp-badge" src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
               alt="Pobierz w Google Play" />
           </a>

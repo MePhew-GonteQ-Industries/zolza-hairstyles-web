@@ -21,7 +21,7 @@
     "other": "Other"
   },
   "nav": {
-    "primaryNav": ["Home", "Dashboard", "Contact"]
+    "primaryNav": ["Home", "Dashboard", "Make an appointment", "Contact"]
   },
   "footer": [
     "Terms of use",

@@ -21,7 +21,12 @@
     "other": "Inna"
   },
   "nav": {
-    "primaryNav": ["Strona główna", "Panel administracyjny", "Kontakt"]
+    "primaryNav": [
+      "Strona główna",
+      "Panel administracyjny",
+      "Umów wizytę",
+      "Kontakt"
+    ]
   },
   "footer": [
     "Warunki korzystania",
