@@ -1,15 +1,29 @@
 <template>
     <div class="make-an-appointment-page">
-        <div class="services-tiles">
+        <div class="services-tiles" v-if="!loading">
             <div class="service-tile" v-for="service in servicesData" :key="service.id" @click="chooseService(service)">
                 <h3>{{ service.name }}</h3>
                 <p>
                     {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes }}min</span>
                 </p>
                 <p>{{ t("home.serviceTile.price") }} <span>{{ service.min_price }}<span
-                            v-if="service.max_price && service.max_price !== service.min_price">~ {{ service.max_price
-                            }}</span>zł</span></p>
+                            v-if="service.max_price && service.max_price !== service.min_price"> ~ {{ service.max_price
+                            }}</span>zł</span>
+                </p>
             </div>
+            <CustomModal v-model:open="openMakeAnAppointmentModal">
+                    <template #title>Tytuł</template>
+                    <div class="make-appointment-modal-wrapper">
+                        <div class="select-date-wrapper"></div>
+                        <div class="buttons-wrapper">
+                            <CustomButton type="info" @click="openMakeAnAppointmentModal = false">Umów wizytę</CustomButton>
+                            <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">Anuluj</CustomButton>
+                        </div>
+                    </div>
+                </CustomModal>
+        </div>
+        <div class="loader" v-else>
+            <CustomLoader></CustomLoader>
         </div>
     </div>
 </template>
@@ -19,15 +33,22 @@ import { useI18n } from 'vue-i18n';
 import { ref, onMounted } from "vue";
 import axios from 'axios';
 import { handleRequestError } from "@/utils";
+import CustomModal from '@/components/CustomModal.vue';
+import CustomLoader from "@/components/CustomLoader.vue";
+import CustomButton from "@/components/CustomButton.vue";
 
 export default {
     setup() {
         const { t } = useI18n({ useScope: "global" });
         const loading = ref(true);
         const servicesData = ref(null);
+        const openMakeAnAppointmentModal = ref(false);
+        // const selecetedService = ref(null);
 
         const chooseService = (service) => {
             console.log(service);
+            // selecetedService.value = service;
+            openMakeAnAppointmentModal.value= true;
         };
 
         onMounted(async () => {
@@ -46,6 +67,11 @@ export default {
             loading,
             servicesData,
             chooseService,
+            CustomModal,
+            CustomLoader,
+            openMakeAnAppointmentModal,
+            // selecetedService,
+            CustomButton,
         }
     }
 }
@@ -55,6 +81,11 @@ export default {
 .make-an-appointment-page {
     display: flex;
     width: 100%;
+    .loader{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     .services-tiles {
         display: flex;
@@ -72,8 +103,16 @@ export default {
             align-items: center;
             justify-content: space-around;
             color: $primary-text-color;
-            border: 2px solid $box-shadow-color;
+            border: 2px solid $primary-text-color;
             border-radius: 12px;
+            transition: ease-in-out .3s;
+            &:hover{
+                cursor: pointer;
+                border: 2px solid $accent-color;
+                h3{
+                    color: $accent-color;
+                }
+            }
         }
     }
 }
