@@ -68,7 +68,7 @@
         <router-link to="/dashboard">{{ t("nav.primaryNav[1]") }}</router-link>
       </li>
       <li>
-        <router-link to="/make-an-appointment">{{ t('nav.primaryNav[2]') }}</router-link>
+        <!-- <router-link to="/make-an-appointment">{{ t('nav.primaryNav[2]') }}</router-link> -->
       </li>
       <li>
         <router-link to="/contact">{{ t("nav.primaryNav[3]") }}</router-link>
