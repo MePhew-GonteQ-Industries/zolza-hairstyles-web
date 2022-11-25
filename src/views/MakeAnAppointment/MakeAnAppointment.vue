@@ -1,26 +1,31 @@
 <template>
     <div class="make-an-appointment-page">
         <div class="services-tiles" v-if="!loading">
-            <div class="service-tile" v-for="service in servicesData" :key="service.id" @click="chooseService(service)">
+            <div class="service-tile" v-for="service in servicesData" :key="service.id"
+                @click="chooseService(service)">
                 <h3>{{ service.name }}</h3>
                 <p>
-                    {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes }}min</span>
+                    {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes
+                    }}min</span>
                 </p>
                 <p>{{ t("home.serviceTile.price") }} <span>{{ service.min_price }}<span
-                            v-if="service.max_price && service.max_price !== service.min_price"> ~ {{ service.max_price
+                            v-if="service.max_price && service.max_price !== service.min_price"> ~
+                            {{ service.max_price
                             }}</span>zł</span>
                 </p>
             </div>
             <CustomModal v-model:open="openMakeAnAppointmentModal">
-                    <template #title>Tytuł</template>
-                    <div class="make-appointment-modal-wrapper">
-                        <div class="select-date-wrapper"></div>
-                        <div class="buttons-wrapper">
-                            <CustomButton type="info" @click="openMakeAnAppointmentModal = false">Umów wizytę</CustomButton>
-                            <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">Anuluj</CustomButton>
-                        </div>
+                <template #title>Tytuł</template>
+                <div class="make-appointment-modal-wrapper">
+                    <div class="select-date-wrapper"></div>
+                    <div class="buttons-wrapper">
+                        <CustomButton type="info" @click="openMakeAnAppointmentModal = false">Umów
+                            wizytę</CustomButton>
+                        <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">
+                            Anuluj</CustomButton>
                     </div>
-                </CustomModal>
+                </div>
+            </CustomModal>
         </div>
         <div class="loader" v-else>
             <CustomLoader></CustomLoader>
@@ -38,6 +43,11 @@ import CustomLoader from "@/components/CustomLoader.vue";
 import CustomButton from "@/components/CustomButton.vue";
 
 export default {
+    components: {
+        CustomButton,
+        CustomModal,
+        CustomLoader,
+    },
     setup() {
         const { t } = useI18n({ useScope: "global" });
         const loading = ref(true);
@@ -48,7 +58,7 @@ export default {
         const chooseService = (service) => {
             console.log(service);
             // selecetedService.value = service;
-            openMakeAnAppointmentModal.value= true;
+            openMakeAnAppointmentModal.value = true;
         };
 
         onMounted(async () => {
@@ -67,11 +77,8 @@ export default {
             loading,
             servicesData,
             chooseService,
-            CustomModal,
-            CustomLoader,
             openMakeAnAppointmentModal,
             // selecetedService,
-            CustomButton,
         }
     }
 }
@@ -81,7 +88,8 @@ export default {
 .make-an-appointment-page {
     display: flex;
     width: 100%;
-    .loader{
+
+    .loader {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -106,10 +114,12 @@ export default {
             border: 2px solid $primary-text-color;
             border-radius: 12px;
             transition: ease-in-out .3s;
-            &:hover{
+
+            &:hover {
                 cursor: pointer;
                 border: 2px solid $accent-color;
-                h3{
+
+                h3 {
                     color: $accent-color;
                 }
             }
