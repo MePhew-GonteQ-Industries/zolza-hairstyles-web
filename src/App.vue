@@ -1,6 +1,6 @@
 <template>
   <n-config-provider :theme="darkTheme" abstract>
-    <div id=" app-wrapper" :data-theme="$store.state.settings.theme">
+    <div id="app-wrapper" :data-theme="$store.state.settings.theme">
       <main ref="main" :class="{ collapsed: !onHomePage }">
         <div id="nav" ref="navbar" :class="navbarClasses">
           <navbarSection />
