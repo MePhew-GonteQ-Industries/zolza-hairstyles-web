@@ -1,16 +1,15 @@
 <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="sidebar">
-    <CustomHamburgerIcon class="custom-hamburger-icon" @slide-sidebar="slideSidebar"
-      :navbarActive="sidebarActive" />
+    <CustomHamburgerIcon class="custom-hamburger-icon" @slide-sidebar="slideSidebar" :navbarActive="sidebarActive" />
     <div class="sidebar-wrapper">
       <div class="sidebar-menu" :class="{ 'sidebar-active': sidebarActive }">
         <div class="nav-section" @click="slideSidebar">
           <router-link to="/">{{ t("nav.primaryNav[0]") }}</router-link>
           <router-link v-if="$store.getters.isLoggedIn && $store.getters.isAdmin" to="/dashboard">{{
-          t("nav.primaryNav[1]")
+              t("nav.primaryNav[1]")
           }}</router-link>
-          <router-link to="/contact">{{ t("nav.primaryNav[2]") }}</router-link>
+          <router-link to="/contact">{{ t("nav.primaryNav[3]") }}</router-link>
         </div>
         <div class="footer-section" @click="slideSidebar">
           <router-link class="link" to="/terms-of-use">{{ t("footer[0]") }}</router-link>
@@ -20,8 +19,8 @@
         </div>
       </div>
     </div>
-    <div class="sidebar-background" :class="{ 'sidebar-menu-background': sidebarActive }"
-      @click.self="slideSidebar"></div>
+    <div class="sidebar-background" :class="{ 'sidebar-menu-background': sidebarActive }" @click.self="slideSidebar">
+    </div>
   </div>
 </template>
 
