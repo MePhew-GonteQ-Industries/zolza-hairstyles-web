@@ -329,7 +329,6 @@ export default {
           }
 
           .hero {
-            // margin-top: 5vh;
             padding: 0;
           }
 

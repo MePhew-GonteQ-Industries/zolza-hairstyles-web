@@ -1,8 +1,8 @@
 <template>
   <section class="dashboard-page dashboard-data-page appointments-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.appointmentsManagement.search')" v-model:value="q" type="search"
-        appearance="secondary" />
+      <CustomInput class="search" :label="t('dashboard.appointmentsManagement.search')"
+        v-model:value="q" type="search" appearance="secondary" />
 
       <div class="search-filters">
         <!-- <DatePicker
@@ -24,10 +24,12 @@
       <div class="add-appointment-wrapper">
         <div class="modal-content-wrapper">
           <div class="input-wrapper">
-            <CustomInput label="Email" type="email" autocomplete="off" v-if="!userWithoutAccount"></CustomInput>
+            <CustomInput label="Email" type="email" autocomplete="off" v-if="!userWithoutAccount">
+            </CustomInput>
             <CustomInput label="Imię" type="text" autocomplete="off"></CustomInput>
             <CustomInput label="Nazwisko" type="text" autocomplete="off"></CustomInput>
-            <CustomCheckbox v-model:checked="userWithoutAccountChecked">Użytkownik bez konta</CustomCheckbox>
+            <CustomCheckbox v-model:checked="userWithoutAccountChecked">Użytkownik bez konta
+            </CustomCheckbox>
           </div>
           <div class="services-wrapper">
             <div class="service" v-for="service in servicesOptions" :key="service.id">
@@ -39,7 +41,8 @@
         </div>
         <div class="buttons-wrapper">
           <CustomButton type="info" @click="addAppointmentModalOpen = false">Zapisz</CustomButton>
-          <CustomButton type="secondary" @click="addAppointmentModalOpen = false">Anuluj</CustomButton>
+          <CustomButton type="secondary" @click="addAppointmentModalOpen = false">Anuluj
+          </CustomButton>
         </div>
       </div>
     </CustomModal>
@@ -56,12 +59,14 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
+              @toggleSort="toggleSort('id')">
               #id</SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
-              @toggleSort="toggleSort('service')">{{ t("dashboard.appointmentsManagement.service") }}</SortedHeader>
+              @toggleSort="toggleSort('service')">{{ t("dashboard.appointmentsManagement.service")
+              }}</SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
@@ -70,11 +75,14 @@
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
-              @toggleSort="toggleSort('startDate')">{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader>
+              @toggleSort="toggleSort('startDate')">{{
+                  t("dashboard.appointmentsManagement.startDate")
+              }}</SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
-              @toggleSort="toggleSort('endDate')">{{ t("dashboard.appointmentsManagement.endDate") }}</SortedHeader>
+              @toggleSort="toggleSort('endDate')">{{ t("dashboard.appointmentsManagement.endDate")
+              }}</SortedHeader>
           </th>
           <th>{{ t("dashboard.appointmentsManagement.status") }}</th>
         </thead>
@@ -92,7 +100,8 @@
             <td class="service">
               <CustomTooltip>
                 <template #activator>
-                  <router-link :to="`services/${appointment.service.id}`">Strzyżenie męskie</router-link>
+                  <router-link :to="`services/${appointment.service.id}`">Strzyżenie
+                    męskie</router-link>
                 </template>
                 {{ appointment.service.id }}
               </CustomTooltip>
@@ -104,7 +113,7 @@
                     {{ appointment.user.name }}
                     {{ appointment.user.surname }}</router-link>
                 </template>
-                {{ appointment.service.id }}
+                {{ appointment.user.id }}
               </CustomTooltip>
               <span>{{ appointment.user.email }}</span>
             </td>
