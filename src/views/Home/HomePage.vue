@@ -54,6 +54,28 @@ import ServicesList from "@/components/Home/ServicesList.vue";
 import AvailableSlotsList from "@/components/Home/AvailableSlotsList.vue";
 import { v4 as uuidv4 } from "uuid";
 
+import photo1 from '@/assets/work-photos/1.jpg';
+import photo2 from '@/assets/work-photos/2.jpg';
+import photo3 from '@/assets/work-photos/3.jpg';
+import photo4 from '@/assets/work-photos/4.jpg';
+import photo5 from '@/assets/work-photos/5.jpg';
+import photo6 from '@/assets/work-photos/6.jpg';
+import photo7 from '@/assets/work-photos/7.jpg';
+import photo8 from '@/assets/work-photos/8.jpg';
+import photo9 from '@/assets/work-photos/9.jpg';
+import photo10 from '@/assets/work-photos/10.jpg';
+import photo11 from '@/assets/work-photos/11.jpg';
+import photo12 from '@/assets/work-photos/12.jpg';
+import photo13 from '@/assets/work-photos/13.jpg';
+import photo14 from '@/assets/work-photos/14.jpg';
+import photo15 from '@/assets/work-photos/15.jpg';
+import photo16 from '@/assets/work-photos/16.jpg';
+import photo17 from '@/assets/work-photos/17.jpg';
+import photo18 from '@/assets/work-photos/18.jpg';
+import photo19 from '@/assets/work-photos/19.jpg';
+import photo20 from '@/assets/work-photos/20.jpg';
+import photo21 from '@/assets/work-photos/21.jpg';
+
 export default {
   name: "HomePage",
   components: {
@@ -70,17 +92,92 @@ export default {
   setup() {
     const { t } = useI18n({ useScope: "global" });
 
-    const modules = import.meta.glob("@/assets/work-photos/*.jpg", { as: 'raw' });
-    const photos = ref([]);
-
-    for (const path in modules) {
-      modules[path]().then(() => {
-        photos.value.push({
-          id: uuidv4(),
-          path: new URL(path, import.meta.url).href,
-        });
-      });
-    }
+    const photos = ref([
+      {
+        id: uuidv4(),
+        path: photo1,
+      },
+      {
+        id: uuidv4(),
+        path: photo2,
+      },
+      {
+        id: uuidv4(),
+        path: photo3,
+      },
+      {
+        id: uuidv4(),
+        path: photo4,
+      },
+      {
+        id: uuidv4(),
+        path: photo5,
+      },
+      {
+        id: uuidv4(),
+        path: photo6,
+      },
+      {
+        id: uuidv4(),
+        path: photo7,
+      },
+      {
+        id: uuidv4(),
+        path: photo8,
+      },
+      {
+        id: uuidv4(),
+        path: photo9,
+      },
+      {
+        id: uuidv4(),
+        path: photo10,
+      },
+      {
+        id: uuidv4(),
+        path: photo11,
+      },
+      {
+        id: uuidv4(),
+        path: photo12,
+      },
+      {
+        id: uuidv4(),
+        path: photo13,
+      },
+      {
+        id: uuidv4(),
+        path: photo14,
+      },
+      {
+        id: uuidv4(),
+        path: photo15,
+      },
+      {
+        id: uuidv4(),
+        path: photo16,
+      },
+      {
+        id: uuidv4(),
+        path: photo17,
+      },
+      {
+        id: uuidv4(),
+        path: photo18,
+      },
+      {
+        id: uuidv4(),
+        path: photo19,
+      },
+      {
+        id: uuidv4(),
+        path: photo20,
+      },
+      {
+        id: uuidv4(),
+        path: photo21,
+      }
+    ]);
 
     const selectedServiceId = ref(null);
 
