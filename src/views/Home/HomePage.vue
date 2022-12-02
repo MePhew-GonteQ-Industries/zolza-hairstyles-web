@@ -1,6 +1,7 @@
 <template>
   <section class="app-page" id="home-page">
-    <ServicesList :scrolledToServices="scrolledToServices" v-model:selectedServiceId="selectedServiceId" />
+    <ServicesList :scrolledToServices="scrolledToServices"
+      v-model:selectedServiceId="selectedServiceId" />
 
     <AvailableSlotsList :selectedServiceId="selectedServiceId" />
 
@@ -16,11 +17,15 @@
           {{ t("home.appDescriptionSecondary") }}
         </p>
         <div class="download-links">
-          <a href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055" target="_blank">
-            <img class="app-store-badge" src="@/assets/app-store-badge.svg" alt="Pobierz z App Store" />
+          <a href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055"
+            target="_blank">
+            <img class="app-store-badge" src="@/assets/app-store-badge.svg"
+              alt="Pobierz z App Store" />
           </a>
-          <a href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app" target="_blank">
-            <img class="gp-badge" src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
+          <a href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app"
+            target="_blank">
+            <img class="gp-badge"
+              src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
               alt="Pobierz w Google Play" />
           </a>
         </div>
@@ -30,7 +35,8 @@
         <div class="app-showcase-container">
           <div class="wrapper">
             <img class="iphone" src="@/assets/iphone-13-pro-max.png" alt="" />
-            <video class="app-showcase" src="@/assets/appDemo.mp4" muted loop webkit-playsinline playsinline autoplay>
+            <video class="app-showcase" src="@/assets/appDemo.mp4" muted loop webkit-playsinline
+              playsinline autoplay>
               <track kind="captions" />
             </video>
           </div>
@@ -64,11 +70,12 @@ export default {
   setup() {
     const { t } = useI18n({ useScope: "global" });
 
-    const modules = import.meta.glob("@/assets/work-photos/*.jpg");
+    const modules = import.meta.glob("@/assets/work-photos/*.jpg", { as: 'raw' });
     const photos = ref([]);
 
     for (const path in modules) {
       modules[path]().then(() => {
+        console.log(path);
         photos.value.push({
           id: uuidv4(),
           path: path,
