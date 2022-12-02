@@ -141,6 +141,7 @@
       <span class="pagination-number">744</span>
       <i class="ph-caret-right-light"></i>
     </div>
+    <NPagination />
   </section>
   <div class="dashboard-page dashboard-data-page users-management" v-else>
     <CustomLoader></CustomLoader>
@@ -164,6 +165,8 @@ import CustomCheckbox from '@/components/CustomCheckbox.vue';
 import axios from 'axios';
 import { v4 as uuidv4 } from "uuid";
 
+import { NPagination } from 'naive-ui';
+
 export default {
   name: "AppointmentsManagement",
   components: {
@@ -176,6 +179,7 @@ export default {
     CustomModal,
     CustomLoader,
     CustomCheckbox,
+    NPagination,
   },
   setup() {
     const q = ref("");
