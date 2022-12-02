@@ -151,4 +151,15 @@ export default {
         }
     }
 }
+
+.make-appointment-modal-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .buttons-wrapper {
+        display: flex;
+        gap: 1rem;
+    }
+}
 </style>
