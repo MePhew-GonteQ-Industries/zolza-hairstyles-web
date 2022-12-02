@@ -75,10 +75,9 @@ export default {
 
     for (const path in modules) {
       modules[path]().then(() => {
-        console.log(path);
         photos.value.push({
           id: uuidv4(),
-          path: path,
+          path: new URL(path, import.meta.url).href,
         });
       });
     }
