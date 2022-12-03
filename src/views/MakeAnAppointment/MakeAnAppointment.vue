@@ -1,8 +1,7 @@
 <template>
     <div class="make-an-appointment-page">
         <div class="services-tiles" v-if="!loading">
-            <div class="service-tile" v-for="service in servicesData" :key="service.id"
-                @click="chooseService(service)">
+            <div class="service-tile" v-for="service in servicesData" :key="service.id" @click="chooseService(service)">
                 <h3>{{ service.name }}</h3>
                 <p>
                     {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes
@@ -15,9 +14,20 @@
                 </p>
             </div>
             <CustomModal v-model:open="openMakeAnAppointmentModal">
-                <template #title>Tytuł</template>
+                <template #title>{{ selecetedService.name }}</template>
                 <div class="make-appointment-modal-wrapper">
-                    <div class="select-date-wrapper"></div>
+                    <MessageBox type="info">
+                        <template #title>
+                            Maksymalnie miesiąc do przodu!
+                        </template>
+                        <template #subtitle>
+                            Umówioną wizytę może anulować tylko administrator!
+                        </template>
+                    </MessageBox>
+                    <div class="select-date-wrapper">
+                        <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green"
+                            mode="date" v-model="selectedDate" />
+                    </div>
                     <div class="buttons-wrapper">
                         <CustomButton type="info" @click="openMakeAnAppointmentModal = false">Umów
                             wizytę</CustomButton>
@@ -35,31 +45,44 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import axios from 'axios';
 import { handleRequestError } from "@/utils";
 import CustomModal from '@/components/CustomModal.vue';
 import CustomLoader from "@/components/CustomLoader.vue";
 import CustomButton from "@/components/CustomButton.vue";
+import MessageBox from '@/components/MessageBox.vue'
+import { DatePicker } from "v-calendar";
+import "v-calendar/dist/style.css";
 
 export default {
     components: {
         CustomButton,
         CustomModal,
         CustomLoader,
+        MessageBox,
+        DatePicker,
     },
     setup() {
         const { t } = useI18n({ useScope: "global" });
         const loading = ref(true);
         const servicesData = ref(null);
         const openMakeAnAppointmentModal = ref(false);
-        // const selecetedService = ref(null);
+        const selecetedService = ref(null);
+        const selectedDate = ref(new Date());
+
+        const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
+
 
         const chooseService = (service) => {
-            console.log(service);
-            // selecetedService.value = service;
+            // console.log(service);
+            selecetedService.value = service;
             openMakeAnAppointmentModal.value = true;
         };
+
+        watch(selectedDateFormatted, async (newDate) => {
+            console.log(newDate);
+        });
 
         onMounted(async () => {
             try {
@@ -78,7 +101,9 @@ export default {
             servicesData,
             chooseService,
             openMakeAnAppointmentModal,
-            // selecetedService,
+            selecetedService,
+            selectedDate,
+            selectedDateFormatted,
         }
     }
 }
@@ -87,6 +112,7 @@ export default {
 <style lang="scss" scoped>
 .make-an-appointment-page {
     display: flex;
+    justify-content: center;
     width: 100%;
 
     .loader {
@@ -124,6 +150,17 @@ export default {
                 }
             }
         }
+    }
+}
+
+.make-appointment-modal-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .buttons-wrapper {
+        display: flex;
+        gap: 1rem;
     }
 }
 </style>
