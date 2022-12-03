@@ -2,35 +2,19 @@
   <div class="services-wrapper" ref="services">
     <CustomLoader :class="{ hidden: !loading }" v-if="!loaderAnimationFinished" />
 
-    <div
-      class="services"
-      :class="{ hidden: loading }"
-      v-if="loaderAnimationFinished && !loadingFailed"
-    >
+    <div class="services" :class="{ hidden: loading }"
+      v-if="loaderAnimationFinished && !loadingFailed">
       <template v-for="service in servicesData" :key="service.id">
-        <ServiceTile
-          :id="service.id"
-          :name="service.name"
-          description="Nasze usługi wyróżnia indywidualne podejście do klienta.
+        <ServiceTile :id="service.id" :name="service.name" description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-          :time="service.average_time_minutes"
-          :availability="40"
-          :priceMin="service.min_price"
-          :priceMax="service.max_price"
-          @updateSelectedService="
-            (newValue) => {
-              $emit('update:selectedServiceId', newValue);
-            }
-          "
-        />
+          :time="service.average_time_minutes" :availability="40" :priceMin="service.min_price"
+          :priceMax="service.max_price" @updateSelectedService="selectService"
+          :selectedServiceId="$props.selectedServiceId" />
       </template>
     </div>
 
-    <div
-      class="error-message"
-      :class="{ hidden: loading }"
-      v-if="loadingFailed && loaderAnimationFinished"
-    >
+    <div class="error-message" :class="{ hidden: loading }"
+      v-if="loadingFailed && loaderAnimationFinished">
       <i class="ph-warning-circle-light"></i>
       <p>{{ t("home.servicesList.error") }}</p>
     </div>
@@ -60,11 +44,15 @@ export default {
       type: String,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const { t } = useI18n({ useScope: "global" });
     const loading = ref(true);
     const loadingFailed = ref(false);
     const loaderAnimationFinished = ref(false);
+
+    const selectService = (newValue) => {
+      emit('update:selectedServiceId', newValue);
+    }
 
     const servicesData = ref(null);
 
@@ -101,6 +89,7 @@ export default {
       loadingFailed,
       loading,
       loaderAnimationFinished,
+      selectService,
       t,
     };
   },
@@ -125,8 +114,20 @@ export default {
     padding: 2.5rem 10%;
     color: black;
     display: grid;
-    row-gap: 2rem;
+    gap: 2rem;
     transition: all 1s;
+
+    @media only screen and (min-width: $lg) {
+      & {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media only screen and (max-width: $sm) {
+      & {
+        grid-template-columns: 1fr;
+      }
+    }
   }
 
   .error-message {
@@ -140,15 +141,6 @@ export default {
 
     i {
       font-size: 2.25rem;
-    }
-  }
-}
-
-@media only screen and (max-width: $xs) {
-  .services-wrapper {
-    .services {
-      display: flex;
-      flex-direction: column;
     }
   }
 }

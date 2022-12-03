@@ -1,5 +1,6 @@
 <template>
-  <div class="service">
+  <div class="service" @click="$emit('updateSelectedService', id)"
+    :class="{ selected: selectedServiceId === id }">
     <div class="left">
       <p class="name">{{ name }}</p>
       <p class="description">{{ description }}</p>
@@ -17,27 +18,16 @@
       </div>
       <p class="price">
         {{ t("home.serviceTile.price") }}
-        <span
-          >{{ priceMin }}
-          <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span
-        >
+        <span>{{ priceMin }}
+          <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span>
       </p>
     </div>
-    <input
-      class="select-service"
-      type="radio"
-      name="select-service"
-      @change="$emit('updateSelectedService', id)"
-      :id="tileId"
-    />
-    <label :for="tileId"></label>
   </div>
 </template>
 
 <script>
 import { useI18n } from "vue-i18n";
 import CustomProgressBar from "@/components/CustomProgressBar.vue";
-import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "ServiceTile",
@@ -72,14 +62,14 @@ export default {
     priceMax: {
       type: Number,
     },
+    selectedServiceId: {
+      type: String,
+    }
   },
   setup() {
     const { t } = useI18n({ useScope: "global" });
 
-    const tileId = uuidv4();
-
     return {
-      tileId,
       t,
     };
   },
@@ -88,7 +78,7 @@ export default {
 
 <style lang="scss" scoped>
 .service {
-  padding: 0 2.5%;
+  padding: 1rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
@@ -96,14 +86,20 @@ export default {
   justify-items: center;
   align-items: center;
   color: $secondary-text-color;
+  background-color: $background-accent-low;
+  border: 1px solid $background-accent-medium;
+  border-radius: .375rem;
+  cursor: pointer;
+  max-width: 500px;
+
+  &.selected {
+    background-color: $alternative-accent-color;
+  }
+
   @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-  }
-
-  .select-service:focus {
-    outline: orange;
   }
 
   .left {
