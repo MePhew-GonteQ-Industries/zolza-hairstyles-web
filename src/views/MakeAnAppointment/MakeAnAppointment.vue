@@ -112,6 +112,7 @@ export default {
 <style lang="scss" scoped>
 .make-an-appointment-page {
     display: flex;
+    justify-content: center;
     width: 100%;
 
     .loader {
