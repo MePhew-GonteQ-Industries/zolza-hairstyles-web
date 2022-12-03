@@ -260,7 +260,8 @@ export default {
 
     .divider {
       display: block;
-      bottom: 0;
+      position: relative;
+      bottom: -5px;
       left: 0;
       width: 100%;
       line-height: 0;
