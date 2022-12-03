@@ -7,6 +7,7 @@
   --secondary-color-dark: #3d3943;
   --accent-color-dark: rgb(0, 232, 176);
   --accent-color-low-dark: rgba(0, 232, 176, .4);
+  --alternative-accent-color-dark: rgba(0, 0, 0, 0.26);
   --background-accent-color-low-dark: rgb(61 57 67 / 65%);
 
   --primary-text-color-dark: #b3b1b5;
@@ -18,11 +19,11 @@
 
   --theme-color-light: white;
 
-
   --primary-color-light: #f8fafb;
   --secondary-color-light: #e2e2e2;
   --accent-color-light: rgb(0, 162, 232);
   --accent-color-low-light: rgba(0, 162, 232, .4);
+  --alternative-accent-color-light: white;
   --background-accent-color-low-light: rgb(255 255 255 / 65%);
 
   --primary-text-color-light: rgb(44, 44, 44);
@@ -37,6 +38,7 @@
   --secondary-color: var(--secondary-color-dark);
   --accent-color: var(--accent-color-dark);
   --accent-color-low: var(--accent-color-low-dark);
+  --alternative-accent-color: rgba(0, 0, 0, 0.26);
   --background-accent-color-low: var(--background-accent-color-low-dark);
 
   --primary-text-color: var(--primary-text-color-dark);
@@ -69,6 +71,7 @@
   --secondary-color: var(--secondary-color-dark);
   --accent-color: var(--accent-color-dark);
   --accent-color-low: var(--accent-color-low-dark);
+  --alternative-accent-color: var(--alternative-accent-color-dark);
   --background-accent-color-low: var(--background-accent-color-low-dark);
 
   --primary-text-color: var(--primary-text-color-dark);
@@ -83,6 +86,7 @@
   --secondary-color: var(--secondary-color-light);
   --accent-color: var(--accent-color-light);
   --accent-color-low: var(--accent-color-low-light);
+  --alternative-accent-color: var(--alternative-accent-color-light);
   --background-accent-color-low: var(--background-accent-color-low-light);
 
   --primary-text-color: var(--primary-text-color-light);
