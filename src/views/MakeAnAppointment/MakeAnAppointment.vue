@@ -14,7 +14,7 @@
                 </p>
             </div>
             <CustomModal v-model:open="openMakeAnAppointmentModal">
-                <template #title>{{ selecetedService.name }}</template>
+                <template #title>{{ selectedService.name }}</template>
                 <div class="make-appointment-modal-wrapper">
                     <MessageBox type="info">
                         <template #title>
@@ -27,9 +27,26 @@
                     <div class="select-date-wrapper">
                         <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green"
                             mode="date" v-model="selectedDate" />
+                        <div class="hours">
+                            <CustomLoader v-if="loadingSlots" class="loader"></CustomLoader>
+                            <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
+                                <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                                    @click="selectAppointmentHour(availableSlot)"
+                                    :class="{ 'selected': availableSlot.id === selectedSlotId }">
+                                    {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(locale, {
+                                            hour:
+                                                "2-digit", minute: "2-digit",
+                                        })
+                                    }}
+                                </div>
+                            </div>
+                            <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots">
+                                Brak wolnych miejsc
+                            </div>
+                        </div>
                     </div>
                     <div class="buttons-wrapper">
-                        <CustomButton type="info" @click="openMakeAnAppointmentModal = false">Umów
+                        <CustomButton type="info" @click="makeAppointment">Umów
                             wizytę</CustomButton>
                         <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">
                             Anuluj</CustomButton>
@@ -54,6 +71,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import MessageBox from '@/components/MessageBox.vue'
 import { DatePicker } from "v-calendar";
 import "v-calendar/dist/style.css";
+import { useStore } from 'vuex';
 
 export default {
     components: {
@@ -68,21 +86,81 @@ export default {
         const loading = ref(true);
         const servicesData = ref(null);
         const openMakeAnAppointmentModal = ref(false);
-        const selecetedService = ref(null);
+        const selectedService = ref(null);
         const selectedDate = ref(new Date());
+        const loadingSlots = ref(true);
+        const availableSlots = ref([]);
+        const store = useStore();
+        const selectedSlotId = ref(null);
+
+        const locale = store.state.settings.language;
 
         const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
+        const validatedSlots = computed(() => {
+            const requiredSlots = selectedService.value.required_slots;
+
+            const slots = [];
+
+            for (let i = 0; i < availableSlots.value.length; i++) {
+                let slot = availableSlots.value[i];
+                let currentSlotFits = 0;
+
+                if (i + requiredSlots <= availableSlots.value.length) {
+                    for (let j = i; j < (i + requiredSlots); j++) {
+                        let innerSlot = availableSlots.value[j];
+
+                        if (innerSlot.occupied) break;
+                        if (innerSlot.reserved) break;
+                        if (innerSlot.holiday) break
+                        if (innerSlot.sunday) break;
+                        if (innerSlot.break_time) break;
+                        if (currentSlotFits === requiredSlots) break;
+                        currentSlotFits++;
+                    }
+                    if (currentSlotFits === requiredSlots) {
+                        slots.push(slot);
+                    }
+                }
+            }
+            return slots;
+        });
+
+        const selectAppointmentHour = (availableSlot) => {
+            selectedSlotId.value = availableSlot.id;
+        }
 
         const chooseService = (service) => {
-            // console.log(service);
-            selecetedService.value = service;
+            selectedService.value = service;
             openMakeAnAppointmentModal.value = true;
         };
 
         watch(selectedDateFormatted, async (newDate) => {
-            console.log(newDate);
+            loadingSlots.value = true;
+            await loadAvailableTimeSlots(newDate);
         });
+
+        const makeAppointment = async () => {
+            try {
+                await axios.post(`appointments`, {
+                    first_slot_id: selectedSlotId.value,
+                    service_id: selectedService.value.id,
+                });
+                openMakeAnAppointmentModal.value = false;
+            } catch (error) {
+                handleRequestError(error);
+            }
+        };
+
+        const loadAvailableTimeSlots = async (date) => {
+            try {
+                const response = await axios.get(`appointments/slots?date=${date}`);
+                availableSlots.value = response.data;
+                loadingSlots.value = false;
+            } catch (error) {
+                handleRequestError(error);
+            }
+        }
 
         onMounted(async () => {
             try {
@@ -92,7 +170,7 @@ export default {
                 handleRequestError(error);
             }
             loading.value = false;
-            console.log(servicesData.value);
+            await loadAvailableTimeSlots(selectedDateFormatted.value);
         });
 
         return {
@@ -101,9 +179,17 @@ export default {
             servicesData,
             chooseService,
             openMakeAnAppointmentModal,
-            selecetedService,
+            selectedService,
             selectedDate,
             selectedDateFormatted,
+            loadingSlots,
+            validatedSlots,
+            availableSlots,
+            loadAvailableTimeSlots,
+            locale,
+            selectAppointmentHour,
+            selectedSlotId,
+            makeAppointment,
         }
     }
 }
@@ -115,11 +201,7 @@ export default {
     justify-content: center;
     width: 100%;
 
-    .loader {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+
 
     .services-tiles {
         display: flex;
@@ -158,9 +240,58 @@ export default {
     flex-direction: column;
     gap: 1rem;
 
+    .select-date-wrapper {
+        display: flex;
+
+        .hours {
+            margin-left: 10px;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+
+            .slots-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                gap: .5rem;
+
+                .single-hour {
+                    padding: 25px;
+                    display: flex;
+                    flex-direction: column;
+                    border: 1px solid $secondary-color;
+                    width: 90px;
+                    border-radius: 12px;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $accent-color;
+                        background-color: $background-accent-low;
+                    }
+
+                    &:active,
+                    &.selected {
+                        color: $accent-color;
+                        border-color: $accent-color;
+                    }
+                }
+            }
+
+            .no-slots {
+                color: $error-color;
+            }
+        }
+    }
+
     .buttons-wrapper {
         display: flex;
         gap: 1rem;
     }
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
