@@ -26,6 +26,7 @@ import { useI18n } from "vue-i18n";
 import ServiceTile from "@/components/Home/ServiceTile.vue";
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
+import { useStore } from "vuex";
 import CustomLoader from "@/components/CustomLoader.vue";
 import { handleRequestError } from "@/utils";
 
@@ -46,6 +47,8 @@ export default {
   },
   setup(props, { emit }) {
     const { t } = useI18n({ useScope: "global" });
+    const store = useStore();
+
     const loading = ref(true);
     const loadingFailed = ref(false);
     const loaderAnimationFinished = ref(false);
@@ -57,8 +60,17 @@ export default {
     const servicesData = ref(null);
 
     onMounted(async () => {
+      let response;
       try {
-        const response = await axios.get("services");
+        if (store.state.settings.language) {
+          response = await axios.get("services", {
+            headers: {
+              'accept-language': store.state.settings.language,
+            }
+          });
+        } else {
+          response = await axios.get("services");
+        }
         servicesData.value = response.data;
       } catch (error) {
         loadingFailed.value = true;
