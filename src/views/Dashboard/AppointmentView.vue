@@ -178,7 +178,6 @@ export default {
 
     const selectAppointmentHour = (availableSlot) => {
       selectedSlotId.value = availableSlot.id;
-      console.log(selectedSlotId.value);
     };
 
     const changeAppointmentDate = async () => {
