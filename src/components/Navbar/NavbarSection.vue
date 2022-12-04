@@ -44,6 +44,10 @@ export default {
   width: 100%;
   padding: 0 10vw;
   height: 100%;
+
+  @media only screen and (max-width: $md) {
+    padding: 0;
+  }
 }
 
 @media only screen and (max-width: $xs) {

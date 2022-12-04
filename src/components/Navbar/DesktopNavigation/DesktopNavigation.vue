@@ -137,10 +137,9 @@ export default {
 .navigation {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-items: center;
 
   a {
     font-size: 1rem;
@@ -196,7 +195,7 @@ export default {
     }
 
     a {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
     }
 
     .primary-nav {
