@@ -201,8 +201,6 @@ export default {
     justify-content: center;
     width: 100%;
 
-
-
     .services-tiles {
         display: flex;
         flex-wrap: wrap;
@@ -218,18 +216,14 @@ export default {
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
-            color: $primary-text-color;
-            border: 2px solid $primary-text-color;
-            border-radius: 12px;
-            transition: ease-in-out .3s;
+            color: $secondary-text-color;
+            border: 1px solid $background-accent-medium;
+            border-radius: .375rem;
+            transition: ease-in-out .6s;
 
             &:hover {
                 cursor: pointer;
-                border: 2px solid $accent-color;
-
-                h3 {
-                    color: $accent-color;
-                }
+                background-color: $alternative-accent-color;
             }
         }
     }
