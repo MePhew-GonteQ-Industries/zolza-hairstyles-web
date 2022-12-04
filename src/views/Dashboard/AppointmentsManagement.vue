@@ -100,8 +100,8 @@
             <td class="service">
               <CustomTooltip>
                 <template #activator>
-                  <router-link :to="`services/${appointment.service.id}`">Strzyżenie
-                    męskie</router-link>
+                  <router-link :to="`services/${appointment.service.id}`">
+                    {{ appointment.service.name }}</router-link>
                 </template>
                 {{ appointment.service.id }}
               </CustomTooltip>
