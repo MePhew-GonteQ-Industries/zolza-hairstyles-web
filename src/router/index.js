@@ -248,6 +248,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
+  store.commit('setNavigationStatus', 'inProgress');
   await store.dispatch("loadAuthData");
   if (store.getters.isLoggedIn) {
     if (to.name === "login" || to.name === "sign-up") return "/";
@@ -278,8 +279,15 @@ router.beforeEach(async (to) => {
       }
     }
   }
-
   return true;
+});
+
+router.afterEach((_to, _from, failure) => {
+  if (failure) {
+    store.commit('setNavigationStatus', 'failure');
+  } else {
+    store.commit('setNavigationStatus', 'success');
+  }
 });
 
 export default router;
