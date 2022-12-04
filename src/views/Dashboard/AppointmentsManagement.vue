@@ -264,7 +264,6 @@ export default {
     onMounted(async () => {
       const response = await axios.get('services');
       servicesOptions.value = response.data;
-      console.log(servicesOptions.value);
       await store.dispatch("loadAppointments");
       loading.value = false;
     });

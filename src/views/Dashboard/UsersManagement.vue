@@ -1,7 +1,8 @@
 <template>
   <section class="dashboard-page dashboard-data-page users-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.usersManagement.search')" v-model:value="q" type="search" />
+      <CustomInput class="search" :label="t('dashboard.usersManagement.search')" v-model:value="q"
+        type="search" />
     </form>
 
     <div class="dashboard-data-table-wrapper">
@@ -18,7 +19,8 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
+              @toggleSort="toggleSort('id')">
               #id</SortedHeader>
           </th>
           <th>
@@ -41,11 +43,13 @@
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
-              @toggleSort="toggleSort('startDate')">{{ t("dashboard.usersManagement.accessLevel") }}</SortedHeader>
+              @toggleSort="toggleSort('startDate')">{{ t("dashboard.usersManagement.accessLevel") }}
+            </SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
-              @toggleSort="toggleSort('endDate')">{{ t("dashboard.usersManagement.verified") }}</SortedHeader>
+              @toggleSort="toggleSort('endDate')">{{ t("dashboard.usersManagement.verified") }}
+            </SortedHeader>
           </th>
           <th>{{ t("dashboard.usersManagement.blocked") }}</th>
         </thead>
@@ -132,8 +136,6 @@ export default {
           userTemp.gender = "Inna";
         }
         userTemp.gender_icon_class += "-light";
-
-        console.log(user.permission_level);
 
         if (user.permission_level.includes("owner") || user.permission_level === "Właściciel") {
           userTemp.permission_level_icon_class = "ph-user-gear";

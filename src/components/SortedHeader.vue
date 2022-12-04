@@ -35,8 +35,6 @@ export default {
         sortAscending.value = !sortAscending.value;
       }
 
-      console.log(sortAscending.value);
-
       emit('toggleSort');
     }
 
