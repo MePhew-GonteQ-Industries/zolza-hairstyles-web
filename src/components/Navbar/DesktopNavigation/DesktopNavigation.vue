@@ -2,11 +2,12 @@
   <nav class="navigation">
     <router-link class="wordmark-link" to="/">
       <!-- eslint-disable max-len -->
-      <svg class="wordmark" version="1.1" width="181.29895pt" height="41.661442pt" viewBox="0 0 181.29895 41.661442"
-        id="svg88" xmlns="http://www.w3.org/2000/svg">
+      <svg class="wordmark" version="1.1" width="181.29895pt" height="41.661442pt"
+        viewBox="0 0 181.29895 41.661442" id="svg88" xmlns="http://www.w3.org/2000/svg">
         <defs id="defs92">
           <clipPath id="cp0">
-            <path transform="matrix(1,0,0,-1,0,99.2126)" d="M 0,99.213 H 325.984 V 0 H 0 Z" id="path4" />
+            <path transform="matrix(1,0,0,-1,0,99.2126)" d="M 0,99.213 H 325.984 V 0 H 0 Z"
+              id="path4" />
           </clipPath>
         </defs>
         <path
@@ -126,6 +127,7 @@ export default {
 .primary-nav,
 .secondary-nav {
   display: flex;
+  align-items: center;
 }
 
 .wordmark-link {
@@ -136,7 +138,7 @@ export default {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   justify-items: center;
 
