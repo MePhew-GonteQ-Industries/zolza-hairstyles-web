@@ -1,8 +1,7 @@
 <template>
-
   <div id="app-wrapper" :data-theme="$store.state.settings.theme">
-    <main ref="main" :class="{ collapsed: !onHomePage }">
-      <div id="nav" ref="navbar" :class="navbarClasses">
+    <main :class="{ collapsed: !onHomePage }">
+      <div id="nav" :class="navbarClasses">
         <navbarSection />
       </div>
       <CustomSidebar class="sidebar" />
@@ -94,8 +93,8 @@
 
 <script>
 import { useI18n } from "vue-i18n";
-import { onMounted, ref, watch, computed } from "vue";
-import { useElementVisibility, useWindowScroll } from "@vueuse/core";
+import { ref, watch, computed } from "vue";
+import { useWindowScroll } from "@vueuse/core";
 import navbarSection from "@/components/Navbar/NavbarSection.vue";
 import contactSection from "@/views/Contact/ContactSection.vue";
 import { useRouter } from "vue-router";
@@ -143,30 +142,9 @@ export default {
 
     const { y } = useWindowScroll();
 
-    const navbar = ref(null);
-
-    const navbarHeight = ref(null);
-
-    const navbarVisible = computed(() => y.value <= navbarHeight.value);
-
-    onMounted(async () => {
-      navbarHeight.value = navbar.value.offsetHeight;
-    });
-
-    const main = ref(null);
-
-    const mainSectionVisible = useElementVisibility(main);
-
-    const navbarFixed = ref(false);
-
-    watch(mainSectionVisible, (newValue) => {
-      navbarFixed.value = !newValue;
-    });
-
     const navbarClasses = computed(() => ({
       static: !onHomePage.value,
-      fixed: navbarFixed.value && onHomePage.value,
-      "static-outside-viewport": !navbarFixed.value && !navbarVisible.value,
+      translucent: y.value > 0 && onHomePage.value,
     }));
 
     const themeOverrides = {
@@ -183,17 +161,13 @@ export default {
           }
         }
       }
-      // ...
+      // todo: finish
     }
 
     return {
       scrollToServices,
       scrolledToServices,
-      navbarFixed,
-      main,
-      navbarVisible,
       onHomePage,
-      navbar,
       navbarClasses,
       themeOverrides,
       t,
@@ -203,18 +177,14 @@ export default {
 </script>
 
 <style lang="scss">
+.router-view {
+  min-height: 92%;
+  justify-content: space-between;
+}
+
 #app {
   #app-wrapper {
     height: 100vh;
-
-    .router-view {
-      min-height: 92%;
-      // height: 92%;
-      // @media only screen and (max-width: $xs){
-      //   min-height: 0;
-      // }
-      justify-content: space-between;
-    }
 
     main {
       position: relative;
@@ -258,8 +228,7 @@ export default {
         max-height: 80px;
         width: 100%;
         z-index: 10;
-        transform: translateY(0);
-        transition: transform $transition-duration;
+        transition: none;
 
         &.static {
           position: relative;
@@ -267,16 +236,9 @@ export default {
           color: $secondary-text-color;
         }
 
-        &.static-outside-viewport {
-          position: fixed;
-          top: 0;
-          transform: translateY(-150px);
-        }
-
-        &.fixed {
-          position: fixed;
-          top: 0;
+        &.translucent {
           background-color: $translucent-color;
+          transition: background-color $transition-duration;
         }
 
         * {
@@ -337,7 +299,8 @@ export default {
 
     .divider {
       display: block;
-      bottom: 0;
+      position: relative;
+      bottom: -5px;
       left: 0;
       width: 100%;
       line-height: 0;
@@ -373,7 +336,6 @@ export default {
           }
 
           .hero {
-            // margin-top: 5vh;
             padding: 0;
           }
 
