@@ -23,23 +23,27 @@
         </div>
         <div class="inputs-section">
           <div class="text-inputs">
-            <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
-              autocomplete="name">
+            <CustomInput :label="t('shared.name')" v-model:value="userData.name"
+              appearance="primary" autocomplete="name">
             </CustomInput>
-            <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
-              autocomplete="surname"></CustomInput>
+            <CustomInput :label="t('shared.surname')" v-model:value="userData.surname"
+              appearance="primary" autocomplete="surname"></CustomInput>
           </div>
-          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
-            v-model:selectedValue="userData.gender" appearance="primary" v-if="!loading"></CustomSelect>
+          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light"
+            :options="genderOptions" v-model:selectedValue="userData.gender" appearance="primary"
+            v-if="!loading"></CustomSelect>
         </div>
         <div class="user-account-buttons">
           <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
-          <CustomButton type="error" class="delete-account-button">{{ t('settings.userAccountSettings.deleteAccount') }}
+          <CustomButton type="error" class="delete-account-button">{{
+              t('settings.userAccountSettings.deleteAccount')
+          }}
           </CustomButton>
         </div>
         <div class="save-changes" v-if="userDataModified">
           <CustomButton class="save" type="success">{{ t('shared.saveChanges') }}</CustomButton>
-          <CustomButton class="cancel" type="secondary">{{ t('shared.operationCancel') }}</CustomButton>
+          <CustomButton class="cancel" type="secondary">{{ t('shared.operationCancel') }}
+          </CustomButton>
         </div>
       </div>
       <div class="loader" v-else>
@@ -110,7 +114,6 @@ export default {
     // );
 
     onMounted(async () => {
-      console.log('yo');
       const storedUser = store.getters.getUserById(route.params.id);
 
       if (storedUser) {
@@ -157,9 +160,6 @@ export default {
           userData.value.gender = 'other';
           break;
       }
-
-      console.log(userData);
-
       loading.value = false;
 
     });
