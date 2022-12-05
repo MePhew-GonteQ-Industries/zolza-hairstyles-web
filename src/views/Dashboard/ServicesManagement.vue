@@ -1,7 +1,8 @@
 <template>
   <section class="dashboard-page dashboard-data-page services-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.servicesManagement.search')" v-model:value="q" type="search" />
+      <CustomInput class="search" :label="t('dashboard.servicesManagement.search')"
+        v-model:value="q" type="search" />
     </form>
 
     <CustomButton @click="addServiceModalOpen = true">Dodaj usługę</CustomButton>
@@ -10,7 +11,8 @@
       <div class="add-service-wrapper">
         <div class="input-wrapper">
           <CustomInput label="Nazwa usługi" autocomplete="off"></CustomInput>
-          <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off"></CustomInput>
+          <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off">
+          </CustomInput>
           <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off"></CustomInput>
           <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off"></CustomInput>
         </div>
@@ -32,12 +34,14 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
+              @toggleSort="toggleSort('id')">
               #id</SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
-              @toggleSort="toggleSort('service')">{{ t("dashboard.servicesManagement.name") }}</SortedHeader>
+              @toggleSort="toggleSort('service')">{{ t("dashboard.servicesManagement.name") }}
+            </SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
@@ -46,11 +50,13 @@
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
-              @toggleSort="toggleSort('startDate')">{{ t("dashboard.servicesManagement.minPrice") }}</SortedHeader>
+              @toggleSort="toggleSort('startDate')">{{ t("dashboard.servicesManagement.minPrice") }}
+            </SortedHeader>
           </th>
           <th>
             <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
-              @toggleSort="toggleSort('endDate')">{{ t("dashboard.servicesManagement.maxPrice") }}</SortedHeader>
+              @toggleSort="toggleSort('endDate')">{{ t("dashboard.servicesManagement.maxPrice") }}
+            </SortedHeader>
           </th>
         </thead>
         <tbody>
@@ -59,7 +65,7 @@
               <router-link :to="`services/${service.id}`"> #{{ service.shortId }}...</router-link>
             </td>
             <td class="name">
-              <router-link :to="`services/${service.id}`">Strzyżenie męskie</router-link>
+              <router-link :to="`services/${service.id}`">{{ service.name }}</router-link>
             </td>
             <td class="average-time">
               <div class="data-icon-wrapper">
@@ -150,8 +156,6 @@ export default {
 
 <style lang="scss" scoped>
 td {
-  text-align: center;
-
   .data-icon-wrapper {
     justify-content: center;
   }

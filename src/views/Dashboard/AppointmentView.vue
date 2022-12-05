@@ -22,7 +22,7 @@
             </p>
           </div>
           <div class="elevated-card">
-            <h2>Strzyżenie męskie</h2>
+            <h2>{{ appointment.service.name }}</h2>
             <p>
               Przewidziany czas:
               {{ appointment.service.average_time_minutes }} min
@@ -39,7 +39,8 @@
       </div>
       <div class="right">
         <CustomButton type="error" class="cancel-appointment-button"
-          v-if="!appointment.archival && !appointment.canceled" @click="cancelAppointmentModalOpen = true">Odwołaj
+          v-if="!appointment.archival && !appointment.canceled"
+          @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -55,7 +56,8 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date" v-if="!appointment.archival && !appointment.canceled"
+        <CustomButton type="info" class="change-appointment-date"
+          v-if="!appointment.archival && !appointment.canceled"
           @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
@@ -68,20 +70,20 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
+                color="green" mode="date" v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
-                    @click="selectAppointmentHour(availableSlot)"
+                  <div class="single-hour" v-for="availableSlot in validatedSlots"
+                    :key="availableSlot.id" @click="selectAppointmentHour(availableSlot)"
                     :class="{ 'selected': availableSlot.id === selectedSlotId }">
                     {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(
-                        locale, {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      }
-                      )
+                    locale, {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    }
+                    )
                     }}
                   </div>
                 </div>

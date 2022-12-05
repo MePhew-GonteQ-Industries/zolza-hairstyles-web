@@ -2,7 +2,7 @@
   <div class="dashboard-page service-view">
     <div class="service elevated-card" v-if="serviceData">
       <div>
-        <h1>Strzyżenie męskie</h1>
+        <h1>{{ serviceData.name }}</h1>
         <p>Średni czas trwania: {{ serviceData.average_time_minutes }} min</p>
         <p>Cena minimalna: {{ serviceData.min_price }}</p>
         <p>Cena maksymalna: {{ serviceData.max_price }}</p>
@@ -17,17 +17,22 @@
           <div class="edit-service-modal">
             <MessageBox type="info">
               <template #title>Zmiana danych usługi</template>
-              <template #subtitle>Tutaj możesz zmienić wszystkie dane dotyczące danej usługi.</template>
+              <template #subtitle>Tutaj możesz zmienić wszystkie dane dotyczące danej
+                usługi.</template>
             </MessageBox>
             <div class="input-wrapper">
               <CustomInput label="Nazwa usługi" autocomplete="off"></CustomInput>
-              <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off"></CustomInput>
-              <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off"></CustomInput>
-              <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off"></CustomInput>
+              <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off">
+              </CustomInput>
+              <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off">
+              </CustomInput>
+              <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off">
+              </CustomInput>
             </div>
             <div class="buttons-wrapper">
               <CustomButton type="info" @click="editServiceModalOpen = false">Zapisz</CustomButton>
-              <CustomButton type="secondary" @click="editServiceModalOpen = false">Anuluj</CustomButton>
+              <CustomButton type="secondary" @click="editServiceModalOpen = false">Anuluj
+              </CustomButton>
             </div>
           </div>
         </CustomModal>
