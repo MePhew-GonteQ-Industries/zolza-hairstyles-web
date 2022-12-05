@@ -16,7 +16,7 @@
             <CustomModal v-model:open="openMakeAnAppointmentModal">
                 <template #title>{{ selectedService.name }}</template>
                 <div class="make-appointment-modal-wrapper">
-                    <MessageBox type="info">
+                    <MessageBox type="warning">
                         <template #title>
                             Maksymalnie miesiąc do przodu!
                         </template>
@@ -164,7 +164,11 @@ export default {
 
         onMounted(async () => {
             try {
-                const response = await axios.get("services");
+                const response = await axios.get("services", {
+                    headers: {
+                        'accept-language': store.state.settings.language,
+                    }
+                });
                 servicesData.value = response.data;
             } catch (error) {
                 handleRequestError(error);
