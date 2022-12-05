@@ -40,7 +40,7 @@ const routes = [
     name: "makeAnAppointment",
     component:  () => import("@/views/MakeAnAppointment/MakeAnAppointment.vue"),
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
       requiredPermissionLevel: "user",
     }
   },
