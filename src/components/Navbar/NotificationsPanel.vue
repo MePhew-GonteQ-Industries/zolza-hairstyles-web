@@ -1,18 +1,9 @@
 <template>
   <div class="notifications-wrapper" ref="notificationsWrapper">
-    <i
-      class="bell-icon"
-      :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
-      @click="toggleNotificationsPanel"
-      @keyup.enter="toggleNotificationsPanel"
-      v-ripple
-    ></i>
-    <span
-      class="unread-notifications-count"
-      @click="toggleNotificationsPanel"
-      @keyup.enter="toggleNotificationsPanel"
-      >2</span
-    >
+    <i class="bell-icon" :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
+      @click="toggleNotificationsPanel" @keyup.enter="toggleNotificationsPanel" v-ripple></i>
+    <span class="unread-notifications-count" @click="toggleNotificationsPanel"
+      @keyup.enter="toggleNotificationsPanel">2</span>
     <div class="notifications-panel" v-show="notificationsPanelExpanded" ref="notificationsPanel">
       <div class="panel-header">
         <h3>Notifications</h3>
@@ -36,31 +27,21 @@
         <p>There aren't any notifications yet</p>
       </div>
       <div class="notifications" v-if="currentTabIndex === 0" ref="notificationsList">
-        <ComposedNotification
-          v-for="(notification, index) in notifications[0]"
-          :key="index"
-          :title="notification.title"
-        />
+        <ComposedNotification v-for="(notification, index) in notifications[0]" :key="index"
+          :title="notification.title" />
       </div>
       <div class="notifications" v-else-if="currentTabIndex === 1" ref="notificationsList">
-        <ComposedNotification
-          v-for="(notification, index) in notifications[1]"
-          :key="index"
-          :title="notification.title"
-        />
+        <ComposedNotification v-for="(notification, index) in notifications[1]" :key="index"
+          :title="notification.title" />
       </div>
       <div class="notifications" v-else-if="currentTabIndex === 2" ref="notificationsList">
-        <ComposedNotification
-          v-for="(notification, index) in notifications[2]"
-          :key="index"
-          :title="notification.title"
-        />
+        <ComposedNotification v-for="(notification, index) in notifications[2]" :key="index"
+          :title="notification.title" />
       </div>
       <div class="panel-footer">
         <p class="notifications-count">3 notifications</p>
-        <CustomButton class="clear-notifications" @click="clearNotifications"
-          >Clear all</CustomButton
-        >
+        <CustomButton class="clear-notifications" @click="clearNotifications">Clear all
+        </CustomButton>
       </div>
     </div>
   </div>
@@ -238,6 +219,7 @@ export default {
     right: 0;
     border-radius: 0 0 5px 5px;
     color: $primary-text-color;
+
     @media only screen and (max-width: $xs) {
       min-width: 350px;
       min-height: 0;
@@ -253,6 +235,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: 20px 20px 0 20px;
+
       @media only screen and (max-width: $xs) {
         font-size: 1rem;
       }
@@ -261,6 +244,7 @@ export default {
         font-size: 2rem;
         cursor: pointer;
         color: $primary-text-color;
+
         @media only screen and (max-width: $xs) {
           font-size: 1rem;
         }
@@ -274,20 +258,22 @@ export default {
       padding: 0.625rem 2rem;
       border-bottom: 1px solid $secondary-color;
       position: relative;
+
       @media only screen and (max-width: $xs) {
         font-size: 0.9rem;
       }
+
       $offset: 158px;
 
-      & .tab:nth-child(1).active ~ .active-tab-indicator {
+      & .tab:nth-child(1).active~.active-tab-indicator {
         transform: translateX(calc($offset * 0));
       }
 
-      & .tab:nth-child(2).active ~ .active-tab-indicator {
+      & .tab:nth-child(2).active~.active-tab-indicator {
         transform: translateX(calc($offset * 1));
       }
 
-      & .tab:nth-child(3).active ~ .active-tab-indicator {
+      & .tab:nth-child(3).active~.active-tab-indicator {
         transform: translateX(calc($offset * 2));
       }
 
@@ -325,6 +311,7 @@ export default {
       align-items: center;
       justify-content: center;
       padding-top: 20px;
+
       @media only screen and (max-width: $xs) {
         font-size: 0.8rem;
       }
@@ -334,10 +321,12 @@ export default {
       padding: 0.5rem 20px 0.5rem 20px;
       max-height: 65vh;
       overflow-y: hidden;
+
       @media only screen and (max-width: $xs) {
         padding: 0;
         font-size: 0.8rem;
       }
+
       &:hover {
         overflow-y: auto;
       }
@@ -353,6 +342,7 @@ export default {
       .notifications-count {
         color: grey;
         font-size: 0.9rem;
+
         @media only screen and (max-width: $xs) {
           font-size: 0.7rem;
         }
