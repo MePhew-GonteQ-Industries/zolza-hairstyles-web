@@ -1,25 +1,37 @@
 <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="sidebar">
-    <CustomHamburgerIcon class="custom-hamburger-icon" @slide-sidebar="slideSidebar" :navbarActive="sidebarActive" />
+    <CustomHamburgerIcon class="custom-hamburger-icon" @slide-sidebar="slideSidebar"
+      :navbarActive="sidebarActive" />
     <div class="sidebar-wrapper">
       <div class="sidebar-menu" :class="{ 'sidebar-active': sidebarActive }">
         <div class="nav-section" @click="slideSidebar">
-          <router-link to="/">{{ t("nav.primaryNav[0]") }}</router-link>
-          <router-link v-if="$store.getters.isLoggedIn && $store.getters.isAdmin" to="/dashboard">{{
-              t("nav.primaryNav[1]")
-          }}</router-link>
-          <router-link to="/contact">{{ t("nav.primaryNav[3]") }}</router-link>
+          <router-link to="/"><i class="ph-house"></i>{{ t("nav.primaryNav[0]") }}</router-link>
+          <router-link v-if="$store.getters.isLoggedIn && $store.getters.isAdmin" to="/dashboard">
+            <i class="ph-app-window"></i>{{ t("nav.primaryNav[1]") }}
+          </router-link>
+          <router-link to="/contact">
+            <i class="ph-chat-centered-dots"></i>{{ t("nav.primaryNav[3]") }}
+          </router-link>
         </div>
         <div class="footer-section" @click="slideSidebar">
-          <router-link class="link" to="/terms-of-use">{{ t("footer[0]") }}</router-link>
-          <router-link class="link" to="/privacy-policy">{{ t("footer[1]") }} </router-link>
-          <router-link class="link" to="/cookies-policy">{{ t("footer[2]") }} </router-link>
-          <router-link class="link" to="/rodo">{{ t("footer[3]") }} </router-link>
+          <router-link class="link" to="/terms-of-use">
+            <i class="ph-files"></i>{{ t("footer[0]") }}
+          </router-link>
+          <router-link class="link" to="/privacy-policy">
+            <i class="ph-files"></i>{{ t("footer[1]") }}
+          </router-link>
+          <router-link class="link" to="/cookies-policy">
+            <i class="ph-files"></i>{{ t("footer[2]") }}
+          </router-link>
+          <router-link class="link" to="/rodo">
+            <i class="ph-files"></i>RODO
+          </router-link>
         </div>
       </div>
     </div>
-    <div class="sidebar-background" :class="{ 'sidebar-menu-background': sidebarActive }" @click.self="slideSidebar">
+    <div class="sidebar-background" :class="{ 'sidebar-menu-background': sidebarActive }"
+      @click.self="slideSidebar">
     </div>
   </div>
 </template>
@@ -53,10 +65,19 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
+  * {
+    font-size: 0.875rem;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  i {
+    font-size: 1.438rem;
+  }
+
   .custom-hamburger-icon {
     position: absolute;
     top: 22px;
-    left: 5vw;
+    left: 1rem;
     display: block;
     transform: translateX(100vw);
     z-index: 2500;
@@ -67,9 +88,22 @@ export default {
     width: 100%;
     z-index: 8;
 
+    a {
+      color: $secondary-text-color !important;
+      padding: .5rem .5rem;
+      margin: 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+
+      &.router-link-active {
+        color: $accent-color !important;
+      }
+    }
+
     .sidebar-menu {
-      padding: 10vh 0;
-      width: 50vw;
+      padding: 4rem 0;
+      width: 60vw;
       height: 100%;
       background-color: $primary-color;
       display: flex;
@@ -79,25 +113,21 @@ export default {
       .nav-section {
         display: flex;
         flex-direction: column;
+        gap: 1rem;
 
         a {
-          color: $secondary-text-color !important;
-          padding: 1.5vh 0 0 2vw;
-
-          &.router-link-active {
-            color: $accent-color !important;
-          }
+          background-color: $secondary-color;
+          border-radius: .375rem;
         }
       }
 
       .footer-section {
         display: flex;
         flex-direction: column;
+        gap: 1rem;
 
-        a {
-          color: $secondary-text-color !important;
-          padding: 1.5vh 0 0 2vw;
-        }
+        border-top: 1px solid var(--secondary-color);
+        padding-top: 1rem;
       }
     }
   }
