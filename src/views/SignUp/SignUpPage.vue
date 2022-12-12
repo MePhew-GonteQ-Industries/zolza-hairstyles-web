@@ -6,99 +6,46 @@
 
       <form @submit.prevent="handleSubmit" novalidate>
         <div class="inputs">
-          <input
-            id="sign-up-hidden-username-input"
-            class="hidden-input"
-            type="text"
-            autocomplete="username"
-          />
+          <input id="sign-up-hidden-username-input" class="hidden-input" type="text" autocomplete="username" />
           <label for="sign-up-hidden-username-input"></label>
 
           <div class="names">
-            <CustomInput
-              :label="t('shared.name')"
-              iconClass="ph-identification-card-light"
-              autocomplete="given-name"
-              type="name"
-              :required="true"
-              :messageEmpty="t('signUp.nameField.messageEmpty')"
-              :messageInvalid="t('signUp.nameField.messageInvalid')"
-              v-model:value="userData.name"
-              :forceValidate="forceValidate"
-              :invalid="!userData.name"
-            />
+            <CustomInput :label="t('shared.name')" iconClass="ph-identification-card-light" autocomplete="given-name"
+              type="name" :required="true" :messageEmpty="t('signUp.nameField.messageEmpty')"
+              :messageInvalid="t('signUp.nameField.messageInvalid')" v-model:value="userData.name"
+              :forceValidate="forceValidate" :invalid="!userData.name" />
 
-            <CustomInput
-              :label="t('shared.surname')"
-              iconClass="ph-identification-card-light"
-              autocomplete="family-name"
-              type="name"
-              v-model:value="userData.surname"
-              :required="true"
+            <CustomInput :label="t('shared.surname')" iconClass="ph-identification-card-light"
+              autocomplete="family-name" type="name" v-model:value="userData.surname" :required="true"
               :messageEmpty="t('signUp.surnameField.messageEmpty')"
-              :messageInvalid="t('signUp.surnameField.messageInvalid')"
-              :invalid="!userData.surname"
-              :forceValidate="forceValidate"
-            />
+              :messageInvalid="t('signUp.surnameField.messageInvalid')" :invalid="!userData.surname"
+              :forceValidate="forceValidate" />
           </div>
 
-          <CustomInput
-            :label="t('shared.email')"
-            iconClass="ph-envelope-simple-light"
-            autocomplete="email"
-            type="email"
-            v-model:value="userData.email"
-            :required="true"
-            :messageEmpty="t('shared.emailEmpty')"
-            :messageInvalid="t('shared.emailInvalid')"
-            :invalid="emailInvalid"
-            :forceValidate="forceValidate"
-          />
+          <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light" autocomplete="email" type="email"
+            v-model:value="userData.email" :required="true" :messageEmpty="t('shared.emailEmpty')"
+            :messageInvalid="t('shared.emailInvalid')" :invalid="emailInvalid" :forceValidate="forceValidate" />
 
-          <CustomSelect
-            class="select"
-            :header="t('shared.gender')"
-            iconClass="ph-gender-intersex-light"
-            :options="genderOptions"
-            v-model:selected-value="userData.gender"
-            :required="true"
+          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
+            v-model:selected-value="userData.gender" :required="true"
             :messageEmpty="t('signUp.genderField.messageEmpty')"
-            :messageInvalid="t('signUp.genderField.messageInvalid')"
-            :invalid="!userData.gender"
-            :forceValidate="forceValidate"
-          />
+            :messageInvalid="t('signUp.genderField.messageInvalid')" :invalid="!userData.gender"
+            :forceValidate="forceValidate" />
 
-          <CustomInput
-            :label="t('shared.password')"
-            autocomplete="new-password"
-            type="password"
-            v-model:value="userData.password"
-            :invalid="!passwordRepeat || passwordRepeat !== userData.password"
-            :forceValidate="forceValidate"
-            :required="true"
-            :messageEmpty="t('signUp.passwordField.messageEmpty')"
-            :messageInvalid="t('signUp.passwordField.messageInvalid')"
-          />
+          <CustomInput :label="t('shared.password')" autocomplete="new-password" type="password"
+            v-model:value="userData.password" :invalid="!passwordRepeat || passwordRepeat !== userData.password"
+            :forceValidate="forceValidate" :required="true" :messageEmpty="t('signUp.passwordField.messageEmpty')"
+            :messageInvalid="t('signUp.passwordField.messageInvalid')" />
 
-          <CustomInput
-            :label="t('signUp.repeatPasswordField.label')"
-            autocomplete="new-password"
-            type="password"
-            v-model:value="passwordRepeat"
-            :invalid="!passwordRepeat || passwordRepeat !== userData.password"
-            :forceValidate="forceValidate"
-            :required="true"
-            :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
-            :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')"
-          />
+          <CustomInput :label="t('signUp.repeatPasswordField.label')" autocomplete="new-password" type="password"
+            v-model:value="passwordRepeat" :invalid="!passwordRepeat || passwordRepeat !== userData.password"
+            :forceValidate="forceValidate" :required="true" :messageEmpty="t('signUp.repeatPasswordField.messageEmpty')"
+            :messageInvalid="t('signUp.repeatPasswordField.messageInvalid')" />
         </div>
 
         <div class="under-inputs-section">
-          <CustomCheckbox
-            v-model:checked="termsAccepted"
-            :forceValidate="forceValidate"
-            :messageUnchecked="t('signUp.checkbox.messageUnchecked')"
-          >
+          <CustomCheckbox v-model:checked="termsAccepted" :forceValidate="forceValidate"
+            :messageUnchecked="t('signUp.checkbox.messageUnchecked')">
             {{ t("signUp.checkbox.label") }}
             <router-link to="/terms-of-use">
               {{ t("signUp.checkbox.termsOfServices") }}
@@ -275,4 +222,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

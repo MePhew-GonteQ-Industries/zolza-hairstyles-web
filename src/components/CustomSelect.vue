@@ -1,39 +1,20 @@
 <!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <div class="select-wrapper">
-    <div
-      class="select"
-      tabindex="0"
-      :class="[
-        {
-          expanded: expanded,
-          'hover-enabled': selectHoverEnabled,
-          invalid: invalid && (validate || forceValidate),
-        },
-        appearance,
-      ]"
-      @mousedown="toggleDropdown"
-      @focus.self="expandDropdown"
-      @keydown.down.prevent="selectNextOption"
-      @keydown.up.prevent="selectPreviousOption"
-      @keydown.tab="collapseDropdown"
-      ref="select"
-      @blur="validate = true"
-    >
+    <div class="select" tabindex="0" :class="[
+      {
+        expanded: expanded,
+        'hover-enabled': selectHoverEnabled,
+        invalid: invalid && (validate || forceValidate),
+      },
+      appearance,
+    ]" @mousedown="toggleDropdown" @focus.self="expandDropdown" @keydown.down.prevent="selectNextOption"
+      @keydown.up.prevent="selectPreviousOption" @keydown.tab="collapseDropdown" ref="select" @blur="validate = true">
       <span class="header" :class="{ expanded: expanded, 'value-selected': selectedItem !== null }">
-        {{ header }}</span
-      >
+        {{ header }}</span>
 
-      <i
-        class="select-icon"
-        :class="currentIconClass"
-        @focus.stop
-        @mousedown.stop
-        @mouseenter="toggleSelectHover"
-        @mouseleave="toggleSelectHover"
-        tabindex="-1"
-        v-if="currentIconClass"
-      ></i>
+      <i class="select-icon" :class="currentIconClass" @focus.stop @mousedown.stop @mouseenter="toggleSelectHover"
+        @mouseleave="toggleSelectHover" tabindex="-1" v-if="currentIconClass"></i>
       <div class="select-text-icon" v-else-if="currentIconText">
         {{ currentIconText }}
       </div>
@@ -42,25 +23,21 @@
 
       <i class="ph-caret-down-light dropdown-arrow" :class="{ flipped: expanded }"></i>
     </div>
-    <div v-show="(validate || forceValidate) && invalid" class="invalid-wrapper">
-      <i class="ph-warning-circle-light invalid-icon"></i>
+    <div class="invalid-wrapper">
+      <i class="ph-warning-circle-light invalid-icon"
+        v-if="(required && selectedItem === null) && (validate || forceValidate)"></i>
 
-      <p class="messageInvalid messageValueEmpty" v-if="required && selectedItem === null">
+      <p class="messageInvalid messageValueEmpty"
+        v-if="(required && selectedItem === null) && (validate || forceValidate)">
         {{ messageEmpty }}
       </p>
     </div>
     <div class="dropdown" :class="{ show: expanded }">
       <ol>
-        <li
-          v-for="(option, index) in options"
-          :key="option.value"
-          @click="
-            changeValue(index);
-            collapseDropdown();
-          "
-          @keydown.down="selectNextOption"
-          @keydown.up="selectPreviousOption"
-        >
+        <li v-for="(option, index) in options" :key="option.value" @click="
+  changeValue(index);
+collapseDropdown();
+        " @keydown.down="selectNextOption" @keydown.up="selectPreviousOption">
           <span :class="{ selected: index === selectedItem }"> {{ option.title }}</span>
 
           <i :class="option.iconClass" v-if="option.iconClass"></i>
@@ -238,31 +215,33 @@ export default {
 
 <style lang="scss" scoped>
 .select-wrapper {
-  position: relative;
-  height: 65px;
+  height: 75px;
   width: 408px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: .5rem;
+
   @media only screen and (max-width: $xs) {
     width: 330px;
   }
 
   .invalid-wrapper {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin: 0.5rem 1rem;
+    height: calc(20px - .5rem);
+    margin: 0 .1rem;
     display: flex;
-    flex-direction: row;
-    gap: 15px;
     align-items: center;
+    gap: 5px;
     transform: translate3d(0, 0, 0);
 
     .invalid-icon {
       position: static;
-      font-size: 2rem;
+      font-size: 1.3rem;
       color: $error-color;
     }
 
     .messageInvalid {
+      font-size: .6rem;
       color: $error-color;
     }
   }
@@ -272,7 +251,7 @@ export default {
     outline: none;
     border: 2px solid transparent;
     background-color: $primary-color;
-    height: 100%;
+    height: 55px;
     width: 100%;
     border-radius: 0.5rem;
     box-shadow: none;
@@ -363,8 +342,8 @@ export default {
 
   .dropdown {
     position: absolute;
-    margin-top: 10px;
-    width: 100%;
+    margin-top: 55px;
+    width: 408px;
     z-index: 1;
     border-radius: 0 0 0.5rem 0.5rem;
     border-width: 0;
@@ -374,6 +353,10 @@ export default {
     box-shadow: none;
     max-height: 0;
     overflow: hidden;
+
+    @media only screen and (max-width: $xs) {
+      width: 330px;
+    }
 
     @keyframes expand {
       from {

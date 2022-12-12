@@ -1,36 +1,41 @@
 <template>
   <div class="input-wrapper">
-    <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete" :placeholder="label" :value="value"
-      @input="(event) => $emit('update:value', event.target.value)"
-      :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]" @focus="$emit('focus')"
-      @blur="handleBlur" />
+    <div class="inside-input-wrapper">
+      <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete" :placeholder="label"
+        :value="value" @input="(event) => $emit('update:value', event.target.value)"
+        :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]" @focus="$emit('focus')"
+        @blur="handleBlur" />
 
-    <label class="search-label" v-if="type === 'search'" :for="inputId">{{ label }}</label>
-    <label class="form-label" v-else :for="inputId">{{ label }}</label>
+      <label class="search-label" v-if="type === 'search'" :for="inputId">{{ label }}</label>
+      <label class="form-label" v-else :for="inputId">{{ label }}</label>
 
-    <div v-if="type === 'search'" class="button" @click="$emit('searchBtnClick')" @keyup.enter="searchBtnClick">
-      <i class="ph-magnifying-glass-light"></i>
+      <div v-if="type === 'search'" class="button" @click="$emit('searchBtnClick')" @keyup.enter="searchBtnClick">
+        <i class="ph-magnifying-glass-light"></i>
+      </div>
+      <div v-else-if="type === 'password'" class="button" @click="showPassword" @keyup.enter="showPassword">
+        <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+
+        <i class="ph-eye-light" v-if="!passwordHidden"></i>
+      </div>
+      <div v-else-if="type === 'password-login'" class="button" @click="showPassword" @keyup.enter="showPassword">
+        <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+
+        <i class="ph-eye-light" v-if="!passwordHidden"></i>
+      </div>
+      <i v-else :class="iconClass" class="input-icon"></i>
+
     </div>
-    <div v-else-if="type === 'password'" class="button" @click="showPassword" @keyup.enter="showPassword">
-      <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+    <div class="invalid-wrapper">
+      <i class="ph-warning-circle-light invalid-icon"
+        v-if="(required && empty) && (validate || forceValidate) || ((validate || forceValidate) && (invalid))"></i>
 
-      <i class="ph-eye-light" v-if="!passwordHidden"></i>
-    </div>
-    <div v-else-if="type === 'password-login'" class="button" @click="showPassword" @keyup.enter="showPassword">
-      <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
-
-      <i class="ph-eye-light" v-if="!passwordHidden"></i>
-    </div>
-    <i v-else :class="iconClass" class="input-icon"></i>
-
-    <div v-show="(validate || forceValidate) && (invalid || empty)" class="invalid-wrapper">
-      <i class="ph-warning-circle-light invalid-icon"></i>
-
-      <p class="message-invalid message-value-empty" v-if="required && empty">
+      <p class="message-invalid message-value-empty"
+        v-if="(required && empty) && (validate || forceValidate) && invalid">
         {{ messageEmpty }}
       </p>
 
-      <p class="message-invalid message-value-invalid" v-if="!(required && empty)">
+      <p class="message-invalid message-value-invalid"
+        v-if="!(required && empty) && (validate || forceValidate) && invalid">
         {{ messageInvalid }}
       </p>
     </div>
@@ -176,35 +181,44 @@ export default {
 .input-wrapper {
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  height: 65px;
+  height: 75px;
   width: 408px;
+  box-sizing: border-box;
+  gap: .5rem;
 
   @media only screen and (max-width: $xs) {
     width: 310px;
   }
 
-  .invalid-wrapper {
-    position: absolute;
-    height: 25px;
-    top: 100%;
-    left: 0;
-    margin: 0.5rem 1rem;
+  .inside-input-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    height: 55px;
+    width: 100%;
+  }
+
+  .invalid-wrapper {
+    height: calc(20px - .5rem);
+    margin: 0 .1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     transform: translate3d(0, 0, 0);
 
     .invalid-icon {
       position: static;
-      font-size: 2rem;
+      font-size: 1.3rem;
       color: $error-color;
     }
 
     .message-invalid {
       color: $error-color;
-      font-size: 1rem;
+      font-size: .6rem;
     }
   }
 
