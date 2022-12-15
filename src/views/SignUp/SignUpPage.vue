@@ -78,6 +78,7 @@ import CustomInput from "@/components/CustomInput.vue";
 import { validateEmail, handleRequestError } from "@/utils";
 import { useStore } from "vuex";
 import CustomCheckbox from "../../components/CustomCheckbox.vue";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "SignUpPage",
@@ -91,6 +92,7 @@ export default {
     const { t } = useI18n({ useScope: "global" });
     const router = useRouter();
     const store = useStore();
+    const message = useMessage();
 
     const userData = ref({
       name: "",
@@ -167,13 +169,15 @@ export default {
         })
         .then((response) => {
           const { email } = response.data;
+          message.success("Konto zostało utworzone");
           router.push({
             name: "login",
             params: { email, accountCreated: true },
           });
         })
         .catch((error) => {
-          handleRequestError(error);
+          const response = handleRequestError(error);
+          message.error(`Nie udało się utworzyć konta, kod błędu: ${response.status}, ${response.data.detail}`)
         });
     }
 
@@ -217,6 +221,7 @@ export default {
       emailInvalid,
       forceValidate,
       termsAccepted,
+      message,
     };
   },
 };

@@ -137,6 +137,7 @@ import TimeAgo from "@/timeAgo";
 import axios from "axios";
 import { handleRequestError } from "@/utils";
 import { useRouter } from "vue-router";
+import { useMessage } from 'naive-ui';
 
 export default {
   name: "UserAccountSettings",
@@ -153,6 +154,7 @@ export default {
     const router = useRouter();
     const store = useStore();
     const locale = store.state.settings.language;
+    const message = useMessage();
 
     const userData = reactive({
       name: store.state.user.name,
@@ -241,11 +243,12 @@ export default {
         })
         .then((response) => {
           if (response.status === 202) {
-            // todo: snackbar ?
+            message.success("Wysłano E-mail z weryfikacją");
           }
         })
         .catch((error) => {
-          handleRequestError(error);
+          const response = handleRequestError(error);
+          message.error(`Nie udało się wysłać wiadomośći E-mail, ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -263,21 +266,22 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             store.commit("setUserData", response.data);
+            message.success("Zmieniono dane");
           }
         })
         .catch((error) => {
-          const { status } = handleRequestError(error);
-          if (status === 403) {
-            passwordPromptOpen.value = true;
-          }
+          const response = handleRequestError(error);
+          message.error(`Nie udało się zmienić danych, ${response.status}, ${response.data.detail}`);
         });
     };
 
     const changeUserData = () => {
       if (validateUserData()) {
+        console.log(store.getters.sudoModeActive)
         if (store.getters.sudoModeActive) {
           requestUserDataChange();
         } else {
+          message.info("Operacja wymaga podania hasła");
           passwordPromptOpen.value = true;
         }
       }
@@ -347,6 +351,7 @@ export default {
       deleteAccountPassword,
       confirmAccountDeletion,
       t,
+      message,
     };
   },
 };

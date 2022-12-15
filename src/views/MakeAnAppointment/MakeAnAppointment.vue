@@ -72,6 +72,7 @@ import MessageBox from '@/components/MessageBox.vue'
 import { DatePicker } from "v-calendar";
 import "v-calendar/dist/style.css";
 import { useStore } from 'vuex';
+import { useMessage } from 'naive-ui';
 
 export default {
     components: {
@@ -92,6 +93,7 @@ export default {
         const availableSlots = ref([]);
         const store = useStore();
         const selectedSlotId = ref(null);
+        const message = useMessage();
 
         const locale = store.state.settings.language;
 
@@ -147,8 +149,10 @@ export default {
                     service_id: selectedService.value.id,
                 });
                 openMakeAnAppointmentModal.value = false;
+                message.success("Wizyta została umówiona");
             } catch (error) {
-                handleRequestError(error);
+                const errorResponse = handleRequestError(error);
+                message.error(`Nie udało się umówić wizyty, ${errorResponse.status}, ${errorResponse.data.detail}`);
             }
         };
 
@@ -194,6 +198,7 @@ export default {
             selectAppointmentHour,
             selectedSlotId,
             makeAppointment,
+            message,
         }
     }
 }
