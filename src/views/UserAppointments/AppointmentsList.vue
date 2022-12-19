@@ -1,6 +1,7 @@
 <template>
     <div class="user-appointments-wrapper">
         <router-link :to="({ name: 'makeAnAppointment' })" class="make-an-appointment-button">Umów wizytę</router-link>
+        <h1>Twoje wizyty:</h1>
         <div class="appointments-list" v-if="appointmentsFiltered.length > 0 && !loading">
             <n-card v-for="appointment in appointmentsFiltered" :key="appointment.id" size="huge"
                 :title="appointment.service">
@@ -109,6 +110,10 @@ export default {
     align-items: center;
     padding: 5rem;
     gap: 3rem;
+
+    h1 {
+        color: $primary-text-color;
+    }
 
     .make-an-appointment-button {
         color: $primary-color;
