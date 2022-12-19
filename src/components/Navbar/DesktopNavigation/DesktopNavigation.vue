@@ -2,12 +2,11 @@
   <nav class="navigation">
     <router-link class="wordmark-link" to="/">
       <!-- eslint-disable max-len -->
-      <svg class="wordmark" version="1.1" width="181.29895pt" height="41.661442pt"
-        viewBox="0 0 181.29895 41.661442" id="svg88" xmlns="http://www.w3.org/2000/svg">
+      <svg class="wordmark" version="1.1" width="181.29895pt" height="41.661442pt" viewBox="0 0 181.29895 41.661442"
+        id="svg88" xmlns="http://www.w3.org/2000/svg">
         <defs id="defs92">
           <clipPath id="cp0">
-            <path transform="matrix(1,0,0,-1,0,99.2126)" d="M 0,99.213 H 325.984 V 0 H 0 Z"
-              id="path4" />
+            <path transform="matrix(1,0,0,-1,0,99.2126)" d="M 0,99.213 H 325.984 V 0 H 0 Z" id="path4" />
           </clipPath>
         </defs>
         <path
@@ -68,8 +67,8 @@
       <li v-if="$store.getters.isLoggedIn && $store.getters.isAdmin">
         <router-link to="/dashboard">{{ t("nav.primaryNav[1]") }}</router-link>
       </li>
-      <li>
-        <!-- <router-link to="/make-an-appointment">{{ t('nav.primaryNav[2]') }}</router-link> -->
+      <li v-if="$store.getters.isLoggedIn">
+        <router-link to="/appointments">{{ t('nav.primaryNav[2]') }}</router-link>
       </li>
       <li>
         <router-link to="/contact">{{ t("nav.primaryNav[3]") }}</router-link>
