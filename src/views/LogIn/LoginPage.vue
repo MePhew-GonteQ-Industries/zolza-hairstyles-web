@@ -43,10 +43,6 @@
         <router-link to="/sign-up">{{ t("shared.signUp") }}</router-link>
       </div>
     </div>
-    <MessageBox type="error" v-if="message" class="error-message">
-      <template #title> {{ t("logIn.error") }} </template>
-      <template #subtitle>{{ message }}</template>
-    </MessageBox>
   </section>
 </template>
 
@@ -59,8 +55,8 @@ import CustomButton from "@/components/CustomButton.vue";
 import CustomInput from "@/components/CustomInput.vue";
 import { validateEmail, handleRequestError } from "@/utils";
 import CustomLoader from "@/components/CustomLoader.vue";
-import MessageBox from "@/components/MessageBox.vue";
 import CustomCheckbox from "../../components/CustomCheckbox.vue";
+import { useMessage } from 'naive-ui';
 
 export default {
   name: "LoginPage",
@@ -69,7 +65,6 @@ export default {
     CustomInput,
     CustomLoader,
     CustomCheckbox,
-    MessageBox,
   },
   props: {
     emailConfirmed: {
@@ -89,6 +84,7 @@ export default {
     const store = useStore();
     const router = useRouter();
     const { t } = useI18n();
+    const message = useMessage();
 
     const userData = ref({
       email: "",
@@ -105,8 +101,6 @@ export default {
     });
 
     const loading = ref(false);
-
-    const message = ref("");
 
     const emailInvalid = computed(() => !validateEmail(userData.value.email));
 
@@ -132,11 +126,12 @@ export default {
         .dispatch("login", userData.value)
         .then(() => {
           loading.value = false;
+          message.success("Zalogowano pomyślnie");
           router.push("/");
         })
         .catch((error) => {
-          handleRequestError(error);
-          message.value = error;
+          const response = handleRequestError(error);
+          message.error(`Nie udało się zalogować, kod błędu: ${response.status}, ${response.data.detail}`);
           loading.value = false;
         });
     }

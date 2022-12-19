@@ -8,10 +8,9 @@
 
     <form @submit.prevent="handleResetPasswordRequest" novalidate>
       <div class="inputs">
-        <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light"
-          inputType="email" autocomplete="email" v-model:value="userEmail" :invalid="emailInvalid"
-          :forceValidate="forceValidate" :required="true" :messageEmpty="t('shared.emailEmpty')"
-          :messageInvalid="t('shared.emailInvalid')" />
+        <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light" inputType="email"
+          autocomplete="email" v-model:value="userEmail" :invalid="emailInvalid" :forceValidate="forceValidate"
+          :required="true" :messageEmpty="t('shared.emailEmpty')" :messageInvalid="t('shared.emailInvalid')" />
       </div>
 
       <CustomButton class="btn">
@@ -34,6 +33,7 @@ import { useI18n } from "vue-i18n";
 import { validateEmail, handleRequestError } from "@/utils";
 import CustomButton from "@/components/CustomButton.vue";
 import CustomInput from "@/components/CustomInput.vue";
+import { useMessage } from 'naive-ui';
 
 export default {
   name: "RequestPasswordReset",
@@ -43,6 +43,7 @@ export default {
   },
   setup() {
     const { t } = useI18n();
+    const message = useMessage();
 
     const userEmail = ref("");
 
@@ -65,8 +66,12 @@ export default {
         .post("auth/request-password-reset", {
           email: userEmail.value,
         })
+        .then(() => {
+          message.success("Wysłano E-mail z instrukcją resetowania hasła");
+        })
         .catch((error) => {
-          handleRequestError(error);
+          const response = handleRequestError(error);
+          message.error(`Resetowanie hasła nie powiodło się, ${response.status}, ${response.data.detail}`);
         });
     }
 
@@ -82,6 +87,7 @@ export default {
       handleResetPasswordRequest,
       emailInvalid,
       forceValidate,
+      message,
     };
   },
 };

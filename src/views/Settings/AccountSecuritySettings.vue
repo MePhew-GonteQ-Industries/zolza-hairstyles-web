@@ -6,17 +6,15 @@
         <input class="hidden-input" type="text" autocomplete="username"
           id="settings-change-password-hidden-username-input" />
         <label for="settings-change-password-hidden-username-input"></label>
-        <CustomInput v-model:value="passwordData.current"
-          :label="t('settings.accountSecuritySettings.currentPassword')"
+        <CustomInput v-model:value="passwordData.current" :label="t('settings.accountSecuritySettings.currentPassword')"
           autocomplete="current-password" type="password" :required="true" />
-        <CustomInput v-model:value="passwordData.new"
-          :label="t('settings.accountSecuritySettings.newPassword')" autocomplete="new-password"
-          type="password" :required="true" />
-        <CustomInput v-model:value="passwordData.repeat"
-          :label="t('settings.accountSecuritySettings.repeatNewPassword')"
+        <CustomInput v-model:value="passwordData.new" :label="t('settings.accountSecuritySettings.newPassword')"
           autocomplete="new-password" type="password" :required="true" />
+        <CustomInput v-model:value="passwordData.repeat"
+          :label="t('settings.accountSecuritySettings.repeatNewPassword')" autocomplete="new-password" type="password"
+          :required="true" />
         <router-link to="/password-reset" tabindex="-1">{{
-        t("shared.forgotYourPassword")
+            t("shared.forgotYourPassword")
         }}</router-link>
         <CustomButton @click="changePassword">
           {{ t("settings.accountSecuritySettings.changePassword") }}</CustomButton>
@@ -39,7 +37,8 @@
         <h1>{{ t("settings.accountSecuritySettings.sessions") }}</h1>
         <CustomButton type="warning" class="logout-everywhere" v-if="sessions.length > 1"
           @click="logoutEverywhereModalOpen = true">{{
-          t("settings.accountSecuritySettings.logOutEverywhere") }}</CustomButton>
+              t("settings.accountSecuritySettings.logOutEverywhere")
+          }}</CustomButton>
         <CustomModal v-model:open="logoutEverywhereModalOpen">
           <template #title>
             {{ t("settings.accountSecuritySettings.logOutReassurance") }}
@@ -51,10 +50,10 @@
             </MessageBox>
             <div class="btns-wrapper">
               <CustomButton type="warning" @click="logoutEverywhere">{{
-              t("shared.logOut")
+                  t("shared.logOut")
               }}</CustomButton>
               <CustomButton type="secondary" @click="logoutEverywhereModalOpen = false">{{
-              t("shared.operationCancel")
+                  t("shared.operationCancel")
               }}</CustomButton>
             </div>
           </div>
@@ -88,6 +87,7 @@ import MessageBox from "@/components/MessageBox.vue";
 import CustomModal from "@/components/CustomModal.vue";
 import axios from "axios";
 import { handleRequestError } from "@/utils";
+import { useMessage } from 'naive-ui';
 
 export default {
   name: "AccountSecuritySettings",
@@ -103,6 +103,7 @@ export default {
     const store = useStore();
     const locale = store.state.settings.language;
     const { t } = useI18n({ useScope: "global" });
+    const message = useMessage();
 
     const sessions = computed(() => {
       if (!store.state.sessions.sessions.length) return [];
@@ -176,12 +177,14 @@ export default {
             store.dispatch("deleteSessions").then(() => {
               store.dispatch("loadSessions").then(() => {
                 logoutEverywhereModalOpen.value = false;
+                message.success("Pomyślnie wylogowano ze wszystkich urządzeń");
               });
             });
           }
         })
         .catch((error) => {
-          handleRequestError(error);
+          const response = handleRequestError(error);
+          message.error(`Nie udało się wylogować, ${response.status}, ${response.data}`);
         });
     };
 
@@ -199,11 +202,12 @@ export default {
         })
         .then((response) => {
           if (response.status === 200) {
-            // todo: snackbar ?
+            message.success("Zmieniono hasło");
           }
         })
         .catch((error) => {
-          handleRequestError(error);
+          const response = handleRequestError(error);
+          message.error(`Nie udało się zmienić hasła, ${response.satus}, ${response.data.detail}`);
         });
     };
 
@@ -229,6 +233,7 @@ export default {
       passwordData,
       changePassword,
       t,
+      message,
     };
   },
 };

@@ -12,10 +12,10 @@
       </div>
       <div class="buttons-row" v-if="selectedTheme !== initialTheme">
         <CustomButton type="success" @click="changeTheme">{{
-          t("shared.saveChanges")
+            t("shared.saveChanges")
         }}</CustomButton>
         <CustomButton type="secondary" @click="selectedTheme = initialTheme">{{
-          t("shared.operationCancel")
+            t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -31,6 +31,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import axios from "axios";
 import { handleRequestError } from "@/utils";
 import { onBeforeRouteLeave } from "vue-router";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "ThemeSettings",
@@ -41,6 +42,7 @@ export default {
   setup() {
     const store = useStore();
     const { t } = useI18n({ useScope: "global" });
+    const message = useMessage();
 
     const selectedTheme = ref(store.state.settings.theme);
 
@@ -69,9 +71,11 @@ export default {
           const language = settings.find((setting) => setting.name === "language").current_value;
           store.commit("setLanguage", language);
           initialTheme.value = store.state.settings.theme;
+          message.success("Zmieniono motyw");
         })
         .catch((error) => {
-          handleRequestError(error);
+          const response = handleRequestError(error);
+          message.error(`Nie udało się zmienić motywu, ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -84,6 +88,7 @@ export default {
       changeTheme,
       initialTheme,
       t,
+      message,
     };
   },
 };
@@ -98,6 +103,7 @@ export default {
   @media screen and (max-width: 1600px) {
     grid-template-columns: 1fr;
   }
+
   @media only screen and (max-width: $xs) {
     display: flex;
     flex-direction: column;

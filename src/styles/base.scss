@@ -216,7 +216,7 @@ ul {
       .inputs {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 1rem;
 
         .names {
           display: flex;
@@ -231,7 +231,7 @@ ul {
       }
 
       .under-inputs-section {
-        margin-top: 0.875rem;
+        margin-top: 30px;
         margin-left: 0.5rem;
         width: 100%;
         display: flex;

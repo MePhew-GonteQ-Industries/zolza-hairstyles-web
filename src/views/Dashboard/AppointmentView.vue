@@ -39,8 +39,7 @@
       </div>
       <div class="right">
         <CustomButton type="error" class="cancel-appointment-button"
-          v-if="!appointment.archival && !appointment.canceled"
-          @click="cancelAppointmentModalOpen = true">Odwołaj
+          v-if="!appointment.archival && !appointment.canceled" @click="cancelAppointmentModalOpen = true">Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -56,8 +55,7 @@
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date"
-          v-if="!appointment.archival && !appointment.canceled"
+        <CustomButton type="info" class="change-appointment-date" v-if="!appointment.archival && !appointment.canceled"
           @click="changeAppointmentDateModalOpen = true">
           Zmień termin</CustomButton>
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
@@ -70,20 +68,20 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
-                color="green" mode="date" v-model="selectedDate" />
+              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
+                v-model="selectedDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots"
-                    :key="availableSlot.id" @click="selectAppointmentHour(availableSlot)"
+                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                    @click="selectAppointmentHour(availableSlot)"
                     :class="{ 'selected': availableSlot.id === selectedSlotId }">
                     {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(
-                    locale, {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    }
-                    )
+                        locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                      )
                     }}
                   </div>
                 </div>
@@ -116,6 +114,7 @@ import CustomModal from "../../components/CustomModal.vue";
 import MessageBox from "../../components/MessageBox.vue";
 import CustomLoader from "../../components/CustomLoader.vue";
 import "v-calendar/dist/style.css";
+import { useMessage } from 'naive-ui';
 
 export default {
   name: "AppointmentView",
@@ -136,6 +135,7 @@ export default {
     const loading = ref(false);
     const availableSlots = ref([]);
     const selectedSlotId = ref(null);
+    const message = useMessage();
 
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
@@ -190,8 +190,10 @@ export default {
           });
         store.dispatch("deleteAppointments");
         changeAppointmentDateModalOpen.value = false;
+        message.success("Zmieniono datę wizyty");
       } catch (error) {
-        handleRequestError(error);
+        const response = handleRequestError(error);
+        message.error(`Nie udało się zmienić daty wizyty, ${response.status}, ${response.data.detail}`);
       }
     };
 
@@ -200,8 +202,10 @@ export default {
         await axios.post(`appointments/any/${route.params.id}`);
         store.dispatch("deleteAppointments");
         cancelAppointmentModalOpen.value = false;
+        message.success("Pomyślnie odwołano wizytę");
       } catch (error) {
-        handleRequestError(error);
+        const response = handleRequestError(error);
+        message.error(`Nie udało się odwołać wizyty, ${response.status}, ${response.data.detail}`);
       }
     };
 
@@ -311,6 +315,7 @@ export default {
       selectedSlotId,
       selectAppointmentHour,
       cancelAppointment,
+      message,
     };
   },
 };
@@ -343,6 +348,12 @@ export default {
   .date-picker-wrapper {
     display: flex;
 
+    @media only screen and (max-width: $sm) {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .hours {
       margin-left: 10px;
       display: flex;
@@ -351,9 +362,13 @@ export default {
       justify-content: center;
 
       .slots-wrapper {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
         gap: .5rem;
+
+        @media only screen and (max-width: $sm) {
+          grid-template-columns: repeat(3, 1fr);
+        }
 
         .single-hour {
           padding: 25px;

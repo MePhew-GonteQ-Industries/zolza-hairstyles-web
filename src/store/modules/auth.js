@@ -24,8 +24,7 @@ export default {
       if (!state.sudoModeActivated) return false;
       if (!state.sudoModeExpires) return false;
       const sudoModeExpires = new Date(state.sudoModeExpires);
-      if (sudoModeExpires > new Date()) return false;
-      return true;
+      return sudoModeExpires > new Date();
     },
   },
 

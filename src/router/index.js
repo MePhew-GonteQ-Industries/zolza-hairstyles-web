@@ -36,9 +36,33 @@ const routes = [
     },
   },
   {
-    path: "/make-an-appointment",
-    name: "makeAnAppointment",
-    component:  () => import("@/views/MakeAnAppointment/MakeAnAppointment.vue"),
+    path: "/appointments",
+    name: "userAppointments",
+    component:  () => import("@/views/UserAppointments/UserAppointmentsView.vue"),
+    children: [
+      {
+        path: "",
+        name: "appointmentsList",
+        components:  {
+          appointments: () => import("@/views/UserAppointments/AppointmentsList.vue"),
+        },
+        meta: {
+          requiresAuth: true,
+          requiredPermissionLevel: "user",
+        }
+      },
+      {
+        path: "/make-an-appointment",
+        name: "makeAnAppointment",
+        components:  {
+          appointments: () => import("@/views/UserAppointments/MakeAnAppointment.vue"),
+        },
+        meta: {
+          requiresAuth: true,
+          requiredPermissionLevel: "user",
+        }
+      },
+    ],
     meta: {
       requiresAuth: true,
       requiredPermissionLevel: "user",
