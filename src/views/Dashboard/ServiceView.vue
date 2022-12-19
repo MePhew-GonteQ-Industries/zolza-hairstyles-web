@@ -117,9 +117,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.elevated-card {
+  @media only screen and (max-width: $sm) {
+    padding: 1rem;
+  }
+}
+
+.dashboard-page {
+  @media only screen and (max-width: $sm) {
+    padding: 5rem 1rem;
+  }
+}
+
 .service {
   display: grid;
   grid-template-columns: 3fr 1fr;
+
+  @media only screen and (max-width: $sm) {
+    display: flex;
+    flex-direction: column;
+  }
 
   .buttons {
     display: flex;

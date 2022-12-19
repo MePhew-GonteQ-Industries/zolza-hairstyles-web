@@ -23,15 +23,14 @@
         </div>
         <div class="inputs-section">
           <div class="text-inputs">
-            <CustomInput :label="t('shared.name')" v-model:value="userData.name"
-              appearance="primary" autocomplete="name">
+            <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
+              autocomplete="name">
             </CustomInput>
-            <CustomInput :label="t('shared.surname')" v-model:value="userData.surname"
-              appearance="primary" autocomplete="surname"></CustomInput>
+            <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
+              autocomplete="surname"></CustomInput>
           </div>
-          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light"
-            :options="genderOptions" v-model:selectedValue="userData.gender" appearance="primary"
-            v-if="!loading"></CustomSelect>
+          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
+            v-model:selectedValue="userData.gender" appearance="primary" v-if="!loading"></CustomSelect>
         </div>
         <div class="user-account-buttons">
           <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
@@ -177,6 +176,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.elevated-card {
+  @media only screen and (max-width: $sm) {
+    padding: 1rem;
+  }
+}
+
 .user-view {
   .user {
     display: flex;
@@ -188,7 +193,17 @@ export default {
       align-items: center;
       font-size: 1rem;
 
+      @media only screen and (max-width: $sm) {
+        flex-direction: column;
+      }
+
       .user-data {
+        @media only screen and (max-width: $sm) {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
         .email {
           font-size: 1.2rem;
         }
@@ -204,6 +219,12 @@ export default {
         gap: 2rem;
         justify-content: center;
         margin-top: 10px;
+
+        @media only screen and (max-width: $sm) {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: center;
+        }
 
         .single-indicator {
           display: flex;
@@ -230,6 +251,10 @@ export default {
       display: flex;
       gap: 1rem;
       justify-content: space-between;
+
+      @media only screen and (max-width: $sm) {
+        flex-direction: column;
+      }
     }
   }
 }
