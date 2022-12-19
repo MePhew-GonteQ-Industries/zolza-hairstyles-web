@@ -1,3 +1,8 @@
+const requestNotificationsPermission = async () => {
+  const permission = await Notification.requestPermission();
+  return permission === 'granted';
+}
+
 function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,4 +33,4 @@ function handleRequestError(error) {
   throw error;
 }
 
-export { validateEmail, getCssPropertyValue, setCssPropertyValue, handleRequestError };
+export { validateEmail, getCssPropertyValue, setCssPropertyValue, handleRequestError, requestNotificationsPermission };
