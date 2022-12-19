@@ -4,12 +4,12 @@ export default {
   },
   getters: {
     getNavigationStatus(state) {
-      return state.navigationInProgress;
+      return state.navigationStatus;
     }
   },
   mutations: {
     setNavigationStatus(state, navigationStatus) {
-      state.navigationInProgress = navigationStatus;
+      state.navigationStatus = navigationStatus;
     },
   },
   actions: {},
