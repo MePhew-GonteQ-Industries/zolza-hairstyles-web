@@ -1,8 +1,8 @@
 <template>
   <section class="dashboard-page dashboard-data-page appointments-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.appointmentsManagement.search')"
-        v-model:value="q" type="search" appearance="secondary" />
+      <CustomInput class="search" :label="t('dashboard.appointmentsManagement.search')" v-model:value="q" type="search"
+        appearance="secondary" />
 
       <div class="search-filters">
         <!-- <DatePicker
@@ -59,8 +59,7 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
-              @toggleSort="toggleSort('id')">
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
               #id</SortedHeader>
           </th>
           <th>
@@ -130,17 +129,6 @@
       </table>
     </div>
 
-    <div class="pagination">
-      <i class="ph-caret-left-light"></i>
-      <span class="pagination-number">1</span>
-      <span class="pagination-number">...</span>
-      <span class="pagination-number">371</span>
-      <span class="pagination-number current">372</span>
-      <span class="pagination-number">373</span>
-      <span class="pagination-number">...</span>
-      <span class="pagination-number">744</span>
-      <i class="ph-caret-right-light"></i>
-    </div>
     <NPagination />
   </section>
   <div class="dashboard-page dashboard-data-page users-management" v-else>
@@ -297,6 +285,12 @@ export default {
   justify-items: center;
   width: 70%;
 
+  @media only screen and (max-width: $sm) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .search,
   .select {
     height: 50px;
@@ -317,6 +311,10 @@ export default {
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    @media only screen and (max-width: $sm) {
+      flex-direction: column;
+    }
   }
 }
 
