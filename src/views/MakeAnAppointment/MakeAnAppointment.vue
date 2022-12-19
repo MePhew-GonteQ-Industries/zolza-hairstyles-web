@@ -211,24 +211,37 @@ export default {
     width: 100%;
 
     .services-tiles {
-        display: flex;
-        flex-wrap: wrap;
-        width: 55vw;
-        margin-left: auto;
-        margin-right: auto;
-        gap: 1rem;
-        padding: 15px 0 15px 0;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 2.5rem 10%;
+        color: black;
+        display: grid;
+        gap: 2rem;
+        transition: all 1s;
+
+        @media only screen and (min-width: $lg) {
+            & {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media only screen and (max-width: $sm) {
+            & {
+                grid-template-columns: 1fr;
+            }
+        }
 
         .service-tile {
-            width: 45%;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
             color: $secondary-text-color;
+            background-color: $background-accent-low;
             border: 1px solid $background-accent-medium;
             border-radius: .375rem;
             transition: ease-in-out .6s;
+            padding: 1rem;
 
             &:hover {
                 cursor: pointer;
@@ -246,6 +259,12 @@ export default {
     .select-date-wrapper {
         display: flex;
 
+        @media only screen and (max-width: $sm) {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .hours {
             margin-left: 10px;
             display: flex;
@@ -254,9 +273,13 @@ export default {
             justify-content: center;
 
             .slots-wrapper {
-                display: flex;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
                 gap: .5rem;
+
+                @media only screen and (max-width: $sm) {
+                    grid-template-columns: repeat(3, 1fr);
+                }
 
                 .single-hour {
                     padding: 25px;

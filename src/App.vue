@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme="darkTheme" abstract>
+  <n-config-provider :theme="$store.state.settings.theme === 'dark' ? darkTheme : lightTheme" abstract>
     <n-loading-bar-provider>
       <n-message-provider placement="top">
         <n-dialog-provider>
@@ -14,7 +14,7 @@
 
 <script>
 import AppContainer from '@/views/AppContainer.vue';
-import { NConfigProvider, NLoadingBarProvider, NMessageProvider, NDialogProvider, NNotificationProvider, darkTheme, } from "naive-ui";
+import { NConfigProvider, NLoadingBarProvider, NMessageProvider, NDialogProvider, NNotificationProvider, darkTheme, lightTheme } from "naive-ui";
 
 export default {
   components: {
@@ -28,6 +28,7 @@ export default {
   setup() {
     return {
       darkTheme,
+      lightTheme,
     }
   }
 };

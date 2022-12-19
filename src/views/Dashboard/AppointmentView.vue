@@ -348,6 +348,12 @@ export default {
   .date-picker-wrapper {
     display: flex;
 
+    @media only screen and (max-width: $sm) {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .hours {
       margin-left: 10px;
       display: flex;
@@ -356,9 +362,13 @@ export default {
       justify-content: center;
 
       .slots-wrapper {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
         gap: .5rem;
+
+        @media only screen and (max-width: $sm) {
+          grid-template-columns: repeat(3, 1fr);
+        }
 
         .single-hour {
           padding: 25px;
