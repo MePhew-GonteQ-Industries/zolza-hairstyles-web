@@ -16,13 +16,15 @@
 
       <form @submit.prevent="handleSubmit" novalidate>
         <div class="inputs">
-          <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light" type="email" autocomplete="email"
-            v-model:value="userData.email" :forceValidate="forceValidate" :invalid="emailInvalid" :required="true"
-            :messageEmpty="t('shared.emailEmpty')" :messageInvalid="t('shared.emailInvalid')" class="input" />
+          <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light" type="email"
+            autocomplete="email" v-model:value="userData.email" :forceValidate="forceValidate"
+            :invalid="emailInvalid" :required="true" :messageEmpty="t('shared.emailEmpty')"
+            :messageInvalid="t('shared.emailInvalid')" class="input" />
 
-          <CustomInput class="current-password input" :label="t('shared.password')" autocomplete="current-password"
-            type="password-login" v-model:value="userData.password" :invalid="!userData.password"
-            :forceValidate="forceValidate" :required="true" :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
+          <CustomInput class="current-password input" :label="t('shared.password')"
+            autocomplete="current-password" type="password-login" v-model:value="userData.password"
+            :invalid="!userData.password" :forceValidate="forceValidate" :required="true"
+            :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
             :messageInvalid="t('logIn.currentPasswordField.messageInvalid')" />
         </div>
 
@@ -55,7 +57,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import CustomInput from "@/components/CustomInput.vue";
 import { validateEmail, handleRequestError } from "@/utils";
 import CustomLoader from "@/components/CustomLoader.vue";
-import CustomCheckbox from "../../components/CustomCheckbox.vue";
+import CustomCheckbox from "@/components/CustomCheckbox.vue";
 import { useMessage } from 'naive-ui';
 
 export default {
@@ -127,7 +129,11 @@ export default {
         .then(() => {
           loading.value = false;
           message.success("Zalogowano pomyślnie");
-          router.push("/");
+          if (store.state.user.permissionLevel.includes('owner') || store.state.user.permissionLevel.includes('admin')) {
+            router.push('/dashboard');
+          } else {
+            router.push("/appointments");
+          }
         })
         .catch((error) => {
           const response = handleRequestError(error);
