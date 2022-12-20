@@ -71,11 +71,11 @@ export default {
           const language = settings.find((setting) => setting.name === "language").current_value;
           store.commit("setLanguage", language);
           initialTheme.value = store.state.settings.theme;
-          message.success("Zmieniono motyw");
+          message.success(t('snackBars.themeChange'));
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się zmienić motywu, ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.themeChangeError')} ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -114,8 +114,16 @@ export default {
   display: flex;
   gap: 1rem;
 
+  @media only screen and (max-width: $xs) {
+    flex-direction: column;
+  }
+
   button {
     width: 200px;
+
+    @media only screen and (max-width: $xs) {
+      width: 100%;
+    }
   }
 }
 </style>

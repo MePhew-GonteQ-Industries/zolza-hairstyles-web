@@ -177,14 +177,14 @@ export default {
             store.dispatch("deleteSessions").then(() => {
               store.dispatch("loadSessions").then(() => {
                 logoutEverywhereModalOpen.value = false;
-                message.success("Pomyślnie wylogowano ze wszystkich urządzeń");
+                message.success(t('snackBars.logOutAllDevices'));
               });
             });
           }
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się wylogować, ${response.status}, ${response.data}`);
+          message.error(`${t('snackBars.logOutAllDevicesError')} ${response.status}, ${response.data}`);
         });
     };
 
@@ -202,12 +202,12 @@ export default {
         })
         .then((response) => {
           if (response.status === 200) {
-            message.success("Zmieniono hasło");
+            message.success(t('snackBars.passwordChange'));
           }
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się zmienić hasła, ${response.satus}, ${response.data.detail}`);
+          message.error(`${t('snackBars.passwordChangeError')} ${response.satus}, ${response.data.detail}`);
         });
     };
 

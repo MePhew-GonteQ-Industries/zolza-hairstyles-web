@@ -215,14 +215,39 @@
       "user": "Użytkownik",
       "startDate": "Data rozpoczęcia",
       "endDate": "Data zakończenia",
-      "status": "Status"
+      "status": "Status",
+      "makeAnAppointment": "Utwórz wizytę",
+      "addAppointment": "Dodaj wizytę",
+      "userWithoutAccount": "Użytkownik bez konta",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
     },
     "servicesManagement": {
       "search": "Szukaj usług",
       "name": "Nazwa",
       "averageDurationTime": "Średni czas trwania",
       "minPrice": "Cena minimalna",
-      "maxPrice": "Cena maksymalna"
+      "maxPrice": "Cena maksymalna",
+      "serviceView": {
+        "avgTime": "Średni czas trwania",
+        "minPrice": "Cena minimalna",
+        "maxPrice": "Cena maksymalna",
+        "createdAt": "Utworzone",
+        "edit": "Edytuj",
+        "modifyService": "Modyfikacja usługi",
+        "changeServiceData": "Zmiana danych usługi",
+        "changeServiceDataInfo": "Tutaj możesz zmienić wszystkie dane dotyczące danej usługi",
+        "serviceName": "Nazwa usługi",
+        "avgTimeLabel": "Średni czas trwania [min]",
+        "minPriceLabel": "Cena minimalna [zł]",
+        "maxPriceLabel": "Cena maksymalna [zl]",
+        "save": "Zapisz",
+        "cancel": "Anuluj",
+        "delete": "Usuń",
+        "deleteReassurance": "Czy napewno chcesz usunąć ta usługę",
+        "deleteWarning": "Usługa zostanie usunięta",
+        "deleteInfo": "Wizyty z tą usługą nie zostaną usunięte"
+      }
     },
     "usersManagement": {
       "search": "Szukaj użytkowników",
@@ -239,5 +264,47 @@
       "statistics": "Statystyki",
       "settings": "Ustawienia"
     }
+  },
+  "userAppointmentsView": {
+    "appointmentsList": {
+      "makeAnAppointment": "Umów wizytę",
+      "yourAppointments": "Twoje wizyty",
+      "date": "Data",
+      "price": "Cena",
+      "noAppointments": "Wygląda na to że nie masz żadnych umówionych wizyt, kliknij przycisk powyżej aby to zrobić"
+    },
+    "makeAnAppointment": {
+      "monthForward": "Maksymalnie miesiąc do przodu",
+      "adminCancel": "Umówioną wizytę może anulować tylko administrator",
+      "noSlots": "Brak wolnych miejsc",
+      "makeAnAppointment": "Umów wizytę",
+      "cancel": "Anuluj"
+    }
+  },
+  "snackBars": {
+    "logOut": "Wylogowano pomyślnie",
+    "appointmentDateChange": "Zmieniono datę wizyty",
+    "appointmentCancel": "Odwołano wizytę",
+    "appointmentDateChangeError": "Nie udało się zmienić daty wizyty,",
+    "appointmentCancelError": "Nie udało się odwołać wizyty,",
+    "login": "Zalogowano pomyślnie",
+    "loginError": "Nie udało się zalogować,",
+    "passwordReset": "Wysłano E-mail z instrukcją resetowania hasła",
+    "passwordResetError": "Resetowanie hasła nie powiodło się,",
+    "logOutAllDevices": "Wylogowano ze wszystkich urządzeń",
+    "logOutAllDevicesError": "Nie udało się wylogować,",
+    "passwordChange": "Zmieniono hasło",
+    "passwordChangeError": "Nie udało się zmienić hasła,",
+    "themeChange": "Zmieniono motyw",
+    "themeChangeError": "Nie udało się zmienić motywu",
+    "emailSent": "Wysłano E-mail z weryfikacją",
+    "emailSentError": "Nie udało się wysłać wiadomości E-mail,",
+    "dataChanged": "Zmieniono dane",
+    "dataChangedError": "Nie udało się zmienić danych,",
+    "passwordRequired": "Operacja wymaga podania hasła",
+    "accountCreated": "Konto zostało utworzone",
+    "accountCreatedError": "Nie udało się utworzyć konta,",
+    "appointmentMade": "Wizyta została umówiona",
+    "appointmentMadeError": "Nie udało się umówić wizyty,"
   }
 }

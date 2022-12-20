@@ -243,12 +243,12 @@ export default {
         })
         .then((response) => {
           if (response.status === 202) {
-            message.success("Wysłano E-mail z weryfikacją");
+            message.success(t('snackBars.emailSent'));
           }
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się wysłać wiadomośći E-mail, ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.emailSentError')} ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -266,12 +266,12 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             store.commit("setUserData", response.data);
-            message.success("Zmieniono dane");
+            message.success(t('snackBars.dataChanged'));
           }
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się zmienić danych, ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.dataChangedError')} ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -281,7 +281,7 @@ export default {
         if (store.getters.sudoModeActive) {
           requestUserDataChange();
         } else {
-          message.info("Operacja wymaga podania hasła");
+          message.info(t('snackBars.passwordRequired'));
           passwordPromptOpen.value = true;
         }
       }
@@ -470,7 +470,7 @@ export default {
   align-items: center;
   gap: 1rem;
 
-  @media only screen and (max-width: $xs) {
+  @media only screen and (max-width: $sm) {
     display: flex;
     flex-direction: column;
   }
@@ -479,15 +479,20 @@ export default {
     display: flex;
     gap: inherit;
 
-    @media only screen and (max-width: $xs) {
+    @media only screen and (max-width: $sm) {
       flex-direction: column;
     }
   }
 
   .input-wrapper,
+
   .select-wrapper {
     height: 55px;
     width: 200px;
+
+    @media only screen and (max-width: $sm) {
+      width: 322px;
+    }
   }
 }
 
@@ -497,8 +502,8 @@ export default {
 
   @media only screen and (max-width: $xs) {
     position: absolute;
-    top: 20vh;
-    right: 1vw;
+    top: 15rem;
+    right: .5rem;
     width: 115px;
   }
 }
@@ -507,16 +512,26 @@ export default {
   display: flex;
   gap: 1rem;
 
-  @media only screen and (max-width: $xs) {
+  @media only screen and (max-width: $sm) {
     margin: auto;
+    flex-direction: column;
+    width: 100%;
   }
 
   .save {
     width: 170px;
+
+    @media only screen and (max-width: $sm) {
+      width: 100%;
+    }
   }
 
   .cancel {
     width: 100px;
+
+    @media only screen and (max-width: $sm) {
+      width: 100%;
+    }
   }
 }
 </style>

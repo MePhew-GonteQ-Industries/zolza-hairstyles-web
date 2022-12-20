@@ -3,59 +3,70 @@
     <div class="service elevated-card" v-if="serviceData">
       <div>
         <h1>{{ serviceData.name }}</h1>
-        <p>Średni czas trwania: {{ serviceData.average_time_minutes }} min</p>
-        <p>Cena minimalna: {{ serviceData.min_price }}</p>
-        <p>Cena maksymalna: {{ serviceData.max_price }}</p>
-        <p>Utworzone: {{ serviceData.created_at }}</p>
+        <p>{{ t('dashboard.servicesManagement.serviceView.avgTime') }}: {{ serviceData.average_time_minutes }} min</p>
+        <p>{{ t('dashboard.servicesManagement.serviceView.minPrice') }}: {{ serviceData.min_price }}</p>
+        <p>{{ t('dashboard.servicesManagement.serviceView.maxPrice') }}: {{ serviceData.max_price }}</p>
+        <p>{{ t('dashboard.servicesManagement.serviceView.createdAt') }}: {{ serviceData.created_at }}</p>
       </div>
       <div class="buttons">
-        <CustomButton type="info" @click="editServiceModalOpen = true">Edytuj</CustomButton>
+        <CustomButton type="info" @click="editServiceModalOpen = true">{{
+            t('dashboard.servicesManagement.serviceView.edit')
+        }}</CustomButton>
         <CustomModal v-model:open="editServiceModalOpen">
           <template #title>
-            Modyfikacja usługi
+            {{ t('dashboard.servicesManagement.serviceView.modifyService') }}
           </template>
           <div class="edit-service-modal">
             <MessageBox type="info">
-              <template #title>Zmiana danych usługi</template>
-              <template #subtitle>Tutaj możesz zmienić wszystkie dane dotyczące danej
-                usługi.</template>
+              <template #title>{{ t('dashboard.servicesManagement.serviceView.changeServiceData') }}</template>
+              <template #subtitle>{{ t('dashboard.servicesManagement.serviceView.changeServiceDataInfo') }}.</template>
             </MessageBox>
             <div class="input-wrapper">
-              <CustomInput label="Nazwa usługi" autocomplete="off"></CustomInput>
-              <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off">
+              <CustomInput :label="t('dashboard.servicesManagement.serviceView.serviceName')" autocomplete="off">
               </CustomInput>
-              <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off">
+              <CustomInput :label="t('dashboard.servicesManagement.serviceView.avgTimeLabel')" type="number"
+                autocomplete="off">
               </CustomInput>
-              <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off">
+              <CustomInput :label="t('dashboard.servicesManagement.serviceView.minPriceLabel')" type="number"
+                autocomplete="off">
+              </CustomInput>
+              <CustomInput :label="t('dashboard.servicesManagement.serviceView.maxPriceLabel')" type="number"
+                autocomplete="off">
               </CustomInput>
             </div>
             <div class="buttons-wrapper">
-              <CustomButton type="info" @click="editServiceModalOpen = false">Zapisz</CustomButton>
-              <CustomButton type="secondary" @click="editServiceModalOpen = false">Anuluj
+              <CustomButton type="info" @click="editServiceModalOpen = false">{{
+                  t('dashboard.servicesManagement.serviceView.save')
+              }}</CustomButton>
+              <CustomButton type="secondary" @click="editServiceModalOpen = false">{{
+                  t('dashboard.servicesManagement.serviceView.cancel')
+              }}
               </CustomButton>
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="error" @click="deleteServiceModalOpen = true">Usuń</CustomButton>
+        <CustomButton type="error" @click="deleteServiceModalOpen = true">{{
+            t('dashboard.servicesManagement.serviceView.delete')
+        }}</CustomButton>
         <CustomModal v-model:open="deleteServiceModalOpen">
           <template #title>
-            Czy napewno chcesz usunąć usługę?
+            {{ t('dashboard.servicesManagement.serviceView.deleteReassurance') }}?
           </template>
           <div class="delete-service-wrapper">
             <MessageBox type="warning">
               <template #title>
-                Usługa zostanie usunięta
+                {{ t('dashboard.servicesManagement.serviceView.deleteWarning') }}
               </template>
               <template #subtitle>
-                Wizyty z tą usługą nie zostaną usunięte.
+                {{ t('dashboard.servicesManagement.serviceView.deleteInfo') }}
               </template>
             </MessageBox>
             <div class="buttons-wrapper">
               <CustomButton type="error" @click="deleteServiceModalOpen = false">
-                Usuń usługę
+                {{ t('dashboard.servicesManagement.serviceView.delete') }}
               </CustomButton>
               <CustomButton type="secondary" @click="deleteServiceModalOpen = false">
-                Anuluj
+                {{ t('dashboard.servicesManagement.serviceView.cancel') }}
               </CustomButton>
             </div>
           </div>
@@ -67,6 +78,7 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import { useI18n } from 'vue-i18n'
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import axios from "axios";
@@ -87,6 +99,7 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const { t } = useI18n({ useScope: 'global' });
 
     const serviceData = ref(null);
     const editServiceModalOpen = ref(false);
@@ -111,6 +124,7 @@ export default {
       serviceData,
       editServiceModalOpen,
       deleteServiceModalOpen,
+      t,
     };
   },
 };

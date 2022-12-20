@@ -67,11 +67,11 @@ export default {
           email: userEmail.value,
         })
         .then(() => {
-          message.success("Wysłano E-mail z instrukcją resetowania hasła");
+          message.success(t('snackBars.passwordReset'));
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Resetowanie hasła nie powiodło się, ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.passwordResetError')} ${response.status}, ${response.data.detail}`);
         });
     }
 

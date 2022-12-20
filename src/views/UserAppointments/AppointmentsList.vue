@@ -1,16 +1,19 @@
 <template>
     <div class="user-appointments-wrapper">
-        <router-link :to="({ name: 'makeAnAppointment' })" class="make-an-appointment-button">Umów wizytę</router-link>
-        <h1>Twoje wizyty:</h1>
+        <router-link :to="({ name: 'makeAnAppointment' })" class="make-an-appointment-button">{{
+                t('userAppointmentsView.appointmentsList.makeAnAppointment')
+        }}</router-link>
+        <h1>{{ t('userAppointmentsView.appointmentsList.yourAppointments') }}:</h1>
         <div class="appointments-list" v-if="appointmentsFiltered.length > 0 && !loading">
             <n-card v-for="appointment in appointmentsFiltered" :key="appointment.id" size="huge"
                 :title="appointment.service">
-                Data: {{ new Date(`${appointment.startSlot}Z`).toLocaleDateString(locale, {
-                        weekday: 'long',
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                    })
+                {{ t('userAppointmentsView.appointmentsList.date') }}: {{ new
+                        Date(`${appointment.startSlot}Z`).toLocaleDateString(locale, {
+                            weekday: 'long',
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                        })
                 }} {{ new Date(`${appointment.startSlot}Z`).toLocaleTimeString(locale, {
         hour: '2-digit', minute:
             '2-digit',
@@ -21,16 +24,15 @@
     })
 }}
                 <template #footer>
-                    Cena: {{ appointment.minPrice }}zł <span v-if="appointment.minPrice !== appointment.maxPrice">- {{
-                            appointment.maxPrice
-                    }}zł</span>
+                    {{ t('userAppointmentsView.appointmentsList.price') }}: {{ appointment.minPrice }}zł <span
+                        v-if="appointment.minPrice !== appointment.maxPrice">- {{
+                                appointment.maxPrice
+                        }}zł</span>
                 </template>
             </n-card>
         </div>
         <div class="no-appointments-wrapper" v-if="appointmentsFiltered.length === 0 && !loading">
-            <n-tag type="info" size="large">Wygląda na to że nie masz żadnych umówionych wizyt, kliknij przycisk powyżej
-                aby to
-                zrobić</n-tag>
+            <n-tag type="info" size="large">{{ t('userAppointmentsView.appointmentsList.noAppointments') }}</n-tag>
         </div>
         <div class="loader" v-if="loading">
             <CustomLoader></CustomLoader>
@@ -40,6 +42,7 @@
 
 <script>
 import { ref, onMounted, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import axios from 'axios';
 import { useStore } from 'vuex';
 import { NTag, NCard } from 'naive-ui';
@@ -55,7 +58,8 @@ export default {
         const store = useStore();
         const appointments = ref([]);
         const loading = ref(true);
-        const locale = store.state.settings.language
+        const locale = store.state.settings.language;
+        const { t } = useI18n({ useScope: 'global' });
 
         const appointmentsFiltered = computed(() => {
             if (!appointments.value) return [];
@@ -98,6 +102,7 @@ export default {
             loadAppointments,
             locale,
             store,
+            t,
         }
     }
 }
