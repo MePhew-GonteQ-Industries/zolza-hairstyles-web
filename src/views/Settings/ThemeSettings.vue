@@ -114,8 +114,16 @@ export default {
   display: flex;
   gap: 1rem;
 
+  @media only screen and (max-width: $xs) {
+    flex-direction: column;
+  }
+
   button {
     width: 200px;
+
+    @media only screen and (max-width: $xs) {
+      width: 100%;
+    }
   }
 }
 </style>
