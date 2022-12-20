@@ -243,12 +243,12 @@ export default {
         })
         .then((response) => {
           if (response.status === 202) {
-            message.success("Wysłano E-mail z weryfikacją");
+            message.success(t('snackBars.emailSent'));
           }
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się wysłać wiadomośći E-mail, ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.emailSentError')} ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -266,12 +266,12 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             store.commit("setUserData", response.data);
-            message.success("Zmieniono dane");
+            message.success(t('snackBars.dataChanged'));
           }
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się zmienić danych, ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.dataChangedError')} ${response.status}, ${response.data.detail}`);
         });
     };
 
@@ -281,7 +281,7 @@ export default {
         if (store.getters.sudoModeActive) {
           requestUserDataChange();
         } else {
-          message.info("Operacja wymaga podania hasła");
+          message.info(t('snackBars.passwordRequired'));
           passwordPromptOpen.value = true;
         }
       }

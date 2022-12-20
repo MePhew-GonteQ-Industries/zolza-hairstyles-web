@@ -106,6 +106,7 @@
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 import axios from "axios";
 import { handleRequestError } from "@/utils";
 import CustomButton from "@/components/CustomButton.vue";
@@ -128,6 +129,7 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const { t } = useI18n;
     const locale = store.state.settings.language;
 
     const appointmentData = ref(null);
@@ -190,10 +192,10 @@ export default {
           });
         store.dispatch("deleteAppointments");
         changeAppointmentDateModalOpen.value = false;
-        message.success("Zmieniono datę wizyty");
+        message.success(t('snackBars.appontmentDataChange'));
       } catch (error) {
         const response = handleRequestError(error);
-        message.error(`Nie udało się zmienić daty wizyty, ${response.status}, ${response.data.detail}`);
+        message.error(`${t('snackBars.appointmentDateChangeError')} ${response.status}, ${response.data.detail}`);
       }
     };
 
@@ -202,10 +204,10 @@ export default {
         await axios.post(`appointments/any/${route.params.id}`);
         store.dispatch("deleteAppointments");
         cancelAppointmentModalOpen.value = false;
-        message.success("Pomyślnie odwołano wizytę");
+        message.success(t('snackBars.appointmentCancel'));
       } catch (error) {
         const response = handleRequestError(error);
-        message.error(`Nie udało się odwołać wizyty, ${response.status}, ${response.data.detail}`);
+        message.error(`${t('snackBars.appointmentCancelError')} ${response.status}, ${response.data.detail}`);
       }
     };
 
@@ -316,6 +318,7 @@ export default {
       selectAppointmentHour,
       cancelAppointment,
       message,
+      t,
     };
   },
 };

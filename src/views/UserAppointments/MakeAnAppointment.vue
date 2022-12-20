@@ -151,10 +151,10 @@ export default {
                     service_id: selectedService.value.id,
                 });
                 openMakeAnAppointmentModal.value = false;
-                message.success("Wizyta została umówiona");
+                message.success(t('snackBars.appointmentMode'));
             } catch (error) {
                 const errorResponse = handleRequestError(error);
-                message.error(`Nie udało się umówić wizyty, ${errorResponse.status}, ${errorResponse.data.detail}`);
+                message.error(`${t('snackBars.appointmentsMadeError')} ${errorResponse.status}, ${errorResponse.data.detail}`);
             }
         };
 

@@ -280,5 +280,31 @@
       "makeAnAppointment": "Umów wizytę",
       "cancel": "Anuluj"
     }
+  },
+  "snackBars": {
+    "logOut": "Wylogowano pomyślnie",
+    "appointmentDateChange": "Zmieniono datę wizyty",
+    "appointmentCancel": "Odwołano wizytę",
+    "appointmentDateChangeError": "Nie udało się zmienić daty wizyty,",
+    "appointmentCancelError": "Nie udało się odwołać wizyty,",
+    "login": "Zalogowano pomyślnie",
+    "loginError": "Nie udało się zalogować,",
+    "passwordReset": "Wysłano E-mail z instrukcją resetowania hasła",
+    "passwordResetError": "Resetowanie hasła nie powiodło się,",
+    "logOutAllDevices": "Wylogowano ze wszystkich urządzeń",
+    "logOutAllDevicesError": "Nie udało się wylogować,",
+    "passwordChange": "Zmieniono hasło",
+    "passwordChangeError": "Nie udało się zmienić hasła,",
+    "themeChange": "Zmieniono motyw",
+    "themeChangeError": "Nie udało się zmienić motywu",
+    "emailSent": "Wysłano E-mail z weryfikacją",
+    "emailSentError": "Nie udało się wysłać wiadomości E-mail,",
+    "dataChanged": "Zmieniono dane",
+    "dataChangedError": "Nie udało się zmienić danych,",
+    "passwordRequired": "Operacja wymaga podania hasła",
+    "accountCreated": "Konto zostało utworzone",
+    "accountCreatedError": "Nie udało się utworzyć konta,",
+    "appointmentMade": "Wizyta została umówiona",
+    "appointmentMadeError": "Nie udało się umówić wizyty,"
   }
 }

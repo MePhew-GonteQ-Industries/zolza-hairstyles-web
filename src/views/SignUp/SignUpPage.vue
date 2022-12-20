@@ -169,7 +169,7 @@ export default {
         })
         .then((response) => {
           const { email } = response.data;
-          message.success("Konto zostało utworzone");
+          message.success(t('snackBars.accountCreated'));
           router.push({
             name: "login",
             params: { email, accountCreated: true },
@@ -177,7 +177,7 @@ export default {
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się utworzyć konta, kod błędu: ${response.status}, ${response.data.detail}`)
+          message.error(`${t('snackBars.accountCreatedError')} ${response.status}, ${response.data.detail}`)
         });
     }
 

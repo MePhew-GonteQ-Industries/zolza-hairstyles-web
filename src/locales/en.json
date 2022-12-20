@@ -275,5 +275,31 @@
       "makeAnAppointment": "Make an appointment",
       "cancel": "Cancel"
     }
+  },
+  "snackBars": {
+    "logOut": "Log out successful",
+    "appointmentDateChange": "Appointment date changed",
+    "appointmentCancel": "Appointment canceled",
+    "appointmentDateChangeError": "Appointment's date can't be changed,",
+    "appointmentCancelError": "Appointment can't be canceled,",
+    "login": "Login successful",
+    "loginError": "Login unsuccessful,",
+    "passwordReset": "E-mail with password reset manual has been sent",
+    "passwordResetError": "Can't reset password,",
+    "logOutAllDevices": "Logged out of all devices successfuly",
+    "logOutAllDevicesError": "Log out unsuccessful,",
+    "passwordChange": "Password changed",
+    "passwordChangeError": "Password can't be changed,",
+    "themeChange": "Theme changed",
+    "themeChangeError": "Theme can't be changed",
+    "emailSent": "Verification E-mail has been sent",
+    "emailSentError": "Couldn't send E-mail,",
+    "dataChanged": "Data changed",
+    "dataChangedError": "Data can't be changed,",
+    "passwordRequired": "Password required",
+    "accountCreated": "Account created",
+    "accountCreatedError": "Couldn't create account,",
+    "appointmentMade": "Appointment created",
+    "appointmentMadeError": "Couldn't make an appointment,"
   }
 }

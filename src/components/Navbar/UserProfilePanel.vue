@@ -110,7 +110,7 @@ export default {
     function logout() {
       store.dispatch("logout").then(() => {
         router.push({ name: "home" });
-        message.success("Wylogowano pomyślnie");
+        message.success(t('snackBars.logOut'));
       });
     }
 

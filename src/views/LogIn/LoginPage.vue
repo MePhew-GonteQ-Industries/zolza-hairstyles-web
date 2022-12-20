@@ -126,12 +126,12 @@ export default {
         .dispatch("login", userData.value)
         .then(() => {
           loading.value = false;
-          message.success("Zalogowano pomyślnie");
+          message.success(t('snackBars.login'));
           router.push("/");
         })
         .catch((error) => {
           const response = handleRequestError(error);
-          message.error(`Nie udało się zalogować, kod błędu: ${response.status}, ${response.data.detail}`);
+          message.error(`${t('snackBars.loginError')} ${response.status}, ${response.data.detail}`);
           loading.value = false;
         });
     }
