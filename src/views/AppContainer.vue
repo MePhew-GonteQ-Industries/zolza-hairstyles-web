@@ -88,25 +88,113 @@
     <footer>
       <contactSection />
     </footer>
+
+    <n-drawer :show="showCookiesBanner" placement="bottom" :height="200" :block-scroll="false"
+      :mask-closable="false">
+      <n-alert title="Informacja o plikach cookie" type="info" :bordered="false" closable
+        class="banner" @close="acceptCookies">
+        <div class="banner-wrapper">
+          <div>
+            Używamy plików cookie, w następujących celach:
+            <ul>
+              <li>Usprawnienie i ułatwienie dostępu do Serwisu</li>
+              <li>Personalizacja Serwisu dla Użytkowników</li>
+              <li>Umożliwienie Logowania do serwisu</li>
+              <li>Prowadzenie statystyk (użytkowników, ilości odwiedzin, rodzajów urządzeń, łącze
+                itp.)
+              </li>
+            </ul>
+          </div>
+          <n-divider vertical />
+          <div class="buttons">
+            <router-link class="link" to="/cookies-policy">Więcej informacji</router-link>
+            <NButton type="success" size="large" @click="acceptCookies">Zgadzam się</NButton>
+          </div>
+        </div>
+
+        <template #icon>
+          <i class="ph-cookie-light"></i>
+        </template>
+      </n-alert>
+    </n-drawer>
+
+    <n-drawer :show="showNotificationsBanner" placement="bottom"
+      :height="showEmailConfirmationBanner ? 300 : 150" :block-scroll="false" :show-mask="false">
+      <n-alert title="Czy chcesz otrzymywać powiadomienia?" type="info" :bordered="false" closable
+        class="banner" @close="disableNotifications">
+        <div class="banner-wrapper">
+          Włącz powiadomienia, aby otrzymywać przypomnienia o nadchodzących wizytach
+          i nowych funkcjonalnościach
+          <n-divider vertical />
+          <div class="buttons">
+            <NButton type="success" size="large" @click="enableNotifications">Włącz powiadomienia
+            </NButton>
+            <NButton type="error" size="large" @click="disableNotifications">Nie, dziękuję
+            </NButton>
+          </div>
+        </div>
+        <template #icon>
+          <i class="ph-bell-ringing-light"></i>
+        </template>
+      </n-alert>
+    </n-drawer>
+
+    <n-drawer :show="showEmailConfirmationBanner" placement="bottom" :height="170"
+      :block-scroll="false" :show-mask="false">
+      <n-alert title="Potwierdź swój adres email" type="warning" :bordered="false"
+        class="email-confirmation-banner">
+        <div class="banner-wrapper">
+          <div>
+            Na twój adres email <span class="email">{{ $store.state.user.email }}</span> została
+            przesłana
+            wiadomość
+            weryfikacyjna,
+            skorzystaj z niej, aby
+            potwierdzić swój adres email i móc umówić się na wizytę
+          </div>
+          <n-divider vertical />
+          <div class="vertical-text">
+            <span>Nie możesz znaleźć wiadomości?</span>
+            <span>Sprawdź folder spam</span>
+          </div>
+          <n-divider vertical />
+          <div class="action">
+            Wiadomość nie dotarła?
+            <NButton type="info" size="large" @click="resendVerificationEmail">Wyślij ponownie
+            </NButton>
+          </div>
+        </div>
+        <template #icon>
+          <i class="ph-envelope-light"></i>
+        </template>
+      </n-alert>
+    </n-drawer>
   </div>
 </template>
 
 <script>
 import { useI18n } from "vue-i18n";
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, onBeforeMount } from "vue";
 import { useWindowScroll } from "@vueuse/core";
 import navbarSection from "@/components/Navbar/NavbarSection.vue";
 import contactSection from "@/views/Contact/ContactSection.vue";
 import { useRouter } from "vue-router";
 import CustomSidebar from "@/components/CustomSidebar.vue";
-import { useLoadingBar } from "naive-ui";
+import { useLoadingBar, useMessage, useNotification, NDrawer, NAlert, NButton, NDivider } from "naive-ui";
 import { useStore } from "vuex";
+import { getToken, onMessage } from "firebase/messaging";
+import messaging from '@/firebase.js';
+import { requestNotificationsPermission, notificationsSupported } from "@/utils.js";
 
 export default {
   components: {
     navbarSection,
     contactSection,
     CustomSidebar,
+    NDrawer,
+    NAlert,
+    NButton,
+    NDivider,
   },
   setup() {
     const { t } = useI18n({ useScope: "global" });
@@ -114,6 +202,8 @@ export default {
     const store = useStore();
 
     const loadingBar = useLoadingBar();
+    const message = useMessage();
+    const notification = useNotification();
 
     watch(() => store.getters.getNavigationStatus, (newValue) => {
       switch (newValue) {
@@ -130,6 +220,11 @@ export default {
           loadingBar.error();
           break;
       }
+    });
+
+    onBeforeMount(async () => {
+      await store.dispatch('loadCookiesState');
+      await store.dispatch('loadNotificationsDeniedState');
     });
 
     const onHomePage = computed(() => router.currentRoute.value.name === "home");
@@ -164,12 +259,100 @@ export default {
       // todo: finish
     }
 
+    const acceptCookies = () => {
+      store.dispatch('setCookiesState', true);
+    }
+
+    const disableNotifications = () => {
+      store.dispatch('setNotificationsDeniedState', true);
+      message.error('Powiadomienia zostały wyłączone');
+    }
+
+    const enableNotifications = async () => {
+      const enablingNotificationsMessage = message.loading('Wyraź zgodę na otrzymywanie powiadomień', {
+        duration: 0,
+      });
+      if (await requestNotificationsPermission()) {
+        enablingNotificationsMessage.content = 'Włączanie powiadomień';
+        try {
+          const currentToken = await getToken(messaging, { vapidKey: "BLMpEz50igRN6b0EZE5G_k02ua5eX-HU4H-CREyINg1pbgy73k0ith1QH4xTWtiYnZFe-fnjC0pke4ilErVRC0I" });
+          if (currentToken) {
+            // Send the token to your server and update the UI if necessary
+            // ...
+            console.log(currentToken);
+            enablingNotificationsMessage.type = 'success';
+            enablingNotificationsMessage.content = 'Włączono powiadomienia';
+            setTimeout(() => {
+              enablingNotificationsMessage.destroy();
+            }, 2000);
+            onMessage(messaging, (payload) => {
+              console.log('Message received. ', payload);
+              // ...
+            });
+          } else {
+            enablingNotificationsMessage.type = 'error';
+            enablingNotificationsMessage.content = 'Nie udało się włączyć powiadomień';
+            setTimeout(() => {
+              enablingNotificationsMessage.destroy();
+            }, 5000);
+            console.error('An error occurred while retrieving token.', 'The getToken function did not return a token')
+          }
+        } catch (err) {
+          enablingNotificationsMessage.type = 'error';
+          enablingNotificationsMessage.content = 'Nie udało się włączyć powiadomień';
+          setTimeout(() => {
+            enablingNotificationsMessage.destroy();
+          }, 5000);
+          console.error('An error occurred while retrieving token.', err);
+        }
+      } else {
+        enablingNotificationsMessage.type = 'error';
+        enablingNotificationsMessage.content = 'Nie wyrażono zgody na otrzymywanie powiadomień';
+        setTimeout(() => {
+          enablingNotificationsMessage.destroy();
+        }, 5000);
+      }
+    }
+
+    const showCookiesBanner = computed(() => !store.state.utils.cookiesAccepted);
+
+    const showNotificationsBanner = computed(() => notificationsSupported() && store.getters.isAuthenticated && Notification.permission === 'default' && !store.state.utils.notificationsDenied);
+
+    const showEmailConfirmationBanner = computed(() => store.getters.isAuthenticated && !store.state.user.verified);
+
+    const notificationsUnsupported = computed(() => !notificationsSupported() && Notification.permission === 'default' && store.getters.isAuthenticated);
+
+    watch(notificationsUnsupported, (newValue) => {
+      if (newValue) {
+        if (!store.state.utils.reducedFunctionalityNotification) {
+          store.commit('setReducedFunctionalityNotification', notification.error({
+            duration: 0,
+            title: 'Ograniczona funkcjonalność',
+            meta: 'Ta przeglądarka nie obsługuje powiadomień',
+            onClose: () => store.commit('setReducedFunctionalityNotification', null),
+            // avatar ?
+          }));
+        }
+      }
+    })
+
+    const resendVerificationEmail = () => {
+      console.error('Not implemented') // todo
+    }
+
     return {
       scrollToServices,
       scrolledToServices,
       onHomePage,
       navbarClasses,
       themeOverrides,
+      acceptCookies,
+      enableNotifications,
+      disableNotifications,
+      showCookiesBanner,
+      showNotificationsBanner,
+      showEmailConfirmationBanner,
+      resendVerificationEmail,
       t,
     };
   },
@@ -177,6 +360,74 @@ export default {
 </script>
 
 <style lang="scss">
+.banner {
+  height: 100%;
+
+  li {
+    margin-left: 2rem;
+    list-style-type: circle;
+  }
+
+  a {
+    color: $accent-color;
+    font-size: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .n-divider {
+    height: 100%;
+  }
+
+  .buttons {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+  }
+
+  .banner-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 20px 1fr;
+    gap: 2rem;
+  }
+}
+
+.email-confirmation-banner {
+  height: 100%;
+
+  .banner-wrapper {
+    display: grid;
+    grid-template-columns: 450px 20px 300px 20px 1fr;
+    gap: 2rem;
+  }
+
+  .n-divider {
+    height: 100%;
+  }
+
+  .email {
+    font-weight: bold;
+  }
+
+  .vertical-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .action {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
 .router-view {
   min-height: 92%;
   justify-content: space-between;

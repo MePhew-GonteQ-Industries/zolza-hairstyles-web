@@ -1,5 +1,6 @@
 <template>
-  <n-config-provider :theme="$store.state.settings.theme === 'dark' ? darkTheme : lightTheme" abstract>
+  <n-config-provider :theme="$store.state.settings.theme === 'dark' ? darkTheme : lightTheme"
+    abstract>
     <n-loading-bar-provider>
       <n-message-provider placement="top">
         <n-dialog-provider>
@@ -13,7 +14,6 @@
 </template>
 
 <script>
-import { onMounted } from 'vue';
 import {
   NConfigProvider,
   NLoadingBarProvider,
@@ -24,10 +24,6 @@ import {
   lightTheme
 } from "naive-ui";
 import AppContainer from '@/views/AppContainer.vue';
-import { getToken, onMessage } from "firebase/messaging";
-import { onBackgroundMessage } from "firebase/messaging/sw";
-import messaging from '@/firebase.js';
-import { requestNotificationsPermission } from "@/utils.js";
 
 export default {
   components: {
@@ -39,42 +35,6 @@ export default {
     NNotificationProvider,
   },
   setup() {
-    onMounted(async () => {
-      if (requestNotificationsPermission()) {
-        try {
-          const currentToken = await getToken(messaging, { vapidKey: "BLMpEz50igRN6b0EZE5G_k02ua5eX-HU4H-CREyINg1pbgy73k0ith1QH4xTWtiYnZFe-fnjC0pke4ilErVRC0I" });
-          if (currentToken) {
-            // Send the token to your server and update the UI if necessary
-            // ...
-            console.log(currentToken);
-          } else {
-            console.error('An error occurred while retrieving token.', 'The getToken function did not return a token')
-          }
-        } catch (err) {
-          console.error('An error occurred while retrieving token.', err)
-        }
-      } else {
-        // disable notifications for current user
-      }
-
-      onMessage(messaging, (payload) => {
-        console.log('Message received. ', payload);
-        // ...
-      });
-      onBackgroundMessage(messaging, (payload) => {
-        console.log('[firebase-messaging-sw.js] Received background message ', payload);
-        // Customize notification here
-        const notificationTitle = 'Background Message Title';
-        const notificationOptions = {
-          body: 'Background Message body.',
-          icon: '/firebase-logo.png'
-        };
-
-        self.registration.showNotification(notificationTitle,
-          notificationOptions);
-      });
-    });
-
     return {
       darkTheme,
       lightTheme,

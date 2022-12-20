@@ -1,3 +1,7 @@
+const notificationsSupported = () => {
+  return ("Notification" in window);
+}
+
 const requestNotificationsPermission = async () => {
   const permission = await Notification.requestPermission();
   return permission === 'granted';
@@ -33,4 +37,4 @@ function handleRequestError(error) {
   throw error;
 }
 
-export { validateEmail, getCssPropertyValue, setCssPropertyValue, handleRequestError, requestNotificationsPermission };
+export { validateEmail, getCssPropertyValue, setCssPropertyValue, handleRequestError, requestNotificationsPermission, notificationsSupported };
