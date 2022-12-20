@@ -1,6 +1,5 @@
 <template>
-  <n-config-provider :theme="$store.state.settings.theme === 'dark' ? darkTheme : lightTheme"
-    abstract>
+  <n-config-provider :theme="$store.state.settings.theme === 'dark' ? darkTheme : lightTheme" abstract>
     <n-loading-bar-provider>
       <n-message-provider placement="top">
         <n-dialog-provider>
@@ -25,7 +24,8 @@ import {
   lightTheme
 } from "naive-ui";
 import AppContainer from '@/views/AppContainer.vue';
-import { getToken } from "firebase/messaging";
+import { getToken, onMessage } from "firebase/messaging";
+import { onBackgroundMessage } from "firebase/messaging/sw";
 import messaging from '@/firebase.js';
 import { requestNotificationsPermission } from "@/utils.js";
 
@@ -56,6 +56,23 @@ export default {
       } else {
         // disable notifications for current user
       }
+
+      onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        // ...
+      });
+      onBackgroundMessage(messaging, (payload) => {
+        console.log('[firebase-messaging-sw.js] Received background message ', payload);
+        // Customize notification here
+        const notificationTitle = 'Background Message Title';
+        const notificationOptions = {
+          body: 'Background Message body.',
+          icon: '/firebase-logo.png'
+        };
+
+        self.registration.showNotification(notificationTitle,
+          notificationOptions);
+      });
     });
 
     return {
