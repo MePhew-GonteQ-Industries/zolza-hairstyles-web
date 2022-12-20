@@ -2,8 +2,7 @@
   <div class="notifications-wrapper" ref="notificationsWrapper">
     <i class="bell-icon" :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
       @click="toggleNotificationsPanel" @keyup.enter="toggleNotificationsPanel" v-ripple></i>
-    <span class="unread-notifications-count" @click="toggleNotificationsPanel"
-      @keyup.enter="toggleNotificationsPanel">2</span>
+    <NBadge class="unread-notifications-count" color="var(--accent-color)" :max="9" :value="2" />
     <div class="notifications-panel" v-show="notificationsPanelExpanded" ref="notificationsPanel">
       <div class="panel-header">
         <h3>Notifications</h3>
@@ -52,12 +51,14 @@ import { computed, ref, watch } from "vue";
 import { onClickOutside, useMouseInElement } from "@vueuse/core";
 import ComposedNotification from "@/components/Navbar/ComposedNotification.vue";
 import CustomButton from "@/components/CustomButton.vue";
+import { NBadge } from 'naive-ui';
 
 export default {
   name: "NotificationsPanel",
   components: {
     ComposedNotification,
     CustomButton,
+    NBadge,
   },
   setup() {
     const notificationsPanelExpanded = ref(false);
@@ -189,19 +190,11 @@ export default {
   }
 
   .unread-notifications-count {
-    background-color: $accent-color;
-    display: flex;
-    width: 20px;
-    height: 20px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
     position: absolute;
-    top: 10px;
+    top: 12.5px;
     right: 10px;
-    font-size: 0.688rem;
-    font-weight: 600;
     cursor: pointer;
+    pointer-events: none;
   }
 
   .notifications-panel {
