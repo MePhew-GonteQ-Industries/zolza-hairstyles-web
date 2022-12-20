@@ -399,12 +399,22 @@ export default {
   }
 }
 
+.elevated-card {
+  @media only screen and (max-width: $xs) {
+    flex-direction: column;
+  }
+}
+
 .appointment {
   grid-template-columns: 3fr 1.2fr;
 
   .cards {
     display: flex;
     gap: 1rem;
+
+    @media only screen and (max-width: $xs) {
+      flex-direction: column;
+    }
   }
 
   .right {
