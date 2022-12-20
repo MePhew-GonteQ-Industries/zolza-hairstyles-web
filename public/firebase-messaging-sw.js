@@ -1,5 +1,14 @@
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
+import { clientsClaim } from 'workbox-core';
 import { initializeApp } from "firebase/app";
 import { getMessaging } from "firebase/messaging/sw";
+
+cleanupOutdatedCaches();
+
+precacheAndRoute(self.__WB_MANIFEST);
+
+self.skipWaiting();
+clientsClaim();
 
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.

@@ -53,6 +53,9 @@
     "prettier": "^2.7.1",
     "sass": "^1.55.0",
     "vfonts": "^0.0.3",
-    "vite": "^3.0.9"
+    "vite": "^3.0.9",
+    "vite-plugin-pwa": "^0.14.0",
+    "workbox-core": "^6.5.4",
+    "workbox-precaching": "^6.5.4"
   }
 }
