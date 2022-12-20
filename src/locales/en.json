@@ -234,5 +234,14 @@
       "statistics": "Statistics",
       "settings": "Settings"
     }
+  },
+  "userAppointmentsView": {
+    "appointmentsList": {
+      "makeAnAppointment": "Make an appointment",
+      "yourAppointments": "Your appointments",
+      "date": "Date",
+      "price": "Price",
+      "noAppointments": "Looks like you have no appointments, click on button above to do so"
+    }
   }
 }
