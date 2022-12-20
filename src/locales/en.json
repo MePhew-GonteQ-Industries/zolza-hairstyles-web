@@ -210,7 +210,12 @@
       "user": "User",
       "startDate": "Start date",
       "endDate": "End date",
-      "status": "Status"
+      "status": "Status",
+      "makeAnAppointment": "Make an appointment",
+      "addAppointment": "Add an appointment",
+      "userWithoutAccount": "User without account",
+      "save": "Save",
+      "cancel": "Cancel"
     },
     "servicesManagement": {
       "search": "Search for services",

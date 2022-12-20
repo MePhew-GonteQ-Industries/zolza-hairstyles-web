@@ -215,7 +215,12 @@
       "user": "Użytkownik",
       "startDate": "Data rozpoczęcia",
       "endDate": "Data zakończenia",
-      "status": "Status"
+      "status": "Status",
+      "makeAnAppointment": "Utwórz wizytę",
+      "addAppointment": "Dodaj wizytę",
+      "userWithoutAccount": "Użytkownik bez konta",
+      "save": "Zapisz",
+      "cancel": "Anuluj"
     },
     "servicesManagement": {
       "search": "Szukaj usług",

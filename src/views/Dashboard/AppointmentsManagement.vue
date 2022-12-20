@@ -18,17 +18,20 @@
       </div>
     </form>
 
-    <CustomButton @click="addAppointmentModalOpen = true">Utwórz wizytę</CustomButton>
+    <CustomButton @click="addAppointmentModalOpen = true">{{ t('dashboard.appointmentsManagement.makeAnAppointment') }}
+    </CustomButton>
     <CustomModal v-model:open="addAppointmentModalOpen">
-      <template #title>Dodaj wizytę</template>
+      <template #title>{{ t('dashboard.appointmentsManagement.addAppointment') }}</template>
       <div class="add-appointment-wrapper">
         <div class="modal-content-wrapper">
           <div class="input-wrapper">
-            <CustomInput label="Email" type="email" autocomplete="off" v-if="!userWithoutAccount">
+            <CustomInput :label="t('shared.email')" type="email" autocomplete="off" v-if="!userWithoutAccount">
             </CustomInput>
-            <CustomInput label="Imię" type="text" autocomplete="off"></CustomInput>
-            <CustomInput label="Nazwisko" type="text" autocomplete="off"></CustomInput>
-            <CustomCheckbox v-model:checked="userWithoutAccountChecked">Użytkownik bez konta
+            <CustomInput :label="t('shared.name')" type="text" autocomplete="off"></CustomInput>
+            <CustomInput :label="t('shared.surname')" type="text" autocomplete="off"></CustomInput>
+            <CustomCheckbox v-model:checked="userWithoutAccountChecked">{{
+                t('dashboard.appointmentsManagement.userWithoutAccount')
+            }}
             </CustomCheckbox>
           </div>
           <div class="services-wrapper">
@@ -40,8 +43,12 @@
           </div>
         </div>
         <div class="buttons-wrapper">
-          <CustomButton type="info" @click="addAppointmentModalOpen = false">Zapisz</CustomButton>
-          <CustomButton type="secondary" @click="addAppointmentModalOpen = false">Anuluj
+          <CustomButton type="info" @click="addAppointmentModalOpen = false">{{
+              t('dashboard.appointmentsManagement.save')
+          }}</CustomButton>
+          <CustomButton type="secondary" @click="addAppointmentModalOpen = false">{{
+              t('dashboard.appointmentsManagement.cancel')
+          }}
           </CustomButton>
         </div>
       </div>
