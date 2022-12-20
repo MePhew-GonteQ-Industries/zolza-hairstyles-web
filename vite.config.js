@@ -14,12 +14,9 @@ export default defineConfig({
       include: resolve(dirname(fileURLToPath(import.meta.url)), "./src/locales/**"),
     }),
     VitePWA({
+      injectRegister: null,
       strategies: 'injectManifest',
       filename: 'firebase-messaging-sw.js',
-      devOptions: {
-        enabled: true,
-        type: 'classic',
-      },
     }),
   ],
   css: {
