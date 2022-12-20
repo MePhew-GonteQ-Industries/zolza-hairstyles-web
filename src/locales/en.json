@@ -242,6 +242,13 @@
       "date": "Date",
       "price": "Price",
       "noAppointments": "Looks like you have no appointments, click on button above to do so"
+    },
+    "makeAnAppointment": {
+      "monthForward": "Up to one month in advance",
+      "adminCancel": "Appointment can only be canceled by administrator",
+      "noSlots": "No slots",
+      "makeAnAppointment": "Make an appointment",
+      "cancel": "Cancel"
     }
   }
 }

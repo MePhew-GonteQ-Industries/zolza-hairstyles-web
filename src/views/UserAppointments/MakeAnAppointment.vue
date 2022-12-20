@@ -18,10 +18,10 @@
                 <div class="make-appointment-modal-wrapper">
                     <MessageBox type="warning">
                         <template #title>
-                            Maksymalnie miesiąc do przodu!
+                            {{ t('userAppointmentsView.makeAnAppointment.monthForward') }}!
                         </template>
                         <template #subtitle>
-                            Umówioną wizytę może anulować tylko administrator!
+                            {{ t('userAppointmentsView.makeAnAppointment.adminCancel') }}!
                         </template>
                     </MessageBox>
                     <div class="select-date-wrapper">
@@ -41,15 +41,17 @@
                                 </div>
                             </div>
                             <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots">
-                                Brak wolnych miejsc
+                                {{ t('userAppointmentsView.makeAnAppointment.noSlots') }}
                             </div>
                         </div>
                     </div>
                     <div class="buttons-wrapper">
-                        <CustomButton type="info" @click="makeAppointment">Umów
-                            wizytę</CustomButton>
-                        <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">
-                            Anuluj</CustomButton>
+                        <CustomButton type="info" @click="makeAppointment">{{
+                                t('userAppointmentsView.makeAnAppointment.makeAnAppointment')
+                        }}</CustomButton>
+                        <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">{{
+                                t('userAppointmentsView.makeAnAppointment.cancel')
+                        }}</CustomButton>
                     </div>
                 </div>
             </CustomModal>

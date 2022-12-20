@@ -247,6 +247,13 @@
       "date": "Data",
       "price": "Cena",
       "noAppointments": "Wygląda na to że nie masz żadnych umówionych wizyt, kliknij przycisk powyżej aby to zrobić"
+    },
+    "makeAnAppointment": {
+      "monthForward": "Maksymalnie miesiąc do przodu",
+      "adminCancel": "Umówioną wizytę może anulować tylko administrator",
+      "noSlots": "Brak wolnych miejsc",
+      "makeAnAppointment": "Umów wizytę",
+      "cancel": "Anuluj"
     }
   }
 }

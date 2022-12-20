@@ -19,6 +19,6 @@ export default {
     display: flex;
     width: 100%;
     justify-content: center;
-    background-color: $secondary-color;
+    background-color: $primary-color;
 }
 </style>
