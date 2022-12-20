@@ -222,7 +222,27 @@
       "name": "Name",
       "averageDurationTime": "Average duration time",
       "minPrice": "Lowest price",
-      "maxPrice": "Highest price"
+      "maxPrice": "Highest price",
+      "serviceView": {
+        "avgTime": "Average duration time",
+        "minPrice": "Lowest price",
+        "maxPrice": "Top price",
+        "createdAt": "Created at",
+        "edit": "Edit",
+        "modifyService": "Modyfing of service",
+        "changeServiceData": "Change service data",
+        "changeServiceDataInfo": "Here you can change all service data",
+        "serviceName": "Service name",
+        "avgTimeLabel": "Average duration time [min]",
+        "minPriceLabel": "Lowest price [zł]",
+        "maxPriceLabel": "Top price [zl]",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleteReassurance": "Are you sure you want to delete that service",
+        "deleteWarning": "Service will be deleted",
+        "deleteInfo": "Appointments with that service won't be canceled"
+      }
     },
     "usersManagement": {
       "search": "Search for users",

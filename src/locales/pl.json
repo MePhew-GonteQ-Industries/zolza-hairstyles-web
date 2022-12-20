@@ -227,7 +227,27 @@
       "name": "Nazwa",
       "averageDurationTime": "Średni czas trwania",
       "minPrice": "Cena minimalna",
-      "maxPrice": "Cena maksymalna"
+      "maxPrice": "Cena maksymalna",
+      "serviceView": {
+        "avgTime": "Średni czas trwania",
+        "minPrice": "Cena minimalna",
+        "maxPrice": "Cena maksymalna",
+        "createdAt": "Utworzone",
+        "edit": "Edytuj",
+        "modifyService": "Modyfikacja usługi",
+        "changeServiceData": "Zmiana danych usługi",
+        "changeServiceDataInfo": "Tutaj możesz zmienić wszystkie dane dotyczące danej usługi",
+        "serviceName": "Nazwa usługi",
+        "avgTimeLabel": "Średni czas trwania [min]",
+        "minPriceLabel": "Cena minimalna [zł]",
+        "maxPriceLabel": "Cena maksymalna [zl]",
+        "save": "Zapisz",
+        "cancel": "Anuluj",
+        "delete": "Usuń",
+        "deleteReassurance": "Czy napewno chcesz usunąć ta usługę",
+        "deleteWarning": "Usługa zostanie usunięta",
+        "deleteInfo": "Wizyty z tą usługą nie zostaną usunięte"
+      }
     },
     "usersManagement": {
       "search": "Szukaj użytkowników",
