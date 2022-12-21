@@ -174,7 +174,7 @@
 
 <script>
 import { useI18n } from "vue-i18n";
-import { ref, watch, computed, onBeforeMount, onBeforeUpdate } from "vue";
+import { ref, watch, computed, onBeforeMount } from "vue";
 import { useWindowScroll } from "@vueuse/core";
 import navbarSection from "@/components/Navbar/NavbarSection.vue";
 import contactSection from "@/views/Contact/ContactSection.vue";
