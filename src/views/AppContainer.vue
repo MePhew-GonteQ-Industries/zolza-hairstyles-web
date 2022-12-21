@@ -89,10 +89,10 @@
       <contactSection />
     </footer>
 
-    <n-drawer :show="!cooldown && showCookiesBanner" placement="bottom" :height="200"
-      :block-scroll="false" :mask-closable="false">
-      <n-alert title="Informacja o plikach cookie" type="info" :bordered="false" closable
-        class="banner" @close="acceptCookies">
+    <n-drawer :show="showCookiesBanner" placement="bottom"
+      :height="showNotificationsBanner ? 320 : 200" :block-scroll="false" :mask-closable="false">
+      <n-alert title="Informacja o plikach cookie" type="info" :bordered="showNotificationsBanner"
+        closable class="banner" @close="acceptCookies">
         <div class="banner-wrapper">
           <div>
             Używamy plików cookie, w następujących celach:
@@ -347,7 +347,6 @@ export default {
       setTimeout(() => cooldown.value = false, 2000);
     };
 
-    watch(showCookiesBanner, resetCooldown);
     watch(showNotificationsBanner, resetCooldown);
     watch(showEmailConfirmationBanner, resetCooldown);
 
