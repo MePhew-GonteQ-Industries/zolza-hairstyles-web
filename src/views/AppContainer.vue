@@ -155,7 +155,8 @@
 
     <n-drawer :show="!cooldown && showEmailConfirmationBanner" placement="bottom" :height="170"
       :block-scroll="false" :show-mask="false">
-      <n-alert title="Potwierdź swój adres email" type="warning" :bordered="false"
+      <n-alert title="Potwierdź swój adres email"
+        :type="verificationCooldownSecondsLeft ? 'success' : 'warning'" :bordered="false"
         class="email-confirmation-banner">
         <div class="banner-wrapper">
           <div>
@@ -173,8 +174,20 @@
           </div>
           <n-divider vertical />
           <div class="action">
-            Wiadomość nie dotarła?
-            <NButton type="info" size="large" @click="resendVerificationEmail">Wyślij ponownie
+            <p v-if="!verificationCooldownSecondsLeft">Wiadomość nie dotarła?</p>
+            <div v-else class="cooldown-notice">
+              <p>Wiadomość została wysłana</p>
+              <p>Możesz spróbować ponownie za {{
+                  Math.floor(verificationCooldownSecondsLeft /
+                    60)
+              }}
+                m i {{
+                    Math.ceil(verificationCooldownSecondsLeft % 60)
+                }} s</p>
+            </div>
+            <NButton type="info" size="large" @click="resendVerificationEmail"
+              :disabled="requestingVerification || !!verificationCooldownSecondsLeft">
+              Wyślij ponownie
             </NButton>
           </div>
         </div>
@@ -198,7 +211,8 @@ import { useLoadingBar, useMessage, useNotification, NDrawer, NAlert, NButton, N
 import { useStore } from "vuex";
 import { getToken, onMessage } from "firebase/messaging";
 import messaging from '@/firebase.js';
-import { requestNotificationsPermission, notificationsSupported } from "@/utils.js";
+import { requestNotificationsPermission, notificationsSupported, handleRequestError } from "@/utils";
+import axios from 'axios';
 
 export default {
   components: {
@@ -357,10 +371,77 @@ export default {
           }));
         }
       }
+    });
+
+    const verificationCooldownEnd = ref(null);
+    const verificationCooldownSecondsLeft = ref(0);
+
+    const verificationIntervalTimerId = ref(null);
+
+    const startVerificationCooldown = (cooldownEnd = null) => {
+      if (cooldownEnd) {
+        const cooldownEndDate = new Date(cooldownEnd);
+        if (cooldownEndDate - new Date() < 999) return;
+        verificationCooldownEnd.value = cooldownEndDate;
+      } else {
+        verificationCooldownEnd.value = new Date();
+
+        verificationCooldownEnd.value.setMinutes(verificationCooldownEnd.value.getMinutes() + 5);
+
+        localStorage.setItem("verificationCooldownEnd", JSON.stringify(verificationCooldownEnd.value));
+      }
+
+      verificationIntervalTimerId.value = setInterval(() => {
+        verificationCooldownSecondsLeft.value = (verificationCooldownEnd.value - new Date());
+
+        if (verificationCooldownSecondsLeft.value < 999) {
+          verificationCooldownSecondsLeft.value = 0;
+          clearInterval(verificationIntervalTimerId);
+        }
+
+        verificationCooldownSecondsLeft.value /= 1000;
+      }, 1000);
+    }
+
+    onBeforeMount(() => {
+      const verificationCooldownEnd = JSON.parse(localStorage.getItem("verificationCooldownEnd"));
+      if (verificationCooldownEnd) {
+        startVerificationCooldown(verificationCooldownEnd);
+      }
     })
 
-    const resendVerificationEmail = () => {
-      console.error('Not implemented') // todo
+    const requestingVerification = ref(false);
+
+    const resendVerificationEmail = async () => {
+      startVerificationCooldown();
+
+      requestingVerification.value = true;
+
+      const verificationEmailMessage = message.create('Wysyłanie wiadomości', {
+        type: 'loading',
+        duration: 0,
+      });
+
+      try {
+        const response = await axios.post(
+          "/users/request-email-verification", {
+          email: store.state.user.email,
+        });
+        if (response.status === 202) {
+          verificationEmailMessage.type = 'success';
+          verificationEmailMessage.content = t('snackBars.emailSent');
+          setTimeout(() => verificationEmailMessage.destroy(), 2000);
+
+          startVerificationCooldown();
+        }
+      }
+      catch (error) {
+        const response = handleRequestError(error);
+        verificationEmailMessage.type = 'error';
+        verificationEmailMessage.content = `${t('snackBars.emailSentError')} ${response.status}, ${response.data.detail}`;
+        setTimeout(() => verificationEmailMessage.destroy(), 2000);
+      }
+      requestingVerification.value = false;
     }
 
     const cooldown = ref(true);
@@ -370,8 +451,8 @@ export default {
       setTimeout(() => cooldown.value = false, 2000);
     };
 
-    watch(showNotificationsBanner, resetCooldown);
-    watch(showEmailConfirmationBanner, resetCooldown);
+    watch(showNotificationsBanner, resetCooldown, { immediate: true });
+    watch(showEmailConfirmationBanner, resetCooldown, { immediate: true });
 
     return {
       scrollToServices,
@@ -390,6 +471,8 @@ export default {
       hideNotificationsBanner,
       resendVerificationEmail,
       cooldown,
+      verificationCooldownSecondsLeft,
+      requestingVerification,
       t,
     };
   },
@@ -436,6 +519,18 @@ export default {
 .email-confirmation-banner {
   height: 100%;
 
+  .cooldown-notice {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .banner-wrapper {
     display: grid;
     grid-template-columns: 450px 20px 300px 20px 1fr;
@@ -457,7 +552,6 @@ export default {
   }
 
   .action {
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;

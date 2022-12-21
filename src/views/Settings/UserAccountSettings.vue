@@ -14,11 +14,11 @@
         <div class="text-inputs">
           <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
             autocomplete="name" />
-          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
-            autocomplete="surname" />
+          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname"
+            appearance="primary" autocomplete="surname" />
         </div>
-        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
-          v-model:selectedValue="userData.gender" appearance="primary" />
+        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light"
+          :options="genderOptions" v-model:selectedValue="userData.gender" appearance="primary" />
       </div>
       <CustomButton type="error" class="delete-account-btn" @click="deleteAccountModalOpen = true">
         {{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton>
@@ -42,12 +42,13 @@
             </MessageBox>
           </div>
           <form @submit.prevent="" class="delete-account">
-            <input type="text" autocomplete="username" class="hidden-input" id="hidden-username-input-delete-account" />
+            <input type="text" autocomplete="username" class="hidden-input"
+              id="hidden-username-input-delete-account" />
             <label for="hidden-username-input-delete-account"></label>
             <div class="input-with-title">
               <p>{{ t("settings.userAccountSettings.password") }}</p>
-              <CustomInput :label="t('shared.password')" autocomplete="current-password" type="password"
-                :required="true" v-model:value="deleteAccountPassword" />
+              <CustomInput :label="t('shared.password')" autocomplete="current-password"
+                type="password" :required="true" v-model:value="deleteAccountPassword" />
             </div>
             <div class="input-with-title">
               <p>
@@ -57,8 +58,8 @@
                 }}</span>
                 :
               </p>
-              <CustomInput :label="t('settings.userAccountSettings.confirmDeleteAccount')" iconClass="ph-trash-light"
-                autocomplete="" v-model:value="confirmAccountDeletion" />
+              <CustomInput :label="t('settings.userAccountSettings.confirmDeleteAccount')"
+                iconClass="ph-trash-light" autocomplete="" v-model:value="confirmAccountDeletion" />
             </div>
             <div class="buttons-row">
               <CustomButton type="error" @click="deleteAccount">{{
@@ -74,7 +75,9 @@
       <MessageBox interactive :interactionHandler="requestEmailVerification" type="warning"
         v-if="!$store.state.user.verified">
         <template #title>
-          {{ t("settings.userAccountSettings.emailLabel") }} {{ $store.state.user.email }}
+          {{ t("settings.userAccountSettings.emailLabel") }} <span class="email">{{
+              $store.state.user.email
+          }}</span>
           {{ t("settings.userAccountSettings.emailNotConfirmed") }}
         </template>
         <template #subtitle> {{ t("settings.userAccountSettings.emailLinkResend") }} </template>
@@ -98,8 +101,8 @@
                 id="password-prompt-hidden-username-input" />
               <label for="password-prompt-hidden-username-input"></label>
               <div class="enter-password-wrapper">
-                <CustomInput :label="t('shared.password')" autocomplete="new-password" type="password"
-                  v-model:value="password" />
+                <CustomInput :label="t('shared.password')" autocomplete="new-password"
+                  type="password" v-model:value="password" />
                 <router-link to="/password-reset" tabindex="-1">{{
                     t("shared.forgotYourPassword")
                 }}</router-link>
@@ -358,6 +361,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.email {
+  font-weight: bold;
+}
+
 .settings-page {
   min-height: 73.5vh;
 }
