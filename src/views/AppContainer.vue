@@ -118,12 +118,13 @@
       </n-alert>
     </n-drawer>
 
-    <n-drawer :show="!cooldown && showNotificationsBanner" placement="bottom"
-      :height="showEmailConfirmationBanner ? 300 : 150" :block-scroll="false" :show-mask="false">
+    <n-drawer :show="(!cooldown && showNotificationsBanner) && !hideNotificationsBanner"
+      placement="bottom" :height="showEmailConfirmationBanner ? 300 : 150" :block-scroll="false"
+      :show-mask="false">
       <n-alert
         :title="notificationsPermissionDenied ? 'Nie wyrażono zgody na otrzymywanie powiadomień' : 'Czy chcesz otrzymywać powiadomienia?'"
         :type="notificationsPermissionDenied ? 'error' : 'info'" :bordered="false" closable
-        class="banner" @close="disableNotifications">
+        class="banner" @close="hideNotificationsBanner = true">
         <div class="banner-wrapper" v-if="!notificationsPermissionDenied">
           Włącz powiadomienia, aby otrzymywać przypomnienia o nadchodzących wizytach
           i nowych funkcjonalnościach
@@ -342,6 +343,8 @@ export default {
 
     const notificationsUnsupported = computed(() => !notificationsSupported() && notificationsPermissionNotChecked.value && store.getters.isAuthenticated);
 
+    const hideNotificationsBanner = ref(false);
+
     watch(notificationsUnsupported, (newValue) => {
       if (newValue) {
         if (!store.state.utils.reducedFunctionalityNotification) {
@@ -384,6 +387,7 @@ export default {
       checkNotificationsPermission,
       notificationsPermissionDenied,
       showEmailConfirmationBanner,
+      hideNotificationsBanner,
       resendVerificationEmail,
       cooldown,
       t,
