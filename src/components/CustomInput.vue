@@ -266,7 +266,7 @@ export default {
   }
 
   input {
-    padding: 20px 30px 0 30px;
+    padding: 20px 65px 0 30px;
     border: 2px solid transparent;
     background-color: $primary-color;
     color: $secondary-text-color;
