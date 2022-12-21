@@ -189,19 +189,19 @@ export default {
 
     const genderOptions = [
       {
-        title: "Male",
+        title: t('shared.male'),
         value: "male",
         iconClass: "ph-gender-male-light",
         iconAlt: "male gender icon",
       },
       {
-        title: "Female",
+        title: t('shared.female'),
         value: "female",
         iconClass: "ph-gender-female-light",
         iconAlt: "female gender icon",
       },
       {
-        title: "Other",
+        title: t('shared.other'),
         value: "other",
         iconClass: "ph-gender-neuter-light",
         iconAlt: "other gender icon",
