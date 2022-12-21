@@ -120,11 +120,24 @@
 
     <n-drawer :show="!cooldown && showNotificationsBanner" placement="bottom"
       :height="showEmailConfirmationBanner ? 300 : 150" :block-scroll="false" :show-mask="false">
-      <n-alert title="Czy chcesz otrzymywać powiadomienia?" type="info" :bordered="false" closable
+      <n-alert
+        :title="notificationsPermissionDenied ? 'Nie wyrażono zgody na otrzymywanie powiadomień' : 'Czy chcesz otrzymywać powiadomienia?'"
+        :type="notificationsPermissionDenied ? 'error' : 'info'" :bordered="false" closable
         class="banner" @close="disableNotifications">
-        <div class="banner-wrapper">
+        <div class="banner-wrapper" v-if="!notificationsPermissionDenied">
           Włącz powiadomienia, aby otrzymywać przypomnienia o nadchodzących wizytach
           i nowych funkcjonalnościach
+          <n-divider vertical />
+          <div class="buttons">
+            <NButton type="success" size="large" @click="enableNotifications">Włącz powiadomienia
+            </NButton>
+            <NButton type="error" size="large" @click="disableNotifications">Nie, dziękuję
+            </NButton>
+          </div>
+        </div>
+        <div class="banner-wrapper" v-else>
+          Jeśli chcesz włączyć powiadomienia, wyraź zgodę na otrzymywanie powiadomień w swojej
+          przeglądarce, a następnie włącz powiadomienia korzystając z przycisku obok
           <n-divider vertical />
           <div class="buttons">
             <NButton type="success" size="large" @click="enableNotifications">Włącz powiadomienia
@@ -268,6 +281,8 @@ export default {
       message.error('Powiadomienia zostały wyłączone');
     }
 
+    const notificationsPermissionDenied = ref(false);
+
     const enableNotifications = async () => {
       const enablingNotificationsMessage = message.loading('Wyraź zgodę na otrzymywanie powiadomień', {
         duration: 0,
@@ -306,6 +321,7 @@ export default {
           console.error('An error occurred while retrieving token.', err);
         }
       } else {
+        notificationsPermissionDenied.value = true;
         enablingNotificationsMessage.type = 'error';
         enablingNotificationsMessage.content = 'Nie wyrażono zgody na otrzymywanie powiadomień';
         setTimeout(() => {
@@ -316,11 +332,15 @@ export default {
 
     const showCookiesBanner = computed(() => !store.state.utils.cookiesAccepted);
 
-    const showNotificationsBanner = computed(() => notificationsSupported() && store.getters.isAuthenticated && Notification.permission === 'default' && !store.state.utils.notificationsDenied);
+    const notificationsPermissionNotChecked = computed(() => Notification.permission === 'default');
+
+    const checkNotificationsPermission = computed(() => notificationsPermissionNotChecked.value && !store.state.utils.notificationsDenied)
+
+    const showNotificationsBanner = computed(() => notificationsSupported() && store.getters.isAuthenticated && checkNotificationsPermission.value);
 
     const showEmailConfirmationBanner = computed(() => store.getters.isAuthenticated && !store.state.user.verified);
 
-    const notificationsUnsupported = computed(() => !notificationsSupported() && Notification.permission === 'default' && store.getters.isAuthenticated);
+    const notificationsUnsupported = computed(() => !notificationsSupported() && notificationsPermissionNotChecked.value && store.getters.isAuthenticated);
 
     watch(notificationsUnsupported, (newValue) => {
       if (newValue) {
@@ -361,6 +381,8 @@ export default {
       disableNotifications,
       showCookiesBanner,
       showNotificationsBanner,
+      checkNotificationsPermission,
+      notificationsPermissionDenied,
       showEmailConfirmationBanner,
       resendVerificationEmail,
       cooldown,
