@@ -113,7 +113,7 @@ export default {
     function logout() {
       store.dispatch("logout").then(() => {
         if (router.currentRoute.value.meta.requiresAuth) router.push({ name: "home" });
-        message.success('snackBars.logOut');
+        message.success(t('snackBars.logOut'));
       });
     }
 
