@@ -118,9 +118,9 @@
       </n-alert>
     </n-drawer>
 
-    <n-drawer :show="(!cooldown && showNotificationsBanner) && !hideNotificationsBanner"
-      placement="bottom" :height="showEmailConfirmationBanner ? 300 : 150" :block-scroll="false"
-      :show-mask="false">
+    <n-drawer
+      :show="(!cooldown && showNotificationsBanner) && !hideNotificationsBanner && !showEmailConfirmationBanner"
+      placement="bottom" :height="150" :block-scroll="false" :show-mask="false">
       <n-alert
         :title="notificationsPermissionDenied ? 'Nie wyrażono zgody na otrzymywanie powiadomień' : 'Czy chcesz otrzymywać powiadomienia?'"
         :type="notificationsPermissionDenied ? 'error' : 'info'" :bordered="false" closable
