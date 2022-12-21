@@ -89,8 +89,8 @@
       <contactSection />
     </footer>
 
-    <n-drawer :show="showCookiesBanner" placement="bottom" :height="200" :block-scroll="false"
-      :mask-closable="false">
+    <n-drawer :show="!cooldown && showCookiesBanner" placement="bottom" :height="200"
+      :block-scroll="false" :mask-closable="false">
       <n-alert title="Informacja o plikach cookie" type="info" :bordered="false" closable
         class="banner" @close="acceptCookies">
         <div class="banner-wrapper">
@@ -118,7 +118,7 @@
       </n-alert>
     </n-drawer>
 
-    <n-drawer :show="showNotificationsBanner" placement="bottom"
+    <n-drawer :show="!cooldown && showNotificationsBanner" placement="bottom"
       :height="showEmailConfirmationBanner ? 300 : 150" :block-scroll="false" :show-mask="false">
       <n-alert title="Czy chcesz otrzymywać powiadomienia?" type="info" :bordered="false" closable
         class="banner" @close="disableNotifications">
@@ -139,7 +139,7 @@
       </n-alert>
     </n-drawer>
 
-    <n-drawer :show="showEmailConfirmationBanner" placement="bottom" :height="170"
+    <n-drawer :show="!cooldown && showEmailConfirmationBanner" placement="bottom" :height="170"
       :block-scroll="false" :show-mask="false">
       <n-alert title="Potwierdź swój adres email" type="warning" :bordered="false"
         class="email-confirmation-banner">
@@ -174,7 +174,7 @@
 
 <script>
 import { useI18n } from "vue-i18n";
-import { ref, watch, computed, onBeforeMount } from "vue";
+import { ref, watch, computed, onBeforeMount, onBeforeUpdate } from "vue";
 import { useWindowScroll } from "@vueuse/core";
 import navbarSection from "@/components/Navbar/NavbarSection.vue";
 import contactSection from "@/views/Contact/ContactSection.vue";
@@ -340,6 +340,17 @@ export default {
       console.error('Not implemented') // todo
     }
 
+    const cooldown = ref(true);
+
+    const resetCooldown = () => {
+      cooldown.value = true;
+      setTimeout(() => cooldown.value = false, 2000);
+    };
+
+    watch(showCookiesBanner, resetCooldown);
+    watch(showNotificationsBanner, resetCooldown);
+    watch(showEmailConfirmationBanner, resetCooldown);
+
     return {
       scrollToServices,
       scrolledToServices,
@@ -353,6 +364,7 @@ export default {
       showNotificationsBanner,
       showEmailConfirmationBanner,
       resendVerificationEmail,
+      cooldown,
       t,
     };
   },
