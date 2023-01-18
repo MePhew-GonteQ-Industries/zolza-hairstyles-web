@@ -5,12 +5,12 @@
                 <h3>{{ service.name }}</h3>
                 <p>
                     {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes
-                    }}min</span>
+}}min</span>
                 </p>
                 <p>{{ t("home.serviceTile.price") }} <span>{{ service.min_price }}<span
                             v-if="service.max_price && service.max_price !== service.min_price"> ~
                             {{ service.max_price
-                            }}</span>zł</span>
+}}</span>zł</span>
                 </p>
             </div>
             <CustomModal v-model:open="openMakeAnAppointmentModal">
@@ -34,10 +34,10 @@
                                     @click="selectAppointmentHour(availableSlot)"
                                     :class="{ 'selected': availableSlot.id === selectedSlotId }">
                                     {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(locale, {
-                                            hour:
-                                                "2-digit", minute: "2-digit",
-                                        })
-                                    }}
+        hour:
+            "2-digit", minute: "2-digit",
+    })
+}}
                                 </div>
                             </div>
                             <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots">
@@ -47,11 +47,11 @@
                     </div>
                     <div class="buttons-wrapper">
                         <CustomButton type="info" @click="makeAppointment">{{
-                                t('userAppointmentsView.makeAnAppointment.makeAnAppointment')
-                        }}</CustomButton>
+        t('userAppointmentsView.makeAnAppointment.makeAnAppointment')
+}}</CustomButton>
                         <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">{{
-                                t('userAppointmentsView.makeAnAppointment.cancel')
-                        }}</CustomButton>
+        t('userAppointmentsView.makeAnAppointment.cancel')
+                            }}</CustomButton>
                     </div>
                 </div>
             </CustomModal>

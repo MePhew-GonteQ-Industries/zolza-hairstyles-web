@@ -2,13 +2,13 @@
 <template>
   <div class="select-wrapper">
     <div class="select" tabindex="0" :class="[
-      {
-        expanded: expanded,
-        'hover-enabled': selectHoverEnabled,
-        invalid: invalid && (validate || forceValidate),
-      },
-      appearance,
-    ]" @mousedown="toggleDropdown" @focus.self="expandDropdown" @keydown.down.prevent="selectNextOption"
+  {
+    expanded: expanded,
+    'hover-enabled': selectHoverEnabled,
+    invalid: invalid && (validate || forceValidate),
+  },
+  appearance,
+]" @mousedown="toggleDropdown" @focus.self="expandDropdown" @keydown.down.prevent="selectNextOption"
       @keydown.up.prevent="selectPreviousOption" @keydown.tab="collapseDropdown" ref="select" @blur="validate = true">
       <span class="header" :class="{ expanded: expanded, 'value-selected': selectedItem !== null }">
         {{ header }}</span>
