@@ -17,7 +17,7 @@ jobs:
           key: ${{secrets.DEPLOYMENT_SSH_KEY}}
           passphrase: ${{secrets.DEPLOYMENT_SSH_KEY_PASSPHRASE}}
           script: |
-            cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
+            cd ${{secrets.DEPLOYMENT_PATH}}/zolza-hairstyles-web
             git reset --hard
             git pull
             echo ${{secrets.DEPLOYMENT_PASSWORD}} | sudo -S npm update -g npm
