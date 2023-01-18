@@ -1,38 +1,44 @@
 <template>
     <div class="user-appointments-wrapper">
         <router-link :to="({ name: 'makeAnAppointment' })" class="make-an-appointment-button">{{
-                t('userAppointmentsView.appointmentsList.makeAnAppointment')
+            t('userAppointmentsView.appointmentsList.makeAnAppointment')
         }}</router-link>
         <h1>{{ t('userAppointmentsView.appointmentsList.yourAppointments') }}:</h1>
         <div class="appointments-list" v-if="appointmentsFiltered.length > 0 && !loading">
             <n-card v-for="appointment in appointmentsFiltered" :key="appointment.id" size="huge"
                 :title="appointment.service">
-                {{ t('userAppointmentsView.appointmentsList.date') }}: {{ new
-                        Date(`${appointment.startSlot}Z`).toLocaleDateString(locale, {
-                            weekday: 'long',
-                            day: '2-digit',
-                            month: '2-digit',
-                            year: 'numeric',
-                        })
-                }} {{ new Date(`${appointment.startSlot}Z`).toLocaleTimeString(locale, {
+                {{ t('userAppointmentsView.appointmentsList.date') }}: {{
+                    new
+                                Date(appointment.startSlot).toLocaleDateString(locale, {
+                        weekday: 'long',
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                    })
+                }} {{
+    new Date(appointment.startSlot).toLocaleTimeString(locale, {
         hour: '2-digit', minute:
             '2-digit',
     })
-}} - {{ new Date(`${appointment.endSlot}Z`).toLocaleTimeString(locale, {
+}} - {{
+    new Date(appointment.endSlot).toLocaleTimeString(locale, {
         hour: '2-digit', minute:
             '2-digit',
     })
 }}
                 <template #footer>
-                    {{ t('userAppointmentsView.appointmentsList.price') }}: {{ appointment.minPrice }}zł <span
-                        v-if="appointment.minPrice !== appointment.maxPrice">- {{
-                                appointment.maxPrice
-                        }}zł</span>
+                    {{ t('userAppointmentsView.appointmentsList.price') }}: {{
+                        appointment.minPrice
+                    }}zł <span v-if="appointment.minPrice !== appointment.maxPrice">- {{
+    appointment.maxPrice
+}}zł</span>
                 </template>
             </n-card>
         </div>
         <div class="no-appointments-wrapper" v-if="appointmentsFiltered.length === 0 && !loading">
-            <n-tag type="info" size="large">{{ t('userAppointmentsView.appointmentsList.noAppointments') }}</n-tag>
+            <n-tag type="info" size="large">{{
+                t('userAppointmentsView.appointmentsList.noAppointments')
+            }}</n-tag>
         </div>
         <div class="loader" v-if="loading">
             <CustomLoader></CustomLoader>

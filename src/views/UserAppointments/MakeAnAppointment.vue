@@ -1,15 +1,18 @@
 <template>
     <div class="make-an-appointment-page">
         <div class="services-tiles" v-if="!loading">
-            <div class="service-tile" v-for="service in servicesData" :key="service.id" @click="chooseService(service)">
+            <div class="service-tile" v-for="service in servicesData" :key="service.id"
+                @click="chooseService(service)">
                 <h3>{{ service.name }}</h3>
                 <p>
-                    {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes
+                    {{ t("home.serviceTile.time") }} <span>~ {{
+                        service.average_time_minutes
                     }}min</span>
                 </p>
                 <p>{{ t("home.serviceTile.price") }} <span>{{ service.min_price }}<span
                             v-if="service.max_price && service.max_price !== service.min_price"> ~
-                            {{ service.max_price
+                            {{
+                                service.max_price
                             }}</span>zł</span>
                 </p>
             </div>
@@ -25,18 +28,23 @@
                         </template>
                     </MessageBox>
                     <div class="select-date-wrapper">
-                        <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green"
-                            mode="date" v-model="selectedDate" />
+                        <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
+                            color="green" mode="date" v-model="selectedDate" />
                         <div class="hours">
                             <CustomLoader v-if="loadingSlots" class="loader"></CustomLoader>
-                            <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
-                                <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                            <div class="slots-wrapper"
+                                v-if="validatedSlots.length && !loadingSlots">
+                                <div class="single-hour" v-for="availableSlot in validatedSlots"
+                                    :key="availableSlot.id"
                                     @click="selectAppointmentHour(availableSlot)"
                                     :class="{ 'selected': availableSlot.id === selectedSlotId }">
-                                    {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(locale, {
-                                            hour:
-                                                "2-digit", minute: "2-digit",
-                                        })
+                                    {{
+                                        new
+                                                                        Date(availableSlot.start_time).toLocaleTimeString(locale,
+                                            {
+                                                hour:
+                                                    "2-digit", minute: "2-digit",
+                                            })
                                     }}
                                 </div>
                             </div>
@@ -47,11 +55,12 @@
                     </div>
                     <div class="buttons-wrapper">
                         <CustomButton type="info" @click="makeAppointment">{{
-                                t('userAppointmentsView.makeAnAppointment.makeAnAppointment')
+                            t('userAppointmentsView.makeAnAppointment.makeAnAppointment')
                         }}</CustomButton>
-                        <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">{{
-                                t('userAppointmentsView.makeAnAppointment.cancel')
-                        }}</CustomButton>
+                        <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">
+                            {{
+    t('userAppointmentsView.makeAnAppointment.cancel')
+                            }}</CustomButton>
                     </div>
                 </div>
             </CustomModal>
@@ -163,6 +172,7 @@ export default {
                 const response = await axios.get(`appointments/slots?date=${date}`);
                 availableSlots.value = response.data;
                 loadingSlots.value = false;
+                console.log(response.data);
             } catch (error) {
                 handleRequestError(error);
             }
