@@ -300,6 +300,6 @@
     "accountCreated": "Account created",
     "accountCreatedError": "Couldn't create account,",
     "appointmentMade": "Appointment created",
-    "appointmentMadeError": "Couldn't make an appointment,"
+    "appointmentsMadeError": "Couldn't make an appointment,"
   }
 }

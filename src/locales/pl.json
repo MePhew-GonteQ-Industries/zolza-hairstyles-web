@@ -305,6 +305,6 @@
     "accountCreated": "Konto zostało utworzone",
     "accountCreatedError": "Nie udało się utworzyć konta,",
     "appointmentMade": "Wizyta została umówiona",
-    "appointmentMadeError": "Nie udało się umówić wizyty,"
+    "appointmentsMadeError": "Nie udało się umówić wizyty,"
   }
 }
