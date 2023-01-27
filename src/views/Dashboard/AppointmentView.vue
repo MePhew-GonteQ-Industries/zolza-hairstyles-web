@@ -76,7 +76,8 @@
                   <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
                     @click="selectAppointmentHour(availableSlot)"
                     :class="{ 'selected': availableSlot.id === selectedSlotId }">
-                    {{ new Date(`${availableSlot.start_time}Z`).toLocaleTimeString(
+                    {{
+                      new Date(`${availableSlot.start_time}`).toLocaleTimeString(
                         locale, {
                         hour: "2-digit",
                         minute: "2-digit",
