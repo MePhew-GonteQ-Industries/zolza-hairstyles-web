@@ -36,4 +36,4 @@ jobs:
           passphrase: ${{secrets.DEPLOYMENT_SSH_KEY_PASSPHRASE}}
           script: |
             cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
-            echo ${{secrets.DEPLOYMENT_PASSWORD}} | sudo -S cp -r ./dist /var/www/zolza-hairstyles.pl
+            echo '${{secrets.DEPLOYMENT_PASSWORD}}' | sudo -S cp -r ./dist /var/www/zolza-hairstyles.pl
