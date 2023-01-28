@@ -46,14 +46,14 @@ export default {
       const now = new Date();
 
       availableSlotsData.value.forEach((service) => {
-        const date = new Date(`${service.start_time}Z`);
+        const date = new Date(`${service.start_time}`);
 
         const day =
           date === now
             ? "Dzisiaj"
             : date.toLocaleDateString(locale, {
-                weekday: "long",
-              });
+              weekday: "long",
+            });
 
         slots.push({
           day: `${day[0].toUpperCase()}${day.slice(1)}`,
@@ -113,6 +113,7 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     padding: 3.5rem 10% 3.5rem 10%;
+
     @media only screen and (max-width: $xs) {
       display: flex;
       flex-direction: column;

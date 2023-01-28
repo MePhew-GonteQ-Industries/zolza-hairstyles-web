@@ -20,8 +20,10 @@
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 import { useI18n } from "vue-i18n";
+import { useMessage } from 'naive-ui';
+import { handleRequestError } from "@/utils";
 
 export default {
   name: "AvailableSlotTile",
@@ -34,13 +36,32 @@ export default {
       type: String,
       required: true,
     },
+    firstSlotId: {
+      type: String,
+      required: true,
+    },
+    serviceId: {
+      type: String,
+      required: true,
+    },
   },
 
   setup() {
     const { t } = useI18n({ useScope: "global" });
+    const message = useMessage();
+
 
     const bookAppointment = async () => {
-      // await axios.post
+      try {
+        await axios.post(`appointments`, {
+          // first_slot_id: selectedSlotId.value,
+          // service_id: selectedService.value.id,
+        });
+        message.success(t('snackBars.appointmentMade'));
+      } catch (error) {
+        const errorResponse = handleRequestError(error);
+        message.error(`${t('snackBars.appointmentsMadeError')} ${errorResponse.status}, ${errorResponse.data.detail}`);
+      }
     };
 
     return { t, bookAppointment };
