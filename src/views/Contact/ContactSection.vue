@@ -3,9 +3,8 @@
     <div class="info-section">
       <ul>
         <li>
-          <span class="copyright-note"
-            ><i class="ph-copyright-light"></i> 2022 Zołza Hairstyles</span
-          >
+          <span class="copyright-note"><i class="ph-copyright-light"></i> 2022 Zołza
+            Hairstyles</span>
         </li>
       </ul>
     </div>
@@ -29,20 +28,14 @@
     <div class="contact">
       <ul>
         <li>
-          <a
-            href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161"
-            target="_blank"
-            aria-label="facebook"
-          >
+          <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank"
+            aria-label="facebook">
             <i class="ph-facebook-logo-light"></i>
           </a>
         </li>
         <li>
-          <a
-            href="https://www.instagram.com/zolza_hairstyles/"
-            target="_blank"
-            aria-label="Instagram"
-          >
+          <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank"
+            aria-label="Instagram">
             <i class="ph-instagram-logo-light"></i>
           </a>
         </li>
@@ -52,7 +45,7 @@
           </a>
         </li>
         <li>
-          <a href="mailto: zolza.hairstyles@gmail.com" target="_blank" aria-label="Adres email">
+          <a href="mailto:zolza.hairstyles@gmail.com" target="_blank" aria-label="Adres email">
             <i class="ph-envelope-simple-light"></i>
           </a>
         </li>
@@ -67,11 +60,8 @@
             <h1>Aplikacja mobilna</h1>
             <GitHubCard username="biQte" />
           </CustomModal>
-          <i
-            class="ph-file-code-light code-icon"
-            @click="toggleDevsModal"
-            @keydown.enter="toggleDevsModal"
-          ></i>
+          <i class="ph-file-code-light code-icon" @click="toggleDevsModal"
+            @keydown.enter="toggleDevsModal"></i>
         </li>
       </ul>
     </div>
@@ -123,12 +113,15 @@ export default {
     .copyright-note {
       display: flex;
       align-items: center;
+
       @media only screen and (max-width: $xs) {
         font-size: 0.7rem;
       }
+
       i {
         font-size: 1.375rem;
         margin: 0 5px;
+
         @media only screen and (max-width: $xs) {
           font-size: 1rem;
         }
@@ -138,6 +131,7 @@ export default {
 
   i {
     font-size: 28px;
+
     @media only screen and (max-width: $xs) {
       font-size: 1.2rem;
     }
@@ -185,11 +179,13 @@ export default {
   @media only screen and (max-width: $xs) {
     .footer-basic {
       height: 3rem;
+
       .info-session {
         ul {
           li {
             .copyright-note {
               font-size: 0.3rem;
+
               .ph-copyright-light::before {
                 margin: 0 2px;
                 font-size: 15px;
@@ -198,13 +194,16 @@ export default {
           }
         }
       }
+
       i {
         font-size: 20px;
       }
+
       a {
         font-size: 0.5rem;
       }
     }
+
     .policy {
       display: none;
     }
