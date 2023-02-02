@@ -36,7 +36,7 @@
             </n-card>
         </div>
         <div class="no-appointments-wrapper" v-if="appointmentsFiltered.length === 0 && !loading">
-            <n-tag type="info" size="large">{{
+            <n-tag type="info" size="large" round :bordered="false" class="ntag">{{
                 t('userAppointmentsView.appointmentsList.noAppointments')
             }}</n-tag>
         </div>
@@ -144,6 +144,12 @@ export default {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+    }
+
+    .no-appointments-wrapper {
+        .ntag {
+            padding: 1.1rem 1.8rem;
+        }
     }
 }
 </style>
