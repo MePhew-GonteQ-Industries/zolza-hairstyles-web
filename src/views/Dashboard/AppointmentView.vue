@@ -69,7 +69,7 @@
             </MessageBox>
             <div class="date-picker-wrapper">
               <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate" />
+                v-model="selectedDate" :min-date="new Date" :max-date="maxDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
@@ -140,6 +140,9 @@ export default {
     const availableSlots = ref([]);
     const selectedSlotId = ref(null);
     const message = useMessage();
+
+    const maxDate = ref(new Date());
+    maxDate.value.setDate(maxDate.value.getDate() + 30);
 
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
@@ -334,6 +337,7 @@ export default {
       message,
       t,
       closeChangeAppointmentDateModal,
+      maxDate,
     };
   },
 };

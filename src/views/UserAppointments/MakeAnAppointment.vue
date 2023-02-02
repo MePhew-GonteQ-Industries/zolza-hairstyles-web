@@ -28,7 +28,7 @@
                     </MessageBox>
                     <div class="select-date-wrapper">
                         <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green"
-                            mode="date" v-model="selectedDate" />
+                            mode="date" v-model="selectedDate" :min-date="new Date" :max-date="maxDate" />
                         <div class="hours">
                             <CustomLoader v-if="loadingSlots" class="loader"></CustomLoader>
                             <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
@@ -106,6 +106,9 @@ export default {
         const router = useRouter();
 
         const locale = store.state.settings.language;
+
+        const maxDate = ref(new Date());
+        maxDate.value.setDate(maxDate.value.getDate() + 30);
 
         const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
@@ -219,6 +222,7 @@ export default {
             makeAppointment,
             message,
             closeMakeAnAppointmentModal,
+            maxDate,
         }
     }
 }
