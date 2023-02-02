@@ -1,8 +1,7 @@
 <template>
   <section class="dashboard-page dashboard-data-page users-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.usersManagement.search')" v-model:value="q"
-        type="search" />
+      <CustomInput class="search" :label="t('dashboard.usersManagement.search')" v-model:value="q" type="search" />
     </form>
 
     <div class="dashboard-data-table-wrapper">
@@ -19,8 +18,7 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
-              @toggleSort="toggleSort('id')">
+            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
               #id</SortedHeader>
           </th>
           <th>
@@ -125,10 +123,12 @@ export default {
 
         userTemp.shortId = user.id.substr(0, 4);
 
-        if (user.gender === "female") {
+        console.log(user.gender);
+
+        if (user.gender === "female" || user.gender === "Żeńska") {
           userTemp.gender_icon_class = "ph-gender-female";
           userTemp.gender = "Żeńska";
-        } else if (user.gender === "male") {
+        } else if (user.gender === "male" || user.gender === "Męska") {
           userTemp.gender_icon_class = "ph-gender-male";
           userTemp.gender = "Męska";
         } else {
