@@ -10,8 +10,8 @@
               <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
                 v-model="selectedDate"></DatePicker>
               <div class="hours">
-                <CustomLoader v-if="loading" />
-                <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
+                <CustomLoader v-if="loadingSlots" />
+                <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
                   <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
                     @click="toggleSlot(availableSlot)"
                     :class="{ 'selected': selectedSlotsId.includes(availableSlot.id) }">
@@ -23,7 +23,7 @@
                     }}
                   </div>
                 </div>
-                <div class="no-slots" v-if="!validatedSlots.length && !loading">
+                <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots">
                   Brak wolnych miejsc
                 </div>
               </div>
@@ -67,6 +67,84 @@
             </div>
           </CustomModal>
         </CustomModal>
+        <div class="reserved-slots-list">
+          <table>
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+            <thead>
+              <th>
+                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id">
+                  #id
+                </SortedHeader>
+              </th>
+              <th>
+                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate">
+                  Od
+                </SortedHeader>
+              </th>
+              <th>
+                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate">
+                  Do
+                </SortedHeader>
+              </th>
+              <th>
+                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="date">
+                  Dnia
+                </SortedHeader>
+              </th>
+            </thead>
+            <tbody>
+              <tr v-for="slot in reservedSlotsFiltered" :key="slot.id">
+                <td class="id" @click="unreserveModalOpen = true">
+                  <CustomTooltip>
+                    <template #activator>
+                      {{ slot.id.slice(0, 5) }}...
+                    </template>
+                    {{ slot.id }}
+                  </CustomTooltip>
+                  <CustomModal v-model:open="unreserveModalOpen">
+                    <template #title>
+                      Cofnięcie rezerwacji slotu
+                    </template>
+                    <div class="unreserve-slot-modal-wrapper">
+                      <div class="slot-info">
+                        <p>Id: {{ slot.id }}</p>
+                        <p>
+                          Od: {{
+                            new Date(slot.start_time).toLocaleTimeString(locale, {
+                              hour: "2-digit", minute: "2-digit"
+                            })
+                          }}
+                        </p>
+                        <p>
+                          Do: {{
+                            new Date(slot.end_time).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })
+                          }}
+                        </p>
+                        <p>
+                          Dnia: {{ new Date(slot.date).toLocaleDateString(locale) }}
+                        </p>
+                      </div>
+                      <div class="buttons-wrapper">
+                        <CustomButton type="info" @click="cancelReservation(slot)">Cofnij rezerwacje</CustomButton>
+                        <CustomButton type="secondary" @click="closeUnreserveSlotModal">Zamknij</CustomButton>
+                      </div>
+                    </div>
+                  </CustomModal>
+                </td>
+                <td>{{ new Date(slot.start_time).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" }) }}
+                </td>
+                <td>{{ new Date(slot.end_time).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" }) }}
+                </td>
+                <td>{{ new Date(slot.date).toLocaleDateString(locale) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <n-divider vertical></n-divider>
       <div class="changing-work-hours-wrapper"></div>
@@ -77,7 +155,7 @@
 <script>
 import { NButton, NDivider } from 'naive-ui';
 import { ref, computed, onMounted, watch } from 'vue';
-import CustomModal from '../../components/CustomModal.vue';
+import CustomModal from '@/components/CustomModal.vue';
 import { DatePicker } from "v-calendar";
 import "v-calendar/dist/style.css";
 import { useStore } from "vuex";
@@ -87,7 +165,9 @@ import { useMessage } from 'naive-ui';
 import CustomLoader from "@/components/CustomLoader.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import { useRouter } from 'vue-router';
-import MessageBox from '../../components/MessageBox.vue';
+import MessageBox from '@/components/MessageBox.vue';
+import SortedHeader from '@/components/SortedHeader.vue';
+import CustomTooltip from '@/components/CustomTooltip.vue';
 
 export default {
   name: "WorkHoursManagement",
@@ -99,6 +179,8 @@ export default {
     CustomLoader,
     CustomButton,
     MessageBox,
+    SortedHeader,
+    CustomTooltip,
   },
   setup() {
     const store = useStore();
@@ -106,6 +188,7 @@ export default {
     const selectedDate = ref(new Date);
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
     const loading = ref(true);
+    const loadingSlots = ref(true);
     const availableSlots = ref([]);
     const selectedSlotsId = ref([]);
     const message = useMessage();
@@ -113,6 +196,8 @@ export default {
     const openReservingSlotsReassuranceModal = ref(false);
     const router = useRouter();
     const selectedSlots = ref([]);
+    const reservedSlots = ref([]);
+    const unreserveModalOpen = ref(false);
 
     const validatedSlots = computed(() => {
       const slots = [];
@@ -132,7 +217,7 @@ export default {
       try {
         const response = await axios.get(`appointments/slots?date=${date}`);
         availableSlots.value = response.data;
-        loading.value = false;
+        loadingSlots.value = false;
       } catch (error) {
         handleRequestError(error);
       }
@@ -162,6 +247,7 @@ export default {
       selectedSlotsId.value = [];
       selectedSlots.value = [];
       selectedDate.value = new Date;
+      loadingSlots.value = true;
       openReservingSlotsModal.value = false;
     }
 
@@ -176,6 +262,7 @@ export default {
         selectedDate.value = new Date;
         openReservingSlotsReassuranceModal.value = false;
         openReservingSlotsModal.value = false;
+        loadReservedSlots();
         router.push({ name: 'workHoursManagement' });
       }
       catch (error) {
@@ -184,18 +271,61 @@ export default {
       }
     }
 
+    const cancelReservation = async (slot) => {
+      try {
+        await axios.post('appointments/unreserve_slots', {
+          slots: [
+            slot.id
+          ],
+        });
+        message.success('Pomyślnie anulowano rezerwacje');
+        unreserveModalOpen.value = false;
+        loadReservedSlots();
+        router.push({ name: 'workHoursManagement' });
+      } catch (error) {
+        handleRequestError(error);
+      }
+    }
+    const closeUnreserveSlotModal = () => {
+      unreserveModalOpen.value = false;
+    }
+
     watch(selectedDateFormatted, async (newDate) => {
       loading.value = true;
       await loadAvailableTimeSlots(newDate);
     });
 
-    onMounted(async () => {
+    const loadReservedSlots = async () => {
       loading.value = true;
       try {
-        // const response = await axios.get('appointments/any/')
+        const response = await axios.get('appointments/slots');
+        reservedSlots.value = response.data;
+        loading.value = false;
       } catch (error) {
         handleRequestError(error);
       }
+    }
+
+    const reservedSlotsFiltered = computed(() => {
+      const slots = [];
+
+      for (let i = 0; i < reservedSlots.value.length; i++) {
+        let slot = reservedSlots.value[i];
+
+        if (slot.reserved) {
+          slots.push(slot);
+        } else {
+          continue;
+        }
+      }
+
+      return slots;
+    });
+
+    onMounted(async () => {
+      loading.value = true;
+      loadingSlots.value = true;
+      await loadReservedSlots();
       await loadAvailableTimeSlots(selectedDateFormatted.value);
     });
 
@@ -217,6 +347,13 @@ export default {
       openReservingSlotsReassuranceModal,
       openReservingReassuranceModal,
       selectedSlots,
+      loadReservedSlots,
+      reservedSlots,
+      loadingSlots,
+      reservedSlotsFiltered,
+      unreserveModalOpen,
+      cancelReservation,
+      closeUnreserveSlotModal,
     }
   }
 };
@@ -235,6 +372,105 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    .reserved-slots-list {
+      table {
+        border-spacing: 0;
+        box-shadow: 0 0 8px -2px $box-shadow-color;
+
+        @media only screen and (max-width: $sm) {
+          display: block;
+        }
+
+        thead {
+          position: sticky;
+          top: 0;
+
+          @media only screen and (max-width: $sm) {
+            display: block;
+            margin-bottom: 15px;
+          }
+        }
+
+        th {
+          padding: 0 1rem;
+          text-transform: uppercase;
+          background-color: $background-accent-high;
+          height: 3.375rem;
+          font-size: .75rem;
+          color: $secondary-text-color;
+          border-width: thin 0 thin 0;
+          border-style: solid;
+          border-color: $secondary-color;
+          letter-spacing: 1px;
+          text-align: left;
+
+          @media only screen and (max-width: $sm) {
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        tr {
+          @media only screen and (max-width: $sm) {
+            display: block;
+            border: thin solid $primary-text-color;
+          }
+        }
+
+        tbody {
+          @media only screen and (max-width: $sm) {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          }
+        }
+
+        th:first-child {
+          border-radius: .5rem 0 0 0;
+        }
+
+        th:last-child {
+          border-radius: 0 .5rem 0 0;
+        }
+
+        tr:last-child td:first-child {
+          border-radius: 0 0 0 .5rem;
+        }
+
+        tr:last-child td:last-child {
+          border-radius: 0 0 .5rem 0;
+        }
+
+        tr:hover>td {
+          background-color: $background-accent-medium;
+        }
+
+        td {
+          padding: 1rem;
+          font-size: .875rem;
+          height: 3.125rem;
+          background-color: $background-accent-low;
+          transition: none;
+          border-bottom: thin solid $secondary-color;
+
+          @media only screen and (max-width: $sm) {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: flex-start;
+          }
+
+          font-weight: 500;
+          color: $secondary-text-color;
+
+          &:first-child:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -314,6 +550,16 @@ export default {
         padding: 2px 10px;
       }
     }
+  }
+}
+
+.unreserve-slot-modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .slot-info {
+    padding: 1rem;
   }
 }
 
