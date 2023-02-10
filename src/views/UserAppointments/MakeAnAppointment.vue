@@ -1,8 +1,7 @@
 <template>
     <div class="make-an-appointment-page">
         <div class="services-tiles" v-if="!loading">
-            <div class="service-tile" v-for="service in servicesData" :key="service.id"
-                @click="chooseService(service)">
+            <div class="service-tile" v-for="service in servicesData" :key="service.id" @click="chooseService(service)">
                 <h3>{{ service.name }}</h3>
                 <p>
                     {{ t("home.serviceTile.time") }} <span>~ {{
@@ -28,14 +27,12 @@
                         </template>
                     </MessageBox>
                     <div class="select-date-wrapper">
-                        <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required
-                            color="green" mode="date" v-model="selectedDate" />
+                        <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green"
+                            mode="date" v-model="selectedDate" :min-date="new Date" :max-date="maxDate" />
                         <div class="hours">
                             <CustomLoader v-if="loadingSlots" class="loader"></CustomLoader>
-                            <div class="slots-wrapper"
-                                v-if="validatedSlots.length && !loadingSlots">
-                                <div class="single-hour" v-for="availableSlot in validatedSlots"
-                                    :key="availableSlot.id"
+                            <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
+                                <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
                                     @click="selectAppointmentHour(availableSlot)"
                                     :class="{ 'selected': availableSlot.id === selectedSlotId }">
                                     {{
@@ -57,7 +54,7 @@
                         <CustomButton type="info" @click="makeAppointment">{{
                             t('userAppointmentsView.makeAnAppointment.makeAnAppointment')
                         }}</CustomButton>
-                        <CustomButton type="secondary" @click="openMakeAnAppointmentModal = false">
+                        <CustomButton type="secondary" @click="closeMakeAnAppointmentModal">
                             {{
     t('userAppointmentsView.makeAnAppointment.cancel')
                             }}</CustomButton>
@@ -81,6 +78,7 @@ import CustomLoader from "@/components/CustomLoader.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import MessageBox from '@/components/MessageBox.vue'
 import { DatePicker } from "v-calendar";
+import { useRouter } from 'vue-router';
 import "v-calendar/dist/style.css";
 import { useStore } from 'vuex';
 import { useMessage } from 'naive-ui';
@@ -105,8 +103,12 @@ export default {
         const store = useStore();
         const selectedSlotId = ref(null);
         const message = useMessage();
+        const router = useRouter();
 
         const locale = store.state.settings.language;
+
+        const maxDate = ref(new Date());
+        maxDate.value.setDate(maxDate.value.getDate() + 30);
 
         const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
@@ -159,7 +161,10 @@ export default {
                     first_slot_id: selectedSlotId.value,
                     service_id: selectedService.value.id,
                 });
+                selectedSlotId.value = null;
+                selectedDate.value = new Date;
                 openMakeAnAppointmentModal.value = false;
+                router.push({ name: 'appointmentsList' });
                 message.success(t('snackBars.appointmentMade'));
             } catch (error) {
                 const errorResponse = handleRequestError(error);
@@ -175,6 +180,12 @@ export default {
             } catch (error) {
                 handleRequestError(error);
             }
+        }
+
+        const closeMakeAnAppointmentModal = () => {
+            selectedSlotId.value = null;
+            selectedDate.value = new Date;
+            openMakeAnAppointmentModal.value = false;
         }
 
         onMounted(async () => {
@@ -210,6 +221,8 @@ export default {
             selectedSlotId,
             makeAppointment,
             message,
+            closeMakeAnAppointmentModal,
+            maxDate,
         }
     }
 }

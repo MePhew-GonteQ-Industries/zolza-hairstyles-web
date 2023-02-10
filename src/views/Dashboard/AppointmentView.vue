@@ -69,7 +69,7 @@
             </MessageBox>
             <div class="date-picker-wrapper">
               <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate" />
+                v-model="selectedDate" :min-date="new Date" :max-date="maxDate" />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
@@ -93,7 +93,7 @@
             </div>
             <div class="buttons-wrapper">
               <CustomButton type="info" @click="changeAppointmentDate">Zmień termin</CustomButton>
-              <CustomButton type="secondary" @click="changeAppointmentDateModalOpen = false">Zamknij
+              <CustomButton type="secondary" @click="closeChangeAppointmentDateModal">Zamknij
               </CustomButton>
             </div>
           </div>
@@ -106,7 +106,7 @@
 <script>
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import axios from "axios";
 import { handleRequestError } from "@/utils";
@@ -130,6 +130,7 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const router = useRouter();
     const { t } = useI18n;
     const locale = store.state.settings.language;
 
@@ -139,6 +140,9 @@ export default {
     const availableSlots = ref([]);
     const selectedSlotId = ref(null);
     const message = useMessage();
+
+    const maxDate = ref(new Date());
+    maxDate.value.setDate(maxDate.value.getDate() + 30);
 
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
 
@@ -192,7 +196,10 @@ export default {
             first_slot_id: selectedSlotId.value,
           });
         store.dispatch("deleteAppointments");
+        selectedSlotId.value = null;
+        selectedDate.value = new Date;
         changeAppointmentDateModalOpen.value = false;
+        router.push({ name: 'appointmentsManagement' });
         message.success(t('snackBars.appontmentDataChange'));
       } catch (error) {
         const response = handleRequestError(error);
@@ -204,13 +211,22 @@ export default {
       try {
         await axios.post(`appointments/any/${route.params.id}`);
         store.dispatch("deleteAppointments");
+        selectedSlotId.value = null;
+        selectedDate.value = new Date;
         cancelAppointmentModalOpen.value = false;
+        router.push({ name: 'appointmentsManagement' });
         message.success(t('snackBars.appointmentCancel'));
       } catch (error) {
         const response = handleRequestError(error);
         message.error(`${t('snackBars.appointmentCancelError')} ${response.status}, ${response.data.detail}`);
       }
     };
+
+    const closeChangeAppointmentDateModal = () => {
+      selectedDate.value = new Date;
+      selectedSlotId.value = null;
+      changeAppointmentDateModalOpen.value = false;
+    }
 
     watch(selectedDateFormatted, async (newDate) => {
       loading.value = true;
@@ -239,8 +255,8 @@ export default {
     const appointment = computed(() => {
       if (!appointmentData.value) return null;
 
-      const startTime = new Date(`${appointmentData.value.start_slot.start_time}Z`);
-      const endTime = new Date(`${appointmentData.value.end_slot.end_time}Z`);
+      const startTime = new Date(`${appointmentData.value.start_slot.start_time}`);
+      const endTime = new Date(`${appointmentData.value.end_slot.end_time}`);
 
       const appointmentTemp = appointmentData.value;
 
@@ -320,6 +336,8 @@ export default {
       cancelAppointment,
       message,
       t,
+      closeChangeAppointmentDateModal,
+      maxDate,
     };
   },
 };
