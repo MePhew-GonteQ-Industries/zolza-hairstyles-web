@@ -56,7 +56,7 @@
             <GitHubCard username="Me-Phew" />
             <GitHubCard username="biQte" />
             <h1>Projekt graficzny</h1>
-            <GitHubCard username="biQte" />
+            <GitHubCard username="Amaczi" />
             <h1>Aplikacja mobilna</h1>
             <GitHubCard username="biQte" />
           </CustomModal>
