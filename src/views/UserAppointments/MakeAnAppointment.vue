@@ -156,6 +156,7 @@ export default {
         });
 
         const makeAppointment = async () => {
+            //todo: saturdays
             try {
                 await axios.post(`appointments`, {
                     first_slot_id: selectedSlotId.value,

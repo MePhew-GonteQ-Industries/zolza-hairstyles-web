@@ -99,7 +99,7 @@
             </thead>
             <tbody>
               <tr v-for="slot in reservedSlotsFiltered" :key="slot.id">
-                <td class="id" @click="unreserveModalOpen = true">
+                <td class="id" @click="unreserveSlot(slot)">
                   <CustomTooltip>
                     <template #activator>
                       {{ slot.id.slice(0, 5) }}...
@@ -112,21 +112,24 @@
                     </template>
                     <div class="unreserve-slot-modal-wrapper">
                       <div class="slot-info">
-                        <p>Id: {{ slot.id }}</p>
+                        <p>Id: {{ unreservingSlot.id }}</p>
                         <p>
                           Od: {{
-                            new Date(slot.start_time).toLocaleTimeString(locale, {
+                            new Date(unreservingSlot.start_time).toLocaleTimeString(locale, {
                               hour: "2-digit", minute: "2-digit"
                             })
                           }}
                         </p>
                         <p>
                           Do: {{
-                            new Date(slot.end_time).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })
+                            new Date(unreservingSlot.end_time).toLocaleTimeString(locale, {
+                              hour: "2-digit", minute:
+                                "2-digit"
+                            })
                           }}
                         </p>
                         <p>
-                          Dnia: {{ new Date(slot.date).toLocaleDateString(locale) }}
+                          Dnia: {{ new Date(unreservingSlot.date).toLocaleDateString(locale) }}
                         </p>
                       </div>
                       <div class="buttons-wrapper">
@@ -198,6 +201,7 @@ export default {
     const selectedSlots = ref([]);
     const reservedSlots = ref([]);
     const unreserveModalOpen = ref(false);
+    const unreservingSlot = ref([]);
 
     const validatedSlots = computed(() => {
       const slots = [];
@@ -269,6 +273,11 @@ export default {
         message.error(`Nie udał się zarezerwować slotów, ${error.message}`);
         handleRequestError(error);
       }
+    }
+
+    const unreserveSlot = (slot) => {
+      unreservingSlot.value = slot;
+      unreserveModalOpen.value = true;
     }
 
     const cancelReservation = async (slot) => {
@@ -354,6 +363,8 @@ export default {
       unreserveModalOpen,
       cancelReservation,
       closeUnreserveSlotModal,
+      unreserveSlot,
+      unreservingSlot,
     }
   }
 };
