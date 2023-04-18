@@ -7,21 +7,21 @@ const requestNotificationsPermission = async () => {
   return permission === 'granted';
 }
 
-function validateEmail(email) {
+const validateEmail = (email) => {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
 
-function getCssPropertyValue(propertyName) {
+const getCssPropertyValue = (propertyName) => {
   return getComputedStyle(document.documentElement).getPropertyValue(propertyName);
 }
 
-function setCssPropertyValue(element, propertyName, propertyValue) {
+const setCssPropertyValue = (element, propertyName, propertyValue) => {
   element.style.setProperty(propertyName, propertyValue);
 }
 
-function handleRequestError(error) {
+const handleRequestError = (error) => {
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
