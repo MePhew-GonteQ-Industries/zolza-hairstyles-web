@@ -8,9 +8,18 @@
 
     <form @submit.prevent="handleResetPasswordRequest" novalidate>
       <div class="inputs">
-        <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light" inputType="email"
-          autocomplete="email" v-model:value="userEmail" :invalid="emailInvalid" :forceValidate="forceValidate"
-          :required="true" :messageEmpty="t('shared.emailEmpty')" :messageInvalid="t('shared.emailInvalid')" />
+        <CustomInput
+          :label="t('shared.email')"
+          iconClass="ph-envelope-simple-light"
+          inputType="email"
+          autocomplete="email"
+          v-model:value="userEmail"
+          :invalid="emailInvalid"
+          :forceValidate="forceValidate"
+          :required="true"
+          :messageEmpty="t('shared.emailEmpty')"
+          :messageInvalid="t('shared.emailInvalid')"
+        />
       </div>
 
       <CustomButton class="btn">
@@ -30,10 +39,10 @@
 import { ref, computed } from "vue";
 import axios from "axios";
 import { useI18n } from "vue-i18n";
-import { validateEmail, handleRequestError } from "@/utils";
+import { validateEmail, createRequestErrorMessage } from "@/utils";
 import CustomButton from "@/components/CustomButton.vue";
 import CustomInput from "@/components/CustomInput.vue";
-import { useMessage } from 'naive-ui';
+import { useMessage } from "naive-ui";
 
 export default {
   name: "RequestPasswordReset",
@@ -67,11 +76,12 @@ export default {
           email: userEmail.value,
         })
         .then(() => {
-          message.success(t('snackBars.passwordReset'));
+          message.success(t("snackBars.passwordReset"));
         })
         .catch((error) => {
-          const response = handleRequestError(error);
-          message.error(`${t('snackBars.passwordResetError')} ${response.status}, ${response.data.detail}`);
+          message.error(
+            `${t("snackBars.passwordResetError")} - ${createRequestErrorMessage(error)}`
+          );
         });
     }
 
@@ -93,6 +103,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

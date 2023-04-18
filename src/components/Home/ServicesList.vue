@@ -2,19 +2,32 @@
   <div class="services-wrapper" ref="services">
     <CustomLoader :class="{ hidden: !loading }" v-if="!loaderAnimationFinished" />
 
-    <div class="services" :class="{ hidden: loading }"
-      v-if="loaderAnimationFinished && !loadingFailed">
+    <div
+      class="services"
+      :class="{ hidden: loading }"
+      v-if="loaderAnimationFinished && !loadingFailed"
+    >
       <template v-for="service in servicesData" :key="service.id">
-        <ServiceTile :id="service.id" :name="service.name" description="Nasze usługi wyróżnia indywidualne podejście do klienta.
+        <ServiceTile
+          :id="service.id"
+          :name="service.name"
+          description="Nasze usługi wyróżnia indywidualne podejście do klienta.
           Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
-          :time="service.average_time_minutes" :availability="40" :priceMin="service.min_price"
-          :priceMax="service.max_price" @updateSelectedService="selectService"
-          :selectedServiceId="$props.selectedServiceId" />
+          :time="service.average_time_minutes"
+          :availability="40"
+          :priceMin="service.min_price"
+          :priceMax="service.max_price"
+          @updateSelectedService="selectService"
+          :selectedServiceId="$props.selectedServiceId"
+        />
       </template>
     </div>
 
-    <div class="error-message" :class="{ hidden: loading }"
-      v-if="loadingFailed && loaderAnimationFinished">
+    <div
+      class="error-message"
+      :class="{ hidden: loading }"
+      v-if="loadingFailed && loaderAnimationFinished"
+    >
       <i class="ph-warning-circle-light"></i>
       <p>{{ t("home.servicesList.error") }}</p>
     </div>
@@ -28,7 +41,8 @@ import axios from "axios";
 import { ref, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import CustomLoader from "@/components/CustomLoader.vue";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "ServicesList",
@@ -46,6 +60,7 @@ export default {
     },
   },
   setup(props, { emit }) {
+    const message = useMessage();
     const { t } = useI18n({ useScope: "global" });
     const store = useStore();
 
@@ -54,8 +69,8 @@ export default {
     const loaderAnimationFinished = ref(false);
 
     const selectService = (newValue) => {
-      emit('update:selectedServiceId', newValue);
-    }
+      emit("update:selectedServiceId", newValue);
+    };
 
     const servicesData = ref(null);
 
@@ -65,8 +80,8 @@ export default {
         if (store.state.settings.language) {
           response = await axios.get("services", {
             headers: {
-              'accept-language': store.state.settings.language,
-            }
+              "accept-language": store.state.settings.language,
+            },
           });
         } else {
           response = await axios.get("services");
@@ -74,7 +89,7 @@ export default {
         servicesData.value = response.data;
       } catch (error) {
         loadingFailed.value = true;
-        handleRequestError(error);
+        message.error(`Nie udało się załadować usług - ${createRequestErrorMessage(error)}`);
       }
       loading.value = false;
       setTimeout(() => {

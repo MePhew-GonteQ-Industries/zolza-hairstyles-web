@@ -20,9 +20,10 @@ import { useI18n } from "vue-i18n";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import MessageBox from "@/components/MessageBox.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "EmailVerification",
@@ -31,6 +32,7 @@ export default {
     CustomLoader,
   },
   setup() {
+    const message = useMessage();
     const { t } = useI18n({ useScope: "global" });
     const route = useRoute();
 
@@ -57,7 +59,9 @@ export default {
             .catch((error) => {
               verificationFailed.value = true;
               loading.value = false;
-              handleRequestError(error);
+              message.error(
+                `Nie udało się zweryfikować adresu email- ${createRequestErrorMessage(error)}`
+              );
             });
         }
       }

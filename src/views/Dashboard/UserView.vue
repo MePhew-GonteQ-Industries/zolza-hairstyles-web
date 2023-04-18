@@ -6,8 +6,7 @@
         <div class="avatar-row">
           <i class="ph-user-square-light avatar-icon"></i>
           <div class="user-data">
-            <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }}
-            </CustomChip>
+            <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }} </CustomChip>
             <p class="email">{{ userData.email }}</p>
             <div class="indicators-wrapper">
               <div class="single-indicator">
@@ -23,25 +22,39 @@
         </div>
         <div class="inputs-section">
           <div class="text-inputs">
-            <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
-              autocomplete="name">
+            <CustomInput
+              :label="t('shared.name')"
+              v-model:value="userData.name"
+              appearance="primary"
+              autocomplete="name"
+            >
             </CustomInput>
-            <CustomInput :label="t('shared.surname')" v-model:value="userData.surname" appearance="primary"
-              autocomplete="surname"></CustomInput>
+            <CustomInput
+              :label="t('shared.surname')"
+              v-model:value="userData.surname"
+              appearance="primary"
+              autocomplete="surname"
+            ></CustomInput>
           </div>
-          <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light" :options="genderOptions"
-            v-model:selectedValue="userData.gender" appearance="primary" v-if="!loading"></CustomSelect>
+          <CustomSelect
+            :header="t('shared.gender')"
+            iconClass="ph-gender-intersex-light"
+            :options="genderOptions"
+            v-model:selectedValue="userData.gender"
+            appearance="primary"
+            v-if="!loading"
+          ></CustomSelect>
         </div>
         <div class="user-account-buttons">
           <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
-          <CustomButton type="error" class="delete-account-button">{{
-              t('settings.userAccountSettings.deleteAccount')
-          }}
+          <CustomButton type="error" class="delete-account-button"
+            >{{ t("settings.userAccountSettings.deleteAccount") }}
           </CustomButton>
         </div>
         <div class="save-changes" v-if="userDataModified">
-          <CustomButton class="save" type="success">{{ t('shared.saveChanges') }}</CustomButton>
-          <CustomButton class="cancel" type="secondary">{{ t('shared.operationCancel') }}
+          <CustomButton class="save" type="success">{{ t("shared.saveChanges") }}</CustomButton>
+          <CustomButton class="cancel" type="secondary"
+            >{{ t("shared.operationCancel") }}
           </CustomButton>
         </div>
       </div>
@@ -57,7 +70,7 @@ import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import CustomChip from "@/components/CustomChip.vue";
 import CustomInput from "@/components/CustomInput.vue";
 import { useI18n } from "vue-i18n";
@@ -65,6 +78,7 @@ import CustomSelect from "@/components/CustomSelect.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import StatusIndicator from "@/components/StatusIndicator.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "UserView",
@@ -77,29 +91,30 @@ export default {
     CustomLoader,
   },
   setup() {
+    const message = useMessage();
     const { t } = useI18n({ useScope: "global" });
     const store = useStore();
     const route = useRoute();
 
     const genderOptions = [
       {
-        title: t('shared.male'),
-        value: 'male',
-        iconClass: 'ph-gender-male-light',
-        iconAlt: 'male gender icon',
+        title: t("shared.male"),
+        value: "male",
+        iconClass: "ph-gender-male-light",
+        iconAlt: "male gender icon",
       },
       {
-        title: t('shared.female'),
-        value: 'female',
-        iconClass: 'ph-gender-female-light',
-        iconAlt: 'female gender icon',
+        title: t("shared.female"),
+        value: "female",
+        iconClass: "ph-gender-female-light",
+        iconAlt: "female gender icon",
       },
       {
-        title: t('shared.other'),
-        value: 'other',
-        iconClass: 'ph-gender-neuter-light',
-        iconAlt: 'other gender icon',
-      }
+        title: t("shared.other"),
+        value: "other",
+        iconClass: "ph-gender-neuter-light",
+        iconAlt: "other gender icon",
+      },
     ];
 
     const userData = ref(null);
@@ -119,24 +134,24 @@ export default {
         userData.value = storedUser;
         userRole.value = userData.value.permission_level;
         switch (userRole.value) {
-          case 'Właściciel':
-            userIconClass = 'ph-user-gear-light';
+          case "Właściciel":
+            userIconClass = "ph-user-gear-light";
             break;
-          case 'Admin':
-            userIconClass = 'ph-wrench-light';
+          case "Admin":
+            userIconClass = "ph-wrench-light";
             break;
           default:
-            userIconClass = 'ph-user-light';
+            userIconClass = "ph-user-light";
             break;
         }
       } else {
         try {
           const response = await axios.get(`users/${route.params.id}`);
           userData.value = response.data;
-          if (userData.value['permission_level'].includes('owner')) {
+          if (userData.value["permission_level"].includes("owner")) {
             userIconClass = "ph-user-gear-light";
             userRole.value = "Właściciel";
-          } else if (userData.value['permission_level'].includes('admin')) {
+          } else if (userData.value["permission_level"].includes("admin")) {
             userIconClass = "ph-wrench-light";
             userRole.value = "Admin";
           } else {
@@ -144,23 +159,24 @@ export default {
             userRole.value = "Użytkownik";
           }
         } catch (error) {
-          handleRequestError(error);
+          message.error(
+            `Nie udało się pobrać danych użytkownika - ${createRequestErrorMessage(error)}`
+          );
         }
       }
 
       switch (userData.value.gender) {
-        case 'Męska':
-          userData.value.gender = 'male';
+        case "Męska":
+          userData.value.gender = "male";
           break;
         case "Żeńska":
-          userData.value.gender = 'female';
+          userData.value.gender = "female";
           break;
         case "Inna":
-          userData.value.gender = 'other';
+          userData.value.gender = "other";
           break;
       }
       loading.value = false;
-
     });
 
     return {

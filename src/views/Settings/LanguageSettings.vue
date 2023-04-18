@@ -2,14 +2,18 @@
   <div class="settings-page">
     <div class="elevated-card">
       <h1>{{ t("settings.languageSettings.chooseLanguage") }}</h1>
-      <CustomSelect :header="t('shared.language')" :options="languageOptions" v-model:selectedValue="selectedLanguage"
-        appearance="primary" />
+      <CustomSelect
+        :header="t('shared.language')"
+        :options="languageOptions"
+        v-model:selectedValue="selectedLanguage"
+        appearance="primary"
+      />
       <div class="buttons-row" v-if="!(selectedLanguage === initialLanguage)">
         <CustomButton type="success" @click="changeLanguage">{{
-            t("shared.saveChanges")
+          t("shared.saveChanges")
         }}</CustomButton>
         <CustomButton type="secondary" @click="selectedLanguage = initialLanguage">{{
-            t("shared.operationCancel")
+          t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -23,8 +27,9 @@ import CustomSelect from "@/components/CustomSelect.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import { useStore } from "vuex";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import { onBeforeRouteLeave } from "vue-router";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "LanguageSettings",
@@ -33,6 +38,7 @@ export default {
     CustomButton,
   },
   setup() {
+    const message = useMessage();
     const store = useStore();
     const { t } = useI18n({ useScope: "global" });
 
@@ -78,7 +84,7 @@ export default {
           initialLanguage.value = store.state.settings.language;
         })
         .catch((error) => {
-          handleRequestError(error);
+          message.error(`Nie udało się zmienić języka - ${createRequestErrorMessage(error)}`);
         });
     };
 
@@ -100,7 +106,6 @@ export default {
 <style lang="scss" scoped>
 .settings-page {
   min-height: 73.5vh;
-
 }
 
 .buttons-row {

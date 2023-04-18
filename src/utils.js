@@ -21,20 +21,42 @@ const setCssPropertyValue = (element, propertyName, propertyValue) => {
   element.style.setProperty(propertyName, propertyValue);
 }
 
-const handleRequestError = (error) => {
+const getRequestResponseStatus = (error) => {
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
     return error.response;
   }
-  if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
-    throw error;
-  }
-  // Something happened in setting up the request that triggered an Error
+
   throw error;
 }
 
-export { validateEmail, getCssPropertyValue, setCssPropertyValue, handleRequestError, requestNotificationsPermission, notificationsSupported };
+const createRequestErrorMessage = (error) => {
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+
+    if (!error.response.data) {
+
+      if (error.response.status === 0) {
+        return error.message;
+      }
+
+      return error.response.status;
+    }
+
+    return `${error.response.status}, ${error.response.data.detail}`;
+  }
+
+  // if (error.request) {
+  //   // The request was made but no response was received
+  //   // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+  //   // http.ClientRequest in node.js
+  //   return error.message;
+  // }
+
+  // Something happened in setting up the request that triggered an Error
+  return error.message;
+}
+
+export { validateEmail, getCssPropertyValue, setCssPropertyValue, createRequestErrorMessage, getRequestResponseStatus, requestNotificationsPermission, notificationsSupported };

@@ -24,7 +24,7 @@
 
 <script>
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import { ref, onMounted } from "vue";
 import LinkButton from "@/components/CustomButton.vue";
 import GitHubMarkLight from "@/assets/GitHub-Mark-Light-32px.png";
@@ -49,7 +49,7 @@ export default {
         const { data } = await axios.get(`github_user/${props.username}`);
         profileData.value = data;
       } catch (error) {
-        handleRequestError(error);
+        console.error(createRequestErrorMessage(error));
       }
     });
 

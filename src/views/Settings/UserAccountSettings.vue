@@ -12,19 +12,34 @@
       </div>
       <div class="inputs-section">
         <div class="text-inputs">
-          <CustomInput :label="t('shared.name')" v-model:value="userData.name" appearance="primary"
-            autocomplete="name" />
-          <CustomInput :label="t('shared.surname')" v-model:value="userData.surname"
-            appearance="primary" autocomplete="surname" />
+          <CustomInput
+            :label="t('shared.name')"
+            v-model:value="userData.name"
+            appearance="primary"
+            autocomplete="name"
+          />
+          <CustomInput
+            :label="t('shared.surname')"
+            v-model:value="userData.surname"
+            appearance="primary"
+            autocomplete="surname"
+          />
         </div>
-        <CustomSelect :header="t('shared.gender')" iconClass="ph-gender-intersex-light"
-          :options="genderOptions" v-model:selectedValue="userData.gender" appearance="primary" />
+        <CustomSelect
+          :header="t('shared.gender')"
+          iconClass="ph-gender-intersex-light"
+          :options="genderOptions"
+          v-model:selectedValue="userData.gender"
+          appearance="primary"
+        />
       </div>
       <CustomButton type="error" class="delete-account-btn" @click="deleteAccountModalOpen = true">
-        {{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton>
+        {{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton
+      >
       <CustomModal v-model:open="deleteAccountModalOpen">
         <template #title>
-          {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template>
+          {{ t("settings.userAccountSettings.deleteAccountReassurance") }}</template
+        >
         <div class="delete-account-wrappper">
           <div class="messages-wrapper">
             <MessageBox type="error">
@@ -42,84 +57,109 @@
             </MessageBox>
           </div>
           <form @submit.prevent="" class="delete-account">
-            <input type="text" autocomplete="username" class="hidden-input"
-              id="hidden-username-input-delete-account" />
+            <input
+              type="text"
+              autocomplete="username"
+              class="hidden-input"
+              id="hidden-username-input-delete-account"
+            />
             <label for="hidden-username-input-delete-account"></label>
             <div class="input-with-title">
               <p>{{ t("settings.userAccountSettings.password") }}</p>
-              <CustomInput :label="t('shared.password')" autocomplete="current-password"
-                type="password" :required="true" v-model:value="deleteAccountPassword" />
+              <CustomInput
+                :label="t('shared.password')"
+                autocomplete="current-password"
+                type="password"
+                :required="true"
+                v-model:value="deleteAccountPassword"
+              />
             </div>
             <div class="input-with-title">
               <p>
                 {{ t("settings.userAccountSettings.confirmationQuote") }}
                 <span class="confirm-delete">{{
-                    t("settings.userAccountSettings.confirmDeleteAccount")
+                  t("settings.userAccountSettings.confirmDeleteAccount")
                 }}</span>
                 :
               </p>
-              <CustomInput :label="t('settings.userAccountSettings.confirmDeleteAccount')"
-                iconClass="ph-trash-light" autocomplete="" v-model:value="confirmAccountDeletion" />
+              <CustomInput
+                :label="t('settings.userAccountSettings.confirmDeleteAccount')"
+                iconClass="ph-trash-light"
+                autocomplete=""
+                v-model:value="confirmAccountDeletion"
+              />
             </div>
             <div class="buttons-row">
               <CustomButton type="error" @click="deleteAccount">{{
-                  t("settings.userAccountSettings.confirmationButton")
+                t("settings.userAccountSettings.confirmationButton")
               }}</CustomButton>
               <CustomButton type="secondary" @click="deleteAccountModalOpen = false">{{
-                  t("shared.operationCancel")
+                t("shared.operationCancel")
               }}</CustomButton>
             </div>
           </form>
         </div>
       </CustomModal>
-      <MessageBox interactive :interactionHandler="requestEmailVerification" type="warning"
-        v-if="!$store.state.user.verified">
+      <MessageBox
+        interactive
+        :interactionHandler="requestEmailVerification"
+        type="warning"
+        v-if="!$store.state.user.verified"
+      >
         <template #title>
-          {{ t("settings.userAccountSettings.emailLabel") }} <span class="email">{{
-              $store.state.user.email
-          }}</span>
+          {{ t("settings.userAccountSettings.emailLabel") }}
+          <span class="email">{{ $store.state.user.email }}</span>
           {{ t("settings.userAccountSettings.emailNotConfirmed") }}
         </template>
         <template #subtitle> {{ t("settings.userAccountSettings.emailLinkResend") }} </template>
       </MessageBox>
       <div class="save-changes" v-if="userDatamodified">
         <CustomButton class="save" type="success" @click="changeUserData">{{
-            t("shared.saveChanges")
+          t("shared.saveChanges")
         }}</CustomButton>
         <CustomModal v-model:open="passwordPromptOpen">
           <template #title> {{ t("settings.userAccountSettings.passwordInput") }} </template>
           <div class="logout-everywhere-wrappper">
             <MessageBox type="info">
               <template #title>
-                {{ t("settings.userAccountSettings.keyDataModification") }}</template>
+                {{ t("settings.userAccountSettings.keyDataModification") }}</template
+              >
               <template #subtitle>{{
-                  t("settings.userAccountSettings.identityConfirmation")
+                t("settings.userAccountSettings.identityConfirmation")
               }}</template>
             </MessageBox>
             <form @submit.prevent="changeUserDataSudoMode">
-              <input class="hidden-input" type="text" autocomplete="username"
-                id="password-prompt-hidden-username-input" />
+              <input
+                class="hidden-input"
+                type="text"
+                autocomplete="username"
+                id="password-prompt-hidden-username-input"
+              />
               <label for="password-prompt-hidden-username-input"></label>
               <div class="enter-password-wrapper">
-                <CustomInput :label="t('shared.password')" autocomplete="new-password"
-                  type="password" v-model:value="password" />
+                <CustomInput
+                  :label="t('shared.password')"
+                  autocomplete="new-password"
+                  type="password"
+                  v-model:value="password"
+                />
                 <router-link to="/password-reset" tabindex="-1">{{
-                    t("shared.forgotYourPassword")
+                  t("shared.forgotYourPassword")
                 }}</router-link>
               </div>
               <div class="buttons-row">
                 <CustomButton type="success" @click="changeUserDataSudoMode">{{
-                    t("settings.userAccountSettings.next")
+                  t("settings.userAccountSettings.next")
                 }}</CustomButton>
                 <CustomButton type="secondary" @click="passwordPromptOpen = false">{{
-                    t("shared.operationCancel")
+                  t("shared.operationCancel")
                 }}</CustomButton>
               </div>
             </form>
           </div>
         </CustomModal>
         <CustomButton type="secondary" class="cancel" @click="revertChanges">{{
-            t("shared.operationCancel")
+          t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -138,9 +178,9 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import TimeAgo from "@/timeAgo";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import { useRouter } from "vue-router";
-import { useMessage } from 'naive-ui';
+import { useMessage } from "naive-ui";
 
 export default {
   name: "UserAccountSettings",
@@ -194,19 +234,19 @@ export default {
 
     const genderOptions = [
       {
-        title: t('shared.male'),
+        title: t("shared.male"),
         value: "male",
         iconClass: "ph-gender-male-light",
         iconAlt: "male gender icon",
       },
       {
-        title: t('shared.female'),
+        title: t("shared.female"),
         value: "female",
         iconClass: "ph-gender-female-light",
         iconAlt: "female gender icon",
       },
       {
-        title: t('shared.other'),
+        title: t("shared.other"),
         value: "other",
         iconClass: "ph-gender-neuter-light",
         iconAlt: "other gender icon",
@@ -246,12 +286,11 @@ export default {
         })
         .then((response) => {
           if (response.status === 202) {
-            message.success(t('snackBars.emailSent'));
+            message.success(t("snackBars.emailSent"));
           }
         })
         .catch((error) => {
-          const response = handleRequestError(error);
-          message.error(`${t('snackBars.emailSentError')} ${response.status}, ${response.data.detail}`);
+          message.error(`${t("snackBars.emailSentError")} - ${createRequestErrorMessage(error)}`);
         });
     };
 
@@ -269,22 +308,21 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             store.commit("setUserData", response.data);
-            message.success(t('snackBars.dataChanged'));
+            message.success(t("snackBars.dataChanged"));
           }
         })
         .catch((error) => {
-          const response = handleRequestError(error);
-          message.error(`${t('snackBars.dataChangedError')} ${response.status}, ${response.data.detail}`);
+          message.error(`${t("snackBars.dataChangedError")} - ${createRequestErrorMessage(error)}`);
         });
     };
 
     const changeUserData = () => {
       if (validateUserData()) {
-        console.log(store.getters.sudoModeActive)
+        console.log(store.getters.sudoModeActive);
         if (store.getters.sudoModeActive) {
           requestUserDataChange();
         } else {
-          message.info(t('snackBars.passwordRequired'));
+          message.info(t("snackBars.passwordRequired"));
           passwordPromptOpen.value = true;
         }
       }
@@ -325,7 +363,7 @@ export default {
           });
         })
         .catch((error) => {
-          handleRequestError(error);
+          message.error(`Nie udało się wylogować - ${createRequestErrorMessage(error)}`);
         });
     };
 
@@ -492,7 +530,6 @@ export default {
   }
 
   .input-wrapper,
-
   .select-wrapper {
     height: 55px;
     width: 200px;
@@ -510,7 +547,7 @@ export default {
   @media only screen and (max-width: $xs) {
     position: absolute;
     top: 15rem;
-    right: .5rem;
+    right: 0.5rem;
     width: 115px;
   }
 }

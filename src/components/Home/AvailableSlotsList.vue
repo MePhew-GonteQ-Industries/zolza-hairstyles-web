@@ -16,7 +16,8 @@ import CustomLoader from "@/components/CustomLoader.vue";
 import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "availableSlotsList",
@@ -30,6 +31,7 @@ export default {
     },
   },
   setup(props) {
+    const message = useMessage();
     const store = useStore();
 
     const locale = store.state.settings.language;
@@ -52,8 +54,8 @@ export default {
           date === now
             ? "Dzisiaj"
             : date.toLocaleDateString(locale, {
-              weekday: "long",
-            });
+                weekday: "long",
+              });
 
         slots.push({
           day: `${day[0].toUpperCase()}${day.slice(1)}`,
@@ -75,7 +77,7 @@ export default {
         const response = await axios.get(`appointments/nearest/${selectedServiceId}`);
         availableSlotsData.value = response.data;
       } catch (error) {
-        handleRequestError(error);
+        message.error(`Nie udało się załadować wizyt - ${createRequestErrorMessage(error)}`);
       }
       loading.value = false;
     };

@@ -12,10 +12,10 @@
       </div>
       <div class="buttons-row" v-if="selectedTheme !== initialTheme">
         <CustomButton type="success" @click="changeTheme">{{
-            t("shared.saveChanges")
+          t("shared.saveChanges")
         }}</CustomButton>
         <CustomButton type="secondary" @click="selectedTheme = initialTheme">{{
-            t("shared.operationCancel")
+          t("shared.operationCancel")
         }}</CustomButton>
       </div>
     </div>
@@ -29,7 +29,7 @@ import { useStore } from "vuex";
 import ThemeCard from "@/components/Settings/ThemeCard.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import { onBeforeRouteLeave } from "vue-router";
 import { useMessage } from "naive-ui";
 
@@ -71,11 +71,10 @@ export default {
           const language = settings.find((setting) => setting.name === "language").current_value;
           store.commit("setLanguage", language);
           initialTheme.value = store.state.settings.theme;
-          message.success(t('snackBars.themeChange'));
+          message.success(t("snackBars.themeChange"));
         })
         .catch((error) => {
-          const response = handleRequestError(error);
-          message.error(`${t('snackBars.themeChangeError')} ${response.status}, ${response.data.detail}`);
+          message.error(`${t("snackBars.themeChangeError")} - ${createRequestErrorMessage(error)}`);
         });
     };
 

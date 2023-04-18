@@ -11,7 +11,7 @@ import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
 import { v4 as uuidv4 } from "uuid";
 import SideMenu from "@/components/SideMenu.vue";
-import CustomHorizontalMenu from "../../components/CustomHorizontalMenu.vue";
+import CustomHorizontalMenu from "@/components/CustomHorizontalMenu.vue";
 
 export default {
   name: "SettingsPage",

@@ -1,7 +1,12 @@
 <template>
   <section class="dashboard-page dashboard-data-page users-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.usersManagement.search')" v-model:value="q" type="search" />
+      <CustomInput
+        class="search"
+        :label="t('dashboard.usersManagement.search')"
+        v-model:value="q"
+        type="search"
+      />
     </form>
 
     <div class="dashboard-data-table-wrapper">
@@ -18,35 +23,69 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id" @toggleSort="toggleSort('id')">
-              #id</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="id"
+              @toggleSort="toggleSort('id')"
+            >
+              #id</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
-              @toggleSort="toggleSort('service')">{{ t("shared.name") }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="service"
+              @toggleSort="toggleSort('service')"
+              >{{ t("shared.name") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
-              @toggleSort="toggleSort('service')">{{ t("shared.surname") }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="service"
+              @toggleSort="toggleSort('service')"
+              >{{ t("shared.surname") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
-              @toggleSort="toggleSort('user')">
-              {{ t("shared.email") }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="user"
+              @toggleSort="toggleSort('user')"
+            >
+              {{ t("shared.email") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
-              @toggleSort="toggleSort('user')">
-              {{ t("shared.gender") }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="user"
+              @toggleSort="toggleSort('user')"
+            >
+              {{ t("shared.gender") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
-              @toggleSort="toggleSort('startDate')">{{ t("dashboard.usersManagement.accessLevel") }}
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="startDate"
+              @toggleSort="toggleSort('startDate')"
+              >{{ t("dashboard.usersManagement.accessLevel") }}
             </SortedHeader>
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
-              @toggleSort="toggleSort('endDate')">{{ t("dashboard.usersManagement.verified") }}
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="endDate"
+              @toggleSort="toggleSort('endDate')"
+              >{{ t("dashboard.usersManagement.verified") }}
             </SortedHeader>
           </th>
           <th>{{ t("dashboard.usersManagement.blocked") }}</th>
@@ -98,6 +137,9 @@ import CustomInput from "@/components/CustomInput.vue";
 import StatusIndicator from "@/components/StatusIndicator.vue";
 import { useStore } from "vuex";
 import CustomLoader from "@/components/CustomLoader.vue";
+import { useMessage } from "naive-ui";
+import { createRequestErrorMessage } from "@/utils";
+import { AxiosError } from "axios";
 
 export default {
   name: "UsersManagement",
@@ -107,6 +149,7 @@ export default {
     CustomLoader,
   },
   setup() {
+    const message = useMessage();
     const store = useStore();
 
     const { t } = useI18n({ useScope: "global" });
@@ -156,7 +199,16 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch("loadUsers");
+      try {
+        await store.dispatch("loadUsers");
+      } catch (error) {
+        loading.value = false;
+        if (error instanceof AxiosError) {
+          message.error(`Nie udało się załadować wizyt - ${createRequestErrorMessage(error)}`);
+        } else {
+          throw error;
+        }
+      }
       loading.value = false;
     });
 

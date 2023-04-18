@@ -16,23 +16,39 @@
 
       <form @submit.prevent="handleSubmit" novalidate>
         <div class="inputs">
-          <CustomInput :label="t('shared.email')" iconClass="ph-envelope-simple-light" type="email"
-            autocomplete="email" v-model:value="userData.email" :forceValidate="forceValidate"
-            :invalid="emailInvalid" :required="true" :messageEmpty="t('shared.emailEmpty')"
-            :messageInvalid="t('shared.emailInvalid')" class="input" />
+          <CustomInput
+            :label="t('shared.email')"
+            iconClass="ph-envelope-simple-light"
+            type="email"
+            autocomplete="email"
+            v-model:value="userData.email"
+            :forceValidate="forceValidate"
+            :invalid="emailInvalid"
+            :required="true"
+            :messageEmpty="t('shared.emailEmpty')"
+            :messageInvalid="t('shared.emailInvalid')"
+            class="input"
+          />
 
-          <CustomInput class="current-password input" :label="t('shared.password')"
-            autocomplete="current-password" type="password-login" v-model:value="userData.password"
-            :invalid="!userData.password" :forceValidate="forceValidate" :required="true"
+          <CustomInput
+            class="current-password input"
+            :label="t('shared.password')"
+            autocomplete="current-password"
+            type="password-login"
+            v-model:value="userData.password"
+            :invalid="!userData.password"
+            :forceValidate="forceValidate"
+            :required="true"
             :messageEmpty="t('logIn.currentPasswordField.messageEmpty')"
-            :messageInvalid="t('logIn.currentPasswordField.messageInvalid')" />
+            :messageInvalid="t('logIn.currentPasswordField.messageInvalid')"
+          />
         </div>
 
         <div class="under-inputs-section">
           <CustomCheckbox v-model:checked="saveUser">{{ t("logIn.saveUser") }}</CustomCheckbox>
 
           <router-link to="/password-reset" tabindex="-1">{{
-              t("logIn.forgotPasswordBtn")
+            t("logIn.forgotPasswordBtn")
           }}</router-link>
         </div>
 
@@ -55,10 +71,10 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import CustomButton from "@/components/CustomButton.vue";
 import CustomInput from "@/components/CustomInput.vue";
-import { validateEmail, handleRequestError } from "@/utils";
+import { validateEmail, createRequestErrorMessage } from "@/utils";
 import CustomLoader from "@/components/CustomLoader.vue";
 import CustomCheckbox from "@/components/CustomCheckbox.vue";
-import { useMessage } from 'naive-ui';
+import { useMessage } from "naive-ui";
 
 export default {
   name: "LoginPage",
@@ -128,16 +144,18 @@ export default {
         .dispatch("login", userData.value)
         .then(() => {
           loading.value = false;
-          message.success(t('snackBars.login'));
-          if (store.state.user.permissionLevel.includes('owner') || store.state.user.permissionLevel.includes('admin')) {
-            router.push('/dashboard');
+          message.success(t("snackBars.login"));
+          if (
+            store.state.user.permissionLevel.includes("owner") ||
+            store.state.user.permissionLevel.includes("admin")
+          ) {
+            router.push("/dashboard");
           } else {
             router.push("/appointments");
           }
         })
         .catch((error) => {
-          const response = handleRequestError(error);
-          message.error(`${t('snackBars.loginError')} ${response.status}, ${response.data.detail}`);
+          message.error(`${t("snackBars.loginError")} - ${createRequestErrorMessage(error)}`);
           loading.value = false;
         });
     }
@@ -170,6 +188,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

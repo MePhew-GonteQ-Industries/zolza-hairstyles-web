@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { handleRequestError } from "@/utils";
+import { getRequestResponseStatus } from "@/utils";
 
 export default {
   state: {
@@ -142,8 +142,8 @@ export default {
         try {
           await dispatch("checkUserData");
           await dispatch("loadSettings");
-        } catch (err) {
-          console.error(err);
+        } catch (error) {
+          console.error(error);
           dispatch("logout");
           dispatch("loadDefaultSettings");
         }
@@ -176,7 +176,7 @@ export default {
         commit("setUserData", response.data.session.user);
         await dispatch("loadSettings");
       } catch (error) {
-        const { status } = handleRequestError(error);
+        const { status } = getRequestResponseStatus(error);
         if (status === 404 || !status) {
           throw error;
         }
@@ -189,7 +189,7 @@ export default {
         await dispatch("deleteAuthData");
         await dispatch("configureAxiosUnauthorized");
       } catch (error) {
-        const { status } = handleRequestError(error);
+        const { status } = getRequestResponseStatus(error);
         if (status === 401 || status === 404) {
           await dispatch("deleteAuthData");
           await dispatch("configureAxiosUnauthorized");
@@ -212,7 +212,7 @@ export default {
         commit("setUserData", response.data.session.user);
         await dispatch("loadSettings");
       } catch (error) {
-        const { status } = handleRequestError(error);
+        const { status } = getRequestResponseStatus(error);
         if (status === 401 && state.refreshToken === null) {
           await dispatch("logout");
         }
@@ -230,7 +230,7 @@ export default {
         commit("setSudoMode", response.data);
         await dispatch("saveSudoModeData");
       } catch (error) {
-        const { status } = handleRequestError(error);
+        const { status } = getRequestResponseStatus(error);
         if (status === 404) {
           throw error;
         }

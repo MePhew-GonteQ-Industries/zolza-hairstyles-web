@@ -1,8 +1,13 @@
 <template>
   <section class="dashboard-page dashboard-data-page appointments-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.appointmentsManagement.search')"
-        v-model:value="q" type="search" appearance="secondary" />
+      <CustomInput
+        class="search"
+        :label="t('dashboard.appointmentsManagement.search')"
+        v-model:value="q"
+        type="search"
+        appearance="secondary"
+      />
 
       <div class="search-filters">
         <!-- <DatePicker
@@ -18,40 +23,46 @@
       </div>
     </form>
 
-    <CustomButton @click="addAppointmentModalOpen = true">{{
-      t('dashboard.appointmentsManagement.makeAnAppointment')
-    }}
+    <CustomButton @click="addAppointmentModalOpen = true"
+      >{{ t("dashboard.appointmentsManagement.makeAnAppointment") }}
     </CustomButton>
     <CustomModal v-model:open="addAppointmentModalOpen">
-      <template #title>{{ t('dashboard.appointmentsManagement.addAppointment') }}</template>
+      <template #title>{{ t("dashboard.appointmentsManagement.addAppointment") }}</template>
       <div class="add-appointment-wrapper">
         <div class="modal-content-wrapper">
           <div class="input-wrapper">
-            <CustomInput :label="t('shared.email')" type="email" autocomplete="off"
-              v-if="!userWithoutAccount">
+            <CustomInput
+              :label="t('shared.email')"
+              type="email"
+              autocomplete="off"
+              v-if="!userWithoutAccount"
+            >
             </CustomInput>
             <CustomInput :label="t('shared.name')" type="text" autocomplete="off"></CustomInput>
             <CustomInput :label="t('shared.surname')" type="text" autocomplete="off"></CustomInput>
-            <CustomCheckbox v-model:checked="userWithoutAccountChecked">{{
-              t('dashboard.appointmentsManagement.userWithoutAccount')
-            }}
+            <CustomCheckbox v-model:checked="userWithoutAccountChecked"
+              >{{ t("dashboard.appointmentsManagement.userWithoutAccount") }}
             </CustomCheckbox>
           </div>
           <div class="services-wrapper">
             <div class="service" v-for="service in servicesOptions" :key="service.id">
               <p>{{ service.name }}</p>
-              <input class="select-service" type="radio" name="select-service"
-                @change="$emit('updateSelectedService', id)" :id="tileId" />
+              <input
+                class="select-service"
+                type="radio"
+                name="select-service"
+                @change="$emit('updateSelectedService', id)"
+                :id="tileId"
+              />
             </div>
           </div>
         </div>
         <div class="buttons-wrapper">
           <CustomButton type="info" @click="addAppointmentModalOpen = false">{{
-            t('dashboard.appointmentsManagement.save')
+            t("dashboard.appointmentsManagement.save")
           }}</CustomButton>
-          <CustomButton type="secondary" @click="addAppointmentModalOpen = false">{{
-            t('dashboard.appointmentsManagement.cancel')
-          }}
+          <CustomButton type="secondary" @click="addAppointmentModalOpen = false"
+            >{{ t("dashboard.appointmentsManagement.cancel") }}
           </CustomButton>
         </div>
       </div>
@@ -69,32 +80,51 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
-              @toggleSort="toggleSort('id')">
-              #id</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="id"
+              @toggleSort="toggleSort('id')"
+            >
+              #id</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
-              @toggleSort="toggleSort('service')">{{
-                t("dashboard.appointmentsManagement.service")
-              }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="service"
+              @toggleSort="toggleSort('service')"
+              >{{ t("dashboard.appointmentsManagement.service") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
-              @toggleSort="toggleSort('user')">
-              {{ t("dashboard.appointmentsManagement.user") }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="user"
+              @toggleSort="toggleSort('user')"
+            >
+              {{ t("dashboard.appointmentsManagement.user") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
-              @toggleSort="toggleSort('startDate')">{{
-                t("dashboard.appointmentsManagement.startDate")
-              }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="startDate"
+              @toggleSort="toggleSort('startDate')"
+              >{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
-              @toggleSort="toggleSort('endDate')">{{
-                t("dashboard.appointmentsManagement.endDate")
-              }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="endDate"
+              @toggleSort="toggleSort('endDate')"
+              >{{ t("dashboard.appointmentsManagement.endDate") }}</SortedHeader
+            >
           </th>
           <th>{{ t("dashboard.appointmentsManagement.status") }}</th>
         </thead>
@@ -104,7 +134,8 @@
               <CustomTooltip>
                 <template #activator>
                   <router-link :to="`appointments/${appointment.id}`">
-                    #{{ appointment.shortId }}...</router-link>
+                    #{{ appointment.shortId }}...</router-link
+                  >
                 </template>
                 {{ appointment.id }}
               </CustomTooltip>
@@ -113,7 +144,8 @@
               <CustomTooltip>
                 <template #activator>
                   <router-link :to="`services/${appointment.service.id}`">
-                    {{ appointment.service.name }}</router-link>
+                    {{ appointment.service.name }}</router-link
+                  >
                 </template>
                 {{ appointment.service.id }}
               </CustomTooltip>
@@ -123,7 +155,8 @@
                 <template #activator>
                   <router-link :to="`users/${appointment.user.id}`">
                     {{ appointment.user.name }}
-                    {{ appointment.user.surname }}</router-link>
+                    {{ appointment.user.surname }}</router-link
+                  >
                 </template>
                 {{ appointment.user.id }}
               </CustomTooltip>
@@ -160,13 +193,15 @@ import SortedHeader from "@/components/SortedHeader.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import "v-calendar/dist/style.css";
 // import { DatePicker } from 'v-calendar';
-import CustomModal from '@/components/CustomModal.vue';
+import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
-import CustomCheckbox from '@/components/CustomCheckbox.vue';
-import axios from 'axios';
+import CustomCheckbox from "@/components/CustomCheckbox.vue";
+import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-
-import { NPagination } from 'naive-ui';
+import { NPagination } from "naive-ui";
+import { useMessage } from "naive-ui";
+import { createRequestErrorMessage } from "@/utils";
+import { AxiosError } from "axios";
 
 export default {
   name: "AppointmentsManagement",
@@ -183,11 +218,12 @@ export default {
     NPagination,
   },
   setup() {
-    const q = ref("");
+    const message = useMessage();
 
     const { t } = useI18n({ useScope: "global" });
-
     const store = useStore();
+
+    const q = ref("");
 
     const addAppointmentModalOpen = ref(false);
     const userWithoutAccount = ref(false);
@@ -201,11 +237,10 @@ export default {
 
     const servicesOptions = ref(null);
 
-    const userWithoutAccountChecked = (() => {
+    const userWithoutAccountChecked = () => {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       userWithoutAccount.value = true;
-    }
-    );
+    };
 
     const toggleSort = (sortName) => {
       if (sortBy.value === sortName) {
@@ -263,9 +298,18 @@ export default {
     });
 
     onMounted(async () => {
-      const response = await axios.get('services');
+      const response = await axios.get("services");
       servicesOptions.value = response.data;
-      await store.dispatch("loadAppointments");
+      try {
+        await store.dispatch("loadAppointments");
+      } catch (error) {
+        loading.value = false;
+        if (error instanceof AxiosError) {
+          message.error(`Nie udało się załadować wizyt - ${createRequestErrorMessage(error)}`);
+        } else {
+          throw error;
+        }
+      }
       loading.value = false;
     });
 

@@ -126,7 +126,7 @@ import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import CustomButton from "@/components/CustomButton.vue";
 import CustomTooltip from "@/components/CustomTooltip.vue";
 import CustomModal from "@/components/CustomModal.vue";
@@ -134,6 +134,7 @@ import MessageBox from "@/components/MessageBox.vue";
 import CustomChip from "@/components/CustomChip.vue";
 import CustomMap from "@/components/CustomMap.vue";
 import TimeAgo from "@/timeAgo";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "SessionView",
@@ -146,6 +147,7 @@ export default {
     CustomMap,
   },
   setup() {
+    const message = useMessage();
     const { t } = useI18n({ useScope: "global" });
     const store = useStore();
     const route = useRoute();
@@ -230,7 +232,7 @@ export default {
           const response = await axios.get(`auth/sessions/${route.params.id}`);
           sessionData.value = response.data;
         } catch (error) {
-          handleRequestError(error);
+          message.error(`Nie udało się pobrać danych sesji - ${createRequestErrorMessage(error)}`);
         }
       }
     });
@@ -247,7 +249,7 @@ export default {
           }
         })
         .catch((error) => {
-          handleRequestError(error);
+          message.error(`Nie udało się wylogować - ${createRequestErrorMessage(error)}`);
         });
     };
 

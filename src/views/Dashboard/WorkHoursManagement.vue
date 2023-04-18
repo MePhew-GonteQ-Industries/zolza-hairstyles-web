@@ -1,24 +1,35 @@
 <template>
   <section class="dashboard-page">
-    <div class=" work-hours-page">
+    <div class="work-hours-page">
       <div class="reserving-slots-wrapper">
-        <n-button tertiary type="primary" @click="openReservingSlotsModal = true">Zarezerwuj sloty</n-button>
+        <n-button tertiary type="primary" @click="openReservingSlotsModal = true"
+          >Zarezerwuj sloty</n-button
+        >
         <CustomModal v-model:open="openReservingSlotsModal">
           <template #title>Zarezerwuj godziny</template>
           <div class="reserving-slots-modal-wrapper">
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate"></DatePicker>
+              <DatePicker
+                :is-dark="$store.state.settings.theme === 'dark'"
+                is-required
+                color="green"
+                mode="date"
+                v-model="selectedDate"
+              ></DatePicker>
               <div class="hours">
                 <CustomLoader v-if="loadingSlots" />
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                  <div
+                    class="single-hour"
+                    v-for="availableSlot in validatedSlots"
+                    :key="availableSlot.id"
                     @click="toggleSlot(availableSlot)"
-                    :class="{ 'selected': selectedSlotsId.includes(availableSlot.id) }">
+                    :class="{ selected: selectedSlotsId.includes(availableSlot.id) }"
+                  >
                     {{
                       new Date(`${availableSlot.start_time}`).toLocaleTimeString(locale, {
-                        hour: "2-digit", minute:
-                          "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
                       })
                     }}
                   </div>
@@ -29,7 +40,9 @@
               </div>
             </div>
             <div class="buttons-wrapper">
-              <CustomButton type="info" @click="openReservingReassuranceModal">Zarezerwuj</CustomButton>
+              <CustomButton type="info" @click="openReservingReassuranceModal"
+                >Zarezerwuj</CustomButton
+              >
               <CustomButton type="secondary" @click="closeReserveSlotsModal">Zamknij</CustomButton>
             </div>
           </div>
@@ -37,31 +50,41 @@
             <template #title>Oto sloty które zostaną zarezerwowane</template>
             <div class="reserving-reassurance-modal-wrapper">
               <MessageBox type="warning">
-                <template #title>
-                  Sprawdź poprawność zaznaczonych slotów
-                </template>
+                <template #title> Sprawdź poprawność zaznaczonych slotów </template>
                 <template #subtitle>
-                  Jeśli przez przypadek zaznaczono sloty które nie powinny zostać zarezerwowane kliknij przycisk ZMIEŃ
+                  Jeśli przez przypadek zaznaczono sloty które nie powinny zostać zarezerwowane
+                  kliknij przycisk ZMIEŃ
                 </template>
               </MessageBox>
               <div class="list-selected-slots">
-                <div class="single-slot-to-reserve" v-for="selectedSlot in selectedSlots" :key="selectedSlot.id">
-                  <p>Od: {{
-                    new Date(`${selectedSlot.start_time}`).toLocaleTimeString(locale, {
-                      hour: "2-digit", minute:
-                        "2-digit",
-                    })
-                  }} Do: {{
-  new Date(`${selectedSlot.end_time}`).toLocaleTimeString(locale, {
-    hour: "2-digit", minute:
-      "2-digit",
-  })
-}} Dnia: {{ selectedSlot.date }}</p>
+                <div
+                  class="single-slot-to-reserve"
+                  v-for="selectedSlot in selectedSlots"
+                  :key="selectedSlot.id"
+                >
+                  <p>
+                    Od:
+                    {{
+                      new Date(`${selectedSlot.start_time}`).toLocaleTimeString(locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                    }}
+                    Do:
+                    {{
+                      new Date(`${selectedSlot.end_time}`).toLocaleTimeString(locale, {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                    }}
+                    Dnia: {{ selectedSlot.date }}
+                  </p>
                 </div>
               </div>
               <div class="buttons-wrapper">
                 <CustomButton type="info" @click="reserveSlots">Zarezerwuj</CustomButton>
-                <CustomButton type="secondary" @click="openReservingSlotsReassuranceModal = false">Zmień
+                <CustomButton type="secondary" @click="openReservingSlotsReassuranceModal = false"
+                  >Zmień
                 </CustomButton>
               </div>
             </div>
@@ -70,10 +93,10 @@
         <div class="reserved-slots-list">
           <table>
             <colgroup>
-              <col>
-              <col>
-              <col>
-              <col>
+              <col />
+              <col />
+              <col />
+              <col />
             </colgroup>
             <thead>
               <th>
@@ -101,47 +124,60 @@
               <tr v-for="slot in reservedSlotsFiltered" :key="slot.id">
                 <td class="id" @click="unreserveSlot(slot)">
                   <CustomTooltip>
-                    <template #activator>
-                      {{ slot.id.slice(0, 5) }}...
-                    </template>
+                    <template #activator> {{ slot.id.slice(0, 5) }}... </template>
                     {{ slot.id }}
                   </CustomTooltip>
                   <CustomModal v-model:open="unreserveModalOpen">
-                    <template #title>
-                      Cofnięcie rezerwacji slotu
-                    </template>
+                    <template #title> Cofnięcie rezerwacji slotu </template>
                     <div class="unreserve-slot-modal-wrapper">
                       <div class="slot-info">
                         <p>Id: {{ unreservingSlot.id }}</p>
                         <p>
-                          Od: {{
+                          Od:
+                          {{
                             new Date(unreservingSlot.start_time).toLocaleTimeString(locale, {
-                              hour: "2-digit", minute: "2-digit"
+                              hour: "2-digit",
+                              minute: "2-digit",
                             })
                           }}
                         </p>
                         <p>
-                          Do: {{
+                          Do:
+                          {{
                             new Date(unreservingSlot.end_time).toLocaleTimeString(locale, {
-                              hour: "2-digit", minute:
-                                "2-digit"
+                              hour: "2-digit",
+                              minute: "2-digit",
                             })
                           }}
                         </p>
-                        <p>
-                          Dnia: {{ new Date(unreservingSlot.date).toLocaleDateString(locale) }}
-                        </p>
+                        <p>Dnia: {{ new Date(unreservingSlot.date).toLocaleDateString(locale) }}</p>
                       </div>
                       <div class="buttons-wrapper">
-                        <CustomButton type="info" @click="cancelReservation(slot)">Cofnij rezerwacje</CustomButton>
-                        <CustomButton type="secondary" @click="closeUnreserveSlotModal">Zamknij</CustomButton>
+                        <CustomButton type="info" @click="cancelReservation(slot)"
+                          >Cofnij rezerwacje</CustomButton
+                        >
+                        <CustomButton type="secondary" @click="closeUnreserveSlotModal"
+                          >Zamknij</CustomButton
+                        >
                       </div>
                     </div>
                   </CustomModal>
                 </td>
-                <td>{{ new Date(slot.start_time).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" }) }}
+                <td>
+                  {{
+                    new Date(slot.start_time).toLocaleTimeString(locale, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  }}
                 </td>
-                <td>{{ new Date(slot.end_time).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" }) }}
+                <td>
+                  {{
+                    new Date(slot.end_time).toLocaleTimeString(locale, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  }}
                 </td>
                 <td>{{ new Date(slot.date).toLocaleDateString(locale) }}</td>
               </tr>
@@ -156,21 +192,21 @@
 </template>
 
 <script>
-import { NButton, NDivider } from 'naive-ui';
-import { ref, computed, onMounted, watch } from 'vue';
-import CustomModal from '@/components/CustomModal.vue';
+import { NButton, NDivider } from "naive-ui";
+import { ref, computed, onMounted, watch } from "vue";
+import CustomModal from "@/components/CustomModal.vue";
 import { DatePicker } from "v-calendar";
 import "v-calendar/dist/style.css";
 import { useStore } from "vuex";
-import { handleRequestError } from '@/utils';
-import axios from 'axios';
-import { useMessage } from 'naive-ui';
+import { createRequestErrorMessage } from "@/utils";
+import axios from "axios";
+import { useMessage } from "naive-ui";
 import CustomLoader from "@/components/CustomLoader.vue";
 import CustomButton from "@/components/CustomButton.vue";
-import { useRouter } from 'vue-router';
-import MessageBox from '@/components/MessageBox.vue';
-import SortedHeader from '@/components/SortedHeader.vue';
-import CustomTooltip from '@/components/CustomTooltip.vue';
+import { useRouter } from "vue-router";
+import MessageBox from "@/components/MessageBox.vue";
+import SortedHeader from "@/components/SortedHeader.vue";
+import CustomTooltip from "@/components/CustomTooltip.vue";
 
 export default {
   name: "WorkHoursManagement",
@@ -188,7 +224,7 @@ export default {
   setup() {
     const store = useStore();
     const openReservingSlotsModal = ref(false);
-    const selectedDate = ref(new Date);
+    const selectedDate = ref(new Date());
     const selectedDateFormatted = computed(() => selectedDate.value.toISOString().split("T")[0]);
     const loading = ref(true);
     const loadingSlots = ref(true);
@@ -223,7 +259,7 @@ export default {
         availableSlots.value = response.data;
         loadingSlots.value = false;
       } catch (error) {
-        handleRequestError(error);
+        message.error(`Nie udało się załadować slotów - ${createRequestErrorMessage(error)}`);
       }
     };
 
@@ -245,59 +281,55 @@ export default {
       } else {
         openReservingSlotsReassuranceModal.value = true;
       }
-    }
+    };
 
     const closeReserveSlotsModal = () => {
       selectedSlotsId.value = [];
       selectedSlots.value = [];
-      selectedDate.value = new Date;
+      selectedDate.value = new Date();
       loadingSlots.value = true;
       openReservingSlotsModal.value = false;
-    }
+    };
 
     const reserveSlots = () => {
       try {
-        axios.post('appointments/reserve_slots', {
+        axios.post("appointments/reserve_slots", {
           slots: selectedSlotsId.value,
         });
-        message.success('Pomyślnie zarezerwowano sloty');
+        message.success("Pomyślnie zarezerwowano sloty");
         selectedSlotsId.value = [];
         selectedSlots.value = [];
-        selectedDate.value = new Date;
+        selectedDate.value = new Date();
         openReservingSlotsReassuranceModal.value = false;
         openReservingSlotsModal.value = false;
         loadReservedSlots();
-        router.push({ name: 'workHoursManagement' });
+        router.push({ name: "workHoursManagement" });
+      } catch (error) {
+        message.error(`Nie udało się zarezerwować slotów - ${createRequestErrorMessage(error)}`);
       }
-      catch (error) {
-        message.error(`Nie udał się zarezerwować slotów, ${error.message}`);
-        handleRequestError(error);
-      }
-    }
+    };
 
     const unreserveSlot = (slot) => {
       unreservingSlot.value = slot;
       unreserveModalOpen.value = true;
-    }
+    };
 
     const cancelReservation = async (slot) => {
       try {
-        await axios.post('appointments/unreserve_slots', {
-          slots: [
-            slot.id
-          ],
+        await axios.post("appointments/unreserve_slots", {
+          slots: [slot.id],
         });
-        message.success('Pomyślnie anulowano rezerwacje');
+        message.success("Pomyślnie anulowano rezerwacje");
         unreserveModalOpen.value = false;
         loadReservedSlots();
-        router.push({ name: 'workHoursManagement' });
+        router.push({ name: "workHoursManagement" });
       } catch (error) {
-        handleRequestError(error);
+        message.error(`Nie udało się anulować rezerwacji - ${createRequestErrorMessage(error)}`);
       }
-    }
+    };
     const closeUnreserveSlotModal = () => {
       unreserveModalOpen.value = false;
-    }
+    };
 
     watch(selectedDateFormatted, async (newDate) => {
       loading.value = true;
@@ -307,13 +339,15 @@ export default {
     const loadReservedSlots = async () => {
       loading.value = true;
       try {
-        const response = await axios.get('appointments/slots');
+        const response = await axios.get("appointments/slots");
         reservedSlots.value = response.data;
         loading.value = false;
       } catch (error) {
-        handleRequestError(error);
+        message.error(
+          `Nie udało się pobrać zarezerwowanych slotów - ${createRequestErrorMessage(error)}`
+        );
       }
-    }
+    };
 
     const reservedSlotsFiltered = computed(() => {
       const slots = [];
@@ -365,8 +399,8 @@ export default {
       closeUnreserveSlotModal,
       unreserveSlot,
       unreservingSlot,
-    }
-  }
+    };
+  },
 };
 </script>
 
@@ -408,7 +442,7 @@ export default {
           text-transform: uppercase;
           background-color: $background-accent-high;
           height: 3.375rem;
-          font-size: .75rem;
+          font-size: 0.75rem;
           color: $secondary-text-color;
           border-width: thin 0 thin 0;
           border-style: solid;
@@ -438,28 +472,28 @@ export default {
         }
 
         th:first-child {
-          border-radius: .5rem 0 0 0;
+          border-radius: 0.5rem 0 0 0;
         }
 
         th:last-child {
-          border-radius: 0 .5rem 0 0;
+          border-radius: 0 0.5rem 0 0;
         }
 
         tr:last-child td:first-child {
-          border-radius: 0 0 0 .5rem;
+          border-radius: 0 0 0 0.5rem;
         }
 
         tr:last-child td:last-child {
-          border-radius: 0 0 .5rem 0;
+          border-radius: 0 0 0.5rem 0;
         }
 
-        tr:hover>td {
+        tr:hover > td {
           background-color: $background-accent-medium;
         }
 
         td {
           padding: 1rem;
-          font-size: .875rem;
+          font-size: 0.875rem;
           height: 3.125rem;
           background-color: $background-accent-low;
           transition: none;
@@ -509,7 +543,7 @@ export default {
       .slots-wrapper {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: .5rem;
+        gap: 0.5rem;
 
         @media only screen and (max-width: $sm) {
           grid-template-columns: repeat(3, 1fr);
@@ -552,7 +586,7 @@ export default {
   .list-selected-slots {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
 
     .single-slot-to-reserve {
       border: 1px solid $secondary-color;

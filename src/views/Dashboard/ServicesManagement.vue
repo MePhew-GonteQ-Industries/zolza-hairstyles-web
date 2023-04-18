@@ -1,8 +1,12 @@
 <template>
   <section class="dashboard-page dashboard-data-page services-management" v-if="!loading">
     <form class="appointments-filters">
-      <CustomInput class="search" :label="t('dashboard.servicesManagement.search')"
-        v-model:value="q" type="search" />
+      <CustomInput
+        class="search"
+        :label="t('dashboard.servicesManagement.search')"
+        v-model:value="q"
+        type="search"
+      />
     </form>
 
     <CustomButton @click="addServiceModalOpen = true">Dodaj usługę</CustomButton>
@@ -34,28 +38,50 @@
         </colgroup>
         <thead>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id"
-              @toggleSort="toggleSort('id')">
-              #id</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="id"
+              @toggleSort="toggleSort('id')"
+            >
+              #id</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="service"
-              @toggleSort="toggleSort('service')">{{ t("dashboard.servicesManagement.name") }}
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="service"
+              @toggleSort="toggleSort('service')"
+              >{{ t("dashboard.servicesManagement.name") }}
             </SortedHeader>
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="user"
-              @toggleSort="toggleSort('user')">
-              {{ t("dashboard.servicesManagement.averageDurationTime") }}</SortedHeader>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="user"
+              @toggleSort="toggleSort('user')"
+            >
+              {{ t("dashboard.servicesManagement.averageDurationTime") }}</SortedHeader
+            >
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate"
-              @toggleSort="toggleSort('startDate')">{{ t("dashboard.servicesManagement.minPrice") }}
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="startDate"
+              @toggleSort="toggleSort('startDate')"
+              >{{ t("dashboard.servicesManagement.minPrice") }}
             </SortedHeader>
           </th>
           <th>
-            <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate"
-              @toggleSort="toggleSort('endDate')">{{ t("dashboard.servicesManagement.maxPrice") }}
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="endDate"
+              @toggleSort="toggleSort('endDate')"
+              >{{ t("dashboard.servicesManagement.maxPrice") }}
             </SortedHeader>
           </th>
         </thead>
@@ -101,8 +127,11 @@ import { onMounted, computed, ref } from "vue";
 import { useStore } from "vuex";
 import CustomInput from "@/components/CustomInput.vue";
 import CustomButton from "@/components/CustomButton.vue";
-import CustomModal from "../../components/CustomModal.vue";
+import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
+import { useMessage } from "naive-ui";
+import { createRequestErrorMessage } from "@/utils";
+import { AxiosError } from "axios";
 
 export default {
   name: "ServicesManagement",
@@ -113,6 +142,7 @@ export default {
     CustomLoader,
   },
   setup() {
+    const message = useMessage();
     const store = useStore();
 
     const addServiceModalOpen = ref(false);
@@ -120,7 +150,7 @@ export default {
 
     const { t } = useI18n({ useScope: "global" });
 
-    const addService = async () => { };
+    const addService = async () => {};
 
     const services = computed(() => {
       if (!store.state.services.services) return [];
@@ -139,7 +169,16 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch("loadServices");
+      try {
+        await store.dispatch("loadServices");
+      } catch (error) {
+        loading.value = false;
+        if (error instanceof AxiosError) {
+          message.error(`Nie udało się załadować wizyt - ${createRequestErrorMessage(error)}`);
+        } else {
+          throw error;
+        }
+      }
       loading.value = false;
     });
 

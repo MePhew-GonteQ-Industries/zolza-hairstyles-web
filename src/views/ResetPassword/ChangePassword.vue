@@ -8,24 +8,39 @@
 
     <form @submit.prevent="handlePasswordReset" novalidate>
       <div class="inputs">
-        <input class="hidden-input" type="text" autocomplete="username"
-          id="change-password-hidden-username-input" />
+        <input
+          class="hidden-input"
+          type="text"
+          autocomplete="username"
+          id="change-password-hidden-username-input"
+        />
         <label for="change-password-hidden-username-input"></label>
 
-        <CustomInput :label="t('resetPassword.changePassword.newPasswordField.label')"
-          autocomplete="new-password" type="password" v-model:value="newPassword"
+        <CustomInput
+          :label="t('resetPassword.changePassword.newPasswordField.label')"
+          autocomplete="new-password"
+          type="password"
+          v-model:value="newPassword"
           :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-          :forceValidate="forceValidate" :required="true"
+          :forceValidate="forceValidate"
+          :required="true"
           :messageEmpty="t('resetPassword.changePassword.newPasswordField.messageEmpty')"
           :messageInvalid="t('resetPassword.changePassword.newPasswordField.messageInvalid')"
-          @focus="passwordInputFocused = true" @blur="passwordInputFocused = false" />
+          @focus="passwordInputFocused = true"
+          @blur="passwordInputFocused = false"
+        />
 
-        <CustomInput :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
-          autocomplete="new-password" type="password" v-model:value="newPasswordRepeat"
+        <CustomInput
+          :label="t('resetPassword.changePassword.repeatNewPasswordField.label')"
+          autocomplete="new-password"
+          type="password"
+          v-model:value="newPasswordRepeat"
           :invalid="!newPasswordRepeat || newPasswordRepeat !== newPassword"
-          :forceValidate="forceValidate" :required="true"
+          :forceValidate="forceValidate"
+          :required="true"
           :messageEmpty="t('resetPassword.changePassword.repeatNewPasswordField.messageEmpty')"
-          :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')" />
+          :messageInvalid="t('resetPassword.changePassword.repeatNewPasswordField.messageInvalid')"
+        />
       </div>
 
       <CustomButton class="btn">
@@ -48,7 +63,8 @@ import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 import CustomInput from "@/components/CustomInput.vue";
 import CustomButton from "@/components/CustomButton.vue";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
+import { useMessage } from "naive-ui";
 
 export default {
   name: "ChangePassword",
@@ -57,6 +73,7 @@ export default {
     CustomButton,
   },
   setup() {
+    const message = useMessage();
     const { t } = useI18n();
     const router = useRouter();
     const route = useRoute();
@@ -94,7 +111,7 @@ export default {
           }
         })
         .catch((error) => {
-          handleRequestError(error);
+          message.error(`Nie udało się zmienić hasła- ${createRequestErrorMessage(error)}`);
         });
     }
 
@@ -150,6 +167,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

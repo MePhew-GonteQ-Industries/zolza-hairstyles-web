@@ -1,5 +1,4 @@
 import axios from "axios";
-import { handleRequestError } from "@/utils";
 
 export default {
   state: {
@@ -16,12 +15,8 @@ export default {
   actions: {
     async loadServices({ state, commit }) {
       if (!state.services.length) {
-        try {
-          const response = await axios.get("services/details");
-          commit("updateServices", response.data);
-        } catch (error) {
-          handleRequestError(error);
-        }
+        const response = await axios.get("services/details");
+        commit("updateServices", response.data);
       }
     },
     deleteServices({ commit }) {

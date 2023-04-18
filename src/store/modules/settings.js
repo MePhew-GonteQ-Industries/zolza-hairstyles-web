@@ -1,5 +1,4 @@
 import axios from "axios";
-import { handleRequestError } from "@/utils";
 import { useNavigatorLanguage } from "@vueuse/core";
 import i18n from "@/i18n";
 
@@ -48,20 +47,15 @@ export default {
 
     async loadSettings({ state, getters, commit }) {
       if (!getters.settingsLoaded || state.defaultsLoaded) {
-        try {
-          const response = await axios.get("settings");
-          const { settings } = response.data;
-          const theme = settings.find(
-            (setting) => setting.name === "preferred_theme"
-          ).current_value;
-          const language = settings.find((setting) => setting.name === "language").current_value;
-          commit("setTheme", theme);
-          commit("setLanguage", language);
-          commit("setDefaultsLoaded", false);
-        } catch (error) {
-          handleRequestError(error);
-          throw error;
-        }
+        const response = await axios.get("settings");
+        const { settings } = response.data;
+        const theme = settings.find(
+          (setting) => setting.name === "preferred_theme"
+        ).current_value;
+        const language = settings.find((setting) => setting.name === "language").current_value;
+        commit("setTheme", theme);
+        commit("setLanguage", language);
+        commit("setDefaultsLoaded", false);
       }
     },
   },

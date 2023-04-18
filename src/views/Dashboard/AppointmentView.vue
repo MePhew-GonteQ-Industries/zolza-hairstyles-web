@@ -38,8 +38,12 @@
         </div>
       </div>
       <div class="right">
-        <CustomButton type="error" class="cancel-appointment-button"
-          v-if="!appointment.archival && !appointment.canceled" @click="cancelAppointmentModalOpen = true">Odwołaj
+        <CustomButton
+          type="error"
+          class="cancel-appointment-button"
+          v-if="!appointment.archival && !appointment.canceled"
+          @click="cancelAppointmentModalOpen = true"
+          >Odwołaj
         </CustomButton>
         <CustomModal v-model:open="cancelAppointmentModalOpen">
           <template #title> Napewno chcesz anulować wizytę? </template>
@@ -50,14 +54,20 @@
             </MessageBox>
             <div class="buttons-wrapper">
               <CustomButton type="error" @click="cancelAppointment">Anuluj wizytę</CustomButton>
-              <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false">Zamknij
+              <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false"
+                >Zamknij
               </CustomButton>
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="info" class="change-appointment-date" v-if="!appointment.archival && !appointment.canceled"
-          @click="changeAppointmentDateModalOpen = true">
-          Zmień termin</CustomButton>
+        <CustomButton
+          type="info"
+          class="change-appointment-date"
+          v-if="!appointment.archival && !appointment.canceled"
+          @click="changeAppointmentDateModalOpen = true"
+        >
+          Zmień termin</CustomButton
+        >
         <CustomModal v-model:open="changeAppointmentDateModalOpen">
           <template #title> Zmiana daty wizyty </template>
           <div class="change-appointment-date-wrapper">
@@ -68,21 +78,30 @@
               </template>
             </MessageBox>
             <div class="date-picker-wrapper">
-              <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
-                v-model="selectedDate" :min-date="new Date" :max-date="maxDate" />
+              <DatePicker
+                :is-dark="$store.state.settings.theme === 'dark'"
+                is-required
+                color="green"
+                mode="date"
+                v-model="selectedDate"
+                :min-date="new Date()"
+                :max-date="maxDate"
+              />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
                 <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
-                  <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
+                  <div
+                    class="single-hour"
+                    v-for="availableSlot in validatedSlots"
+                    :key="availableSlot.id"
                     @click="selectAppointmentHour(availableSlot)"
-                    :class="{ 'selected': availableSlot.id === selectedSlotId }">
+                    :class="{ selected: availableSlot.id === selectedSlotId }"
+                  >
                     {{
-                      new Date(`${availableSlot.start_time}`).toLocaleTimeString(
-                        locale, {
+                      new Date(`${availableSlot.start_time}`).toLocaleTimeString(locale, {
                         hour: "2-digit",
                         minute: "2-digit",
-                      }
-                      )
+                      })
                     }}
                   </div>
                 </div>
@@ -93,7 +112,8 @@
             </div>
             <div class="buttons-wrapper">
               <CustomButton type="info" @click="changeAppointmentDate">Zmień termin</CustomButton>
-              <CustomButton type="secondary" @click="closeChangeAppointmentDateModal">Zamknij
+              <CustomButton type="secondary" @click="closeChangeAppointmentDateModal"
+                >Zamknij
               </CustomButton>
             </div>
           </div>
@@ -109,14 +129,14 @@ import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import axios from "axios";
-import { handleRequestError } from "@/utils";
+import { createRequestErrorMessage } from "@/utils";
 import CustomButton from "@/components/CustomButton.vue";
 import { DatePicker } from "v-calendar";
-import CustomModal from "../../components/CustomModal.vue";
-import MessageBox from "../../components/MessageBox.vue";
-import CustomLoader from "../../components/CustomLoader.vue";
+import CustomModal from "@/components/CustomModal.vue";
+import MessageBox from "@/components/MessageBox.vue";
+import CustomLoader from "@/components/CustomLoader.vue";
 import "v-calendar/dist/style.css";
-import { useMessage } from 'naive-ui';
+import { useMessage } from "naive-ui";
 
 export default {
   name: "AppointmentView",
@@ -156,12 +176,12 @@ export default {
         let currentSlotFits = 0;
 
         if (i + requiredSlots <= availableSlots.value.length) {
-          for (let j = i; j < (i + requiredSlots); j++) {
+          for (let j = i; j < i + requiredSlots; j++) {
             let innerSlot = availableSlots.value[j];
 
             if (innerSlot.occupied) break;
             if (innerSlot.reserved) break;
-            if (innerSlot.holiday) break
+            if (innerSlot.holiday) break;
             if (innerSlot.sunday) break;
             if (innerSlot.break_time) break;
             if (currentSlotFits === requiredSlots) break;
@@ -181,7 +201,9 @@ export default {
         availableSlots.value = response.data;
         loading.value = false;
       } catch (error) {
-        handleRequestError(error);
+        message.error(
+          `Nie udało się pobrać dostępnych slotów - ${createRequestErrorMessage(error)}`
+        );
       }
     };
 
@@ -191,19 +213,19 @@ export default {
 
     const changeAppointmentDate = async () => {
       try {
-        await axios.put(`appointments/any/${route.params.id}`,
-          {
-            first_slot_id: selectedSlotId.value,
-          });
+        await axios.put(`appointments/any/${route.params.id}`, {
+          first_slot_id: selectedSlotId.value,
+        });
         store.dispatch("deleteAppointments");
         selectedSlotId.value = null;
-        selectedDate.value = new Date;
+        selectedDate.value = new Date();
         changeAppointmentDateModalOpen.value = false;
-        router.push({ name: 'appointmentsManagement' });
-        message.success(t('snackBars.appontmentDataChange'));
+        router.push({ name: "appointmentsManagement" });
+        message.success(t("snackBars.appontmentDataChange"));
       } catch (error) {
-        const response = handleRequestError(error);
-        message.error(`${t('snackBars.appointmentDateChangeError')} ${response.status}, ${response.data.detail}`);
+        message.error(
+          `${t("snackBars.appointmentDateChangeError")} - ${createRequestErrorMessage(error)}`
+        );
       }
     };
 
@@ -212,21 +234,22 @@ export default {
         await axios.post(`appointments/any/${route.params.id}`);
         store.dispatch("deleteAppointments");
         selectedSlotId.value = null;
-        selectedDate.value = new Date;
+        selectedDate.value = new Date();
         cancelAppointmentModalOpen.value = false;
-        router.push({ name: 'appointmentsManagement' });
-        message.success(t('snackBars.appointmentCancel'));
+        router.push({ name: "appointmentsManagement" });
+        message.success(t("snackBars.appointmentCancel"));
       } catch (error) {
-        const response = handleRequestError(error);
-        message.error(`${t('snackBars.appointmentCancelError')} ${response.status}, ${response.data.detail}`);
+        message.error(
+          `${t("snackBars.appointmentCancelError")} - ${createRequestErrorMessage(error)}`
+        );
       }
     };
 
     const closeChangeAppointmentDateModal = () => {
-      selectedDate.value = new Date;
+      selectedDate.value = new Date();
       selectedSlotId.value = null;
       changeAppointmentDateModalOpen.value = false;
-    }
+    };
 
     watch(selectedDateFormatted, async (newDate) => {
       loading.value = true;
@@ -243,7 +266,7 @@ export default {
           const response = await axios.get(`appointments/any/${route.params.id}`);
           appointmentData.value = response.data;
         } catch (error) {
-          handleRequestError(error);
+          message.error(`Nie udało się pobrać danych wizyty - ${createRequestErrorMessage(error)}`);
         }
       }
       await loadAvailableTimeSlots(selectedDateFormatted.value);
@@ -386,7 +409,7 @@ export default {
       .slots-wrapper {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: .5rem;
+        gap: 0.5rem;
 
         @media only screen and (max-width: $sm) {
           grid-template-columns: repeat(3, 1fr);
