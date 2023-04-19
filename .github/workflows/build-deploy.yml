@@ -15,9 +15,8 @@ jobs:
           host: ${{secrets.DEPLOYMENT_HOST}}
           username: ${{secrets.DEPLOYMENT_USERNAME}}
           key: ${{secrets.DEPLOYMENT_SSH_KEY}}
-          passphrase: ${{secrets.DEPLOYMENT_SSH_KEY_PASSPHRASE}}
           script: |
-            cd ${{secrets.DEPLOYMENT_PATH}}/zolza-hairstyles-web
+            cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
             git reset --hard
             git pull
             echo '${{secrets.DEPLOYMENT_PASSWORD}}' | sudo -S npm update -g npm
@@ -33,7 +32,6 @@ jobs:
           host: ${{secrets.DEPLOYMENT_HOST}}
           username: ${{secrets.DEPLOYMENT_USERNAME}}
           key: ${{secrets.DEPLOYMENT_SSH_KEY}}
-          passphrase: ${{secrets.DEPLOYMENT_SSH_KEY_PASSPHRASE}}
           script: |
             cd /home/${{secrets.DEPLOYMENT_USERNAME}}/zolza-hairstyles-web
             echo '${{secrets.DEPLOYMENT_PASSWORD}}' | sudo -S cp -r ./dist /var/www/zolza-hairstyles.pl
