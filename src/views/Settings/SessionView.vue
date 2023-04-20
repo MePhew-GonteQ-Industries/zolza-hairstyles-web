@@ -245,6 +245,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             store.dispatch("deleteSessions");
+            message.success("Wylogowano pomyślnie");
             router.push({ name: "accountSecuritySettings" });
           }
         })

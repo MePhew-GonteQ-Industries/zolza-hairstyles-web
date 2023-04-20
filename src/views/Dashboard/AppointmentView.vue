@@ -220,8 +220,8 @@ export default {
         selectedSlotId.value = null;
         selectedDate.value = new Date();
         changeAppointmentDateModalOpen.value = false;
-        router.push({ name: "appointmentsManagement" });
         message.success(t("snackBars.appontmentDataChange"));
+        router.push({ name: "appointmentsManagement" });
       } catch (error) {
         message.error(
           `${t("snackBars.appointmentDateChangeError")} - ${createRequestErrorMessage(error)}`
@@ -236,8 +236,8 @@ export default {
         selectedSlotId.value = null;
         selectedDate.value = new Date();
         cancelAppointmentModalOpen.value = false;
-        router.push({ name: "appointmentsManagement" });
         message.success(t("snackBars.appointmentCancel"));
+        router.push({ name: "appointmentsManagement" });
       } catch (error) {
         message.error(
           `${t("snackBars.appointmentCancelError")} - ${createRequestErrorMessage(error)}`

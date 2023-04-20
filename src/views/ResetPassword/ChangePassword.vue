@@ -107,6 +107,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             const { email } = response.data;
+            message.success("Hasło zostało zmienione");
             router.push({ name: "login", params: { email } });
           }
         })

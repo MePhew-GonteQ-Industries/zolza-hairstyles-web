@@ -296,13 +296,13 @@ export default {
         axios.post("appointments/reserve_slots", {
           slots: selectedSlotsId.value,
         });
-        message.success("Pomyślnie zarezerwowano sloty");
         selectedSlotsId.value = [];
         selectedSlots.value = [];
         selectedDate.value = new Date();
         openReservingSlotsReassuranceModal.value = false;
         openReservingSlotsModal.value = false;
         loadReservedSlots();
+        message.success("Pomyślnie zarezerwowano sloty");
         router.push({ name: "workHoursManagement" });
       } catch (error) {
         message.error(`Nie udało się zarezerwować slotów - ${createRequestErrorMessage(error)}`);
@@ -319,9 +319,9 @@ export default {
         await axios.post("appointments/unreserve_slots", {
           slots: [slot.id],
         });
-        message.success("Pomyślnie anulowano rezerwacje");
         unreserveModalOpen.value = false;
         loadReservedSlots();
+        message.success("Pomyślnie anulowano rezerwacje");
         router.push({ name: "workHoursManagement" });
       } catch (error) {
         message.error(`Nie udało się anulować rezerwacji - ${createRequestErrorMessage(error)}`);

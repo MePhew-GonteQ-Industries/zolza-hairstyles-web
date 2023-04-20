@@ -179,8 +179,8 @@ export default {
         selectedSlotId.value = null;
         selectedDate.value = new Date();
         openMakeAnAppointmentModal.value = false;
-        router.push({ name: "appointmentsList" });
         message.success(t("snackBars.appointmentMade"));
+        router.push({ name: "appointmentsList" });
       } catch (error) {
         message.error(
           `${t("snackBars.appointmentsMadeError")} - ${createRequestErrorMessage(error)}`

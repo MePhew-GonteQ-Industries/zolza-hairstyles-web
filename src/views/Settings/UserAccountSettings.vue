@@ -358,12 +358,13 @@ export default {
           })
         )
         .then(() => {
+          message.success("Konto zostało usunięte");
           store.dispatch("logout").then(() => {
             router.push({ name: "home" });
           });
         })
         .catch((error) => {
-          message.error(`Nie udało się wylogować - ${createRequestErrorMessage(error)}`);
+          message.error(`Nie udało się usunąć konta - ${createRequestErrorMessage(error)}`);
         });
     };
 
