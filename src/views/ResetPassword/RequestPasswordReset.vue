@@ -51,7 +51,7 @@ export default {
     CustomButton,
   },
   setup() {
-    const { t } = useI18n();
+    const { t } = useI18n({ useScope: "global" });
     const message = useMessage();
 
     const userEmail = ref("");

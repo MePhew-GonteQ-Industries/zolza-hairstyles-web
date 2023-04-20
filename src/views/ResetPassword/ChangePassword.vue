@@ -74,7 +74,7 @@ export default {
   },
   setup() {
     const message = useMessage();
-    const { t } = useI18n();
+    const { t } = useI18n({ useScope: "global" });
     const router = useRouter();
     const route = useRoute();
 

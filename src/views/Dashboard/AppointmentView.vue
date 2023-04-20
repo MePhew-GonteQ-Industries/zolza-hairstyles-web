@@ -128,15 +128,15 @@ import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { createRequestErrorMessage } from "@/utils";
 import CustomButton from "@/components/CustomButton.vue";
 import { DatePicker } from "v-calendar";
 import CustomModal from "@/components/CustomModal.vue";
 import MessageBox from "@/components/MessageBox.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
-import "v-calendar/dist/style.css";
 import { useMessage } from "naive-ui";
+import "v-calendar/dist/style.css";
 
 export default {
   name: "AppointmentView",
@@ -151,7 +151,7 @@ export default {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
-    const { t } = useI18n;
+    const { t } = useI18n({ useScope: "global" });
     const locale = store.state.settings.language;
 
     const appointmentData = ref(null);
@@ -216,13 +216,18 @@ export default {
         await axios.put(`appointments/any/${route.params.id}`, {
           first_slot_id: selectedSlotId.value,
         });
+        message.success(t("snackBars.appointmentDateChange"));
+
         store.dispatch("deleteAppointments");
         selectedSlotId.value = null;
         selectedDate.value = new Date();
         changeAppointmentDateModalOpen.value = false;
-        message.success(t("snackBars.appontmentDataChange"));
         router.push({ name: "appointmentsManagement" });
       } catch (error) {
+        if (!(error instanceof AxiosError)) {
+          throw error;
+        }
+
         message.error(
           `${t("snackBars.appointmentDateChangeError")} - ${createRequestErrorMessage(error)}`
         );
@@ -232,13 +237,18 @@ export default {
     const cancelAppointment = async () => {
       try {
         await axios.post(`appointments/any/${route.params.id}`);
+        message.success(t("snackBars.appointmentCancel"));
+
         store.dispatch("deleteAppointments");
         selectedSlotId.value = null;
         selectedDate.value = new Date();
         cancelAppointmentModalOpen.value = false;
-        message.success(t("snackBars.appointmentCancel"));
         router.push({ name: "appointmentsManagement" });
       } catch (error) {
+        if (!(error instanceof AxiosError)) {
+          throw error;
+        }
+
         message.error(
           `${t("snackBars.appointmentCancelError")} - ${createRequestErrorMessage(error)}`
         );

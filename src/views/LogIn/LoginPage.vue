@@ -101,7 +101,7 @@ export default {
   setup(props) {
     const store = useStore();
     const router = useRouter();
-    const { t } = useI18n();
+    const { t } = useI18n({ useScope: "global" });
     const message = useMessage();
 
     const userData = ref({
