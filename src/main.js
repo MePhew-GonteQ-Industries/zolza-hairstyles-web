@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import axios from "axios";
-import { SetupCalendar } from "v-calendar";
+import VCalendar from 'v-calendar';
+import 'v-calendar/style.css';
 import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
@@ -14,7 +15,7 @@ createApp(App)
   .use(i18n)
   .use(store)
   .use(router)
-  .use(SetupCalendar, {})
+  .use(VCalendar, {})
   .use(VWave, {
     directive: "ripple",
   })

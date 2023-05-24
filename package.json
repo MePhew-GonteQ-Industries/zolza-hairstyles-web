@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@intlify/unplugin-vue-i18n": "^0.7.0",
+    "@popperjs/core": "^2.11.7",
     "@vueuse/components": "^9.3.0",
     "@vueuse/core": "^9.3.0",
     "@vueuse/integrations": "^9.3.0",
@@ -25,7 +26,7 @@
     "update": "^0.4.2",
     "upgrade": "^1.1.0",
     "uuid": "^8.3.2",
-    "v-calendar": "^3.0.0-alpha.8",
+    "v-calendar": "^3.0.3",
     "v-wave": "^1.5.0",
     "vue": "^3.2.38",
     "vue-i18n": "^9.2.2",
