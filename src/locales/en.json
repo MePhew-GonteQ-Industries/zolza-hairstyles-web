@@ -6,7 +6,7 @@
     "surname": "Surname",
     "email": "Email",
     "emailEmpty": "Please enter your email",
-    "emailInvalid": "Please enter correct email",
+    "emailInvalid": "Please enter a correct email",
     "gender": "Gender",
     "password": "Password",
     "saveChanges": "Save changes",
@@ -15,7 +15,7 @@
     "warning": "WARNING",
     "logOut": "Log out",
     "forgotYourPassword": "Forgot your password?",
-    "irreversible": "Action is irreversible",
+    "irreversible": "This action is irreversible",
     "male": "Male",
     "female": "Female",
     "other": "Other"
@@ -23,19 +23,14 @@
   "nav": {
     "primaryNav": ["Home", "Dashboard", "Appointments", "Contact"]
   },
-  "footer": [
-    "Terms of use",
-    "Privacy policy",
-    "Cookies policy",
-    "RODO infromation obligation"
-  ],
+  "footer": ["Terms of use", "Privacy policy", "Cookies policy", "GDPR"],
   "app": {
-    "description": "Professional hairdressing salon. Razor shaving, hair cutting, wedding and occasional hairstyles. Feel free to see our offer and photos of our hairstyles."
+    "description": "Professional hairdressing salon. Razor shaving, hair cutting, wedding and occasional hairstyles. Feel free to check out our offer and photos of our hairstyles."
   },
   "home": {
-    "appHeading": "One app lots of possibilites",
-    "appDescription": "With mobile app you can book and take care of your appointments in our salon.",
-    "appDescriptionSecondary": "You can get this app as well on android and IOS devices.",
+    "appHeading": "One app, lots of possibilites",
+    "appDescription": "With the mobile app you can book and manage your appointments in our salon.",
+    "appDescriptionSecondary": "Available both for android and IOS devices.",
     "serviceTile": {
       "time": "Time: ",
       "availableDates": "Available dates",
@@ -63,18 +58,18 @@
       "gender": "Gender",
       "deleteAccount": "Delete account",
       "deleteAccountReassurance": "Are you sure you want to delete your account?",
-      "deleteAccountInformation": "Deleting account is irreversible",
+      "deleteAccountInformation": "Deleting an account is irreversible",
       "appointmentsCancellation": "Your appointments will be cancelled",
-      "deleteHighLevelAccount": "You are deleting higher level account",
-      "password": "Insert your password:",
-      "confirmationQuote": "Type to confirm",
+      "deleteHighLevelAccount": "You are deleting a higher level account",
+      "password": "Type your password:",
+      "confirmationQuote": "In order to confirm type",
       "confirmationButton": "Delete account",
       "emailLabel": "Your email address",
       "emailNotConfirmed": "is not confirmed. Check your mailbox.",
       "emailLinkResend": "Resend confirmation link",
-      "passwordInput": "Insert your password",
-      "keyDataModification": "You are trying to modify key data",
-      "identityConfirmation": "Insert your password to confirm your identity",
+      "passwordInput": "Type your password",
+      "keyDataModification": "You are trying to modify sensitive data",
+      "identityConfirmation": "Type your password to confirm your identity",
       "next": "Next"
     },
     "accountSecuritySettings": {
@@ -85,12 +80,12 @@
       "changePassword": "Change password",
       "twoFactorAuthentication": "Two factor authentication",
       "notConfigured": "Not configured",
-      "twoFAInfo": "Two factor authentication(2FA) increases acount security",
+      "twoFAInfo": "Two factor authentication(2FA) increases account security",
       "configureNow": "Configure now",
       "sessions": "Active sessions",
       "logOutEverywhere": "Log out everywhere",
       "logOutReassurance": "Are you sure you want to log out from all devices?",
-      "devicesList": "This list shows all devices you are currently logged in.",
+      "devicesList": "This list shows all devices you are currently logged in on.",
       "logOutUnrecognisedDevices": "Log out from all devices you don't recognise"
     },
     "notificationsSettings": {
@@ -109,7 +104,7 @@
       "currentSession": "Your current session",
       "logOutReassurance": "Are you sure you want to log out from this device?",
       "lastAccess": "Last access:",
-      "ip": "Your ip address:",
+      "ip": "Your IP address:",
       "location": "Location",
       "showOnMap": "Show on map",
       "noData": "No data",
@@ -140,16 +135,16 @@
     },
     "checkbox": {
       "label": "I accept ",
-      "termsOfServices": "terms of services",
+      "termsOfServices": "Terms of Use",
       "separator": " and ",
       "privacyPolicy": "privacy policy.",
-      "messageUnchecked": "You have to accept terms of services and policy privacy."
+      "messageUnchecked": "You have to accept the Terms of Use and Privacy Policy."
     },
     "logInBtn": "Sign up"
   },
   "logIn": {
     "heading": "Welcome to Zołza Hairstyles",
-    "subtitle": "Login to your account and book an appointment today",
+    "subtitle": "Log in to your account and book an appointment today",
     "currentPasswordField": {
       "messageEmpty": "Please enter your password",
       "messageInvalid": "Password is not strong enough"
@@ -165,21 +160,21 @@
   "resetPassword": {
     "requestPasswordReset": {
       "heading": "Forgot your password?",
-      "subtitle": "Enter email connected to your account and we will send you a message providing link to reset your password",
+      "subtitle": "Enter an email connected to your account and we will send you a message containing a link to password reset page",
       "resetPasswordBtn": "Send link"
     },
     "changePassword": {
       "heading": "Set up new password",
-      "subtitle": "Your new password must be diffrent than five last used by you passwords",
+      "subtitle": "Your new password must be diffrent than the last five passwords you have used",
       "newPasswordField": {
         "label": "New password",
-        "messageEmpty": "Enter new password",
-        "messageInvalid": "Password is not strong enough"
+        "messageEmpty": "Enter a new password",
+        "messageInvalid": "The password is not strong enough"
       },
       "repeatNewPasswordField": {
-        "label": "Repeat new password",
-        "messageEmpty": "Enter new password",
-        "messageInvalid": "Passwords must be the same."
+        "label": "Repeat the new password",
+        "messageEmpty": "Enter a new password",
+        "messageInvalid": "Both passwords must be the same."
       },
       "changePasswordBtn": "Change password"
     }
@@ -197,9 +192,9 @@
   },
   "dashboard": {
     "summaryView": {
-      "monthSummary": "Month summary",
+      "monthSummary": "Monthly summary",
       "estimatedIncome": "Estimated income",
-      "entitiesOfAppointments": "Entities of appointments",
+      "entitiesOfAppointments": "Number of appointments",
       "newUsers": "New users",
       "verifiedUsers": "Verified users",
       "numberOfAppointments": "Number of appointments"
@@ -213,7 +208,7 @@
       "status": "Status",
       "makeAnAppointment": "Make an appointment",
       "addAppointment": "Add an appointment",
-      "userWithoutAccount": "User without account",
+      "userWithoutAccount": "User without an account",
       "save": "Save",
       "cancel": "Cancel"
     },
@@ -229,23 +224,23 @@
         "maxPrice": "Top price",
         "createdAt": "Created at",
         "edit": "Edit",
-        "modifyService": "Modyfing of service",
-        "changeServiceData": "Change service data",
-        "changeServiceDataInfo": "Here you can change all service data",
+        "modifyService": "Change service details",
+        "changeServiceData": "Change service details",
+        "changeServiceDataInfo": "Here you can change all service details",
         "serviceName": "Service name",
         "avgTimeLabel": "Average duration time [min]",
-        "minPriceLabel": "Lowest price [zł]",
-        "maxPriceLabel": "Top price [zl]",
+        "minPriceLabel": "Lowest price [PLN]",
+        "maxPriceLabel": "Top price [PLN]",
         "save": "Save",
         "cancel": "Cancel",
         "delete": "Delete",
         "deleteReassurance": "Are you sure you want to delete that service",
-        "deleteWarning": "Service will be deleted",
-        "deleteInfo": "Appointments with that service won't be canceled"
+        "deleteWarning": "The service will be deleted",
+        "deleteInfo": "Appointments associated with that service won't be canceled"
       }
     },
     "usersManagement": {
-      "search": "Search for users",
+      "search": "Search users",
       "accessLevel": "Access level",
       "verified": "Verified",
       "blocked": "Blocked"
@@ -266,40 +261,40 @@
       "yourAppointments": "Your appointments",
       "date": "Date",
       "price": "Price",
-      "noAppointments": "Looks like you have no appointments, click the button above book one"
+      "noAppointments": "Looks like you have no appointments, click the button above to book one"
     },
     "makeAnAppointment": {
       "monthForward": "Up to one month in advance",
-      "adminCancel": "Appointment can only be canceled by administrator",
-      "noSlots": "No slots",
+      "adminCancel": "Appointments can only be canceled by an administrator",
+      "noSlots": "No slots available",
       "makeAnAppointment": "Make an appointment",
       "cancel": "Cancel"
     }
   },
   "snackBars": {
-    "logOut": "Log out successful",
+    "logOut": "Logged out successfuly",
     "appointmentDateChange": "Appointment date changed",
     "appointmentCancel": "Appointment canceled",
     "appointmentDateChangeError": "Appointment's date can't be changed,",
     "appointmentCancelError": "Appointment can't be canceled,",
-    "login": "Login successful",
-    "loginError": "Login unsuccessful,",
-    "passwordReset": "E-mail with password reset manual has been sent",
-    "passwordResetError": "Can't reset password,",
+    "login": "Logged in successfuly",
+    "loginError": "Failed to log in",
+    "passwordReset": "An e-mail containing password reset instructions has been sent",
+    "passwordResetError": "Failed to reset the password",
     "logOutAllDevices": "Logged out of all devices successfuly",
-    "logOutAllDevicesError": "Log out unsuccessful,",
+    "logOutAllDevicesError": "Failed to log out",
     "passwordChange": "Password changed",
-    "passwordChangeError": "Password can't be changed,",
+    "passwordChangeError": "Failed to change password",
     "themeChange": "Theme changed",
-    "themeChangeError": "Theme can't be changed",
+    "themeChangeError": "Failed to change theme",
     "emailSent": "Verification E-mail has been sent",
-    "emailSentError": "Couldn't send E-mail,",
+    "emailSentError": "Failed to send verification email",
     "dataChanged": "Data changed",
-    "dataChangedError": "Data can't be changed,",
+    "dataChangedError": "Failed to change data",
     "passwordRequired": "Password required",
     "accountCreated": "Account created",
-    "accountCreatedError": "Couldn't create account,",
+    "accountCreatedError": "Failed to create account",
     "appointmentMade": "Appointment created",
-    "appointmentsMadeError": "Couldn't make an appointment,"
+    "appointmentsMadeError": "Failed to make appointment"
   }
 }

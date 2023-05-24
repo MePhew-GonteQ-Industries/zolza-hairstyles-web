@@ -38,7 +38,7 @@
     "description": "Profesjonalny salon fryzjerski. Golenie brzytwą, stryżenie włosów, fryzury ślubne oraz okolicznosciowe. Zapraszamy do zapoznania się znaszą ofertą, oraz prezentacją wykonanych przez nas fryzur."
   },
   "home": {
-    "appHeading": "Jedna aplikacja wiele możliwości",
+    "appHeading": "Jedna aplikacja, wiele możliwości",
     "appDescription": "W aplikacji mobilnej na telefon możesz przeglądać wolne terminy, umawiać się na wizytę oraz kontrolować wszystkie swoje wizyty w naszym salonie.",
     "appDescriptionSecondary": "Aplikacja dostępna jest na urządzeniach z systemem Android oraz IOS.",
     "serviceTile": {
@@ -112,7 +112,7 @@
       "currentSession": "Twoja obecna sesja",
       "logOutReassurance": "Czy napewno chcesz wylogować się z tego urządzenia?",
       "lastAccess": "Ostatni dostęp:",
-      "ip": "Adres ip:",
+      "ip": "Adres IP:",
       "location": "Lokalizacja",
       "showOnMap": "Pokaż na mapie",
       "noData": "Brak danych",
@@ -145,10 +145,10 @@
     },
     "checkbox": {
       "label": "Akceptuję ",
-      "termsOfServices": "regulamin serwisu",
+      "termsOfServices": "Regulamin Serwisu",
       "separator": " i ",
-      "privacyPolicy": "politykę prywatności.",
-      "messageUnchecked": "Należy zaakceptować warunki korzystania z serwisu i politykę prywatności."
+      "privacyPolicy": "Politykę Prywatności.",
+      "messageUnchecked": "Należy zaakceptować Warunki Korzystania z Serwisu oraz Politykę Prywatności."
     },
     "logInBtn": "Utwórz konto"
   },
