@@ -3,8 +3,10 @@
     <div class="info-section">
       <ul>
         <li>
-          <span class="copyright-note"><i class="ph-copyright-light"></i> 2022 Zołza
-            Hairstyles</span>
+          <span class="copyright-note"
+            ><i class="ph-copyright-light"></i> {{ new Date().getFullYear() }} Zołza
+            Hairstyles</span
+          >
         </li>
       </ul>
     </div>
@@ -28,14 +30,20 @@
     <div class="contact">
       <ul>
         <li>
-          <a href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161" target="_blank"
-            aria-label="facebook">
+          <a
+            href="https://www.facebook.com/Zo%C5%82za-Hairstyles-110103241392161"
+            target="_blank"
+            aria-label="facebook"
+          >
             <i class="ph-facebook-logo-light"></i>
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/zolza_hairstyles/" target="_blank"
-            aria-label="Instagram">
+          <a
+            href="https://www.instagram.com/zolza_hairstyles/"
+            target="_blank"
+            aria-label="Instagram"
+          >
             <i class="ph-instagram-logo-light"></i>
           </a>
         </li>
@@ -60,8 +68,11 @@
             <h1>Aplikacja mobilna</h1>
             <GitHubCard username="biQte" />
           </CustomModal>
-          <i class="ph-file-code-light code-icon" @click="toggleDevsModal"
-            @keydown.enter="toggleDevsModal"></i>
+          <i
+            class="ph-file-code-light code-icon"
+            @click="toggleDevsModal"
+            @keydown.enter="toggleDevsModal"
+          ></i>
         </li>
       </ul>
     </div>
