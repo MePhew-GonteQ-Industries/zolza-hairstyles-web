@@ -2,14 +2,25 @@
   <teleport to="body">
     <Transition v-if="modalOpen" appear>
       <FocusTrap :active="true" :escapeDeactivates="false" :initial-focus="$refs.modal">
-        <div ref="modal" class="modal" :class="{ open: modalOpen, closing: closing }" @click.self="handleModalClick"
-          @keyup.esc="handleModalClose" tabindex="0">
+        <div
+          ref="modal"
+          class="modal"
+          :class="{ open: modalOpen, closing: closing }"
+          @click.self="handleModalClick"
+          @keyup.esc="handleModalClose"
+          tabindex="0"
+        >
           <div ref="modalContent" class="modal-content" :class="{ shake: shake }">
             <div class="header">
               <div class="title">
                 <slot name="title" />
               </div>
-              <i class="ph-x-light close-icon" v-if="!persistent" @click="closeModal" @keyup.enter="closeModal"></i>
+              <i
+                class="ph-x-light close-icon"
+                v-if="!persistent"
+                @click="closeModal"
+                @keyup.enter="closeModal"
+              ></i>
             </div>
             <div class="body">
               <slot />
@@ -140,7 +151,6 @@ export default {
   }
 
   @keyframes shake {
-
     10%,
     90% {
       transform: translate3d(-1px, 0, 0);
@@ -173,7 +183,6 @@ export default {
     grid-template-rows: 50px auto;
     z-index: 1000;
     max-height: 80%;
-    max-width: 50%;
     overflow: auto;
 
     @media only screen and (max-width: $xs) {
