@@ -191,8 +191,6 @@ import CustomTooltip from "@/components/CustomTooltip.vue";
 import { computed, onMounted, ref } from "vue";
 import SortedHeader from "@/components/SortedHeader.vue";
 import CustomButton from "@/components/CustomButton.vue";
-import "v-calendar/dist/style.css";
-// import { DatePicker } from 'v-calendar';
 import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
 import CustomCheckbox from "@/components/CustomCheckbox.vue";
