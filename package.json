@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@intlify/unplugin-vue-i18n": "^0.7.0",
-    "@popperjs/core": "^2.11.7",
+    "@popperjs/core": "^2.11.8",
     "@vueuse/components": "^9.3.0",
     "@vueuse/core": "^9.3.0",
     "@vueuse/integrations": "^9.3.0",
