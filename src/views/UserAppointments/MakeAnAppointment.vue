@@ -151,7 +151,11 @@ export default {
     });
 
     const selectAppointmentHour = (availableSlot) => {
+      // if(selectedDate.value.toLocaleDateString('pl-PL', {weekday: 'long'}) !== 'Sobota'){ // Can't check it right now because all saturdays are reserved
       selectedSlotId.value = availableSlot.id;
+      // } else {
+      // Handle saturday meesage
+      // }
     };
 
     const chooseService = (service) => {
