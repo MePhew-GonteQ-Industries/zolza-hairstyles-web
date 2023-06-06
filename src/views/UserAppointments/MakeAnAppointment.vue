@@ -1,24 +1,16 @@
 <template>
   <div class="make-an-appointment-page">
     <div class="services-tiles" v-if="!loading">
-      <div
-        class="service-tile"
-        v-for="service in servicesData"
-        :key="service.id"
-        @click="chooseService(service)"
-      >
+      <div class="service-tile" v-for="service in servicesData" :key="service.id" @click="chooseService(service)">
         <h3>{{ service.name }}</h3>
         <p>
           {{ t("home.serviceTile.time") }} <span>~ {{ service.average_time_minutes }}min</span>
         </p>
         <p>
           {{ t("home.serviceTile.price") }}
-          <span
-            >{{ service.min_price
-            }}<span v-if="service.max_price && service.max_price !== service.min_price">
-              ~ {{ service.max_price }}</span
-            >zł</span
-          >
+          <span>{{ service.min_price
+          }}<span v-if="service.max_price && service.max_price !== service.min_price">
+              ~ {{ service.max_price }}</span>zł</span>
         </p>
       </div>
       <CustomModal v-model:open="openMakeAnAppointmentModal">
@@ -33,25 +25,14 @@
             </template>
           </MessageBox>
           <div class="select-date-wrapper">
-            <DatePicker
-              :is-dark="$store.state.settings.theme === 'dark'"
-              is-required
-              color="green"
-              mode="date"
-              v-model="selectedDate"
-              :min-date="new Date()"
-              :max-date="maxDate"
-            />
+            <DatePicker :is-dark="$store.state.settings.theme === 'dark'" is-required color="green" mode="date"
+              v-model="selectedDate" :min-date="new Date()" :max-date="maxDate" />
             <div class="hours">
               <CustomLoader v-if="loadingSlots" class="loader"></CustomLoader>
-              <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
-                <div
-                  class="single-hour"
-                  v-for="availableSlot in validatedSlots"
-                  :key="availableSlot.id"
+              <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots && validatedSlots !== 'Niedziela'">
+                <div class="single-hour" v-for="availableSlot in validatedSlots" :key="availableSlot.id"
                   @click="selectAppointmentHour(availableSlot)"
-                  :class="{ selected: availableSlot.id === selectedSlotId }"
-                >
+                  :class="{ selected: availableSlot.id === selectedSlotId }">
                   {{
                     new Date(availableSlot.start_time).toLocaleTimeString(locale, {
                       hour: "2-digit",
@@ -60,8 +41,14 @@
                   }}
                 </div>
               </div>
-              <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots">
+              <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots && !validatedSlots.holiday">
                 {{ t("userAppointmentsView.makeAnAppointment.noSlots") }}
+              </div>
+              <div class="no-slots" v-if="validatedSlots === 'Niedziela' && !loadingSlots">
+                Niedziela
+              </div>
+              <div class="no-slots" v-if="validatedSlots.holiday && !loadingSlots">
+                {{ validatedSlots.holidayName }}
               </div>
             </div>
           </div>
@@ -70,8 +57,7 @@
               t("userAppointmentsView.makeAnAppointment.makeAnAppointment")
             }}</CustomButton>
             <CustomButton type="secondary" @click="closeMakeAnAppointmentModal">
-              {{ t("userAppointmentsView.makeAnAppointment.cancel") }}</CustomButton
-            >
+              {{ t("userAppointmentsView.makeAnAppointment.cancel") }}</CustomButton>
           </div>
         </div>
       </CustomModal>
@@ -149,6 +135,15 @@ export default {
           }
           if (currentSlotFits === requiredSlots) {
             slots.push(slot);
+          }
+        }
+        if (slot.sunday) {
+          return 'Niedziela';
+        }
+        if (slot.holiday) {
+          return {
+            'holiday': slot.holiday,
+            'holidayName': slot.holiday_name
           }
         }
       }
