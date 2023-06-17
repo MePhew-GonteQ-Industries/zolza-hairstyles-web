@@ -32,16 +32,16 @@
     - [x] Active sessions management
       - [x] Log out of every session seperately
       - [x] Log out everywhere
-      - [x] Show last location on a map based on IP address location data
+      - [x] Show location on a map based on IP address
     - [ ] Two Factor Authentication
   - [ ] Notification settings
     - [ ] Appointment reminders
     - [ ] New functionality added
   - [ ]  Themes
-    - [x]   Dark theme
-    ![Alt text](/screenshots/dark-theme.png "Dark theme preview")
-    - [ ]   Light theme
-    ![Alt text](/screenshots/light-theme.png "Light theme preview")
+    - [x] Dark theme
+      ![Alt text](/screenshots/dark-theme.png "Dark theme preview")
+    - [ ] Light theme
+      ![Alt text](/screenshots/light-theme.png "Light theme preview")
   - [x] Internalization
     - [x] Translations
       - [x] Polish
