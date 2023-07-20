@@ -121,66 +121,9 @@
               </th>
             </thead>
             <tbody>
-              <tr v-for="slot in reservedSlotsFiltered" :key="slot.id">
-                <td class="id" @click="unreserveSlot(slot)">
-                  <CustomTooltip>
-                    <template #activator> {{ slot.id.slice(0, 5) }}... </template>
-                    {{ slot.id }}
-                  </CustomTooltip>
-                  <CustomModal v-model:open="unreserveModalOpen">
-                    <template #title> Cofnięcie rezerwacji slotu </template>
-                    <div class="unreserve-slot-modal-wrapper">
-                      <div class="slot-info">
-                        <p>Id: {{ unreservingSlot.id }}</p>
-                        <p>
-                          Od:
-                          {{
-                            new Date(unreservingSlot.start_time).toLocaleTimeString(locale, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })
-                          }}
-                        </p>
-                        <p>
-                          Do:
-                          {{
-                            new Date(unreservingSlot.end_time).toLocaleTimeString(locale, {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })
-                          }}
-                        </p>
-                        <p>Dnia: {{ new Date(unreservingSlot.date).toLocaleDateString(locale) }}</p>
-                      </div>
-                      <div class="buttons-wrapper">
-                        <CustomButton type="info" @click="cancelReservation(slot)"
-                          >Cofnij rezerwacje</CustomButton
-                        >
-                        <CustomButton type="secondary" @click="closeUnreserveSlotModal"
-                          >Zamknij</CustomButton
-                        >
-                      </div>
-                    </div>
-                  </CustomModal>
-                </td>
-                <td>
-                  {{
-                    new Date(slot.start_time).toLocaleTimeString(locale, {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  }}
-                </td>
-                <td>
-                  {{
-                    new Date(slot.end_time).toLocaleTimeString(locale, {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  }}
-                </td>
-                <td>{{ new Date(slot.date).toLocaleDateString(locale) }}</td>
-              </tr>
+              <template v-for="slot in reservedSlotsFiltered" :key="slot.id">
+                <UnreserveSlotItem :appointmentSlot="slot" @slotUnreserved="loadReservedSlots" />
+              </template>
             </tbody>
           </table>
         </div>
@@ -206,7 +149,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import { useRouter } from "vue-router";
 import MessageBox from "@/components/MessageBox.vue";
 import SortedHeader from "@/components/SortedHeader.vue";
-import CustomTooltip from "@/components/CustomTooltip.vue";
+import UnreserveSlotItem from "@/components/UnreserveSlotItem.vue";
 
 export default {
   name: "WorkHoursManagement",
@@ -219,7 +162,7 @@ export default {
     CustomButton,
     MessageBox,
     SortedHeader,
-    CustomTooltip,
+    UnreserveSlotItem,
   },
   setup() {
     const store = useStore();
@@ -236,8 +179,6 @@ export default {
     const router = useRouter();
     const selectedSlots = ref([]);
     const reservedSlots = ref([]);
-    const unreserveModalOpen = ref(false);
-    const unreservingSlot = ref([]);
 
     const validatedSlots = computed(() => {
       const slots = [];
@@ -309,28 +250,6 @@ export default {
       }
     };
 
-    const unreserveSlot = (slot) => {
-      unreservingSlot.value = slot;
-      unreserveModalOpen.value = true;
-    };
-
-    const cancelReservation = async (slot) => {
-      try {
-        await axios.post("appointments/unreserve_slots", {
-          slots: [slot.id],
-        });
-        unreserveModalOpen.value = false;
-        loadReservedSlots();
-        message.success("Pomyślnie anulowano rezerwacje");
-        router.push({ name: "workHoursManagement" });
-      } catch (error) {
-        message.error(`Nie udało się anulować rezerwacji - ${createRequestErrorMessage(error)}`);
-      }
-    };
-    const closeUnreserveSlotModal = () => {
-      unreserveModalOpen.value = false;
-    };
-
     watch(selectedDateFormatted, async (newDate) => {
       loading.value = true;
       await loadAvailableTimeSlots(newDate);
@@ -394,17 +313,12 @@ export default {
       reservedSlots,
       loadingSlots,
       reservedSlotsFiltered,
-      unreserveModalOpen,
-      cancelReservation,
-      closeUnreserveSlotModal,
-      unreserveSlot,
-      unreservingSlot,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .work-hours-page {
   display: flex;
   width: 75vw;
@@ -595,16 +509,6 @@ export default {
         padding: 2px 10px;
       }
     }
-  }
-}
-
-.unreserve-slot-modal-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  .slot-info {
-    padding: 1rem;
   }
 }
 
