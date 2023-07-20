@@ -31,7 +31,6 @@ const cancelReservation = async () => {
     unreserveSlotModalOpen.value = false;
     emit("slotUnreserved");
     message.success("Pomyślnie anulowano rezerwacje");
-    // router.push({ name: "workHoursManagement" });
   } catch (error) {
     message.error(`Nie udało się anulować rezerwacji - ${createRequestErrorMessage(error)}`);
   }
