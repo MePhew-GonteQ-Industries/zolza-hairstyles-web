@@ -89,9 +89,10 @@
     </ul>
     <div class="user-prof" v-else>
       <ul>
-        <li>
+        <!-- TODO: ZH-18 Finish implementing notifications -->
+        <!-- <li>
           <NotificationsPanel />
-        </li>
+        </li> -->
         <li>
           <UserProfilePanel />
         </li>
@@ -102,13 +103,15 @@
 
 <script>
 import { useI18n } from "vue-i18n";
-import NotificationsPanel from "@/components/Navbar/NotificationsPanel.vue";
+    // TODO: ZH-18 Finish implementing notifications
+// import NotificationsPanel from "@/components/Navbar/NotificationsPanel.vue";
 import UserProfilePanel from "@/components/Navbar/UserProfilePanel.vue";
 
 export default {
   name: "desktopNavigation",
   components: {
-    NotificationsPanel,
+    // TODO: ZH-18 Finish implementing notifications
+    // NotificationsPanel,
     UserProfilePanel,
   },
   setup() {
