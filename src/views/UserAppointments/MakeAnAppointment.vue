@@ -268,6 +268,14 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.vc-header button {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+</style>
+
 <style lang="scss" scoped>
 .make-an-appointment-page {
   display: flex;
