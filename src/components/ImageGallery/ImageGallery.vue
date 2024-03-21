@@ -29,7 +29,6 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-/* eslint-disable */
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
@@ -48,7 +47,7 @@ export default {
       required: true,
     },
   },
-  setup(props) {
+  setup() {
     return {
       modules: [Autoplay, Pagination, Navigation],
     };
