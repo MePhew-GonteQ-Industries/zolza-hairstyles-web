@@ -27,7 +27,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 /* eslint-disable */
 import 'swiper/scss';
