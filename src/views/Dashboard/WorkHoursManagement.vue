@@ -319,6 +319,12 @@ export default {
 </script>
 
 <style lang="scss">
+.vc-header button {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
 .work-hours-page {
   display: flex;
   width: 75vw;

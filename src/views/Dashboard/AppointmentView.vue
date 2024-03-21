@@ -376,6 +376,14 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.vc-header button {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+</style>
+
 <style lang="scss" scoped>
 .cancel-appointment-wrapper {
   display: flex;
