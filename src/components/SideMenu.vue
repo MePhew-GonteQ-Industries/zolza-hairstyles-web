@@ -1,5 +1,5 @@
 <template>
-  <nav class="menu" ref="menu">
+  <nav class="menu">
     <router-link v-for="link in links" :key="link.id" :to="{ name: link.toName }">
       <span><i :class="link.iconClass"></i>{{ link.text }}</span>
       <div class="edge top"></div>
@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
 export default {
   name: "SideMenu",
   props: {
@@ -19,13 +17,6 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  setup() {
-    const menu = ref(null);
-
-    return {
-      menu,
-    };
   },
 };
 </script>
@@ -44,67 +35,6 @@ export default {
 
   & a.router-link-exact-active ~ .active-tab-indicator {
     opacity: 1;
-  }
-
-  a:nth-child(1).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 0);
-  }
-  a:nth-child(2).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 1);
-  }
-  a:nth-child(3).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 2);
-  }
-  a:nth-child(4).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 3);
-  }
-  a:nth-child(5).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 4);
-  }
-  a:nth-child(6).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 5);
-  }
-  a:nth-child(7).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 6);
-  }
-  a:nth-child(8).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 7);
-  }
-  a:nth-child(9).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 8);
-  }
-  a:nth-child(10).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 9);
-  }
-  a:nth-child(11).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 10);
-  }
-  a:nth-child(12).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 11);
-  }
-  a:nth-child(13).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 12);
-  }
-  a:nth-child(14).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 13);
-  }
-  a:nth-child(15).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 14);
-  }
-  a:nth-child(16).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 15);
-  }
-  a:nth-child(17).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 16);
-  }
-  a:nth-child(18).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 17);
-  }
-  a:nth-child(19).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 18);
-  }
-  a:nth-child(20).router-link-exact-active ~ .active-tab-indicator {
-    --offset: calc(88px * 19);
   }
 
   .active-tab-indicator {
