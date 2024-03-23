@@ -14,11 +14,9 @@ export default {
     },
   },
   actions: {
-    async loadAppointments({ state, commit }) {
-      if (!state.appointments.length) {
-        const response = await axios.get("appointments/all");
-        commit("updateAppointments", response.data.items);
-      }
+    async loadAppointments({ commit }, includeArchival) {
+      const response = await axios.get(`appointments/all?include_archival=${includeArchival}`);
+      commit("updateAppointments", response.data.items);
     },
     deleteAppointments({ commit }) {
       commit("updateAppointments", []);

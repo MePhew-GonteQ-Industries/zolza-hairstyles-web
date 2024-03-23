@@ -1,19 +1,15 @@
 <template>
-  <section
-    class="dashboard-page dashboard-data-page appointments-management"
-    v-if="!loading"
-  >
-    <!-- <form class="appointments-filters">
-      <CustomInput
+  <section class="dashboard-page dashboard-data-page appointments-management">
+    <form class="dashboard-filters-wrapper appointments-filters-wrapper">
+      <!-- <CustomInput
         class="search"
         :label="t('dashboard.appointmentsManagement.search')"
         v-model:value="q"
         type="search"
         appearance="secondary"
-      />
+      /> -->
 
-      <div class="search-filters">
-        <DatePicker
+      <!-- <DatePicker
           :is-dark="$store.state.settings.theme === 'dark'"
           is-required
           is-range
@@ -32,9 +28,12 @@
         <CustomSelect
           class="select"
           appearance="secondary"
-        />
-      </div>
-    </form> -->
+        /> -->
+
+      <CustomCheckbox v-model:checked="showArchivalAppointments">
+        Pokaż archiwalne wizyty
+      </CustomCheckbox>
+    </form>
 
     <!-- <CustomButton @click="addAppointmentModalOpen = true"
       >{{ t("dashboard.appointmentsManagement.makeAnAppointment") }}
@@ -98,7 +97,10 @@
       </div>
     </CustomModal> -->
 
-    <div class="dashboard-data-table-wrapper">
+    <div
+      class="dashboard-data-table-wrapper"
+      v-if="!loading"
+    >
       <table>
         <colgroup>
           <col />
@@ -207,15 +209,15 @@
         </tbody>
       </table>
     </div>
+    <div
+      v-else
+      class="loader-wrapper"
+    >
+      <CustomLoader />
+    </div>
 
-    <NPagination />
+    <!-- <NPagination /> -->
   </section>
-  <div
-    class="dashboard-page"
-    v-else
-  >
-    <CustomLoader></CustomLoader>
-  </div>
 </template>
 
 <script>
@@ -224,15 +226,14 @@ import { useStore } from "vuex";
 // import CustomInput from "@/components/CustomInput.vue";
 // import CustomSelect from "@/components/CustomSelect.vue";
 import CustomTooltip from "@/components/CustomTooltip.vue";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import SortedHeader from "@/components/SortedHeader.vue";
 // import CustomButton from "@/components/CustomButton.vue";
 // import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
-// import CustomCheckbox from "@/components/CustomCheckbox.vue";
-import axios from "axios";
+import CustomCheckbox from "@/components/CustomCheckbox.vue";
 import { v4 as uuidv4 } from "uuid";
-import { NPagination } from "naive-ui";
+// import { NPagination } from "naive-ui";
 import { useMessage } from "naive-ui";
 import { createRequestErrorMessage } from "@/utils";
 import { AxiosError } from "axios";
@@ -248,8 +249,8 @@ export default {
     // DatePicker,
     // CustomModal,
     CustomLoader,
-    // CustomCheckbox,
-    NPagination,
+    CustomCheckbox,
+    // NPagination,
   },
   setup() {
     const message = useMessage();
@@ -268,8 +269,6 @@ export default {
 
     const sortBy = ref("startDate");
     const sortAscending = ref(false);
-
-    const servicesOptions = ref(null);
 
     const userWithoutAccountChecked = () => {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -331,11 +330,11 @@ export default {
       return appointmentsTemp;
     });
 
-    onMounted(async () => {
-      const response = await axios.get("services");
-      servicesOptions.value = response.data;
+    const loadAppointments = async (includeArchival) => {
+      loading.value = true;
+
       try {
-        await store.dispatch("loadAppointments");
+        await store.dispatch("loadAppointments", includeArchival);
       } catch (error) {
         loading.value = false;
         if (error instanceof AxiosError) {
@@ -344,15 +343,23 @@ export default {
           throw error;
         }
       }
+
       loading.value = false;
+    };
+
+    const showArchivalAppointments = ref(false);
+
+    watch(showArchivalAppointments, async (newValue) => {
+      await loadAppointments(newValue);
     });
 
-    const selectedDate = ref(new Date());
+    onMounted(async () => {
+      await loadAppointments(showArchivalAppointments.value);
+    });
 
     return {
       appointments,
       q,
-      selectedDate,
       sortBy,
       sortAscending,
       toggleSort,
@@ -360,131 +367,91 @@ export default {
       loading,
       addAppointmentModalOpen,
       userWithoutAccount,
-      servicesOptions,
       tileId,
       userWithoutAccountChecked,
+      showArchivalAppointments,
     };
   },
 };
 </script>
 
 <style lang="scss">
-.appointments-filters {
-  display: grid;
-  grid-template-rows: 50px 50px;
-  gap: 1rem;
-  justify-items: center;
-  width: 70%;
+// .pagination {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   gap: 1rem;
 
-  @media only screen and (max-width: $sm) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+//   i {
+//     font-size: 1.5rem;
+//   }
 
-  .search,
-  .select {
-    height: 50px;
-  }
+//   .pagination-number,
+//   i {
+//     padding: 0.5rem;
+//     border-radius: 50%;
+//     height: 50px;
+//     width: 50px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     background-color: $background-accent-low;
+//     box-shadow: 0 0 8px -2px $box-shadow-color;
 
-  .select {
-    .select {
-      background-color: $secondary-color;
-      box-shadow: 0 0 8px -2px $box-shadow-color;
-    }
-  }
+//     &:not(.current) {
+//       cursor: pointer;
+//     }
 
-  .select {
-    width: 200px;
-  }
+//     &:hover {
+//       background-color: $secondary-color;
+//     }
 
-  .search-filters {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+//     &.current {
+//       background-color: $secondary-color;
+//       color: $accent-color;
+//       cursor: default;
+//     }
+//   }
+// }
 
-    @media only screen and (max-width: $sm) {
-      flex-direction: column;
-    }
-  }
-}
+// .add-appointment-wrapper {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 1rem;
 
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+//   .modal-content-wrapper {
+//     display: flex;
+//     gap: 1rem;
 
-  i {
-    font-size: 1.5rem;
-  }
+//     .input-wrapper {
+//       display: flex;
+//       flex-direction: column;
+//       gap: 1rem;
+//     }
 
-  .pagination-number,
-  i {
-    padding: 0.5rem;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $background-accent-low;
-    box-shadow: 0 0 8px -2px $box-shadow-color;
+//     .services-wrapper {
+//       display: flex;
+//       flex-wrap: wrap;
+//       gap: 1rem;
 
-    &:not(.current) {
-      cursor: pointer;
-    }
+//       .service {
+//         width: 40%;
+//         height: 45px;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         gap: 1rem;
 
-    &:hover {
-      background-color: $secondary-color;
-    }
+//         .select-service:focus {
+//           outline: orange;
+//         }
+//       }
+//     }
+//   }
 
-    &.current {
-      background-color: $secondary-color;
-      color: $accent-color;
-      cursor: default;
-    }
-  }
-}
-
-.add-appointment-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  .modal-content-wrapper {
-    display: flex;
-    gap: 1rem;
-
-    .input-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .services-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-
-      .service {
-        width: 40%;
-        height: 45px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-
-        .select-service:focus {
-          outline: orange;
-        }
-      }
-    }
-  }
-
-  .buttons-wrapper {
-    display: flex;
-    gap: 1rem;
-  }
-}
+//   .buttons-wrapper {
+//     display: flex;
+//     gap: 1rem;
+//   }
+// }
 </style>
