@@ -96,7 +96,14 @@
             :key="service.id"
           >
             <td class="id">
-              <router-link :to="`services/${service.id}`"> #{{ service.shortId }}...</router-link>
+              <CustomTooltip>
+                <template #activator>
+                  <router-link :to="`services/${service.id}`">
+                    #{{ service.shortId }}...</router-link
+                  >
+                </template>
+                {{ service.id }}
+              </CustomTooltip>
             </td>
             <td class="name">
               <router-link :to="`services/${service.id}`">{{ service.name }}</router-link>
@@ -141,6 +148,7 @@ import { useStore } from "vuex";
 // import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
 import SortedHeader from "@/components/SortedHeader.vue";
+import CustomTooltip from "@/components/CustomTooltip.vue";
 import { useMessage } from "naive-ui";
 import { createRequestErrorMessage } from "@/utils";
 import { AxiosError } from "axios";
@@ -153,6 +161,7 @@ export default {
     // CustomModal,
     CustomLoader,
     SortedHeader,
+    CustomTooltip,
   },
   setup() {
     const message = useMessage();
