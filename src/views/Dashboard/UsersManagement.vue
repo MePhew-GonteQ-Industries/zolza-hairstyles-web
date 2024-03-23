@@ -175,8 +175,6 @@ export default {
 
         userTemp.shortId = user.id.substr(0, 4);
 
-        console.log(user.gender);
-
         if (user.gender === "female" || user.gender === "Żeńska") {
           userTemp.gender_icon_class = "ph-gender-female";
           userTemp.gender = "Żeńska";
