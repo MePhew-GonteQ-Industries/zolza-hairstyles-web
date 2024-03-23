@@ -1,6 +1,7 @@
 <template>
   <section class="dashboard-page dashboard-data-page services-management" v-if="!loading">
-    <form class="appointments-filters">
+    <!-- TODO: Filtering services -->
+    <!-- <form class="appointments-filters">
       <CustomInput
         class="search"
         :label="t('dashboard.servicesManagement.search')"
@@ -9,6 +10,7 @@
       />
     </form>
 
+    TODO: Adding new services
     <CustomButton @click="addServiceModalOpen = true">Dodaj usługę</CustomButton>
     <CustomModal v-model:open="addServiceModalOpen">
       <template #title>Dodaj nową usługę</template>
@@ -25,7 +27,7 @@
           <CustomButton type="secondary" @click="addServiceModalOpen = false">Anuluj</CustomButton>
         </div>
       </div>
-    </CustomModal>
+    </CustomModal> -->
 
     <div class="dashboard-data-table-wrapper">
       <table>
@@ -125,9 +127,9 @@
 import { useI18n } from "vue-i18n";
 import { onMounted, computed, ref } from "vue";
 import { useStore } from "vuex";
-import CustomInput from "@/components/CustomInput.vue";
-import CustomButton from "@/components/CustomButton.vue";
-import CustomModal from "@/components/CustomModal.vue";
+// import CustomInput from "@/components/CustomInput.vue";
+// import CustomButton from "@/components/CustomButton.vue";
+// import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
 import { useMessage } from "naive-ui";
 import { createRequestErrorMessage } from "@/utils";
@@ -136,9 +138,9 @@ import { AxiosError } from "axios";
 export default {
   name: "ServicesManagement",
   components: {
-    CustomInput,
-    CustomButton,
-    CustomModal,
+    // CustomInput,
+    // CustomButton,
+    // CustomModal,
     CustomLoader,
   },
   setup() {
