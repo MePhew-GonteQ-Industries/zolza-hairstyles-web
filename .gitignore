@@ -27,3 +27,4 @@ pnpm-debug.log*
 
 # hidden files
 .*
+!.prettierrc.json
