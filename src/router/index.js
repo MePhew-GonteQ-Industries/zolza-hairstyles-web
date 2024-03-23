@@ -38,35 +38,35 @@ const routes = [
   {
     path: "/appointments",
     name: "userAppointments",
-    component:  () => import("@/views/UserAppointments/UserAppointmentsView.vue"),
+    component: () => import("@/views/UserAppointments/UserAppointmentsView.vue"),
     children: [
       {
         path: "",
         name: "appointmentsList",
-        components:  {
+        components: {
           appointments: () => import("@/views/UserAppointments/AppointmentsList.vue"),
         },
         meta: {
           requiresAuth: true,
           requiredPermissionLevel: "user",
-        }
+        },
       },
       {
         path: "/make-an-appointment",
         name: "makeAnAppointment",
-        components:  {
+        components: {
           appointments: () => import("@/views/UserAppointments/MakeAnAppointment.vue"),
         },
         meta: {
           requiresAuth: true,
           requiredPermissionLevel: "user",
-        }
+        },
       },
     ],
     meta: {
       requiresAuth: true,
       requiredPermissionLevel: "user",
-    }
+    },
   },
   {
     path: "/contact",
@@ -207,7 +207,7 @@ const routes = [
         path: "",
         // component: () => import("@/views/Dashboard/SummaryView.vue"),
         // name: "summaryView",
-        redirect: 'dashboard/appointments',
+        redirect: "dashboard/appointments",
         name: "dashboard",
       },
       {
@@ -273,7 +273,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  store.commit('setNavigationStatus', 'inProgress');
+  store.commit("setNavigationStatus", "inProgress");
   await store.dispatch("loadAuthData");
   if (store.getters.isLoggedIn) {
     if (to.name === "login" || to.name === "sign-up") return "/";
@@ -309,9 +309,9 @@ router.beforeEach(async (to) => {
 
 router.afterEach((_to, _from, failure) => {
   if (failure) {
-    store.commit('setNavigationStatus', 'failure');
+    store.commit("setNavigationStatus", "failure");
   } else {
-    store.commit('setNavigationStatus', 'success');
+    store.commit("setNavigationStatus", "success");
   }
 });
 
