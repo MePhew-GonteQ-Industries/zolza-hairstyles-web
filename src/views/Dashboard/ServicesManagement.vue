@@ -131,6 +131,7 @@ import { useStore } from "vuex";
 // import CustomButton from "@/components/CustomButton.vue";
 // import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
+import SortedHeader from "@/components/SortedHeader.vue";
 import { useMessage } from "naive-ui";
 import { createRequestErrorMessage } from "@/utils";
 import { AxiosError } from "axios";
@@ -142,6 +143,7 @@ export default {
     // CustomButton,
     // CustomModal,
     CustomLoader,
+    SortedHeader,
   },
   setup() {
     const message = useMessage();
@@ -170,6 +172,9 @@ export default {
       return servicesTemp;
     });
 
+    const sortBy = ref("service");
+    const sortAscending = ref(false);
+
     onMounted(async () => {
       try {
         await store.dispatch("loadServices");
@@ -190,6 +195,8 @@ export default {
       addService,
       addServiceModalOpen,
       loading,
+      sortBy,
+      sortAscending
     };
   },
 };
