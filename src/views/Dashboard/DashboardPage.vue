@@ -22,12 +22,12 @@ export default {
     const { t } = useI18n({ useScope: "global" });
 
     const links = [
-      {
-        id: uuidv4(),
-        toName: "summaryView",
-        iconClass: "ph-table-light",
-        text: t("dashboard.sideMenu.summary"),
-      },
+      // {
+      //   id: uuidv4(),
+      //   toName: "summaryView",
+      //   iconClass: "ph-table-light",
+      //   text: t("dashboard.sideMenu.summary"),
+      // },
       {
         id: uuidv4(),
         toName: "appointmentsManagement",
@@ -52,18 +52,18 @@ export default {
         iconClass: "ph-clock-light",
         text: t("dashboard.sideMenu.workHours"),
       },
-      {
-        id: uuidv4(),
-        toName: "statsView",
-        iconClass: "ph-chart-line-light",
-        text: t("dashboard.sideMenu.statistics"),
-      },
-      {
-        id: uuidv4(),
-        toName: "serviceSettings",
-        iconClass: "ph-gear-six-light",
-        text: t("dashboard.sideMenu.settings"),
-      },
+      // {
+      //   id: uuidv4(),
+      //   toName: "statsView",
+      //   iconClass: "ph-chart-line-light",
+      //   text: t("dashboard.sideMenu.statistics"),
+      // },
+      // {
+      //   id: uuidv4(),
+      //   toName: "serviceSettings",
+      //   iconClass: "ph-gear-six-light",
+      //   text: t("dashboard.sideMenu.settings"),
+      // },
     ];
 
     return {

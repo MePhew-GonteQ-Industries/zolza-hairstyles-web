@@ -206,8 +206,9 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("@/views/Dashboard/SummaryView.vue"),
-        name: "summaryView",
+        // component: () => import("@/views/Dashboard/SummaryView.vue"),
+        // name: "summaryView",
+        redirect: 'dashboard/appointments'
       },
       {
         path: "appointments",
