@@ -126,7 +126,6 @@
           </table>
         </div>
       </div>
-      <n-divider vertical></n-divider>
     </div>
   </section>
 </template>
