@@ -278,6 +278,9 @@ export default {
       return slots;
     });
 
+    const sortBy = ref("date");
+    const sortAscending = ref(false);
+
     onMounted(async () => {
       loading.value = true;
       loadingSlots.value = true;
@@ -307,6 +310,8 @@ export default {
       reservedSlots,
       loadingSlots,
       reservedSlotsFiltered,
+      sortBy,
+      sortAscending
     };
   },
 };
