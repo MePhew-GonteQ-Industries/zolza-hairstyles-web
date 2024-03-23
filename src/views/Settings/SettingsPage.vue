@@ -45,12 +45,13 @@ export default {
         iconClass: "ph-lock-open-light",
         text: t("settings.sideMenu.security"),
       },
-      {
-        id: uuidv4(),
-        toName: "notificationsSettings",
-        iconClass: "ph-bell-ringing-light",
-        text: t("settings.sideMenu.notifications"),
-      },
+      // TODO: Implement notifications settings
+      // {
+      //   id: uuidv4(),
+      //   toName: "notificationsSettings",
+      //   iconClass: "ph-bell-ringing-light",
+      //   text: t("settings.sideMenu.notifications"),
+      // },
       {
         id: uuidv4(),
         toName: "themeSettings",
