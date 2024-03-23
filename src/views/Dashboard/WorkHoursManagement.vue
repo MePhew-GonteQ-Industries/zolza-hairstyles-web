@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="dashboard-page"
-    v-if="!loading"
-  >
+  <section class="dashboard-page">
     <div class="work-hours-page">
       <div class="reserving-slots-wrapper">
         <CustomButton @click="openReservingSlotsModal = true">Zarezerwuj sloty</CustomButton>
@@ -109,7 +106,10 @@
             </div>
           </CustomModal>
         </CustomModal>
-        <div class="reserved-slots-list">
+        <div
+          class="reserved-slots-list"
+          v-if="!loading"
+        >
           <table>
             <colgroup>
               <col />
@@ -168,15 +168,15 @@
             </tbody>
           </table>
         </div>
+        <div
+          v-else
+          class="loader-wrapper"
+        >
+          <CustomLoader />
+        </div>
       </div>
     </div>
   </section>
-  <div
-    class="dashboard-page"
-    v-else
-  >
-    <CustomLoader></CustomLoader>
-  </div>
 </template>
 
 <script>

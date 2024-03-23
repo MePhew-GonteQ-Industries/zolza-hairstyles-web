@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="dashboard-page dashboard-data-page users-management"
-    v-if="!loading"
-  >
+  <section class="dashboard-page dashboard-data-page users-management">
     <!-- TODO: Search users -->
     <!-- <form class="appointments-filters">
       <CustomInput
@@ -13,7 +10,10 @@
       />
     </form> -->
 
-    <div class="dashboard-data-table-wrapper">
+    <div
+      class="dashboard-data-table-wrapper"
+      v-if="!loading"
+    >
       <table>
         <colgroup>
           <col />
@@ -144,13 +144,13 @@
         </tbody>
       </table>
     </div>
+    <div
+      v-else
+      class="loader-wrapper"
+    >
+      <CustomLoader />
+    </div>
   </section>
-  <div
-    class="dashboard-page dashboard-data-page users-management"
-    v-else
-  >
-    <CustomLoader></CustomLoader>
-  </div>
 </template>
 
 <script>
@@ -252,6 +252,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// TODO: Remove after implementing: search users
+// ----------------
+.users-management {
+  grid-template-rows: auto;
+}
+// ----------------
+
 td {
   &.bool-column {
     .data-icon-wrapper {

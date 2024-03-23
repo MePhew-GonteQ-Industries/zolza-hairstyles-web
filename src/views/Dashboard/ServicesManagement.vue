@@ -1,38 +1,62 @@
 <template>
-  <section
-    class="dashboard-page dashboard-data-page services-management"
-    v-if="!loading"
-  >
-    <!-- TODO: Filtering services -->
-    <!-- <form class="appointments-filters">
-      <CustomInput
+  <section class="dashboard-page dashboard-data-page services-management">
+    <form class="appointments-filters">
+      <!-- TODO: Filtering services -->
+
+      <!-- <CustomInput
         class="search"
         :label="t('dashboard.servicesManagement.search')"
         v-model:value="q"
         type="search"
-      />
+      /> -->
     </form>
 
-    TODO: Adding new services
+    <!-- TODO: Adding new services
     <CustomButton @click="addServiceModalOpen = true">Dodaj usługę</CustomButton>
     <CustomModal v-model:open="addServiceModalOpen">
       <template #title>Dodaj nową usługę</template>
       <div class="add-service-wrapper">
         <div class="input-wrapper">
-          <CustomInput label="Nazwa usługi" autocomplete="off"></CustomInput>
-          <CustomInput label="Średni czas trwania [min]" type="number" autocomplete="off">
+          <CustomInput
+            label="Nazwa usługi"
+            autocomplete="off"
+          ></CustomInput>
+          <CustomInput
+            label="Średni czas trwania [min]"
+            type="number"
+            autocomplete="off"
+          >
           </CustomInput>
-          <CustomInput label="Cena minimalna [zł]" type="number" autocomplete="off"></CustomInput>
-          <CustomInput label="Cena maksymalna [zł]" type="number" autocomplete="off"></CustomInput>
+          <CustomInput
+            label="Cena minimalna [zł]"
+            type="number"
+            autocomplete="off"
+          ></CustomInput>
+          <CustomInput
+            label="Cena maksymalna [zł]"
+            type="number"
+            autocomplete="off"
+          ></CustomInput>
         </div>
         <div class="buttons-wrapper">
-          <CustomButton type="info" @click="addServiceModalOpen = false">Zapisz</CustomButton>
-          <CustomButton type="secondary" @click="addServiceModalOpen = false">Anuluj</CustomButton>
+          <CustomButton
+            type="info"
+            @click="addServiceModalOpen = false"
+            >Zapisz</CustomButton
+          >
+          <CustomButton
+            type="secondary"
+            @click="addServiceModalOpen = false"
+            >Anuluj</CustomButton
+          >
         </div>
       </div>
     </CustomModal> -->
 
-    <div class="dashboard-data-table-wrapper">
+    <div
+      class="dashboard-data-table-wrapper"
+      v-if="!loading"
+    >
       <table>
         <colgroup>
           <col />
@@ -130,13 +154,13 @@
         </tbody>
       </table>
     </div>
+    <div
+      v-else
+      class="loader-wrapper"
+    >
+      <CustomLoader />
+    </div>
   </section>
-  <div
-    class="dashboard-page dashboard-data-page services-management"
-    v-else
-  >
-    <CustomLoader></CustomLoader>
-  </div>
 </template>
 
 <script>
