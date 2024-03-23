@@ -4,8 +4,8 @@
       <span><i :class="link.iconClass"></i>{{ link.text }}</span>
       <div class="edge top"></div>
       <div class="edge bottom"></div>
+      <div class="active-tab-indicator"></div>
     </router-link>
-    <div class="active-tab-indicator"></div>
   </nav>
 </template>
 
@@ -33,27 +33,6 @@ export default {
   width: 100%;
   position: relative;
 
-  & a.router-link-exact-active ~ .active-tab-indicator {
-    opacity: 1;
-  }
-
-  .active-tab-indicator {
-    --offset: -400px;
-    $offset: var(--offset);
-
-    height: 15px;
-    width: 15px;
-    position: absolute;
-    top: 138px;
-    left: -8px;
-    border-radius: 100%;
-    background-color: $accent-color;
-    opacity: 0;
-    transition-property: transform, opacity;
-    z-index: 600;
-    transform: translateY($offset);
-  }
-
   a {
     color: $accent-text-color;
     padding: 1rem;
@@ -65,6 +44,17 @@ export default {
     font-size: 1rem;
     transition: none;
     margin-bottom: 1rem;
+
+    .active-tab-indicator {
+      left: -5px;
+      height: 15px;
+      width: 15px;
+      position: absolute;
+      border-radius: 100%;
+      background-color: $accent-color;
+      opacity: 0;
+      z-index: 600;
+    }
 
     &:hover,
     &.router-link-exact-active {
@@ -106,6 +96,10 @@ export default {
 
     &.router-link-exact-active {
       color: $accent-color;
+
+      .active-tab-indicator {
+        opacity: 1;
+      }
     }
 
     * {
