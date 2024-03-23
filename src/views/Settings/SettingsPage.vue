@@ -82,10 +82,8 @@ export default {
       display: block;
     }
   }
+
   #settings-navigation {
-    .active-tab-indicator {
-      top: 225px;
-    }
     @media only screen and (max-width: $xs) {
       display: none;
     }
