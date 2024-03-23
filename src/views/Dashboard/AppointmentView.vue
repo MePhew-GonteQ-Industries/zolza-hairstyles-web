@@ -291,7 +291,7 @@ export default {
       const startTime = new Date(`${appointmentData.value.start_slot.start_time}`);
       const endTime = new Date(`${appointmentData.value.end_slot.end_time}`);
 
-      const appointmentTemp = appointmentData.value;
+      const appointmentTemp = JSON.parse(JSON.stringify(appointmentData.value));
 
       const locale = store.state.settings.language;
 
