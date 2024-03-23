@@ -190,7 +190,7 @@
                   dostępu do danych zapisanych plików Cookies przez każdą witrynę internetową</p>
               </li>
               <li>
-                <p>Informacje o sposobie wyłączenia plików Cookie w najpopularniejszych przeglądarkach komputerowych dostępne są na stronie: <a rel="external" href="https://nety.pl/jak-wylaczyc-pliki-cookie/">jak wyłączyć cookie</a> lub u jednego ze wskazanych dostawców:
+                <p>Informacje o sposobie wyłączenia plików Cookie w najpopularniejszych przeglądarkach komputerowych dostępne są na stronie: <a rel="external" href="https://nety.pl/jak-wylaczyc-pliki-cookie/">jak wyłączyć cookie</a> lub u jednego ze wskazanych dostawców:</p>
                 <ul>
                     <li><a rel="nofollow external" target="blank" href="https://support.google.com/accounts/answer/61416?co=GENIE.Platform%3DDesktop&#038;hl=pl">Zarządzanie plikami cookies w przeglądarce <span class="strong">Chrome</span></a></li>
                     <li><a rel="nofollow external" target="blank" href="https://help.opera.com/pl/latest/web-preferences/">Zarządzanie plikami cookies w przeglądarce <span class="strong">Opera</span></a></li>
@@ -199,7 +199,6 @@
                     <li><a rel="nofollow external" target="blank" href="https://support.apple.com/pl-pl/guide/safari/sfri11471/mac">Zarządzanie plikami cookies w przeglądarce <span class="strong">Safari</span></a></li>
                     <li><a rel="nofollow external" target="blank" href="https://windows.microsoft.com/pl-pl/internet-explorer/delete-manage-cookies#ie=ie-11">Zarządzanie plikami cookies w przeglądarce <span class="strong">Internet Explorer 11</span></a></li>
                 </ul>
-                </p>
               </li>
               <li>
                 <p>Użytkownik może w dowolnym momencie usunąć wszelkie zapisane do tej pory pliki
