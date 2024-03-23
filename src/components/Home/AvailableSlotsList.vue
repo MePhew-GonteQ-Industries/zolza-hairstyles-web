@@ -16,7 +16,7 @@
         v-for="slot in availableSlots"
         :key="slot.id"
       >
-        <AvailableDateTile
+        <AvailableSlotTile
           :day="slot.day"
           :time="slot.time"
         />
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import AvailableDateTile from "@/components/Home/AvailableSlotTile.vue";
+import AvailableSlotTile from "@/components/Home/AvailableSlotTile.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
 import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
@@ -37,7 +37,7 @@ import { useMessage } from "naive-ui";
 export default {
   name: "availableSlotsList",
   components: {
-    AvailableDateTile,
+    AvailableSlotTile,
     CustomLoader,
   },
   props: {
