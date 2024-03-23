@@ -227,6 +227,10 @@ export default {
 }
 
 .user-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   .user {
     display: flex;
     flex-direction: column;

@@ -177,6 +177,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.service-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .elevated-card {
   @media only screen and (max-width: $sm) {
     padding: 1rem;

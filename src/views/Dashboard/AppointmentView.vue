@@ -406,6 +406,12 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+.appointment-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cancel-appointment-wrapper {
   display: flex;
   flex-direction: column;
