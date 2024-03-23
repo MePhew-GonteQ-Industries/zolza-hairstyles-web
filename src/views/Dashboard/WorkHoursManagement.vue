@@ -1,5 +1,8 @@
 <template>
-  <section class="dashboard-page">
+  <section
+    class="dashboard-page"
+    v-if="!loading"
+  >
     <div class="work-hours-page">
       <div class="reserving-slots-wrapper">
         <CustomButton @click="openReservingSlotsModal = true">Zarezerwuj sloty</CustomButton>
@@ -168,6 +171,12 @@
       </div>
     </div>
   </section>
+  <div
+    class="dashboard-page"
+    v-else
+  >
+    <CustomLoader></CustomLoader>
+  </div>
 </template>
 
 <script>
