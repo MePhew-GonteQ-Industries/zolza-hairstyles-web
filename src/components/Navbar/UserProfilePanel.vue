@@ -67,6 +67,7 @@
           <span class="tile-title">{{ t("shared.logOut") }}</span>
         </button>
       </div>
+      <!-- TODO Implement secondary options -->
       <!-- <div
         class="secondary-options"
         @click="collapseProfilePanel"
