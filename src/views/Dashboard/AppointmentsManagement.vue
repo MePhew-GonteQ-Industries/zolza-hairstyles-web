@@ -211,7 +211,7 @@
     <NPagination />
   </section>
   <div
-    class="dashboard-page dashboard-data-page users-management"
+    class="dashboard-page"
     v-else
   >
     <CustomLoader></CustomLoader>
