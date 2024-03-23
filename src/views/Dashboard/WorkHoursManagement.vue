@@ -127,13 +127,11 @@
         </div>
       </div>
       <n-divider vertical></n-divider>
-      <div class="changing-work-hours-wrapper"></div>
     </div>
   </section>
 </template>
 
 <script>
-import { NDivider } from "naive-ui";
 import { ref, computed, onMounted, watch } from "vue";
 import CustomModal from "@/components/CustomModal.vue";
 import { DatePicker } from "v-calendar";
@@ -152,7 +150,6 @@ import UnreserveSlotItem from "@/components/UnreserveSlotItem.vue";
 export default {
   name: "WorkHoursManagement",
   components: {
-    NDivider,
     CustomModal,
     DatePicker,
     CustomLoader,
