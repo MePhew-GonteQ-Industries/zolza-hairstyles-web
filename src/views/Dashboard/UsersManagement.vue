@@ -3,14 +3,15 @@
     class="dashboard-page dashboard-data-page users-management"
     v-if="!loading"
   >
-    <form class="appointments-filters">
+    <!-- TODO: Search users -->
+    <!-- <form class="appointments-filters">
       <CustomInput
         class="search"
         :label="t('dashboard.usersManagement.search')"
         v-model:value="q"
         type="search"
       />
-    </form>
+    </form> -->
 
     <div class="dashboard-data-table-wrapper">
       <table>
@@ -147,7 +148,7 @@
 <script>
 import { useI18n } from "vue-i18n";
 import { onMounted, computed, ref } from "vue";
-import CustomInput from "@/components/CustomInput.vue";
+// import CustomInput from "@/components/CustomInput.vue";
 import StatusIndicator from "@/components/StatusIndicator.vue";
 import { useStore } from "vuex";
 import CustomLoader from "@/components/CustomLoader.vue";
@@ -159,7 +160,7 @@ import { AxiosError } from "axios";
 export default {
   name: "UsersManagement",
   components: {
-    CustomInput,
+    // CustomInput,
     StatusIndicator,
     CustomLoader,
     CustomTooltip,
