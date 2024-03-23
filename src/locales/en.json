@@ -203,6 +203,7 @@
       "search": "Search for appointments",
       "service": "Service",
       "user": "User",
+      "creationDate": "Data utworzenia",
       "startDate": "Start date",
       "endDate": "End date",
       "status": "Status",

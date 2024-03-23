@@ -208,6 +208,7 @@
       "search": "Szukaj wizyt",
       "service": "Usługa",
       "user": "Użytkownik",
+      "creationDate": "Data utworzenia",
       "startDate": "Data rozpoczęcia",
       "endDate": "Data zakończenia",
       "status": "Status",

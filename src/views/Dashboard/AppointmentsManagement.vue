@@ -144,6 +144,15 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
+              sortName="creationDate"
+              @toggleSort="toggleSort('creationDate')"
+              >{{ t("dashboard.appointmentsManagement.creationDate") }}</SortedHeader
+            >
+          </th>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
               sortName="startDate"
               @toggleSort="toggleSort('startDate')"
               >{{ t("dashboard.appointmentsManagement.startDate") }}</SortedHeader
@@ -197,6 +206,7 @@
               </CustomTooltip>
               <span>{{ appointment.user.email }}</span>
             </td>
+            <td>{{ appointment.created_at_str }}</td>
             <td>{{ appointment.start_slot.start_time_str }}</td>
             <td>{{ appointment.end_slot.end_time_str }}</td>
             <td class="status">
@@ -267,7 +277,7 @@ export default {
 
     const locale = store.state.settings.language;
 
-    const sortBy = ref("startDate");
+    const sortBy = ref("creationDate");
     const sortAscending = ref(false);
 
     const userWithoutAccountChecked = () => {
@@ -290,10 +300,18 @@ export default {
       const appointmentsTemp = [];
 
       store.state.appointments.appointments.forEach((appointment) => {
+        const creationDate = new Date(appointment.created_at);
         const startTime = new Date(appointment.start_slot.start_time);
         const endTime = new Date(appointment.end_slot.end_time);
 
         const appointmentTemp = appointment;
+
+        appointmentTemp.created_at_str = creationDate.toLocaleTimeString(locale, {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
 
         appointmentTemp.start_slot.start_time_str = startTime.toLocaleTimeString(locale, {
           weekday: "long",
