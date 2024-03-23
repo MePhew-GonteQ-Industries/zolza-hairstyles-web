@@ -3,7 +3,7 @@
     class="dashboard-page dashboard-data-page appointments-management"
     v-if="!loading"
   >
-    <form class="appointments-filters">
+    <!-- <form class="appointments-filters">
       <CustomInput
         class="search"
         :label="t('dashboard.appointmentsManagement.search')"
@@ -13,13 +13,14 @@
       />
 
       <div class="search-filters">
-        <!-- <DatePicker
-        :is-dark="$store.state. settings.theme === 'dark'"
-        is-required
-        is-range
-        color="green"
-        mode="date"
-        v-model="selectedDate"/> -->
+        <DatePicker
+          :is-dark="$store.state.settings.theme === 'dark'"
+          is-required
+          is-range
+          color="green"
+          mode="date"
+          v-model="selectedDate"
+        />
         <CustomSelect
           class="select"
           appearance="secondary"
@@ -33,11 +34,12 @@
           appearance="secondary"
         />
       </div>
-    </form>
+    </form> -->
 
-    <CustomButton @click="addAppointmentModalOpen = true"
+    <!-- <CustomButton @click="addAppointmentModalOpen = true"
       >{{ t("dashboard.appointmentsManagement.makeAnAppointment") }}
     </CustomButton>
+
     <CustomModal v-model:open="addAppointmentModalOpen">
       <template #title>{{ t("dashboard.appointmentsManagement.addAppointment") }}</template>
       <div class="add-appointment-wrapper">
@@ -94,7 +96,7 @@
           </CustomButton>
         </div>
       </div>
-    </CustomModal>
+    </CustomModal> -->
 
     <div class="dashboard-data-table-wrapper">
       <table>
