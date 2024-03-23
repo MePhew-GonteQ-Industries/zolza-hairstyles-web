@@ -191,6 +191,9 @@ export default {
 }
 
 .wordmark-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 5;
 }
 
