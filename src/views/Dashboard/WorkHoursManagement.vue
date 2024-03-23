@@ -2,9 +2,7 @@
   <section class="dashboard-page">
     <div class="work-hours-page">
       <div class="reserving-slots-wrapper">
-        <n-button tertiary type="primary" @click="openReservingSlotsModal = true"
-          >Zarezerwuj sloty</n-button
-        >
+        <CustomButton @click="openReservingSlotsModal = true">Zarezerwuj sloty</CustomButton>
         <CustomModal v-model:open="openReservingSlotsModal">
           <template #title>Zarezerwuj godziny</template>
           <div class="reserving-slots-modal-wrapper">
@@ -135,7 +133,7 @@
 </template>
 
 <script>
-import { NButton, NDivider } from "naive-ui";
+import { NDivider } from "naive-ui";
 import { ref, computed, onMounted, watch } from "vue";
 import CustomModal from "@/components/CustomModal.vue";
 import { DatePicker } from "v-calendar";
@@ -154,7 +152,6 @@ import UnreserveSlotItem from "@/components/UnreserveSlotItem.vue";
 export default {
   name: "WorkHoursManagement",
   components: {
-    NButton,
     NDivider,
     CustomModal,
     DatePicker,
