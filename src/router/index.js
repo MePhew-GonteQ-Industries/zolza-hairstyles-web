@@ -205,6 +205,7 @@ const routes = [
     children: [
       {
         path: "",
+        // TODO: Create summary view
         // component: () => import("@/views/Dashboard/SummaryView.vue"),
         // name: "summaryView",
         redirect: { name: "appointmentsManagement" },
