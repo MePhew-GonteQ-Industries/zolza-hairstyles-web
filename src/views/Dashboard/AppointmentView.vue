@@ -53,7 +53,7 @@
               <template #subtitle>Akcja jest nieodwracalna</template>
             </MessageBox>
             <div class="buttons-wrapper">
-              <CustomButton type="error" @click="cancelAppointment">Anuluj wizytę</CustomButton>
+              <CustomButton type="error" @click="cancelAppointment">Odwołaj wizytę</CustomButton>
               <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false"
                 >Zamknij
               </CustomButton>
