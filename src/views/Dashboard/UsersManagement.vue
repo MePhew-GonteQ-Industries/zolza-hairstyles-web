@@ -40,8 +40,8 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
-              sortName="service"
-              @toggleSort="toggleSort('service')"
+              sortName="name"
+              @toggleSort="toggleSort('name')"
               >{{ t("shared.name") }}</SortedHeader
             >
           </th>
@@ -49,8 +49,8 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
-              sortName="service"
-              @toggleSort="toggleSort('service')"
+              sortName="surname"
+              @toggleSort="toggleSort('surname')"
               >{{ t("shared.surname") }}</SortedHeader
             >
           </th>
@@ -58,8 +58,8 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
-              sortName="user"
-              @toggleSort="toggleSort('user')"
+              sortName="email"
+              @toggleSort="toggleSort('email')"
             >
               {{ t("shared.email") }}</SortedHeader
             >
@@ -68,8 +68,8 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
-              sortName="user"
-              @toggleSort="toggleSort('user')"
+              sortName="gender"
+              @toggleSort="toggleSort('gender')"
             >
               {{ t("shared.gender") }}</SortedHeader
             >
@@ -78,8 +78,8 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
-              sortName="startDate"
-              @toggleSort="toggleSort('startDate')"
+              sortName="accessLevel"
+              @toggleSort="toggleSort('accessLevel')"
               >{{ t("dashboard.usersManagement.accessLevel") }}
             </SortedHeader>
           </th>
@@ -87,12 +87,20 @@
             <SortedHeader
               :sortBy="sortBy"
               :sortAscending="sortAscending"
-              sortName="endDate"
-              @toggleSort="toggleSort('endDate')"
+              sortName="verified"
+              @toggleSort="toggleSort('verified')"
               >{{ t("dashboard.usersManagement.verified") }}
             </SortedHeader>
           </th>
-          <th>{{ t("dashboard.usersManagement.blocked") }}</th>
+          <th>
+            <SortedHeader
+              :sortBy="sortBy"
+              :sortAscending="sortAscending"
+              sortName="blocked"
+              @toggleSort="toggleSort('blocked')"
+              >{{ t("dashboard.usersManagement.blocked") }}
+            </SortedHeader>
+          </th>
         </thead>
         <tbody>
           <tr
@@ -153,6 +161,7 @@ import StatusIndicator from "@/components/StatusIndicator.vue";
 import { useStore } from "vuex";
 import CustomLoader from "@/components/CustomLoader.vue";
 import CustomTooltip from "@/components/CustomTooltip.vue";
+import SortedHeader from "@/components/SortedHeader.vue";
 import { useMessage } from "naive-ui";
 import { createRequestErrorMessage } from "@/utils";
 import { AxiosError } from "axios";
@@ -164,6 +173,7 @@ export default {
     StatusIndicator,
     CustomLoader,
     CustomTooltip,
+    SortedHeader,
   },
   setup() {
     const message = useMessage();
@@ -213,6 +223,9 @@ export default {
       return usersTemp;
     });
 
+    const sortBy = ref("name");
+    const sortAscending = ref(false);
+
     onMounted(async () => {
       try {
         await store.dispatch("loadUsers");
@@ -231,6 +244,8 @@ export default {
       users,
       t,
       loading,
+      sortBy,
+      sortAscending,
     };
   },
 };
