@@ -1,7 +1,12 @@
 <template>
-  <section class="app-page" id="home-page">
-    <ServicesList :scrolledToServices="scrolledToServices"
-      v-model:selectedServiceId="selectedServiceId" />
+  <section
+    class="app-page"
+    id="home-page"
+  >
+    <ServicesList
+      :scrolledToServices="scrolledToServices"
+      v-model:selectedServiceId="selectedServiceId"
+    />
 
     <AvailableSlotsList :selectedServiceId="selectedServiceId" />
 
@@ -17,16 +22,25 @@
           {{ t("home.appDescriptionSecondary") }}
         </p>
         <div class="download-links">
-          <a href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055"
-            target="_blank">
-            <img class="app-store-badge" src="@/assets/app-store-badge.svg"
-              alt="Pobierz z App Store" />
+          <a
+            href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055"
+            target="_blank"
+          >
+            <img
+              class="app-store-badge"
+              src="@/assets/app-store-badge.svg"
+              alt="Pobierz z App Store"
+            />
           </a>
-          <a href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app"
-            target="_blank">
-            <img class="gp-badge"
+          <a
+            href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app"
+            target="_blank"
+          >
+            <img
+              class="gp-badge"
               src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
-              alt="Pobierz w Google Play" />
+              alt="Pobierz w Google Play"
+            />
           </a>
         </div>
       </div>
@@ -34,9 +48,20 @@
       <div class="banner">
         <div class="app-showcase-container">
           <div class="wrapper">
-            <img class="iphone" src="@/assets/iphone-13-pro-max.png" alt="" />
-            <video class="app-showcase" src="@/assets/appDemo.mp4" muted loop webkit-playsinline
-              playsinline autoplay>
+            <img
+              class="iphone"
+              src="@/assets/iphone-13-pro-max.png"
+              alt=""
+            />
+            <video
+              class="app-showcase"
+              src="@/assets/appDemo.mp4"
+              muted
+              loop
+              webkit-playsinline
+              playsinline
+              autoplay
+            >
               <track kind="captions" />
             </video>
           </div>
@@ -54,27 +79,27 @@ import ServicesList from "@/components/Home/ServicesList.vue";
 import AvailableSlotsList from "@/components/Home/AvailableSlotsList.vue";
 import { v4 as uuidv4 } from "uuid";
 
-import photo1 from '@/assets/work-photos/1.jpg';
-import photo2 from '@/assets/work-photos/2.jpg';
-import photo3 from '@/assets/work-photos/3.jpg';
-import photo4 from '@/assets/work-photos/4.jpg';
-import photo5 from '@/assets/work-photos/5.jpg';
-import photo6 from '@/assets/work-photos/6.jpg';
-import photo7 from '@/assets/work-photos/7.jpg';
-import photo8 from '@/assets/work-photos/8.jpg';
-import photo9 from '@/assets/work-photos/9.jpg';
-import photo10 from '@/assets/work-photos/10.jpg';
-import photo11 from '@/assets/work-photos/11.jpg';
-import photo12 from '@/assets/work-photos/12.jpg';
-import photo13 from '@/assets/work-photos/13.jpg';
-import photo14 from '@/assets/work-photos/14.jpg';
-import photo15 from '@/assets/work-photos/15.jpg';
-import photo16 from '@/assets/work-photos/16.jpg';
-import photo17 from '@/assets/work-photos/17.jpg';
-import photo18 from '@/assets/work-photos/18.jpg';
-import photo19 from '@/assets/work-photos/19.jpg';
-import photo20 from '@/assets/work-photos/20.jpg';
-import photo21 from '@/assets/work-photos/21.jpg';
+import photo1 from "@/assets/work-photos/1.jpg";
+import photo2 from "@/assets/work-photos/2.jpg";
+import photo3 from "@/assets/work-photos/3.jpg";
+import photo4 from "@/assets/work-photos/4.jpg";
+import photo5 from "@/assets/work-photos/5.jpg";
+import photo6 from "@/assets/work-photos/6.jpg";
+import photo7 from "@/assets/work-photos/7.jpg";
+import photo8 from "@/assets/work-photos/8.jpg";
+import photo9 from "@/assets/work-photos/9.jpg";
+import photo10 from "@/assets/work-photos/10.jpg";
+import photo11 from "@/assets/work-photos/11.jpg";
+import photo12 from "@/assets/work-photos/12.jpg";
+import photo13 from "@/assets/work-photos/13.jpg";
+import photo14 from "@/assets/work-photos/14.jpg";
+import photo15 from "@/assets/work-photos/15.jpg";
+import photo16 from "@/assets/work-photos/16.jpg";
+import photo17 from "@/assets/work-photos/17.jpg";
+import photo18 from "@/assets/work-photos/18.jpg";
+import photo19 from "@/assets/work-photos/19.jpg";
+import photo20 from "@/assets/work-photos/20.jpg";
+import photo21 from "@/assets/work-photos/21.jpg";
 
 export default {
   name: "HomePage",
@@ -176,7 +201,7 @@ export default {
       {
         id: uuidv4(),
         path: photo21,
-      }
+      },
     ]);
 
     const selectedServiceId = ref(null);

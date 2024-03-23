@@ -19,8 +19,8 @@ export default {
     });
 
     const sidebarSlide = () => {
-      emit('slide-sidebar');
-    }
+      emit("slide-sidebar");
+    };
 
     function toggleMobileMenu() {
       state.mobileMenuActive = !state.mobileMenuActive;

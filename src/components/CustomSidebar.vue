@@ -1,39 +1,72 @@
 <!-- eslint-disable vuejs-accessibility/click-events-have-key-events -->
 <template>
   <div class="sidebar">
-    <CustomHamburgerIcon class="custom-hamburger-icon" @slide-sidebar="slideSidebar" :navbarActive="sidebarActive" />
+    <CustomHamburgerIcon
+      class="custom-hamburger-icon"
+      @slide-sidebar="slideSidebar"
+      :navbarActive="sidebarActive"
+    />
     <div class="sidebar-wrapper">
-      <div class="sidebar-menu" :class="{ 'sidebar-active': sidebarActive }">
-        <div class="nav-section" @click="slideSidebar">
+      <div
+        class="sidebar-menu"
+        :class="{ 'sidebar-active': sidebarActive }"
+      >
+        <div
+          class="nav-section"
+          @click="slideSidebar"
+        >
           <router-link to="/"><i class="ph-house"></i>{{ t("nav.primaryNav[0]") }}</router-link>
-          <router-link v-if="$store.getters.isLoggedIn && $store.getters.isAdmin" to="/dashboard">
+          <router-link
+            v-if="$store.getters.isLoggedIn && $store.getters.isAdmin"
+            to="/dashboard"
+          >
             <i class="ph-app-window"></i>{{ t("nav.primaryNav[1]") }}
           </router-link>
-          <router-link v-if="$store.getters.isLoggedIn" to="/appointments"><i class="ph-calendar-check"></i>{{
-              t('nav.primaryNav[2]')
-          }}</router-link>
+          <router-link
+            v-if="$store.getters.isLoggedIn"
+            to="/appointments"
+            ><i class="ph-calendar-check"></i>{{ t("nav.primaryNav[2]") }}</router-link
+          >
           <router-link to="/contact">
             <i class="ph-chat-centered-dots"></i>{{ t("nav.primaryNav[3]") }}
           </router-link>
         </div>
-        <div class="footer-section" @click="slideSidebar">
-          <router-link class="link" to="/terms-of-use">
+        <div
+          class="footer-section"
+          @click="slideSidebar"
+        >
+          <router-link
+            class="link"
+            to="/terms-of-use"
+          >
             <i class="ph-files"></i>{{ t("footer[0]") }}
           </router-link>
-          <router-link class="link" to="/privacy-policy">
+          <router-link
+            class="link"
+            to="/privacy-policy"
+          >
             <i class="ph-files"></i>{{ t("footer[1]") }}
           </router-link>
-          <router-link class="link" to="/cookies-policy">
+          <router-link
+            class="link"
+            to="/cookies-policy"
+          >
             <i class="ph-files"></i>{{ t("footer[2]") }}
           </router-link>
-          <router-link class="link" to="/rodo">
+          <router-link
+            class="link"
+            to="/rodo"
+          >
             <i class="ph-files"></i>RODO
           </router-link>
         </div>
       </div>
     </div>
-    <div class="sidebar-background" :class="{ 'sidebar-menu-background': sidebarActive }" @click.self="slideSidebar">
-    </div>
+    <div
+      class="sidebar-background"
+      :class="{ 'sidebar-menu-background': sidebarActive }"
+      @click.self="slideSidebar"
+    ></div>
   </div>
 </template>
 
@@ -91,11 +124,11 @@ export default {
 
     a {
       color: $secondary-text-color !important;
-      padding: .5rem .5rem;
+      padding: 0.5rem 0.5rem;
       margin: 0 1rem;
       display: flex;
       align-items: center;
-      gap: .5rem;
+      gap: 0.5rem;
 
       &.router-link-active {
         color: $accent-color !important;
@@ -118,7 +151,7 @@ export default {
 
         a {
           background-color: $secondary-color;
-          border-radius: .375rem;
+          border-radius: 0.375rem;
         }
       }
 

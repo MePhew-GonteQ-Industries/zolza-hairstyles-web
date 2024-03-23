@@ -4,7 +4,11 @@
       <div class="avatar-row">
         <i class="ph-user-square-light avatar-icon"></i>
         <div class="user-data">
-          <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }}</CustomChip>
+          <CustomChip
+            type="info"
+            :customIconClass="userIconClass"
+            >{{ userRole }}</CustomChip
+          >
           <p class="email">{{ $store.state.user.email }}</p>
           <p>{{ t("settings.userAccountSettings.userSince") }} {{ accountCreationDateStr }}</p>
           <p>({{ timeSinceCreationDate }})</p>
@@ -33,7 +37,11 @@
           appearance="primary"
         />
       </div>
-      <CustomButton type="error" class="delete-account-btn" @click="deleteAccountModalOpen = true">
+      <CustomButton
+        type="error"
+        class="delete-account-btn"
+        @click="deleteAccountModalOpen = true"
+      >
         {{ t("settings.userAccountSettings.deleteAccount") }}</CustomButton
       >
       <CustomModal v-model:open="deleteAccountModalOpen">
@@ -49,14 +57,20 @@
                 <p>{{ t("settings.userAccountSettings.appointmentsCancellation") }}</p>
               </template>
             </MessageBox>
-            <MessageBox type="error" v-if="$store.getters.isAdmin || $store.getters.isOwner">
+            <MessageBox
+              type="error"
+              v-if="$store.getters.isAdmin || $store.getters.isOwner"
+            >
               <template #title>{{ t("shared.warning") }}</template>
               <template #subtitle>
                 {{ t("settings.userAccountSettings.deleteHighLevelAccount") }}
               </template>
             </MessageBox>
           </div>
-          <form @submit.prevent="" class="delete-account">
+          <form
+            @submit.prevent=""
+            class="delete-account"
+          >
             <input
               type="text"
               autocomplete="username"
@@ -90,12 +104,16 @@
               />
             </div>
             <div class="buttons-row">
-              <CustomButton type="error" @click="deleteAccount">{{
-                t("settings.userAccountSettings.confirmationButton")
-              }}</CustomButton>
-              <CustomButton type="secondary" @click="deleteAccountModalOpen = false">{{
-                t("shared.operationCancel")
-              }}</CustomButton>
+              <CustomButton
+                type="error"
+                @click="deleteAccount"
+                >{{ t("settings.userAccountSettings.confirmationButton") }}</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="deleteAccountModalOpen = false"
+                >{{ t("shared.operationCancel") }}</CustomButton
+              >
             </div>
           </form>
         </div>
@@ -113,10 +131,16 @@
         </template>
         <template #subtitle> {{ t("settings.userAccountSettings.emailLinkResend") }} </template>
       </MessageBox>
-      <div class="save-changes" v-if="userDatamodified">
-        <CustomButton class="save" type="success" @click="changeUserData">{{
-          t("shared.saveChanges")
-        }}</CustomButton>
+      <div
+        class="save-changes"
+        v-if="userDatamodified"
+      >
+        <CustomButton
+          class="save"
+          type="success"
+          @click="changeUserData"
+          >{{ t("shared.saveChanges") }}</CustomButton
+        >
         <CustomModal v-model:open="passwordPromptOpen">
           <template #title> {{ t("settings.userAccountSettings.passwordInput") }} </template>
           <div class="logout-everywhere-wrappper">
@@ -143,24 +167,33 @@
                   type="password"
                   v-model:value="password"
                 />
-                <router-link to="/password-reset" tabindex="-1">{{
-                  t("shared.forgotYourPassword")
-                }}</router-link>
+                <router-link
+                  to="/password-reset"
+                  tabindex="-1"
+                  >{{ t("shared.forgotYourPassword") }}</router-link
+                >
               </div>
               <div class="buttons-row">
-                <CustomButton type="success" @click="changeUserDataSudoMode">{{
-                  t("settings.userAccountSettings.next")
-                }}</CustomButton>
-                <CustomButton type="secondary" @click="passwordPromptOpen = false">{{
-                  t("shared.operationCancel")
-                }}</CustomButton>
+                <CustomButton
+                  type="success"
+                  @click="changeUserDataSudoMode"
+                  >{{ t("settings.userAccountSettings.next") }}</CustomButton
+                >
+                <CustomButton
+                  type="secondary"
+                  @click="passwordPromptOpen = false"
+                  >{{ t("shared.operationCancel") }}</CustomButton
+                >
               </div>
             </form>
           </div>
         </CustomModal>
-        <CustomButton type="secondary" class="cancel" @click="revertChanges">{{
-          t("shared.operationCancel")
-        }}</CustomButton>
+        <CustomButton
+          type="secondary"
+          class="cancel"
+          @click="revertChanges"
+          >{{ t("shared.operationCancel") }}</CustomButton
+        >
       </div>
     </div>
   </div>
@@ -223,7 +256,7 @@ export default {
       () =>
         store.state.user.name !== userData.name ||
         store.state.user.surname !== userData.surname ||
-        store.state.user.gender !== userData.gender
+        store.state.user.gender !== userData.gender,
     );
 
     const revertChanges = () => {
@@ -355,7 +388,7 @@ export default {
           "users/me/delete",
           new URLSearchParams({
             password: deleteAccountPassword.value,
-          })
+          }),
         )
         .then(() => {
           message.success("Konto zostało usunięte");

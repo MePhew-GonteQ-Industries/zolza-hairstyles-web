@@ -4,7 +4,10 @@
       <h1>{{ t("signUp.heading") }}</h1>
       <h3>{{ t("signUp.subtitle") }}</h3>
 
-      <form @submit.prevent="handleSubmit" novalidate>
+      <form
+        @submit.prevent="handleSubmit"
+        novalidate
+      >
         <div class="inputs">
           <input
             id="sign-up-hidden-username-input"
@@ -229,7 +232,7 @@ export default {
         })
         .catch((error) => {
           message.error(
-            `${t("snackBars.accountCreatedError")} - ${createRequestErrorMessage(error)}`
+            `${t("snackBars.accountCreatedError")} - ${createRequestErrorMessage(error)}`,
           );
         });
     }

@@ -3,20 +3,33 @@
     <div class="elevated-card">
       <h1>{{ t("settings.themeSettings.selectTheme") }}</h1>
       <div class="theme-selection">
-        <ThemeCard themeName="dark" v-model:selectedTheme="selectedTheme">
+        <ThemeCard
+          themeName="dark"
+          v-model:selectedTheme="selectedTheme"
+        >
           {{ t("settings.themeSettings.dark") }}
         </ThemeCard>
-        <ThemeCard themeName="light" v-model:selectedTheme="selectedTheme">
+        <ThemeCard
+          themeName="light"
+          v-model:selectedTheme="selectedTheme"
+        >
           {{ t("settings.themeSettings.light") }}
         </ThemeCard>
       </div>
-      <div class="buttons-row" v-if="selectedTheme !== initialTheme">
-        <CustomButton type="success" @click="changeTheme">{{
-          t("shared.saveChanges")
-        }}</CustomButton>
-        <CustomButton type="secondary" @click="selectedTheme = initialTheme">{{
-          t("shared.operationCancel")
-        }}</CustomButton>
+      <div
+        class="buttons-row"
+        v-if="selectedTheme !== initialTheme"
+      >
+        <CustomButton
+          type="success"
+          @click="changeTheme"
+          >{{ t("shared.saveChanges") }}</CustomButton
+        >
+        <CustomButton
+          type="secondary"
+          @click="selectedTheme = initialTheme"
+          >{{ t("shared.operationCancel") }}</CustomButton
+        >
       </div>
     </div>
   </div>

@@ -1,11 +1,20 @@
 <template>
-  <div id="app-wrapper" :data-theme="$store.state.settings.theme">
+  <div
+    id="app-wrapper"
+    :data-theme="$store.state.settings.theme"
+  >
     <main :class="{ collapsed: !onHomePage }">
-      <div id="nav" :class="navbarClasses">
+      <div
+        id="nav"
+        :class="navbarClasses"
+      >
         <navbarSection />
       </div>
       <CustomSidebar class="sidebar" />
-      <div class="wrapper" v-if="onHomePage">
+      <div
+        class="wrapper"
+        v-if="onHomePage"
+      >
         <section class="hero">
           <!-- eslint-disable max-len -->
           <svg
@@ -110,7 +119,11 @@
             {{ t("app.description") }}
           </h1>
         </section>
-        <i class="ph-caret-down-light" @click="scrollToServices" @keyup.down="scrollToServices"></i>
+        <i
+          class="ph-caret-down-light"
+          @click="scrollToServices"
+          @keyup.down="scrollToServices"
+        ></i>
 
         <!-- eslint-disable max-len -->
         <svg
@@ -131,7 +144,10 @@
       </div>
     </main>
 
-    <router-view :scrolledToServices="scrolledToServices" class="router-view" />
+    <router-view
+      :scrolledToServices="scrolledToServices"
+      class="router-view"
+    />
 
     <footer>
       <contactSection />
@@ -167,8 +183,17 @@
           </div>
           <n-divider vertical />
           <div class="buttons">
-            <router-link class="link" to="/cookies-policy">Więcej informacji</router-link>
-            <NButton type="success" size="large" @click="acceptCookies">Zgadzam się</NButton>
+            <router-link
+              class="link"
+              to="/cookies-policy"
+              >Więcej informacji</router-link
+            >
+            <NButton
+              type="success"
+              size="large"
+              @click="acceptCookies"
+              >Zgadzam się</NButton
+            >
           </div>
         </div>
 
@@ -202,28 +227,46 @@
         class="banner"
         @close="hideNotificationsBanner = true"
       >
-        <div class="banner-wrapper" v-if="!notificationsPermissionDenied">
+        <div
+          class="banner-wrapper"
+          v-if="!notificationsPermissionDenied"
+        >
           Włącz powiadomienia, aby otrzymywać przypomnienia o nadchodzących wizytach i nowych
           funkcjonalnościach
           <n-divider vertical />
           <div class="buttons">
-            <NButton type="success" size="large" @click="enableNotifications"
+            <NButton
+              type="success"
+              size="large"
+              @click="enableNotifications"
               >Włącz powiadomienia
             </NButton>
-            <NButton type="error" size="large" @click="disableNotifications"
+            <NButton
+              type="error"
+              size="large"
+              @click="disableNotifications"
               >Nie, dziękuję
             </NButton>
           </div>
         </div>
-        <div class="banner-wrapper" v-else>
+        <div
+          class="banner-wrapper"
+          v-else
+        >
           Jeśli chcesz włączyć powiadomienia, wyraź zgodę na otrzymywanie powiadomień w swojej
           przeglądarce, a następnie włącz powiadomienia korzystając z przycisku obok
           <n-divider vertical />
           <div class="buttons">
-            <NButton type="success" size="large" @click="enableNotifications"
+            <NButton
+              type="success"
+              size="large"
+              @click="enableNotifications"
               >Włącz powiadomienia
             </NButton>
-            <NButton type="error" size="large" @click="disableNotifications"
+            <NButton
+              type="error"
+              size="large"
+              @click="disableNotifications"
               >Nie, dziękuję
             </NButton>
           </div>
@@ -261,7 +304,10 @@
           <n-divider vertical />
           <div class="action">
             <p v-if="!verificationCooldownSecondsLeft">Wiadomość nie dotarła?</p>
-            <div v-else class="cooldown-notice">
+            <div
+              v-else
+              class="cooldown-notice"
+            >
               <p>Wiadomość została wysłana</p>
               <p>
                 Możesz spróbować ponownie za
@@ -350,7 +396,7 @@ export default {
             loadingBar.error();
             break;
         }
-      }
+      },
     );
 
     onBeforeMount(async () => {
@@ -406,7 +452,7 @@ export default {
         "Wyraź zgodę na otrzymywanie powiadomień",
         {
           duration: 0,
-        }
+        },
       );
       if (await requestNotificationsPermission()) {
         enablingNotificationsMessage.content = "Włączanie powiadomień";
@@ -436,7 +482,7 @@ export default {
             }, 5000);
             console.error(
               "An error occurred while retrieving token.",
-              "The getToken function did not return a token"
+              "The getToken function did not return a token",
             );
           }
         } catch (err) {
@@ -462,25 +508,25 @@ export default {
     const notificationsPermissionNotChecked = computed(() => Notification.permission === "default");
 
     const checkNotificationsPermission = computed(
-      () => notificationsPermissionNotChecked.value && !store.state.utils.notificationsDenied
+      () => notificationsPermissionNotChecked.value && !store.state.utils.notificationsDenied,
     );
 
     const showNotificationsBanner = computed(
       () =>
         notificationsSupported() &&
         store.getters.isAuthenticated &&
-        checkNotificationsPermission.value
+        checkNotificationsPermission.value,
     );
 
     const showEmailConfirmationBanner = computed(
-      () => store.getters.isAuthenticated && !store.state.user.verified
+      () => store.getters.isAuthenticated && !store.state.user.verified,
     );
 
     const notificationsUnsupported = computed(
       () =>
         !notificationsSupported() &&
         notificationsPermissionNotChecked.value &&
-        store.getters.isAuthenticated
+        store.getters.isAuthenticated,
     );
 
     const hideNotificationsBanner = ref(false);
@@ -496,7 +542,7 @@ export default {
               meta: "Ta przeglądarka nie obsługuje powiadomień",
               onClose: () => store.commit("setReducedFunctionalityNotification", null),
               // avatar ?
-            })
+            }),
           );
         }
       }
@@ -519,7 +565,7 @@ export default {
 
         localStorage.setItem(
           "verificationCooldownEnd",
-          JSON.stringify(verificationCooldownEnd.value)
+          JSON.stringify(verificationCooldownEnd.value),
         );
       }
 
@@ -568,7 +614,7 @@ export default {
       } catch (error) {
         verificationEmailMessage.type = "error";
         verificationEmailMessage.content = `${t(
-          "snackBars.emailSentError"
+          "snackBars.emailSentError",
         )} - ${createRequestErrorMessage(error)}`;
         setTimeout(() => verificationEmailMessage.destroy(), 2000);
       }

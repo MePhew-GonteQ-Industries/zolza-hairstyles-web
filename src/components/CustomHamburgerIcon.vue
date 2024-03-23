@@ -1,5 +1,9 @@
 <template>
-  <div class="hamburger-icon" :class="{ 'nav-active': navbarActive }" @click="sidebarSlide">
+  <div
+    class="hamburger-icon"
+    :class="{ 'nav-active': navbarActive }"
+    @click="sidebarSlide"
+  >
     <div class="line1"></div>
     <div class="line2"></div>
     <div class="line3"></div>
@@ -15,18 +19,16 @@ export default {
       default: false,
     },
   },
-  emits: [
-    "slide-sidebar",
-  ],
+  emits: ["slide-sidebar"],
   setup(_, { emit }) {
     const sidebarSlide = () => {
       emit("slide-sidebar");
-    }
+    };
 
     return {
       sidebarSlide,
-    }
-  }
+    };
+  },
 };
 </script>
 

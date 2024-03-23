@@ -16,7 +16,10 @@
               ></DatePicker>
               <div class="hours">
                 <CustomLoader v-if="loadingSlots" />
-                <div class="slots-wrapper" v-if="validatedSlots.length && !loadingSlots">
+                <div
+                  class="slots-wrapper"
+                  v-if="validatedSlots.length && !loadingSlots"
+                >
                   <div
                     class="single-hour"
                     v-for="availableSlot in validatedSlots"
@@ -32,16 +35,25 @@
                     }}
                   </div>
                 </div>
-                <div class="no-slots" v-if="!validatedSlots.length && !loadingSlots">
+                <div
+                  class="no-slots"
+                  v-if="!validatedSlots.length && !loadingSlots"
+                >
                   Brak wolnych miejsc
                 </div>
               </div>
             </div>
             <div class="buttons-wrapper">
-              <CustomButton type="info" @click="openReservingReassuranceModal"
+              <CustomButton
+                type="info"
+                @click="openReservingReassuranceModal"
                 >Zarezerwuj</CustomButton
               >
-              <CustomButton type="secondary" @click="closeReserveSlotsModal">Zamknij</CustomButton>
+              <CustomButton
+                type="secondary"
+                @click="closeReserveSlotsModal"
+                >Zamknij</CustomButton
+              >
             </div>
           </div>
           <CustomModal v-model:open="openReservingSlotsReassuranceModal">
@@ -80,8 +92,14 @@
                 </div>
               </div>
               <div class="buttons-wrapper">
-                <CustomButton type="info" @click="reserveSlots">Zarezerwuj</CustomButton>
-                <CustomButton type="secondary" @click="openReservingSlotsReassuranceModal = false"
+                <CustomButton
+                  type="info"
+                  @click="reserveSlots"
+                  >Zarezerwuj</CustomButton
+                >
+                <CustomButton
+                  type="secondary"
+                  @click="openReservingSlotsReassuranceModal = false"
                   >Zmień
                 </CustomButton>
               </div>
@@ -98,29 +116,51 @@
             </colgroup>
             <thead>
               <th>
-                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="id">
+                <SortedHeader
+                  :sortBy="sortBy"
+                  :sortAscending="sortAscending"
+                  sortName="id"
+                >
                   #id
                 </SortedHeader>
               </th>
               <th>
-                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="startDate">
+                <SortedHeader
+                  :sortBy="sortBy"
+                  :sortAscending="sortAscending"
+                  sortName="startDate"
+                >
                   Od
                 </SortedHeader>
               </th>
               <th>
-                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="endDate">
+                <SortedHeader
+                  :sortBy="sortBy"
+                  :sortAscending="sortAscending"
+                  sortName="endDate"
+                >
                   Do
                 </SortedHeader>
               </th>
               <th>
-                <SortedHeader :sortBy="sortBy" :sortAscending="sortAscending" sortName="date">
+                <SortedHeader
+                  :sortBy="sortBy"
+                  :sortAscending="sortAscending"
+                  sortName="date"
+                >
                   Dnia
                 </SortedHeader>
               </th>
             </thead>
             <tbody>
-              <template v-for="slot in reservedSlotsFiltered" :key="slot.id">
-                <UnreserveSlotItem :appointmentSlot="slot" @slotUnreserved="loadReservedSlots" />
+              <template
+                v-for="slot in reservedSlotsFiltered"
+                :key="slot.id"
+              >
+                <UnreserveSlotItem
+                  :appointmentSlot="slot"
+                  @slotUnreserved="loadReservedSlots"
+                />
               </template>
             </tbody>
           </table>
@@ -256,7 +296,7 @@ export default {
         loading.value = false;
       } catch (error) {
         message.error(
-          `Nie udało się pobrać zarezerwowanych slotów - ${createRequestErrorMessage(error)}`
+          `Nie udało się pobrać zarezerwowanych slotów - ${createRequestErrorMessage(error)}`,
         );
       }
     };
@@ -310,7 +350,7 @@ export default {
       loadingSlots,
       reservedSlotsFiltered,
       sortBy,
-      sortAscending
+      sortAscending,
     };
   },
 };

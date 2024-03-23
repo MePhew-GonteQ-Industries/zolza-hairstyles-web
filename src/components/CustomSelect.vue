@@ -1,47 +1,94 @@
 <!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
 <template>
   <div class="select-wrapper">
-    <div class="select" tabindex="0" :class="[
-  {
-    expanded: expanded,
-    'hover-enabled': selectHoverEnabled,
-    invalid: invalid && (validate || forceValidate),
-  },
-  appearance,
-]" @mousedown="toggleDropdown" @focus.self="expandDropdown" @keydown.down.prevent="selectNextOption"
-      @keydown.up.prevent="selectPreviousOption" @keydown.tab="collapseDropdown" ref="select" @blur="validate = true">
-      <span class="header" :class="{ expanded: expanded, 'value-selected': selectedItem !== null }">
-        {{ header }}</span>
+    <div
+      class="select"
+      tabindex="0"
+      :class="[
+        {
+          expanded: expanded,
+          'hover-enabled': selectHoverEnabled,
+          invalid: invalid && (validate || forceValidate),
+        },
+        appearance,
+      ]"
+      @mousedown="toggleDropdown"
+      @focus.self="expandDropdown"
+      @keydown.down.prevent="selectNextOption"
+      @keydown.up.prevent="selectPreviousOption"
+      @keydown.tab="collapseDropdown"
+      ref="select"
+      @blur="validate = true"
+    >
+      <span
+        class="header"
+        :class="{ expanded: expanded, 'value-selected': selectedItem !== null }"
+      >
+        {{ header }}</span
+      >
 
-      <i class="select-icon" :class="currentIconClass" @focus.stop @mousedown.stop @mouseenter="toggleSelectHover"
-        @mouseleave="toggleSelectHover" tabindex="-1" v-if="currentIconClass"></i>
-      <div class="select-text-icon" v-else-if="currentIconText">
+      <i
+        class="select-icon"
+        :class="currentIconClass"
+        @focus.stop
+        @mousedown.stop
+        @mouseenter="toggleSelectHover"
+        @mouseleave="toggleSelectHover"
+        tabindex="-1"
+        v-if="currentIconClass"
+      ></i>
+      <div
+        class="select-text-icon"
+        v-else-if="currentIconText"
+      >
         {{ currentIconText }}
       </div>
 
       <span class="selected-value"> {{ title }}</span>
 
-      <i class="ph-caret-down-light dropdown-arrow" :class="{ flipped: expanded }"></i>
+      <i
+        class="ph-caret-down-light dropdown-arrow"
+        :class="{ flipped: expanded }"
+      ></i>
     </div>
     <div class="invalid-wrapper">
-      <i class="ph-warning-circle-light invalid-icon"
-        v-if="(required && selectedItem === null) && (validate || forceValidate)"></i>
+      <i
+        class="ph-warning-circle-light invalid-icon"
+        v-if="required && selectedItem === null && (validate || forceValidate)"
+      ></i>
 
-      <p class="messageInvalid messageValueEmpty"
-        v-if="(required && selectedItem === null) && (validate || forceValidate)">
+      <p
+        class="messageInvalid messageValueEmpty"
+        v-if="required && selectedItem === null && (validate || forceValidate)"
+      >
         {{ messageEmpty }}
       </p>
     </div>
-    <div class="dropdown" :class="{ show: expanded }">
+    <div
+      class="dropdown"
+      :class="{ show: expanded }"
+    >
       <ol>
-        <li v-for="(option, index) in options" :key="option.value" @click="
-  changeValue(index);
-collapseDropdown();
-        " @keydown.down="selectNextOption" @keydown.up="selectPreviousOption">
+        <li
+          v-for="(option, index) in options"
+          :key="option.value"
+          @click="
+            changeValue(index);
+            collapseDropdown();
+          "
+          @keydown.down="selectNextOption"
+          @keydown.up="selectPreviousOption"
+        >
           <span :class="{ selected: index === selectedItem }"> {{ option.title }}</span>
 
-          <i :class="option.iconClass" v-if="option.iconClass"></i>
-          <div class="text-icon" v-else-if="option.iconText">
+          <i
+            :class="option.iconClass"
+            v-if="option.iconClass"
+          ></i>
+          <div
+            class="text-icon"
+            v-else-if="option.iconText"
+          >
             {{ option.iconText }}
           </div>
         </li>
@@ -157,7 +204,7 @@ export default {
         const currentItem = props.options.findIndex((item) => item.value === props.selectedValue);
 
         changeValue(currentItem);
-      }
+      },
     );
 
     function selectNextOption() {
@@ -220,15 +267,15 @@ export default {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  gap: .5rem;
+  gap: 0.5rem;
 
   @media only screen and (max-width: $xs) {
     width: 330px;
   }
 
   .invalid-wrapper {
-    height: calc(20px - .5rem);
-    margin: 0 .1rem;
+    height: calc(20px - 0.5rem);
+    margin: 0 0.1rem;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -241,7 +288,7 @@ export default {
     }
 
     .messageInvalid {
-      font-size: .6rem;
+      font-size: 0.6rem;
       color: $error-color;
     }
   }

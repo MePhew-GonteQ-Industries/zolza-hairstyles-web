@@ -1,4 +1,4 @@
-@import '_constants';
+@import "_constants";
 
 $transition-duration: var(--transition-duration);
 $translucent-color: var(--translucent-color);
@@ -7,4 +7,4 @@ $xs: 600px; // extra small
 $sm: 960px; // small
 // desktop sizes take 16px browser scrollbar into account
 $md: 1264px; // medium
-$lg: 1904px // large
+$lg: 1904px; // large

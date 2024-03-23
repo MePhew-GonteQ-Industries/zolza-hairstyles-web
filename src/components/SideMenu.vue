@@ -1,6 +1,10 @@
 <template>
   <nav class="menu">
-    <router-link v-for="link in links" :key="link.id" :to="{ name: link.toName }">
+    <router-link
+      v-for="link in links"
+      :key="link.id"
+      :to="{ name: link.toName }"
+    >
       <span><i :class="link.iconClass"></i>{{ link.text }}</span>
       <div class="edge top"></div>
       <div class="edge bottom"></div>

@@ -1,41 +1,98 @@
 <template>
   <div class="input-wrapper">
     <div class="inside-input-wrapper">
-      <input :type="inputType" :id="inputId" name="input" :autocomplete="autocomplete" :placeholder="label"
-        :value="value" @input="(event) => $emit('update:value', event.target.value)"
-        :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]" @focus="$emit('focus')"
-        @blur="handleBlur" />
+      <input
+        :type="inputType"
+        :id="inputId"
+        name="input"
+        :autocomplete="autocomplete"
+        :placeholder="label"
+        :value="value"
+        @input="(event) => $emit('update:value', event.target.value)"
+        :class="[{ invalid: (invalid || empty) && (validate || forceValidate) }, appearance]"
+        @focus="$emit('focus')"
+        @blur="handleBlur"
+      />
 
-      <label class="search-label" v-if="type === 'search'" :for="inputId">{{ label }}</label>
-      <label class="form-label" v-else :for="inputId">{{ label }}</label>
+      <label
+        class="search-label"
+        v-if="type === 'search'"
+        :for="inputId"
+        >{{ label }}</label
+      >
+      <label
+        class="form-label"
+        v-else
+        :for="inputId"
+        >{{ label }}</label
+      >
 
-      <div v-if="type === 'search'" class="button" @click="$emit('searchBtnClick')" @keyup.enter="searchBtnClick">
+      <div
+        v-if="type === 'search'"
+        class="button"
+        @click="$emit('searchBtnClick')"
+        @keyup.enter="searchBtnClick"
+      >
         <i class="ph-magnifying-glass-light"></i>
       </div>
-      <div v-else-if="type === 'password'" class="button" @click="showPassword" @keyup.enter="showPassword">
-        <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+      <div
+        v-else-if="type === 'password'"
+        class="button"
+        @click="showPassword"
+        @keyup.enter="showPassword"
+      >
+        <i
+          class="ph-eye-slash-light"
+          v-if="passwordHidden"
+        ></i>
 
-        <i class="ph-eye-light" v-if="!passwordHidden"></i>
+        <i
+          class="ph-eye-light"
+          v-if="!passwordHidden"
+        ></i>
       </div>
-      <div v-else-if="type === 'password-login'" class="button" @click="showPassword" @keyup.enter="showPassword">
-        <i class="ph-eye-slash-light" v-if="passwordHidden"></i>
+      <div
+        v-else-if="type === 'password-login'"
+        class="button"
+        @click="showPassword"
+        @keyup.enter="showPassword"
+      >
+        <i
+          class="ph-eye-slash-light"
+          v-if="passwordHidden"
+        ></i>
 
-        <i class="ph-eye-light" v-if="!passwordHidden"></i>
+        <i
+          class="ph-eye-light"
+          v-if="!passwordHidden"
+        ></i>
       </div>
-      <i v-else :class="iconClass" class="input-icon"></i>
-
+      <i
+        v-else
+        :class="iconClass"
+        class="input-icon"
+      ></i>
     </div>
     <div class="invalid-wrapper">
-      <i class="ph-warning-circle-light invalid-icon"
-        v-if="(required && empty) && (validate || forceValidate) || ((validate || forceValidate) && (invalid))"></i>
+      <i
+        class="ph-warning-circle-light invalid-icon"
+        v-if="
+          (required && empty && (validate || forceValidate)) ||
+          ((validate || forceValidate) && invalid)
+        "
+      ></i>
 
-      <p class="message-invalid message-value-empty"
-        v-if="(required && empty) && (validate || forceValidate) && invalid">
+      <p
+        class="message-invalid message-value-empty"
+        v-if="required && empty && (validate || forceValidate) && invalid"
+      >
         {{ messageEmpty }}
       </p>
 
-      <p class="message-invalid message-value-invalid"
-        v-if="!(required && empty) && (validate || forceValidate) && invalid">
+      <p
+        class="message-invalid message-value-invalid"
+        v-if="!(required && empty) && (validate || forceValidate) && invalid"
+      >
         {{ messageInvalid }}
       </p>
     </div>
@@ -187,7 +244,7 @@ export default {
   height: 75px;
   width: 408px;
   box-sizing: border-box;
-  gap: .5rem;
+  gap: 0.5rem;
 
   @media only screen and (max-width: $xs) {
     width: 310px;
@@ -203,8 +260,8 @@ export default {
   }
 
   .invalid-wrapper {
-    height: calc(20px - .5rem);
-    margin: 0 .1rem;
+    height: calc(20px - 0.5rem);
+    margin: 0 0.1rem;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -218,7 +275,7 @@ export default {
 
     .message-invalid {
       color: $error-color;
-      font-size: .6rem;
+      font-size: 0.6rem;
     }
   }
 
@@ -296,14 +353,15 @@ export default {
       -webkit-appearance: none;
     }
 
-
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
       -webkit-text-fill-color: $secondary-text-color;
       background-color: $secondary-color;
       color: $secondary-text-color;
-      transition: background-color 5000s ease-in-out 0s, border-color $transition-duration,
+      transition:
+        background-color 5000s ease-in-out 0s,
+        border-color $transition-duration,
         box-shadow $transition-duration;
     }
 
@@ -323,14 +381,14 @@ export default {
       outline: none;
     }
 
-    &:focus+.form-label,
-    &:not(:placeholder-shown)+.form-label,
-    &:-webkit-autofill:active+.form-label {
+    &:focus + .form-label,
+    &:not(:placeholder-shown) + .form-label,
+    &:-webkit-autofill:active + .form-label {
       color: $accent-color;
       transform: translateY(-0.6em) scale(0.8);
     }
 
-    &:not(:placeholder-shown)+.search-label {
+    &:not(:placeholder-shown) + .search-label {
       display: none;
     }
 

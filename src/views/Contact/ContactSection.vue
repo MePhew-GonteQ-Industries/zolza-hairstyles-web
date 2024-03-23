@@ -14,16 +14,32 @@
     <div class="policy">
       <ul>
         <li>
-          <router-link class="link" to="/terms-of-use">{{ t("footer[0]") }}</router-link>
+          <router-link
+            class="link"
+            to="/terms-of-use"
+            >{{ t("footer[0]") }}</router-link
+          >
         </li>
         <li>
-          <router-link class="link" to="/privacy-policy">{{ t("footer[1]") }} </router-link>
+          <router-link
+            class="link"
+            to="/privacy-policy"
+            >{{ t("footer[1]") }}
+          </router-link>
         </li>
         <li>
-          <router-link class="link" to="/cookies-policy">{{ t("footer[2]") }} </router-link>
+          <router-link
+            class="link"
+            to="/cookies-policy"
+            >{{ t("footer[2]") }}
+          </router-link>
         </li>
         <li>
-          <router-link class="link" to="/rodo">{{ t("footer[3]") }} </router-link>
+          <router-link
+            class="link"
+            to="/rodo"
+            >{{ t("footer[3]") }}
+          </router-link>
         </li>
       </ul>
     </div>
@@ -48,12 +64,20 @@
           </a>
         </li>
         <li>
-          <a href="tel:+48 730 601 830" target="_blank" aria-label="Numer telefonu">
+          <a
+            href="tel:+48 730 601 830"
+            target="_blank"
+            aria-label="Numer telefonu"
+          >
             <i class="ph-phone-light"></i>
           </a>
         </li>
         <li>
-          <a href="mailto:zolza.hairstyles@gmail.com" target="_blank" aria-label="Adres email">
+          <a
+            href="mailto:zolza.hairstyles@gmail.com"
+            target="_blank"
+            aria-label="Adres email"
+          >
             <i class="ph-envelope-simple-light"></i>
           </a>
         </li>

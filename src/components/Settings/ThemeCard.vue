@@ -12,7 +12,10 @@
     >
       <slot />
     </CustomRadioButton>
-    <div class="theme-preview" ref="themePreview">
+    <div
+      class="theme-preview"
+      ref="themePreview"
+    >
       <div class="header">
         <div class="accent-indicator"></div>
         <div class="accent-line"></div>

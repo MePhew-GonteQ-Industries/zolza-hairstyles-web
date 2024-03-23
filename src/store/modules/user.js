@@ -73,7 +73,7 @@ export default {
           permissionLevel: state.permissionLevel,
           verified: state.verified,
           createdAt: state.createdAt,
-        })
+        }),
       );
     },
 

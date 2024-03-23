@@ -4,8 +4,8 @@
       appearance === 'checkbox'
         ? 'checkbox-wrapper'
         : appearance === 'switch'
-        ? 'switch-wrapper'
-        : '',
+          ? 'switch-wrapper'
+          : '',
       { disabled: disabled },
     ]"
     class="checkbox"
@@ -24,7 +24,10 @@
     <label :for="checkboxId">
       <slot v-if="appearance === 'checkbox'" />
     </label>
-    <div class="label" v-if="appearance !== 'checkbox'">
+    <div
+      class="label"
+      v-if="appearance !== 'checkbox'"
+    >
       <slot />
     </div>
   </div>

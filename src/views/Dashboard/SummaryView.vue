@@ -1,5 +1,9 @@
 <template>
-  <section class="dashboard-page" id="summary-view-page" ref="summaryViewPage">
+  <section
+    class="dashboard-page"
+    id="summary-view-page"
+    ref="summaryViewPage"
+  >
     <h2>{{ t("dashboard.summaryView.monthSummary") }}</h2>
     <div class="month-summary-tiles">
       <div class="month-summary-tile">

@@ -1,7 +1,14 @@
 <template>
   <teleport to="body">
-    <Transition v-if="modalOpen" appear>
-      <FocusTrap :active="true" :escapeDeactivates="false" :initial-focus="$refs.modal">
+    <Transition
+      v-if="modalOpen"
+      appear
+    >
+      <FocusTrap
+        :active="true"
+        :escapeDeactivates="false"
+        :initial-focus="$refs.modal"
+      >
         <div
           ref="modal"
           class="modal"
@@ -10,7 +17,11 @@
           @keyup.esc="handleModalClose"
           tabindex="0"
         >
-          <div ref="modalContent" class="modal-content" :class="{ shake: shake }">
+          <div
+            ref="modalContent"
+            class="modal-content"
+            :class="{ shake: shake }"
+          >
             <div class="header">
               <div class="title">
                 <slot name="title" />
@@ -79,7 +90,7 @@ export default {
         } else {
           closeModal();
         }
-      }
+      },
     );
 
     const shakeModal = () => {

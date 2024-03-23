@@ -1,5 +1,8 @@
 <template>
-  <div class="progress-bar" ref="progress">
+  <div
+    class="progress-bar"
+    ref="progress"
+  >
     <div class="progress"></div>
   </div>
 </template>

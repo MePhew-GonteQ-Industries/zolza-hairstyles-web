@@ -11,7 +11,10 @@
           </template>
           <span>{{ session.deviceTooltip }}</span>
         </CustomTooltip>
-        <span class="location" v-if="session.last_access_data.location">
+        <span
+          class="location"
+          v-if="session.last_access_data.location"
+        >
           <span>{{ session.last_access_data.location.country }}</span
           >, <span>{{ session.last_access_data.location.region }}</span>
         </span>
@@ -31,7 +34,11 @@
         </span>
       </div>
     </div>
-    <LinkButton type="info" :to="`sessions/${session.id}`" class="details-link">
+    <LinkButton
+      type="info"
+      :to="`sessions/${session.id}`"
+      class="details-link"
+    >
       Szczegóły
     </LinkButton>
   </div>

@@ -6,7 +6,7 @@
   --primary-color-dark: #2d2833;
   --secondary-color-dark: #3d3943;
   --accent-color-dark: rgb(0, 232, 176);
-  --accent-color-low-dark: rgba(0, 232, 176, .4);
+  --accent-color-low-dark: rgba(0, 232, 176, 0.4);
   --alternative-accent-color-dark: rgba(0, 0, 0, 0.26);
   --background-accent-color-low-dark: rgb(61 57 67 / 65%);
 
@@ -22,7 +22,7 @@
   --primary-color-light: #f8fafb;
   --secondary-color-light: #e2e2e2;
   --accent-color-light: rgb(0, 162, 232);
-  --accent-color-low-light: rgba(0, 162, 232, .4);
+  --accent-color-low-light: rgba(0, 162, 232, 0.4);
   --alternative-accent-color-light: white;
   --background-accent-color-low-light: rgb(255 255 255 / 65%);
 

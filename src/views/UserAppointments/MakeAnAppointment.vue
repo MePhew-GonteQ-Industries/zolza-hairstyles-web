@@ -1,6 +1,9 @@
 <template>
   <div class="make-an-appointment-page">
-    <div class="services-tiles" v-if="!loading">
+    <div
+      class="services-tiles"
+      v-if="!loading"
+    >
       <div
         class="service-tile"
         v-for="service in servicesData"
@@ -43,7 +46,10 @@
               :max-date="maxDate"
             />
             <div class="hours">
-              <CustomLoader v-if="loadingSlots" class="loader"></CustomLoader>
+              <CustomLoader
+                v-if="loadingSlots"
+                class="loader"
+              ></CustomLoader>
               <div
                 class="slots-wrapper"
                 v-if="validatedSlots.length && !loadingSlots && validatedSlots !== 'Niedziela'"
@@ -69,26 +75,40 @@
               >
                 {{ t("userAppointmentsView.makeAnAppointment.noSlots") }}
               </div>
-              <div class="no-slots" v-if="validatedSlots === 'Niedziela' && !loadingSlots">
+              <div
+                class="no-slots"
+                v-if="validatedSlots === 'Niedziela' && !loadingSlots"
+              >
                 Niedziela
               </div>
-              <div class="no-slots" v-if="validatedSlots.holiday && !loadingSlots">
+              <div
+                class="no-slots"
+                v-if="validatedSlots.holiday && !loadingSlots"
+              >
                 {{ validatedSlots.holidayName }}
               </div>
             </div>
           </div>
           <div class="buttons-wrapper">
-            <CustomButton type="info" @click="makeAppointment">{{
-              t("userAppointmentsView.makeAnAppointment.makeAnAppointment")
-            }}</CustomButton>
-            <CustomButton type="secondary" @click="closeMakeAnAppointmentModal">
+            <CustomButton
+              type="info"
+              @click="makeAppointment"
+              >{{ t("userAppointmentsView.makeAnAppointment.makeAnAppointment") }}</CustomButton
+            >
+            <CustomButton
+              type="secondary"
+              @click="closeMakeAnAppointmentModal"
+            >
               {{ t("userAppointmentsView.makeAnAppointment.cancel") }}</CustomButton
             >
           </div>
         </div>
       </CustomModal>
     </div>
-    <div class="loader" v-else>
+    <div
+      class="loader"
+      v-else
+    >
       <CustomLoader></CustomLoader>
     </div>
   </div>
@@ -207,7 +227,7 @@ export default {
         router.push({ name: "appointmentsList" });
       } catch (error) {
         message.error(
-          `${t("snackBars.appointmentsMadeError")} - ${createRequestErrorMessage(error)}`
+          `${t("snackBars.appointmentsMadeError")} - ${createRequestErrorMessage(error)}`,
         );
       }
     };

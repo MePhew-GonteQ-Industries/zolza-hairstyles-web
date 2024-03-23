@@ -1,25 +1,25 @@
 const notificationsSupported = () => {
-  return ("Notification" in window);
-}
+  return "Notification" in window;
+};
 
 const requestNotificationsPermission = async () => {
   const permission = await Notification.requestPermission();
-  return permission === 'granted';
-}
+  return permission === "granted";
+};
 
 const validateEmail = (email) => {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
-}
+};
 
 const getCssPropertyValue = (propertyName) => {
   return getComputedStyle(document.documentElement).getPropertyValue(propertyName);
-}
+};
 
 const setCssPropertyValue = (element, propertyName, propertyValue) => {
   element.style.setProperty(propertyName, propertyValue);
-}
+};
 
 const getRequestResponseStatus = (error) => {
   if (error.response) {
@@ -29,7 +29,7 @@ const getRequestResponseStatus = (error) => {
   }
 
   throw error;
-}
+};
 
 const createRequestErrorMessage = (error) => {
   if (error.response) {
@@ -37,7 +37,6 @@ const createRequestErrorMessage = (error) => {
     // that falls out of the range of 2xx
 
     if (!error.response.data) {
-
       if (error.response.status === 0) {
         return error.message;
       }
@@ -57,6 +56,14 @@ const createRequestErrorMessage = (error) => {
 
   // Something happened in setting up the request that triggered an Error
   return error.message;
-}
+};
 
-export { validateEmail, getCssPropertyValue, setCssPropertyValue, createRequestErrorMessage, getRequestResponseStatus, requestNotificationsPermission, notificationsSupported };
+export {
+  validateEmail,
+  getCssPropertyValue,
+  setCssPropertyValue,
+  createRequestErrorMessage,
+  getRequestResponseStatus,
+  requestNotificationsPermission,
+  notificationsSupported,
+};

@@ -1,5 +1,8 @@
 <template>
-  <div class="chip" ref="chip">
+  <div
+    class="chip"
+    ref="chip"
+  >
     <i :class="iconClass"></i>
     <span><slot /></span>
   </div>

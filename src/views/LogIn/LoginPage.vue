@@ -4,17 +4,26 @@
       <h1>{{ t("logIn.heading") }}</h1>
       <h3>{{ t("logIn.subtitle") }}</h3>
 
-      <div class="state-message" v-if="emailConfirmed">
+      <div
+        class="state-message"
+        v-if="emailConfirmed"
+      >
         <h4>{{ t("logIn.emailConfirmed") }}</h4>
         <h4>{{ t("logIn.allowLogin") }}</h4>
       </div>
 
-      <div class="state-message" v-if="accountCreated">
+      <div
+        class="state-message"
+        v-if="accountCreated"
+      >
         <h4>{{ t("logIn.accountCreated") }}</h4>
         <h4>{{ t("logIn.allowLogin") }}</h4>
       </div>
 
-      <form @submit.prevent="handleSubmit" novalidate>
+      <form
+        @submit.prevent="handleSubmit"
+        novalidate
+      >
         <div class="inputs">
           <CustomInput
             :label="t('shared.email')"
@@ -47,14 +56,23 @@
         <div class="under-inputs-section">
           <CustomCheckbox v-model:checked="saveUser">{{ t("logIn.saveUser") }}</CustomCheckbox>
 
-          <router-link to="/password-reset" tabindex="-1">{{
-            t("logIn.forgotPasswordBtn")
-          }}</router-link>
+          <router-link
+            to="/password-reset"
+            tabindex="-1"
+            >{{ t("logIn.forgotPasswordBtn") }}</router-link
+          >
         </div>
 
-        <CustomButton class="btn" v-if="!loading">{{ t("shared.login") }}</CustomButton>
+        <CustomButton
+          class="btn"
+          v-if="!loading"
+          >{{ t("shared.login") }}</CustomButton
+        >
 
-        <CustomLoader class="loader" v-else />
+        <CustomLoader
+          class="loader"
+          v-else
+        />
       </form>
       <div class="under-form-section">
         <span>{{ t("logIn.dontHaveAnAccount") }}</span>

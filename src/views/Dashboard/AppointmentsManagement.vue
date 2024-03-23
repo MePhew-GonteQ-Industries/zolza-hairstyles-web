@@ -1,5 +1,8 @@
 <template>
-  <section class="dashboard-page dashboard-data-page appointments-management" v-if="!loading">
+  <section
+    class="dashboard-page dashboard-data-page appointments-management"
+    v-if="!loading"
+  >
     <form class="appointments-filters">
       <CustomInput
         class="search"
@@ -17,9 +20,18 @@
         color="green"
         mode="date"
         v-model="selectedDate"/> -->
-        <CustomSelect class="select" appearance="secondary" />
-        <CustomSelect class="select" appearance="secondary" />
-        <CustomSelect class="select" appearance="secondary" />
+        <CustomSelect
+          class="select"
+          appearance="secondary"
+        />
+        <CustomSelect
+          class="select"
+          appearance="secondary"
+        />
+        <CustomSelect
+          class="select"
+          appearance="secondary"
+        />
       </div>
     </form>
 
@@ -38,14 +50,26 @@
               v-if="!userWithoutAccount"
             >
             </CustomInput>
-            <CustomInput :label="t('shared.name')" type="text" autocomplete="off"></CustomInput>
-            <CustomInput :label="t('shared.surname')" type="text" autocomplete="off"></CustomInput>
+            <CustomInput
+              :label="t('shared.name')"
+              type="text"
+              autocomplete="off"
+            ></CustomInput>
+            <CustomInput
+              :label="t('shared.surname')"
+              type="text"
+              autocomplete="off"
+            ></CustomInput>
             <CustomCheckbox v-model:checked="userWithoutAccountChecked"
               >{{ t("dashboard.appointmentsManagement.userWithoutAccount") }}
             </CustomCheckbox>
           </div>
           <div class="services-wrapper">
-            <div class="service" v-for="service in servicesOptions" :key="service.id">
+            <div
+              class="service"
+              v-for="service in servicesOptions"
+              :key="service.id"
+            >
               <p>{{ service.name }}</p>
               <input
                 class="select-service"
@@ -58,10 +82,14 @@
           </div>
         </div>
         <div class="buttons-wrapper">
-          <CustomButton type="info" @click="addAppointmentModalOpen = false">{{
-            t("dashboard.appointmentsManagement.save")
-          }}</CustomButton>
-          <CustomButton type="secondary" @click="addAppointmentModalOpen = false"
+          <CustomButton
+            type="info"
+            @click="addAppointmentModalOpen = false"
+            >{{ t("dashboard.appointmentsManagement.save") }}</CustomButton
+          >
+          <CustomButton
+            type="secondary"
+            @click="addAppointmentModalOpen = false"
             >{{ t("dashboard.appointmentsManagement.cancel") }}
           </CustomButton>
         </div>
@@ -129,7 +157,10 @@
           <th>{{ t("dashboard.appointmentsManagement.status") }}</th>
         </thead>
         <tbody>
-          <tr v-for="appointment in appointments" :key="appointment.id">
+          <tr
+            v-for="appointment in appointments"
+            :key="appointment.id"
+          >
             <td class="id">
               <CustomTooltip>
                 <template #activator>
@@ -177,7 +208,10 @@
 
     <NPagination />
   </section>
-  <div class="dashboard-page dashboard-data-page users-management" v-else>
+  <div
+    class="dashboard-page dashboard-data-page users-management"
+    v-else
+  >
     <CustomLoader></CustomLoader>
   </div>
 </template>

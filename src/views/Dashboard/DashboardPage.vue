@@ -1,7 +1,16 @@
 <template>
-  <section class="app-page" id="dashboard-page">
-    <CustomHorizontalMenu :links="links" class="horizontal-menu"></CustomHorizontalMenu>
-    <SideMenu :links="links" class="side-menu" />
+  <section
+    class="app-page"
+    id="dashboard-page"
+  >
+    <CustomHorizontalMenu
+      :links="links"
+      class="horizontal-menu"
+    ></CustomHorizontalMenu>
+    <SideMenu
+      :links="links"
+      class="side-menu"
+    />
     <router-view></router-view>
   </section>
 </template>

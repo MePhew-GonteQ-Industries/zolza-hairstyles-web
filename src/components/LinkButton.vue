@@ -1,5 +1,8 @@
 <template>
-  <div class="link-button-wrapper" ref="linkButton">
+  <div
+    class="link-button-wrapper"
+    ref="linkButton"
+  >
     <router-link
       v-if="mode === 'router-link'"
       :to="to"

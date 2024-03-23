@@ -6,7 +6,10 @@
     </div>
     <h3>{{ t("resetPassword.requestPasswordReset.subtitle") }}</h3>
 
-    <form @submit.prevent="handleResetPasswordRequest" novalidate>
+    <form
+      @submit.prevent="handleResetPasswordRequest"
+      novalidate
+    >
       <div class="inputs">
         <CustomInput
           :label="t('shared.email')"
@@ -27,7 +30,10 @@
       </CustomButton>
     </form>
     <div class="under-form-section">
-      <router-link to="/login" class="return-link">
+      <router-link
+        to="/login"
+        class="return-link"
+      >
         <i class="ph-caret-left-bold"></i>
         <span>Powrót do logowania</span>
       </router-link>
@@ -80,7 +86,7 @@ export default {
         })
         .catch((error) => {
           message.error(
-            `${t("snackBars.passwordResetError")} - ${createRequestErrorMessage(error)}`
+            `${t("snackBars.passwordResetError")} - ${createRequestErrorMessage(error)}`,
           );
         });
     }

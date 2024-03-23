@@ -8,13 +8,20 @@
         v-model:selectedValue="selectedLanguage"
         appearance="primary"
       />
-      <div class="buttons-row" v-if="!(selectedLanguage === initialLanguage)">
-        <CustomButton type="success" @click="changeLanguage">{{
-          t("shared.saveChanges")
-        }}</CustomButton>
-        <CustomButton type="secondary" @click="selectedLanguage = initialLanguage">{{
-          t("shared.operationCancel")
-        }}</CustomButton>
+      <div
+        class="buttons-row"
+        v-if="!(selectedLanguage === initialLanguage)"
+      >
+        <CustomButton
+          type="success"
+          @click="changeLanguage"
+          >{{ t("shared.saveChanges") }}</CustomButton
+        >
+        <CustomButton
+          type="secondary"
+          @click="selectedLanguage = initialLanguage"
+          >{{ t("shared.operationCancel") }}</CustomButton
+        >
       </div>
     </div>
   </div>

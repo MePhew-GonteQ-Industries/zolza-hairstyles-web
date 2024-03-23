@@ -1,6 +1,9 @@
 <template>
-  <div class="service" @click="$emit('updateSelectedService', id)"
-    :class="{ selected: selectedServiceId === id }">
+  <div
+    class="service"
+    @click="$emit('updateSelectedService', id)"
+    :class="{ selected: selectedServiceId === id }"
+  >
     <div class="left">
       <p class="name">{{ name }}</p>
       <p class="description">{{ description }}</p>
@@ -18,8 +21,10 @@
       </div>
       <p class="price">
         {{ t("home.serviceTile.price") }}
-        <span>{{ priceMin }}
-          <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span>
+        <span
+          >{{ priceMin }}
+          <span v-if="priceMax && priceMax !== priceMin">- {{ priceMax }}</span> zł</span
+        >
       </p>
     </div>
   </div>
@@ -64,7 +69,7 @@ export default {
     },
     selectedServiceId: {
       type: String,
-    }
+    },
   },
   setup() {
     const { t } = useI18n({ useScope: "global" });
@@ -88,7 +93,7 @@ export default {
   color: $secondary-text-color;
   background-color: $background-accent-low;
   border: 1px solid $background-accent-medium;
-  border-radius: .375rem;
+  border-radius: 0.375rem;
   cursor: pointer;
   max-width: 500px;
 

@@ -1,9 +1,14 @@
 <template>
   <div class="slider">
-    <swiper :slidesPerView="3" :slidesPerGroup="3" :loop="true" :loopFillGroupWithBlank="true"
+    <swiper
+      :slidesPerView="3"
+      :slidesPerGroup="3"
+      :loop="true"
+      :loopFillGroupWithBlank="true"
       :pagination="{
         clickable: true,
-      }" :breakpoints="{
+      }"
+      :breakpoints="{
         120: {
           slidesPerView: 1,
           slidesPerGroup: 1,
@@ -14,12 +19,23 @@
           slidesPerGroup: 3,
           spacebetween: 5,
         },
-      }" :navigation="true" :modules="modules" :autoplay="{
+      }"
+      :navigation="true"
+      :modules="modules"
+      :autoplay="{
         delay: 2500,
         disableOnInteraction: true,
-      }" class="mySwiper">
-      <swiper-slide v-for="photo in photos" :key="photo.id">
-        <img :src="photo.path" alt="" />
+      }"
+      class="mySwiper"
+    >
+      <swiper-slide
+        v-for="photo in photos"
+        :key="photo.id"
+      >
+        <img
+          :src="photo.path"
+          alt=""
+        />
       </swiper-slide>
     </swiper>
   </div>
@@ -29,14 +45,14 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-import 'swiper/scss';
-import 'swiper/scss/autoplay';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
-import 'swiper/scss/thumbs';
+import "swiper/scss";
+import "swiper/scss/autoplay";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
+import "swiper/scss/thumbs";
 
 export default {
-  name: 'ImageGallery',
+  name: "ImageGallery",
   components: {
     Swiper,
     SwiperSlide,

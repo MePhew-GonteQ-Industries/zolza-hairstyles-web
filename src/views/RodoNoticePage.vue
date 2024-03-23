@@ -6,11 +6,15 @@
       <p>
         Poniższa informacja stanowi zwięzły, zrozumiały i przejrzysty skrót informacji
         zamieszczonych w
-        <router-link class="link" to="/privacy-policy">Polityce Prywatności </router-link> odnośnie
-        Administratora danych, celu i sposobu przetwarzania danych osobowych oraz Twoich praw w
-        związku z tym przetwarzaniem, w formie wymaganej do spełnienia obowiązku informacyjnego
-        RODO. Szczegóły dotyczące sposobu przetwarzania i podmiotów uczestniczących w tym procesie
-        dostępne są we wskazanej polityce.
+        <router-link
+          class="link"
+          to="/privacy-policy"
+          >Polityce Prywatności
+        </router-link>
+        odnośnie Administratora danych, celu i sposobu przetwarzania danych osobowych oraz Twoich
+        praw w związku z tym przetwarzaniem, w formie wymaganej do spełnienia obowiązku
+        informacyjnego RODO. Szczegóły dotyczące sposobu przetwarzania i podmiotów uczestniczących w
+        tym procesie dostępne są we wskazanej polityce.
       </p>
       <h2>Kto jest administratorem danych?</h2>
       <p>

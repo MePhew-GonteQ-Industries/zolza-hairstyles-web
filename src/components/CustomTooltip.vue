@@ -1,7 +1,12 @@
 <template>
   <div class="tooltip-wrapper">
     <slot name="activator" />
-    <div class="tooltip" ref="tooltip"><slot /></div>
+    <div
+      class="tooltip"
+      ref="tooltip"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 

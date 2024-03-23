@@ -202,7 +202,10 @@
         <li>
           W przypadku kontaktu Usługobiorcy z Usługodawcą, dane osobowe Usługobiorców będa
           przetwarzane zgodnie z
-          <router-link class="link" to="/privacy-policy">"Polityką Prywatności", </router-link
+          <router-link
+            class="link"
+            to="/privacy-policy"
+            >"Polityką Prywatności", </router-link
           >stanowiącą integralną część Regulaminu.
         </li>
       </ul>
@@ -219,9 +222,17 @@
       <p>
         Zakres, cele, sposób oraz zasady przetwarzania danych dostępne są w załącznikach do
         Regulaminu:
-        <router-link class="link" to="/rodo">"Obowiązek informacyjny RODO" </router-link>
+        <router-link
+          class="link"
+          to="/rodo"
+          >"Obowiązek informacyjny RODO"
+        </router-link>
         oraz w
-        <router-link class="link" to="/privacy-policy">"Polityce prywatności", </router-link>
+        <router-link
+          class="link"
+          to="/privacy-policy"
+          >"Polityce prywatności",
+        </router-link>
         stanowiących integralną część Regulaminu.
       </p>
       <ul>

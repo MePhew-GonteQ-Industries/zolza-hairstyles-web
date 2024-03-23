@@ -1,11 +1,17 @@
 <template>
   <div class="settings-page">
-    <div class="elevated-card session-card" v-if="session">
+    <div
+      class="elevated-card session-card"
+      v-if="session"
+    >
       <div class="header">
         <div class="icon-wrapper">
           <CustomTooltip type="info">
             <template #activator>
-              <i :class="session.iconClass || 'ph-question-light'" class="session-icon"></i>
+              <i
+                :class="session.iconClass || 'ph-question-light'"
+                class="session-icon"
+              ></i>
             </template>
             {{ session.deviceTooltip }}
           </CustomTooltip>
@@ -32,7 +38,11 @@
           @click="logoutModalOpen = true"
           >{{ t("shared.logOut") }}</CustomButton
         >
-        <CustomChip type="info" class="current-session-chip" v-else>
+        <CustomChip
+          type="info"
+          class="current-session-chip"
+          v-else
+        >
           {{ t("settings.sessionView.currentSession") }}
         </CustomChip>
         <CustomModal v-model:open="logoutModalOpen">
@@ -45,10 +55,16 @@
               <template #subtitle> {{ t("shared.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
-              <CustomButton type="warning" @click="logout">{{ t("shared.logOut") }}</CustomButton>
-              <CustomButton type="secondary" @click="logoutModalOpen = false">{{
-                t("shared.operationCancel")
-              }}</CustomButton>
+              <CustomButton
+                type="warning"
+                @click="logout"
+                >{{ t("shared.logOut") }}</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="logoutModalOpen = false"
+                >{{ t("shared.operationCancel") }}</CustomButton
+              >
             </div>
           </div>
         </CustomModal>
@@ -72,9 +88,12 @@
                 {{ session.last_access_data.location.region }},
                 {{ session.last_access_data.location.country }}
               </p>
-              <CustomButton type="info" class="show-on-map-btn" @click="showLastAccessMap">{{
-                t("settings.sessionView.showOnMap")
-              }}</CustomButton>
+              <CustomButton
+                type="info"
+                class="show-on-map-btn"
+                @click="showLastAccessMap"
+                >{{ t("settings.sessionView.showOnMap") }}</CustomButton
+              >
             </template>
             <p v-else>{{ t("settings.sessionView.noData") }}</p>
           </div>
@@ -103,9 +122,12 @@
                 {{ session.sign_in_data.location.region }},
                 {{ session.sign_in_data.location.country }}
               </p>
-              <CustomButton type="info" class="show-on-map-btn" @click="showSignInMap">{{
-                t("settings.sessionView.showOnMap")
-              }}</CustomButton>
+              <CustomButton
+                type="info"
+                class="show-on-map-btn"
+                @click="showSignInMap"
+                >{{ t("settings.sessionView.showOnMap") }}</CustomButton
+              >
             </template>
             <p v-else>{{ t("settings.sessionView.noData") }}</p>
           </div>

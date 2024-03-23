@@ -1,7 +1,16 @@
 <template>
-  <section class="app-page" id="settings-page">
-    <CustomHorizontalMenu :links="links" class="horizontal-menu"></CustomHorizontalMenu>
-    <SideMenu id="settings-navigation" :links="links" />
+  <section
+    class="app-page"
+    id="settings-page"
+  >
+    <CustomHorizontalMenu
+      :links="links"
+      class="horizontal-menu"
+    ></CustomHorizontalMenu>
+    <SideMenu
+      id="settings-navigation"
+      :links="links"
+    />
     <router-view v-if="$store.getters.isLoggedIn"></router-view>
   </section>
 </template>

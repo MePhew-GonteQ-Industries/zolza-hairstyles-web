@@ -1,11 +1,18 @@
 <template>
-  <div class="message-box" :class="{ interactive: interactive }" ref="messageBox">
+  <div
+    class="message-box"
+    :class="{ interactive: interactive }"
+    ref="messageBox"
+  >
     <i :class="iconClass"></i>
     <div class="content">
       <p>
         <slot name="title"></slot>
       </p>
-      <span v-if="!interactive" class="subtitle">
+      <span
+        v-if="!interactive"
+        class="subtitle"
+      >
         <slot name="subtitle"></slot>
       </span>
       <span

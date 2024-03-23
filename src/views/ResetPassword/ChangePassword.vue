@@ -6,7 +6,10 @@
     </div>
     <h3>{{ t("resetPassword.changePassword.subtitle") }}</h3>
 
-    <form @submit.prevent="handlePasswordReset" novalidate>
+    <form
+      @submit.prevent="handlePasswordReset"
+      novalidate
+    >
       <div class="inputs">
         <input
           class="hidden-input"
@@ -48,7 +51,10 @@
       </CustomButton>
     </form>
     <div class="under-form-section">
-      <router-link to="/login" class="return-link">
+      <router-link
+        to="/login"
+        class="return-link"
+      >
         <i class="ph-caret-left-bold"></i>
         <span>Powrót do logowania</span>
       </router-link>

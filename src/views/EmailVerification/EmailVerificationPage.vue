@@ -1,14 +1,23 @@
 <template>
-  <section class="app-page" id="verification-page">
+  <section
+    class="app-page"
+    id="verification-page"
+  >
     <CustomLoader v-if="loading" />
-    <MessageBox type="error" v-if="!$route.query | !$route.query.token | verificationFailed">
+    <MessageBox
+      type="error"
+      v-if="!$route.query | !$route.query.token | verificationFailed"
+    >
       <template #title>Adres e-mail nie został zweryfikowany</template>
       <template #subtitle
         >Przepraszamy, ale Twój link służący do weryfikacji adresu e-mail jest błędny, utracił
         ważność lub został już wykorzystany.</template
       >
     </MessageBox>
-    <MessageBox type="success" v-else-if="!loading">
+    <MessageBox
+      type="success"
+      v-else-if="!loading"
+    >
       <template #title>Adres e-mail został zweryfikowany</template>
       <template #subtitle>Adres e-mail został pomyślnie zweryfikowany. Dziękujemy!</template>
     </MessageBox>
@@ -60,7 +69,7 @@ export default {
               verificationFailed.value = true;
               loading.value = false;
               message.error(
-                `Nie udało się zweryfikować adresu email- ${createRequestErrorMessage(error)}`
+                `Nie udało się zweryfikować adresu email- ${createRequestErrorMessage(error)}`,
               );
             });
         }

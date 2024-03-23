@@ -1,18 +1,28 @@
 <template>
-  <div class="sorted-header" :class="{ active: sortBy === sortName }" @click="toggleSort"
-    @keyup.enter="$emit('toggleSort')">
+  <div
+    class="sorted-header"
+    :class="{ active: sortBy === sortName }"
+    @click="toggleSort"
+    @keyup.enter="$emit('toggleSort')"
+  >
     <span>
       <slot />
     </span>
     <div class="sort-wrapper">
-      <i class="ph-sort-ascending-light" v-if="sortAscending"></i>
-      <i class="ph-sort-descending-light" v-if="!sortAscending"></i>
+      <i
+        class="ph-sort-ascending-light"
+        v-if="sortAscending"
+      ></i>
+      <i
+        class="ph-sort-descending-light"
+        v-if="!sortAscending"
+      ></i>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 export default {
   name: "SortedHeader",
@@ -35,14 +45,14 @@ export default {
         sortAscending.value = !sortAscending.value;
       }
 
-      emit('toggleSort');
-    }
+      emit("toggleSort");
+    };
 
     return {
       sortAscending,
       toggleSort,
-    }
-  }
+    };
+  },
 };
 </script>
 

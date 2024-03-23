@@ -1,6 +1,9 @@
 <template>
   <div class="dashboard-page service-view">
-    <div class="service elevated-card" v-if="serviceData">
+    <div
+      class="service elevated-card"
+      v-if="serviceData"
+    >
       <div>
         <h1>{{ serviceData.name }}</h1>
         <p>
@@ -19,9 +22,11 @@
         </p>
       </div>
       <div class="buttons">
-        <CustomButton type="info" @click="editServiceModalOpen = true">{{
-          t("dashboard.servicesManagement.serviceView.edit")
-        }}</CustomButton>
+        <CustomButton
+          type="info"
+          @click="editServiceModalOpen = true"
+          >{{ t("dashboard.servicesManagement.serviceView.edit") }}</CustomButton
+        >
         <CustomModal v-model:open="editServiceModalOpen">
           <template #title>
             {{ t("dashboard.servicesManagement.serviceView.modifyService") }}
@@ -63,18 +68,24 @@
               </CustomInput>
             </div>
             <div class="buttons-wrapper">
-              <CustomButton type="info" @click="editServiceModalOpen = false">{{
-                t("dashboard.servicesManagement.serviceView.save")
-              }}</CustomButton>
-              <CustomButton type="secondary" @click="editServiceModalOpen = false"
+              <CustomButton
+                type="info"
+                @click="editServiceModalOpen = false"
+                >{{ t("dashboard.servicesManagement.serviceView.save") }}</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="editServiceModalOpen = false"
                 >{{ t("dashboard.servicesManagement.serviceView.cancel") }}
               </CustomButton>
             </div>
           </div>
         </CustomModal>
-        <CustomButton type="error" @click="deleteServiceModalOpen = true">{{
-          t("dashboard.servicesManagement.serviceView.delete")
-        }}</CustomButton>
+        <CustomButton
+          type="error"
+          @click="deleteServiceModalOpen = true"
+          >{{ t("dashboard.servicesManagement.serviceView.delete") }}</CustomButton
+        >
         <CustomModal v-model:open="deleteServiceModalOpen">
           <template #title>
             {{ t("dashboard.servicesManagement.serviceView.deleteReassurance") }}?
@@ -89,10 +100,16 @@
               </template>
             </MessageBox>
             <div class="buttons-wrapper">
-              <CustomButton type="error" @click="deleteServiceModalOpen = false">
+              <CustomButton
+                type="error"
+                @click="deleteServiceModalOpen = false"
+              >
                 {{ t("dashboard.servicesManagement.serviceView.delete") }}
               </CustomButton>
-              <CustomButton type="secondary" @click="deleteServiceModalOpen = false">
+              <CustomButton
+                type="secondary"
+                @click="deleteServiceModalOpen = false"
+              >
                 {{ t("dashboard.servicesManagement.serviceView.cancel") }}
               </CustomButton>
             </div>

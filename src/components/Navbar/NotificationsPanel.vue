@@ -1,45 +1,104 @@
 <template>
-  <div class="notifications-wrapper" ref="notificationsWrapper">
-    <i class="bell-icon" :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
-      @click="toggleNotificationsPanel" @keyup.enter="toggleNotificationsPanel" v-ripple></i>
-    <NBadge class="unread-notifications-count" color="var(--accent-color)" :max="9" :value="2" />
-    <div class="notifications-panel" v-show="notificationsPanelExpanded" ref="notificationsPanel">
+  <div
+    class="notifications-wrapper"
+    ref="notificationsWrapper"
+  >
+    <i
+      class="bell-icon"
+      :class="notificationsPanelExpanded ? 'ph-bell-fill' : 'ph-bell-light'"
+      @click="toggleNotificationsPanel"
+      @keyup.enter="toggleNotificationsPanel"
+      v-ripple
+    ></i>
+    <NBadge
+      class="unread-notifications-count"
+      color="var(--accent-color)"
+      :max="9"
+      :value="2"
+    />
+    <div
+      class="notifications-panel"
+      v-show="notificationsPanelExpanded"
+      ref="notificationsPanel"
+    >
       <div class="panel-header">
         <h3>Notifications</h3>
-        <router-link to="/settings/notifications" @click="collapseNotificationsPanel">
+        <router-link
+          to="/settings/notifications"
+          @click="collapseNotificationsPanel"
+        >
           <i class="ph-gear-six-light notification-settings"></i>
         </router-link>
       </div>
       <div class="tab-selector">
-        <button class="tab" :class="{ active: currentTabIndex === 0 }" @click="switchTab(0)">
+        <button
+          class="tab"
+          :class="{ active: currentTabIndex === 0 }"
+          @click="switchTab(0)"
+        >
           Events
         </button>
-        <button class="tab" :class="{ active: currentTabIndex === 1 }" @click="switchTab(1)">
+        <button
+          class="tab"
+          :class="{ active: currentTabIndex === 1 }"
+          @click="switchTab(1)"
+        >
           My account
         </button>
-        <button class="tab" :class="{ active: currentTabIndex === 2 }" @click="switchTab(2)">
+        <button
+          class="tab"
+          :class="{ active: currentTabIndex === 2 }"
+          @click="switchTab(2)"
+        >
           What's new
         </button>
         <div class="active-tab-indicator"></div>
       </div>
-      <div class="no-notifications-info" v-if="notifications[currentTabIndex].length === 0">
+      <div
+        class="no-notifications-info"
+        v-if="notifications[currentTabIndex].length === 0"
+      >
         <p>There aren't any notifications yet</p>
       </div>
-      <div class="notifications" v-if="currentTabIndex === 0" ref="notificationsList">
-        <ComposedNotification v-for="(notification, index) in notifications[0]" :key="index"
-          :title="notification.title" />
+      <div
+        class="notifications"
+        v-if="currentTabIndex === 0"
+        ref="notificationsList"
+      >
+        <ComposedNotification
+          v-for="(notification, index) in notifications[0]"
+          :key="index"
+          :title="notification.title"
+        />
       </div>
-      <div class="notifications" v-else-if="currentTabIndex === 1" ref="notificationsList">
-        <ComposedNotification v-for="(notification, index) in notifications[1]" :key="index"
-          :title="notification.title" />
+      <div
+        class="notifications"
+        v-else-if="currentTabIndex === 1"
+        ref="notificationsList"
+      >
+        <ComposedNotification
+          v-for="(notification, index) in notifications[1]"
+          :key="index"
+          :title="notification.title"
+        />
       </div>
-      <div class="notifications" v-else-if="currentTabIndex === 2" ref="notificationsList">
-        <ComposedNotification v-for="(notification, index) in notifications[2]" :key="index"
-          :title="notification.title" />
+      <div
+        class="notifications"
+        v-else-if="currentTabIndex === 2"
+        ref="notificationsList"
+      >
+        <ComposedNotification
+          v-for="(notification, index) in notifications[2]"
+          :key="index"
+          :title="notification.title"
+        />
       </div>
       <div class="panel-footer">
         <p class="notifications-count">3 notifications</p>
-        <CustomButton class="clear-notifications" @click="clearNotifications">Clear all
+        <CustomButton
+          class="clear-notifications"
+          @click="clearNotifications"
+          >Clear all
         </CustomButton>
       </div>
     </div>
@@ -51,7 +110,7 @@ import { computed, ref, watch } from "vue";
 import { onClickOutside, useMouseInElement } from "@vueuse/core";
 import ComposedNotification from "@/components/Navbar/ComposedNotification.vue";
 import CustomButton from "@/components/CustomButton.vue";
-import { NBadge } from 'naive-ui';
+import { NBadge } from "naive-ui";
 
 export default {
   name: "NotificationsPanel",
@@ -124,7 +183,7 @@ export default {
     const notificationsList = ref(null);
 
     const notificationsListOverflows = computed(
-      () => notificationsList.value.clientHeight < notificationsList.value.scrollHeight
+      () => notificationsList.value.clientHeight < notificationsList.value.scrollHeight,
     );
 
     const scrollHandler = (e) => {
@@ -258,15 +317,15 @@ export default {
 
       $offset: 158px;
 
-      & .tab:nth-child(1).active~.active-tab-indicator {
+      & .tab:nth-child(1).active ~ .active-tab-indicator {
         transform: translateX(calc($offset * 0));
       }
 
-      & .tab:nth-child(2).active~.active-tab-indicator {
+      & .tab:nth-child(2).active ~ .active-tab-indicator {
         transform: translateX(calc($offset * 1));
       }
 
-      & .tab:nth-child(3).active~.active-tab-indicator {
+      & .tab:nth-child(3).active ~ .active-tab-indicator {
         transform: translateX(calc($offset * 2));
       }
 

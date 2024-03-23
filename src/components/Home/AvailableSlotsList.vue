@@ -1,10 +1,25 @@
 <template>
-  <div class="available-slots-wrapper" v-if="selectedServiceId">
-    <CustomLoader class="loader" v-if="loading" />
+  <div
+    class="available-slots-wrapper"
+    v-if="selectedServiceId"
+  >
+    <CustomLoader
+      class="loader"
+      v-if="loading"
+    />
 
-    <div class="available-dates" v-if="!loading">
-      <template v-for="slot in availableSlots" :key="slot.id">
-        <AvailableDateTile :day="slot.day" :time="slot.time" />
+    <div
+      class="available-dates"
+      v-if="!loading"
+    >
+      <template
+        v-for="slot in availableSlots"
+        :key="slot.id"
+      >
+        <AvailableDateTile
+          :day="slot.day"
+          :time="slot.time"
+        />
       </template>
     </div>
   </div>
@@ -87,7 +102,7 @@ export default {
       (newValue) => {
         loading.value = true;
         loadAppointments(newValue);
-      }
+      },
     );
 
     return {

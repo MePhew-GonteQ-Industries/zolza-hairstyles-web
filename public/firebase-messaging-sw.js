@@ -1,5 +1,5 @@
-import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
-import { clientsClaim } from 'workbox-core';
+import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
+import { clientsClaim } from "workbox-core";
 import { initializeApp } from "firebase/app";
 import { getMessaging, onBackgroundMessage } from "firebase/messaging/sw";
 
@@ -20,7 +20,7 @@ const firebaseConfig = {
   storageBucket: "zolza-hairstyles.appspot.com",
   messagingSenderId: "436999151575",
   appId: "1:436999151575:web:5998a5ea066c09d1c33592",
-  measurementId: "G-JFC9R9LRXY"
+  measurementId: "G-JFC9R9LRXY",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -30,14 +30,13 @@ const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 
 onBackgroundMessage(messaging, (payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  console.log("[firebase-messaging-sw.js] Received background message ", payload);
   // Customize notification here
-  const notificationTitle = 'Background Message Title';
+  const notificationTitle = "Background Message Title";
   const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
+    body: "Background Message body.",
+    icon: "/firebase-logo.png",
   };
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });

@@ -1,6 +1,9 @@
 <template>
   <div class="dashboard-page appointment-view">
-    <div class="appointment elevated-card" v-if="appointment">
+    <div
+      class="appointment elevated-card"
+      v-if="appointment"
+    >
       <div class="left">
         <h1>Wizyta #{{ appointment.id }}</h1>
         <p><i :class="appointment.icon_class"></i> {{ appointment.status }}</p>
@@ -53,8 +56,14 @@
               <template #subtitle>Akcja jest nieodwracalna</template>
             </MessageBox>
             <div class="buttons-wrapper">
-              <CustomButton type="error" @click="cancelAppointment">Odwołaj wizytę</CustomButton>
-              <CustomButton type="secondary" @click="cancelAppointmentModalOpen = false"
+              <CustomButton
+                type="error"
+                @click="cancelAppointment"
+                >Odwołaj wizytę</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="cancelAppointmentModalOpen = false"
                 >Zamknij
               </CustomButton>
             </div>
@@ -89,7 +98,10 @@
               />
               <div class="hours">
                 <CustomLoader v-if="loading"></CustomLoader>
-                <div class="slots-wrapper" v-if="validatedSlots.length && !loading">
+                <div
+                  class="slots-wrapper"
+                  v-if="validatedSlots.length && !loading"
+                >
                   <div
                     class="single-hour"
                     v-for="availableSlot in validatedSlots"
@@ -105,14 +117,23 @@
                     }}
                   </div>
                 </div>
-                <div class="no-slots" v-if="!validatedSlots.length && !loading">
+                <div
+                  class="no-slots"
+                  v-if="!validatedSlots.length && !loading"
+                >
                   Brak wolnych miejsc
                 </div>
               </div>
             </div>
             <div class="buttons-wrapper">
-              <CustomButton type="info" @click="changeAppointmentDate">Zmień termin</CustomButton>
-              <CustomButton type="secondary" @click="closeChangeAppointmentDateModal"
+              <CustomButton
+                type="info"
+                @click="changeAppointmentDate"
+                >Zmień termin</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="closeChangeAppointmentDateModal"
                 >Zamknij
               </CustomButton>
             </div>
@@ -202,7 +223,7 @@ export default {
         loading.value = false;
       } catch (error) {
         message.error(
-          `Nie udało się pobrać dostępnych slotów - ${createRequestErrorMessage(error)}`
+          `Nie udało się pobrać dostępnych slotów - ${createRequestErrorMessage(error)}`,
         );
       }
     };
@@ -229,7 +250,7 @@ export default {
         }
 
         message.error(
-          `${t("snackBars.appointmentDateChangeError")} - ${createRequestErrorMessage(error)}`
+          `${t("snackBars.appointmentDateChangeError")} - ${createRequestErrorMessage(error)}`,
         );
       }
     };
@@ -250,7 +271,7 @@ export default {
         }
 
         message.error(
-          `${t("snackBars.appointmentCancelError")} - ${createRequestErrorMessage(error)}`
+          `${t("snackBars.appointmentCancelError")} - ${createRequestErrorMessage(error)}`,
         );
       }
     };

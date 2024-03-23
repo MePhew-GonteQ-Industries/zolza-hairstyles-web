@@ -39,7 +39,10 @@ const cancelReservation = async () => {
 
 <template>
   <tr>
-    <td class="id" @click="unreserveSlotModalOpen = true">
+    <td
+      class="id"
+      @click="unreserveSlotModalOpen = true"
+    >
       {{ appointmentSlot.id }}
       <CustomModal v-model:open="unreserveSlotModalOpen">
         <template #title> Cofnięcie rezerwacji slotu </template>
@@ -67,8 +70,14 @@ const cancelReservation = async () => {
             <p>Dnia: {{ new Date(appointmentSlot.date).toLocaleDateString(locale) }}</p>
           </div>
           <div class="buttons-wrapper">
-            <CustomButton type="info" @click="cancelReservation">Cofnij rezerwacje</CustomButton>
-            <CustomButton type="secondary" @click="unreserveSlotModalOpen = false"
+            <CustomButton
+              type="info"
+              @click="cancelReservation"
+              >Cofnij rezerwacje</CustomButton
+            >
+            <CustomButton
+              type="secondary"
+              @click="unreserveSlotModalOpen = false"
               >Zamknij</CustomButton
             >
           </div>

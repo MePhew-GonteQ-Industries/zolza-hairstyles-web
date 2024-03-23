@@ -1,38 +1,77 @@
 <template>
-  <div class="profile-wrapper" ref="profileWrapper" v-if="$store.getters.isLoggedIn">
-    <i class="user-icon" :class="profilePanelExpanded ? 'ph-user-fill' : 'ph-user-light'"
-      @click="toggleProfilePanel" @keyup.enter="toggleProfilePanel" v-ripple></i>
+  <div
+    class="profile-wrapper"
+    ref="profileWrapper"
+    v-if="$store.getters.isLoggedIn"
+  >
+    <i
+      class="user-icon"
+      :class="profilePanelExpanded ? 'ph-user-fill' : 'ph-user-light'"
+      @click="toggleProfilePanel"
+      @keyup.enter="toggleProfilePanel"
+      v-ripple
+    ></i>
 
-    <div class="profile-panel" v-show="profilePanelExpanded" ref="profilePanel">
+    <div
+      class="profile-panel"
+      v-show="profilePanelExpanded"
+      ref="profilePanel"
+    >
       <div class="panel-header">
-        <router-link :to="{ name: 'userAccountSettings' }" @click="collapseProfilePanel"><i
-            class="ph-user-circle-fill user-avatar"></i></router-link>
-        <router-link :to="{ name: 'userAccountSettings' }" @click="collapseProfilePanel">
+        <router-link
+          :to="{ name: 'userAccountSettings' }"
+          @click="collapseProfilePanel"
+          ><i class="ph-user-circle-fill user-avatar"></i
+        ></router-link>
+        <router-link
+          :to="{ name: 'userAccountSettings' }"
+          @click="collapseProfilePanel"
+        >
           <span>{{ $store.state.user.name }} {{ $store.state.user.surname }}</span>
         </router-link>
       </div>
-      <div class="primary-options" @click="collapseProfilePanel"
-        @keyup.enter="collapseProfilePanel">
-        <router-link :to="{ name: 'themeSettings' }" class="option-tile">
-          <i class="tile-icon"
-            :class="$store.state.settings.theme === 'dark' ? 'ph-moon-light' : 'ph-sun-light'"></i>
+      <div
+        class="primary-options"
+        @click="collapseProfilePanel"
+        @keyup.enter="collapseProfilePanel"
+      >
+        <router-link
+          :to="{ name: 'themeSettings' }"
+          class="option-tile"
+        >
+          <i
+            class="tile-icon"
+            :class="$store.state.settings.theme === 'dark' ? 'ph-moon-light' : 'ph-sun-light'"
+          ></i>
           <span class="tile-title">{{ t("userProfilePanel.theme") }}</span>
         </router-link>
-        <router-link :to="{ name: 'languageSettings' }" class="option-tile">
+        <router-link
+          :to="{ name: 'languageSettings' }"
+          class="option-tile"
+        >
           <i class="ph-translate-light tile-icon"></i>
           <span class="tile-title">{{ t("shared.language") }}</span>
         </router-link>
-        <router-link :to="{ name: 'userAccountSettings' }" class="option-tile">
+        <router-link
+          :to="{ name: 'userAccountSettings' }"
+          class="option-tile"
+        >
           <i class="ph-gear-six-light tile-icon"></i>
           <span class="tile-title">{{ t("userProfilePanel.settings") }}</span>
         </router-link>
-        <button class="option-tile" @click="logout">
+        <button
+          class="option-tile"
+          @click="logout"
+        >
           <i class="ph-sign-out-light tile-icon"></i>
           <span class="tile-title">{{ t("shared.logOut") }}</span>
         </button>
       </div>
-      <div class="secondary-options" @click="collapseProfilePanel"
-        @keyup.enter="collapseProfilePanel">
+      <div
+        class="secondary-options"
+        @click="collapseProfilePanel"
+        @keyup.enter="collapseProfilePanel"
+      >
         <button class="option-tile">
           <i class="ph-question-light tile-icon"></i>
           <span class="tile-title">{{ t("userProfilePanel.help") }}</span>
@@ -56,7 +95,7 @@ import { ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { onClickOutside, useMouseInElement } from "@vueuse/core";
-import { useMessage } from 'naive-ui';
+import { useMessage } from "naive-ui";
 
 export default {
   name: "UserProfilePanel",
@@ -113,7 +152,7 @@ export default {
     function logout() {
       store.dispatch("logout").then(() => {
         if (router.currentRoute.value.meta.requiresAuth) router.push({ name: "home" });
-        message.success(t('snackBars.logOut'));
+        message.success(t("snackBars.logOut"));
       });
     }
 
@@ -176,7 +215,7 @@ export default {
 
       @media only screen and (max-width: $xs) {
         font-size: 1rem;
-        padding: .5rem;
+        padding: 0.5rem;
       }
 
       a {

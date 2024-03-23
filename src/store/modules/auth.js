@@ -88,7 +88,7 @@ export default {
             }
           }
           throw error;
-        }
+        },
       );
       commit("setRefreshTokenInterceptor", refreshTokenInterceptor);
     },
@@ -168,7 +168,7 @@ export default {
             grant_type: "password",
             username: userData.email,
             password: userData.password,
-          })
+          }),
         );
         commit("login", response.data);
         await dispatch("saveAuthData");
@@ -204,7 +204,7 @@ export default {
           new URLSearchParams({
             grant_type: "refresh_token",
             refresh_token: state.refreshToken,
-          })
+          }),
         );
         await commit("login", response.data);
         await dispatch("saveAuthData");
@@ -225,7 +225,7 @@ export default {
           "auth/enter-sudo-mode",
           new URLSearchParams({
             password,
-          })
+          }),
         );
         commit("setSudoMode", response.data);
         await dispatch("saveSudoModeData");

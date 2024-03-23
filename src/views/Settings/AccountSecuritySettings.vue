@@ -31,15 +31,20 @@
           type="password"
           :required="true"
         />
-        <router-link to="/password-reset" tabindex="-1">{{
-          t("shared.forgotYourPassword")
-        }}</router-link>
+        <router-link
+          to="/password-reset"
+          tabindex="-1"
+          >{{ t("shared.forgotYourPassword") }}</router-link
+        >
         <CustomButton @click="changePassword">
           {{ t("settings.accountSecuritySettings.changePassword") }}</CustomButton
         >
       </form>
     </div>
-    <div class="elevated-card two-fa" v-if="false">
+    <div
+      class="elevated-card two-fa"
+      v-if="false"
+    >
       <div class="header">
         <h1>{{ t("settings.accountSecuritySettings.twoFactorAuthentication") }}</h1>
         <CustomChip type="warning">
@@ -73,12 +78,16 @@
               <template #subtitle> {{ t("shared.irreversible") }} </template>
             </MessageBox>
             <div class="btns-wrapper">
-              <CustomButton type="warning" @click="logoutEverywhere">{{
-                t("shared.logOut")
-              }}</CustomButton>
-              <CustomButton type="secondary" @click="logoutEverywhereModalOpen = false">{{
-                t("shared.operationCancel")
-              }}</CustomButton>
+              <CustomButton
+                type="warning"
+                @click="logoutEverywhere"
+                >{{ t("shared.logOut") }}</CustomButton
+              >
+              <CustomButton
+                type="secondary"
+                @click="logoutEverywhereModalOpen = false"
+                >{{ t("shared.operationCancel") }}</CustomButton
+              >
             </div>
           </div>
         </CustomModal>
@@ -92,7 +101,11 @@
         </template>
       </MessageBox>
       <div class="active-sessions-wrapper">
-        <LoginSession v-for="session in sessions" :key="session.id" :session="session">
+        <LoginSession
+          v-for="session in sessions"
+          :key="session.id"
+          :session="session"
+        >
         </LoginSession>
       </div>
     </div>
@@ -145,7 +158,7 @@ export default {
             year: "numeric",
             month: "long",
             day: "numeric",
-          }
+          },
         );
 
         let sessionIcon;
@@ -210,8 +223,8 @@ export default {
                   if (error instanceof AxiosError) {
                     message.error(
                       `Nie udało się załadować sesji użytkownika - ${createRequestErrorMessage(
-                        error
-                      )}`
+                        error,
+                      )}`,
                     );
                   }
                   message.error("Nie udało się załadować sesji użytkownika");
@@ -222,7 +235,7 @@ export default {
         })
         .catch((error) => {
           message.error(
-            `${t("snackBars.logOutAllDevicesError")} ${createRequestErrorMessage(error)}`
+            `${t("snackBars.logOutAllDevicesError")} ${createRequestErrorMessage(error)}`,
           );
         });
     };
@@ -246,7 +259,7 @@ export default {
         })
         .catch((error) => {
           message.error(
-            `${t("snackBars.passwordChangeError")} - ${createRequestErrorMessage(error)}`
+            `${t("snackBars.passwordChangeError")} - ${createRequestErrorMessage(error)}`,
           );
         });
     };

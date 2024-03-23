@@ -1,5 +1,8 @@
 <template>
-  <section class="dashboard-page dashboard-data-page users-management" v-if="!loading">
+  <section
+    class="dashboard-page dashboard-data-page users-management"
+    v-if="!loading"
+  >
     <form class="appointments-filters">
       <CustomInput
         class="search"
@@ -91,7 +94,10 @@
           <th>{{ t("dashboard.usersManagement.blocked") }}</th>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id">
+          <tr
+            v-for="user in users"
+            :key="user.id"
+          >
             <td class="id">
               <router-link :to="`users/${user.id}`"> #{{ user.shortId }}...</router-link>
             </td>
@@ -125,7 +131,10 @@
       </table>
     </div>
   </section>
-  <div class="dashboard-page dashboard-data-page users-management" v-else>
+  <div
+    class="dashboard-page dashboard-data-page users-management"
+    v-else
+  >
     <CustomLoader></CustomLoader>
   </div>
 </template>

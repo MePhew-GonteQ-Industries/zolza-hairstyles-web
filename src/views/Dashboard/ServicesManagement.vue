@@ -1,5 +1,8 @@
 <template>
-  <section class="dashboard-page dashboard-data-page services-management" v-if="!loading">
+  <section
+    class="dashboard-page dashboard-data-page services-management"
+    v-if="!loading"
+  >
     <!-- TODO: Filtering services -->
     <!-- <form class="appointments-filters">
       <CustomInput
@@ -88,7 +91,10 @@
           </th>
         </thead>
         <tbody>
-          <tr v-for="service in services" :key="service.id">
+          <tr
+            v-for="service in services"
+            :key="service.id"
+          >
             <td class="id">
               <router-link :to="`services/${service.id}`"> #{{ service.shortId }}...</router-link>
             </td>
@@ -118,7 +124,10 @@
       </table>
     </div>
   </section>
-  <div class="dashboard-page dashboard-data-page services-management" v-else>
+  <div
+    class="dashboard-page dashboard-data-page services-management"
+    v-else
+  >
     <CustomLoader></CustomLoader>
   </div>
 </template>
@@ -196,7 +205,7 @@ export default {
       addServiceModalOpen,
       loading,
       sortBy,
-      sortAscending
+      sortAscending,
     };
   },
 };

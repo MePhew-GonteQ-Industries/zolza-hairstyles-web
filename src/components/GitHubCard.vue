@@ -1,10 +1,20 @@
 <template>
-  <div tabindex="0" class="github-card">
+  <div
+    tabindex="0"
+    class="github-card"
+  >
     <template v-if="profileData">
-      <img class="user-avatar" :src="profileData.avatar_url" alt="" />
-      <a :href="profileData.html_url" target="_blank" class="profile-link">{{
-        profileData.login
-      }}</a>
+      <img
+        class="user-avatar"
+        :src="profileData.avatar_url"
+        alt=""
+      />
+      <a
+        :href="profileData.html_url"
+        target="_blank"
+        class="profile-link"
+        >{{ profileData.login }}</a
+      >
       <LinkButton
         type="secondary"
         class="follow-btn"

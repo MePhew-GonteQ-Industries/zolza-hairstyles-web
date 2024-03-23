@@ -1,11 +1,17 @@
 <template>
-  <div class="map" :class="{ loaded: loaded }" :id="mapId">
+  <div
+    class="map"
+    :class="{ loaded: loaded }"
+    :id="mapId"
+  >
     <a
       class="mapbox-logo"
       href="http://mapbox.com/about/maps"
       target="_blank"
       aria-label="Mapbox logo"
-      ><img src="@/assets/mapbox-logo-white.svg" alt="Mapbox logo"
+      ><img
+        src="@/assets/mapbox-logo-white.svg"
+        alt="Mapbox logo"
     /></a>
   </div>
 </template>
@@ -52,7 +58,7 @@ export default {
         .setView([latitude, longitude], 5);
 
       map.attributionControl.setPrefix(
-        '<a href="https://leafletjs.com" title="A JavaScript library for interactive maps" target="_blank"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>'
+        '<a href="https://leafletjs.com" title="A JavaScript library for interactive maps" target="_blank"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a>',
       );
 
       switch (props.type) {
@@ -83,7 +89,7 @@ export default {
               "© <a href='https://www.mapbox.com/about/maps/' target='_blank'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
             theme: store.state.settings.theme === "light" ? "light" : "dark",
             accessToken: import.meta.env.VITE_MAPBOX_API_TOKEN,
-          }
+          },
         )
         .addTo(map);
     };
@@ -97,7 +103,7 @@ export default {
             showMap();
           }, 100);
         }
-      }
+      },
     );
 
     return {

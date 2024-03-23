@@ -1,12 +1,19 @@
 <template>
-  <div class="available-slot" ref="availableSlot">
+  <div
+    class="available-slot"
+    ref="availableSlot"
+  >
     <div class="date">
       <p class="day">{{ day }}</p>
       <p class="time">{{ time }}</p>
     </div>
 
     <div class="buttons">
-      <div class="button make-appointment" @click="bookAppointment" @keyup.enter="bookAppointment">
+      <div
+        class="button make-appointment"
+        @click="bookAppointment"
+        @keyup.enter="bookAppointment"
+      >
         <i class="ph-calendar-plus-light"></i>
         {{ t("home.availableSlotTile.book") }}
       </div>
@@ -59,7 +66,7 @@ export default {
         message.success(t("snackBars.appointmentMade"));
       } catch (error) {
         message.error(
-          `${t("snackBars.appointmentsMadeError")} - ${createRequestErrorMessage(error)}`
+          `${t("snackBars.appointmentsMadeError")} - ${createRequestErrorMessage(error)}`,
         );
       }
     };

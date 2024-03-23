@@ -1,5 +1,9 @@
 <template>
-  <button ref="button" :class="{ secondary: type === 'secondary' }" v-ripple>
+  <button
+    ref="button"
+    :class="{ secondary: type === 'secondary' }"
+    v-ripple
+  >
     <slot />
   </button>
 </template>

@@ -1,13 +1,22 @@
 <template>
-  <div class="services-wrapper" ref="services">
-    <CustomLoader :class="{ hidden: !loading }" v-if="!loaderAnimationFinished" />
+  <div
+    class="services-wrapper"
+    ref="services"
+  >
+    <CustomLoader
+      :class="{ hidden: !loading }"
+      v-if="!loaderAnimationFinished"
+    />
 
     <div
       class="services"
       :class="{ hidden: loading }"
       v-if="loaderAnimationFinished && !loadingFailed"
     >
-      <template v-for="service in servicesData" :key="service.id">
+      <template
+        v-for="service in servicesData"
+        :key="service.id"
+      >
         <ServiceTile
           :id="service.id"
           :name="service.name"
@@ -107,7 +116,7 @@ export default {
       () => props.scrolledToServices,
       () => {
         scrollToServices();
-      }
+      },
     );
 
     return {

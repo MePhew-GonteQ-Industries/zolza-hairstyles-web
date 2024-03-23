@@ -1,12 +1,22 @@
 <template>
-  <div class="dashboard-page user-view" v-if="userData">
+  <div
+    class="dashboard-page user-view"
+    v-if="userData"
+  >
     <!-- {{ $route.params.id }} -->
     <div class="elevated-card">
-      <div class="user" v-if="userData && !loading">
+      <div
+        class="user"
+        v-if="userData && !loading"
+      >
         <div class="avatar-row">
           <i class="ph-user-square-light avatar-icon"></i>
           <div class="user-data">
-            <CustomChip type="info" :customIconClass="userIconClass">{{ userRole }} </CustomChip>
+            <CustomChip
+              type="info"
+              :customIconClass="userIconClass"
+              >{{ userRole }}
+            </CustomChip>
             <p class="email">{{ userData.email }}</p>
             <div class="indicators-wrapper">
               <div class="single-indicator">
@@ -46,19 +56,37 @@
           ></CustomSelect>
         </div>
         <div class="user-account-buttons">
-          <CustomButton type="error" class="block-account-button">Zablokuj konto</CustomButton>
-          <CustomButton type="error" class="delete-account-button"
+          <CustomButton
+            type="error"
+            class="block-account-button"
+            >Zablokuj konto</CustomButton
+          >
+          <CustomButton
+            type="error"
+            class="delete-account-button"
             >{{ t("settings.userAccountSettings.deleteAccount") }}
           </CustomButton>
         </div>
-        <div class="save-changes" v-if="userDataModified">
-          <CustomButton class="save" type="success">{{ t("shared.saveChanges") }}</CustomButton>
-          <CustomButton class="cancel" type="secondary"
+        <div
+          class="save-changes"
+          v-if="userDataModified"
+        >
+          <CustomButton
+            class="save"
+            type="success"
+            >{{ t("shared.saveChanges") }}</CustomButton
+          >
+          <CustomButton
+            class="cancel"
+            type="secondary"
             >{{ t("shared.operationCancel") }}
           </CustomButton>
         </div>
       </div>
-      <div class="loader" v-else>
+      <div
+        class="loader"
+        v-else
+      >
         <CustomLoader></CustomLoader>
       </div>
     </div>
@@ -160,7 +188,7 @@ export default {
           }
         } catch (error) {
           message.error(
-            `Nie udało się pobrać danych użytkownika - ${createRequestErrorMessage(error)}`
+            `Nie udało się pobrać danych użytkownika - ${createRequestErrorMessage(error)}`,
           );
         }
       }
