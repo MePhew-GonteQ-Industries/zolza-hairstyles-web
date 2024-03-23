@@ -99,7 +99,12 @@
             :key="user.id"
           >
             <td class="id">
-              <router-link :to="`users/${user.id}`"> #{{ user.shortId }}...</router-link>
+              <CustomTooltip>
+                <template #activator>
+                  <router-link :to="`users/${user.id}`"> #{{ user.shortId }}...</router-link>
+                </template>
+                {{ user.id }}
+              </CustomTooltip>
             </td>
             <td class="user-name">
               {{ user.name }}
@@ -146,6 +151,7 @@ import CustomInput from "@/components/CustomInput.vue";
 import StatusIndicator from "@/components/StatusIndicator.vue";
 import { useStore } from "vuex";
 import CustomLoader from "@/components/CustomLoader.vue";
+import CustomTooltip from "@/components/CustomTooltip.vue";
 import { useMessage } from "naive-ui";
 import { createRequestErrorMessage } from "@/utils";
 import { AxiosError } from "axios";
@@ -156,6 +162,7 @@ export default {
     CustomInput,
     StatusIndicator,
     CustomLoader,
+    CustomTooltip,
   },
   setup() {
     const message = useMessage();
