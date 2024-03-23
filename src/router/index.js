@@ -207,7 +207,7 @@ const routes = [
         path: "",
         // component: () => import("@/views/Dashboard/SummaryView.vue"),
         // name: "summaryView",
-        redirect: "dashboard/appointments",
+        redirect: { name: "appointmentsManagement" },
         name: "dashboard",
       },
       {
