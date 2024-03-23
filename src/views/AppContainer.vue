@@ -839,11 +839,10 @@ export default {
         justify-content: center;
 
         .description {
-          font-size: 1rem;
+          font-size: 3rem;
           font-family: "Poppins", sans-serif;
           margin-top: 0.75rem;
-          max-width: 45vw;
-          font-weight: 400;
+          font-weight: 700;
         }
 
         .wordmark {

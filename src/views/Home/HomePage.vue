@@ -12,62 +12,66 @@
 
     <ImageGallery :photos="photos" />
 
-    <div class="mobile-app-banner">
-      <div class="cta">
-        <p class="primary">{{ t("home.appHeading") }}</p>
-        <p class="description">
-          {{ t("home.appDescription") }}
-        </p>
-        <p class="secondary">
-          {{ t("home.appDescriptionSecondary") }}
-        </p>
-        <div class="download-links">
-          <a
-            href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055"
-            target="_blank"
-          >
-            <img
-              class="app-store-badge"
-              src="@/assets/app-store-badge.svg"
-              alt="Pobierz z App Store"
-            />
-          </a>
-          <a
-            href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app"
-            target="_blank"
-          >
-            <img
-              class="gp-badge"
-              src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
-              alt="Pobierz w Google Play"
-            />
-          </a>
-        </div>
-      </div>
+    <section class="mobile-app-section">
+      <h4 class="app-header">Aplikacja mobilna</h4>
 
-      <div class="banner">
-        <div class="app-showcase-container">
-          <div class="wrapper">
-            <img
-              class="iphone"
-              src="@/assets/iphone-13-pro-max.png"
-              alt=""
-            />
-            <video
-              class="app-showcase"
-              src="@/assets/appDemo.mp4"
-              muted
-              loop
-              webkit-playsinline
-              playsinline
-              autoplay
+      <div class="mobile-app-banner">
+        <div class="cta">
+          <p class="primary">{{ t("home.appHeading") }}</p>
+          <p class="description">
+            {{ t("home.appDescription") }}
+          </p>
+          <p class="secondary">
+            {{ t("home.appDescriptionSecondary") }}
+          </p>
+          <div class="download-links">
+            <a
+              href="https://apps.apple.com/pl/app/zo%C5%82za-hairstyles/id1628563055"
+              target="_blank"
             >
-              <track kind="captions" />
-            </video>
+              <img
+                class="app-store-badge"
+                src="@/assets/app-store-badge.svg"
+                alt="Pobierz z App Store"
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=pl.zolzahairstyles.app"
+              target="_blank"
+            >
+              <img
+                class="gp-badge"
+                src="https://www-growth.scdn.co/static/badges/svgs/google/badge-pl.svg"
+                alt="Pobierz w Google Play"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="banner">
+          <div class="app-showcase-container">
+            <div class="wrapper">
+              <img
+                class="iphone"
+                src="@/assets/iphone-13-pro-max.png"
+                alt=""
+              />
+              <video
+                class="app-showcase"
+                src="@/assets/appDemo.mp4"
+                muted
+                loop
+                webkit-playsinline
+                playsinline
+                autoplay
+              >
+                <track kind="captions" />
+              </video>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </template>
 
@@ -222,9 +226,22 @@ export default {
   justify-content: space-between;
   background-color: $primary-color;
 
-  .mobile-app-banner {
+  .mobile-app-section {
     margin-top: 1.5rem;
     width: 100%;
+    background-color: $secondary-color;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
+    align-items: center;
+
+    .app-header {
+      font-size: 2.5rem;
+      color: $secondary-text-color;
+    }
+  }
+
+  .mobile-app-banner {
     background-image: url("@/assets/app-baner-background.png");
     background-color: $secondary-color;
     color: $secondary-text-color;

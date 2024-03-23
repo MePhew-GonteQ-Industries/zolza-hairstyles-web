@@ -3,6 +3,7 @@
     class="services-wrapper"
     ref="services"
   >
+    <h2 class="services-header">Zapoznaj się z naszą ofertą</h2>
     <CustomLoader
       :class="{ hidden: !loading }"
       v-if="!loaderAnimationFinished"
@@ -137,8 +138,15 @@ export default {
   min-height: 20vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
+
+  .services-header {
+    font-size: 2.5rem;
+    color: $secondary-text-color;
+  }
 
   .hidden {
     display: none;
