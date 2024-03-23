@@ -100,13 +100,22 @@
           {{ t("settings.accountSecuritySettings.logOutUnrecognisedDevices") }}
         </template>
       </MessageBox>
-      <div class="active-sessions-wrapper">
+      <div
+        class="active-sessions-wrapper"
+        v-if="sessions"
+      >
         <LoginSession
           v-for="session in sessions"
           :key="session.id"
           :session="session"
         >
         </LoginSession>
+      </div>
+      <div
+        v-else
+        class="active-sessions-loader-wrapper"
+      >
+        <CustomLoader></CustomLoader>
       </div>
     </div>
   </div>
@@ -122,6 +131,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import LoginSession from "@/components/Settings/LoginSession.vue";
 import MessageBox from "@/components/MessageBox.vue";
 import CustomModal from "@/components/CustomModal.vue";
+import CustomLoader from "@/components/CustomLoader.vue";
 import axios from "axios";
 import { createRequestErrorMessage } from "@/utils";
 import { useMessage } from "naive-ui";
@@ -136,6 +146,7 @@ export default {
     LoginSession,
     MessageBox,
     CustomModal,
+    CustomLoader,
   },
   setup() {
     const store = useStore();
@@ -343,6 +354,12 @@ export default {
       display: flex;
       flex-direction: column;
     }
+  }
+
+  .active-sessions-loader-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .active-sessions-wrapper {
