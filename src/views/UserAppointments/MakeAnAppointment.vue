@@ -27,9 +27,9 @@
       <CustomModal v-model:open="openMakeAnAppointmentModal">
         <template #title>{{ selectedService.name }}</template>
         <div class="make-appointment-modal-wrapper">
-          <MessageBox type="warning">
+          <MessageBox type="info">
             <template #title>
-              {{ t("userAppointmentsView.makeAnAppointment.monthForward") }}!
+              {{ t("userAppointmentsView.makeAnAppointment.monthForward") }}
             </template>
             <template #subtitle>
               {{ t("userAppointmentsView.makeAnAppointment.adminCancel") }}!

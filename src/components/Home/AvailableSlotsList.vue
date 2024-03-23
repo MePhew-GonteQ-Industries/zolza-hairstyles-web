@@ -12,13 +12,25 @@
       class="available-dates"
       v-if="!loading"
     >
+      <MessageBox
+        type="info"
+        class="appointment-cancellation-info"
+      >
+        <template #title> Uwaga! </template>
+        <template #subtitle>
+          {{ $t("userAppointmentsView.makeAnAppointment.adminCancel") }}
+        </template>
+      </MessageBox>
+
       <template
         v-for="slot in availableSlots"
         :key="slot.id"
       >
         <AvailableSlotTile
+          :id="slot.id"
           :day="slot.day"
           :time="slot.time"
+          :serviceId="selectedServiceId"
         />
       </template>
     </div>
@@ -28,6 +40,7 @@
 <script>
 import AvailableSlotTile from "@/components/Home/AvailableSlotTile.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
+import MessageBox from "@/components/MessageBox.vue";
 import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
@@ -39,6 +52,7 @@ export default {
   components: {
     AvailableSlotTile,
     CustomLoader,
+    MessageBox,
   },
   props: {
     selectedServiceId: {
@@ -62,8 +76,8 @@ export default {
 
       const now = new Date();
 
-      availableSlotsData.value.forEach((service) => {
-        const date = new Date(`${service.start_time}`);
+      availableSlotsData.value.forEach((slot) => {
+        const date = new Date(`${slot.start_time}`);
 
         const day =
           date === now
@@ -73,6 +87,7 @@ export default {
               });
 
         slots.push({
+          id: slot.id,
           day: `${day[0].toUpperCase()}${day.slice(1)}`,
           time: date.toLocaleTimeString(locale, {
             hour: "2-digit",
@@ -127,6 +142,7 @@ export default {
     color: black;
     display: grid;
     row-gap: 2rem;
+    grid-template-rows: 1fr auto;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     padding: 3.5rem 10% 3.5rem 10%;
@@ -134,6 +150,10 @@ export default {
     @media only screen and (max-width: $xs) {
       display: flex;
       flex-direction: column;
+    }
+
+    .appointment-cancellation-info {
+      grid-column: 1 / span 3;
     }
   }
 }

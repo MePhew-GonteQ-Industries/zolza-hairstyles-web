@@ -269,7 +269,7 @@
       "noAppointments": "Wygląda na to że nie masz żadnych umówionych wizyt, kliknij przycisk powyżej aby to zrobić"
     },
     "makeAnAppointment": {
-      "monthForward": "Maksymalnie miesiąc do przodu",
+      "monthForward": "Maksymalnie z miesięcznym wyprzedzeniem",
       "adminCancel": "Umówioną wizytę może anulować tylko administrator",
       "noSlots": "Brak wolnych miejsc",
       "makeAnAppointment": "Umów wizytę",

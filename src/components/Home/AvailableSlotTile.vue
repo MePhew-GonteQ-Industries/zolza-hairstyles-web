@@ -11,22 +11,24 @@
     <div class="buttons">
       <div
         class="button make-appointment"
-        @click="bookAppointment"
-        @keyup.enter="bookAppointment"
+        @click="makeAppointment"
       >
         <i class="ph-calendar-plus-light"></i>
         {{ t("home.availableSlotTile.book") }}
       </div>
 
-      <div class="button more-info">
+      <!-- TODO: Add appointment summary in a modal -->
+      <!-- <div class="button more-info">
         <i class="ph-info-light"></i>
         {{ t("home.availableSlotTile.info") }}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import axios from "axios";
 import { useI18n } from "vue-i18n";
 import { useMessage } from "naive-ui";
@@ -43,7 +45,7 @@ export default {
       type: String,
       required: true,
     },
-    firstSlotId: {
+    id: {
       type: String,
       required: true,
     },
@@ -53,17 +55,26 @@ export default {
     },
   },
 
-  setup() {
+  setup(props) {
     const { t } = useI18n({ useScope: "global" });
     const message = useMessage();
+    const router = useRouter();
+    const store = useStore();
 
-    const bookAppointment = async () => {
+    const makeAppointment = async () => {
+      if (!store.getters.isLoggedIn) {
+        router.push({ name: "login" });
+        return;
+      }
+
       try {
         await axios.post(`appointments`, {
-          // first_slot_id: selectedSlotId.value,
-          // service_id: selectedService.value.id,
+          first_slot_id: props.id,
+          service_id: props.serviceId,
         });
+
         message.success(t("snackBars.appointmentMade"));
+        router.push({ name: "appointmentsList" });
       } catch (error) {
         message.error(
           `${t("snackBars.appointmentsMadeError")} - ${createRequestErrorMessage(error)}`,
@@ -71,7 +82,7 @@ export default {
       }
     };
 
-    return { t, bookAppointment };
+    return { t, makeAppointment };
   },
 };
 </script>
