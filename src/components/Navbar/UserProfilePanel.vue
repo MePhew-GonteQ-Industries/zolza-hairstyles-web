@@ -67,7 +67,7 @@
           <span class="tile-title">{{ t("shared.logOut") }}</span>
         </button>
       </div>
-      <div
+      <!-- <div
         class="secondary-options"
         @click="collapseProfilePanel"
         @keyup.enter="collapseProfilePanel"
@@ -84,7 +84,7 @@
           <i class="ph-bug-light tile-icon"></i>
           <span class="tile-title">{{ t("userProfilePanel.reportIssue") }}</span>
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -231,15 +231,15 @@ export default {
       }
     }
 
-    .primary-options {
-      border-bottom: 1px solid $secondary-color;
-    }
-
     .primary-options,
     .secondary-options {
       display: flex;
       flex-direction: column;
       padding-block: 0.5rem;
+    }
+
+    .secondary-options {
+      border-top: 1px solid $secondary-color;
     }
 
     .option-tile {
