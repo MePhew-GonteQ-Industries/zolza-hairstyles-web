@@ -221,15 +221,15 @@
 <script>
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
-import CustomInput from "@/components/CustomInput.vue";
-import CustomSelect from "@/components/CustomSelect.vue";
+// import CustomInput from "@/components/CustomInput.vue";
+// import CustomSelect from "@/components/CustomSelect.vue";
 import CustomTooltip from "@/components/CustomTooltip.vue";
 import { computed, onMounted, ref } from "vue";
 import SortedHeader from "@/components/SortedHeader.vue";
-import CustomButton from "@/components/CustomButton.vue";
-import CustomModal from "@/components/CustomModal.vue";
+// import CustomButton from "@/components/CustomButton.vue";
+// import CustomModal from "@/components/CustomModal.vue";
 import CustomLoader from "@/components/CustomLoader.vue";
-import CustomCheckbox from "@/components/CustomCheckbox.vue";
+// import CustomCheckbox from "@/components/CustomCheckbox.vue";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { NPagination } from "naive-ui";
@@ -240,15 +240,15 @@ import { AxiosError } from "axios";
 export default {
   name: "AppointmentsManagement",
   components: {
-    CustomInput,
-    CustomSelect,
+    // CustomInput,
+    // CustomSelect,
     CustomTooltip,
     SortedHeader,
-    CustomButton,
+    // CustomButton,
     // DatePicker,
-    CustomModal,
+    // CustomModal,
     CustomLoader,
-    CustomCheckbox,
+    // CustomCheckbox,
     NPagination,
   },
   setup() {
