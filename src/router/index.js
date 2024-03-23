@@ -197,7 +197,6 @@ const routes = [
   },
   {
     path: "/dashboard",
-    name: "dashboard",
     component: () => import("@/views/Dashboard/DashboardPage.vue"),
     meta: {
       requiresAuth: true,
@@ -208,7 +207,8 @@ const routes = [
         path: "",
         // component: () => import("@/views/Dashboard/SummaryView.vue"),
         // name: "summaryView",
-        redirect: 'dashboard/appointments'
+        redirect: 'dashboard/appointments',
+        name: "dashboard",
       },
       {
         path: "appointments",
