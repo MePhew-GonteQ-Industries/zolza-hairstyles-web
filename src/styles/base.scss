@@ -334,15 +334,14 @@ ul {
   white-space: nowrap;
 
   table {
-    overflow-y: auto;
     border-spacing: 0;
     box-shadow: 0 0 8px -2px $box-shadow-color;
+
     @media only screen and (max-width: $sm) {
       display: block;
     }
+
     thead {
-      position: sticky;
-      top: 0;
       @media only screen and (max-width: $sm) {
         display: block;
         margin-bottom: 15px;
