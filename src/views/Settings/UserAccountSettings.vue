@@ -375,7 +375,7 @@ export default {
 
     const validateDeleteData = () => {
       if (!deleteAccountPassword.value) return false;
-      if (confirmAccountDeletion.value !== t("userAccountSettings.confirmDeleteAccount")) {
+      if (confirmAccountDeletion.value !== t("settings.userAccountSettings.confirmDeleteAccount")) {
         return false;
       }
 
