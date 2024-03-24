@@ -15,10 +15,6 @@
         </p>
         <CustomProgressBar :value="time" />
       </div>
-      <div class="available-dates-wrapper">
-        <p class="available-dates">{{ t("home.serviceTile.availableDates") }}</p>
-        <CustomProgressBar :value="availability" />
-      </div>
       <p class="price">
         {{ t("home.serviceTile.price") }}
         <span
@@ -52,10 +48,6 @@ export default {
       type: String,
     },
     time: {
-      type: Number,
-      required: true,
-    },
-    availability: {
       type: Number,
       required: true,
     },
@@ -121,6 +113,13 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 0.875rem;
+    width: 125px;
+
+    .time-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 }
 </style>

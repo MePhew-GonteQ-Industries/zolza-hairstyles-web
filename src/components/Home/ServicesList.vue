@@ -4,15 +4,11 @@
     ref="services"
   >
     <h2 class="services-header">Zapoznaj się z naszą ofertą</h2>
-    <CustomLoader
-      :class="{ hidden: !loading }"
-      v-if="!loaderAnimationFinished"
-    />
+    <CustomLoader v-if="false" />
 
     <div
       class="services"
-      :class="{ hidden: loading }"
-      v-if="loaderAnimationFinished && !loadingFailed"
+      v-else
     >
       <template
         v-for="service in servicesData"
@@ -23,7 +19,6 @@
           :name="service.name"
           :description="service.description"
           :time="service.average_time_minutes"
-          :availability="40"
           :priceMin="service.min_price"
           :priceMax="service.max_price"
           @updateSelectedService="selectService"
