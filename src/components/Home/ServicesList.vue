@@ -21,8 +21,7 @@
         <ServiceTile
           :id="service.id"
           :name="service.name"
-          description="Nasze usługi wyróżnia indywidualne podejście do klienta.
-          Każdą osobę poddajemy dokładnej diagnozie, aby móc podkreślić jej naturalną urodę."
+          :description="service.description"
           :time="service.average_time_minutes"
           :availability="40"
           :priceMin="service.min_price"

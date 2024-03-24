@@ -50,7 +50,6 @@ export default {
     },
     description: {
       type: String,
-      required: true,
     },
     time: {
       type: Number,
