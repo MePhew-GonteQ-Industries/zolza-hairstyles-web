@@ -115,9 +115,9 @@
             />
           </svg>
           <!-- eslint-enable max-len -->
-          <h1 class="description">
+          <!-- <h1 class="description">
             {{ t("app.description") }}
-          </h1>
+          </h1> -->
         </section>
         <i
           class="ph-caret-down-light"
@@ -846,7 +846,38 @@ export default {
         }
 
         .wordmark {
-          height: 5rem;
+          margin-top: 4rem;
+          height: 8rem;
+        }
+
+        @media screen and (max-width: 575.98px) {
+          .wordmark {
+            height: 5rem;
+          }
+        }
+
+        @media screen and (min-width: 576px) and (max-width: 767.98px) {
+          .wordmark {
+            height: 6rem;
+          }
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 991.98px) {
+          .wordmark {
+            height: 7rem;
+          }
+        }
+
+        @media screen and (min-width: 992px) and (max-width: 1199.98px) {
+          .wordmark {
+            height: 8rem;
+          }
+        }
+
+        @media screen and (min-width: 1200px) {
+          .wordmark {
+            height: 9rem;
+          }
         }
       }
 
