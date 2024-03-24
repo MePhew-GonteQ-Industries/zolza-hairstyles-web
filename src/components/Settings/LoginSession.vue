@@ -85,7 +85,7 @@ export default {
 
   .session-data {
     display: grid;
-    grid-template-columns: 140px auto;
+    grid-template-columns: 200px auto;
     align-items: center;
     gap: 1rem;
 

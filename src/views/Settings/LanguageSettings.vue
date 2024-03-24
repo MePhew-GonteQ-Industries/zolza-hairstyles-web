@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-page">
+  <div class="settings-page language-settings">
     <div class="elevated-card">
       <h1>{{ t("settings.languageSettings.chooseLanguage") }}</h1>
       <CustomSelect
@@ -111,6 +111,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.language-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .settings-page {
   min-height: 73.5vh;
 }

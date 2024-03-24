@@ -322,8 +322,6 @@ export default {
 
 .account-security-settings {
   display: grid;
-  grid-template-columns: auto auto;
-  align-items: stretch;
 
   @media only screen and (max-width: $xs) {
     display: flex;
@@ -378,6 +376,8 @@ export default {
 }
 
 .change-password {
+  justify-self: flex-start;
+
   form {
     display: flex;
     flex-direction: column;

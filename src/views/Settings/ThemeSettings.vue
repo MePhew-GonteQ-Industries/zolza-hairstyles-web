@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-page">
+  <div class="settings-page theme-settings">
     <div class="elevated-card">
       <h1>{{ t("settings.themeSettings.selectTheme") }}</h1>
       <div class="theme-selection">
@@ -107,6 +107,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.theme-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .theme-selection {
   display: grid;
   gap: 1rem;

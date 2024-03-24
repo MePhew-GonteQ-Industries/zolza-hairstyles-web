@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-page">
+  <div class="settings-page user-account-settings">
     <div class="elevated-card">
       <div class="avatar-row">
         <i class="ph-user-square-light avatar-icon"></i>
@@ -439,6 +439,12 @@ export default {
 
 .settings-page {
   min-height: 73.5vh;
+}
+
+.user-account-settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-account-wrappper,
