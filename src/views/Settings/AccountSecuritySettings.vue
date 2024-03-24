@@ -102,7 +102,7 @@
       </MessageBox>
       <div
         class="active-sessions-wrapper"
-        v-if="sessions"
+        v-if="sessions.length"
       >
         <LoginSession
           v-for="session in sessions"
