@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-page">
+  <div class="settings-page session-view">
     <div
       class="elevated-card session-card"
       v-if="session"
@@ -302,6 +302,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.session-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logout-everywhere-wrappper {
   display: flex;
   flex-direction: column;
