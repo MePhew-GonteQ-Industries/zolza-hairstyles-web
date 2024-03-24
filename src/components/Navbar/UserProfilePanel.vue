@@ -236,7 +236,6 @@ export default {
     .secondary-options {
       display: flex;
       flex-direction: column;
-      padding-block: 0.5rem;
     }
 
     .secondary-options {
