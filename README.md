@@ -17,6 +17,7 @@
   - [x] [Logging in](https://zolza-hairstyles.pl/sign-up)
   - [x] [Password reset via email](https://zolza-hairstyles.pl/password-reset)
   - [x] Account types with diffrent permissions (users, admins and the owner)
+  - [x] Account deletion
 - [X] Booking appointments:
   - [x] Booking through the appointments page by first selecting a service and then followed by selecting a date
         ![Alt text](/screenshots/appointment-booking.png "Appointment Booking")
@@ -31,14 +32,13 @@
   - [ ] Administrative settings
 - [ ] Settings
   - [x] Updating user data (name, surname and gender)
-  - [x] Account deletion
   - [ ] Account security
     - [x] Password change
     - [x] Active sessions management
       - [x] Log out of every session seperately
       - [x] Log out everywhere
       - [x] Show location on a map based on IP address
-    - [ ] Two Factor Authentication
+    - [ ] Two-Factor Authentication
   - [ ] Notification settings
     - [ ] Appointment reminders
     - [ ] New functionality added
