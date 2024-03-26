@@ -7,7 +7,15 @@
 
 ## Appointments management system - website repo
 
-### List of the features that have been implemented so far:
+## Table of Contents
+
+- 🧩 [Features](#features)
+- 🚀 [Project setup](#project-setup)
+- ⚖️ [License](#license)
+
+## <a name="features">🧩 Features</a>
+
+List of the features that have been implemented so far:
 
 - [x] [Home page featuring an image gallery and mobile app advertisement](https://zolza-hairstyles.pl/)
 - [x] [Contact page showing the salon location on Google Maps](https://zolza-hairstyles.pl/contact)
@@ -58,7 +66,8 @@
   - [x] [Cookies policy](https://zolza-hairstyles.pl/cookies-policy)
   - [x] [GDPR](https://zolza-hairstyles.pl/rodo)
 
-## Project setup
+
+## <a name="project-setup">🚀 Project setup</a>
 
 ```bash
 npm install
@@ -81,3 +90,7 @@ npm run build
 ```bash
 npm run lint
 ```
+
+## <a name="license">⚖️ License</a>
+
+[ Apache-2.0](./LICENSE)
