@@ -17,7 +17,7 @@
   - [x] [Logging in](https://zolza-hairstyles.pl/sign-up)
   - [x] [Password reset via email](https://zolza-hairstyles.pl/password-reset)
   - [x] Account types with diffrent permissions (users, admins and the owner)
-- [ ] Booking appointments:
+- [X] Booking appointments:
   - [x] Booking through the appointments page by first selecting a service and then followed by selecting a date
         ![Alt text](/screenshots/appointment-booking.png "Appointment Booking")
   - [X] Quick booking from the home page
