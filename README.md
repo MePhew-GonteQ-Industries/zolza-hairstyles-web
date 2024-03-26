@@ -20,7 +20,7 @@
 - [ ] Booking appointments:
   - [x] Booking through the appointments page by first selecting a service and then followed by selecting a date
         ![Alt text](/screenshots/appointment-booking.png "Appointment Booking")
-  - [ ] Quick booking from the home page
+  - [X] Quick booking from the home page
 - [ ] Administration dashboard
   - [ ] Business summary and overview
   - [ ] Appointments management
